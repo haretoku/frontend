@@ -49,3 +49,17 @@ python3 -m http.server 8000
 ```
 
 起動後に`http://localhost:8000/`を開く．
+
+## 公開確認
+
+> **結論：開発中は所有者限定の確認用URLへ公開し，画面と導線が固まった後に`haretoku.jp`を一般公開へ接続する．**
+
+確認用URLのビルドにはViteとCloudflare Workers互換の静的配信設定を用いる．アプリケーション自体は引き続きHTML，CSSおよびブラウザJavaScriptであり，フレームワーク，データベースおよび秘密情報は追加しない．
+
+```bash
+pnpm install
+pnpm run build
+pnpm run preview
+```
+
+`haretoku.jp`のDNSは，公開内容の確認後にホスティング先へ接続する．開発中の確認用公開ではDNSを変更しない．
