@@ -8,9 +8,9 @@
 
 `business-research`のサービス要件と，`backend`の計算・データ仕様を表示可能な形にする．住宅用太陽光の導入を一律に推奨せず，得にならない概算結果もそのまま表示する．
 
-## 基本構成
+## 構成
 
-> **結論：frontendは，利用者向けサイト，backendとのデータ連携および品質検査の3機能に分ける．**
+> **結論：frontendは，公開画面，backendから受け取る公開データおよび自動検査を分離する．**
 
 | 場所 | 役割 |
 |---|---|
@@ -20,50 +20,26 @@
 
 Vite，Wrangler，Sitesおよびパッケージ管理がルートから設定を発見できるよう，`.openai/`，`vite.config.js`，`wrangler.jsonc`および`package.json`はルートに置くが，責任上は`site`の公開処理に属する．詳細は[site](site/README.md)，[data](data/README.md)および[qa](qa/README.md)を参照する．
 
-## ユーザー体験
+## 人間とAIの役割分担
 
-> **結論：主画面は，「一目で判断→詳細で納得→見積もりで精緻化」の順に構成する．**
+> **結論：AIが実装，データ反映および自動検査を担当し，人間は公開画面のUX，文章，情報の優先順位および見た目を判断する．**
 
-結果は，採算の結論，費用・経済効果の内訳，前提・詳細情報の順に表示する．見積もり導線は，結論付近，内訳後および詳細情報後に置く．
+通常，人間がJSON，テストfixtureおよび実装コードを直接編集する運用は想定しない．`data/input/`はbackendが生成した公開成果物を受け取り，`qa/`は自動検査とbackend基準計算との一致確認を担当する．人間は実ブラウザで公開画面を確認し，UX，文章，情報の優先順位および見た目に関する判断を[画面設計](site/docs/画面設計.md)へ反映する．
 
-## backendとの連携
+## 更新・確認手順
 
-> **結論：frontendは，backendが生成した公開データだけを受け取り，内部データまたは秘密情報へ接続しない．**
+> **結論：backend成果物の反映，frontend QA，実ブラウザ確認および公開ビルド確認の順に進める．**
 
-初期段階では，backendの`dist/output/public-data.json`と`dist/output/metadata.json`を`data/input/`へ，`dist/output/calculation-cases.json`を`qa/fixtures/`へ手動で反映する．詳細は[実装方針](site/docs/実装方針.md)を参照する．
+1. backendの`dist/output/public-data.json`と`metadata.json`を`data/input/`へ，`calculation-cases.json`を`qa/fixtures/`へ反映する．
+2. frontendを変更する．
+3. `pnpm test`で計算，公開データ，HTMLおよびリンクを自動検査する．
+4. `pnpm run dev`で実ブラウザからUX，文章，導線および見た目を確認する．
+5. `pnpm run build`と`pnpm run preview`で公開成果物を確認する．
 
-## 現在の状態
-
-> **結論：検証済み公開データとbackend基準計算を使用し，3シナリオの概算結果と6つの詳細ページを表示する．**
-
-都道府県と任意の月間電気料金から，下振れ，標準および上振れの20年間の概算利益を表示する．計算方法，費用，売電，補助金，防災および施工業者の詳細を結果から確認できる．frontendの計算結果は，47都道府県と入力境界ケースについてbackendが生成した固定テストケースとの一致を確認する．
-
-## ローカル確認
-
-> **結論：ES ModulesとJSON読込を使用するため，ローカルWebサーバーを起動して確認する．**
-
-```bash
-pnpm run dev
-```
-
-Viteが表示するローカルURLを開く．
-
-## 公開確認
-
-> **結論：開発中は所有者限定の確認用URLへ公開し，画面と導線が固まった後に`haretoku.jp`を一般公開へ接続する．**
-
-確認用URLのビルドにはViteとCloudflare Workers互換の静的配信設定を用いる．アプリケーション自体は引き続きHTML，CSSおよびブラウザJavaScriptであり，フレームワーク，データベースおよび秘密情報は追加しない．
+初回または依存関係の更新後は，事前に次を実行する．
 
 ```bash
 pnpm install
-pnpm run build
-pnpm run preview
 ```
 
-計算テストは次のコマンドで実行する．
-
-```bash
-pnpm test
-```
-
-`haretoku.jp`のDNSは，公開内容の確認後にホスティング先へ接続する．開発中の確認用公開ではDNSを変更しない．
+frontendはbackendの公開成果物だけを使用し，内部データまたは秘密情報へ接続しない．ファイルの役割と版確認は[実装方針](site/docs/実装方針.md)，公開処理は[site](site/README.md)を参照する．`haretoku.jp`のDNSは公開内容の確認後に接続し，開発中の確認用公開では変更しない．
