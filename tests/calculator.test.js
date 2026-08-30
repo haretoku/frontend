@@ -44,3 +44,57 @@ test("負の月間電気料金を拒否する", () => {
     /月間電気料金/
   );
 });
+
+test("有限な数値以外の月間電気料金を拒否する", () => {
+  for (const invalidBill of [Number.NaN, Number.POSITIVE_INFINITY, "10000", true]) {
+    assert.throws(
+      () => calculateEstimate(
+        { prefectureCode: "13", monthlyElectricityBillYen: invalidBill },
+        publicData
+      ),
+      /月間電気料金/
+    );
+  }
+});
+
+test("47都道府県でシナリオ順序と電力量保存が成立する", () => {
+  assert.equal(publicData.prefectures.length, 47);
+  for (const prefecture of publicData.prefectures) {
+    const result = calculateEstimate(
+      { prefectureCode: prefecture.code, monthlyElectricityBillYen: null },
+      publicData
+    );
+    const scenarios = Object.fromEntries(
+      result.scenarios.map((scenario) => [scenario.scenario, scenario])
+    );
+    assert.ok(scenarios.upside.profit_yen >= scenarios.standard.profit_yen);
+    assert.ok(scenarios.standard.profit_yen >= scenarios.downside.profit_yen);
+    assert.equal(
+      scenarios.standard.profit_yen - scenarios.downside.profit_yen,
+      scenarios.standard.subsidy_yen
+    );
+    assert.ok(
+      Math.abs(
+        result.energy.annual_self_consumed_kwh
+        + result.energy.annual_exported_kwh
+        - result.energy.annual_generation_kwh
+      ) <= 1
+    );
+  }
+});
+
+test("月間電気料金の境界で売電のみと自家消費のみになる", () => {
+  const zero = calculateEstimate(
+    { prefectureCode: "27", monthlyElectricityBillYen: 0 },
+    publicData
+  );
+  assert.equal(zero.energy.annual_self_consumed_kwh, 0);
+  assert.equal(zero.energy.annual_exported_kwh, zero.energy.annual_generation_kwh);
+
+  const high = calculateEstimate(
+    { prefectureCode: "47", monthlyElectricityBillYen: 1_000_000 },
+    publicData
+  );
+  assert.equal(high.energy.annual_exported_kwh, 0);
+  assert.equal(high.energy.annual_self_consumed_kwh, high.energy.annual_generation_kwh);
+});

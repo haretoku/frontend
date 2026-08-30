@@ -1,0 +1,151 @@
+.article-width {
+  width: min(100% - 2rem, 50rem);
+  margin-inline: auto;
+}
+
+.breadcrumb {
+  padding-top: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+}
+
+.breadcrumb a,
+.article a,
+.detail-link {
+  color: var(--color-primary-dark);
+  text-decoration-color: rgb(13 79 55 / 35%);
+  text-underline-offset: 0.18em;
+}
+
+.article-hero {
+  padding-block: clamp(2.5rem, 7vw, 4.5rem) 2rem;
+}
+
+.article-hero h1 {
+  max-width: 18ch;
+  font-size: clamp(2.15rem, 7vw, 4.25rem);
+}
+
+.article-hero__lead {
+  max-width: 43rem;
+  margin-bottom: 0;
+  color: var(--color-muted);
+  font-size: 1.08rem;
+}
+
+.article {
+  padding-bottom: 5rem;
+}
+
+.article > section {
+  margin-top: 1.5rem;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  border: 1px solid var(--color-border);
+  border-radius: 1rem;
+  background: var(--color-surface);
+}
+
+.article h2 {
+  margin-bottom: 1rem;
+}
+
+.article h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.article ul,
+.article ol {
+  padding-left: 1.4rem;
+}
+
+.article li + li {
+  margin-top: 0.55rem;
+}
+
+.key-point {
+  border-left: 0.35rem solid var(--color-accent);
+}
+
+.caution-box {
+  border-color: #dfc36e !important;
+  background: #fff9e7 !important;
+}
+
+.article-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.article-table th,
+.article-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-table th {
+  width: 32%;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.source-list {
+  padding-left: 1.2rem;
+  font-size: 0.92rem;
+}
+
+.article-data-status {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.article-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.article-footer-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.65rem;
+  background: var(--color-background);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.detail-link-list .detail-link {
+  display: block;
+  height: 100%;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.result-grid dt a {
+  text-decoration-thickness: 1px;
+}
+
+@media (max-width: 40rem) {
+  .article-table,
+  .article-table tbody,
+  .article-table tr,
+  .article-table th,
+  .article-table td {
+    display: block;
+  }
+
+  .article-table th {
+    width: auto;
+    padding-bottom: 0.2rem;
+    border-bottom: 0;
+  }
+
+  .article-table td {
+    padding-top: 0;
+  }
+}

@@ -1,10 +1,718 @@
 {
   "schema_version": "1.0.0",
   "data_version": "2026-08-29",
-  "generated_at": "2026-08-30T01:02:56+00:00",
+  "generated_at": "2026-08-30T01:58:19+00:00",
   "cases": [
     {
-      "id": "tokyo-default-bill-with-subsidy",
+      "id": "prefecture-01-default-bill",
+      "input": {
+        "prefecture_code": "01",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "01",
+          "prefecture_name": "北海道",
+          "monthly_electricity_bill_yen": 12283,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4486,
+          "annual_generation_kwh": 4188,
+          "annual_self_consumed_kwh": 4188,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 137618,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 137618,
+            "total_electricity_savings_yen": 2752354,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2752354,
+            "profit_yen": 1427954
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 137618,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 137618,
+            "total_electricity_savings_yen": 2752354,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2752354,
+            "profit_yen": 1427954
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 137618,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 137618,
+            "total_electricity_savings_yen": 3343748,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3343748,
+            "profit_yen": 2019348
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-02-default-bill",
+      "input": {
+        "prefecture_code": "02",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "02",
+          "prefecture_name": "青森県",
+          "monthly_electricity_bill_yen": 12867,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5036,
+          "annual_generation_kwh": 3900,
+          "annual_self_consumed_kwh": 3900,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 119574,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 119574,
+            "total_electricity_savings_yen": 2391480,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2391480,
+            "profit_yen": 1067080
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 119574,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 119574,
+            "total_electricity_savings_yen": 2391480,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2391480,
+            "profit_yen": 1067080
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 119574,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 119574,
+            "total_electricity_savings_yen": 2905334,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2905334,
+            "profit_yen": 1580934
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-03-default-bill",
+      "input": {
+        "prefecture_code": "03",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "03",
+          "prefecture_name": "岩手県",
+          "monthly_electricity_bill_yen": 12867,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5036,
+          "annual_generation_kwh": 4136,
+          "annual_self_consumed_kwh": 4136,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126810,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126810,
+            "total_electricity_savings_yen": 2536195,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2536195,
+            "profit_yen": 1211795
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126810,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126810,
+            "total_electricity_savings_yen": 2536195,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2536195,
+            "profit_yen": 1211795
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126810,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126810,
+            "total_electricity_savings_yen": 3081144,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3081144,
+            "profit_yen": 1756744
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-04-default-bill",
+      "input": {
+        "prefecture_code": "04",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "04",
+          "prefecture_name": "宮城県",
+          "monthly_electricity_bill_yen": 12867,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5036,
+          "annual_generation_kwh": 4092,
+          "annual_self_consumed_kwh": 4092,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 125461,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 125461,
+            "total_electricity_savings_yen": 2509214,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2509214,
+            "profit_yen": 1184814
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 125461,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 125461,
+            "total_electricity_savings_yen": 2509214,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2509214,
+            "profit_yen": 1184814
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 125461,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 125461,
+            "total_electricity_savings_yen": 3048366,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3048366,
+            "profit_yen": 1723966
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-05-default-bill",
+      "input": {
+        "prefecture_code": "05",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "05",
+          "prefecture_name": "秋田県",
+          "monthly_electricity_bill_yen": 12867,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5036,
+          "annual_generation_kwh": 3772,
+          "annual_self_consumed_kwh": 3772,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115650,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115650,
+            "total_electricity_savings_yen": 2312990,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2312990,
+            "profit_yen": 988590
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115650,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115650,
+            "total_electricity_savings_yen": 2312990,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2312990,
+            "profit_yen": 988590
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115650,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115650,
+            "total_electricity_savings_yen": 2809979,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2809979,
+            "profit_yen": 1485579
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-06-default-bill",
+      "input": {
+        "prefecture_code": "06",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "06",
+          "prefecture_name": "山形県",
+          "monthly_electricity_bill_yen": 12867,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5036,
+          "annual_generation_kwh": 3964,
+          "annual_self_consumed_kwh": 3964,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 121536,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 121536,
+            "total_electricity_savings_yen": 2430725,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2430725,
+            "profit_yen": 1106325
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 280000,
+            "initial_cost_yen": 1044400,
+            "first_year_electricity_savings_yen": 121536,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 121536,
+            "total_electricity_savings_yen": 2430725,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2430725,
+            "profit_yen": 1386325
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 280000,
+            "initial_cost_yen": 1044400,
+            "first_year_electricity_savings_yen": 121536,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 121536,
+            "total_electricity_savings_yen": 2953011,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2953011,
+            "profit_yen": 1908611
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-07-default-bill",
+      "input": {
+        "prefecture_code": "07",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "07",
+          "prefecture_name": "福島県",
+          "monthly_electricity_bill_yen": 12867,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5036,
+          "annual_generation_kwh": 4124,
+          "annual_self_consumed_kwh": 4124,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126442,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126442,
+            "total_electricity_savings_yen": 2528837,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2528837,
+            "profit_yen": 1204437
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 160000,
+            "initial_cost_yen": 1164400,
+            "first_year_electricity_savings_yen": 126442,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126442,
+            "total_electricity_savings_yen": 2528837,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2528837,
+            "profit_yen": 1364437
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 160000,
+            "initial_cost_yen": 1164400,
+            "first_year_electricity_savings_yen": 126442,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126442,
+            "total_electricity_savings_yen": 3072204,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3072204,
+            "profit_yen": 1907804
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-08-default-bill",
+      "input": {
+        "prefecture_code": "08",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "08",
+          "prefecture_name": "茨城県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4208,
+          "annual_self_consumed_kwh": 4208,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131332,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131332,
+            "total_electricity_savings_yen": 2626634,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2626634,
+            "profit_yen": 1302234
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131332,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131332,
+            "total_electricity_savings_yen": 2626634,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2626634,
+            "profit_yen": 1302234
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131332,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131332,
+            "total_electricity_savings_yen": 3191014,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3191014,
+            "profit_yen": 1866614
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-09-default-bill",
+      "input": {
+        "prefecture_code": "09",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "09",
+          "prefecture_name": "栃木県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4220,
+          "annual_self_consumed_kwh": 4220,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131706,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131706,
+            "total_electricity_savings_yen": 2634124,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2634124,
+            "profit_yen": 1309724
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131706,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131706,
+            "total_electricity_savings_yen": 2634124,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2634124,
+            "profit_yen": 1309724
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131706,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131706,
+            "total_electricity_savings_yen": 3200114,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3200114,
+            "profit_yen": 1875714
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-10-default-bill",
+      "input": {
+        "prefecture_code": "10",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "10",
+          "prefecture_name": "群馬県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4336,
+          "annual_self_consumed_kwh": 4336,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 135327,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 135327,
+            "total_electricity_savings_yen": 2706531,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2706531,
+            "profit_yen": 1382131
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 70000,
+            "initial_cost_yen": 1254400,
+            "first_year_electricity_savings_yen": 135327,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 135327,
+            "total_electricity_savings_yen": 2706531,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2706531,
+            "profit_yen": 1452131
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 70000,
+            "initial_cost_yen": 1254400,
+            "first_year_electricity_savings_yen": 135327,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 135327,
+            "total_electricity_savings_yen": 3288079,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3288079,
+            "profit_yen": 2033679
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-11-default-bill",
+      "input": {
+        "prefecture_code": "11",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "11",
+          "prefecture_name": "埼玉県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4060,
+          "annual_self_consumed_kwh": 4060,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126713,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126713,
+            "total_electricity_savings_yen": 2534252,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2534252,
+            "profit_yen": 1209852
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126713,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126713,
+            "total_electricity_savings_yen": 2534252,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2534252,
+            "profit_yen": 1209852
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126713,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126713,
+            "total_electricity_savings_yen": 3078783,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3078783,
+            "profit_yen": 1754383
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-12-default-bill",
+      "input": {
+        "prefecture_code": "12",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "12",
+          "prefecture_name": "千葉県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4264,
+          "annual_self_consumed_kwh": 4264,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 133079,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 133079,
+            "total_electricity_savings_yen": 2661589,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2661589,
+            "profit_yen": 1337189
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 133079,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 133079,
+            "total_electricity_savings_yen": 2661589,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2661589,
+            "profit_yen": 1337189
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 133079,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 133079,
+            "total_electricity_savings_yen": 3233480,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3233480,
+            "profit_yen": 1909080
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-13-default-bill",
       "input": {
         "prefecture_code": "13",
         "monthly_electricity_bill_yen": null
@@ -58,6 +766,2012 @@
             "total_sales_income_yen": 0,
             "total_revenue_yen": 3024184,
             "profit_yen": 2179784
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-14-default-bill",
+      "input": {
+        "prefecture_code": "14",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "14",
+          "prefecture_name": "神奈川県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4168,
+          "annual_self_consumed_kwh": 4168,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 130083,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 130083,
+            "total_electricity_savings_yen": 2601666,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2601666,
+            "profit_yen": 1277266
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 130083,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 130083,
+            "total_electricity_savings_yen": 2601666,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2601666,
+            "profit_yen": 1277266
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 130083,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 130083,
+            "total_electricity_savings_yen": 3160682,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3160682,
+            "profit_yen": 1836282
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-15-default-bill",
+      "input": {
+        "prefecture_code": "15",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "15",
+          "prefecture_name": "新潟県",
+          "monthly_electricity_bill_yen": 14225,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5568,
+          "annual_generation_kwh": 3764,
+          "annual_self_consumed_kwh": 3764,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115404,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115404,
+            "total_electricity_savings_yen": 2308085,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2308085,
+            "profit_yen": 983685
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 280000,
+            "initial_cost_yen": 1044400,
+            "first_year_electricity_savings_yen": 115404,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115404,
+            "total_electricity_savings_yen": 2308085,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2308085,
+            "profit_yen": 1263685
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 280000,
+            "initial_cost_yen": 1044400,
+            "first_year_electricity_savings_yen": 115404,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115404,
+            "total_electricity_savings_yen": 2804019,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2804019,
+            "profit_yen": 1759619
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-16-default-bill",
+      "input": {
+        "prefecture_code": "16",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "16",
+          "prefecture_name": "富山県",
+          "monthly_electricity_bill_yen": 14225,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 6092,
+          "annual_generation_kwh": 3796,
+          "annual_self_consumed_kwh": 3796,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106364,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106364,
+            "total_electricity_savings_yen": 2127278,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2127278,
+            "profit_yen": 802878
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106364,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106364,
+            "total_electricity_savings_yen": 2127278,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2127278,
+            "profit_yen": 802878
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106364,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106364,
+            "total_electricity_savings_yen": 2584363,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2584363,
+            "profit_yen": 1259963
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-17-default-bill",
+      "input": {
+        "prefecture_code": "17",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "17",
+          "prefecture_name": "石川県",
+          "monthly_electricity_bill_yen": 14225,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 6092,
+          "annual_generation_kwh": 3912,
+          "annual_self_consumed_kwh": 3912,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 109614,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 109614,
+            "total_electricity_savings_yen": 2192285,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2192285,
+            "profit_yen": 867885
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 109614,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 109614,
+            "total_electricity_savings_yen": 2192285,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2192285,
+            "profit_yen": 867885
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 109614,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 109614,
+            "total_electricity_savings_yen": 2663338,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2663338,
+            "profit_yen": 1338938
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-18-default-bill",
+      "input": {
+        "prefecture_code": "18",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "18",
+          "prefecture_name": "福井県",
+          "monthly_electricity_bill_yen": 14225,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 6092,
+          "annual_generation_kwh": 3796,
+          "annual_self_consumed_kwh": 3796,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106364,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106364,
+            "total_electricity_savings_yen": 2127278,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2127278,
+            "profit_yen": 802878
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106364,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106364,
+            "total_electricity_savings_yen": 2127278,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2127278,
+            "profit_yen": 802878
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106364,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106364,
+            "total_electricity_savings_yen": 2584363,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2584363,
+            "profit_yen": 1259963
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-19-default-bill",
+      "input": {
+        "prefecture_code": "19",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "19",
+          "prefecture_name": "山梨県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4447,
+          "annual_generation_kwh": 4584,
+          "annual_self_consumed_kwh": 4447,
+          "annual_exported_kwh": 137
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 138804,
+            "first_year_sales_income_yen": 3278,
+            "first_year_economic_benefit_yen": 142082,
+            "total_electricity_savings_yen": 2776080,
+            "total_sales_income_yen": 31523,
+            "total_revenue_yen": 2807603,
+            "profit_yen": 1483203
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 138804,
+            "first_year_sales_income_yen": 3278,
+            "first_year_economic_benefit_yen": 142082,
+            "total_electricity_savings_yen": 2776080,
+            "total_sales_income_yen": 31523,
+            "total_revenue_yen": 2807603,
+            "profit_yen": 1483203
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 138804,
+            "first_year_sales_income_yen": 3278,
+            "first_year_economic_benefit_yen": 142082,
+            "total_electricity_savings_yen": 3372572,
+            "total_sales_income_yen": 31523,
+            "total_revenue_yen": 3404095,
+            "profit_yen": 2079695
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-20-default-bill",
+      "input": {
+        "prefecture_code": "20",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "20",
+          "prefecture_name": "長野県",
+          "monthly_electricity_bill_yen": 11567,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4767,
+          "annual_generation_kwh": 4208,
+          "annual_self_consumed_kwh": 4208,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 122537,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 122537,
+            "total_electricity_savings_yen": 2450739,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2450739,
+            "profit_yen": 1126339
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 122537,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 122537,
+            "total_electricity_savings_yen": 2450739,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2450739,
+            "profit_yen": 1126339
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 122537,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 122537,
+            "total_electricity_savings_yen": 2977326,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2977326,
+            "profit_yen": 1652926
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-21-default-bill",
+      "input": {
+        "prefecture_code": "21",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "21",
+          "prefecture_name": "岐阜県",
+          "monthly_electricity_bill_yen": 11208,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4619,
+          "annual_generation_kwh": 4528,
+          "annual_self_consumed_kwh": 4528,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131855,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131855,
+            "total_electricity_savings_yen": 2637107,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2637107,
+            "profit_yen": 1312707
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131855,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131855,
+            "total_electricity_savings_yen": 2637107,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2637107,
+            "profit_yen": 1312707
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 131855,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 131855,
+            "total_electricity_savings_yen": 3203738,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3203738,
+            "profit_yen": 1879338
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-22-default-bill",
+      "input": {
+        "prefecture_code": "22",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "22",
+          "prefecture_name": "静岡県",
+          "monthly_electricity_bill_yen": 11208,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4619,
+          "annual_generation_kwh": 4424,
+          "annual_self_consumed_kwh": 4424,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128827,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128827,
+            "total_electricity_savings_yen": 2576538,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2576538,
+            "profit_yen": 1252138
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128827,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128827,
+            "total_electricity_savings_yen": 2576538,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2576538,
+            "profit_yen": 1252138
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128827,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128827,
+            "total_electricity_savings_yen": 3130154,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3130154,
+            "profit_yen": 1805754
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-23-default-bill",
+      "input": {
+        "prefecture_code": "23",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "23",
+          "prefecture_name": "愛知県",
+          "monthly_electricity_bill_yen": 11208,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4619,
+          "annual_generation_kwh": 4380,
+          "annual_self_consumed_kwh": 4380,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 127546,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 127546,
+            "total_electricity_savings_yen": 2550912,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2550912,
+            "profit_yen": 1226512
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 127546,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 127546,
+            "total_electricity_savings_yen": 2550912,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2550912,
+            "profit_yen": 1226512
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 127546,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 127546,
+            "total_electricity_savings_yen": 3099023,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3099023,
+            "profit_yen": 1774623
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-24-default-bill",
+      "input": {
+        "prefecture_code": "24",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "24",
+          "prefecture_name": "三重県",
+          "monthly_electricity_bill_yen": 11208,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4619,
+          "annual_generation_kwh": 4424,
+          "annual_self_consumed_kwh": 4424,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128827,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128827,
+            "total_electricity_savings_yen": 2576538,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2576538,
+            "profit_yen": 1252138
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128827,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128827,
+            "total_electricity_savings_yen": 2576538,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2576538,
+            "profit_yen": 1252138
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128827,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128827,
+            "total_electricity_savings_yen": 3130154,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3130154,
+            "profit_yen": 1805754
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-25-default-bill",
+      "input": {
+        "prefecture_code": "25",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "25",
+          "prefecture_name": "滋賀県",
+          "monthly_electricity_bill_yen": 10058,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4655,
+          "annual_generation_kwh": 3676,
+          "annual_self_consumed_kwh": 3676,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 95319,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 95319,
+            "total_electricity_savings_yen": 1906374,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 1906374,
+            "profit_yen": 581974
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 95319,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 95319,
+            "total_electricity_savings_yen": 1906374,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 1906374,
+            "profit_yen": 581974
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 95319,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 95319,
+            "total_electricity_savings_yen": 2315993,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2315993,
+            "profit_yen": 991593
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-26-default-bill",
+      "input": {
+        "prefecture_code": "26",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "26",
+          "prefecture_name": "京都府",
+          "monthly_electricity_bill_yen": 10058,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4655,
+          "annual_generation_kwh": 3964,
+          "annual_self_consumed_kwh": 3964,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 102787,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 102787,
+            "total_electricity_savings_yen": 2055730,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2055730,
+            "profit_yen": 731330
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 102787,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 102787,
+            "total_electricity_savings_yen": 2055730,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2055730,
+            "profit_yen": 731330
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 102787,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 102787,
+            "total_electricity_savings_yen": 2497442,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2497442,
+            "profit_yen": 1173042
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-27-default-bill",
+      "input": {
+        "prefecture_code": "27",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "27",
+          "prefecture_name": "大阪府",
+          "monthly_electricity_bill_yen": 10058,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4655,
+          "annual_generation_kwh": 4176,
+          "annual_self_consumed_kwh": 4176,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 108284,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 108284,
+            "total_electricity_savings_yen": 2165674,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2165674,
+            "profit_yen": 841274
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 108284,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 108284,
+            "total_electricity_savings_yen": 2165674,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2165674,
+            "profit_yen": 841274
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 108284,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 108284,
+            "total_electricity_savings_yen": 2631009,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2631009,
+            "profit_yen": 1306609
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-28-default-bill",
+      "input": {
+        "prefecture_code": "28",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "28",
+          "prefecture_name": "兵庫県",
+          "monthly_electricity_bill_yen": 10058,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4655,
+          "annual_generation_kwh": 4304,
+          "annual_self_consumed_kwh": 4304,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 111603,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 111603,
+            "total_electricity_savings_yen": 2232054,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2232054,
+            "profit_yen": 907654
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 111603,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 111603,
+            "total_electricity_savings_yen": 2232054,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2232054,
+            "profit_yen": 907654
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 111603,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 111603,
+            "total_electricity_savings_yen": 2711653,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2711653,
+            "profit_yen": 1387253
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-29-default-bill",
+      "input": {
+        "prefecture_code": "29",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "29",
+          "prefecture_name": "奈良県",
+          "monthly_electricity_bill_yen": 10058,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4655,
+          "annual_generation_kwh": 4252,
+          "annual_self_consumed_kwh": 4252,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 110254,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 110254,
+            "total_electricity_savings_yen": 2205087,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2205087,
+            "profit_yen": 880687
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 110254,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 110254,
+            "total_electricity_savings_yen": 2205087,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2205087,
+            "profit_yen": 880687
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 110254,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 110254,
+            "total_electricity_savings_yen": 2678891,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2678891,
+            "profit_yen": 1354491
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-30-default-bill",
+      "input": {
+        "prefecture_code": "30",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "30",
+          "prefecture_name": "和歌山県",
+          "monthly_electricity_bill_yen": 10058,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4655,
+          "annual_generation_kwh": 4392,
+          "annual_self_consumed_kwh": 4392,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113885,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113885,
+            "total_electricity_savings_yen": 2277691,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2277691,
+            "profit_yen": 953291
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113885,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113885,
+            "total_electricity_savings_yen": 2277691,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2277691,
+            "profit_yen": 953291
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113885,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113885,
+            "total_electricity_savings_yen": 2767095,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2767095,
+            "profit_yen": 1442695
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-31-default-bill",
+      "input": {
+        "prefecture_code": "31",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "31",
+          "prefecture_name": "鳥取県",
+          "monthly_electricity_bill_yen": 12958,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5320,
+          "annual_generation_kwh": 3892,
+          "annual_self_consumed_kwh": 3892,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113763,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113763,
+            "total_electricity_savings_yen": 2275263,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2275263,
+            "profit_yen": 950863
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113763,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113763,
+            "total_electricity_savings_yen": 2275263,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2275263,
+            "profit_yen": 950863
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113763,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113763,
+            "total_electricity_savings_yen": 2764146,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2764146,
+            "profit_yen": 1439746
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-32-default-bill",
+      "input": {
+        "prefecture_code": "32",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "32",
+          "prefecture_name": "島根県",
+          "monthly_electricity_bill_yen": 12958,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5320,
+          "annual_generation_kwh": 3964,
+          "annual_self_consumed_kwh": 3964,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115868,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115868,
+            "total_electricity_savings_yen": 2317354,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2317354,
+            "profit_yen": 992954
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115868,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115868,
+            "total_electricity_savings_yen": 2317354,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2317354,
+            "profit_yen": 992954
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 115868,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 115868,
+            "total_electricity_savings_yen": 2815281,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2815281,
+            "profit_yen": 1490881
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-33-default-bill",
+      "input": {
+        "prefecture_code": "33",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "33",
+          "prefecture_name": "岡山県",
+          "monthly_electricity_bill_yen": 12958,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5320,
+          "annual_generation_kwh": 4328,
+          "annual_self_consumed_kwh": 4328,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126507,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126507,
+            "total_electricity_savings_yen": 2530149,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2530149,
+            "profit_yen": 1205749
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126507,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126507,
+            "total_electricity_savings_yen": 2530149,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2530149,
+            "profit_yen": 1205749
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 126507,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 126507,
+            "total_electricity_savings_yen": 3073798,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3073798,
+            "profit_yen": 1749398
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-34-default-bill",
+      "input": {
+        "prefecture_code": "34",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "34",
+          "prefecture_name": "広島県",
+          "monthly_electricity_bill_yen": 12958,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5320,
+          "annual_generation_kwh": 4540,
+          "annual_self_consumed_kwh": 4540,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 132704,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 132704,
+            "total_electricity_savings_yen": 2654084,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2654084,
+            "profit_yen": 1329684
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 132704,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 132704,
+            "total_electricity_savings_yen": 2654084,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2654084,
+            "profit_yen": 1329684
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 132704,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 132704,
+            "total_electricity_savings_yen": 3224363,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3224363,
+            "profit_yen": 1899963
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-35-default-bill",
+      "input": {
+        "prefecture_code": "35",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "35",
+          "prefecture_name": "山口県",
+          "monthly_electricity_bill_yen": 12958,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5320,
+          "annual_generation_kwh": 4252,
+          "annual_self_consumed_kwh": 4252,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 124286,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 124286,
+            "total_electricity_savings_yen": 2485719,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2485719,
+            "profit_yen": 1161319
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 124286,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 124286,
+            "total_electricity_savings_yen": 2485719,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2485719,
+            "profit_yen": 1161319
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 124286,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 124286,
+            "total_electricity_savings_yen": 3019822,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3019822,
+            "profit_yen": 1695422
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-36-default-bill",
+      "input": {
+        "prefecture_code": "36",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "36",
+          "prefecture_name": "徳島県",
+          "monthly_electricity_bill_yen": 11683,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5023,
+          "annual_generation_kwh": 4400,
+          "annual_self_consumed_kwh": 4400,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 122804,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 122804,
+            "total_electricity_savings_yen": 2456080,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2456080,
+            "profit_yen": 1131680
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 280000,
+            "initial_cost_yen": 1044400,
+            "first_year_electricity_savings_yen": 122804,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 122804,
+            "total_electricity_savings_yen": 2456080,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2456080,
+            "profit_yen": 1411680
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 280000,
+            "initial_cost_yen": 1044400,
+            "first_year_electricity_savings_yen": 122804,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 122804,
+            "total_electricity_savings_yen": 2983814,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2983814,
+            "profit_yen": 1939414
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-37-default-bill",
+      "input": {
+        "prefecture_code": "37",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "37",
+          "prefecture_name": "香川県",
+          "monthly_electricity_bill_yen": 11683,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5023,
+          "annual_generation_kwh": 4456,
+          "annual_self_consumed_kwh": 4456,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 124367,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 124367,
+            "total_electricity_savings_yen": 2487339,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2487339,
+            "profit_yen": 1162939
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 124367,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 124367,
+            "total_electricity_savings_yen": 2487339,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2487339,
+            "profit_yen": 1162939
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 124367,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 124367,
+            "total_electricity_savings_yen": 3021790,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3021790,
+            "profit_yen": 1697390
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-38-default-bill",
+      "input": {
+        "prefecture_code": "38",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "38",
+          "prefecture_name": "愛媛県",
+          "monthly_electricity_bill_yen": 11683,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5023,
+          "annual_generation_kwh": 4424,
+          "annual_self_consumed_kwh": 4424,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 123474,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 123474,
+            "total_electricity_savings_yen": 2469477,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2469477,
+            "profit_yen": 1145077
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 123474,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 123474,
+            "total_electricity_savings_yen": 2469477,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2469477,
+            "profit_yen": 1145077
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 123474,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 123474,
+            "total_electricity_savings_yen": 3000090,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3000090,
+            "profit_yen": 1675690
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-39-default-bill",
+      "input": {
+        "prefecture_code": "39",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "39",
+          "prefecture_name": "高知県",
+          "monthly_electricity_bill_yen": 11683,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 5023,
+          "annual_generation_kwh": 4604,
+          "annual_self_consumed_kwh": 4604,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128498,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128498,
+            "total_electricity_savings_yen": 2569953,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2569953,
+            "profit_yen": 1245553
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128498,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128498,
+            "total_electricity_savings_yen": 2569953,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2569953,
+            "profit_yen": 1245553
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 128498,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 128498,
+            "total_electricity_savings_yen": 3122155,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3122155,
+            "profit_yen": 1797755
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-40-default-bill",
+      "input": {
+        "prefecture_code": "40",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "40",
+          "prefecture_name": "福岡県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4028,
+          "annual_self_consumed_kwh": 4028,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 100901,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 100901,
+            "total_electricity_savings_yen": 2018028,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2018028,
+            "profit_yen": 693628
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 100901,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 100901,
+            "total_electricity_savings_yen": 2018028,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2018028,
+            "profit_yen": 693628
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 100901,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 100901,
+            "total_electricity_savings_yen": 2451639,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2451639,
+            "profit_yen": 1127239
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-41-default-bill",
+      "input": {
+        "prefecture_code": "41",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "41",
+          "prefecture_name": "佐賀県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4200,
+          "annual_self_consumed_kwh": 4200,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105210,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105210,
+            "total_electricity_savings_yen": 2104200,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2104200,
+            "profit_yen": 779800
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105210,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105210,
+            "total_electricity_savings_yen": 2104200,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2104200,
+            "profit_yen": 779800
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105210,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105210,
+            "total_electricity_savings_yen": 2556326,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2556326,
+            "profit_yen": 1231926
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-42-default-bill",
+      "input": {
+        "prefecture_code": "42",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "42",
+          "prefecture_name": "長崎県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4220,
+          "annual_self_consumed_kwh": 4220,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105711,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105711,
+            "total_electricity_savings_yen": 2114220,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2114220,
+            "profit_yen": 789820
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105711,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105711,
+            "total_electricity_savings_yen": 2114220,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2114220,
+            "profit_yen": 789820
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105711,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105711,
+            "total_electricity_savings_yen": 2568499,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2568499,
+            "profit_yen": 1244099
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-43-default-bill",
+      "input": {
+        "prefecture_code": "43",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "43",
+          "prefecture_name": "熊本県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4316,
+          "annual_self_consumed_kwh": 4316,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 108116,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 108116,
+            "total_electricity_savings_yen": 2162316,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2162316,
+            "profit_yen": 837916
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 108116,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 108116,
+            "total_electricity_savings_yen": 2162316,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2162316,
+            "profit_yen": 837916
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 108116,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 108116,
+            "total_electricity_savings_yen": 2626930,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2626930,
+            "profit_yen": 1302530
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-44-default-bill",
+      "input": {
+        "prefecture_code": "44",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "44",
+          "prefecture_name": "大分県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4208,
+          "annual_self_consumed_kwh": 4208,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105410,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105410,
+            "total_electricity_savings_yen": 2108208,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2108208,
+            "profit_yen": 783808
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105410,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105410,
+            "total_electricity_savings_yen": 2108208,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2108208,
+            "profit_yen": 783808
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 105410,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 105410,
+            "total_electricity_savings_yen": 2561195,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2561195,
+            "profit_yen": 1236795
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-45-default-bill",
+      "input": {
+        "prefecture_code": "45",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "45",
+          "prefecture_name": "宮崎県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4540,
+          "annual_self_consumed_kwh": 4540,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113727,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113727,
+            "total_electricity_savings_yen": 2274540,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2274540,
+            "profit_yen": 950140
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113727,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113727,
+            "total_electricity_savings_yen": 2274540,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2274540,
+            "profit_yen": 950140
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 113727,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 113727,
+            "total_electricity_savings_yen": 2763267,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2763267,
+            "profit_yen": 1438867
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-46-default-bill",
+      "input": {
+        "prefecture_code": "46",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "46",
+          "prefecture_name": "鹿児島県",
+          "monthly_electricity_bill_yen": 10133,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4854,
+          "annual_generation_kwh": 4264,
+          "annual_self_consumed_kwh": 4264,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106813,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106813,
+            "total_electricity_savings_yen": 2136264,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2136264,
+            "profit_yen": 811864
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106813,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106813,
+            "total_electricity_savings_yen": 2136264,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2136264,
+            "profit_yen": 811864
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 106813,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 106813,
+            "total_electricity_savings_yen": 2595280,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2595280,
+            "profit_yen": 1270880
+          }
+        ]
+      }
+    },
+    {
+      "id": "prefecture-47-default-bill",
+      "input": {
+        "prefecture_code": "47",
+        "monthly_electricity_bill_yen": null
+      },
+      "expected": {
+        "input": {
+          "prefecture_code": "47",
+          "prefecture_name": "沖縄県",
+          "monthly_electricity_bill_yen": 11225,
+          "used_default_monthly_electricity_bill": true
+        },
+        "energy": {
+          "annual_consumption_kwh": 4441,
+          "annual_generation_kwh": 4360,
+          "annual_self_consumed_kwh": 4360,
+          "annual_exported_kwh": 0
+        },
+        "scenarios": [
+          {
+            "scenario": "downside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 132239,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 132239,
+            "total_electricity_savings_yen": 2644776,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2644776,
+            "profit_yen": 1320376
+          },
+          {
+            "scenario": "standard",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 132239,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 132239,
+            "total_electricity_savings_yen": 2644776,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 2644776,
+            "profit_yen": 1320376
+          },
+          {
+            "scenario": "upside",
+            "subsidy_yen": 0,
+            "initial_cost_yen": 1324400,
+            "first_year_electricity_savings_yen": 132239,
+            "first_year_sales_income_yen": 0,
+            "first_year_economic_benefit_yen": 132239,
+            "total_electricity_savings_yen": 3213055,
+            "total_sales_income_yen": 0,
+            "total_revenue_yen": 3213055,
+            "profit_yen": 1888655
           }
         ]
       }
