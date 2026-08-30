@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "node site/hosting/prepare-build.js && vite build && node site/hosting/finalize-build.js",
+    "build": "node site/hosting/prepare-build.js && vite build && node site/hosting/finalize-build.js && node site/hosting/verify-build.js",
     "preview": "vite preview",
     "test": "node --test qa/tests/calculator.test.js qa/tests/detail-pages.test.js qa/tests/site-integrity.test.js"
   },

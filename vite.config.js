@@ -7,11 +7,10 @@ const siteRoot = resolve(import.meta.dirname, "site");
 
 export default defineConfig({
   root: siteRoot,
-  plugins: [sites(), cloudflare()],
-  build: {
-    outDir: "dist",
-    emptyOutDir: true
-  },
+  plugins: [
+    sites(),
+    cloudflare({ configPath: resolve(import.meta.dirname, "wrangler.jsonc") })
+  ],
   environments: {
     client: {
       build: {
