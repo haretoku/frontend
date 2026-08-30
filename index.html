@@ -80,6 +80,8 @@
           <p class="result-label">結論</p>
           <h3 id="summary-title" data-result-summary>概算結果</h3>
           <p class="result-amount" data-result-economic-benefit>―</p>
+          <p class="result-period">標準シナリオにおける20年間の概算利益</p>
+          <div class="scenario-grid" data-scenario-list aria-label="シナリオ別の20年間の概算利益"></div>
           <p class="result-note">確定値ではありません．住宅固有条件は見積もりで確認する必要があります．</p>
         </section>
 
@@ -93,11 +95,11 @@
           <h3 id="breakdown-title">費用・経済効果の内訳</h3>
           <dl class="result-grid">
             <div><dt>初期費用</dt><dd data-result-initial-cost>―</dd></div>
-            <div><dt>年間の経済効果</dt><dd data-result-annual-benefit>―</dd></div>
-            <div><dt>電気料金削減</dt><dd data-result-self-consumption>―</dd></div>
-            <div><dt>売電収入</dt><dd data-result-sales-income>―</dd></div>
+            <div><dt>1年目の経済効果</dt><dd data-result-annual-benefit>―</dd></div>
+            <div><dt>20年間の電気料金削減</dt><dd data-result-self-consumption>―</dd></div>
+            <div><dt>20年間の売電収入</dt><dd data-result-sales-income>―</dd></div>
             <div><dt>補助金</dt><dd data-result-subsidy>―</dd></div>
-            <div><dt>維持・交換費</dt><dd data-result-maintenance-cost>―</dd></div>
+            <div><dt>年間発電量</dt><dd data-result-generation>―</dd></div>
           </dl>
         </section>
 
@@ -109,7 +111,8 @@
 
         <section class="panel" aria-labelledby="assumptions-title">
           <h3 id="assumptions-title">前提・詳細情報</h3>
-          <p>計算に使用した値，出典，更新時点および不確実性を確認できる領域です．</p>
+          <p data-result-assumptions>計算に使用した月間電気料金を表示します．</p>
+          <p>4 kWの設備を仮定し，20年間の電気料金削減と売電収入から初期費用を差し引いています．設備劣化，維持・交換費，撤去費および現在価値換算は含みません．</p>
           <nav aria-label="計算根拠の詳細情報">
             <ul class="detail-link-list">
               <li>発電量</li>

@@ -1,6 +1,418 @@
 {
-  "schema_version": "0.1.0",
-  "data_version": "uninitialized",
-  "generated_at": null,
-  "data": {}
+  "schema_version": "1.0.0",
+  "data_version": "2026-08-29",
+  "generated_at": "2026-08-30T01:02:56+00:00",
+  "calculation": {
+    "system_capacity_kw": 4,
+    "evaluation_period_years": 20,
+    "installation_cost_yen_per_kw": 331100,
+    "fit_prices": [
+      {
+        "period_start_year": 1,
+        "period_end_year": 4,
+        "price_yen_per_kwh": 24
+      },
+      {
+        "period_start_year": 5,
+        "period_end_year": 10,
+        "price_yen_per_kwh": 8.3
+      }
+    ],
+    "post_fit_price_yen_per_kwh": 8.5
+  },
+  "scenarios": [
+    {
+      "scenario": "downside",
+      "electricity_price_growth_rate": 0,
+      "subsidy_included": false
+    },
+    {
+      "scenario": "standard",
+      "electricity_price_growth_rate": 0,
+      "subsidy_included": true
+    },
+    {
+      "scenario": "upside",
+      "electricity_price_growth_rate": 0.02,
+      "subsidy_included": true
+    }
+  ],
+  "prefectures": [
+    {
+      "code": "01",
+      "name": "北海道",
+      "annual_generation_kwh_per_kw": 1047,
+      "electricity_price_yen_per_kwh": 32.86,
+      "default_monthly_electricity_bill_yen": 12283,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "02",
+      "name": "青森県",
+      "annual_generation_kwh_per_kw": 975,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 12867,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "03",
+      "name": "岩手県",
+      "annual_generation_kwh_per_kw": 1034,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 12867,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "04",
+      "name": "宮城県",
+      "annual_generation_kwh_per_kw": 1023,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 12867,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "05",
+      "name": "秋田県",
+      "annual_generation_kwh_per_kw": 943,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 12867,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "06",
+      "name": "山形県",
+      "annual_generation_kwh_per_kw": 991,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 12867,
+      "subsidy_amount_for_4kw_yen": 280000
+    },
+    {
+      "code": "07",
+      "name": "福島県",
+      "annual_generation_kwh_per_kw": 1031,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 12867,
+      "subsidy_amount_for_4kw_yen": 160000
+    },
+    {
+      "code": "08",
+      "name": "茨城県",
+      "annual_generation_kwh_per_kw": 1052,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "09",
+      "name": "栃木県",
+      "annual_generation_kwh_per_kw": 1055,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "10",
+      "name": "群馬県",
+      "annual_generation_kwh_per_kw": 1084,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 70000
+    },
+    {
+      "code": "11",
+      "name": "埼玉県",
+      "annual_generation_kwh_per_kw": 1015,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "12",
+      "name": "千葉県",
+      "annual_generation_kwh_per_kw": 1066,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "13",
+      "name": "東京都",
+      "annual_generation_kwh_per_kw": 997,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 480000
+    },
+    {
+      "code": "14",
+      "name": "神奈川県",
+      "annual_generation_kwh_per_kw": 1042,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "15",
+      "name": "新潟県",
+      "annual_generation_kwh_per_kw": 941,
+      "electricity_price_yen_per_kwh": 30.66,
+      "default_monthly_electricity_bill_yen": 14225,
+      "subsidy_amount_for_4kw_yen": 280000
+    },
+    {
+      "code": "16",
+      "name": "富山県",
+      "annual_generation_kwh_per_kw": 949,
+      "electricity_price_yen_per_kwh": 28.02,
+      "default_monthly_electricity_bill_yen": 14225,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "17",
+      "name": "石川県",
+      "annual_generation_kwh_per_kw": 978,
+      "electricity_price_yen_per_kwh": 28.02,
+      "default_monthly_electricity_bill_yen": 14225,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "18",
+      "name": "福井県",
+      "annual_generation_kwh_per_kw": 949,
+      "electricity_price_yen_per_kwh": 28.02,
+      "default_monthly_electricity_bill_yen": 14225,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "19",
+      "name": "山梨県",
+      "annual_generation_kwh_per_kw": 1146,
+      "electricity_price_yen_per_kwh": 31.21,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "20",
+      "name": "長野県",
+      "annual_generation_kwh_per_kw": 1052,
+      "electricity_price_yen_per_kwh": 29.12,
+      "default_monthly_electricity_bill_yen": 11567,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "21",
+      "name": "岐阜県",
+      "annual_generation_kwh_per_kw": 1132,
+      "electricity_price_yen_per_kwh": 29.12,
+      "default_monthly_electricity_bill_yen": 11208,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "22",
+      "name": "静岡県",
+      "annual_generation_kwh_per_kw": 1106,
+      "electricity_price_yen_per_kwh": 29.12,
+      "default_monthly_electricity_bill_yen": 11208,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "23",
+      "name": "愛知県",
+      "annual_generation_kwh_per_kw": 1095,
+      "electricity_price_yen_per_kwh": 29.12,
+      "default_monthly_electricity_bill_yen": 11208,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "24",
+      "name": "三重県",
+      "annual_generation_kwh_per_kw": 1106,
+      "electricity_price_yen_per_kwh": 29.12,
+      "default_monthly_electricity_bill_yen": 11208,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "25",
+      "name": "滋賀県",
+      "annual_generation_kwh_per_kw": 919,
+      "electricity_price_yen_per_kwh": 25.93,
+      "default_monthly_electricity_bill_yen": 10058,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "26",
+      "name": "京都府",
+      "annual_generation_kwh_per_kw": 991,
+      "electricity_price_yen_per_kwh": 25.93,
+      "default_monthly_electricity_bill_yen": 10058,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "27",
+      "name": "大阪府",
+      "annual_generation_kwh_per_kw": 1044,
+      "electricity_price_yen_per_kwh": 25.93,
+      "default_monthly_electricity_bill_yen": 10058,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "28",
+      "name": "兵庫県",
+      "annual_generation_kwh_per_kw": 1076,
+      "electricity_price_yen_per_kwh": 25.93,
+      "default_monthly_electricity_bill_yen": 10058,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "29",
+      "name": "奈良県",
+      "annual_generation_kwh_per_kw": 1063,
+      "electricity_price_yen_per_kwh": 25.93,
+      "default_monthly_electricity_bill_yen": 10058,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "30",
+      "name": "和歌山県",
+      "annual_generation_kwh_per_kw": 1098,
+      "electricity_price_yen_per_kwh": 25.93,
+      "default_monthly_electricity_bill_yen": 10058,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "31",
+      "name": "鳥取県",
+      "annual_generation_kwh_per_kw": 973,
+      "electricity_price_yen_per_kwh": 29.23,
+      "default_monthly_electricity_bill_yen": 12958,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "32",
+      "name": "島根県",
+      "annual_generation_kwh_per_kw": 991,
+      "electricity_price_yen_per_kwh": 29.23,
+      "default_monthly_electricity_bill_yen": 12958,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "33",
+      "name": "岡山県",
+      "annual_generation_kwh_per_kw": 1082,
+      "electricity_price_yen_per_kwh": 29.23,
+      "default_monthly_electricity_bill_yen": 12958,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "34",
+      "name": "広島県",
+      "annual_generation_kwh_per_kw": 1135,
+      "electricity_price_yen_per_kwh": 29.23,
+      "default_monthly_electricity_bill_yen": 12958,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "35",
+      "name": "山口県",
+      "annual_generation_kwh_per_kw": 1063,
+      "electricity_price_yen_per_kwh": 29.23,
+      "default_monthly_electricity_bill_yen": 12958,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "36",
+      "name": "徳島県",
+      "annual_generation_kwh_per_kw": 1100,
+      "electricity_price_yen_per_kwh": 27.91,
+      "default_monthly_electricity_bill_yen": 11683,
+      "subsidy_amount_for_4kw_yen": 280000
+    },
+    {
+      "code": "37",
+      "name": "香川県",
+      "annual_generation_kwh_per_kw": 1114,
+      "electricity_price_yen_per_kwh": 27.91,
+      "default_monthly_electricity_bill_yen": 11683,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "38",
+      "name": "愛媛県",
+      "annual_generation_kwh_per_kw": 1106,
+      "electricity_price_yen_per_kwh": 27.91,
+      "default_monthly_electricity_bill_yen": 11683,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "39",
+      "name": "高知県",
+      "annual_generation_kwh_per_kw": 1151,
+      "electricity_price_yen_per_kwh": 27.91,
+      "default_monthly_electricity_bill_yen": 11683,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "40",
+      "name": "福岡県",
+      "annual_generation_kwh_per_kw": 1007,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "41",
+      "name": "佐賀県",
+      "annual_generation_kwh_per_kw": 1050,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "42",
+      "name": "長崎県",
+      "annual_generation_kwh_per_kw": 1055,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "43",
+      "name": "熊本県",
+      "annual_generation_kwh_per_kw": 1079,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "44",
+      "name": "大分県",
+      "annual_generation_kwh_per_kw": 1052,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "45",
+      "name": "宮崎県",
+      "annual_generation_kwh_per_kw": 1135,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "46",
+      "name": "鹿児島県",
+      "annual_generation_kwh_per_kw": 1066,
+      "electricity_price_yen_per_kwh": 25.05,
+      "default_monthly_electricity_bill_yen": 10133,
+      "subsidy_amount_for_4kw_yen": 0
+    },
+    {
+      "code": "47",
+      "name": "沖縄県",
+      "annual_generation_kwh_per_kw": 1090,
+      "electricity_price_yen_per_kwh": 30.33,
+      "default_monthly_electricity_bill_yen": 11225,
+      "subsidy_amount_for_4kw_yen": 0
+    }
+  ]
 }

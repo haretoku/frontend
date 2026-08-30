@@ -240,6 +240,47 @@ button:disabled {
   line-height: 1.1;
 }
 
+.result-amount--negative {
+  color: #a32626;
+}
+
+.result-period {
+  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.scenario-card {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  background: var(--color-background);
+}
+
+.scenario-card--standard {
+  border-color: var(--color-primary);
+  background: #edf7f1;
+}
+
+.scenario-card__label {
+  color: var(--color-muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.scenario-card__amount {
+  font-size: clamp(1rem, 3vw, 1.35rem);
+}
+
 .result-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -327,6 +368,7 @@ button:disabled {
     flex-direction: column;
   }
 
+  .scenario-grid,
   .result-grid,
   .detail-link-list {
     grid-template-columns: 1fr;
