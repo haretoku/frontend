@@ -28,13 +28,20 @@ Vite，Wrangler，Sitesおよびパッケージ管理がルートから設定を
 
 ## 更新・確認手順
 
-> **結論：backend成果物の反映，frontend QA，実ブラウザ確認および公開ビルド確認の順に進める．**
+> **結論：通常の画面開発はローカルサーバーで反復し，公開可能な単位が完成した場合だけQA，ビルドおよびデプロイへ進む．**
 
-1. backendの`dist/output/public-data.json`と`metadata.json`を`data/input/`へ，`calculation-cases.json`を`qa/fixtures/`へ反映する．
-2. frontendを変更する．
-3. `pnpm test`で計算，公開データ，HTMLおよびリンクを自動検査する．
-4. `pnpm run dev`で実ブラウザからUX，文章，導線および見た目を確認する．
-5. `pnpm run build`と`pnpm run preview`で公開成果物を確認する．
+通常の開発では，次の手順を繰り返す．
+
+1. 必要な場合は，backendの`dist/output/public-data.json`と`metadata.json`を`data/input/`へ，`calculation-cases.json`を`qa/fixtures/`へ反映する．
+2. `pnpm run dev`でローカル開発サーバーを起動する．
+3. frontendを変更し，`http://localhost:5173/`を実ブラウザで確認する．
+4. 変更と確認を繰り返し，開発中はローカルサーバーと`node_modules/`を維持する．
+
+複数の変更が公開可能な単位として完成した場合，またはユーザーが公開を明示的に依頼した場合だけ，次へ進む．
+
+1. `pnpm test`で計算，公開データ，HTMLおよびリンクを自動検査する．
+2. `pnpm run build`で公開成果物を生成・検査する．
+3. 必要な公開確認を行った後，デプロイする．
 
 初回または依存関係の更新後は，事前に次を実行する．
 
