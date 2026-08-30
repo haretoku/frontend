@@ -9,8 +9,11 @@ const elements = {
   formMessage: document.querySelector("#form-message"),
   dataStatus: document.querySelector("#data-status"),
   result: document.querySelector("#estimate-result"),
+  resultTitle: document.querySelector("#result-title"),
   resultSummary: document.querySelector("[data-result-summary]"),
   resultEconomicBenefit: document.querySelector("[data-result-economic-benefit]"),
+  resultPayback: document.querySelector("[data-result-payback]"),
+  resultPeriod: document.querySelector("[data-result-period]"),
   resultInitialCost: document.querySelector("[data-result-initial-cost]"),
   resultAnnualBenefit: document.querySelector("[data-result-annual-benefit]"),
   resultSelfConsumption: document.querySelector("[data-result-self-consumption]"),
@@ -18,7 +21,8 @@ const elements = {
   resultSubsidy: document.querySelector("[data-result-subsidy]"),
   resultGeneration: document.querySelector("[data-result-generation]"),
   scenarioList: document.querySelector("[data-scenario-list]"),
-  assumptions: document.querySelector("[data-result-assumptions]")
+  assumptions: document.querySelector("[data-result-assumptions]"),
+  resultDisclosures: document.querySelectorAll("[data-result-disclosure]")
 };
 
 let frontendData = null;
@@ -80,6 +84,11 @@ function formatProfit(value) {
   return `${value > 0 ? "+" : ""}${yenFormatter.format(value)}円`;
 }
 
+function formatDecisionAmount(value) {
+  const amountInTenThousands = yenFormatter.format(Math.abs(Math.round(value / 10_000)));
+  return `約${amountInTenThousands}万円${value >= 0 ? "得" : "損"}`;
+}
+
 function renderScenarios(scenarios) {
   const labels = { downside: "下振れ", standard: "標準", upside: "上振れ" };
   elements.scenarioList.replaceChildren();
@@ -105,10 +114,16 @@ function renderResult(result) {
 
   const profitable = standard.profit_yen >= 0;
   elements.resultSummary.textContent = profitable
-    ? `${result.input.prefecture_name}では，得になる概算です`
-    : `${result.input.prefecture_name}では，損になる概算です`;
-  elements.resultEconomicBenefit.textContent = formatProfit(standard.profit_yen);
+    ? `${result.input.prefecture_name}では，得になる見込みです`
+    : `${result.input.prefecture_name}では，損になる見込みです`;
+  elements.resultEconomicBenefit.textContent = formatDecisionAmount(standard.profit_yen);
   elements.resultEconomicBenefit.classList.toggle("result-amount--negative", !profitable);
+  elements.resultPayback.textContent = standard.payback_year === null
+    ? "20年以内には元が取れない見込みです．"
+    : standard.payback_year === 0
+      ? "初期費用は補助金の範囲内です．"
+      : `約${standard.payback_year}年で元が取れる見込みです．`;
+  elements.resultPeriod.textContent = `標準シナリオの20年間概算：${formatProfit(standard.profit_yen)}`;
   elements.resultInitialCost.textContent = formatYen(standard.initial_cost_yen);
   elements.resultAnnualBenefit.textContent = formatYen(standard.first_year_economic_benefit_yen);
   elements.resultSelfConsumption.textContent = formatYen(standard.total_electricity_savings_yen);
@@ -119,8 +134,12 @@ function renderResult(result) {
     ? `月間電気料金は地域平均の${formatYen(result.input.monthly_electricity_bill_yen)}を使用しています．`
     : `入力された月間電気料金${formatYen(result.input.monthly_electricity_bill_yen)}を使用しています．`;
   renderScenarios(result.scenarios);
+  for (const disclosure of elements.resultDisclosures) {
+    disclosure.removeAttribute("open");
+  }
   elements.result.hidden = false;
   elements.result.scrollIntoView({ behavior: "smooth", block: "start" });
+  elements.resultTitle.focus({ preventScroll: true });
 }
 
 async function initialize() {

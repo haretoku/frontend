@@ -57,6 +57,15 @@ export function calculateEstimate(input, publicData) {
     const totalElectricitySavings = yearlyElectricitySavings.reduce((sum, value) => sum + value, 0);
     const totalSalesIncome = yearlySalesIncome.reduce((sum, value) => sum + value, 0);
     const totalRevenue = totalElectricitySavings + totalSalesIncome;
+    let cumulativeEconomicBenefit = 0;
+    let paybackYear = initialCost <= 0 ? 0 : null;
+
+    for (let index = 0; index < calculation.evaluation_period_years && paybackYear === null; index += 1) {
+      cumulativeEconomicBenefit += yearlyElectricitySavings[index] + yearlySalesIncome[index];
+      if (cumulativeEconomicBenefit >= initialCost) {
+        paybackYear = index + 1;
+      }
+    }
 
     return {
       scenario: scenario.scenario,
@@ -70,7 +79,8 @@ export function calculateEstimate(input, publicData) {
       total_electricity_savings_yen: roundYen(totalElectricitySavings),
       total_sales_income_yen: roundYen(totalSalesIncome),
       total_revenue_yen: roundYen(totalRevenue),
-      profit_yen: roundYen(totalRevenue - initialCost)
+      profit_yen: roundYen(totalRevenue - initialCost),
+      payback_year: paybackYear
     };
   });
 

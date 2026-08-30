@@ -21,9 +21,33 @@ for (const calculationCase of calculationCases.cases) {
       },
       publicData
     );
-    assert.deepEqual(actual, calculationCase.expected);
+    const backendComparable = structuredClone(actual);
+    for (const scenario of backendComparable.scenarios) {
+      delete scenario.payback_year;
+    }
+    assert.deepEqual(backendComparable, calculationCase.expected);
   });
 }
+
+test("回収年は累積経済効果が初期費用以上になる最初の年を返す", () => {
+  const tokyo = calculateEstimate(
+    { prefectureCode: "13", monthlyElectricityBillYen: 11_567 },
+    publicData
+  );
+  const standard = tokyo.scenarios.find((scenario) => scenario.scenario === "standard");
+  const downside = tokyo.scenarios.find((scenario) => scenario.scenario === "downside");
+  assert.equal(standard.payback_year, 7);
+  assert.equal(downside.payback_year, 11);
+
+  const osakaWithoutConsumption = calculateEstimate(
+    { prefectureCode: "27", monthlyElectricityBillYen: 0 },
+    publicData
+  );
+  const unprofitable = osakaWithoutConsumption.scenarios.find(
+    (scenario) => scenario.scenario === "standard"
+  );
+  assert.equal(unprofitable.payback_year, null);
+});
 
 test("不明な都道府県を拒否する", () => {
   assert.throws(

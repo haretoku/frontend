@@ -26,7 +26,7 @@
         <p class="eyebrow">住宅用太陽光の概算シミュレーター</p>
         <h1 id="hero-title">太陽光，結局いくら得？</h1>
         <p class="hero__lead">
-          詳細見積もりの前に，お住まいの地域から概算の損得を確認します．得にならない場合も，結果をそのまま表示します．
+          都道府県と電気料金だけで，20年間の損得を概算します．得にならない場合も，結果をそのまま表示します．
         </p>
       </section>
 
@@ -75,61 +75,60 @@
       <section id="estimate-result" class="result page-width" aria-labelledby="result-title" hidden>
         <div class="section-heading">
           <p class="step-label">STEP 2</p>
-          <h2 id="result-title">概算結果</h2>
+          <h2 id="result-title" tabindex="-1">あなたの概算結果</h2>
         </div>
 
         <section class="panel result-summary" aria-labelledby="summary-title">
-          <p class="result-label">結論</p>
+          <p class="result-label">あなたの場合</p>
           <h3 id="summary-title" data-result-summary>概算結果</h3>
           <p class="result-amount" data-result-economic-benefit>―</p>
-          <p class="result-period">標準シナリオにおける20年間の概算利益</p>
+          <p class="result-payback" data-result-payback>回収年数を計算します．</p>
+          <p class="result-period" data-result-period>標準シナリオにおける20年間の概算利益</p>
           <div class="scenario-grid" data-scenario-list aria-label="シナリオ別の20年間の概算利益"></div>
           <p class="result-note">確定値ではありません．住宅固有条件は見積もりで確認する必要があります．</p>
         </section>
 
-        <aside class="estimate-cta" aria-label="結論確認後の見積もり案内">
+        <details class="panel disclosure-panel" data-result-disclosure>
+          <summary>
+            <span class="disclosure-panel__title">利益の内訳を見る</span>
+            <span class="disclosure-panel__hint">初期費用，電気代削減，売電収入</span>
+          </summary>
+          <div class="disclosure-panel__body">
+            <dl class="result-grid">
+              <div><dt><a href="pages/costs-maintenance.html">初期費用</a></dt><dd data-result-initial-cost>―</dd></div>
+              <div><dt><a href="pages/calculation-method.html">1年目の経済効果</a></dt><dd data-result-annual-benefit>―</dd></div>
+              <div><dt><a href="pages/electricity-sales.html">20年間の電気料金削減</a></dt><dd data-result-self-consumption>―</dd></div>
+              <div><dt><a href="pages/electricity-sales.html#sales">20年間の売電収入</a></dt><dd data-result-sales-income>―</dd></div>
+              <div><dt><a href="pages/subsidies.html">補助金</a></dt><dd data-result-subsidy>―</dd></div>
+              <div><dt><a href="pages/calculation-method.html#generation">年間発電量</a></dt><dd data-result-generation>―</dd></div>
+            </dl>
+          </div>
+        </details>
+
+        <details class="panel disclosure-panel" data-result-disclosure>
+          <summary>
+            <span class="disclosure-panel__title">計算の前提・根拠を見る</span>
+            <span class="disclosure-panel__hint">入力条件，計算方法，採用データ</span>
+          </summary>
+          <div class="disclosure-panel__body">
+            <p data-result-assumptions>計算に使用した月間電気料金を表示します．</p>
+            <p>4 kWの設備を仮定し，20年間の電気料金削減と売電収入から初期費用を差し引いています．設備劣化，維持・交換費，撤去費および現在価値換算は含みません．</p>
+            <nav aria-label="計算根拠の詳細情報">
+              <ul class="detail-link-list">
+                <li><a class="detail-link" href="pages/calculation-method.html">計算方法・前提</a></li>
+                <li><a class="detail-link" href="pages/costs-maintenance.html">初期費用・維持費</a></li>
+                <li><a class="detail-link" href="pages/electricity-sales.html">電気料金・FIT</a></li>
+                <li><a class="detail-link" href="pages/subsidies.html">補助金</a></li>
+                <li><a class="detail-link" href="pages/disaster.html">防災・停電</a></li>
+                <li><a class="detail-link" href="pages/quotes-contractors.html">見積もり・施工業者</a></li>
+              </ul>
+            </nav>
+          </div>
+        </details>
+
+        <aside class="estimate-cta" aria-label="概算確認後の見積もり案内">
           <p><strong>正確な採算には，屋根や施工条件を反映した見積もりが必要です．</strong></p>
           <button class="secondary-button" type="button" disabled>住宅条件を反映した見積もりへ</button>
-          <p class="advertising-label">広告・アフィリエイトを含む導線です．</p>
-        </aside>
-
-        <section class="panel" aria-labelledby="breakdown-title">
-          <h3 id="breakdown-title">費用・経済効果の内訳</h3>
-          <dl class="result-grid">
-            <div><dt><a href="pages/costs-maintenance.html">初期費用</a></dt><dd data-result-initial-cost>―</dd></div>
-            <div><dt><a href="pages/calculation-method.html">1年目の経済効果</a></dt><dd data-result-annual-benefit>―</dd></div>
-            <div><dt><a href="pages/electricity-sales.html">20年間の電気料金削減</a></dt><dd data-result-self-consumption>―</dd></div>
-            <div><dt><a href="pages/electricity-sales.html#sales">20年間の売電収入</a></dt><dd data-result-sales-income>―</dd></div>
-            <div><dt><a href="pages/subsidies.html">補助金</a></dt><dd data-result-subsidy>―</dd></div>
-            <div><dt><a href="pages/calculation-method.html#generation">年間発電量</a></dt><dd data-result-generation>―</dd></div>
-          </dl>
-        </section>
-
-        <aside class="estimate-cta" aria-label="内訳確認後の見積もり案内">
-          <p><strong>概算と実際の施工価格を比較できます．</strong></p>
-          <button class="secondary-button" type="button" disabled>見積もりで精緻化する</button>
-          <p class="advertising-label">広告・アフィリエイトを含む導線です．</p>
-        </aside>
-
-        <section class="panel" aria-labelledby="assumptions-title">
-          <h3 id="assumptions-title">前提・詳細情報</h3>
-          <p data-result-assumptions>計算に使用した月間電気料金を表示します．</p>
-          <p>4 kWの設備を仮定し，20年間の電気料金削減と売電収入から初期費用を差し引いています．設備劣化，維持・交換費，撤去費および現在価値換算は含みません．</p>
-          <nav aria-label="計算根拠の詳細情報">
-            <ul class="detail-link-list">
-              <li><a class="detail-link" href="pages/calculation-method.html">計算方法・前提</a></li>
-              <li><a class="detail-link" href="pages/costs-maintenance.html">初期費用・維持費</a></li>
-              <li><a class="detail-link" href="pages/electricity-sales.html">電気料金・FIT</a></li>
-              <li><a class="detail-link" href="pages/subsidies.html">補助金</a></li>
-              <li><a class="detail-link" href="pages/disaster.html">防災・停電</a></li>
-              <li><a class="detail-link" href="pages/quotes-contractors.html">見積もり・施工業者</a></li>
-            </ul>
-          </nav>
-        </section>
-
-        <aside class="estimate-cta" aria-label="詳細確認後の見積もり案内">
-          <p><strong>最終的な設置可否と採算は，施工会社の確認が必要です．</strong></p>
-          <button class="secondary-button" type="button" disabled>無料見積もりを確認する</button>
           <p class="advertising-label">広告・アフィリエイトを含む導線です．</p>
         </aside>
       </section>
