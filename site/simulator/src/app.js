@@ -7,9 +7,15 @@ const elements = {
   monthlyElectricityBill: document.querySelector("#monthly-electricity-bill"),
   calculateButton: document.querySelector("#calculate-button"),
   formMessage: document.querySelector("#form-message"),
+  calculator: document.querySelector(".calculator"),
+  calculatorExpanded: document.querySelector("[data-calculator-expanded]"),
+  calculatorCollapsed: document.querySelector("[data-calculator-collapsed]"),
+  conditionSummary: document.querySelector("[data-condition-summary]"),
+  changeConditionsButton: document.querySelector("[data-change-conditions]"),
   dataStatus: document.querySelector("#data-status"),
   result: document.querySelector("#estimate-result"),
   resultTitle: document.querySelector("#result-title"),
+  resultCondition: document.querySelector("[data-result-condition]"),
   resultSummary: document.querySelector("[data-result-summary]"),
   resultEconomicBenefit: document.querySelector("[data-result-economic-benefit]"),
   resultPayback: document.querySelector("[data-result-payback]"),
@@ -89,6 +95,30 @@ function formatDecisionAmount(value) {
   return `約${amountInTenThousands}万円${value >= 0 ? "得" : "損"}`;
 }
 
+function formatConditions(result) {
+  const bill = result.input.used_default_monthly_electricity_bill
+    ? `地域標準の月額${formatYen(result.input.monthly_electricity_bill_yen)}`
+    : `月額${formatYen(result.input.monthly_electricity_bill_yen)}`;
+  return `${result.input.prefecture_name}・${bill}`;
+}
+
+function collapseCalculator(result) {
+  const conditions = formatConditions(result);
+  elements.conditionSummary.textContent = conditions;
+  elements.resultCondition.textContent = `計算条件：${conditions}`;
+  elements.calculatorExpanded.hidden = true;
+  elements.calculatorCollapsed.hidden = false;
+  elements.calculator.classList.add("calculator--collapsed");
+}
+
+function expandCalculator() {
+  elements.calculatorCollapsed.hidden = true;
+  elements.calculatorExpanded.hidden = false;
+  elements.calculator.classList.remove("calculator--collapsed");
+  elements.calculator.scrollIntoView({ behavior: "smooth", block: "start" });
+  elements.prefecture.focus({ preventScroll: true });
+}
+
 function renderScenarios(scenarios) {
   const labels = { downside: "下振れ", standard: "標準", upside: "上振れ" };
   elements.scenarioList.replaceChildren();
@@ -134,6 +164,7 @@ function renderResult(result) {
     ? `月間電気料金は地域平均の${formatYen(result.input.monthly_electricity_bill_yen)}を使用しています．`
     : `入力された月間電気料金${formatYen(result.input.monthly_electricity_bill_yen)}を使用しています．`;
   renderScenarios(result.scenarios);
+  collapseCalculator(result);
   for (const disclosure of elements.resultDisclosures) {
     disclosure.removeAttribute("open");
   }
@@ -169,5 +200,7 @@ elements.form.addEventListener("submit", (event) => {
     elements.formMessage.textContent = error instanceof Error ? error.message : "計算できませんでした．";
   }
 });
+
+elements.changeConditionsButton.addEventListener("click", expandCalculator);
 
 initialize();

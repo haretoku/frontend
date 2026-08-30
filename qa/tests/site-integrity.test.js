@@ -97,9 +97,12 @@ test("フォーム部品にラベルと入力制約がある", async () => {
   assert.match(html, /<label for="monthly-electricity-bill">/);
   assert.match(html, /<input[\s\S]*?id="monthly-electricity-bill"[\s\S]*?min="0"/);
   assert.match(html, /id="form-message"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(html, /data-calculator-collapsed[^>]*hidden/);
+  assert.match(html, /data-change-conditions/);
+  assert.match(html, /data-result-condition/);
 });
 
-test("結果は主要結論，段階的開示，単一の見積もり導線の順である", async () => {
+test("結果は主要結論，単一の見積もり導線，段階的開示の順である", async () => {
   const html = await readFile(resolve(siteRoot, "index.html"), "utf8");
   assert.equal((html.match(/class="estimate-cta"/g) ?? []).length, 1);
   assert.equal((html.match(/class="advertising-label"/g) ?? []).length, 1);
@@ -108,13 +111,14 @@ test("結果は主要結論，段階的開示，単一の見積もり導線の�
   assert.match(html, /data-result-payback/);
   assert.match(html, /利益の内訳を見る/);
   assert.match(html, /計算の前提・根拠を見る/);
-  assert.match(html, /正確な採算には，屋根や施工条件を反映した見積もりが必要/);
+  assert.match(html, /実際の屋根・施工条件を反映した採算は，見積もりで確認できます/);
   assert.match(html, /広告・アフィリエイト/);
   assert.match(html, /得にならない場合も，結果をそのまま表示/);
   assert.match(html, /長期利益または補助金の適用を保証するものではありません/);
+  assert.match(html, /<span class="hero-title__chunk">太陽光，<\/span><span class="hero-title__chunk">結局いくら得？<\/span>/);
   assert.ok(html.indexOf("data-result-economic-benefit") < html.indexOf("利益の内訳を見る"));
+  assert.ok(html.indexOf("class=\"estimate-cta\"") < html.indexOf("利益の内訳を見る"));
   assert.ok(html.indexOf("利益の内訳を見る") < html.indexOf("計算の前提・根拠を見る"));
-  assert.ok(html.indexOf("計算の前提・根拠を見る") < html.indexOf("class=\"estimate-cta\""));
 });
 
 test("詳細ページの動的出典IDが公開メタデータに存在する", async () => {

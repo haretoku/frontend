@@ -17,6 +17,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   margin: 0;
   color: var(--color-ink);
@@ -90,11 +94,15 @@ p {
 }
 
 h1 {
-  max-width: 15ch;
+  max-width: none;
   margin-bottom: 0.75rem;
-  font-size: clamp(2.4rem, 6vw, 4.4rem);
-  line-height: 1.08;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.15;
   letter-spacing: -0.04em;
+}
+
+.hero-title__chunk {
+  white-space: nowrap;
 }
 
 h2 {
@@ -124,6 +132,23 @@ h2 {
 
 .calculator__panel {
   max-width: 38rem;
+}
+
+.calculator--collapsed {
+  padding-bottom: 1rem;
+}
+
+.calculator__collapsed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.calculator__condition {
+  margin-bottom: 0;
+  font-size: 1.05rem;
+  font-weight: 750;
 }
 
 .section-heading {
@@ -197,13 +222,23 @@ a:focus-visible {
 }
 
 .primary-button,
-.secondary-button {
+.secondary-button,
+.text-button {
   min-height: 3.25rem;
   padding: 0.75rem 1.2rem;
   border: 0;
   border-radius: 0.7rem;
   font-weight: 800;
   cursor: pointer;
+}
+
+.text-button {
+  flex: none;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--color-primary);
+  color: var(--color-primary-dark);
+  background: #ffffff;
 }
 
 .primary-button {
@@ -236,6 +271,12 @@ button:disabled {
 .result-summary {
   border-top: 0.4rem solid var(--color-accent);
   text-align: center;
+}
+
+.result-condition {
+  margin: 0.35rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
 }
 
 .result-amount {
@@ -386,6 +427,13 @@ button:disabled {
   background: #fff9e7;
 }
 
+.result-summary .estimate-cta {
+  display: grid;
+  justify-items: start;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
 .estimate-cta p {
   margin-bottom: 0.75rem;
 }
@@ -430,6 +478,15 @@ button:disabled {
 
 @media (max-width: 40rem) {
   .site-header__inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .hero-title__chunk {
+    display: block;
+  }
+
+  .calculator__collapsed {
     align-items: flex-start;
     flex-direction: column;
   }

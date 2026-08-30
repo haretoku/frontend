@@ -23,52 +23,62 @@
 
     <main>
       <section class="hero page-width" aria-labelledby="hero-title">
-        <p class="eyebrow">住宅用太陽光の概算シミュレーター</p>
-        <h1 id="hero-title">太陽光，結局いくら得？</h1>
+        <p class="eyebrow">住宅用太陽光のかんたん採算診断</p>
+        <h1 id="hero-title"><span class="hero-title__chunk">太陽光，</span><span class="hero-title__chunk">結局いくら得？</span></h1>
         <p class="hero__lead">
           都道府県と電気料金だけで，20年間の損得を概算します．得にならない場合も，結果をそのまま表示します．
         </p>
       </section>
 
-      <section class="calculator page-width" aria-labelledby="calculator-title">
+      <section class="calculator page-width" aria-label="計算条件">
         <div class="panel calculator__panel">
-          <div class="section-heading">
-            <p class="step-label">STEP 1</p>
-            <h2 id="calculator-title">条件を入力</h2>
+          <div class="calculator__collapsed" data-calculator-collapsed hidden>
+            <div>
+              <p class="step-label">入力条件</p>
+              <p class="calculator__condition" data-condition-summary>計算条件を表示します．</p>
+            </div>
+            <button class="text-button" type="button" data-change-conditions>条件を変更</button>
           </div>
 
-          <form id="estimate-form">
-            <div class="form-field">
-              <label for="prefecture">都道府県<span class="required-label">必須</span></label>
-              <select id="prefecture" name="prefecture" required>
-                <option value="">選択してください</option>
-              </select>
+          <div data-calculator-expanded>
+            <div class="section-heading">
+              <p class="step-label">STEP 1</p>
+              <h2 id="calculator-title">条件を入力</h2>
             </div>
 
-            <div class="form-field">
-              <label for="monthly-electricity-bill">月間電気料金<span class="optional-label">任意</span></label>
-              <div class="input-with-unit">
-                <input
-                  id="monthly-electricity-bill"
-                  name="monthlyElectricityBill"
-                  type="number"
-                  inputmode="numeric"
-                  min="0"
-                  step="100"
-                  aria-describedby="electricity-bill-help"
-                >
-                <span aria-hidden="true">円／月</span>
+            <form id="estimate-form">
+              <div class="form-field">
+                <label for="prefecture">都道府県<span class="required-label">必須</span></label>
+                <select id="prefecture" name="prefecture" required>
+                  <option value="">選択してください</option>
+                </select>
               </div>
-              <p id="electricity-bill-help" class="field-help">未入力の場合は，地域の標準値を使用します．</p>
-            </div>
 
-            <button id="calculate-button" class="primary-button" type="submit" disabled>
-              概算結果を見る
-            </button>
-            <p id="form-message" class="form-message" role="status" aria-live="polite">
-              計算式と検証済みデータの準備後に利用できます．
-            </p>
-          </form>
+              <div class="form-field">
+                <label for="monthly-electricity-bill">月間電気料金<span class="optional-label">任意</span></label>
+                <div class="input-with-unit">
+                  <input
+                    id="monthly-electricity-bill"
+                    name="monthlyElectricityBill"
+                    type="number"
+                    inputmode="numeric"
+                    min="0"
+                    step="100"
+                    aria-describedby="electricity-bill-help"
+                  >
+                  <span aria-hidden="true">円／月</span>
+                </div>
+                <p id="electricity-bill-help" class="field-help">未入力の場合は，地域の標準値を使用します．</p>
+              </div>
+
+              <button id="calculate-button" class="primary-button" type="submit" disabled>
+                概算結果を見る
+              </button>
+              <p id="form-message" class="form-message" role="status" aria-live="polite">
+                計算式と検証済みデータの準備後に利用できます．
+              </p>
+            </form>
+          </div>
         </div>
       </section>
 
@@ -76,6 +86,7 @@
         <div class="section-heading">
           <p class="step-label">STEP 2</p>
           <h2 id="result-title" tabindex="-1">あなたの概算結果</h2>
+          <p class="result-condition" data-result-condition>計算条件を表示します．</p>
         </div>
 
         <section class="panel result-summary" aria-labelledby="summary-title">
@@ -85,7 +96,11 @@
           <p class="result-payback" data-result-payback>回収年数を計算します．</p>
           <p class="result-period" data-result-period>標準シナリオにおける20年間の概算利益</p>
           <div class="scenario-grid" data-scenario-list aria-label="シナリオ別の20年間の概算利益"></div>
-          <p class="result-note">確定値ではありません．住宅固有条件は見積もりで確認する必要があります．</p>
+          <div class="estimate-cta" aria-label="概算確認後の見積もり案内">
+            <p class="result-note">この結果は地域データによる概算です．実際の屋根・施工条件を反映した採算は，見積もりで確認できます．</p>
+            <button class="secondary-button" type="button" disabled>住宅条件を反映した無料見積もりを見る</button>
+            <p class="advertising-label">広告・アフィリエイトを含む導線です．</p>
+          </div>
         </section>
 
         <details class="panel disclosure-panel" data-result-disclosure>
@@ -126,11 +141,6 @@
           </div>
         </details>
 
-        <aside class="estimate-cta" aria-label="概算確認後の見積もり案内">
-          <p><strong>正確な採算には，屋根や施工条件を反映した見積もりが必要です．</strong></p>
-          <button class="secondary-button" type="button" disabled>住宅条件を反映した見積もりへ</button>
-          <p class="advertising-label">広告・アフィリエイトを含む導線です．</p>
-        </aside>
       </section>
 
       <section class="site-state page-width" aria-labelledby="site-state-title">
