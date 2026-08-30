@@ -1,5 +1,5 @@
 import { CALCULATION_IMPLEMENTED, calculateEstimate } from "./calculator.js";
-import { loadFrontendData } from "./data-loader.js";
+import { loadFrontendData } from "../../../data/src/data-loader.js";
 
 const elements = {
   form: document.querySelector("#estimate-form"),

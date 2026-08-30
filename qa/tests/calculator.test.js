@@ -2,14 +2,14 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-import { calculateEstimate } from "../assets/js/calculator.js";
+import { calculateEstimate } from "../../site/simulator/src/calculator.js";
 
 
 const publicData = JSON.parse(
-  await readFile(new URL("../data/public-data.json", import.meta.url), "utf8")
+  await readFile(new URL("../../data/input/public-data.json", import.meta.url), "utf8")
 );
 const calculationCases = JSON.parse(
-  await readFile(new URL("../data/calculation-cases.json", import.meta.url), "utf8")
+  await readFile(new URL("../fixtures/calculation-cases.json", import.meta.url), "utf8")
 );
 
 for (const calculationCase of calculationCases.cases) {

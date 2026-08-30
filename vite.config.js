@@ -3,20 +3,27 @@ import { sites } from "@openai/sites-vite-plugin";
 import { defineConfig } from "vite";
 import { resolve } from "node:path";
 
+const siteRoot = resolve(import.meta.dirname, "site");
+
 export default defineConfig({
+  root: siteRoot,
   plugins: [sites(), cloudflare()],
+  build: {
+    outDir: "dist",
+    emptyOutDir: true
+  },
   environments: {
     client: {
       build: {
         rollupOptions: {
           input: {
-            index: resolve(import.meta.dirname, "index.html"),
-            calculationMethod: resolve(import.meta.dirname, "pages/calculation-method.html"),
-            costsMaintenance: resolve(import.meta.dirname, "pages/costs-maintenance.html"),
-            electricitySales: resolve(import.meta.dirname, "pages/electricity-sales.html"),
-            subsidies: resolve(import.meta.dirname, "pages/subsidies.html"),
-            disaster: resolve(import.meta.dirname, "pages/disaster.html"),
-            quotesContractors: resolve(import.meta.dirname, "pages/quotes-contractors.html")
+            index: resolve(siteRoot, "index.html"),
+            calculationMethod: resolve(siteRoot, "pages/calculation-method.html"),
+            costsMaintenance: resolve(siteRoot, "pages/costs-maintenance.html"),
+            electricitySales: resolve(siteRoot, "pages/electricity-sales.html"),
+            subsidies: resolve(siteRoot, "pages/subsidies.html"),
+            disaster: resolve(siteRoot, "pages/disaster.html"),
+            quotesContractors: resolve(siteRoot, "pages/quotes-contractors.html")
           }
         }
       }

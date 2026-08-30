@@ -5,6 +5,8 @@
 node_modules/
 coverage/
 dist/
+site/dist/
+site/.openai/
 .wrangler/
 
 .DS_Store

@@ -1,13 +1,4 @@
-const PUBLIC_DATA_URL = new URL("../../data/public-data.json", import.meta.url);
-const METADATA_URL = new URL("../../data/metadata.json", import.meta.url);
-
-async function loadJson(url) {
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`公開データを取得できませんでした：${response.status}`);
-  }
-  return response.json();
-}
+import { loadFrontendData } from "../../../data/src/data-loader.js";
 
 function setText(selector, value) {
   for (const element of document.querySelectorAll(selector)) {
@@ -37,13 +28,7 @@ function bindSources(metadata) {
 async function initialize() {
   const status = document.querySelector("[data-article-data-status]");
   try {
-    const [publicData, metadata] = await Promise.all([
-      loadJson(PUBLIC_DATA_URL),
-      loadJson(METADATA_URL)
-    ]);
-    if (publicData.data_version !== metadata.data_version) {
-      throw new Error("公開データと出典情報の版が一致しません．");
-    }
+    const { publicData, metadata } = await loadFrontendData();
 
     const calculation = publicData.calculation;
     setText("[data-data-version]", publicData.data_version);

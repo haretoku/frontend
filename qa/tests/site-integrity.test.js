@@ -5,15 +5,16 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 
 
-const root = fileURLToPath(new URL("..", import.meta.url));
+const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
+const siteRoot = resolve(repositoryRoot, "site");
 const htmlPaths = [
-  resolve(root, "index.html"),
-  resolve(root, "pages/calculation-method.html"),
-  resolve(root, "pages/costs-maintenance.html"),
-  resolve(root, "pages/electricity-sales.html"),
-  resolve(root, "pages/subsidies.html"),
-  resolve(root, "pages/disaster.html"),
-  resolve(root, "pages/quotes-contractors.html")
+  resolve(siteRoot, "index.html"),
+  resolve(siteRoot, "pages/calculation-method.html"),
+  resolve(siteRoot, "pages/costs-maintenance.html"),
+  resolve(siteRoot, "pages/electricity-sales.html"),
+  resolve(siteRoot, "pages/subsidies.html"),
+  resolve(siteRoot, "pages/disaster.html"),
+  resolve(siteRoot, "pages/quotes-contractors.html")
 ];
 
 function attributeValues(html, attribute) {
@@ -26,9 +27,9 @@ async function localTarget(pagePath, reference) {
     return null;
   }
   let target = pathPart.startsWith("/")
-    ? resolve(root, pathPart.slice(1))
+    ? resolve(siteRoot, pathPart.slice(1))
     : resolve(dirname(pagePath), pathPart);
-  if (pathPart.endsWith("/") || target === root) {
+  if (pathPart.endsWith("/") || target === siteRoot) {
     target = resolve(target, "index.html");
   }
   return target;
@@ -90,7 +91,7 @@ test("別ページを指すアンカー参照先が存在する", async () => {
 });
 
 test("フォーム部品にラベルと入力制約がある", async () => {
-  const html = await readFile(resolve(root, "index.html"), "utf8");
+  const html = await readFile(resolve(siteRoot, "index.html"), "utf8");
   assert.match(html, /<label for="prefecture">/);
   assert.match(html, /<select id="prefecture"[^>]*required>/);
   assert.match(html, /<label for="monthly-electricity-bill">/);
@@ -99,7 +100,7 @@ test("フォーム部品にラベルと入力制約がある", async () => {
 });
 
 test("結果の3段階すべてに見積もり理由と広告表示がある", async () => {
-  const html = await readFile(resolve(root, "index.html"), "utf8");
+  const html = await readFile(resolve(siteRoot, "index.html"), "utf8");
   assert.equal((html.match(/class="estimate-cta"/g) ?? []).length, 3);
   assert.equal((html.match(/class="advertising-label"/g) ?? []).length, 3);
   assert.equal((html.match(/class="secondary-button" type="button" disabled/g) ?? []).length, 3);
@@ -110,7 +111,7 @@ test("結果の3段階すべてに見積もり理由と広告表示がある", a
 });
 
 test("詳細ページの動的出典IDが公開メタデータに存在する", async () => {
-  const metadata = JSON.parse(await readFile(resolve(root, "data/metadata.json"), "utf8"));
+  const metadata = JSON.parse(await readFile(resolve(repositoryRoot, "data/input/metadata.json"), "utf8"));
   const sourceIds = new Set(metadata.sources.map((source) => source.source_id));
   for (const pagePath of htmlPaths.slice(1)) {
     const html = await readFile(pagePath, "utf8");

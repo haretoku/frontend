@@ -8,9 +8,9 @@
   },
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "node site/hosting/prepare-build.js && vite build && node site/hosting/finalize-build.js",
     "preview": "vite preview",
-    "test": "node --test"
+    "test": "node --test qa/tests/calculator.test.js qa/tests/detail-pages.test.js qa/tests/site-integrity.test.js"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",

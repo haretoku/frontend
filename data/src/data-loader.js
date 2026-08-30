@@ -1,5 +1,5 @@
-const PUBLIC_DATA_URL = new URL("../../data/public-data.json", import.meta.url);
-const METADATA_URL = new URL("../../data/metadata.json", import.meta.url);
+const PUBLIC_DATA_URL = new URL("../input/public-data.json", import.meta.url);
+const METADATA_URL = new URL("../input/metadata.json", import.meta.url);
 
 async function loadJson(url) {
   const response = await fetch(url);

@@ -10,17 +10,15 @@
 
 ## 基本構成
 
-> **結論：GitHub Pagesで直接公開できるHTML，CSSおよびブラウザJavaScriptを基本とし，必要性が生じるまでフレームワークとサーバーを導入しない．**
+> **結論：frontendは，利用者向けサイト，backendとのデータ連携および品質検査の3機能に分ける．**
 
 | 場所 | 役割 |
 |---|---|
-| `index.html` | 入力，結果および見積もり導線を含む主画面 |
-| `assets/css/` | サイト共通の表示スタイル |
-| `assets/js/` | データ読込，ブラウザ計算および画面制御 |
-| `data/` | backendから受け取る公開可能データ |
-| `pages/` | 計算根拠を説明する詳細ページ |
-| `docs/` | 画面構成と実装方針 |
-| `tests/` | frontend固有の確認項目とテスト |
+| `site/` | シミュレーター，詳細記事，共通表示およびホスティング処理 |
+| `data/` | backendの公開成果物の受取，読込および版確認 |
+| `qa/` | backend基準ケース，計算，HTML，リンクおよび統合の検査 |
+
+Vite，Wrangler，Sitesおよびパッケージ管理がルートから設定を発見できるよう，`.openai/`，`vite.config.js`，`wrangler.jsonc`および`package.json`はルートに置くが，責任上は`site`の公開処理に属する．詳細は[site](site/README.md)，[data](data/README.md)および[qa](qa/README.md)を参照する．
 
 ## ユーザー体験
 
@@ -32,7 +30,7 @@
 
 > **結論：frontendは，backendが生成した公開データだけを受け取り，内部データまたは秘密情報へ接続しない．**
 
-初期段階では，backendの`dist/public-data.json`，`dist/metadata.json`および`dist/calculation-cases.json`を，本リポジトリの`data/`へ手動で反映する．詳細は[実装方針](docs/実装方針.md)を参照する．
+初期段階では，backendの`dist/output/public-data.json`と`dist/output/metadata.json`を`data/input/`へ，`dist/output/calculation-cases.json`を`qa/fixtures/`へ手動で反映する．詳細は[実装方針](site/docs/実装方針.md)を参照する．
 
 ## 現在の状態
 
@@ -45,10 +43,10 @@
 > **結論：ES ModulesとJSON読込を使用するため，ローカルWebサーバーを起動して確認する．**
 
 ```bash
-python3 -m http.server 8000
+pnpm run dev
 ```
 
-起動後に`http://localhost:8000/`を開く．
+Viteが表示するローカルURLを開く．
 
 ## 公開確認
 

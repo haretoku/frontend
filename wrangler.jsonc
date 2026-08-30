@@ -2,7 +2,7 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "server",
   "compatibility_date": "2026-05-15",
-  "main": "./src/worker.js",
+  "main": "./site/hosting/worker.js",
   "assets": {
     "binding": "ASSETS"
   }
