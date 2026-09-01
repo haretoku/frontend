@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="ハレトクの住宅用太陽光の利益計算方法，前提および計算上の限界を説明します．">
-    <title>計算方法と前提｜ハレトク</title>
+    <meta name="description" content="はれトクの住宅用太陽光の利益計算方法，前提および計算上の限界を説明します．">
+    <title>計算方法と前提｜はれトク</title>
     <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../shared/styles/main.css">
     <link rel="stylesheet" href="../articles/styles/article.css">
@@ -13,16 +13,17 @@
   <body>
     <header class="site-header">
       <div class="page-width site-header__inner">
-        <a class="brand" href="../">ハレトク</a>
-        <span class="site-header__description">計算根拠</span>
+        <a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a>
+        <span class="site-header__descriptor">太陽光のかんたん採算診断</span>
+        <nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../#guides">はれ<span class="brand-term">トク</span>ガイド</a></nav>
       </div>
     </header>
     <main>
-      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">採算計算</a> ／ 計算方法と前提</nav>
+      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ はれ<span class="brand-term">トク</span>診断 ／ 計算方法と前提</nav>
       <header class="article-width article-hero">
         <p class="eyebrow">計算根拠</p>
         <h1>利益はどう計算している？</h1>
-        <p class="article-hero__lead">ハレトクは，<span data-system-capacity>4 kW</span>の標準設備を仮定し，<span data-evaluation-years>20年間</span>の電気料金削減と売電収入から初期費用を差し引きます．</p>
+        <p class="article-hero__lead">はれトクは，<span data-system-capacity>4 kW</span>の標準設備を仮定し，<span data-evaluation-years>20年間</span>の電気料金削減と売電収入から初期費用を差し引きます．</p>
       </header>
       <article class="article-width article">
         <section class="key-point">
@@ -40,7 +41,7 @@
               <tr><th>電気料金削減</th><td>自家消費電力量 × 年ごとの買電単価</td></tr>
               <tr><th>売電収入</th><td>余剰電力量 × 年ごとの売電単価</td></tr>
               <tr><th>初期費用</th><td>設備容量 × 1 kW当たり導入費用 − シナリオ別補助金</td></tr>
-              <tr><th>20年間の利益</th><td>20年間の電気料金削減＋売電収入−初期費用</td></tr>
+              <tr><th>20年間の正味利益</th><td>20年間の電気料金削減＋売電収入－実質初期負担－維持・交換費</td></tr>
             </tbody>
           </table>
         </section>
@@ -66,11 +67,17 @@
           <p>FITと卒FIT後の売電単価は3シナリオで共通です．補助金がない地域では，下振れと標準が同額になります．</p>
         </section>
 
+        <section>
+          <h2>維持・交換費</h2>
+          <p>現行モデルでは，定期点検費を<span data-maintenance-cost>38,000円</span>ずつ<span data-maintenance-years>4，8，12，16，20年目</span>に，パワーコンディショナ交換費を<span data-replacement-cost>384,000円</span>として<span data-replacement-years>15年目</span>に計上します．20年間の合計は<span data-lifecycle-cost-total>574,000円</span>です．</p>
+          <p>これらは入力容量にかかわらない固定イベント費として扱います．容量一般で費用が一定であることを意味せず，実際の点検・交換時期と金額は契約，製品および使用状況によって異なります．</p>
+        </section>
+
         <section class="caution-box">
           <h2>計算に含めないもの</h2>
           <ul>
             <li>屋根の面積，形状，方角，傾斜および影．</li>
-            <li>設備劣化，故障，維持費，交換費および撤去費．</li>
+            <li>発電量の経年劣化，突発的な故障・修理費および撤去費．</li>
             <li>借入費用，税金および現在価値換算．</li>
             <li>市区町村補助金と，個別世帯の適用条件．</li>
           </ul>
@@ -93,11 +100,11 @@
             <a href="costs-maintenance.html">初期費用・維持費</a>
             <a href="electricity-sales.html">電気料金・FIT</a>
             <a href="quotes-contractors.html">見積もりが必要な理由</a>
-            <a href="../">採算計算へ戻る</a>
+            <a href="../simulator/">はれ<span class="brand-term">トク</span>診断へ</a>
           </nav>
         </section>
       </article>
     </main>
-    <footer class="site-footer"><div class="page-width"><p>ハレトクの結果は概算であり，長期利益を保証するものではありません．</p></div></footer>
+    <footer class="site-footer"><div class="page-width"><p>はれトクの結果は概算であり，長期利益を保証するものではありません．</p></div></footer>
   </body>
 </html>

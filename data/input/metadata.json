@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0.0",
-  "data_version": "2026-08-29",
-  "generated_at": "2026-08-30T01:58:19+00:00",
+  "schema_version": "2.1.0",
+  "data_version": "2026-09-01",
+  "generated_at": "2026-09-01T06:25:24+00:00",
   "sources": [
     {
       "source_id": "enecho-regional-low-voltage-price-fy2023",
@@ -10,7 +10,7 @@
       "publisher": "資源エネルギー庁",
       "source_title": "電気料金の全国比較：供給区域ごとの2023年度実績単価",
       "source_url": "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf",
-      "retrieved_at": "2026-08-29T21:30:21+09:00"
+      "retrieved_at": "2026-09-01T21:30:21+09:00"
     },
     {
       "source_id": "enecho-renewable-surcharge-fy2023",
@@ -19,7 +19,7 @@
       "publisher": "資源エネルギー庁",
       "source_title": "エネルギー白書2024 電気料金の内訳",
       "source_url": "https://www.enecho.meti.go.jp/about/whitepaper/2024/html/1-2-2.html",
-      "retrieved_at": "2026-08-29T21:30:21+09:00"
+      "retrieved_at": "2026-09-01T21:30:21+09:00"
     },
     {
       "source_id": "env-household-co2-electricity-payment-fy2023",
@@ -28,7 +28,7 @@
       "publisher": "環境省",
       "source_title": "令和5年度 家庭部門のCO2排出実態統計調査 地方6-5-1 基本項目別年間エネルギー種別支払金額",
       "source_url": "https://www.e-stat.go.jp/dbview?sid=0004029237",
-      "retrieved_at": "2026-08-29T17:34:57+09:00"
+      "retrieved_at": "2026-09-01T17:34:57+09:00"
     },
     {
       "source_id": "env-housing-decarbonization-navi-2026",
@@ -37,7 +37,7 @@
       "publisher": "環境省",
       "source_title": "住宅脱炭素NAVI 全国省エネ住宅支援検索",
       "source_url": "https://policies.env.go.jp/earth/zeh/search/",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "env-prefectural-solar-generation-table",
@@ -46,7 +46,7 @@
       "publisher": "環境省",
       "source_title": "第4章 優良事例の考え方の整理と導入促進 表4.3-17 各地の年平均日射量と年間予想発電量",
       "source_url": "https://www.env.go.jp/content/900535929.pdf",
-      "retrieved_at": "2026-08-29T21:30:21+09:00"
+      "retrieved_at": "2026-09-01T21:30:21+09:00"
     },
     {
       "source_id": "fukushima-renewable-center-application-status-2026",
@@ -55,7 +55,7 @@
       "publisher": "福島県再生可能エネルギー推進センター",
       "source_title": "福島県住宅用太陽光発電補助制度",
       "source_url": "https://fukushima-pv-hojo.org/",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "fukushima-residential-solar-subsidy-guideline-fy2026",
@@ -64,7 +64,7 @@
       "publisher": "福島県",
       "source_title": "令和8年度福島県住宅用太陽光発電設備等導入支援補助金交付事業取扱要領",
       "source_url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/745282.pdf",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "gunma-renewable-subsidy-guideline-fy2026",
@@ -73,7 +73,7 @@
       "publisher": "群馬県",
       "source_title": "令和8年度太陽光発電設備等導入支援事業費補助金募集要領",
       "source_url": "https://www.pref.gunma.jp/uploaded/attachment/704768.pdf",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "gunma-residential-renewable-subsidy-fy2026",
@@ -82,7 +82,16 @@
       "publisher": "群馬県",
       "source_title": "令和8年度の個人住宅・事業者向け再エネ導入支援補助制度",
       "source_url": "https://www.pref.gunma.jp/page/753198.html",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
+    },
+    {
+      "source_id": "jpea-residential-equipment-service-life",
+      "data_domain": "lifecycle_cost",
+      "source_class": "primary",
+      "publisher": "一般社団法人太陽光発電協会",
+      "source_title": "機器の耐用年数はどれくらいですか？",
+      "source_url": "https://www.jpea.gr.jp/faq/583/",
+      "retrieved_at": "2026-09-01T13:49:33+09:00"
     },
     {
       "source_id": "meti-fit-residential-fy2026",
@@ -91,7 +100,7 @@
       "publisher": "経済産業省",
       "source_title": "再生可能エネルギーのFIT制度・FIP制度における2026年度以降の買取価格等と2026年度の賦課金単価を設定します",
       "source_url": "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html",
-      "retrieved_at": "2026-08-29T17:25:07+09:00"
+      "retrieved_at": "2026-09-01T17:25:07+09:00"
     },
     {
       "source_id": "meti-residential-solar-cost-2025",
@@ -100,7 +109,16 @@
       "publisher": "経済産業省 調達価格等算定委員会",
       "source_title": "令和8年度以降（2026年度以降）の調達価格等に関する意見",
       "source_url": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
-      "retrieved_at": "2026-08-29T17:25:07+09:00"
+      "retrieved_at": "2026-09-01T17:25:07+09:00"
+    },
+    {
+      "source_id": "meti-residential-solar-om-cost-2026",
+      "data_domain": "lifecycle_cost",
+      "source_class": "primary",
+      "publisher": "経済産業省 調達価格等算定委員会",
+      "source_title": "令和8年度以降（2026年度以降）の調達価格等に関する意見",
+      "source_url": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+      "retrieved_at": "2026-09-01T13:49:33+09:00"
     },
     {
       "source_id": "niigata-snow-country-zeh-subsidy-fy2026",
@@ -109,7 +127,7 @@
       "publisher": "新潟県",
       "source_title": "令和8年度新潟県雪国型ZEH等導入促進補助金",
       "source_url": "https://www.pref.niigata.lg.jp/sec/kankyoseisaku/0583945.html",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "tainavi-prefectural-subsidy-ranking-2026",
@@ -118,7 +136,7 @@
       "publisher": "株式会社グッドフェローズ",
       "source_title": "2026年最新 太陽光・蓄電池の都道府県別実質補助額ランキング",
       "source_url": "https://www.tainavi.com/library/16073/",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "tepco-post-fit-standard-plan",
@@ -127,7 +145,7 @@
       "publisher": "東京電力エナジーパートナー株式会社",
       "source_title": "再エネ買取標準プラン",
       "source_url": "https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html",
-      "retrieved_at": "2026-08-29T21:30:21+09:00"
+      "retrieved_at": "2026-09-01T21:30:21+09:00"
     },
     {
       "source_id": "tokushima-residential-renewable-subsidy-fy2026",
@@ -136,7 +154,7 @@
       "publisher": "徳島県",
       "source_title": "令和8年度徳島県地域脱炭素移行・再エネ推進事業補助金",
       "source_url": "https://www.pref.tokushima.lg.jp/ippannokata/kurashi/shizen/7241363/",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "tokyo-residential-solar-subsidy-fy2026",
@@ -145,7 +163,7 @@
       "publisher": "公益財団法人東京都環境公社",
       "source_title": "令和8年度 家庭における太陽光発電導入促進事業",
       "source_url": "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "yamagata-residential-solar-subsidy-fy2026",
@@ -154,7 +172,7 @@
       "publisher": "山形県",
       "source_title": "令和8年度住宅用太陽光発電設備（自家消費型）導入事業費補助金",
       "source_url": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/r8_taiyoukou_hojo.html",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
       "source_id": "zeh-lab-prefectural-subsidy-list-2026",
@@ -163,7 +181,7 @@
       "publisher": "ZEH Lab",
       "source_title": "2026年版 47都道府県別 太陽光発電・蓄電池補助金一覧",
       "source_url": "https://zeh-lab.com/solar-subsidy-47prefectures-2026/",
-      "retrieved_at": "2026-08-29T21:41:46+09:00"
+      "retrieved_at": "2026-09-01T21:41:46+09:00"
     }
   ]
 }

@@ -3,27 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="住宅用太陽光の初期費用，維持管理，機器交換およびハレトクの計算に含まれない費用を説明します．">
-    <title>初期費用と維持費｜ハレトク</title>
+    <meta name="description" content="住宅用太陽光の初期費用，維持管理，機器交換およびはれトクの計算に含まれない費用を説明します．">
+    <title>初期費用と維持費｜はれトク</title>
     <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../shared/styles/main.css">
     <link rel="stylesheet" href="../articles/styles/article.css">
     <script type="module" src="../articles/src/article-data.js"></script>
   </head>
   <body>
-    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../">ハレトク</a><span class="site-header__description">費用の根拠</span></div></header>
+    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor">太陽光のかんたん採算診断</span><nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../#guides" aria-current="page">はれ<span class="brand-term">トク</span>ガイド</a></nav></div></header>
     <main>
-      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">採算計算</a> ／ 初期費用と維持費</nav>
+      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ はれ<span class="brand-term">トク</span>ガイド ／ 初期費用と維持費</nav>
       <header class="article-width article-hero">
-        <p class="eyebrow">費用の根拠</p>
+        <p class="eyebrow">見積もり</p>
         <h1>表示額以外に，何がかかる？</h1>
-        <p class="article-hero__lead">初期費用は平均導入費用から概算しますが，長期利用では点検，修理，機器交換および撤去が発生する可能性があります．</p>
+        <p class="article-hero__lead">初期費用に加え，定期点検とパワーコンディショナ交換を正味利益から差し引きます．突発的な修理や撤去等は含みません．</p>
       </header>
       <article class="article-width article">
         <section class="key-point">
           <h2>結論</h2>
-          <p><strong>現在の利益計算には，導入時の設備・工事費を含めますが，維持・交換・撤去費は含めません．</strong></p>
-          <p>したがって，表示利益はこれらの費用が発生した場合に小さくなります．正式見積もりでは，初期価格だけでなく保証と長期対応も確認する必要があります．</p>
+          <p><strong>現在の正味利益には，導入時の設備・工事費，4年ごとの定期点検費および15年目のパワーコンディショナ交換費を含めます．</strong></p>
+          <p>一方，突発的な故障・修理，発電量の経年劣化，撤去，保険，借入および税金は含みません．正式見積もりでは，初期価格だけでなく保証と長期対応も確認する必要があります．</p>
         </section>
 
         <section>
@@ -37,12 +37,22 @@
         </section>
 
         <section>
-          <h2>長期利用で考える費用</h2>
+          <h2>計算へ含める維持・交換費</h2>
+          <table class="article-table"><tbody>
+            <tr><th>定期点検</th><td><span data-maintenance-cost>38,000円</span>／回を<span data-maintenance-years>4，8，12，16，20年目</span>に計上．20年間で<span data-maintenance-total>190,000円</span>．</td></tr>
+            <tr><th>機器交換</th><td>パワーコンディショナ交換費<span data-replacement-cost>384,000円</span>を<span data-replacement-years>15年目</span>に計上．</td></tr>
+            <tr><th>合計</th><td><span data-lifecycle-cost-total>574,000円</span>．入力容量にかかわらない固定費として扱う現行モデルの仮定．</td></tr>
+          </tbody></table>
+          <p>費用の発生時点と金額は代表値による仮定です．実際の契約，製品，設置環境および使用状況によって異なります．</p>
+        </section>
+
+        <section>
+          <h2>計算へ含めない費用</h2>
           <ul>
-            <li><strong>点検：</strong>発電量の低下，表示エラー，配線，固定部および屋根周辺の異常を確認します．</li>
-            <li><strong>パワーコンディショナ：</strong>太陽電池の直流を家庭用の交流へ変換する機器で，修理や交換が必要になる場合があります．</li>
+            <li><strong>突発的な修理：</strong>故障の有無と修理額を一律に置けないため，定期点検と機器交換以外は含めません．</li>
             <li><strong>屋根工事との調整：</strong>屋根の補修・葺き替え時に，パネルの一時撤去や再設置が必要になる場合があります．</li>
             <li><strong>撤去・処分：</strong>故障，建替えまたは屋根工事等で設備を撤去する場合に費用が発生します．</li>
+            <li><strong>保険・借入・税金：</strong>契約や利用者の条件によって異なるため，計算へ含めません．</li>
           </ul>
           <p>JPEAは，一般的な目安として太陽電池モジュールは20年以上，パワーコンディショナは10～15年と説明しています．実際の期間は製品，設置環境および使用状況で異なります．</p>
         </section>
@@ -63,9 +73,9 @@
           <p class="article-data-status" data-article-data-status>公開データを確認しています．</p>
         </section>
 
-        <section><h2>次に確認する</h2><nav class="article-footer-nav" aria-label="関連ページ"><a href="calculation-method.html">計算方法・前提</a><a href="quotes-contractors.html">見積もり・施工業者</a><a href="disaster.html">防災・停電</a><a href="../">採算計算へ戻る</a></nav></section>
+        <section><h2>次に確認する</h2><nav class="article-footer-nav" aria-label="関連ページ"><a href="calculation-method.html">計算方法・前提</a><a href="quotes-contractors.html">見積もり・施工業者</a><a href="disaster.html">防災・停電</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断へ</a></nav></section>
       </article>
     </main>
-    <footer class="site-footer"><div class="page-width"><p>ハレトクの計算では，維持・交換・撤去費を利益から控除していません．</p></div></footer>
+    <footer class="site-footer"><div class="page-width"><p>定期点検と機器交換は正味利益へ反映し，突発的な修理や撤去等は反映していません．</p></div></footer>
   </body>
 </html>

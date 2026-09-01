@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="都道府県と月間電気料金から，住宅用太陽光の20年間の損得，回収年数および3シナリオを分析します．">
+    <title>はれトク診断｜住宅用太陽光の20年間採算</title>
+    <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../shared/styles/main.css">
+    <link rel="stylesheet" href="../articles/styles/article.css">
+    <link rel="stylesheet" href="styles/analysis.css">
+    <script type="module" src="src/app.js"></script>
+  </head>
+  <body data-page="analysis">
+    <header class="site-header">
+      <div class="page-width site-header__inner">
+        <a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a>
+        <span class="site-header__descriptor">太陽光のかんたん採算診断</span>
+        <nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="./" aria-current="page">はれ<span class="brand-term">トク</span>診断</a><a href="../#guides">はれ<span class="brand-term">トク</span>ガイド</a></nav>
+      </div>
+    </header>
+
+    <main class="analysis-main">
+      <section class="analysis-intro page-width" aria-labelledby="analysis-title">
+        <div><h1 id="analysis-title" class="analysis-page-title">はれ<span class="brand-word">トク</span>診断</h1></div>
+        <section class="calculator calculator--analysis" aria-labelledby="calculator-title">
+          <div class="panel calculator__panel">
+            <div class="calculator__collapsed" data-calculator-collapsed hidden><div><p class="step-label">条件</p><p class="calculator__condition" data-condition-summary>条件を表示します．</p></div><button class="text-button" type="button" data-change-conditions>条件を変更</button></div>
+            <div data-calculator-expanded>
+              <div class="section-heading"><h2 id="calculator-title">条件</h2><p>月間電気料金は未入力でも計算できます．</p></div>
+              <form id="estimate-form" data-route-source="analysis-recalculate">
+                <div class="form-field"><label for="prefecture">都道府県<span class="required-label">必須</span></label><select id="prefecture" name="prefecture" required><option value="">選択してください</option></select></div>
+                <div class="form-field"><label for="monthly-electricity-bill">月間電気料金<span class="optional-label">任意</span></label><div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="100" placeholder="例：12,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div><p id="electricity-bill-help" class="field-help">未入力なら，地域の標準値を使用します．</p></div>
+                <div class="calculator-actions"><button id="calculate-button" class="primary-button" type="submit" disabled><span data-calculate-label>分析結果を表示する</span><span aria-hidden="true">→</span></button><button class="text-button" type="button" data-cancel-conditions hidden>変更をやめる</button></div>
+                <p id="form-message" class="form-message" role="status" aria-live="polite">公開データを確認しています．</p>
+              </form>
+            </div>
+            <details class="advanced-panel advanced-panel--conditions">
+              <summary><span><span class="step-label">屋根条件</span><strong data-roof-condition-summary>方角：南向き</strong></span><span class="advanced-panel__action"><span class="advanced-panel__action-closed">詳細条件を変更</span><span class="advanced-panel__action-open">詳細条件を閉じる</span></span></summary>
+              <div class="advanced-panel__body">
+                <div class="form-field"><label for="roof-orientation">屋根の方角</label><select id="roof-orientation" name="roofOrientation" aria-describedby="roof-orientation-help"></select><p id="roof-orientation-help" class="field-help">南向きを基準に，南東・南西は96％，東西・不明は85％として年間発電量を補正します．選択すると結果を再計算します．</p></div>
+                <p>屋根傾斜と日陰は，検証済みの一般補正係数がないため現在の計算には反映しません．</p>
+                <p class="field-help">方角係数は全国共通の概算値です．実際の設置可否，屋根面積，日陰および施工難易度は見積もりで確認します．</p>
+              </div>
+            </details>
+          </div>
+        </section>
+      </section>
+
+      <section id="estimate-result" class="result page-width" aria-labelledby="result-title" hidden>
+        <div class="section-heading result__heading"><p class="step-label">分析結果</p><h2 id="result-title" tabindex="-1">あなたの場合，20年間でいくらトク？</h2><p class="result-condition" data-result-condition>計算条件を表示します．</p></div>
+        <section class="panel result-summary" aria-labelledby="summary-title">
+          <p class="result-label">20年間の正味利益</p><h3 id="summary-title" data-result-summary>概算結果</h3><p class="result-amount" data-result-economic-benefit>―</p><p class="result-payback" data-result-payback>回収年数を計算します．</p><p class="result-period" data-result-period>標準シナリオにおける20年間の概算利益</p>
+          <div class="scenario-grid" data-scenario-list role="group" aria-label="表示するシナリオを選択"></div>
+          <div class="result-summary__affiliate" aria-label="主結果からの見積もり案内"><p>この概算を，実際の屋根・施工条件で確かめる</p><button class="secondary-button affiliate-button" type="button" data-route-source="analysis-primary-affiliate" disabled>無料見積もりで確認</button><small class="advertising-label">広告・アフィリエイトを含みます．</small></div>
+        </section>
+
+        <aside class="loss-guidance" data-loss-guidance hidden aria-labelledby="loss-guidance-title"><div><p class="result-label">採算とは別の観点</p><h3 id="loss-guidance-title">停電時の備えも含めて判断する</h3><p>金銭的な採算が合わない場合も，自家発電による停電対策には別の価値があります．</p></div><a class="text-link" href="../pages/disaster.html">防災・停電の記事を見る <span aria-hidden="true">→</span></a></aside>
+
+        <section class="analysis-workbench" aria-labelledby="workbench-title">
+          <div class="section-heading analysis-workbench__heading"><p class="step-label">条件を動かして比較</p><h3 id="workbench-title">これから決める設置容量を変える</h3><p>設備容量は，工事前に見積もりで決める条件です．3～6 kWの範囲で概算の変化を比較できます．</p></div>
+          <div class="analysis-workbench__grid">
+            <section class="panel capacity-panel" aria-labelledby="capacity-title">
+              <div class="capacity-panel__header"><div><p class="result-label">比較する設置容量</p><h4 id="capacity-title">太陽光パネルの容量</h4></div><output for="system-capacity" class="capacity-output" data-capacity-output>4.0 kW</output></div>
+              <input id="system-capacity" class="capacity-slider" name="systemCapacityKw" type="range" min="3" max="6" step="0.5" value="4" aria-describedby="capacity-help capacity-status">
+              <div class="capacity-scale" aria-hidden="true"><span>3 kW</span><span>4 kW</span><span>5 kW</span><span>6 kW</span></div>
+              <div class="capacity-metrics" aria-live="polite"><div><span>年間発電量</span><strong data-capacity-generation>―</strong></div><div><span>実質初期負担</span><strong data-capacity-initial-cost>―</strong></div><div><span>20年間の正味利益</span><strong data-capacity-profit>―</strong></div></div>
+              <p id="capacity-help" class="field-help">発電量と導入費用は検証済みの1 kW当たりデータから換算します．補助金は容量別の確認状況に応じて反映し，確認できない容量では「未確認」と表示します．</p>
+              <p id="capacity-status" class="capacity-status" role="status" aria-live="polite" data-capacity-status></p>
+            </section>
+
+            <section class="panel cashflow-panel" aria-labelledby="cashflow-title">
+              <div class="cashflow-panel__header"><div><p class="result-label" data-cashflow-scenario>標準シナリオ</p><h4 id="cashflow-title">累積損益と回収時点</h4></div><p class="cashflow-panel__endpoint" data-cashflow-endpoint>20年後 ―</p></div>
+              <svg class="cashflow-chart" data-cashflow-chart viewBox="0 0 720 280" role="img" aria-labelledby="cashflow-title cashflow-description"></svg>
+              <p id="cashflow-description" class="sr-only" data-cashflow-description>累積損益の推移を表示します．</p>
+              <div class="cashflow-legend"><span data-legend-scenario="downside"><i class="cashflow-legend__line" aria-hidden="true"></i>下振れ</span><span data-legend-scenario="standard"><i class="cashflow-legend__line" aria-hidden="true"></i>標準</span><span data-legend-scenario="upside"><i class="cashflow-legend__line" aria-hidden="true"></i>上振れ</span><span><i class="cashflow-legend__zero" aria-hidden="true"></i>損益ゼロ</span></div>
+            </section>
+          </div>
+        </section>
+
+        <div class="estimate-cta affiliate-panel" aria-label="概算確認後の見積もり案内">
+          <div><p class="estimate-cta__title">結果を確認したら，無料見積もりへ</p><p class="result-note">この結果は地域データによる概算です．実際の屋根・施工条件を反映した採算は，見積もりで詳しく確認できます．</p></div>
+          <button class="secondary-button affiliate-button" type="button" data-route-source="analysis-affiliate" disabled>無料見積もりで確認</button>
+          <p class="advertising-label">広告・アフィリエイトを含みます．</p>
+        </div>
+
+        <div class="result-disclosures">
+          <details class="panel disclosure-panel" data-result-disclosure><summary><span class="disclosure-panel__title">利益の内訳を見る</span><span class="disclosure-panel__hint">導入時，20年間の経済効果と維持費，正味利益，年間の電力量</span></summary><div class="disclosure-panel__body">
+            <section class="breakdown-section" aria-labelledby="initial-breakdown-title"><h4 id="initial-breakdown-title">導入時</h4><dl class="result-grid"><div><dt><a href="../pages/costs-maintenance.html">導入費用</a></dt><dd data-result-gross-cost>―</dd></div><div><dt><a href="../pages/subsidies.html">補助金</a></dt><dd><strong data-result-subsidy>―</strong><small class="result-grid__status" data-result-subsidy-status>―</small></dd></div><div><dt>実質初期負担</dt><dd data-result-initial-cost>―</dd></div></dl></section>
+            <section class="breakdown-section" aria-labelledby="cashflow-breakdown-title"><h4 id="cashflow-breakdown-title">20年間の経済効果と維持費</h4><dl class="result-grid"><div><dt><a href="../pages/electricity-sales.html">電気料金削減</a></dt><dd data-result-self-consumption>―</dd></div><div><dt><a href="../pages/electricity-sales.html#sales">売電収入</a></dt><dd data-result-sales-income>―</dd></div><div><dt><a href="../pages/costs-maintenance.html">維持・交換費</a></dt><dd><strong data-result-lifecycle-cost>―</strong><small class="result-grid__status" data-result-lifecycle-status>4年ごとの点検と15年目の交換を反映します．</small></dd></div></dl></section>
+            <section class="breakdown-section" aria-labelledby="profit-breakdown-title"><h4 id="profit-breakdown-title">20年間の正味利益</h4><dl class="result-profit-summary"><div><dt>電気料金削減＋売電収入－実質初期負担－維持・交換費</dt><dd data-result-profit>―</dd></div></dl></section>
+            <section class="breakdown-section" aria-labelledby="energy-breakdown-title"><h4 id="energy-breakdown-title">年間の電力量</h4><dl class="result-grid"><div><dt><a href="../pages/calculation-method.html#generation">発電量</a></dt><dd data-result-generation>―</dd></div><div><dt>家庭の使用量</dt><dd data-result-consumption>―</dd></div><div><dt>自家消費量</dt><dd data-result-self-consumed>―</dd></div><div><dt>買電量</dt><dd data-result-purchased>―</dd></div><div><dt>売電量</dt><dd data-result-exported>―</dd></div></dl></section>
+            <p class="breakdown-note">現在の概算には，設備劣化，撤去費および現在価値換算を含みません．</p><nav class="breakdown-links" aria-label="計算根拠の詳細情報"><a href="../pages/calculation-method.html">計算方法と採用データ</a><a href="../pages/costs-maintenance.html">初期費用・維持費の考え方</a><a href="../pages/quotes-contractors.html">見積もり・施工業者の選び方</a></nav>
+          </div></details>
+        </div>
+      </section>
+
+      <section class="site-state page-width" aria-labelledby="site-state-title"><h2 id="site-state-title">データ状態</h2><p id="data-status" role="status" aria-live="polite">公開データを確認しています．</p></section>
+    </main>
+    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><p>太陽光の採算判断を，短く，わかりやすく．</p></div><div class="site-footer__notes"><p>結果は概算であり，長期利益または補助金の適用を保証するものではありません．</p><p>見積もり導線には，広告・アフィリエイトを含む場合があります．</p></div></div></footer>
+  </body>
+</html>

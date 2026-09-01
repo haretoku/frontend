@@ -17,12 +17,15 @@ export default defineConfig({
         rollupOptions: {
           input: {
             index: resolve(siteRoot, "index.html"),
+            logoFinalists: resolve(siteRoot, "logo-finalists.html"),
+            simulator: resolve(siteRoot, "simulator/index.html"),
             calculationMethod: resolve(siteRoot, "pages/calculation-method.html"),
             costsMaintenance: resolve(siteRoot, "pages/costs-maintenance.html"),
             electricitySales: resolve(siteRoot, "pages/electricity-sales.html"),
             subsidies: resolve(siteRoot, "pages/subsidies.html"),
             disaster: resolve(siteRoot, "pages/disaster.html"),
-            quotesContractors: resolve(siteRoot, "pages/quotes-contractors.html")
+            quotesContractors: resolve(siteRoot, "pages/quotes-contractors.html"),
+            policy: resolve(siteRoot, "pages/policy.html")
           }
         }
       }

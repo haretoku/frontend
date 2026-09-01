@@ -1,7 +1,7 @@
 {
-  "schema_version": "1.0.0",
-  "data_version": "2026-08-29",
-  "generated_at": "2026-08-30T01:58:19+00:00",
+  "schema_version": "2.1.0",
+  "data_version": "2026-09-01",
+  "generated_at": "2026-09-01T06:25:24+00:00",
   "calculation": {
     "system_capacity_kw": 4,
     "evaluation_period_years": 20,
@@ -18,7 +18,203 @@
         "price_yen_per_kwh": 8.3
       }
     ],
-    "post_fit_price_yen_per_kwh": 8.5
+    "post_fit_price_yen_per_kwh": 8.5,
+    "sale_price_periods": [
+      {
+        "period_start_year": 1,
+        "period_end_year": 4,
+        "price_yen_per_kwh": 24,
+        "price_type": "fit",
+        "source_id": "meti-fit-residential-fy2026"
+      },
+      {
+        "period_start_year": 5,
+        "period_end_year": 10,
+        "price_yen_per_kwh": 8.3,
+        "price_type": "fit",
+        "source_id": "meti-fit-residential-fy2026"
+      },
+      {
+        "period_start_year": 11,
+        "period_end_year": 20,
+        "price_yen_per_kwh": 8.5,
+        "price_type": "post_fit",
+        "source_id": "tepco-post-fit-standard-plan"
+      }
+    ],
+    "detail_inputs": [
+      {
+        "input_name": "roof_orientation",
+        "label": "屋根方角",
+        "default_option": "south",
+        "calculation_status": "supported",
+        "source_ids": [
+          "sorakarte-orientation-benchmark",
+          "jpea-residential-orientation-angle-impact"
+        ],
+        "reason": "ソラカルテの宮城県・宮崎県4.5 kW表示値から同一比率を逆算し，JPEAの南向き基準の方位別比較と整合する全国共通のMVPモデル係数として採用する．地点別精密係数ではない．",
+        "confirmed_at": "2026-09-01",
+        "options": [
+          {
+            "value": "south",
+            "label": "南向き",
+            "generation_correction_factor": 1.0,
+            "calculation_status": "supported"
+          },
+          {
+            "value": "southeast_southwest",
+            "label": "南東・南西",
+            "generation_correction_factor": 0.96,
+            "calculation_status": "supported"
+          },
+          {
+            "value": "east_west_unknown",
+            "label": "東西・不明",
+            "generation_correction_factor": 0.85,
+            "calculation_status": "supported"
+          }
+        ]
+      },
+      {
+        "input_name": "roof_tilt",
+        "label": "屋根傾斜",
+        "default_option": "degrees_20_40",
+        "calculation_status": "unsupported",
+        "source_ids": [
+          "nedo-solar-radiation-database"
+        ],
+        "reason": "基準発電量は傾斜角30度であるが，地域と方位を固定しないカテゴリ別補正係数は検証していないため補正しない．",
+        "confirmed_at": "2026-09-01",
+        "options": [
+          {
+            "value": "degrees_0_10",
+            "label": "ほぼ平ら（0～10度）",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "degrees_10_20",
+            "label": "緩やか（10～20度）",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "degrees_20_40",
+            "label": "標準的（20～40度）",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "degrees_over_40",
+            "label": "急（40度超）",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "unknown",
+            "label": "不明",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          }
+        ]
+      },
+      {
+        "input_name": "shading",
+        "label": "日陰",
+        "default_option": "unknown",
+        "calculation_status": "unsupported",
+        "source_ids": [
+          "jpea-residential-shadow-impact"
+        ],
+        "reason": "陰により発電量が低下することは確認できるが，影の範囲・時間・機器構成を問わない一般補正係数は確認できないため補正しない．",
+        "confirmed_at": "2026-09-01",
+        "options": [
+          {
+            "value": "none",
+            "label": "ほぼない",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "partial",
+            "label": "一部の時間・場所にある",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "significant",
+            "label": "長時間または広範囲にある",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          },
+          {
+            "value": "unknown",
+            "label": "不明",
+            "generation_correction_factor": null,
+            "calculation_status": "unsupported"
+          }
+        ]
+      }
+    ],
+    "lifecycle_cost_events": [
+      {
+        "id": "residential-solar-periodic-inspection-2026",
+        "cost_type": "maintenance",
+        "cost_yen": 38000,
+        "cost_model": "fixed_event_cost",
+        "event_years": [
+          4,
+          8,
+          12,
+          16,
+          20
+        ],
+        "source_id": "meti-residential-solar-om-cost-2026",
+        "component_source_ids": [
+          "jpea-residential-equipment-service-life"
+        ],
+        "timing_basis": "経済産業省資料の3～5年ごととJPEAの4年に1度を踏まえ，4年ごとの年末に計上する．"
+      },
+      {
+        "id": "residential-solar-power-conditioner-replacement-2026",
+        "cost_type": "replacement",
+        "cost_yen": 384000,
+        "cost_model": "fixed_event_cost",
+        "event_years": [
+          15
+        ],
+        "source_id": "meti-residential-solar-om-cost-2026",
+        "component_source_ids": [
+          "jpea-residential-equipment-service-life"
+        ],
+        "timing_basis": "経済産業省資料の20年間で一度とJPEAの耐用年数10～15年を踏まえ，15年目末に計上する．"
+      }
+    ],
+    "excluded_cost_and_performance_items": [
+      {
+        "item": "generation_degradation",
+        "reason": "採用済み発電量データと整合する年次劣化率を検証していないため算入しない．"
+      },
+      {
+        "item": "removal_cost",
+        "reason": "4 kW住宅用設備の代表撤去額と発生時点を検証していないため算入しない．"
+      },
+      {
+        "item": "insurance",
+        "reason": "契約の有無と補償範囲が住宅ごとに異なるため算入しない．"
+      },
+      {
+        "item": "financing_cost",
+        "reason": "借入条件を入力していないため算入しない．"
+      },
+      {
+        "item": "tax",
+        "reason": "利用者の課税関係を入力していないため算入しない．"
+      }
+    ],
+    "deprecated_result_fields": [
+      "first_year_economic_benefit_yen"
+    ]
   },
   "scenarios": [
     {
@@ -44,7 +240,14 @@
       "annual_generation_kwh_per_kw": 1047,
       "electricity_price_yen_per_kwh": 32.86,
       "default_monthly_electricity_bill_yen": 12283,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "02",
@@ -52,7 +255,14 @@
       "annual_generation_kwh_per_kw": 975,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 12867,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "03",
@@ -60,7 +270,14 @@
       "annual_generation_kwh_per_kw": 1034,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 12867,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "04",
@@ -68,7 +285,14 @@
       "annual_generation_kwh_per_kw": 1023,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 12867,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "05",
@@ -76,7 +300,14 @@
       "annual_generation_kwh_per_kw": 943,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 12867,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "06",
@@ -84,7 +315,43 @@
       "annual_generation_kwh_per_kw": 991,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 12867,
-      "subsidy_amount_for_4kw_yen": 280000
+      "subsidy_amount_for_4kw_yen": 280000,
+      "subsidy_programs": [
+        {
+          "id": "yamagata-residential-solar-fy2026",
+          "government_level": "prefecture",
+          "municipality_code": null,
+          "municipality_name": null,
+          "program_name": "令和8年度住宅用太陽光発電設備（自家消費型）導入事業費補助金",
+          "fiscal_year": 2026,
+          "calculation_type": "per_kw",
+          "fixed_amount_yen": null,
+          "amount_yen_per_kw": 70000,
+          "subsidy_rate": null,
+          "capacity_min_kw": null,
+          "capacity_max_kw": 10,
+          "capacity_min_inclusive": true,
+          "capacity_max_inclusive": false,
+          "subsidy_cap_yen": 630000,
+          "rounding_rule": "floor_capacity_to_integer_kw",
+          "combination_conditions": "他制度との併用可否は申請時に個別確認する．",
+          "status": "verified",
+          "calculated_amount_for_4kw_yen": 280000,
+          "fit_compatible": false,
+          "conditions": "自ら居住するやまがた省エネ健康住宅または同等性能の住宅へ設置する10 kW未満の設備であること．FIT・FIP認定を取得せず，発電量の30％以上を自家消費すること．PPA・リースは対象外．4 kWでは小数点以下切捨て後の出力4 kWに7万円を乗じる．",
+          "effective_from": "2026-04-06",
+          "effective_to": "2027-01-15",
+          "source_id": "yamagata-residential-solar-subsidy-fy2026",
+          "confirmed_at": "2026-09-01"
+        }
+      ],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026",
+        "yamagata-residential-solar-subsidy-fy2026"
+      ],
+      "subsidy_data_status": "included"
     },
     {
       "code": "07",
@@ -92,7 +359,44 @@
       "annual_generation_kwh_per_kw": 1031,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 12867,
-      "subsidy_amount_for_4kw_yen": 160000
+      "subsidy_amount_for_4kw_yen": 160000,
+      "subsidy_programs": [
+        {
+          "id": "fukushima-residential-solar-fy2026",
+          "government_level": "prefecture",
+          "municipality_code": null,
+          "municipality_name": null,
+          "program_name": "令和8年度福島県住宅用太陽光発電設備等導入支援補助金",
+          "fiscal_year": 2026,
+          "calculation_type": "per_kw",
+          "fixed_amount_yen": null,
+          "amount_yen_per_kw": 40000,
+          "subsidy_rate": null,
+          "capacity_min_kw": null,
+          "capacity_max_kw": 10,
+          "capacity_min_inclusive": true,
+          "capacity_max_inclusive": false,
+          "subsidy_cap_yen": 160000,
+          "rounding_rule": "unverified",
+          "combination_conditions": "他制度との併用可否は申請時に個別確認する．",
+          "status": "verified",
+          "calculated_amount_for_4kw_yen": 160000,
+          "fit_compatible": true,
+          "conditions": "県内の住居等へ設置する10 kW未満の未使用設備で，発電電力を当該住居で消費すること．初期費用ゼロモデルとリースは対象外．4 kWでは4万円に4 kWを乗じ，上限16万円を適用する．",
+          "effective_from": "2026-05-20",
+          "effective_to": "2027-03-12",
+          "source_id": "fukushima-residential-solar-subsidy-guideline-fy2026",
+          "confirmed_at": "2026-09-01"
+        }
+      ],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026",
+        "fukushima-residential-solar-subsidy-guideline-fy2026",
+        "fukushima-renewable-center-application-status-2026"
+      ],
+      "subsidy_data_status": "included"
     },
     {
       "code": "08",
@@ -100,7 +404,14 @@
       "annual_generation_kwh_per_kw": 1052,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "09",
@@ -108,7 +419,14 @@
       "annual_generation_kwh_per_kw": 1055,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "10",
@@ -116,7 +434,44 @@
       "annual_generation_kwh_per_kw": 1084,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 70000
+      "subsidy_amount_for_4kw_yen": 70000,
+      "subsidy_programs": [
+        {
+          "id": "gunma-residential-solar-fy2026",
+          "government_level": "prefecture",
+          "municipality_code": null,
+          "municipality_name": null,
+          "program_name": "令和8年度太陽光発電設備等導入支援事業費補助金",
+          "fiscal_year": 2026,
+          "calculation_type": "fixed",
+          "fixed_amount_yen": 70000,
+          "amount_yen_per_kw": null,
+          "subsidy_rate": null,
+          "capacity_min_kw": null,
+          "capacity_max_kw": null,
+          "capacity_min_inclusive": true,
+          "capacity_max_inclusive": true,
+          "subsidy_cap_yen": null,
+          "rounding_rule": "none",
+          "combination_conditions": "他制度との併用可否は申請時に個別確認する．",
+          "status": "verified",
+          "calculated_amount_for_4kw_yen": 70000,
+          "fit_compatible": false,
+          "conditions": "県内の自ら居住する住宅へ太陽光発電設備を導入する個人が対象であり，太陽光単体で申請できる．個人向けは設備容量によらず7万円／世帯．2026年度の申請期間は6月29日から7月20日までであり，現在の受付状況にかかわらず年度初スナップショットへ採用する．",
+          "effective_from": "2026-06-29",
+          "effective_to": "2026-07-20",
+          "source_id": "gunma-renewable-subsidy-guideline-fy2026",
+          "confirmed_at": "2026-09-01"
+        }
+      ],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026",
+        "gunma-residential-renewable-subsidy-fy2026",
+        "gunma-renewable-subsidy-guideline-fy2026"
+      ],
+      "subsidy_data_status": "included"
     },
     {
       "code": "11",
@@ -124,7 +479,14 @@
       "annual_generation_kwh_per_kw": 1015,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "12",
@@ -132,7 +494,14 @@
       "annual_generation_kwh_per_kw": 1066,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "13",
@@ -140,7 +509,61 @@
       "annual_generation_kwh_per_kw": 997,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 480000
+      "subsidy_amount_for_4kw_yen": 480000,
+      "subsidy_programs": [
+        {
+          "id": "tokyo-existing-residential-solar-fy2026",
+          "government_level": "prefecture",
+          "municipality_code": null,
+          "municipality_name": null,
+          "program_name": "令和8年度家庭における太陽光発電導入促進事業",
+          "fiscal_year": 2026,
+          "calculation_type": "tiered",
+          "fixed_amount_yen": null,
+          "amount_yen_per_kw": null,
+          "subsidy_rate": null,
+          "capacity_min_kw": null,
+          "capacity_max_kw": 50,
+          "capacity_min_inclusive": true,
+          "capacity_max_inclusive": false,
+          "subsidy_cap_yen": null,
+          "rounding_rule": "round_capacity_to_0_01_kw",
+          "combination_conditions": "東京都および公社の同種助成金との重複受給は不可．助成対象経費が上限となる．",
+          "status": "verified",
+          "tiers": [
+            {
+              "capacity_min_kw": null,
+              "capacity_max_kw": 3.75,
+              "capacity_min_inclusive": true,
+              "capacity_max_inclusive": true,
+              "amount_yen_per_kw": 150000,
+              "subsidy_cap_yen": 450000
+            },
+            {
+              "capacity_min_kw": 3.75,
+              "capacity_max_kw": 50,
+              "capacity_min_inclusive": false,
+              "capacity_max_inclusive": false,
+              "amount_yen_per_kw": 120000,
+              "subsidy_cap_yen": null
+            }
+          ],
+          "calculated_amount_for_4kw_yen": 480000,
+          "fit_compatible": true,
+          "conditions": "都内の既存住宅へ新規設置する50 kW未満の未使用設備で，発電電力を居住部分で使用すること．4 kWは3.75 kW超の区分となるため，12万円に4 kWを乗じる．助成対象経費が上限となる．",
+          "effective_from": "2026-05-29",
+          "effective_to": null,
+          "source_id": "tokyo-residential-solar-subsidy-fy2026",
+          "confirmed_at": "2026-09-01"
+        }
+      ],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026",
+        "tokyo-residential-solar-subsidy-fy2026"
+      ],
+      "subsidy_data_status": "included"
     },
     {
       "code": "14",
@@ -148,7 +571,14 @@
       "annual_generation_kwh_per_kw": 1042,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "15",
@@ -156,7 +586,43 @@
       "annual_generation_kwh_per_kw": 941,
       "electricity_price_yen_per_kwh": 30.66,
       "default_monthly_electricity_bill_yen": 14225,
-      "subsidy_amount_for_4kw_yen": 280000
+      "subsidy_amount_for_4kw_yen": 280000,
+      "subsidy_programs": [
+        {
+          "id": "niigata-residential-solar-fy2026",
+          "government_level": "prefecture",
+          "municipality_code": null,
+          "municipality_name": null,
+          "program_name": "令和8年度新潟県雪国型ZEH等導入促進補助金",
+          "fiscal_year": 2026,
+          "calculation_type": "per_kw",
+          "fixed_amount_yen": null,
+          "amount_yen_per_kw": 70000,
+          "subsidy_rate": null,
+          "capacity_min_kw": null,
+          "capacity_max_kw": null,
+          "capacity_min_inclusive": true,
+          "capacity_max_inclusive": true,
+          "subsidy_cap_yen": 315000,
+          "rounding_rule": "floor_capacity_to_integer_kw",
+          "combination_conditions": "新発田市および南魚沼市は県制度の対象外．他制度との併用可否は申請時に個別確認する．",
+          "status": "verified",
+          "calculated_amount_for_4kw_yen": 280000,
+          "fit_compatible": false,
+          "conditions": "県内の専用住宅へ設置し，FIT・FIP認定を取得しないこと．県内事業者が施工すること．新発田市および南魚沼市は県制度の対象外．4 kWでは小数点以下切捨て後の出力4 kWに7万円を乗じる．",
+          "effective_from": "2026-07-17",
+          "effective_to": "2027-01-29",
+          "source_id": "niigata-snow-country-zeh-subsidy-fy2026",
+          "confirmed_at": "2026-09-01"
+        }
+      ],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026",
+        "niigata-snow-country-zeh-subsidy-fy2026"
+      ],
+      "subsidy_data_status": "included"
     },
     {
       "code": "16",
@@ -164,7 +630,14 @@
       "annual_generation_kwh_per_kw": 949,
       "electricity_price_yen_per_kwh": 28.02,
       "default_monthly_electricity_bill_yen": 14225,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "17",
@@ -172,7 +645,14 @@
       "annual_generation_kwh_per_kw": 978,
       "electricity_price_yen_per_kwh": 28.02,
       "default_monthly_electricity_bill_yen": 14225,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "18",
@@ -180,7 +660,14 @@
       "annual_generation_kwh_per_kw": 949,
       "electricity_price_yen_per_kwh": 28.02,
       "default_monthly_electricity_bill_yen": 14225,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "19",
@@ -188,7 +675,14 @@
       "annual_generation_kwh_per_kw": 1146,
       "electricity_price_yen_per_kwh": 31.21,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "20",
@@ -196,7 +690,14 @@
       "annual_generation_kwh_per_kw": 1052,
       "electricity_price_yen_per_kwh": 29.12,
       "default_monthly_electricity_bill_yen": 11567,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "21",
@@ -204,7 +705,14 @@
       "annual_generation_kwh_per_kw": 1132,
       "electricity_price_yen_per_kwh": 29.12,
       "default_monthly_electricity_bill_yen": 11208,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "22",
@@ -212,7 +720,14 @@
       "annual_generation_kwh_per_kw": 1106,
       "electricity_price_yen_per_kwh": 29.12,
       "default_monthly_electricity_bill_yen": 11208,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "23",
@@ -220,7 +735,14 @@
       "annual_generation_kwh_per_kw": 1095,
       "electricity_price_yen_per_kwh": 29.12,
       "default_monthly_electricity_bill_yen": 11208,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "24",
@@ -228,7 +750,14 @@
       "annual_generation_kwh_per_kw": 1106,
       "electricity_price_yen_per_kwh": 29.12,
       "default_monthly_electricity_bill_yen": 11208,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "25",
@@ -236,7 +765,14 @@
       "annual_generation_kwh_per_kw": 919,
       "electricity_price_yen_per_kwh": 25.93,
       "default_monthly_electricity_bill_yen": 10058,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "26",
@@ -244,7 +780,14 @@
       "annual_generation_kwh_per_kw": 991,
       "electricity_price_yen_per_kwh": 25.93,
       "default_monthly_electricity_bill_yen": 10058,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "27",
@@ -252,7 +795,14 @@
       "annual_generation_kwh_per_kw": 1044,
       "electricity_price_yen_per_kwh": 25.93,
       "default_monthly_electricity_bill_yen": 10058,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "28",
@@ -260,7 +810,14 @@
       "annual_generation_kwh_per_kw": 1076,
       "electricity_price_yen_per_kwh": 25.93,
       "default_monthly_electricity_bill_yen": 10058,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "29",
@@ -268,7 +825,14 @@
       "annual_generation_kwh_per_kw": 1063,
       "electricity_price_yen_per_kwh": 25.93,
       "default_monthly_electricity_bill_yen": 10058,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "30",
@@ -276,7 +840,14 @@
       "annual_generation_kwh_per_kw": 1098,
       "electricity_price_yen_per_kwh": 25.93,
       "default_monthly_electricity_bill_yen": 10058,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "31",
@@ -284,7 +855,14 @@
       "annual_generation_kwh_per_kw": 973,
       "electricity_price_yen_per_kwh": 29.23,
       "default_monthly_electricity_bill_yen": 12958,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "32",
@@ -292,7 +870,14 @@
       "annual_generation_kwh_per_kw": 991,
       "electricity_price_yen_per_kwh": 29.23,
       "default_monthly_electricity_bill_yen": 12958,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "33",
@@ -300,7 +885,14 @@
       "annual_generation_kwh_per_kw": 1082,
       "electricity_price_yen_per_kwh": 29.23,
       "default_monthly_electricity_bill_yen": 12958,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "34",
@@ -308,7 +900,14 @@
       "annual_generation_kwh_per_kw": 1135,
       "electricity_price_yen_per_kwh": 29.23,
       "default_monthly_electricity_bill_yen": 12958,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "35",
@@ -316,7 +915,14 @@
       "annual_generation_kwh_per_kw": 1063,
       "electricity_price_yen_per_kwh": 29.23,
       "default_monthly_electricity_bill_yen": 12958,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "36",
@@ -324,7 +930,43 @@
       "annual_generation_kwh_per_kw": 1100,
       "electricity_price_yen_per_kwh": 27.91,
       "default_monthly_electricity_bill_yen": 11683,
-      "subsidy_amount_for_4kw_yen": 280000
+      "subsidy_amount_for_4kw_yen": 280000,
+      "subsidy_programs": [
+        {
+          "id": "tokushima-residential-solar-fy2026",
+          "government_level": "prefecture",
+          "municipality_code": null,
+          "municipality_name": null,
+          "program_name": "令和8年度徳島県地域脱炭素移行・再エネ推進事業補助金",
+          "fiscal_year": 2026,
+          "calculation_type": "per_kw",
+          "fixed_amount_yen": null,
+          "amount_yen_per_kw": 70000,
+          "subsidy_rate": null,
+          "capacity_min_kw": null,
+          "capacity_max_kw": null,
+          "capacity_min_inclusive": true,
+          "capacity_max_inclusive": true,
+          "subsidy_cap_yen": 350000,
+          "rounding_rule": "floor_capacity_to_integer_kw",
+          "combination_conditions": "他制度との併用可否は申請時に個別確認する．",
+          "status": "verified",
+          "calculated_amount_for_4kw_yen": 280000,
+          "fit_compatible": false,
+          "conditions": "県内の既存住宅へ設置する自家消費型設備で，FIT・FIP認定を取得せず，発電量の30％以上を自家消費すること．蓄電池を申請する場合は太陽光との同時導入が必要だが，太陽光単体は申請可能．4 kWでは7万円に4 kWを乗じる．",
+          "effective_from": "2026-05-25",
+          "effective_to": "2026-12-15",
+          "source_id": "tokushima-residential-renewable-subsidy-fy2026",
+          "confirmed_at": "2026-09-01"
+        }
+      ],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026",
+        "tokushima-residential-renewable-subsidy-fy2026"
+      ],
+      "subsidy_data_status": "included"
     },
     {
       "code": "37",
@@ -332,7 +974,14 @@
       "annual_generation_kwh_per_kw": 1114,
       "electricity_price_yen_per_kwh": 27.91,
       "default_monthly_electricity_bill_yen": 11683,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "38",
@@ -340,7 +989,14 @@
       "annual_generation_kwh_per_kw": 1106,
       "electricity_price_yen_per_kwh": 27.91,
       "default_monthly_electricity_bill_yen": 11683,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "39",
@@ -348,7 +1004,14 @@
       "annual_generation_kwh_per_kw": 1151,
       "electricity_price_yen_per_kwh": 27.91,
       "default_monthly_electricity_bill_yen": 11683,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "40",
@@ -356,7 +1019,14 @@
       "annual_generation_kwh_per_kw": 1007,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "41",
@@ -364,7 +1034,14 @@
       "annual_generation_kwh_per_kw": 1050,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "42",
@@ -372,7 +1049,14 @@
       "annual_generation_kwh_per_kw": 1055,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "43",
@@ -380,7 +1064,14 @@
       "annual_generation_kwh_per_kw": 1079,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "44",
@@ -388,7 +1079,14 @@
       "annual_generation_kwh_per_kw": 1052,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "45",
@@ -396,7 +1094,14 @@
       "annual_generation_kwh_per_kw": 1135,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "46",
@@ -404,7 +1109,14 @@
       "annual_generation_kwh_per_kw": 1066,
       "electricity_price_yen_per_kwh": 25.05,
       "default_monthly_electricity_bill_yen": 10133,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     },
     {
       "code": "47",
@@ -412,7 +1124,14 @@
       "annual_generation_kwh_per_kw": 1090,
       "electricity_price_yen_per_kwh": 30.33,
       "default_monthly_electricity_bill_yen": 11225,
-      "subsidy_amount_for_4kw_yen": 0
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "env-housing-decarbonization-navi-2026",
+        "tainavi-prefectural-subsidy-ranking-2026",
+        "zeh-lab-prefectural-subsidy-list-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found"
     }
   ]
 }

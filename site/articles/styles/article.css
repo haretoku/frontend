@@ -33,6 +33,28 @@
   font-size: 1.08rem;
 }
 
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.25rem;
+  margin: 1.25rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+.article-meta div {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.article-meta dt {
+  font-weight: 700;
+}
+
+.article-meta dd {
+  margin: 0;
+}
+
 .article {
   padding-bottom: 5rem;
 }

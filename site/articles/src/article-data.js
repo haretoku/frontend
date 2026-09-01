@@ -10,6 +10,10 @@ function yen(value) {
   return `${new Intl.NumberFormat("ja-JP").format(value)}円`;
 }
 
+function lifecycleEvent(calculation, costType) {
+  return calculation.lifecycle_cost_events?.find((event) => event.cost_type === costType);
+}
+
 function bindSources(metadata) {
   const sources = new Map(metadata.sources.map((source) => [source.source_id, source]));
   for (const link of document.querySelectorAll("[data-source-id]")) {
@@ -40,6 +44,23 @@ async function initialize() {
       yen(calculation.system_capacity_kw * calculation.installation_cost_yen_per_kw)
     );
     setText("[data-post-fit-price]", `${calculation.post_fit_price_yen_per_kwh}円／kWh`);
+
+    const maintenance = lifecycleEvent(calculation, "maintenance");
+    const replacement = lifecycleEvent(calculation, "replacement");
+    if (maintenance) {
+      setText("[data-maintenance-cost]", yen(maintenance.cost_yen));
+      setText("[data-maintenance-years]", `${maintenance.event_years.join("，")}年目`);
+      setText("[data-maintenance-total]", yen(maintenance.cost_yen * maintenance.event_years.length));
+    }
+    if (replacement) {
+      setText("[data-replacement-cost]", yen(replacement.cost_yen));
+      setText("[data-replacement-years]", `${replacement.event_years.join("，")}年目`);
+    }
+    if (maintenance && replacement) {
+      const totalLifecycleCost = maintenance.cost_yen * maintenance.event_years.length
+        + replacement.cost_yen * replacement.event_years.length;
+      setText("[data-lifecycle-cost-total]", yen(totalLifecycleCost));
+    }
 
     for (const element of document.querySelectorAll("[data-fit-period]")) {
       const period = calculation.fit_prices[Number(element.dataset.fitPeriod)];

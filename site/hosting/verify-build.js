@@ -12,6 +12,7 @@ const outputRoot = resolve(repositoryRoot, "dist");
 
 await Promise.all([
   access(resolve(outputRoot, "client/index.html")),
+  access(resolve(outputRoot, "client/pages/policy.html")),
   access(resolve(outputRoot, "server/index.js")),
   access(resolve(outputRoot, ".openai/hosting.json"))
 ]);
