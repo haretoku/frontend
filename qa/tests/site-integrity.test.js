@@ -118,14 +118,15 @@ test("フォーム部品にラベルと入力制約がある", async () => {
   assert.match(analysisHtml, /data-result-condition/);
 });
 
-test("結果は主要結論，2段階の見積もり導線，段階的開示の順である", async () => {
+test("結果は主要結論，見積もり導線，段階的開示の順である", async () => {
   const html = await readFile(resolve(siteRoot, "simulator/index.html"), "utf8");
   const app = await readFile(resolve(siteRoot, "simulator/src/app.js"), "utf8");
-  assert.equal((html.match(/class="estimate-cta affiliate-panel"/g) ?? []).length, 1);
-  assert.equal((html.match(/class="advertising-label"/g) ?? []).length, 2);
-  assert.equal((html.match(/class="secondary-button affiliate-button"[^>]*type="button"[^>]*disabled/g) ?? []).length, 2);
+  assert.equal((html.match(/class="estimate-cta affiliate-panel"/g) ?? []).length, 0);
+  assert.equal((html.match(/class="result-summary__affiliate affiliate-panel"/g) ?? []).length, 1);
+  assert.equal((html.match(/class="advertising-label"/g) ?? []).length, 1);
+  assert.equal((html.match(/class="secondary-button affiliate-button"[^>]*type="button"[^>]*disabled/g) ?? []).length, 1);
   assert.match(html, /data-route-source="analysis-primary-affiliate"/);
-  assert.match(html, /data-route-source="analysis-affiliate"/);
+  assert.doesNotMatch(html, /data-route-source="analysis-affiliate"/);
   assert.equal((html.match(/<details class="panel disclosure-panel"/g) ?? []).length, 1);
   assert.match(html, /data-result-payback/);
   assert.match(html, /data-cashflow-scenario/);
@@ -167,15 +168,14 @@ test("結果は主要結論，2段階の見積もり導線，段階的開示の�
   assert.match(html, /家庭の使用量/);
   assert.match(html, /買電量/);
   assert.match(html, /data-loss-guidance[^>]*hidden/);
-  assert.match(html, /結果を確認したら，無料見積もりへ/);
+  assert.match(html, /この概算を，実際の屋根・施工条件で確かめる/);
   assert.equal((html.match(/class="brand-word"/g) ?? []).length, 1);
-  assert.match(html, /実際の屋根・施工条件を反映した採算は，見積もりで詳しく確認できます/);
-  assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, 2);
+  assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, 1);
   assert.doesNotMatch(html, /無料見積もりで詳しく確認/);
   assert.match(html, /広告・アフィリエイト/);
   assert.match(html, /長期利益または補助金の適用を保証するものではありません/);
   assert.ok(html.indexOf("data-result-economic-benefit") < html.indexOf("利益の内訳を見る"));
-  assert.ok(html.indexOf("class=\"estimate-cta affiliate-panel\"") < html.indexOf("利益の内訳を見る"));
+  assert.ok(html.indexOf("data-route-source=\"analysis-primary-affiliate\"") < html.indexOf("利益の内訳を見る"));
 });
 
 test("トップは診断を主導線，広告を副導線として1か所だけ持つ", async () => {
