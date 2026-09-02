@@ -75,6 +75,28 @@
   font-weight: 900;
 }
 
+.cashflow-amount--positive,
+.capacity-metrics strong.cashflow-amount--positive,
+.result-profit-summary dd.cashflow-amount--positive {
+  color: var(--color-primary-dark);
+}
+
+.cashflow-amount--negative,
+.capacity-metrics strong.cashflow-amount--negative,
+.result-profit-summary dd.cashflow-amount--negative {
+  color: #9c2929;
+}
+
+.cashflow-amount--neutral,
+.capacity-metrics strong.cashflow-amount--neutral,
+.result-profit-summary dd.cashflow-amount--neutral {
+  color: var(--color-muted);
+}
+
+.cashflow-inline-amount {
+  font-weight: 900;
+}
+
 .result-summary__affiliate {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

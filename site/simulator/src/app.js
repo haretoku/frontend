@@ -155,8 +155,40 @@ function formatYen(value) {
   return `${yenFormatter.format(value)}円`;
 }
 
+function formatSignedYen(value, direction = "auto") {
+  if (!Number.isFinite(value)) {
+    return "未確認";
+  }
+  if (value === 0) {
+    return "0円";
+  }
+  const sign = direction === "cost" || (direction === "auto" && value < 0)
+    ? "−"
+    : "＋";
+  return `${sign}${yenFormatter.format(Math.abs(value))}円`;
+}
+
 function formatProfit(value) {
-  return `${value > 0 ? "+" : ""}${yenFormatter.format(value)}円`;
+  return formatSignedYen(value);
+}
+
+function renderCashflowAmount(element, value, direction = "auto") {
+  element.textContent = formatSignedYen(value, direction);
+  const tone = !Number.isFinite(value) || value === 0
+    ? "neutral"
+    : direction === "cost" || (direction === "auto" && value < 0)
+      ? "negative"
+      : "positive";
+  for (const name of ["positive", "negative", "neutral"]) {
+    element.classList.toggle(`cashflow-amount--${name}`, name === tone);
+  }
+}
+
+function renderInlineCashflowAmount(element, prefix, value) {
+  const amount = document.createElement("span");
+  amount.className = "cashflow-inline-amount";
+  renderCashflowAmount(amount, value);
+  element.replaceChildren(document.createTextNode(prefix), amount);
 }
 
 function decisionAmountParts(value) {
@@ -288,7 +320,7 @@ function renderScenarios(scenarios, input) {
     label.textContent = labels[scenario.scenario];
     const amount = document.createElement("strong");
     amount.className = "scenario-card__amount";
-    amount.textContent = formatProfit(scenario.profit_yen);
+    renderCashflowAmount(amount, scenario.profit_yen);
     const premise = document.createElement("small");
     premise.className = "scenario-card__premise";
     const subsidyStatus = subsidyStatusFor(scenario, input);
@@ -503,7 +535,7 @@ function renderCashflow(scenarios, selectedScenario) {
     );
   }
   elements.cashflowScenario.textContent = `${labels[selectedScenario.scenario]}シナリオを選択中`;
-  elements.cashflowEndpoint.textContent = `20年後 ${formatProfit(selectedScenario.profit_yen)}`;
+  renderInlineCashflowAmount(elements.cashflowEndpoint, "20年後 ", selectedScenario.profit_yen);
   const paybackDescriptions = availableScenarios.map((scenario) => (
     `${labels[scenario.scenario]}は${scenario.payback_year === null ? "20年以内の回収なし" : `約${scenario.payback_year}年で回収`}`
   ));
@@ -543,28 +575,38 @@ function renderResult(result, options = {}) {
       ? "初期費用は補助金の範囲内です．"
       : `現在の計算前提では，約${selectedScenario.payback_year}年で回収する見込みです．`;
   const scenarioLabels = { downside: "下振れ", standard: "標準", upside: "上振れ" };
-  elements.resultPeriod.textContent = `${scenarioLabels[selectedScenario.scenario]}シナリオの20年間概算：${formatProfit(selectedScenario.profit_yen)}`;
+  renderInlineCashflowAmount(
+    elements.resultPeriod,
+    `${scenarioLabels[selectedScenario.scenario]}シナリオの20年間概算：`,
+    selectedScenario.profit_yen
+  );
   const netInitialOutlay = selectedScenario.net_initial_outlay_yen
     ?? selectedScenario.initial_cost_yen;
   const grossInstallationCost = selectedScenario.gross_installation_cost_yen
     ?? netInitialOutlay + selectedScenario.subsidy_yen;
-  elements.resultGrossCost.textContent = formatYen(grossInstallationCost);
-  elements.resultInitialCost.textContent = formatYen(netInitialOutlay);
-  elements.resultSelfConsumption.textContent = formatYen(selectedScenario.total_electricity_savings_yen);
-  elements.resultSalesIncome.textContent = formatYen(selectedScenario.total_sales_income_yen);
+  renderCashflowAmount(elements.resultGrossCost, grossInstallationCost, "cost");
+  renderCashflowAmount(elements.resultInitialCost, netInitialOutlay, "cost");
+  renderCashflowAmount(elements.resultSelfConsumption, selectedScenario.total_electricity_savings_yen, "income");
+  renderCashflowAmount(elements.resultSalesIncome, selectedScenario.total_sales_income_yen, "income");
   const selectedSubsidyStatus = subsidyStatusFor(selectedScenario, result.input);
-  elements.resultSubsidy.textContent = selectedSubsidyStatus === "unverified"
-    ? "未確認"
-    : formatYen(selectedScenario.subsidy_yen);
+  if (selectedSubsidyStatus === "unverified") {
+    elements.resultSubsidy.textContent = "未確認";
+    elements.resultSubsidy.className = "cashflow-amount--neutral";
+  } else {
+    renderCashflowAmount(elements.resultSubsidy, selectedScenario.subsidy_yen, "income");
+  }
   elements.resultSubsidyStatus.textContent = subsidyNoteFor(selectedScenario, result.input);
   const lifecycleCost = selectedScenario.total_maintenance_and_replacement_cost_yen;
-  elements.resultLifecycleCost.textContent = Number.isFinite(lifecycleCost)
-    ? formatYen(lifecycleCost)
-    : "未確認";
+  if (Number.isFinite(lifecycleCost)) {
+    renderCashflowAmount(elements.resultLifecycleCost, lifecycleCost, "cost");
+  } else {
+    elements.resultLifecycleCost.textContent = "未確認";
+    elements.resultLifecycleCost.className = "cashflow-amount--neutral";
+  }
   elements.resultLifecycleStatus.textContent = selectedScenario.lifecycle_cost_status === "applied"
     ? `定期点検 ${formatYen(selectedScenario.total_maintenance_cost_yen)}・15年目の交換 ${formatYen(selectedScenario.total_replacement_cost_yen)}`
     : "維持・交換費は未確認です．";
-  elements.resultProfit.textContent = formatProfit(selectedScenario.profit_yen);
+  renderCashflowAmount(elements.resultProfit, selectedScenario.profit_yen);
   elements.resultGeneration.textContent = `${yenFormatter.format(result.energy.annual_generation_kwh)} kWh／年`;
   elements.resultConsumption.textContent = `${yenFormatter.format(result.energy.annual_consumption_kwh)} kWh／年`;
   elements.resultSelfConsumed.textContent = `${yenFormatter.format(result.energy.annual_self_consumed_kwh)} kWh／年`;
@@ -574,8 +616,8 @@ function renderResult(result, options = {}) {
   elements.resultExported.textContent = `${yenFormatter.format(result.energy.annual_exported_kwh)} kWh／年`;
   elements.capacityOutput.textContent = formatCapacity(result.input.system_capacity_kw);
   elements.capacityGeneration.textContent = `${yenFormatter.format(result.energy.annual_generation_kwh)} kWh`;
-  elements.capacityInitialCost.textContent = formatYen(netInitialOutlay);
-  elements.capacityProfit.textContent = formatProfit(selectedScenario.profit_yen);
+  renderCashflowAmount(elements.capacityInitialCost, netInitialOutlay, "cost");
+  renderCashflowAmount(elements.capacityProfit, selectedScenario.profit_yen);
   const subsidyScenario = result.scenarios.find((scenario) => scenario.scenario === "standard")
     ?? selectedScenario;
   const lifecycleStatus = subsidyScenario.lifecycle_cost_status === "applied"
