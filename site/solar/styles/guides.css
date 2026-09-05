@@ -207,8 +207,11 @@
   align-items: center;
   gap: 2rem;
   margin-bottom: clamp(4rem, 9vw, 7rem);
-  padding-block: 2rem;
-  border-block: 1px solid var(--color-border);
+  padding: 1.5rem;
+  border: 1px solid var(--color-border);
+  border-left: 0.35rem solid var(--color-primary-dark);
+  border-radius: 0.75rem;
+  background: var(--color-background-cool);
 }
 
 .guide-diagnosis h2 {

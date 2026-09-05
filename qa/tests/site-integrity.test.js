@@ -3,7 +3,8 @@ import { access, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { decisionAmountParts } from "../../site/simulator/src/result-presentation.js";
+import { requireMunicipality } from "../../site/simulator/src/location-input.js";
+import { decisionAmountParts, scenarioSubsidyCondition } from "../../site/simulator/src/result-presentation.js";
 
 
 const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
@@ -355,8 +356,8 @@ test("結果は主要結論，見積もり導線，段階的開示の順であ�
   assert.doesNotMatch(html, /計算の前提・根拠を見る/);
   assert.doesNotMatch(html, /1年目の経済効果/);
   assert.match(html, /導入時の費用/);
-  assert.match(html, /太陽光費/);
-  assert.match(html, /蓄電池費/);
+  assert.match(html, /太陽光パネル導入費（工事費込み）/);
+  assert.match(html, /蓄電池導入費（工事費込み）/);
   assert.match(html, /実質負担/);
   assert.doesNotMatch(html, /data-result-subsidy-status/);
   assert.match(html, /確認できない容量では「未確認」と表示/);
@@ -378,7 +379,7 @@ test("結果は主要結論，見積もり導線，段階的開示の順であ�
   assert.match(app, /renderCashflowAmount\(elements\.resultSelfConsumption, selectedScenario\.total_electricity_savings_yen, "income"\)/);
   assert.match(app, /renderCashflowAmount\(amount, scenario\.profit_yen\)/);
   assert.match(app, /renderInlineCashflowAmount\(elements\.cashflowEndpoint/);
-  assert.match(app, /renderInlineCashflowAmount\(\s*elements\.resultPeriod/);
+  assert.doesNotMatch(html, /data-result-period/);
   assert.match(html, /20年間の収入・削減効果/);
   assert.match(html, /20年間の費用<small class="capacity-metrics__formula">実質初期負担＋維持・交換費<\/small>/);
   assert.doesNotMatch(html, /data-capacity-profit/);
@@ -387,7 +388,7 @@ test("結果は主要結論，見積もり導線，段階的開示の順であ�
   assert.doesNotMatch(app, /total_electricity_savings_yen\s*\+\s*selectedScenario\.total_sales_income_yen/);
   assert.match(app, /netInitialOutlay \+ lifecycleCost/);
   assert.match(app, /renderCashflowAmount\(elements\.capacityCost, totalTwentyYearCost, "cost"\)/);
-  assert.match(screenDesign, /費用内訳は正の金額と通常色で示す/);
+  assert.match(screenDesign, /費用内訳は負の符号と赤系で示し/);
   assert.match(screenDesign, /実質負担と点検・機器交換費を別項目として表示する/);
   assert.match(screenDesign, /容量比較カードでは比較期間を20年間に統一し，backendが返す費用項目と発生年に基づく「20年間の費用」として両者を合算する/);
   assert.doesNotMatch(screenDesign, /発生時点が異なる初期費用と維持・交換費を合算表示しない/);
@@ -399,7 +400,8 @@ test("結果は主要結論，見積もり導線，段階的開示の順であ�
   assert.match(app, /classList\.toggle\(`cashflow-amount--\$\{name\}`/);
   assert.match(app, /補助金確認後に確定/);
   assert.match(app, /const profitConfirmed = Number\.isFinite\(selectedScenario\.profit_yen\)/);
-  assert.match(app, /elements\.lossGuidance\.hidden = !profitConfirmed \|\| profitable/);
+  assert.doesNotMatch(html, /data-loss-guidance hidden/);
+  assert.doesNotMatch(app, /elements\.lossGuidance\.hidden/);
   assert.match(html, /家庭の使用量/);
   assert.match(html, /data-result-self-consumption-rate/);
   assert.match(app, /result\.energy\.self_consumption_rate \* 100/);
@@ -440,7 +442,8 @@ test("結果は主要結論，見積もり導線，段階的開示の順であ�
   assert.match(screenDesign, /保証寿命とは表現しない/);
   assert.match(screenDesign, /`total_revenue_yen`を表示の正本/);
   assert.match(html, /戸建て・4人以上世帯の地域平均（令和5年度）を使用します/);
-  assert.match(app, /戸建て・4人以上世帯の地域平均（令和5年度） 月額/);
+  assert.match(app, /地域平均から推定/);
+  assert.doesNotMatch(app, /戸建て・4人以上世帯の地域平均（令和5年度） 月額/);
   assert.match(app, /monthlyBill === null \|\| monthlyBill === "" \? null : Number\(monthlyBill\)/);
   assert.match(screenDesign, /手入力値またはURLの`monthlyElectricityBill`がある場合は，0円を含めて入力値を優先/);
   assert.match(screenDesign, /点検38,000円を4，8，12，16，20年目/);
@@ -450,7 +453,7 @@ test("結果は主要結論，見積もり導線，段階的開示の順であ�
   assert.match(screenDesign, /蓄電池の運転モード，既設太陽光への後付けおよび蓄電池単体は対象外/);
   assert.match(screenDesign, /frontendで両比率を再計算しない/);
   assert.match(html, /買電量/);
-  assert.match(html, /data-loss-guidance[^>]*hidden/);
+  assert.doesNotMatch(html, /data-loss-guidance[^>]*hidden/);
   assert.match(html, /あなたの条件で，補助金と工事費を確かめる/);
   assert.match(html, /利用できる補助金や必要な工事は，住宅ごとに異なります．無料見積もりで，施工会社に条件を確認してもらえます．/);
   assert.match(html, /あなたの場合，20年間でいくら<span class="brand-term">トク<\/span>？/);
@@ -487,11 +490,11 @@ test("トップは診断を主導線，広告を副導線として1か所だけ�
   assert.match(html, /<span class="affiliate-button__label">無料見積もりで確認<\/span>/);
   assert.doesNotMatch(html, /affiliate-button__brand-word/);
   assert.match(html, /登録不要<\/li><li>氏名・住所の入力なし<\/li><li>診断も見積もりも無料<\/li>/);
-  assert.match(html, /<figure class="hero__motif">\s*<img src="shared\/assets\/haretoku-balance-motif\.png" width="1616" height="973" alt="太陽光パネルと工具・硬貨を載せた天秤">\s*<figcaption class="hero__motif-labels"><span>得られる効果<\/span><span>かかる費用<\/span><\/figcaption>\s*<\/figure>/);
+  assert.match(html, /<figure class="hero__motif">\s*<img src="shared\/assets\/haretoku-balance-motif\.png" width="1616" height="973" alt="太陽光パネルと工具・硬貨を載せた天秤">\s*<\/figure>/);
   assert.ok(html.indexOf('class="hero__proof"') < html.indexOf('class="hero__motif"'));
   assert.ok(html.indexOf('class="hero__motif"') < html.indexOf('class="calculator"'));
   assert.match(css, /\.hero__motif \{ width: min\(100%, 20rem\); margin: clamp\(1\.4rem, 3vw, 2rem\) auto 0; \}/);
-  assert.match(css, /\.hero__motif-labels \{ display: grid; grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*text-align: center; \}/);
+  assert.doesNotMatch(html, /hero__motif-labels|得られる効果|かかる費用/);
   assert.match(css, /@media \(max-width: 40rem\) \{[\s\S]*\.hero__motif \{ display: none; \}/);
   assert.match(css, /\.hero > \.calculator \.calculator__panel \{ border: 1px solid rgb\(18 63 49 \/ 18%\); border-left: 0\.38rem solid var\(--color-primary\); border-radius: 0\.8rem; \}/);
   assert.match(css, /\.hero > \.calculator \.calculator__panel::before \{ content: none; \}/);
@@ -533,4 +536,34 @@ test("詳細ページの動的出典IDが公開メタデータに存在する", 
       assert.ok(sourceIds.has(sourceId), `出典IDがありません：${sourceId}`);
     }
   }
+});
+
+
+test("診断の地域必須検証は欠落・不正・県不一致を拒否し，有効な自治体状態を保持する", () => {
+  const publicData = { prefectures: [{ code: "08" }, { code: "14" }, { code: "01" }], municipalities: [
+    { municipality_code: "08230", prefecture_code: "08", program_status: "no_program" },
+    { municipality_code: "08364", prefecture_code: "08", program_status: "unconfirmed" },
+    { municipality_code: "14218", prefecture_code: "14", program_status: "included" }
+  ] };
+  for (const input of [
+    {}, { prefectureCode: "14" }, { prefectureCode: "01" },
+    { prefectureCode: "14", municipalityCode: "invalid" },
+    { prefectureCode: "14", municipalityCode: "99999" },
+    { prefectureCode: "08", municipalityCode: "14218" }
+  ]) assert.throws(() => requireMunicipality(input, publicData), /選択|確認/);
+  for (const municipality of publicData.municipalities) {
+    const restored = requireMunicipality({ prefectureCode: municipality.prefecture_code, municipalityCode: municipality.municipality_code }, publicData);
+    assert.strictEqual(restored, municipality);
+    assert.equal(restored.program_status, municipality.program_status);
+  }
+});
+
+test("シナリオの補助金注記は反映・未確認併存・対象なしと下振れを区別する", () => {
+  const scenario = { scenario: "standard", subsidy_yen: 300000, subsidy_status: "applied", subsidy_breakdown: { municipality_program_status: "unconfirmed" } };
+  assert.match(scenarioSubsidyCondition(scenario), /反映.*支給保証なし.*未確認/);
+  assert.match(scenarioSubsidyCondition({ ...scenario, scenario: "downside" }), /含めません/);
+  assert.match(scenarioSubsidyCondition({ ...scenario, subsidy_yen: null }), /確認後に収支が確定/);
+  assert.match(scenarioSubsidyCondition({ ...scenario, subsidy_yen: 0 }), /未確認.*制度なしとは異なります/);
+  assert.match(scenarioSubsidyCondition({ scenario: "upside", subsidy_yen: 0, subsidy_status: "not_applicable" }), /対象補助金なし/);
+  assert.match(scenarioSubsidyCondition({ ...scenario, subsidy_breakdown: { municipality_program_status: "no_program", candidate_programs: [{ id: "unverified" }] } }), /未確認の候補/);
 });

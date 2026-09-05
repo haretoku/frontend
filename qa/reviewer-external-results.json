@@ -1,0 +1,224 @@
+[
+  {
+    "url": "https://doi.org/10.24778/jjser.46.4_167",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "final": "https://www.jstage.jst.go.jp/article/jjser/46/4/46_167/_article/-char/ja/"
+  },
+  {
+    "url": "https://fukushima-pv-hojo.org/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://fukushima-pv-hojo.org/"
+  },
+  {
+    "url": "https://github.com/BRI-EES-House/pyhees",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "final": "https://github.com/BRI-EES-House/pyhees"
+  },
+  {
+    "url": "https://policies.env.go.jp/earth/zeh/search/",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://policies.env.go.jp/earth/zeh/search/"
+  },
+  {
+    "url": "https://socialsolution.omron.com/jp/ja/products_service/energy/doc/cat/kand-070b_kpbp-a.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://socialsolution.omron.com/jp/ja/products_service/energy/doc/cat/kand-070b_kpbp-a.pdf"
+  },
+  {
+    "url": "https://socialsolution.omron.com/jp/ja/products_service/energy/product/bt/kpbp-b_spec.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://socialsolution.omron.com/jp/ja/products_service/energy/product/bt/kpbp-b_spec.html"
+  },
+  {
+    "url": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_020/",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_020/"
+  },
+  {
+    "url": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_053/",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_053/"
+  },
+  {
+    "url": "https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html"
+  },
+  {
+    "url": "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html"
+  },
+  {
+    "url": "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf"
+  },
+  {
+    "url": "https://www.env.go.jp/recycle/waste/lithium_1/index.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.env.go.jp/recycle/waste/lithium_1/index.html"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/faq/583/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.jpea.gr.jp/faq/583/"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/house/longuser/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.jpea.gr.jp/house/longuser/"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/house/poweroutage/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.jpea.gr.jp/house/poweroutage/"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/news/23653/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.jpea.gr.jp/news/23653/"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/wp-content/themes/jpea/pdf/hanbaikijyun.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.jpea.gr.jp/wp-content/themes/jpea/pdf/hanbaikijyun.pdf"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/wp-content/uploads/hajimeyou_leaflet_2305.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.jpea.gr.jp/wp-content/uploads/hajimeyou_leaflet_2305.pdf"
+  },
+  {
+    "url": "https://www.jpea.gr.jp/wp-content/uploads/session2_02_sekisui.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.jpea.gr.jp/wp-content/uploads/session2_02_sekisui.pdf"
+  },
+  {
+    "url": "https://www.kokusen.go.jp/news/data/n-20250604_1.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.kokusen.go.jp/news/data/n-20250604_1.html"
+  },
+  {
+    "url": "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2021_06.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2021_06.html"
+  },
+  {
+    "url": "https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/"
+  },
+  {
+    "url": "https://www.kyocera.co.jp/solar/support/topics/flow/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.kyocera.co.jp/solar/support/topics/flow/"
+  },
+  {
+    "url": "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/detail/shizensaigainocyuikanki.html",
+    "status": 202,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/detail/shizensaigainocyuikanki.html"
+  },
+  {
+    "url": "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html"
+  },
+  {
+    "url": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/004_04_00.pdf",
+    "status": 202,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/004_04_00.pdf"
+  },
+  {
+    "url": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/20250307_1.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/20250307_1.pdf"
+  },
+  {
+    "url": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf"
+  },
+  {
+    "url": "https://www.nedo.go.jp/seika_hyoka/ZZFF_100041.html",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.nedo.go.jp/seika_hyoka/ZZFF_100041.html"
+  },
+  {
+    "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/745282.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.pref.fukushima.lg.jp/uploaded/attachment/745282.pdf"
+  },
+  {
+    "url": "https://www.pref.gunma.jp/page/753198.html",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.pref.gunma.jp/page/753198.html"
+  },
+  {
+    "url": "https://www.pref.niigata.lg.jp/sec/kankyoseisaku/0583945.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.pref.niigata.lg.jp/sec/kankyoseisaku/0583945.html"
+  },
+  {
+    "url": "https://www.pref.tokushima.lg.jp/ippannokata/kurashi/shizen/7241363/",
+    "status": 200,
+    "type": "text/html; charset=UTF-8",
+    "final": "https://www.pref.tokushima.lg.jp/ippannokata/kurashi/shizen/7241363/"
+  },
+  {
+    "url": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/r8_taiyoukou_hojo.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/r8_taiyoukou_hojo.html"
+  },
+  {
+    "url": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html"
+  },
+  {
+    "url": "https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html"
+  },
+  {
+    "url": "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/"
+  }
+]

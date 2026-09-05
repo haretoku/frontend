@@ -22,3 +22,19 @@ export function decisionAmountParts(value) {
     outcome: roundedYen > 0 ? "トク" : "損"
   };
 }
+
+export function hasUnconfirmedSubsidy(scenario) {
+  return scenario.subsidy_status === "unverified"
+    || scenario.subsidy_breakdown?.municipality_program_status === "unconfirmed"
+    || (scenario.subsidy_breakdown?.candidate_programs ?? []).length > 0;
+}
+
+export function scenarioSubsidyCondition(scenario) {
+  if (scenario.scenario === "downside") return "補助金は含めません";
+  const amount = scenario.subsidy_yen;
+  const unknown = hasUnconfirmedSubsidy(scenario);
+  if (!Number.isFinite(amount)) return "補助金額は未確認（確認後に収支が確定）";
+  if (amount > 0) return "確認済み対象補助金を反映（支給保証なし）" + (unknown ? "．未確認の候補は含めません" : "");
+  if (unknown) return "補助金は未確認のため含めません（制度なしとは異なります）";
+  return "今回算入する対象補助金なし（確認済み情報の範囲）";
+}

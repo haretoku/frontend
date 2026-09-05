@@ -1,6 +1,8 @@
 import { CALCULATION_IMPLEMENTED } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
+import { requireMunicipality, populateMunicipalitySelect } from "./location-input.js";
+
 const form = document.querySelector("#estimate-form");
 const prefecture = document.querySelector("#prefecture");
 const municipalityField = document.querySelector("[data-municipality-field]");
@@ -23,44 +25,8 @@ function populatePrefectures(prefectures) {
   prefecture.append(fragment);
 }
 
-function setMunicipalityPlaceholder(text) {
-  const option = document.createElement("option");
-  option.value = "";
-  option.textContent = text;
-  municipality.replaceChildren(option);
-}
-
 function updateMunicipalities() {
-  setMunicipalityPlaceholder("都道府県を選択してください");
-  municipality.disabled = true;
-  municipalityField.hidden = !prefecture.value;
-
-  if (!prefecture.value || !frontendData) {
-    municipalityHelp.textContent = "都道府県を選ぶと，対応する市区町村を確認できます．";
-    return;
-  }
-
-  const municipalities = (frontendData.publicData.municipalities ?? [])
-    .filter((item) => item.prefecture_code === prefecture.value);
-  municipalityField.hidden = false;
-
-  if (!municipalities.length) {
-    setMunicipalityPlaceholder("市区町村データは未収集です");
-    municipalityHelp.textContent = "市区町村の補助金が0円という意味ではありません．市区町村を選択せず，従来どおり診断できます．";
-    return;
-  }
-
-  setMunicipalityPlaceholder("選択しない");
-  const fragment = document.createDocumentFragment();
-  for (const item of municipalities) {
-    const option = document.createElement("option");
-    option.value = item.municipality_code;
-    option.textContent = item.municipality_name;
-    fragment.append(option);
-  }
-  municipality.append(fragment);
-  municipality.disabled = false;
-  municipalityHelp.textContent = "選ぶと市区町村の公開情報を診断条件へ引き継ぎます．選択しなくても診断できます．";
+  populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp }, frontendData?.publicData);
 }
 
 function updateAvailability() {
@@ -73,6 +39,13 @@ function updateAvailability() {
 form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (calculateButton.disabled || !form.reportValidity()) return;
+  try {
+    requireMunicipality({ prefectureCode: prefecture.value, municipalityCode: municipality.value }, frontendData.publicData);
+  } catch (error) {
+    formMessage.hidden = false;
+    formMessage.textContent = error.message;
+    return;
+  }
   const target = new URL("simulator/", window.location.href);
   target.searchParams.set("prefecture", prefecture.value);
   if (!municipality.disabled && municipality.value) target.searchParams.set("municipality_code", municipality.value);

@@ -1,0 +1,81 @@
+$ node site/hosting/prepare-build.js && vite build && node site/hosting/finalize-build.js && node site/hosting/verify-build.js
+vite v8.0.13 building server environment for production...
+[2K
+transforming...✓ 4 modules transformed.
+rendering chunks...
+X [ERROR] Failed to write to log file Error: EPERM: operation not permitted, open 'C:\Users\wordm\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-09-05_12-02-24_695.log'
+
+      at async open (node:internal/fs/promises:697:25)
+      at async writeFile (node:internal/fs/promises:1317:14)
+      at async C:\Users\wordm\github_haretoku\frontend\node_modules\.pnpm\wrangler@4.92.0\node_modules\wrangler\wrangler-dist\cli.js:49721:7
+      at async Mutex.runWith (C:\Users\wordm\github_haretoku\frontend\node_modules\.pnpm\miniflare@4.20260515.0\node_modules\miniflare\dist\src\index.js:58160:48)
+      at async appendToDebugLogFile (C:\Users\wordm\github_haretoku\frontend\node_modules\.pnpm\wrangler@4.92.0\node_modules\wrangler\wrangler-dist\cli.js:49718:3) {
+    errno: -4048,
+    code: 'EPERM',
+    syscall: 'open',
+    path: 'C:\\Users\\wordm\\AppData\\Roaming\\xdg.config\\.wrangler\\logs\\wrangler-2026-09-05_12-02-24_695.log'
+  }
+
+
+X [ERROR] Would have written: 
+
+  --- 2026-09-05T12:02:25.241Z debug
+  🪵  Writing logs to "C:\Users\wordm\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-09-05_12-02-24_695.log"
+  ---
+  
+
+
+computing gzip size...
+site/dist/server/.vite/manifest.json  0.16 kB │ gzip: 0.11 kB
+site/dist/server/wrangler.json        1.25 kB │ gzip: 0.64 kB
+site/dist/server/index.js             0.20 kB │ gzip: 0.16 kB
+
+✓ built in 199ms
+vite v8.0.13 building client environment for production...
+[2K
+transforming...✓ 40 modules transformed.
+rendering chunks...
+computing gzip size...
+site/dist/client/.assetsignore                                          0.02 kB
+site/dist/client/assets/favicon-Cps3Me14.svg                            0.51 kB │ gzip:   0.30 kB
+site/dist/client/solar/index.html                                       5.95 kB │ gzip:   2.02 kB
+site/dist/client/pages/policy.html                                      6.18 kB │ gzip:   2.43 kB
+site/dist/client/logo-finalists.html                                    8.01 kB │ gzip:   1.90 kB
+site/dist/client/index.html                                            11.65 kB │ gzip:   3.84 kB
+site/dist/client/assets/metadata-Bh_0Fc7-.json                         15.23 kB │ gzip:   3.86 kB
+site/dist/client/pages/quotes-contractors.html                         17.54 kB │ gzip:   5.93 kB
+site/dist/client/pages/disaster.html                                   18.62 kB │ gzip:   6.36 kB
+site/dist/client/pages/subsidies.html                                  18.63 kB │ gzip:   6.02 kB
+site/dist/client/pages/costs-maintenance.html                          20.30 kB │ gzip:   7.20 kB
+site/dist/client/simulator/index.html                                  24.82 kB │ gzip:   7.21 kB
+site/dist/client/pages/calculation-method.html                         31.69 kB │ gzip:   9.48 kB
+site/dist/client/pages/electricity-sales.html                          32.81 kB │ gzip:  10.45 kB
+site/dist/client/assets/guide-subsidy-DSG6T5Uh.webp                    38.87 kB
+site/dist/client/assets/guide-mechanics-AKecyzWy.webp                  47.28 kB
+site/dist/client/assets/guide-quotes-CcTHIIpX.webp                     49.44 kB
+site/dist/client/assets/guide-disaster-CqQKDEu5.webp                   80.00 kB
+site/dist/client/assets/article-solar-economics-hero-CzAhsLtj.webp    115.18 kB
+site/dist/client/assets/article-subsidy-check-flow-CfDRT-rK.webp      128.37 kB
+site/dist/client/assets/article-solar-economics-flow-Dhg4SrIP.webp    141.86 kB
+site/dist/client/assets/article-disaster-standalone-DTSk61fn.webp     145.14 kB
+site/dist/client/assets/article-quotes-comparison-rjCI2jy1.webp       178.45 kB
+site/dist/client/assets/article-solar-suitability-CO_J26Xn.webp       204.25 kB
+site/dist/client/assets/article-costs-lifecycle-BdZ_DqjI.webp         219.05 kB
+site/dist/client/assets/haretoku-balance-motif-CKvhySsS.png           612.19 kB
+site/dist/client/assets/haretoku-home-solar-BFvfMOzC.png            1,226.03 kB
+site/dist/client/assets/public-data-71Z725lC.json                   1,567.13 kB │ gzip: 265.59 kB
+site/dist/client/assets/guides-DAT_e9vo.css                             4.78 kB │ gzip:   1.41 kB
+site/dist/client/assets/logoFinalists-XUAqG2G6.css                      5.10 kB │ gzip:   1.74 kB
+site/dist/client/assets/simulator-C9jpMqqu.css                         16.01 kB │ gzip:   3.40 kB
+site/dist/client/assets/main-g2-mnbnB.css                              18.03 kB │ gzip:   4.91 kB
+site/dist/client/assets/article-DtNTd6wJ.css                           23.49 kB │ gzip:   4.06 kB
+site/dist/client/assets/data-loader-BEDtQGye.js                         0.66 kB │ gzip:   0.40 kB
+site/dist/client/assets/modulepreload-polyfill-N-DOuI4P.js              0.69 kB │ gzip:   0.39 kB
+site/dist/client/assets/index-P4uLo-pW.js                               1.80 kB │ gzip:   0.92 kB
+site/dist/client/assets/article-data-DQHjbMEG.js                        2.84 kB │ gzip:   1.28 kB
+site/dist/client/assets/guides-Dfpm5wmv.js                              6.01 kB │ gzip:   2.44 kB
+site/dist/client/assets/location-input-BNUZEzqH.js                     24.56 kB │ gzip:   8.66 kB
+site/dist/client/assets/simulator-dQEvpyah.js                          37.98 kB │ gzip:  10.39 kB
+
+✓ built in 513ms
+🪵  Logs were written to "C:\Users\wordm\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-09-05_12-02-24_695.log"

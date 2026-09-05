@@ -30,7 +30,7 @@
               <div class="section-heading"><h2 id="calculator-title">あなたの条件で診断する</h2><p>月間電気料金は未入力でも計算できます．</p></div>
               <form id="estimate-form" data-route-source="analysis-recalculate">
                 <div class="form-field"><label for="prefecture">都道府県<span class="required-label">必須</span></label><select id="prefecture" name="prefecture" required><option value="">選択してください</option></select></div>
-                <div class="form-field" data-municipality-field hidden><label for="municipality">市区町村<span class="optional-label">任意</span></label><select id="municipality" name="municipality_code" aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select><p id="municipality-help" class="field-help">都道府県を選ぶと，対応する市区町村を確認できます．</p></div>
+                <div class="form-field" data-municipality-field hidden><label for="municipality">市区町村<span class="required-label">必須</span></label><select id="municipality" name="municipality_code" required aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select><p id="municipality-help" class="field-help">都道府県を選ぶと，対応する市区町村を確認できます．</p></div>
                 <div class="form-field"><label for="monthly-electricity-bill">月間電気料金<span class="optional-label">任意</span></label><div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="1" placeholder="例：15,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div><p id="electricity-bill-help" class="field-help">未入力なら，戸建て・4人以上世帯の地域平均（令和5年度）を使用します．</p></div>
                 <fieldset class="equipment-choice" aria-describedby="equipment-choice-help">
                   <legend>診断する設備構成</legend>
@@ -40,13 +40,6 @@
                   </div>
                   <p id="equipment-choice-help" class="field-help">既設太陽光への後付け，蓄電池単体，運転モードの変更は対象外です．</p>
                 </fieldset>
-                <div class="battery-capacity-control" data-battery-capacity-control hidden>
-                  <div class="battery-capacity-control__header"><label for="battery-capacity">蓄電池の定格容量</label><output for="battery-capacity" data-battery-capacity-output>―</output></div>
-                  <input id="battery-capacity" class="capacity-slider" name="batteryCapacityKwh" type="range" aria-describedby="battery-capacity-help battery-capacity-status" disabled>
-                  <div class="capacity-scale" data-battery-capacity-scale aria-hidden="true"></div>
-                  <p id="battery-capacity-help" class="field-help" data-battery-capacity-help></p>
-                  <p id="battery-capacity-status" class="capacity-status" role="status" aria-live="polite" data-battery-capacity-status></p>
-                </div>
                 <div class="calculator-actions"><button id="calculate-button" class="primary-button" type="submit" disabled><span data-calculate-label>分析結果を表示する</span><span aria-hidden="true">→</span></button><button class="text-button" type="button" data-cancel-conditions hidden>変更をやめる</button></div>
                 <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
               </form>
@@ -71,7 +64,7 @@
       <section id="estimate-result" class="result page-width" aria-labelledby="result-title" hidden>
         <div class="section-heading result__heading"><p class="step-label">分析結果</p><h2 id="result-title" tabindex="-1">あなたの場合，20年間でいくら<span class="brand-term">トク</span>？</h2></div>
         <section class="panel result-summary" aria-labelledby="summary-title">
-          <p class="result-label">20年間の正味利益</p><h3 id="summary-title" data-result-summary>概算結果</h3><p class="result-amount" data-result-economic-benefit>―</p><p class="result-payback" data-result-payback>回収年数を計算します．</p><p class="result-period" data-result-period>標準シナリオにおける20年間の概算利益</p>
+          <p class="result-label">20年間の正味利益</p><h3 id="summary-title" data-result-summary>概算結果</h3><p class="result-amount" data-result-economic-benefit>―</p><p class="result-payback" data-result-payback>回収年数を計算します．</p>
           <div class="scenario-grid" data-scenario-list role="group" aria-label="表示するシナリオを選択"></div>
           <section class="municipal-subsidy" data-municipal-subsidy aria-labelledby="municipal-subsidy-title">
             <p class="result-label">補助金</p>
@@ -86,15 +79,22 @@
           <div class="result-summary__affiliate affiliate-panel" aria-label="主結果からの見積もり案内"><h3>あなたの条件で，補助金と工事費を確かめる</h3><p>利用できる補助金や必要な工事は，住宅ごとに異なります．無料見積もりで，施工会社に条件を確認してもらえます．</p><button class="secondary-button affiliate-button" type="button" data-route-source="analysis-primary-affiliate" disabled>無料見積もりで確認</button><small class="advertising-label">広告・アフィリエイトを含みます．</small></div>
         </section>
 
-        <aside class="loss-guidance" data-loss-guidance hidden aria-labelledby="loss-guidance-title"><div><p class="result-label">採算とは別の観点</p><h3 id="loss-guidance-title">停電時の備えも含めて判断する</h3><p>金銭的な採算が合わない場合も，自家発電による停電対策には別の価値があります．</p></div><a class="text-link" href="../pages/disaster.html">防災・停電の記事を見る <span aria-hidden="true">→</span></a></aside>
+        <aside class="loss-guidance" data-loss-guidance aria-labelledby="loss-guidance-title"><div><p class="result-label">採算とは別の観点</p><h3 id="loss-guidance-title">停電時の備えも含めて判断する</h3><p>採算とあわせて，停電時に使いたい機器と設備の制約を確認しましょう．太陽光のみでは夜間に発電できず，停電時の出力や接続先にも制限があります．</p></div><a class="text-link" href="../pages/disaster.html">防災・停電の記事を見る <span aria-hidden="true">→</span></a></aside>
 
         <section class="analysis-workbench" aria-labelledby="workbench-title">
-          <div class="section-heading analysis-workbench__heading"><p class="step-label">条件を動かして比較</p><h3 id="workbench-title">これから決める設置容量を変える</h3><p>設備容量は，工事前に見積もりで決める条件です．3～6 kWの範囲で概算の変化を比較できます．</p></div>
+          <div class="section-heading analysis-workbench__heading"><p class="step-label">条件を動かして比較</p><h3 id="workbench-title">設置容量を考える</h3><p>設備容量は，工事前に見積もりで決める条件です．3～6 kWの範囲で概算の変化を比較できます．</p></div>
           <div class="analysis-workbench__grid">
             <section class="panel capacity-panel" aria-labelledby="capacity-title">
               <div class="capacity-panel__header"><div><p class="result-label">比較する設置容量</p><h4 id="capacity-title">太陽光パネルの容量</h4></div><output for="system-capacity" class="capacity-output" data-capacity-output>4.0 kW</output></div>
               <input id="system-capacity" class="capacity-slider" name="systemCapacityKw" type="range" min="3" max="6" step="0.5" value="4" aria-describedby="capacity-help capacity-status">
               <div class="capacity-scale" aria-hidden="true"><span>3 kW</span><span>4 kW</span><span>5 kW</span><span>6 kW</span></div>
+                <div class="battery-capacity-control" data-battery-capacity-control hidden>
+                  <div class="battery-capacity-control__header"><label for="battery-capacity">蓄電池の定格容量</label><output for="battery-capacity" data-battery-capacity-output>―</output></div>
+                  <input id="battery-capacity" class="capacity-slider" name="batteryCapacityKwh" type="range" aria-describedby="battery-capacity-help battery-capacity-status" disabled>
+                  <div class="capacity-scale" data-battery-capacity-scale aria-hidden="true"></div>
+                  <p id="battery-capacity-help" class="field-help" data-battery-capacity-help></p>
+                  <p id="battery-capacity-status" class="capacity-status" role="status" aria-live="polite" data-battery-capacity-status></p>
+                </div>
               <div class="capacity-metrics" aria-live="polite"><div><span>年間発電量</span><strong data-capacity-generation>―</strong></div><div><span>20年間の収入・削減効果</span><strong data-capacity-revenue>―</strong></div><div><span>20年間の費用<small class="capacity-metrics__formula">実質初期負担＋維持・交換費</small></span><strong data-capacity-cost>―</strong></div></div>
               <p id="capacity-help" class="field-help">発電量と導入費用は検証済みの1 kW当たりデータから換算します．補助金は容量別の確認状況に応じて反映し，確認できない容量では「未確認」と表示します．</p>
               <p id="capacity-status" class="capacity-status" role="status" aria-live="polite" data-capacity-status></p>
@@ -111,10 +111,47 @@
 
         <div class="result-disclosures">
           <details class="panel disclosure-panel" data-result-disclosure><summary><span class="disclosure-panel__title">利益の内訳を見る</span><span class="disclosure-panel__hint">費用と電力量の詳しい内訳</span></summary><div class="disclosure-panel__body">
-            <section class="breakdown-section" aria-labelledby="initial-breakdown-title"><h4 id="initial-breakdown-title">導入時の費用</h4><dl class="result-grid"><div><dt>太陽光費</dt><dd data-result-solar-cost>―</dd></div><div><dt>蓄電池費</dt><dd data-result-battery-cost>対象外</dd></div><div><dt><a href="../pages/costs-maintenance.html">導入費用合計</a></dt><dd data-result-gross-cost>―</dd></div><div><dt><a href="../pages/subsidies.html">補助金</a></dt><dd data-result-subsidy>―</dd></div><div><dt>実質負担</dt><dd data-result-initial-cost>―</dd></div></dl></section>
-            <section class="breakdown-section" aria-labelledby="cashflow-breakdown-title"><h4 id="cashflow-breakdown-title">20年間の収入・削減効果と費用</h4><dl class="result-grid"><div><dt><a href="../pages/electricity-sales.html">電気料金削減</a></dt><dd data-result-self-consumption>―</dd></div><div><dt><a href="../pages/electricity-sales.html#sales">売電収入</a></dt><dd data-result-sales-income>―</dd></div><div><dt>定期点検費</dt><dd data-result-maintenance-cost>―</dd></div><div><dt>パワーコンディショナー交換費</dt><dd data-result-power-conditioner-cost>―</dd></div><div><dt><a href="../pages/costs-maintenance.html">点検・機器交換費 合計</a></dt><dd><strong data-result-lifecycle-cost>―</strong><small class="result-grid__status" data-result-lifecycle-status>点検・機器交換費を含みます．</small></dd></div></dl></section>
-            <section class="breakdown-section" aria-labelledby="profit-breakdown-title"><h4 id="profit-breakdown-title">20年間の正味利益</h4><dl class="result-profit-summary"><div><dt>電気料金削減＋売電収入－実質初期負担－維持・交換費</dt><dd data-result-profit>―</dd></div></dl></section>
-            <section class="breakdown-section" aria-labelledby="energy-breakdown-title"><h4 id="energy-breakdown-title">年間の電力量</h4><dl class="result-grid"><div><dt><a href="../pages/calculation-method.html#calculation-formulas">発電量</a></dt><dd data-result-generation>―</dd></div><div><dt>家庭の使用量</dt><dd data-result-consumption>―</dd></div><div><dt><a href="../pages/calculation-method.html#daytime-occupancy">自家消費率</a><small class="metric-definition">発電量のうち，家庭で使った割合</small></dt><dd data-result-self-consumption-rate>―</dd></div><div><dt><a href="../pages/calculation-method.html#daytime-occupancy">電力自給率</a><small class="metric-definition">家庭の使用量のうち，太陽光と蓄電池で賄った割合</small></dt><dd data-result-self-sufficiency-rate>―</dd></div><div><dt>自家消費量</dt><dd data-result-self-consumed>―</dd></div><div><dt>直接自家消費量</dt><dd data-result-direct-self-consumed>―</dd></div><div><dt>蓄電池からの供給量</dt><dd data-result-battery-delivered>―</dd></div><div><dt>充放電変換損失</dt><dd data-result-battery-loss>―</dd></div><div><dt>買電量</dt><dd data-result-purchased>―</dd></div><div><dt>売電量</dt><dd data-result-exported>―</dd></div></dl></section>
+            <section class="breakdown-section" aria-labelledby="cashflow-breakdown-title">
+              <h4 id="cashflow-breakdown-title">20年間の収入・削減効果と費用</h4>
+              <div class="breakdown-columns">
+                <section aria-labelledby="income-breakdown-title"><h5 id="income-breakdown-title">収入・削減効果（＋）</h5><dl class="breakdown-list">
+                  <div><dt><a href="../pages/subsidies.html">補助金（導入時）</a></dt><dd data-result-subsidy>―</dd></div>
+                  <div><dt><a href="../pages/electricity-sales.html#sales">売電収入（20年計）</a></dt><dd data-result-sales-income>―</dd></div>
+                  <div><dt><a href="../pages/electricity-sales.html">電気料金削減（20年計）</a></dt><dd data-result-self-consumption>―</dd></div>
+                </dl></section>
+                <section aria-labelledby="expense-breakdown-title"><h5 id="expense-breakdown-title">支出（−）</h5><dl class="breakdown-list">
+                  <div><dt>太陽光パネル導入費（工事費込み）</dt><dd data-result-solar-cost>―</dd></div>
+                  <div><dt>蓄電池導入費（工事費込み）</dt><dd data-result-battery-cost>対象外</dd></div>
+                  <div><dt>定期点検費（20年計）</dt><dd data-result-maintenance-cost>―</dd></div>
+                  <div><dt>パワーコンディショナー交換費（15年目）</dt><dd data-result-power-conditioner-cost>―</dd></div>
+                </dl></section>
+                <section class="breakdown-total" aria-labelledby="initial-breakdown-title"><h5 id="initial-breakdown-title">導入時の費用・20年間の集計</h5><dl class="breakdown-list">
+                  <div><dt><a href="../pages/costs-maintenance.html">導入費用合計</a></dt><dd data-result-gross-cost>―</dd></div>
+                  <div><dt>実質負担（導入費用合計−補助金）</dt><dd data-result-initial-cost>―</dd></div>
+                  <div><dt><a href="../pages/costs-maintenance.html">点検・機器交換費 合計</a></dt><dd><strong data-result-lifecycle-cost>―</strong><small class="result-grid__status" data-result-lifecycle-status>点検・機器交換費を含みます．</small></dd></div>
+                </dl><p class="field-help">集計は上の内訳をまとめたものです．内訳へ重ねて加算しません．</p></section>
+                <section class="breakdown-total" aria-labelledby="profit-breakdown-title"><h5 id="profit-breakdown-title">20年間の正味利益</h5><dl class="result-profit-summary"><div><dt>電気料金削減＋売電収入－実質初期負担－維持・交換費</dt><dd data-result-profit>―</dd></div></dl></section>
+              </div>
+            </section>
+            <section class="breakdown-section" aria-labelledby="energy-breakdown-title">
+              <h4 id="energy-breakdown-title">年間の電力量</h4><p class="field-help">電気の量（kWh／年）で供給と行き先を示します．金銭収支のプラス・マイナスではありません．</p>
+              <div class="breakdown-columns">
+                <section aria-labelledby="energy-supply-title"><h5 id="energy-supply-title">供給される電気</h5><dl class="breakdown-list">
+                  <div><dt><a href="../pages/calculation-method.html#calculation-formulas">発電量</a></dt><dd data-result-generation>―</dd></div>
+                  <div><dt>買電量</dt><dd data-result-purchased>―</dd></div>
+                </dl></section>
+                <section aria-labelledby="energy-use-title"><h5 id="energy-use-title">使用・行き先</h5><dl class="breakdown-list">
+                  <div><dt>家庭の使用量</dt><dd><span data-result-consumption>―</span><dl class="energy-subitems"><div><dt>うち自家消費量</dt><dd><span data-result-self-consumed>―</span><dl><div><dt>うち直接自家消費量</dt><dd data-result-direct-self-consumed>―</dd></div><div><dt>うち蓄電池からの供給量</dt><dd data-result-battery-delivered>―</dd></div></dl></dd></div></dl></dd></div>
+                  <div><dt>売電量</dt><dd data-result-exported>―</dd></div>
+                  <div><dt>充放電変換損失</dt><dd data-result-battery-loss>―</dd></div>
+                </dl></section>
+                <p class="breakdown-total field-help">発電量＋買電量＝家庭の使用量＋売電量＋充放電変換損失．自家消費量は家庭の使用量の内訳であり，直接自家消費量と蓄電池からの供給量の合計です．各内訳を総量へ重ねて加算しません．表示の丸めにより端数差が生じる場合があります．</p>
+                <section class="breakdown-total" aria-labelledby="energy-ratios-title"><h5 id="energy-ratios-title">電気の利用割合</h5><dl class="breakdown-list breakdown-totals">
+                  <div><dt><a href="../pages/calculation-method.html#daytime-occupancy">自家消費率</a><small class="metric-definition">発電量のうち，家庭で使った割合</small></dt><dd data-result-self-consumption-rate>―</dd></div>
+                  <div><dt><a href="../pages/calculation-method.html#daytime-occupancy">電力自給率</a><small class="metric-definition">家庭の使用量のうち，太陽光と蓄電池で賄った割合</small></dt><dd data-result-self-sufficiency-rate>―</dd></div>
+                </dl></section>
+              </div>
+            </section>
             <section class="breakdown-section battery-capacity" data-battery-yearly hidden aria-labelledby="battery-yearly-title"><h4 id="battery-yearly-title">蓄電池の使用可能容量</h4><p>15年目末60％は，保証下限に整合する保守的感度パスです．実測平均や期待値ではなく，各年は年末容量をその年の計算に用います．16～20年は年率係数を継続した数学的外挿であり，一次資料の実測値・保証値ではありません．20年間交換しないモデル仮定であり，製品の寿命や動作を保証するものではありません．</p><svg class="battery-capacity-chart" data-battery-capacity-chart viewBox="0 0 720 260" role="img" aria-labelledby="battery-yearly-title battery-capacity-description"></svg><p id="battery-capacity-description" class="sr-only" data-battery-capacity-description>蓄電池の使用可能容量の推移を表示します．</p><dl class="battery-capacity-points"><div><dt>導入時</dt><dd data-battery-capacity-initial>―</dd></div><div><dt>初年度</dt><dd data-battery-capacity-year1>―</dd></div><div><dt>10年後</dt><dd data-battery-capacity-year10>―</dd></div><div><dt>20年後</dt><dd data-battery-capacity-year20>―</dd></div></dl></section>
             <p class="breakdown-note">現在の概算には，設備劣化，撤去費および現在価値換算を含みません．</p><nav class="breakdown-links" aria-label="計算根拠の詳細情報"><a href="../pages/calculation-method.html">計算方法・使用データ</a><a href="../pages/costs-maintenance.html">初期費用・維持費の考え方</a><a href="../pages/quotes-contractors.html">見積もり・施工業者の選び方</a></nav>
           </div></details>

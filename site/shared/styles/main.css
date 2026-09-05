@@ -148,7 +148,6 @@ h3 { line-height: 1.4; }
 .hero__proof li::before { margin-right: 0.4rem; color: var(--color-primary); content: "✓"; font-weight: 900; }
 .hero__motif { width: min(100%, 20rem); margin: clamp(1.4rem, 3vw, 2rem) auto 0; }
 .hero__motif img { display: block; width: 100%; height: auto; }
-.hero__motif-labels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 0.25rem; color: var(--color-primary-dark); font-size: 0.76rem; font-weight: 900; text-align: center; }
 .hero-steps { display: grid; grid-column: 1 / -1; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; margin: clamp(0.5rem, 2vw, 1.5rem) 0 0; padding: 1.4rem 0 0; border-top: 1px solid rgb(18 63 49 / 16%); list-style: none; }
 .hero-steps li { position: relative; min-width: 0; padding: 0 2.25rem 0 0; }
 .hero-steps li + li { padding-left: 2.25rem; }
@@ -191,7 +190,7 @@ button:disabled { color: #69746f; background: #dfe4e1; cursor: not-allowed; }
 .calculator-links { display: flex; flex-wrap: wrap; gap: 0.35rem 1rem; margin-top: 0.9rem; padding-top: 0.8rem; border-top: 1px solid var(--color-border); }
 .calculator-links a { color: var(--color-muted); font-size: 0.72rem; font-weight: 700; text-underline-offset: 0.18em; }
 
-.affiliate-panel { border: 2px solid var(--color-accent); border-top-width: 4px; background: var(--color-surface); }
+.affiliate-panel { border: 1px solid var(--color-affiliate-border); border-left: 0.35rem solid var(--color-accent); border-radius: 0.75rem; background: var(--color-affiliate-pale); }
 .affiliate-button { border: 1px solid #794d00; color: #fff; background: var(--color-affiliate); }
 .affiliate-button:hover:not(:disabled) { background: #7f5000; }
 .affiliate-button:disabled { border-color: #794d00; color: #fff; background: var(--color-affiliate); }

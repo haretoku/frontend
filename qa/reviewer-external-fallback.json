@@ -1,0 +1,56 @@
+[
+  {
+    "url": "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html"
+  },
+  {
+    "url": "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html"
+  },
+  {
+    "url": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf"
+  },
+  {
+    "url": "https://doi.org/10.24778/jjser.46.4_167",
+    "status": 200,
+    "type": "text/html; charset=utf-8",
+    "final": "https://www.jstage.jst.go.jp/article/jjser/46/4/46_167/_article/-char/ja/"
+  },
+  {
+    "url": "https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html"
+  },
+  {
+    "url": "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/detail/shizensaigainocyuikanki.html",
+    "status": 200,
+    "type": "text/html",
+    "final": "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/detail/shizensaigainocyuikanki.html"
+  },
+  {
+    "url": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/004_04_00.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/004_04_00.pdf"
+  },
+  {
+    "url": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/20250307_1.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/20250307_1.pdf"
+  },
+  {
+    "url": "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf",
+    "status": 200,
+    "type": "application/pdf",
+    "final": "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf"
+  }
+]

@@ -24,6 +24,27 @@ const pageNames = [
 ];
 const guidePageNames = pageNames.filter((pageName) => pageName !== "calculation-method.html");
 
+test("一般5記事の概要・結論は通常段落で，参考文献が公開出典へ解決する", async () => {
+  const metadata = JSON.parse(await readFile(new URL("../../data/input/metadata.json", import.meta.url), "utf8"));
+  const sources = new Map(metadata.sources.map((source) => [source.source_id, source]));
+  for (const pageName of guidePageNames) {
+    const html = await readFile(new URL(`../../site/pages/${pageName}`, import.meta.url), "utf8");
+    const overview = html.match(/<section class="article-learn"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+    const summary = html.match(/<section id="summary">([\s\S]*?)<\/section>/)?.[1];
+    assert.ok(overview && summary, pageName);
+    for (const prose of [overview, summary]) {
+      assert.match(prose, /<p>/);
+      assert.doesNotMatch(prose, /<(?:ul|ol|table)\b/);
+    }
+    assert.doesNotMatch(html, /article-opening-answer|先にまとめると|class="key-point"|article-learn__checks/);
+    for (const [, sourceId] of html.matchAll(/data-source-id="([^"]+)"/g)) {
+      const source = sources.get(sourceId);
+      assert.ok(source?.source_title && source?.publisher, `${pageName}: ${sourceId}`);
+      assert.match(source.source_url, /^https:\/\//);
+    }
+  }
+});
+
 test("6つの詳細ページが共通構造と役割別の見出しを持つ", async () => {
   for (const pageName of pageNames) {
     const html = await readFile(new URL(`../../site/pages/${pageName}`, import.meta.url), "utf8");
@@ -81,6 +102,15 @@ test("計算方法と費用記事が維持・交換費の採用範囲を一致�
   assert.match(costsHtml, /現地調査後の最終見積額/);
   assert.match(costsHtml, /内訳の表示値を足した金額と総額に丸め差が生じ得ます/);
   assert.match(costsHtml, /全国一律の追加額は置きません/);
+  const maintenanceSection = costsHtml.match(/<section id="included-costs">([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(maintenanceSection);
+  assert.match(maintenanceSection, /所有者が行う日常点検と，専門業者へ依頼する定期点検を区別/);
+  assert.match(maintenanceSection, /安全に確認できる範囲で機器の外観，異音・異臭の有無を確認し，発電モニターで発電量/);
+  assert.match(maintenanceSection, /前年同月の発電量と比較/);
+  assert.match(maintenanceSection, /屋根へ上るなどの危険な作業は行わず/);
+  assert.match(maintenanceSection, /定期点検の項目は設置後の年数や使用・故障状況によって異なる/);
+  assert.match(maintenanceSection, /日常点検だけで専門業者の定期点検を代替するものではありません/);
+  assert.match(maintenanceSection, /href="https:\/\/www\.jpea\.gr\.jp\/house\/longuser\/"/);
   assert.match(calculationHtml, /各年の収支（式 \(11\)）/);
   assert.match(calculationHtml, /20年間の正味利益（式 \(13\)）/);
   assert.match(calculationHtml, /標準蓄電池交換費<\/th><td>0円/);
@@ -147,6 +177,7 @@ test("3分類の代表記事が読者の問いと次の行動に対応する", a
   assert.match(mechanicsHtml, /住宅用5 kW設備を想定した業界ヒアリング値/);
   assert.match(mechanicsHtml, /専門業者による定期点検を設置後1年，その後は4年ごとに推奨/);
   assert.match(mechanicsHtml, /その頻度自体を一律の法定義務として説明しません/);
+  assert.match(mechanicsHtml, /href="costs-maintenance\.html#included-costs"/);
   for (const condition of ["発電量", "昼間の使用量", "買電・売電単価", "設置容量", "設置費・追加工事", "補助金", "維持・交換費"]) {
     assert.match(mechanicsHtml, new RegExp(`<th>${condition}<\\/th>`));
   }
@@ -219,7 +250,7 @@ test("ガイド5記事は共通構造，2経路，目次および開示を持つ
     assert.match(html, /この記事で分かること/);
     assert.match(html, /class="article-entry-actions /);
     assert.match(html, /class="article-toc"/);
-    assert.match(html, /class="key-point" id="summary"/);
+    assert.match(html, /id="summary"/);
     assert.equal((html.match(/data-route-source="article-top-affiliate"/g) ?? []).length, 1);
     assert.equal((html.match(/data-route-source="article-final-affiliate"/g) ?? []).length, 1);
     assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, 2);
@@ -322,8 +353,8 @@ test("収支記事以外の4記事が確定した記事構造と主題別図版�
     assert.deepEqual(introOrder, [...introOrder].sort((a, b) => a - b), `導入順が異なります：${spec.pageName}`);
     assert.equal((html.match(/class="article-opening-summary"/g) ?? []).length, 1);
     assert.doesNotMatch(html, /article-opening-answer|先にまとめると/);
-    assert.equal((html.match(/class="article-learn__check" aria-hidden="true">✓<\/span>/g) ?? []).length, 3);
-    assert.equal((html.match(/class="article-learn__description"/g) ?? []).length, 3);
+
+
     assert.match(html, /<details class="article-toc">[\s\S]*<summary>[\s\S]*目次[\s\S]*<\/summary>/);
 
     const stacks = [...html.matchAll(/<section class="article-entry-actions [^"]*article-action-stack[^"]*"[\s\S]*?<\/section>/g)]
@@ -346,7 +377,7 @@ test("収支記事以外の4記事が確定した記事構造と主題別図版�
     assert.ok(stacks[1].indexOf("article-action-stack__row--internal") < stacks[1].indexOf("article-action-stack__row--affiliate"));
 
     const endingOrder = [
-      'class="key-point" id="summary"',
+      'id="summary"',
       'class="article-entry-actions article-entry-actions--final article-action-stack',
       'class="article-sources"',
       'class="article-related"'
@@ -439,8 +470,8 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   for (const summaryHeading of ["得られる効果", "かかる費用", "収支が変わる条件"]) {
     assert.match(guideHtml, new RegExp(`<strong>${summaryHeading}<\\/strong>`));
   }
-  assert.equal((guideHtml.match(/class="article-learn__check" aria-hidden="true">✓<\/span>/g) ?? []).length, 3);
-  assert.equal((guideHtml.match(/class="article-learn__description"/g) ?? []).length, 3);
+
+
   assert.doesNotMatch(guideHtml, /<h2[^>]*>太陽光を考えるときに気になること<\/h2>/);
   assert.doesNotMatch(guideHtml, /<h2[^>]*>答えは，一つの数字だけでは決まりません<\/h2>/);
   assert.equal((guideHtml.match(/class="article-opening-summary"/g) ?? []).length, 1);
@@ -634,11 +665,14 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   assert.match(screenDesign, /#### 記事デザイン方針/);
   assert.doesNotMatch(screenDesign, /記事デザイン方針（仮）|「仮」は/);
   assert.match(screenDesign, /`site\/pages\/electricity-sales\.html`を一般向け記事の基準実装/);
-  assert.match(screenDesign, /タイトル・説明・対象地域／年度／最終確認日→内容を示すタイトル画像→縦のチェックリスト→読者の疑問→小さな先取り結論→診断・見積もり共通縦2段CTA→折りたたみ目次/);
+  assert.match(screenDesign, /タイトル・説明・対象地域／年度／最終確認日→内容を示すタイトル画像→通常段落の概要→読者の疑問→通常段落の冒頭結論→診断・見積もり共通縦2段CTA→折りたたみ目次/);
+  assert.match(screenDesign, /概要と冒頭結論は通常段落とし，チェックリストや「先にまとめると」の独立カードにしない/);
+  assert.match(screenDesign, /概要，冒頭結論および末尾まとめにも通常段落を用い，カードとして残すのは診断・見積もり等の重要導線に限る/);
+  assert.doesNotMatch(screenDesign, /→縦のチェックリスト→|→小さな先取り結論→/);
   assert.match(screenDesign, /PCでは文意と無関係な位置で改行させない[\s\S]*`h2`には太い深緑の左線[\s\S]*`h3`にはそれより弱い灰色の左線/);
   assert.match(screenDesign, /段落ごとのカード化を避ける/);
   assert.match(screenDesign, /生活者向け図版[\s\S]*数式の図解，意味のない装飾/);
-  assert.match(screenDesign, /記事末尾は「まとめ→診断・見積もり共通縦2段CTA→控えめな出典→関連記事2～3件」の順/);
+  assert.match(screenDesign, /記事末尾は「通常段落のまとめ→診断・見積もり共通縦2段CTA→控えめな出典→関連記事2～3件」の順/);
   assert.match(screenDesign, /`site\/solar\/index\.html`を一覧の基準実装/);
   assert.match(screenDesign, /「まず読む3本」を最初に示し，画像，ジャンル，タイトルおよび短い説明を一体化したカード/);
   assert.match(screenDesign, /公開状態の実在記事だけを表示し，記事が少数の段階では検索，ランキングおよび複雑な絞り込みを設けない/);

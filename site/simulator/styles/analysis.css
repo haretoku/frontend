@@ -127,7 +127,7 @@
 
 .battery-capacity-chart__label {
   fill: var(--color-muted);
-  font-size: 0.78rem;
+  font-size: 13px;
 }
 
 .battery-capacity-points {
@@ -599,7 +599,7 @@
 .cashflow-chart__label {
   fill: var(--color-muted);
   font-family: var(--font-sans);
-  font-size: 18px;
+  font-size: 13px;
 }
 
 .cashflow-chart__payback {
@@ -1012,3 +1012,24 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+/* Conditions and breakdowns retain the same reading order at narrow widths. */
+.calculator__condition > span { display: block; }
+.calculator__condition small { display: block; color: var(--color-muted); font-size: 0.78rem; font-weight: 400; }
+.scenario-card__subsidy { display: block; margin-top: 0.4rem; color: var(--color-muted); font-size: 0.78rem; line-height: 1.65; }
+.breakdown-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 2rem; }
+.breakdown-columns > section { min-width: 0; }
+.breakdown-columns h5 { margin: 0 0 0.75rem; font-size: 1rem; }
+.breakdown-total { grid-column: 1 / -1; }
+.breakdown-list { margin: 0; }
+.breakdown-list > div { padding: 0.85rem 0; border-bottom: 1px solid var(--color-border); }
+.breakdown-list dt { color: var(--color-muted); font-size: 0.88rem; }
+.breakdown-list dd { margin: 0.25rem 0 0; font-weight: 900; overflow-wrap: anywhere; }
+.breakdown-totals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 1.5rem; }
+.energy-subitems, .energy-subitems dl { margin: 0.75rem 0 0; padding-left: 0.8rem; border-left: 2px solid var(--color-border); }
+.energy-subitems div { margin-top: 0.5rem; }
+@media (max-width: 40rem) {
+  .breakdown-columns, .breakdown-totals { grid-template-columns: minmax(0, 1fr); }
+}
+
+.result-amount.result-amount--neutral { color: var(--color-muted); }

@@ -30,7 +30,6 @@
             <ul class="hero__proof" aria-label="診断の特徴"><li>登録不要</li><li>氏名・住所の入力なし</li><li>診断も見積もりも無料</li></ul>
             <figure class="hero__motif">
               <img src="shared/assets/haretoku-balance-motif.png" width="1616" height="973" alt="太陽光パネルと工具・硬貨を載せた天秤">
-              <figcaption class="hero__motif-labels"><span>得られる効果</span><span>かかる費用</span></figcaption>
             </figure>
           </div>
 
@@ -43,8 +42,8 @@
                   <select id="prefecture" name="prefecture" required><option value="">選択してください</option></select>
                 </div>
                 <div class="form-field" data-municipality-field hidden>
-                  <label for="municipality">市区町村<span class="optional-label">任意</span></label>
-                  <select id="municipality" name="municipality_code" aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select>
+                  <label for="municipality">市区町村<span class="required-label">必須</span></label>
+                  <select id="municipality" name="municipality_code" required aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select>
                   <p id="municipality-help" class="field-help">都道府県を選ぶと，対応する市区町村を確認できます．</p>
                 </div>
                 <div class="form-field">
@@ -60,7 +59,7 @@
           </section>
 
           <ol class="hero-steps" aria-label="はれトク診断の流れ">
-            <li><span>01</span><strong>条件を入力</strong><small>都道府県だけでもOK．登録や氏名・住所の入力は不要です．</small></li>
+            <li><span>01</span><strong>条件を入力</strong><small>都道府県と市区町村を選択．登録や氏名・住所の入力は不要です．</small></li>
             <li><span>02</span><strong>いくら<span class="brand-term">トク</span>か試算</strong><small>20年間の収支を表示．条件変更，内訳・根拠も確認できます．</small></li>
             <li><span>03</span><strong>なっ<span class="brand-term">トク</span>したら，実際の費用を確認</strong><small>屋根・施工条件と利用できる補助金を踏まえた無料見積もりへ進めます．</small></li>
           </ol>

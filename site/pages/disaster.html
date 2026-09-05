@@ -30,11 +30,9 @@
       <article class="article-width article article--continuous article--guide">
         <section class="article-learn" aria-labelledby="learn-title">
           <h2 id="learn-title">この記事で分かること</h2>
-          <ul class="article-learn__checks">
-            <li><span class="article-learn__check" aria-hidden="true">✓</span><strong>自立運転</strong><span class="article-learn__description">停電時に太陽光を使うための機器と操作条件が分かります．</span></li>
-            <li><span class="article-learn__check" aria-hidden="true">✓</span><strong>出力と蓄電池</strong><span class="article-learn__description">太陽光単体の制約と蓄電池を組み合わせた場合の違いを確認できます．</span></li>
-            <li><span class="article-learn__check" aria-hidden="true">✓</span><strong>災害時の安全</strong><span class="article-learn__description">破損・浸水時に設備へ触れず，優先する行動を整理できます．</span></li>
-          </ul>
+          <p><strong>自立運転</strong>：停電時に太陽光を使うための機器と操作条件が分かります．</p>
+          <p><strong>出力と蓄電池</strong>：太陽光単体の制約と蓄電池を組み合わせた場合の違いを確認できます．</p>
+          <p><strong>災害時の安全</strong>：破損・浸水時に設備へ触れず，優先する行動を整理できます．</p>
         </section>
 
         <p class="article-opening-questions">「停電中も家全体の電気を使えるのか」「どの家電まで動かせるのか」「蓄電池がないと役に立たないのか」．太陽光が載っていても，停電時の給電方法と使える電力は通常時と同じではありません．</p>
@@ -62,14 +60,22 @@
         <details class="article-toc">
           <summary><span class="article-toc__title">目次</span><span class="article-toc__state" aria-hidden="true"></span></summary>
           <ol>
+            <li><a href="#daily-needs">停電中に守りたい生活</a></li>
             <li><a href="#requirements">停電時に使う条件</a></li>
             <li><a href="#limitations">太陽光単体の制約</a></li>
+            <li><a href="#other-backup">夜間や悪天候の備え</a></li>
+            <li><a href="#battery-backup">蓄電池の給電条件</a></li>
             <li><a href="#outage-cases">実際の停電事例</a></li>
             <li><a href="#damage-caution">破損・浸水時の注意</a></li>
-            <li><a href="#before-installation">導入前の確認</a></li>
+            <li><a href="#before-installation">停電前の確認・練習・点検</a></li>
             <li><a href="#summary">まとめ</a></li>
           </ol>
         </details>
+
+        <section id="daily-needs">
+          <h2>停電中に守りたい生活を決める</h2>
+          <p>連絡手段の充電，照明，冷蔵庫など，優先して使いたい機器と必要な時間帯を整理します．昼間だけ使う機器と夜間にも必要な機器を分けておくと，太陽光単体で対応できる範囲と，別の備えが必要な範囲を確認できます．</p>
+        </section>
 
         <section id="requirements">
           <h2>停電時に使う条件</h2>
@@ -91,11 +97,21 @@
             <li>大きな電力を必要とする機器を同時に使えるとは限りません．</li>
             <li>停電時に家全体へ自動給電する構成とは限りません．</li>
           </ul>
-          <p>蓄電池があれば，昼間に蓄えた電気を夜間等に利用できる可能性があります．ただし，残量，容量（kWh），同時に供給できる出力（kWまたはkVA），100 V・200 Vへの対応，接続回路，全負荷・特定負荷の方式およびモーター等の起動電流に制約があります．自動・手動の切替，復電時の復帰および瞬断の有無も機種ごとに異なります．「蓄電池があれば家中の機器を常に使える」とは限りません．はれトク診断では標準蓄電池を含む構成も比較できますが，停電時に使える時間や給電範囲は金銭的利益へ合算しません．</p>
+
           <figure class="article-section-illustration" aria-labelledby="standalone-operation-caption">
             <img src="../shared/assets/article-disaster-standalone.webp" width="1693" height="929" alt="昼間の停電時に自立運転へ切り替え，専用コンセントで照明と携帯電話だけを使い，夜間は別の蓄電池から照明へ給電する様子" loading="lazy" decoding="async">
             <figcaption id="standalone-operation-caption">太陽光単体では昼間の発電中に限られ，大きな電力を使う機器や夜間の給電には別の制約があります．</figcaption>
           </figure>
+        </section>
+
+        <section id="other-backup">
+          <h2>夜間や悪天候には，他の備えも確認する</h2>
+          <p>モバイルバッテリーはPSEマークを確認し，モバイルバッテリーやポータブル電源はリコール情報，定格および回収方法を確認します．膨張，異臭または異常な発熱があれば使用を中止し，高温，強い衝撃および充電中の可燃物を避けます．不要になったリチウムイオン電池は家庭ごみに混ぜず，自治体の回収ルールに従います．携帯発電機は一酸化炭素中毒のおそれがあるため，屋内では絶対に使用しません．</p>
+        </section>
+
+        <section id="battery-backup">
+          <h2>蓄電池は出力・接続先・残量を確認する</h2>
+          <p>蓄電池があれば，昼間に蓄えた電気を夜間等に利用できる可能性があります．ただし，残量，容量（kWh），同時に供給できる出力（kWまたはkVA），100 V・200 Vへの対応，接続回路，全負荷・特定負荷の方式およびモーター等の起動電流に制約があります．自動・手動の切替，復電時の復帰および瞬断の有無も機種ごとに異なります．「蓄電池があれば家中の機器を常に使える」とは限りません．はれトク診断では標準蓄電池を含む構成も比較できますが，停電時に使える時間や給電範囲は金銭的利益へ合算しません．</p>
         </section>
 
         <section id="outage-cases">
@@ -109,11 +125,12 @@
           <h2>破損・浸水した設備には近づかない</h2>
           <p>太陽光設備は，破損または浸水していても光が当たると発電する場合があります．感電の危険があるため，パネル，ケーブルおよびパワーコンディショナへ触れず，販売店・施工店等へ連絡してください．</p>
           <p>設備に損傷がある場合は，自立運転を試さず，自治体や関係機関の避難・安全情報を優先します．</p>
-          <p>モバイルバッテリーはPSEマークを確認し，モバイルバッテリーやポータブル電源はリコール情報，定格および回収方法を確認します．膨張，異臭または異常な発熱があれば使用を中止し，高温，強い衝撃および充電中の可燃物を避けます．不要になったリチウムイオン電池は家庭ごみに混ぜず，自治体の回収ルールに従います．携帯発電機は一酸化炭素中毒のおそれがあるため，屋内では絶対に使用しません．</p>
+
         </section>
 
         <section id="before-installation">
-          <h2>導入前に確認すること</h2>
+          <h2>停電前に確認・練習・点検する</h2>
+          <p>取扱説明書で操作を確認し，販売店・施工店に相談して，平常時に切替と復帰の手順を練習します．点検時には指定コンセント，接続できる機器および連絡先も確認します．自作配線や指定外の接続は行いません．</p>
           <ul>
             <li>停電時にどのコンセントまたは回路へ給電できるか．</li>
             <li>自立運転時の最大出力（kWまたはkVA）と，同時使用できる機器および起動電流．</li>
@@ -123,9 +140,9 @@
           </ul>
         </section>
 
-        <section class="key-point" id="summary">
+        <section id="summary">
           <h2>まとめ</h2>
-          <p><strong>停電時に太陽光を使えるかは，自立運転機能，切替方法，給電回路，その時点の発電量および出力上限で決まります．</strong></p>
+          <p>停電時に太陽光を使えるかは，自立運転機能，切替方法，給電回路，その時点の発電量および出力上限で決まります．</p>
           <p>平常時に取扱説明書と自立運転用コンセントを確認し，夜間や悪天候に備える電源は別に検討してください．破損・浸水時は設備へ触れず，避難・安全情報を優先します．防災上の価値は，診断の金銭的利益へ合算しません．</p>
         </section>
 
@@ -151,6 +168,7 @@
           <h2>参考文献</h2>
           <ul class="source-list">
             <li><a href="https://www.jpea.gr.jp/house/poweroutage/">太陽光発電協会「停電時でも電気が使えます」</a></li>
+            <li><a href="https://www.jpea.gr.jp/house/longuser/">太陽光発電協会「長く使っていただくために」</a></li>
             <li><a href="https://www.jpea.gr.jp/news/23653/">太陽光発電協会「災害時における太陽光発電の自立運転についての実態調査結果」</a></li>
             <li><a href="https://www.jpea.gr.jp/wp-content/uploads/session2_02_sekisui.pdf">積水化学工業「住宅の電力レジリエンス強化に向けたPV＋蓄電システムの役割」</a></li>
             <li><a href="https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html">資源エネルギー庁「あらためて学ぶ，停電の時にすべきこと・すべきでないこと」</a></li>
