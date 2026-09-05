@@ -29,6 +29,44 @@ function bindSources(metadata) {
   }
 }
 
+function initializeTableOfContents() {
+  const tableOfContents = document.querySelector("details.article-toc");
+  if (!tableOfContents) return;
+  tableOfContents.open = window.matchMedia("(min-width: 48rem)").matches;
+}
+
+function populateDaytimeOccupancy(calculation) {
+  const model = calculation.daytime_occupancy;
+  if (!model) return;
+  setText("[data-temporal-overlap-bin-count]", String(model.time_bin_definition.count));
+  setText(
+    "[data-self-consumption-validation-rate]",
+    `${(model.external_validation.model_rate * 100).toFixed(5)}％`
+  );
+  setText(
+    "[data-self-consumption-validation-error]",
+    `${(Math.max(...Object.values(model.external_validation.relative_errors)) * 100).toFixed(2)}％`
+  );
+
+  for (const table of document.querySelectorAll("[data-daytime-occupancy-table]")) {
+    const fragment = document.createDocumentFragment();
+    for (const option of model.options) {
+      const row = document.createElement("tr");
+      for (const text of [
+        option.label,
+        option.definition,
+        option.daytime_occupancy_rate.toFixed(3)
+      ]) {
+        const cell = document.createElement("td");
+        cell.textContent = text;
+        row.append(cell);
+      }
+      fragment.append(row);
+    }
+    table.replaceChildren(fragment);
+  }
+}
+
 async function initialize() {
   const status = document.querySelector("[data-article-data-status]");
   try {
@@ -44,6 +82,7 @@ async function initialize() {
       yen(calculation.system_capacity_kw * calculation.installation_cost_yen_per_kw)
     );
     setText("[data-post-fit-price]", `${calculation.post_fit_price_yen_per_kwh}円／kWh`);
+    populateDaytimeOccupancy(calculation);
 
     const maintenance = lifecycleEvent(calculation, "maintenance");
     const replacement = lifecycleEvent(calculation, "replacement");
@@ -63,7 +102,7 @@ async function initialize() {
     }
 
     for (const element of document.querySelectorAll("[data-fit-period]")) {
-      const period = calculation.fit_prices[Number(element.dataset.fitPeriod)];
+      const period = calculation.sale_price_periods[Number(element.dataset.fitPeriod)];
       if (period) {
         element.textContent = `${period.period_start_year}～${period.period_end_year}年目：${period.price_yen_per_kwh}円／kWh`;
       }
@@ -80,4 +119,5 @@ async function initialize() {
   }
 }
 
+initializeTableOfContents();
 initialize();

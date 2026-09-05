@@ -4,11 +4,13 @@
 
 node_modules/
 .pnpm-store/
+.tmp-chrome-*/
 coverage/
 dist/
 site/dist/
 site/.openai/
 .wrangler/
+qa/screenshots/
 
 .DS_Store
 Thumbs.db

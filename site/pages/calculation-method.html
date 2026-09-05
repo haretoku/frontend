@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="はれトクの住宅用太陽光の利益計算方法，前提および計算上の限界を説明します．">
-    <title>計算方法と前提｜はれトク</title>
+    <meta name="description" content="はれトクの住宅用太陽光・標準蓄電池診断で使用する計算式，採用パラメータ，シナリオおよび参考文献を説明します．">
+    <title>計算方法・使用データ｜はれトク</title>
     <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../shared/styles/main.css">
     <link rel="stylesheet" href="../articles/styles/article.css">
@@ -15,96 +15,155 @@
       <div class="page-width site-header__inner">
         <a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a>
         <span class="site-header__descriptor">太陽光のかんたん採算診断</span>
-        <nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../#guides">はれ<span class="brand-term">トク</span>ガイド</a></nav>
+        <nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../solar/">はれ<span class="brand-term">トク</span>ガイド</a></nav>
       </div>
     </header>
     <main>
-      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ はれ<span class="brand-term">トク</span>診断 ／ 計算方法と前提</nav>
+      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ はれ<span class="brand-term">トク</span>診断 ／ 計算方法・使用データ</nav>
       <header class="article-width article-hero">
         <p class="eyebrow">計算根拠</p>
-        <h1>利益はどう計算している？</h1>
-        <p class="article-hero__lead">はれトクは，<span data-system-capacity>4 kW</span>の標準設備を仮定し，<span data-evaluation-years>20年間</span>の電気料金削減と売電収入から初期費用を差し引きます．</p>
+        <h1>計算方法・使用データ</h1>
+        <p class="article-hero__lead">はれトク診断で使っている太陽光・標準蓄電池の計算式，採用値とその根拠，3つのシナリオをまとめています．</p>
       </header>
-      <article class="article-width article">
+      <article class="article-width article article--reference">
         <section class="key-point">
-          <h2>結論</h2>
-          <p><strong>表示する利益は，住宅固有条件を反映した確定値ではなく，都道府県別の代表値による概算です．</strong></p>
-          <p>簡単な入力で見積もりを取る価値がありそうかを判断するための値であり，施工会社の現地調査や正式見積もりを置き換えません．</p>
+          <h2>このページで分かること</h2>
+          <p><strong>診断で使っている式と採用値を，根拠資料までたどれる形で確認できます．</strong></p>
+          <p>表示する利益は，都道府県別の代表値を用いた概算であり，個別住宅の現地調査や正式見積もりを置き換えるものではありません．</p>
         </section>
 
-        <section>
-          <h2>基本計算</h2>
-          <table class="article-table">
+        <section id="calculation-formulas">
+          <h2>計算式</h2>
+          <p>以下の「各年」は設置後1～20年目を指します．金額と電力量は，計算途中では丸めず，画面に表示するときに四捨五入します．20年間の収入総額は計算結果として返された値を表示し，四捨五入後の内訳から足し直しません．</p>
+          <h3>年間発電量</h3>
+          <p class="article-formula"><span class="formula-term">年間発電量（式 (1)）</span><span class="formula-operator">＝</span><span class="formula-term">設備容量</span><span class="formula-operator">×</span><span class="formula-term">都道府県別の1 kW当たり年間発電量</span><span class="formula-operator">×</span><span class="formula-term">屋根方位補正</span></p>
+          <h3>年間電力使用量</h3>
+          <p class="article-formula"><span class="formula-term">年間電力使用量（式 (2)）</span><span class="formula-operator">＝</span><span class="formula-term">月間電気料金</span><span class="formula-operator">×</span><span class="formula-term">12</span><span class="formula-operator">÷</span><span class="formula-term">地域別の代表買電単価</span></p>
+          <p>月間電気料金が未入力の場合だけ，「戸建て・4人以上世帯の地域平均（令和5年度）」を使用します．関東甲信の初期値は15,467円／月です．画面で手入力した値またはURLの<code>monthlyElectricityBill</code>がある場合は，その値を優先します．</p>
+          <h3>時間別の需要量と発電量</h3>
+          <p class="article-formula"><span class="formula-term">時間別の需要量・発電量（式 (3)）</span><span class="formula-operator">＝</span><span class="formula-term">年間電力使用量（式 (2)）</span><span class="formula-operator">×</span><span class="formula-term">時間別の需要配分比率</span>，<span class="formula-term">年間発電量（式 (1)）</span><span class="formula-operator">×</span><span class="formula-term">時間別の発電配分比率</span></p>
+          <p>需要配分は，平日昼間の在宅状況を反映した標準住宅の8760時間需要から作ります．時間区分を <em>t</em>＝1，…，8760，総和を取る時間区分の添字を <em>s</em>，診断開始前に利用者が選ぶ平日昼間在宅率を <em>h</em>（0以上1以下），公開データに収録した標準需要と平日在宅相当需要をそれぞれ <em>q</em><sub>t</sub><sup>標準</sup>，<em>q</em><sub>t</sub><sup>在宅</sup>と定義します．在宅率反映後の需要は <em>q</em><sub>t</sub>(<em>h</em>)＝(1−<em>h</em>)<em>q</em><sub>t</sub><sup>標準</sup>＋<em>h</em><em>q</em><sub>t</sub><sup>在宅</sup>（式 (3a)），需要配分比率は <em>w</em><sub>t</sub>(<em>h</em>)＝<em>q</em><sub>t</sub>(<em>h</em>)÷Σ<sub>s＝1</sub><sup>8760</sup><em>q</em><sub>s</sub>(<em>h</em>)（式 (3b)）です．発電配分は，診断開始前に選ぶ屋根方位に対応する8760時間日射量を同様に正規化します．</p>
+          <h3>年間自家消費量と標準蓄電池</h3>
+          <p class="article-formula"><span class="formula-term">年間直接自家消費量（式 (4)）</span><span class="formula-operator">＝</span><span class="formula-term">各時間の需要量（式 (3)）</span>と<span class="formula-term">発電量（式 (3)）</span>のうち小さい値を8760時間分合計</p>
+          <p>太陽光のみでは，式 (4) を年間自家消費量とします．太陽光＋標準蓄電池では，直接自家消費後の太陽光余剰だけを充電し，同じ時間の需要不足へ放電します．経済的な年間自家消費量は，式 (4) と，充放電損失後に蓄電池から家庭へ供給された電力量の合計です．系統からの充電は行わず，充放電の出力上限は設定しません．</p>
+          <p class="article-formula"><span class="formula-term">使用可能容量（式 (5)）</span><span class="formula-operator">＝</span><span class="formula-term">初期容量9.5 kWh</span><span class="formula-operator">×</span><span class="formula-term">15年後60％となる年間容量保持係数</span><span class="formula-operator">の</span><span class="formula-term">設置後年数乗</span></p>
+          <p>標準蓄電池は，20年間交換せず使用する前提です．各年の使用可能容量は式 (5) で低下し，年末の充電残量は翌年の年初へ引き継ぎます．15年後60％は容量保証の下限を用いた保守的な感度パスであり，平均的な実測劣化ではありません．16～20年目は同じ年間保持係数を延長する数学的外挿であり，実測値でもメーカー保証でもありません．15年目から16年目にも容量や充電残量をリセットしません．20年間交換しない取扱いは診断上のモデル仮定であり，製品の20年寿命または保証を確認した事実ではありません．</p>
+          <p>公称容量は電池の名目容量，実効容量は製品が定める初期の使用範囲です．診断の使用可能容量は，初期容量へ式 (5) の保持係数を適用した各年の計算値であり，実機で取り出せる電力量は充放電効率，保護制御，残量および運転モードにも左右されます．出力は同時に供給できる電力の大きさで，容量とは別です．容量保証の下限，保証期間，想定使用期間およびサイクル期待寿命も同一視しません．メーカーのサイクル期待寿命は所定条件による期待値であり，保証値ではありません（オムロン ソーシアルソリューションズ，2026a，b）．</p>
+          <h3>自家消費率と自給率</h3>
+          <p class="article-formula"><span class="formula-term">自家消費率（式 (6)）</span><span class="formula-operator">＝（</span><span class="formula-term">直接自家消費量（式 (4)）</span><span class="formula-operator">＋</span><span class="formula-term">損失後蓄電池供給量</span><span class="formula-operator">）÷</span><span class="formula-term">年間発電量（式 (1)）</span>，<span class="formula-term">自給率（式 (6)）</span><span class="formula-operator">＝（</span><span class="formula-term">直接自家消費量（式 (4)）</span><span class="formula-operator">＋</span><span class="formula-term">損失後蓄電池供給量</span><span class="formula-operator">）÷</span><span class="formula-term">年間電力使用量（式 (2)）</span></p>
+          <h3>年間売電量と年間買電量</h3>
+          <p class="article-formula"><span class="formula-term">年間売電量・年間買電量（式 (7)）</span><span class="formula-operator">＝</span><span class="formula-term">年間発電量（式 (1)）</span><span class="formula-operator">−</span><span class="formula-term">直接自家消費量（式 (4)）</span><span class="formula-operator">−</span><span class="formula-term">蓄電池充電量</span>，<span class="formula-term">年間電力使用量（式 (2)）</span><span class="formula-operator">−</span><span class="formula-term">直接自家消費量（式 (4)）</span><span class="formula-operator">−</span><span class="formula-term">損失後蓄電池供給量</span></p>
+          <h3>各年の電気料金削減</h3>
+          <p class="article-formula"><span class="formula-term">各年の電気料金削減（式 (8)）</span><span class="formula-operator">＝</span><span class="formula-term">経済的な年間自家消費量</span><span class="formula-operator">×</span><span class="formula-term">各年の買電単価</span></p>
+          <h3>各年の売電収入</h3>
+          <p class="article-formula"><span class="formula-term">各年の売電収入（式 (9)）</span><span class="formula-operator">＝</span><span class="formula-term">年間売電量（式 (7)）</span><span class="formula-operator">×</span><span class="formula-term">各年の売電単価</span></p>
+          <h3>実質初期負担</h3>
+          <p class="article-formula"><span class="formula-term">実質初期負担（式 (10)）</span><span class="formula-operator">＝</span><span class="formula-term">太陽光の導入費用</span><span class="formula-operator">＋</span><span class="formula-term">選択した場合の標準蓄電池導入費用</span><span class="formula-operator">−</span><span class="formula-term">利用できる補助金</span></p>
+          <h3>各年の収支</h3>
+          <p class="article-formula"><span class="formula-term">各年の収支（式 (11)）</span><span class="formula-operator">＝</span><span class="formula-term">各年の電気料金削減（式 (8)）</span><span class="formula-operator">＋</span><span class="formula-term">各年の売電収入（式 (9)）</span><span class="formula-operator">−</span><span class="formula-term">各年の点検費</span><span class="formula-operator">−</span><span class="formula-term">各年の交換費</span></p>
+          <h3>各年末の累積損益</h3>
+          <p class="article-formula"><span class="formula-term">各年末の累積損益（式 (12)）</span><span class="formula-operator">＝</span><span class="formula-term">−実質初期負担（式 (10)）</span><span class="formula-operator">＋</span><span class="formula-term">その年までの</span><span class="formula-term">各年の収支（式 (11)）の合計</span></p>
+          <h3>20年間の正味利益</h3>
+          <p class="article-formula"><span class="formula-term">20年間の正味利益（式 (13)）</span><span class="formula-operator">＝</span><span class="formula-term">20年目末の累積損益（式 (12)）</span></p>
+          <h3>回収年</h3>
+          <p class="article-formula"><span class="formula-term">回収年（式 (14)）</span><span class="formula-operator">＝</span><span class="formula-term">累積損益（式 (12)）</span><span class="formula-term">が0円以上となり，</span><span class="formula-term">その後20年目まで</span><span class="formula-term">0円未満へ戻らない最初の年</span></p>
+          <p>該当する年がなければ「20年以内の回収は見込めません」と表示します．後年の点検・交換費で再びマイナスになる一時的な交点は，回収年に含めません．</p>
+        </section>
+
+        <section id="adopted-parameters">
+          <h2>採用パラメータ</h2>
+          <table class="article-table article-table--multi-column article-table--parameters">
+            <colgroup><col class="parameter-column--item"><col class="parameter-column--value"><col class="parameter-column--condition"><col class="parameter-column--source"></colgroup>
+            <thead><tr><th>項目</th><th>採用値・単位</th><th>適用期間・条件</th><th>出典・設定理由</th></tr></thead>
             <tbody>
-              <tr><th>年間発電量</th><td>標準設備容量 × 都道府県別の1 kW当たり年間発電量</td></tr>
-              <tr><th>年間電力使用量</th><td>月間電気料金 × 12 ÷ 地域別の代表買電単価</td></tr>
-              <tr><th>電気料金削減</th><td>自家消費電力量 × 年ごとの買電単価</td></tr>
-              <tr><th>売電収入</th><td>余剰電力量 × 年ごとの売電単価</td></tr>
-              <tr><th>初期費用</th><td>設備容量 × 1 kW当たり導入費用 − シナリオ別補助金</td></tr>
-              <tr><th>20年間の正味利益</th><td>20年間の電気料金削減＋売電収入－実質初期負担－維持・交換費</td></tr>
+              <tr><th>計算期間</th><td><span data-evaluation-years>20年間</span></td><td>設置年を1年目とする</td><td>診断上の設定</td></tr>
+              <tr><th>設備選択</th><td>太陽光のみ，または太陽光＋標準蓄電池9.5 kWh</td><td>未選択時は太陽光のみ</td><td>診断上の選択範囲</td></tr>
+              <tr><th>設備容量</th><td>初期値<span data-system-capacity>4 kW</span></td><td>利用者が診断画面で3～6 kWから選択</td><td>診断上の選択範囲</td></tr>
+              <tr><th>1 kW当たり年間発電量</th><td>919～1,151 kWh／kW・年</td><td>都道府県庁所在地に対応する47地点</td><td>（環境省，2012）</td></tr>
+              <tr><th>屋根方位補正</th><td>南1.00，南東・南西0.96，東西・不明0.85</td><td>年間発電量へ適用</td><td>（太陽光発電協会，年不明a；ファナス，年不明）</td></tr>
+              <tr><th>月間電気料金の初期値</th><td>13,167～18,475円／月<br>関東甲信15,467円／月</td><td>未入力時だけ，戸建て・4人以上世帯の地域平均（令和5年度）を使用</td><td>（環境省，2025）</td></tr>
+              <tr><th>代表買電単価</th><td>25.05～32.86円／kWh</td><td>地域別，消費税込み，2023年度実績</td><td>（資源エネルギー庁，2024a，b）</td></tr>
+              <tr><th>参考：従量電灯B</th><td>29.80円，36.40円，40.49円／kWh<br>30 A基本料金935.25円／月</td><td>東京電力エナジーパートナーの契約例．40.49円は300 kWh超過分だけに適用し，診断の全使用量へ一律に掛けない</td><td>（東京電力エナジーパートナー，2026a）</td></tr>
+              <tr><th>2026年度再エネ賦課金</th><td>4.18円／kWh</td><td>2026年5月検針分～2027年4月検針分</td><td>（経済産業省，2026）</td></tr>
+              <tr><th>自家消費モデル</th><td><span data-temporal-overlap-bin-count>8760</span>時間の需要・発電重複</td><td>各時間で需要量と発電量の小さい方を自家消費</td><td>（建築研究所，2026；NEDO，年不明；エネルギー・資源学会，2025）</td></tr>
+              <tr><th>導入費用</th><td><span data-installation-cost-per-kw>331,100円</span>／kW</td><td>既築住宅，消費税込み</td><td>（調達価格等算定委員会，2026a）</td></tr>
+              <tr><th>標準蓄電池導入費用</th><td>1,149,500円</td><td>9.5 kWh，設備費・工事費込み</td><td>（資源エネルギー庁，2025）</td></tr>
+              <tr><th>標準蓄電池の容量劣化</th><td>15年後の容量保持率60％</td><td>保証下限を用いた保守的感度パス．16～20年目は数学的外挿であり，実測・保証ではない</td><td>（資源エネルギー庁，2021；診断上の設定）</td></tr>
+              <tr><th>標準蓄電池交換費</th><td>0円</td><td>20年間の評価期間内は交換しない</td><td>診断上のモデル仮定</td></tr>
+              <tr><th>補助金</th><td>国，都道府県，対応済み市区町村の公的制度</td><td>標準的な申請条件を満たす前提で金額を算定できる制度を反映し，重要条件と併用可否は別に扱う</td><td>（環境省，2026）</td></tr>
+              <tr><th>FIT売電単価</th><td><span data-fit-period="0">1～4年目：24円／kWh</span><br><span data-fit-period="1">5～10年目：8.3円／kWh</span></td><td>2025年度下半期・2026年度認定，住宅用10 kW未満，調達期間10年間</td><td>（経済産業省，2026）</td></tr>
+              <tr><th>FIT終了後の売電単価</th><td><span data-post-fit-price>8.50円／kWh</span></td><td>11～20年目に置く東京電力エナジーパートナーの地域・契約条件付き例．全国共通価格ではない</td><td>（東京電力エナジーパートナー，2026b）</td></tr>
+              <tr><th>定期点検費</th><td><span data-maintenance-cost>38,000円</span>／回</td><td><span data-maintenance-years>4，8，12，16，20年目</span>．3～5年ごとの中点を4年とするサービス評価仮定</td><td>（調達価格等算定委員会，2026）</td></tr>
+              <tr><th>パワーコンディショナ交換費</th><td><span data-replacement-cost>384,000円</span>／回</td><td><span data-replacement-years>15年目</span>．20年間に1回を15年目へ置くサービス評価仮定</td><td>（調達価格等算定委員会，2026）</td></tr>
             </tbody>
           </table>
-        </section>
-
-        <section id="generation">
-          <h2>発電量と自家消費</h2>
-          <p>都道府県庁所在地の代表的な日射条件による年間発電量を使用します．入力された月間電気料金から年間使用量を推定し，発電量を自家消費へ優先的に充て，残りを売電すると仮定します．</p>
-          <div class="caution-box">
-            <h3>重要な限界</h3>
-            <p>年間の発電量と年間使用量をまとめて比較する簡易計算です．昼夜，季節，天候および在宅状況による時間差を考慮しないため，実際の自家消費量とは一致しません．</p>
+          <div class="parameter-notes">
+            <p><strong>維持費の採用範囲：</strong>点検3.8万円／回とパワーコンディショナ交換38.4万円／回は，経済産業省の2026年資料にある住宅用5 kW設備の業界ヒアリング値です．個別見積額または製品保証価格ではなく，税区分は未確認です．目視・動作確認・簡易電圧測定を標準範囲とし，足場，特殊測定，洗浄および修理・部品交換は含めません．4年ごとの点検と15年目の交換は診断上のサービス評価仮定であり，資料自体は交換年を15年目と定めていません．</p>
+            <p><strong>補助金の反映範囲：</strong>2026年9月1日時点で，国・都道府県・対応済み市区町村の公的制度を確認しています．標準・上振れでは，選択地域に居住し対象住宅を所有すること，未使用設備を期限内に申請すること，受付中の予算が残ることを標準条件として満たす前提で，算定可能な制度を反映します．蓄電池必須，住宅区分，指定施工業者，所得，売電経路等の重要条件を確定できない制度は候補として表示し，算入しません．市区町村を特定しない場合または未収集の場合も，市区町村制度を加算しませんが，補助金0円を意味しません．</p>
+            <p><strong>制度が重なる場合：</strong>併用可否と対象経費を公式情報で確認できる組み合わせだけを算入し，確認できない重複は加算しません．予算終了，受付期間，併用可否，住宅・設備条件によって実際の適用額は変わります．未収録または確認日後に更新された制度もあり得るため，申請前に自治体等の公式ページで最新情報を確認してください．</p>
           </div>
+
+          <h3 id="daytime-occupancy">日中在宅状況と自家消費</h3>
+          <p>自家消費率を固定値として置かず，式 (3)～式 (6)により，年間使用量，年間発電量，屋根方位，平日昼間の在宅状況および設備選択から計算します．需要には建築研究所の公式計算エンジンが算出した標準住宅の8760時間需要，発電にはNEDO METPV-20の東京平均年・傾斜角30度・方位別8760時間日射量を使用します（建築研究所，2026；NEDO，年不明）．</p>
+          <p>外部検証条件では，自家消費率<span data-self-consumption-validation-rate>37.66641％</span>となり，査読研究の比較値に対する最大相対誤差は<span data-self-consumption-validation-error>16.61％</span>です．許容上限20％以内であり，外部値へ合わせる補正係数は使用していません（エネルギー・資源学会，2025）．</p>
+          <table class="article-table article-table--multi-column article-table--occupancy"><colgroup><col><col><col></colgroup><thead><tr><th>選択肢</th><th>生活状況</th><th>平日昼間在宅率</th></tr></thead><tbody data-daytime-occupancy-table></tbody></table>
         </section>
 
-        <section>
-          <h2>3つのシナリオ</h2>
-          <table class="article-table">
+        <section id="scenarios">
+          <h2>シナリオ</h2>
+          <p>発電量，屋根方位，自家消費率，導入費用，売電単価，点検費および交換費は，3つのシナリオで共通です．</p>
+          <table class="article-table article-table--multi-column article-table--scenarios">
+            <colgroup><col><col><col></colgroup>
+            <thead><tr><th>シナリオ</th><th>電気料金上昇率</th><th>補助金</th></tr></thead>
             <tbody>
-              <tr><th>下振れ</th><td>補助金なし，買電単価の上昇なし．</td></tr>
-              <tr><th>標準</th><td>都道府県補助金あり，買電単価の上昇なし．</td></tr>
-              <tr><th>上振れ</th><td>都道府県補助金あり，買電単価が年2％上昇．</td></tr>
+              <tr><th>下振れ</th><td>年0％</td><td>含めない</td></tr>
+              <tr><th>標準</th><td>年1.5％</td><td>確認できた都道府県・市区町村制度を含める</td></tr>
+              <tr><th>上振れ</th><td>年3％</td><td>確認できた都道府県・市区町村制度を含める</td></tr>
             </tbody>
           </table>
-          <p>FITと卒FIT後の売電単価は3シナリオで共通です．補助金がない地域では，下振れと標準が同額になります．</p>
+          <p>補助金は，対象設備容量と制度の計算式を公式情報で確認し，前記の標準条件を満たす前提で算入します（環境省，2026）．市区町村制度は対応地域を選択した場合に判定し，条件不足の候補制度は公式URLと要確認事項を表示して金額へ加算しません．都道府県制度との併用を確認できない場合は二重加算せず，算定額が大きい単独制度だけを採用します．標準と上振れの電気料金上昇率は比較用の仮定であり，政府予測ではありません．</p>
         </section>
 
-        <section>
-          <h2>維持・交換費</h2>
-          <p>現行モデルでは，定期点検費を<span data-maintenance-cost>38,000円</span>ずつ<span data-maintenance-years>4，8，12，16，20年目</span>に，パワーコンディショナ交換費を<span data-replacement-cost>384,000円</span>として<span data-replacement-years>15年目</span>に計上します．20年間の合計は<span data-lifecycle-cost-total>574,000円</span>です．</p>
-          <p>これらは入力容量にかかわらない固定イベント費として扱います．容量一般で費用が一定であることを意味せず，実際の点検・交換時期と金額は契約，製品および使用状況によって異なります．</p>
-        </section>
-
-        <section class="caution-box">
-          <h2>計算に含めないもの</h2>
+        <section class="caution-box" id="limitations">
+          <h2>計算結果を見る際の注意</h2>
           <ul>
-            <li>屋根の面積，形状，方角，傾斜および影．</li>
-            <li>発電量の経年劣化，突発的な故障・修理費および撤去費．</li>
-            <li>借入費用，税金および現在価値換算．</li>
-            <li>市区町村補助金と，個別世帯の適用条件．</li>
+            <li>発電量は都道府県庁所在地の代表値です．屋根の面積・傾斜・影，積雪，機器差，発電量の経年劣化は反映していません．</li>
+            <li>自家消費は標準住宅と東京平均年の8760時間形状による概算です．個別住宅の断熱，設備，世帯構成，実際の曜日別行動，都道府県別の気象時系列差および実機固有の蓄電池制御は再現していません．</li>
+            <li>標準蓄電池を20年間交換しない取扱いは診断上のモデル仮定です．20年寿命または20年保証を確認した事実ではなく，故障，修理および評価期間後の交換費も収支に含めていません．</li>
+            <li>突発的な故障，撤去，保険，借入および税金は収支に含めていません．市区町村補助金は対応地域のうち，標準条件を満たす前提で金額を算定でき，重要な未確定条件がない制度に限って含めます．併用不明の制度は二重加算しません．</li>
+            <li>売電単価，補助金，点検・交換費は将来の契約や制度を保証する値ではありません．現地調査と正式見積もりで確認してください．</li>
           </ul>
         </section>
 
-        <section>
-          <h2>主な出典</h2>
-          <ul class="source-list">
-            <li><a data-source-id="env-prefectural-solar-generation-table"></a></li>
-            <li><a data-source-id="env-household-co2-electricity-payment-fy2023"></a></li>
-            <li><a data-source-id="enecho-regional-low-voltage-price-fy2023"></a></li>
-            <li><a data-source-id="meti-residential-solar-cost-2025"></a></li>
-          </ul>
-          <p class="article-data-status" data-article-data-status>公開データを確認しています．</p>
-        </section>
-
-        <section>
-          <h2>次に確認する</h2>
-          <nav class="article-footer-nav" aria-label="関連ページ">
-            <a href="costs-maintenance.html">初期費用・維持費</a>
-            <a href="electricity-sales.html">電気料金・FIT</a>
-            <a href="quotes-contractors.html">見積もりが必要な理由</a>
-            <a href="../simulator/">はれ<span class="brand-term">トク</span>診断へ</a>
-          </nav>
+        <section class="article-sources" id="references">
+          <h2>参考文献</h2>
+          <ol class="source-list">
+            <li>環境省（2012）「平成23年度再生可能エネルギーに関するゾーニング基礎情報整備報告書，第4章 表4.3-17 各地の年平均日射量と年間予想発電量」．<a data-source-id="env-prefectural-solar-generation-table">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>環境省（2025）「令和5年度 家庭部門のCO2排出実態統計調査 地方6-5-1 基本項目別年間エネルギー種別支払金額」．<a data-source-id="env-household-co2-electricity-payment-fy2023">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>資源エネルギー庁（2024a）「電気料金の全国比較：供給区域ごとの2023年度実績単価」．<a data-source-id="enecho-regional-low-voltage-price-fy2023">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>資源エネルギー庁（2024b）「エネルギー白書2024 電気料金の内訳」．<a data-source-id="enecho-renewable-surcharge-fy2023">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>東京電力エナジーパートナー株式会社（2026a）「料金単価表‐電灯」．<a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html">資料を見る</a>（参照日：2026年9月5日）．</li>
+            <li>一般社団法人太陽光発電協会（年不明a）「設置方位や設置角度の影響はありますか？」．<a data-source-id="jpea-residential-orientation-angle-impact">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>株式会社ファナス（年不明）「ソラカルテ 太陽光・蓄電池の概算シミュレーター」．<a data-source-id="sorakarte-orientation-benchmark">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>国立研究開発法人建築研究所（2026）「住宅のエネルギー消費性能計算プログラムの公式計算エンジンpyheesおよび第二章第二節一次エネルギー消費量」．<a data-source-id="bri-pyhees-residential-total-electricity-load">資料を見る</a>（参照日：2026年9月4日）．</li>
+            <li>国立研究開発法人新エネルギー・産業技術総合開発機構（年不明）「日射に関するデータベース」．<a data-source-id="nedo-solar-radiation-database">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>一般社団法人エネルギー・資源学会（2025）「太陽光発電の自家消費率などの実態把握―家庭CO2統計の個票データを用いた分析―」．<a data-source-id="criepi-household-co2-pv-self-consumption-2025">資料を見る</a>（参照日：2026年9月3日）．</li>
+            <li>経済産業省 調達価格等算定委員会（2026）「令和8年度以降（2026年度以降）の調達価格等に関する意見」．<a data-source-id="meti-residential-solar-cost-2025">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>経済産業省（2026）「再生可能エネルギーのFIT制度・FIP制度における2026年度以降の買取価格等と2026年度の賦課金単価を設定します」．<a data-source-id="meti-fit-residential-fy2026">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>東京電力エナジーパートナー株式会社（2026b）「再エネ買取標準プラン」．<a data-source-id="tepco-post-fit-standard-plan">資料を見る</a>（参照日：2026年9月5日）．</li>
+            <li>一般社団法人太陽光発電協会（年不明b）「機器の耐用年数はどれくらいですか？」．<a data-source-id="jpea-residential-equipment-service-life">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>一般社団法人太陽光発電協会（年不明c）「長く使っていただくために」．<a href="https://www.jpea.gr.jp/house/longuser/">資料を見る</a>（参照日：2026年9月5日）．</li>
+            <li>京セラ株式会社（2026a）「太陽光発電の設置費用はいくら？」．<a href="https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/">資料を見る</a>（参照日：2026年9月5日）．</li>
+            <li>京セラ株式会社（2026b）「設置工事の流れについて」．<a href="https://www.kyocera.co.jp/solar/support/topics/flow/">資料を見る</a>（参照日：2026年9月5日）．</li>
+            <li>環境省（2026）「住宅脱炭素NAVI 全国省エネ住宅支援検索」．<a data-source-id="env-housing-decarbonization-navi-2026">資料を見る</a>（参照日：2026年9月1日）．</li>
+            <li>経済産業省 資源エネルギー庁（2025）「定置用蓄電システム普及拡大検討会の結果とりまとめ」．<a data-source-id="meti-household-storage-cost-2025">資料を見る</a>（参照日：2026年9月4日）．</li>
+            <li>経済産業省 資源エネルギー庁（2021）「第4回定置用蓄電システム普及拡大検討会 資料4」．<a data-source-id="meti-household-storage-degradation-2021">資料を見る</a>（参照日：2026年9月4日）．</li>
+            <li>オムロン ソーシアルソリューションズ株式会社（2026a）「KPBP-A マルチ蓄電プラットフォーム カタログ」．<a href="https://socialsolution.omron.com/jp/ja/products_service/energy/doc/cat/kand-070b_kpbp-a.pdf">資料を見る</a>（参照日：2026年9月5日）．</li>
+            <li>オムロン ソーシアルソリューションズ株式会社（2026b）「KPBP-Bシリーズ 蓄電池ユニット仕様」．<a href="https://socialsolution.omron.com/jp/ja/products_service/energy/product/bt/kpbp-b_spec.html">資料を見る</a>（参照日：2026年9月5日）．</li>
+          </ol>
         </section>
       </article>
     </main>
-    <footer class="site-footer"><div class="page-width"><p>はれトクの結果は概算であり，長期利益を保証するものではありません．</p></div></footer>
+<footer class="site-footer"><div class="page-width"><nav class="site-footer__links" aria-label="運営情報"><a href="policy.html#operation">運営方針</a><a href="policy.html#advertising">広告方針</a><a href="policy.html#data">データ方針</a><a href="policy.html#privacy">プライバシー</a><a href="policy.html#disclaimer">免責事項</a></nav><p>はれトクの結果は概算であり，長期利益を保証するものではありません．</p></div></footer>
   </body>
 </html>

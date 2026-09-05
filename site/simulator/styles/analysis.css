@@ -12,6 +12,150 @@
   flex: 1;
 }
 
+.equipment-choice {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: 0;
+}
+
+.equipment-choice legend {
+  margin-bottom: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.equipment-choice__options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.equipment-choice__option {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.65rem;
+  min-height: 4.5rem;
+  padding: 0.85rem;
+  border: 1px solid var(--color-border);
+  background: #fff;
+}
+
+.equipment-choice__option.is-selected {
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary-pale);
+}
+
+.equipment-choice__option.is-disabled {
+  color: var(--color-muted);
+  background: var(--color-background-cool);
+  cursor: not-allowed;
+}
+
+.equipment-choice__option input {
+  margin-top: 0.2rem;
+}
+
+.equipment-choice__option strong,
+.equipment-choice__option small,
+.metric-definition {
+  display: block;
+}
+
+.equipment-choice__option small {
+  margin-top: 0.25rem;
+  font-size: 0.76rem;
+  line-height: 1.45;
+}
+
+.equipment-choice > .field-help {
+  margin-bottom: 0;
+}
+
+.battery-capacity-control {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.65rem;
+  background: var(--color-background-cool);
+}
+
+.battery-capacity-control__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.battery-capacity-control__header label {
+  font-weight: 800;
+}
+
+.battery-capacity-control__header output {
+  color: var(--color-primary-dark);
+  font-size: 1.2rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.battery-capacity-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  overflow: visible;
+}
+
+.battery-capacity-chart__axis {
+  stroke: var(--color-border);
+  stroke-width: 1.5;
+}
+
+.battery-capacity-chart__line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.battery-capacity-chart__point {
+  fill: #fff;
+  stroke: var(--color-primary-dark);
+  stroke-width: 3;
+}
+
+.battery-capacity-chart__label {
+  fill: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.battery-capacity-points {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0.75rem 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.battery-capacity-points div {
+  display: grid;
+  min-width: 0;
+  justify-items: center;
+  padding: 0.75rem 0.5rem 0;
+  text-align: center;
+}
+
+.battery-capacity-points dt {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.battery-capacity-points dd {
+  margin: 0.15rem 0 0;
+  font-weight: 900;
+}
+
 .loss-guidance {
   display: flex;
   align-items: center;
@@ -105,22 +249,118 @@
   max-width: 54rem;
   margin: 0 auto;
   padding: 1rem 1.2rem;
+  border: 1px solid var(--color-border);
+  border-left: 0.35rem solid var(--color-affiliate);
+  border-radius: 0.75rem;
   background: #fffaf0;
   text-align: left;
 }
 
+.result-summary__affiliate h3,
 .result-summary__affiliate p,
 .result-summary__affiliate .advertising-label {
   margin: 0;
 }
 
-.result-summary__affiliate p {
+.result-summary__affiliate h3 {
   font-weight: 900;
 }
 
+.result-summary__affiliate p {
+  color: var(--color-muted);
+}
+
 .result-summary__affiliate .advertising-label {
-  grid-column: 1 / -1;
+  grid-column: 1;
+  grid-row: 3;
   font-size: 0.68rem;
+}
+
+.result-summary__affiliate .affiliate-button {
+  grid-column: 2;
+  grid-row: 1 / 4;
+  align-self: center;
+}
+
+.subsidy-source-note {
+  margin: -0.65rem 0 1.35rem;
+  font-size: 0.78rem;
+}
+
+.subsidy-source-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+  color: var(--color-primary-dark);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-underline-offset: 0.18em;
+}
+
+.municipal-subsidy {
+  max-width: 54rem;
+  margin: 0 auto 1.35rem;
+  padding: 1.15rem 1.2rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+  text-align: left;
+}
+
+.municipal-subsidy h4,
+.municipal-subsidy h5,
+.municipal-subsidy p {
+  margin-top: 0;
+}
+
+.municipal-subsidy h4 {
+  margin-bottom: 0.35rem;
+  font-size: 1.05rem;
+}
+
+.municipal-subsidy h5 {
+  margin-bottom: 0.55rem;
+  font-size: 0.88rem;
+}
+
+.municipal-subsidy > p:not(.result-label) {
+  color: var(--color-muted);
+  font-size: 0.82rem;
+}
+
+.municipal-subsidy > div {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.municipal-subsidy ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.municipal-subsidy li + li {
+  margin-top: 0.8rem;
+}
+
+.municipal-subsidy li p {
+  margin: 0.25rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+}
+
+.municipal-subsidy li ul {
+  margin-top: 0.45rem;
+  font-size: 0.76rem;
+}
+
+.municipal-subsidy .equipment-subsidy-status {
+  color: var(--color-muted);
+}
+
+.metric-definition {
+  margin-top: 0.25rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .breakdown-note {
@@ -251,6 +491,14 @@
 .capacity-metrics span {
   color: var(--color-muted);
   font-size: 0.66rem;
+}
+
+.capacity-metrics__formula {
+  display: block;
+  margin-top: 0.18rem;
+  font-size: 0.62rem;
+  font-weight: 500;
+  line-height: 1.4;
 }
 
 .capacity-metrics strong {
@@ -514,6 +762,73 @@
   border-top: 1px solid var(--color-border);
 }
 
+.occupancy-field {
+  margin: 1.5rem 0;
+  padding: 0;
+  border: 0;
+}
+
+.occupancy-field legend {
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 900;
+}
+
+.occupancy-field > .field-help {
+  margin-bottom: 0.75rem;
+}
+
+.occupancy-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.occupancy-option {
+  position: relative;
+  display: block;
+  cursor: pointer;
+}
+
+.occupancy-option input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.occupancy-option__content {
+  display: grid;
+  min-height: 100%;
+  gap: 0.25rem;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.25rem;
+  background: #fff;
+}
+
+.occupancy-option__content strong {
+  color: var(--color-primary-dark);
+  font-size: 0.86rem;
+}
+
+.occupancy-option__content small {
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.occupancy-option input:checked + .occupancy-option__content {
+  border-color: var(--color-primary);
+  background: var(--color-primary-pale);
+  box-shadow: inset 0 -0.2rem 0 var(--color-primary);
+}
+
+.occupancy-option input:focus-visible + .occupancy-option__content {
+  outline: 3px solid rgb(31 102 76 / 24%);
+  outline-offset: 2px;
+}
+
 .advanced-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -587,6 +902,14 @@
     flex-direction: column;
   }
 
+  .occupancy-options {
+    grid-template-columns: 1fr;
+  }
+
+  .equipment-choice__options {
+    grid-template-columns: 1fr;
+  }
+
   .calculator-actions,
   .loss-guidance {
     align-items: stretch;
@@ -601,6 +924,12 @@
 
   .result-summary__affiliate .advertising-label {
     grid-column: auto;
+    grid-row: auto;
+  }
+
+  .result-summary__affiliate .affiliate-button {
+    grid-column: auto;
+    grid-row: auto;
   }
 
   .result-profit-summary > div {
@@ -615,6 +944,45 @@
     scroll-behavior: auto;
   }
 }
+.analysis-intro {
+  display: block;
+  max-width: 46rem;
+  padding-block: clamp(2rem, 5vw, 3.5rem) 1.5rem;
+}
+
+.calculator--analysis .calculator__panel {
+  border: 1px solid var(--color-border);
+  border-left: 0.35rem solid var(--color-primary);
+  border-radius: 0.75rem;
+}
+
+.calculator--analysis .calculator__panel::before {
+  content: none;
+}
+
+.analysis-intro__heading {
+  margin-bottom: 1.25rem;
+  padding-top: 0;
+  text-align: center;
+}
+
+.analysis-intro__heading h1 {
+  margin-bottom: 0.35rem;
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.analysis-intro__motif {
+  display: block;
+  width: min(100%, 8.5rem);
+  height: auto;
+  margin: 0 auto 0.5rem;
+}
+
+.analysis-intro__heading p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
 .analysis-page-title {
   white-space: nowrap;
 }
@@ -625,4 +993,22 @@
   font-size: 0.78rem;
   font-weight: 500;
   line-height: 1.55;
+}
+
+@media (max-width: 40rem) {
+  .analysis-intro {
+    padding-block: 1.25rem 1rem;
+  }
+
+  .analysis-intro__heading {
+    margin-bottom: 0.85rem;
+  }
+
+  .analysis-intro__motif {
+    display: none;
+  }
+
+  .battery-capacity-points {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

@@ -15,7 +15,7 @@
         <a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a>
         <span class="site-header__descriptor">太陽光のかんたん採算診断</span>
         <nav class="site-nav" aria-label="主要メニュー">
-          <a href="/" aria-current="page">トップ</a><a href="simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="#guides">はれ<span class="brand-term">トク</span>ガイド</a>
+          <a href="/" aria-current="page">トップ</a><a href="simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="solar/">はれ<span class="brand-term">トク</span>ガイド</a>
         </nav>
       </div>
     </header>
@@ -28,6 +28,10 @@
             <h1 id="hero-title"><span class="hero-title__chunk">太陽光，</span><span class="hero-title__chunk">結局いくら<span class="brand-word">トク</span>？</span></h1>
             <p class="hero__lead">見積もりを取る前に，あなたの場合の20年間の損得を確認．</p>
             <ul class="hero__proof" aria-label="診断の特徴"><li>登録不要</li><li>氏名・住所の入力なし</li><li>診断も見積もりも無料</li></ul>
+            <figure class="hero__motif">
+              <img src="shared/assets/haretoku-balance-motif.png" width="1616" height="973" alt="太陽光パネルと工具・硬貨を載せた天秤">
+              <figcaption class="hero__motif-labels"><span>得られる効果</span><span>かかる費用</span></figcaption>
+            </figure>
           </div>
 
           <section class="calculator" aria-label="計算条件">
@@ -38,9 +42,14 @@
                   <label for="prefecture">都道府県<span class="required-label">必須</span></label>
                   <select id="prefecture" name="prefecture" required><option value="">選択してください</option></select>
                 </div>
+                <div class="form-field" data-municipality-field hidden>
+                  <label for="municipality">市区町村<span class="optional-label">任意</span></label>
+                  <select id="municipality" name="municipality_code" aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select>
+                  <p id="municipality-help" class="field-help">都道府県を選ぶと，対応する市区町村を確認できます．</p>
+                </div>
                 <div class="form-field">
                   <label for="monthly-electricity-bill">月間電気料金<span class="optional-label">任意</span></label>
-                  <div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="100" placeholder="例：12,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div>
+                  <div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="1" placeholder="例：12,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div>
                   <p id="electricity-bill-help" class="field-help">未入力なら，地域の標準値を使用します．</p>
                 </div>
                 <button id="calculate-button" class="primary-button" type="submit" disabled>20年間の損得を診断する <span aria-hidden="true">→</span></button>
@@ -60,7 +69,7 @@
         <aside class="top-estimate-route affiliate-panel page-width" aria-label="導入を決めている方への見積もり案内">
           <div class="top-estimate-route__copy">
             <p class="top-estimate-route__eyebrow">すでに導入を決めている方へ</p>
-            <p>工事費や利用できる補助金を，無料見積もりで詳しく確認できます．</p>
+            <p>工事費や利用できる補助金など，概算では決まらない条件を確認できます．</p>
           </div>
           <button class="secondary-button affiliate-button" type="button" data-route-source="top-affiliate" disabled><span class="affiliate-button__label">無料見積もりで確認</span></button>
           <p class="advertising-label">広告・アフィリエイトを含みます．</p>
@@ -69,12 +78,34 @@
 
       <section id="guides" class="guides-section">
         <div class="page-width">
-          <div class="section-intro"><p class="eyebrow">はれ<span class="brand-term">トク</span>ガイド</p><h2>知って，なっ<span class="brand-word">トク</span>．</h2><p>仕組み，補助金，見積もり．自分に関係することから，短く整理します．</p></div>
+          <div class="section-intro"><p class="eyebrow">はれ<span class="brand-term">トク</span>ガイド</p><h2>知って，なっ<span class="brand-word">トク</span>．</h2><p>太陽光の収支，補助金，見積もり．気になるところから，さっと確認できます．</p></div>
           <div class="guide-grid">
-            <a class="guide-card guide-card--featured" href="pages/electricity-sales.html"><span class="guide-card__number">01</span><span class="guide-card__category">しくみ｜全国</span><strong>電気代は，どう減る？</strong><p>自分で使う電気と売る電気に分けて，家計への効果を整理します．</p><span>電気代が減る仕組みを知る →</span></a>
-            <a class="guide-card" href="pages/subsidies.html"><span class="guide-card__number">02</span><span class="guide-card__category">補助金｜全国｜2026年度</span><strong>使える補助金は，どう探す？</strong><p>対象地域と年度を確かめ，自分に関係する制度を探す順番を整理します．</p><span>補助金の探し方を知る →</span></a>
-            <a class="guide-card" href="pages/quotes-contractors.html"><span class="guide-card__number">03</span><span class="guide-card__category">見積もり｜全国</span><strong>見積もりは，何を比べて決める？</strong><p>金額，設備，工事範囲，保証から，自分が確認する項目を整理します．</p><span>見積もりの比べ方を知る →</span></a>
+            <a class="guide-card guide-card--featured" href="pages/electricity-sales.html">
+              <span class="guide-card__number">01</span>
+              <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-mechanics.webp" alt="" width="720" height="540" loading="lazy" decoding="async"></span>
+              <span class="guide-card__category">しくみ｜全国</span>
+              <strong>太陽光の収支は，何で決まる？</strong>
+              <p>電気代の削減，売電収入，設置費用，維持費．20年間で何がプラス・マイナスになるかを見ていきます．</p>
+              <span>収支の決まり方を知る →</span>
+            </a>
+            <a class="guide-card" href="pages/subsidies.html">
+              <span class="guide-card__number">02</span>
+              <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-subsidy.webp" alt="" width="720" height="540" loading="lazy" decoding="async"></span>
+              <span class="guide-card__category">補助金｜全国｜2026年度</span>
+              <strong>補助金は，どう探してどう申請する？</strong>
+              <p>住んでいる地域や設備条件に合う制度の探し方と，申し込み前に確認するポイントがわかります．</p>
+              <span>補助金の確認方法を知る →</span>
+            </a>
+            <a class="guide-card" href="pages/quotes-contractors.html">
+              <span class="guide-card__number">03</span>
+              <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-quotes.webp" alt="" width="720" height="540" loading="lazy" decoding="async"></span>
+              <span class="guide-card__category">見積もり｜全国</span>
+              <strong>太陽光の見積もりは，何を比べる？</strong>
+              <p>金額だけで決めないために，設備，発電試算，工事範囲，保証の比べ方を確認します．</p>
+              <span>見積もりの比べ方を知る →</span>
+            </a>
           </div>
+          <p class="guides-more"><a href="solar/">すべての記事を見る <span aria-hidden="true">→</span></a></p>
         </div>
       </section>
 

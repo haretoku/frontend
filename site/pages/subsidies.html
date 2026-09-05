@@ -3,64 +3,166 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="はれトクが住宅用太陽光の補助金をどのように利益計算へ反映するかを説明します．">
-    <title>補助金の取扱い｜はれトク</title>
+    <meta name="description" content="住宅用太陽光で使える補助金の探し方，対象条件の確認方法および申請準備の順番を説明します．">
+    <title>補助金は，どう探してどう申請する？｜はれトク</title>
     <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../shared/styles/main.css">
     <link rel="stylesheet" href="../articles/styles/article.css">
     <script type="module" src="../articles/src/article-data.js"></script>
   </head>
-  <body>
-    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor">太陽光のかんたん採算診断</span><nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../#guides" aria-current="page">はれ<span class="brand-term">トク</span>ガイド</a></nav></div></header>
+  <body class="article-guide-page">
+    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor">太陽光のかんたん採算診断</span><nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../solar/" aria-current="page">はれ<span class="brand-term">トク</span>ガイド</a></nav></div></header>
     <main>
-      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ はれ<span class="brand-term">トク</span>ガイド ／ 補助金の取扱い</nav>
+      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ <a href="../solar/">はれ<span class="brand-term">トク</span>ガイド</a> ／ 補助金の探索と申請</nav>
       <header class="article-width article-hero">
         <p class="eyebrow">補助金</p>
-        <h1>表示された補助金は，必ずもらえる？</h1>
-        <p class="article-hero__lead">いいえ．都道府県と設備容量だけで計算できる制度を概算へ反映しますが，受給を保証するものではありません．</p>
+        <h1>補助金は，どう探してどう申請する？</h1>
+        <p class="article-hero__lead">地域，年度，受付状態および設備条件を照合し，住宅用太陽光の補助金を公式情報で確認する順番を整理します．</p>
         <dl class="article-meta">
           <div><dt>公開日</dt><dd>2026-09-01</dd></div>
           <div><dt>最終確認日</dt><dd><span data-data-version>2026-09-01</span></dd></div>
           <div><dt>対象年度</dt><dd>2026年度</dd></div>
           <div><dt>対象地域</dt><dd>全国47都道府県</dd></div>
-          <div><dt>有効状態</dt><dd>年度スナップショット</dd></div>
+          <div><dt>情報の基準</dt><dd>2026年度の制度情報</dd></div>
         </dl>
       </header>
-      <article class="article-width article">
-        <section class="key-point">
-          <h2>結論</h2>
-          <p><strong>標準と上振れでは採用した都道府県補助金を含め，下振れでは0円とします．</strong></p>
-          <p>下振れは，予算到達，受付終了，条件不適合または申請手続き上の理由によって受給できない場合を表します．</p>
-        </section>
-
-        <section>
-          <h2>計算へ含める範囲</h2>
-          <ul>
-            <li>都道府県を選ぶだけで概算額を決められる制度．</li>
-            <li>公式情報で金額と主要条件を確認できる制度．</li>
-            <li><span data-system-capacity>4 kW</span>を設置した場合の概算額．</li>
-          </ul>
-          <p>市区町村の制度は居住地を入力しないと特定できないため，現在のMVP計算には含めません．国，都道府県および市区町村の制度を重複して利用できるとは限りません．</p>
-        </section>
-
-        <section>
-          <h2>年度初の制度スナップショット</h2>
-          <p>公開データは年度単位で採用制度を確認します．年度途中に受付が終わった制度や，FIT・FIPを利用しないことが条件となる制度も，その年度に利用できた可能性を示すため標準・上振れの候補へ残す場合があります．</p>
-          <p>この扱いにより，現在申請できることを意味するわけではありません．申請前には必ず自治体の公式ページで受付状況，対象設備，工事着手時期，併用条件および必要書類を確認してください．</p>
-        </section>
-
-        <section class="caution-box">
-          <h2>契約前に確認する</h2>
-          <ul>
-            <li>契約または工事着手より前の申請が必要か．</li>
-            <li>予算上限または申請期限に達していないか．</li>
-            <li>既築・新築，自家消費率，FIT利用等の条件を満たすか．</li>
-            <li>施工会社，機器または申請者に指定要件があるか．</li>
+      <figure class="article-width article-hero-visual">
+        <img src="../shared/assets/guide-subsidy.webp" width="720" height="480" alt="太陽の印と円記号が付いた補助金の袋を受け取り，申請条件を確認する様子">
+      </figure>
+      <article class="article-width article article--continuous article--guide">
+        <section class="article-learn" aria-labelledby="learn-title">
+          <h2 id="learn-title">この記事で分かること</h2>
+          <ul class="article-learn__checks">
+            <li><span class="article-learn__check" aria-hidden="true">✓</span><strong>制度と受付状況</strong><span class="article-learn__description">国，都道府県，市区町村の制度を探し，受付中かを公式情報で確認できます．</span></li>
+            <li><span class="article-learn__check" aria-hidden="true">✓</span><strong>条件と必要書類</strong><span class="article-learn__description">設備・住宅・申請時期の条件と，準備する書類の代表例が分かります．</span></li>
+            <li><span class="article-learn__check" aria-hidden="true">✓</span><strong>申請と支援の範囲</strong><span class="article-learn__description">申請から入金までの流れと，施工会社へ確認する内容を整理できます．</span></li>
           </ul>
         </section>
 
-        <section>
-          <h2>主な出典</h2>
+        <p class="article-opening-questions">「自分の地域で使える制度はどこにあるのか」「表示された制度へ今も申請できるのか」「契約前に何を確認すべきか」．補助金は，同じ設備でも地域と申請時期によって利用可否が変わります．</p>
+
+        <p class="article-opening-summary">国，都道府県，市区町村の公式情報を確認し，対象年度，受付状態，設備・住宅条件，申請期限および併用可否を照合します．契約や工事を進める前に募集要領を読み，必要書類と申請後の手順まで確認します．</p>
+
+        <section class="article-entry-actions article-entry-actions--diagnosis-primary article-action-stack" aria-label="次の行動">
+          <div class="article-action-stack__row article-action-stack__row--internal">
+            <div class="article-action-stack__copy">
+              <h2>補助金を含む概算を確認する</h2>
+              <p>地域と設備条件を入力し，補助金を考慮した導入後の収支の目安を確認します．</p>
+            </div>
+            <a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
+          </div>
+          <div class="article-action-stack__row article-action-stack__row--affiliate affiliate-panel">
+            <div class="article-action-stack__copy">
+              <h2>申請支援を含む費用を確かめる</h2>
+              <p>見積もりサービスの利用は無料です．申請支援・現地調査の費用は施工会社・条件で確認します．</p>
+              <p class="advertising-label">広告・アフィリエイトを含みます．</p>
+            </div>
+            <button class="secondary-button affiliate-button" type="button" data-route-source="article-top-affiliate" disabled>無料見積もりで確認</button>
+          </div>
+        </section>
+
+        <details class="article-toc">
+          <summary><span class="article-toc__title">目次</span><span class="article-toc__state" aria-hidden="true"></span></summary>
+          <ol>
+            <li><a href="#search-order">補助金を探す順番</a></li>
+            <li><a href="#acceptance-status">受付中かを見分ける</a></li>
+            <li><a href="#eligibility-documents">対象条件と必要書類</a></li>
+            <li><a href="#contractor-support">施工会社へ依頼できる範囲</a></li>
+            <li><a href="#application-flow">申請から入金までの流れ</a></li>
+            <li><a href="#final-checks">最後のチェックリスト</a></li>
+            <li><a href="#summary">まとめ</a></li>
+          </ol>
+        </details>
+
+        <section id="search-order">
+          <h2>補助金を探す順番</h2>
+          <ol>
+            <li>国の住宅・再エネ支援制度を，所管省庁の公式情報で確認する．</li>
+            <li>都道府県の公式サイトで，住宅用太陽光を対象とする制度を確認する．</li>
+            <li>市区町村の公式サイトで，居住地に限定された制度を確認する．</li>
+            <li>併用可否，申請期限および予算の受付状況を各制度で照合する．</li>
+          </ol>
+          <p>検索結果や民間のまとめ記事だけで判断せず，最終的な条件と受付状況は制度実施主体の公式ページで確認します．</p>
+          <h3>東京都内で探す例</h3>
+          <p>まず，国の制度を<a href="https://policies.env.go.jp/earth/zeh/search/">環境省「住宅脱炭素NAVI」</a>で検索します．次に，都道府県の制度として<a href="https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/">東京都環境公社の2026年度公式ページ</a>を確認します．最後に，居住する市区町村の公式サイトで「住宅用太陽光 補助金 令和8年度」等と検索し，国・都・市区町村の併用可否を各募集要領で照合します．</p>
+          <figure class="article-section-illustration" aria-labelledby="subsidy-check-caption">
+            <img src="../shared/assets/article-subsidy-check-flow.webp" width="1693" height="929" alt="住宅用太陽光の補助金について，国，都道府県，市区町村の公式情報と受付状態を順に確認する利用者" loading="lazy" decoding="async">
+            <figcaption id="subsidy-check-caption">補助金は，地域ごとの公式情報を順にたどり，対象年度と現在の受付状態を照合します．</figcaption>
+          </figure>
+        </section>
+
+        <section id="acceptance-status">
+          <h2>受付中かを見分ける</h2>
+          <p>制度名だけでなく，公式ページの対象年度，更新日および「受付中」「受付終了」「予算上限到達」等の表示を確認します．申請期限内でも予算額に達すると募集を終了する制度があり，環境省の検索結果にも公募終了後の制度が残る場合があります．検索結果から各実施主体のページへ進み，最新のお知らせと募集要領を照合してください．</p>
+          <p class="notice-label">注意点</p>
+          <p>募集要領を保存した後も，申請直前に公式ページを再確認します．受付件数や予算残額が公表されていなければ，制度実施主体の窓口へ問い合わせます．施工会社から受けた説明だけで受付中と判断せず，確認日と参照したURLを控えておくと，申請準備中の変更を追いやすくなります．</p>
+        </section>
+
+        <section id="eligibility-documents">
+          <h2>対象条件と必要書類を確認する</h2>
+          <p>制度ごとに，申請者，住宅，対象設備，工事時期および他制度との併用条件が異なります．住宅の所在地と所有・居住関係，新築・既築の区分，設備容量，未使用品か，自家消費率やFIT利用の条件，指定事業者の有無を募集要領で確認します．</p>
+          <h3>契約・着工前の確認</h3>
+          <p>交付申請または交付決定より前の契約・発注・着工を対象外とする制度があります．一方で，所定の事前着手届等による例外を置く制度もあります．契約日，発注日，着工日および設備の引渡日のうち，どの時点が基準になるかを募集要領で確認し，判断できない場合は契約前に制度実施主体へ問い合わせます．</p>
+          <h3>必要書類の代表例</h3>
+          <p>交付申請では，申請書，事業計画書，本人・住所・住宅の所有関係を確認する書類，見積書と内訳，設備の型式・出力が分かる仕様書やカタログ，配置図，設置前写真および振込口座の確認書類等が求められます．工事後の実績報告では，契約書，領収書，設置後写真，保証書・出荷証明書および系統連系に関する書類等が代表例です．申請書，見積書，契約書および振込口座の名義をそろえ，設置前写真と内訳書を実績報告まで保存します．必要な書類と有効期限は制度固有であり，公式のチェックリストと様式を使用してください．</p>
+        </section>
+
+        <section id="contractor-support">
+          <h2>施工会社へ依頼できる範囲</h2>
+          <p>施工会社によっては，申請書の作成補助，設備資料の準備または提出代行を無料で行う場合があります．ただし，すべての会社・制度で無料とは限らず，代行手数料が見積額に含まれる場合や，一部の書類だけを支援する場合があります．</p>
+          <p>契約前に，代行手数料の有無，支援する書類と対象外の書類，申請者と提出者，提出期限の管理者，自治体からの照会への対応，採択前に工事を進める条件および不採択時の契約・費用の扱いを書面で確認します．代行を依頼しても，申請内容，受付状況および交付決定の確認を施工会社だけに任せないことが重要です．</p>
+        </section>
+
+        <section id="application-flow">
+          <h2>申請から入金までの流れ</h2>
+          <ol>
+            <li><strong>交付申請：</strong>募集要領に従い，期限内に申請書と添付書類を提出する．</li>
+            <li><strong>交付決定：</strong>通知書を受け取り，対象設備，交付予定額および工事を開始できる時点を確認する．</li>
+            <li><strong>契約・工事：</strong>承認された内容に沿って工事を行い，変更が生じた場合は事前承認の要否を確認する．</li>
+            <li><strong>実績報告：</strong>期限内に契約書，領収書，設備資料および設置後写真等を提出する．</li>
+            <li><strong>額の確定・入金：</strong>審査後の確定通知と振込を確認し，関係書類を定められた期間保管する．</li>
+          </ol>
+          <p>これは代表的な順番です．申請時期，交付決定前の契約・着工の可否，実績報告の期限および請求手続の有無は制度によって異なるため，必ず当該年度の募集要領を優先します．</p>
+        </section>
+
+        <section id="final-checks">
+          <h2>最後のチェックリスト</h2>
+          <ul>
+            <li>対象年度と更新日が最新で，現在も受付中か．</li>
+            <li>申請者，住宅，設備，施工会社および他制度との併用条件を満たすか．</li>
+            <li>契約，発注または着工の前に必要な手続はないか．</li>
+            <li>交付申請と実績報告に必要な書類，写真および期限を確認したか．</li>
+            <li>施工会社の代行手数料，支援範囲，提出者および期限管理者を書面で確認したか．</li>
+            <li>不採択，減額または工事内容変更の場合の契約・費用の扱いを確認したか．</li>
+          </ul>
+        </section>
+
+        <section class="key-point" id="summary">
+          <h2>まとめ</h2>
+          <p><strong>補助金は，国，都道府県，市区町村の公式情報を順に確認し，対象年度，受付状態，設備・住宅条件，申請時期および併用可否を制度ごとに照合します．</strong></p>
+          <p>施工会社が無料で申請を支援・代行する場合もありますが，対象範囲は会社と制度で異なります．契約前に手数料，支援範囲，提出者，期限管理および不採択時の扱いを確認し，申請から実績報告・入金まで当該年度の募集要領に従って進めてください．</p>
+        </section>
+
+        <section class="article-entry-actions article-entry-actions--final article-action-stack" aria-label="記事を読んだ後の次の行動">
+          <div class="article-action-stack__row article-action-stack__row--internal">
+            <div class="article-action-stack__copy">
+              <h2>補助金を含む概算を確認する</h2>
+              <p>地域と設備条件を入力し，補助金を考慮した導入後の収支の目安を確認します．</p>
+            </div>
+            <a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
+          </div>
+          <div class="article-action-stack__row article-action-stack__row--affiliate affiliate-panel">
+            <div class="article-action-stack__copy">
+              <h2>申請支援を含む費用を確かめる</h2>
+              <p>見積もりサービスの利用は無料です．申請支援・現地調査の費用は施工会社・条件で確認します．</p>
+              <p class="advertising-label">広告・アフィリエイトを含みます．</p>
+            </div>
+            <button class="secondary-button affiliate-button" type="button" data-route-source="article-final-affiliate" disabled>無料見積もりで確認</button>
+          </div>
+        </section>
+
+        <section class="article-sources">
+          <h2>参考文献</h2>
           <ul class="source-list">
             <li><a data-source-id="env-housing-decarbonization-navi-2026"></a></li>
             <li><a data-source-id="fukushima-renewable-center-application-status-2026"></a></li>
@@ -71,13 +173,13 @@
             <li><a data-source-id="tokyo-residential-solar-subsidy-fy2026"></a></li>
             <li><a data-source-id="yamagata-residential-solar-subsidy-fy2026"></a></li>
           </ul>
-          <p>計算へ採用した地域では，制度実施主体である都道府県等の公式情報を個別に確認しています．</p>
+          <p>制度の受付状態，対象条件，必要書類および手続は，各実施主体の当該年度の公式情報を確認してください．</p>
           <p class="article-data-status" data-article-data-status>公開データを確認しています．</p>
         </section>
 
-        <section><h2>次に確認する</h2><nav class="article-footer-nav" aria-label="関連ページ"><a href="calculation-method.html">計算方法・前提</a><a href="quotes-contractors.html">見積もり・施工業者</a><a href="electricity-sales.html">電気料金・FIT</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断へ</a></nav></section>
+        <section class="article-related"><h2>関連記事</h2><nav class="article-footer-nav" aria-label="関連ページ"><a href="electricity-sales.html">太陽光の収支は，何で決まる？</a><a href="costs-maintenance.html">表示額以外に，何がかかる？</a><a href="quotes-contractors.html">太陽光の見積もりは，何を比べる？</a></nav></section>
       </article>
     </main>
-    <footer class="site-footer"><div class="page-width"><p>補助金の適用可否と受付状況は，自治体の公式情報で最終確認してください．</p></div></footer>
+<footer class="site-footer"><div class="page-width"><nav class="site-footer__links" aria-label="運営情報"><a href="policy.html#operation">運営方針</a><a href="policy.html#advertising">広告方針</a><a href="policy.html#data">データ方針</a><a href="policy.html#privacy">プライバシー</a><a href="policy.html#disclaimer">免責事項</a></nav><p>補助金の適用可否と受付状況は，自治体の公式情報で最終確認してください．</p></div></footer>
   </body>
 </html>
