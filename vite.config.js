@@ -17,7 +17,6 @@ export default defineConfig({
         rollupOptions: {
           input: {
             index: resolve(siteRoot, "index.html"),
-            logoFinalists: resolve(siteRoot, "logo-finalists.html"),
             guides: resolve(siteRoot, "solar/index.html"),
             simulator: resolve(siteRoot, "simulator/index.html"),
             calculationMethod: resolve(siteRoot, "pages/calculation-method.html"),
