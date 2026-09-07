@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0.0",
+  "rule": "floor_0_01_kw",
+  "definition": "正の太陽光容量を十進数として解釈し，小数点以下第3位以降を切り捨てる．",
+  "calculation_order": [
+    "capacity_preprocessing",
+    "rate_multiplication",
+    "money_rounding",
+    "cap_application"
+  ],
+  "amount_yen_per_kw": 15000,
+  "rounding_rule": "floor_1000_yen",
+  "cap_yen": 52000,
+  "cases": [
+    {
+      "id": "boundary-before-1_13",
+      "input_capacity_kw": 1.129999,
+      "expected_preprocessed_capacity_kw": "1.12",
+      "expected_amount_yen": 16000
+    },
+    {
+      "id": "boundary-exact-1_13",
+      "input_capacity_kw": 1.13,
+      "expected_preprocessed_capacity_kw": "1.13",
+      "expected_amount_yen": 16000
+    },
+    {
+      "id": "boundary-after-1_13",
+      "input_capacity_kw": 1.130001,
+      "expected_preprocessed_capacity_kw": "1.13",
+      "expected_amount_yen": 16000
+    },
+    {
+      "id": "observable-difference-1_067",
+      "input_capacity_kw": 1.067,
+      "expected_preprocessed_capacity_kw": "1.06",
+      "expected_amount_yen": 15000
+    },
+    {
+      "id": "cap-boundary-before",
+      "input_capacity_kw": 3.469999,
+      "expected_preprocessed_capacity_kw": "3.46",
+      "expected_amount_yen": 51000
+    },
+    {
+      "id": "cap-boundary-exact",
+      "input_capacity_kw": 3.47,
+      "expected_preprocessed_capacity_kw": "3.47",
+      "expected_amount_yen": 52000
+    },
+    {
+      "id": "cap-boundary-after",
+      "input_capacity_kw": 3.470001,
+      "expected_preprocessed_capacity_kw": "3.47",
+      "expected_amount_yen": 52000
+    },
+    {
+      "id": "cap-exceeded",
+      "input_capacity_kw": 4.0,
+      "expected_preprocessed_capacity_kw": "4.00",
+      "expected_amount_yen": 52000
+    }
+  ]
+}

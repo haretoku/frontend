@@ -158,12 +158,20 @@ test("3分類の代表記事が読者の問いと次の行動に対応する", a
     "設置費は，容量だけでなく屋根と工事で変わる",
     "導入後の費用は，発生する年を分けて見る",
     "収支を大きく変える条件",
-    "同じ4 kWでも，昼間の使い方で結果が変わる",
     "向いている家庭と，慎重に考えたい家庭",
     "記事で理解し，診断で概算し，見積もりで個別条件を確認する"
   ]) {
     assert.match(mechanicsHtml, new RegExp(`<h2>${heading}<\\/h2>`));
   }
+  assert.match(mechanicsHtml, /<section id="suitability">[\s\S]*<div id="household-comparison">[\s\S]*<h3>具体例：同じ4 kWでも，昼間の使い方で結果が変わる<\/h3>[\s\S]*<\/div>\s*<\/section>/);
+  const income = mechanicsHtml.match(/<div class="article-balance-group article-balance-group--income">([\s\S]*?)<\/div>/)?.[1];
+  const expense = mechanicsHtml.match(/<div class="article-balance-group article-balance-group--expense">([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(income && expense);
+  assert.match(income, /<h3>収入・削減効果<\/h3>[\s\S]*電気代削減[\s\S]*売電収入[\s\S]*補助金/);
+  assert.doesNotMatch(income, /設置費|維持・交換費/);
+  assert.match(expense, /<h3>支出<\/h3>[\s\S]*設置費[\s\S]*維持・交換費/);
+  assert.ok(mechanicsHtml.indexOf('article-balance-group--income') < mechanicsHtml.indexOf('article-balance-group--expense'));
+  assert.match(mechanicsHtml, /<a href="subsidies\.html">補助金の探し方と申請の流れ<\/a>/);
   assert.match(mechanicsHtml, /月間電気料金が高くても，使用時間が夜間中心なら/);
   assert.match(mechanicsHtml, /FITの買取価格は1～4年目が24円／kWh，5～10年目が8\.3円／kWh/);
   assert.match(mechanicsHtml, /30 A契約を例にすると，基本料金は935\.25円／月/);
@@ -225,6 +233,21 @@ test("3分類の代表記事が読者の問いと次の行動に対応する", a
   assert.match(quotesHtml, /data-route-source="article-final-affiliate" disabled/);
 });
 
+test("補助金記事は支援節直後の見積もり導線と東京都の条件付き申請例を持つ", async () => {
+  const html = await readFile(new URL("../../site/pages/subsidies.html", import.meta.url), "utf8");
+  assert.match(html, /<section id="contractor-support">[\s\S]*?<\/section>\s*<section class="article-entry-actions article-entry-actions--quote-primary article-action-stack"/);
+  const cta = html.match(/<section class="article-entry-actions article-entry-actions--quote-primary[\s\S]*?<\/section>/)?.[0];
+  assert.ok(cta);
+  assert.match(cta, /article-action-stack__row--affiliate/);
+  assert.match(cta, /広告・アフィリエイトを含みます/);
+  assert.match(cta, /data-route-source="article-top-affiliate" disabled/);
+  assert.doesNotMatch(cta, /article-action-stack__row--internal/);
+  assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, 1);
+  for (const condition of ["実際の受給事例ではなく", "2026年度", "2026年9月5日", "3.75 kW超", "12万円／kW", "48万円", "助成対象経費が上限", "受付通知", "金融機関発行の証明書", "工事と支払の完了後", "2029年3月30日", "受給は確定しません", "他自治体へ同じ金額や手順を適用しません"]) assert.ok(html.includes(condition), condition);
+  assert.match(html, /r8taiyouko_tebiki_20260630\.pdf/);
+  assert.match(html, /<ul class="article-checklist">/);
+});
+
 test("停電記事は給電条件，安全上の制約および実例の限界を区別する", async () => {
   const html = await readFile(new URL("../../site/pages/disaster.html", import.meta.url), "utf8");
   assert.match(html, /系統へ接続した通常運転は安全のため停止します/);
@@ -240,6 +263,45 @@ test("停電記事は給電条件，安全上の制約および実例の限界�
   assert.match(html, /モバイルバッテリーはPSEマークを確認し，モバイルバッテリーやポータブル電源はリコール情報，定格および回収方法/);
   assert.match(html, /標準蓄電池を含む構成も比較できますが，停電時に使える時間や給電範囲は金銭的利益へ合算しません/);
   assert.match(html, /屋内では絶対に使用しません/);
+  const backup = html.match(/<section id="battery-backup">([\s\S]*?)<\/section>/)?.[1];
+  assert.ok(backup);
+  for (const condition of ["冷蔵庫1台", "LED電球2灯を各6時間", "スマホ4台を各1回", "限定24時間", "約0.9 kWh", "設備自身の消費を0.72 kWhと仮定", "満充電", "残量下限は0", "太陽光からの補充なし", "停電放電中の実測値ではありません", "冷暖房，固定回線，調理", "24時間の動作を保証しません"]) {
+    assert.ok(backup.includes(condition), condition);
+  }
+  assert.doesNotMatch(backup, /0\.9044|√|往復効率/);
+  assert.match(backup, /href="calculation-method\.html#outage-reference"/);
+  for (const source of ["NR-E457PX/spec.html", "LDA7WWGEW1/spec.html", "231003-d.html", "qa_ess-tribrid-t1.html"]) {
+    assert.ok(backup.includes(source), source);
+  }
+});
+
+test("蓄電池記事は選択容量・条件付き劣化比較と年次適用を説明する", async () => {
+  const calculation = await readFile(new URL("../../site/pages/calculation-method.html", import.meta.url), "utf8");
+  const costs = await readFile(new URL("../../site/pages/costs-maintenance.html", import.meta.url), "utf8");
+  const formula = calculation.match(/<p class="article-formula"><span class="formula-term">使用可能容量（式 \(5\)）[\s\S]*?<\/p>/)?.[0];
+  assert.ok(formula);
+  assert.match(formula, /選択した初期容量（kWh）/);
+  assert.match(formula, /選択した劣化仮定の年間容量保持係数/);
+  assert.doesNotMatch(formula, /9\.5|15年後60％/);
+  for (const html of [calculation, costs]) {
+    assert.match(html, /20年末70％・85％/);
+    assert.match(html, /条件付き比較仮定/);
+    assert.match(html, /標準期待値，製品保証または研究で同定された平均ではありません/);
+    assert.match(html, /約50\.6％/);
+    assert.match(html, /収支も/);
+  }
+  assert.match(calculation, /各年の年末容量をその年の8760時間の計算へ適用/);
+  assert.match(calculation, /0\.60の15分の1乗/);
+  assert.match(calculation, /0\.70または0\.85の20分の1乗/);
+  assert.match(calculation, /翌年の容量上限を超える分だけ切り詰め/);
+  assert.match(calculation, /年初に満充電へ戻す処理は行いません/);
+  assert.match(calculation, /標準蓄電池は，20年間交換せず/);
+  const outageReference = calculation.match(/<p id="outage-reference">([\s\S]*?)<\/p>/)?.[1];
+  assert.ok(outageReference);
+  assert.match(outageReference, /0\.9043979452 kWh/);
+  assert.match(outageReference, /片道放電効率√0\.9/);
+  assert.match(outageReference, /往復効率90％を片道効率として用いず/);
+  assert.match(outageReference, /通常の収支計算の開始残量を満充電に変えるものではありません/);
 });
 
 test("ガイド5記事は共通構造，2経路，目次および開示を持つ", async () => {
@@ -252,13 +314,14 @@ test("ガイド5記事は共通構造，2経路，目次および開示を持つ
     assert.match(html, /class="article-toc"/);
     assert.match(html, /id="summary"/);
     assert.equal((html.match(/data-route-source="article-top-affiliate"/g) ?? []).length, 1);
-    assert.equal((html.match(/data-route-source="article-final-affiliate"/g) ?? []).length, 1);
-    assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, 2);
-    assert.equal((html.match(/広告・アフィリエイトを含みます/g) ?? []).length, 2);
-    assert.equal((html.match(/見積もりサービスの利用は無料です/g) ?? []).length, 2);
-    assert.equal((html.match(/施工会社・条件で確認します/g) ?? []).length, 2);
+    const quoteCount = pageName === "subsidies.html" ? 1 : 2;
+    assert.equal((html.match(/data-route-source="article-final-affiliate"/g) ?? []).length, pageName === "subsidies.html" ? 0 : 1);
+    assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, quoteCount);
+    assert.equal((html.match(/広告・アフィリエイトを含みます/g) ?? []).length, quoteCount);
+    assert.equal((html.match(/見積もりサービスの利用は無料です/g) ?? []).length, quoteCount);
+    assert.equal((html.match(/施工会社・条件で確認します/g) ?? []).length, quoteCount);
     assert.doesNotMatch(html, /(?:相談|現地調査|見積もり)[^．]{0,24}すべて無料/);
-    assert.equal((html.match(/data-route-source="article-(?:top|final)-affiliate" disabled/g) ?? []).length, 2);
+    assert.equal((html.match(/data-route-source="article-(?:top|final)-affiliate" disabled/g) ?? []).length, quoteCount);
     assert.match(html, /class="article-sources"/);
     assert.match(html, /class="article-related"/);
     assert.equal((html.match(/class="article-action"/g) ?? []).length, 0);
@@ -348,7 +411,7 @@ test("収支記事以外の4記事が確定した記事構造と主題別図版�
       'class="article-opening-summary"',
       'class="article-entry-actions',
       'class="article-toc"'
-    ].map((marker) => html.indexOf(marker));
+    ].filter(marker => spec.pageName !== "subsidies.html" || marker !== 'class="article-entry-actions').map((marker) => html.indexOf(marker));
     assert.ok(introOrder.every((position) => position >= 0), `導入要素が不足しています：${spec.pageName}`);
     assert.deepEqual(introOrder, [...introOrder].sort((a, b) => a - b), `導入順が異なります：${spec.pageName}`);
     assert.equal((html.match(/class="article-opening-summary"/g) ?? []).length, 1);
@@ -361,6 +424,7 @@ test("収支記事以外の4記事が確定した記事構造と主題別図版�
       .map((match) => match[0]);
     assert.equal(stacks.length, 2, `共通2段CTAは上下2組です：${spec.pageName}`);
     for (const stack of stacks) {
+      if (spec.pageName === "subsidies.html") continue;
       assert.equal((stack.match(/class="article-action-stack__row /g) ?? []).length, 2);
       assert.match(stack, /article-action-stack__row--internal/);
       assert.match(stack, /article-action-stack__row--affiliate affiliate-panel/);
@@ -369,12 +433,12 @@ test("収支記事以外の4記事が確定した記事構造と主題別図版�
       assert.match(stack, /広告・アフィリエイトを含みます．/);
     }
     const firstStack = stacks[0];
-    assert.ok(
+    if (spec.pageName !== "subsidies.html") assert.ok(
       firstStack.indexOf(`article-action-stack__row--${spec.topFirstRole}`) <
         firstStack.indexOf(`article-action-stack__row--${spec.topFirstRole === "internal" ? "affiliate" : "internal"}`),
       `上部CTAの主従順が異なります：${spec.pageName}`
     );
-    assert.ok(stacks[1].indexOf("article-action-stack__row--internal") < stacks[1].indexOf("article-action-stack__row--affiliate"));
+    if (spec.pageName !== "subsidies.html") assert.ok(stacks[1].indexOf("article-action-stack__row--internal") < stacks[1].indexOf("article-action-stack__row--affiliate"));
 
     const endingOrder = [
       'id="summary"',
@@ -680,7 +744,10 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
 
   const articleDataJs = await readFile(new URL("../../site/articles/src/article-data.js", import.meta.url), "utf8");
   assert.match(articleDataJs, /details\.article-toc/);
-  assert.match(articleDataJs, /matchMedia\("\(min-width: 48rem\)"\)/);
+  assert.doesNotMatch(articleDataJs, /tableOfContents\.open\s*=\s*window\.matchMedia/);
+  assert.match(articleDataJs, /tableOfContents\.open = false/);
+  assert.match(articleDataJs, /summary\.setAttribute\("aria-label", tableOfContents\.open \? "目次を閉じる" : "目次を開く"\)/);
+  assert.match(articleDataJs, /updateLabel\(\);\s*tableOfContents\.addEventListener\("toggle", updateLabel\)/);
 
   const html = await readFile(new URL("../../site/pages/calculation-method.html", import.meta.url), "utf8");
   const formulaParagraphs = [...html.matchAll(/<p class="article-formula">([\s\S]*?)<\/p>/g)];

@@ -1,7 +1,7 @@
 {
-  "schema_version": "9.1.0",
-  "data_version": "2026-09-05",
-  "generated_at": "2026-09-05T08:46:59+00:00",
+  "schema_version": "9.4.0",
+  "data_version": "2026-09-06",
+  "generated_at": "2026-09-05T16:16:08+00:00",
   "sources": [
     {
       "source_id": "bri-pyhees-residential-total-electricity-load",
@@ -224,6 +224,15 @@
       "retrieved_at": "2026-09-01T13:49:33+09:00"
     },
     {
+      "source_id": "nichicon-ess-t1-t2-outage-qa-2026",
+      "data_domain": "battery_system",
+      "source_class": "primary",
+      "publisher": "ニチコン株式会社",
+      "source_title": "トライブリッド蓄電システム ESS-T1／T2 よくあるご質問",
+      "source_url": "https://www.nichicon.co.jp/products/ess/qa_ess-tribrid-t1.html",
+      "retrieved_at": "2026-09-05T00:00:00+09:00"
+    },
+    {
       "source_id": "niigata-snow-country-zeh-subsidy-fy2026",
       "data_domain": "subsidy",
       "source_class": "primary",
@@ -231,6 +240,34 @@
       "source_title": "令和8年度新潟県雪国型ZEH等導入促進補助金",
       "source_url": "https://www.pref.niigata.lg.jp/sec/kankyoseisaku/0583945.html",
       "retrieved_at": "2026-09-01T21:41:46+09:00"
+    },
+    {
+      "source_id": "panasonic-lda7wwgew1-spec-2026",
+      "data_domain": "battery_system",
+      "source_class": "primary",
+      "publisher": "パナソニック株式会社",
+      "source_title": "LDA7WWGEW1 仕様・性能",
+      "source_url": "https://panasonic.jp/lamp/products/LDA7WWGEW1/spec.html",
+      "retrieved_at": "2026-09-05T00:00:00+09:00"
+    },
+    {
+      "source_id": "panasonic-nr-e457px-spec-2026",
+      "data_domain": "battery_system",
+      "source_class": "primary",
+      "publisher": "パナソニック株式会社",
+      "source_title": "NR-E457PX 仕様・寸法",
+      "source_url": "https://panasonic.jp/reizo/products/NR-E457PX/spec.html",
+      "retrieved_at": "2026-09-05T00:00:00+09:00"
+    },
+    {
+      "source_id": "sharp-aquos-sense8-battery-2023",
+      "data_domain": "battery_system",
+      "source_class": "primary",
+      "publisher": "シャープ株式会社",
+      "source_title": "スマートフォン AQUOS sense8を商品化",
+      "source_url": "https://corporate.jp.sharp/news/231003-d.html",
+      "retrieved_at": "2026-09-05T00:00:00+09:00",
+      "published_at": "2023-10-03"
     },
     {
       "source_id": "sharp-residential-battery-capacity-warranty-2026",

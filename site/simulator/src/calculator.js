@@ -1,3 +1,5 @@
+import { preprocessCapacity } from "./capacity-preprocessing.js";
+
 export const CALCULATION_IMPLEMENTED = true;
 
 function roundYen(value) {
@@ -399,11 +401,12 @@ function municipalityStatusForEquipment(municipality, programs, equipmentPackage
 }
 
 function amountFromRule(rule, capacityKw, batteryCapacityKwh) {
+  if (rule.minimum_capacity_kw != null && capacityKw < rule.minimum_capacity_kw) return null;
   let amount = null;
   if (rule.calculation_type === "fixed") {
     amount = rule.fixed_amount_yen;
   } else if (rule.calculation_type === "per_kw") {
-    amount = capacityKw * rule.amount_yen_per_kw;
+    amount = preprocessCapacity(capacityKw, rule.capacity_preprocessing_rule) * rule.amount_yen_per_kw;
     if (rule.rounding_rule === "floor_1000_yen") amount = Math.floor(amount / 1000) * 1000;
     if (rule.cap_yen !== null) amount = Math.min(amount, rule.cap_yen);
   } else if (rule.calculation_type === "per_kwh") {
@@ -511,6 +514,9 @@ function municipalProgramEvaluation(
   if (program.application_status !== "accepting") {
     confirmations.unshift("現在の受付状態では算入しない．");
   }
+  if (reasonCode === "capacity_below_minimum") {
+    confirmations.unshift("入力容量が制度の最低容量を下回るため算入しない．");
+  }
   return {
     ...program,
     government_level: "municipality",
@@ -538,12 +544,18 @@ function municipalSubsidyForCapacity(
     const requiredTypes = requiredBenefitComponentTypes(program, equipmentPackage);
     const presentTypes = new Set(program.benefit_components.map((item) => item.component_type));
     if (![...requiredTypes].every((type) => presentTypes.has(type))) return "required_benefit_component_missing";
+    if (resolvedProgramComponents(program, equipmentPackage) !== null && !meetsMinimumCapacity(program)) return "capacity_below_minimum";
     return "benefit_amount_rule_unresolved";
+  };
+  const meetsMinimumCapacity = (program) => {
+    const components = resolvedProgramComponents(program, equipmentPackage);
+    return components !== null && components.every((component) => component.amount_rule.minimum_capacity_kw == null
+      || capacityKw >= component.amount_rule.minimum_capacity_kw);
   };
   const candidates = programs
     .filter((item) => item.application_status === "accepting"
       && (!eligibleEquipment.has(item.target_equipment)
-        || resolvedProgramComponents(item, equipmentPackage) === null))
+        || resolvedProgramComponents(item, equipmentPackage) === null || !meetsMinimumCapacity(item)))
     .map((item) => municipalProgramEvaluation(
       item,
       "candidate_missing_conditions",
@@ -574,7 +586,7 @@ function municipalSubsidyForCapacity(
   const calculable = programs
     .filter((program) => program.application_status === "accepting"
       && eligibleEquipment.has(program.target_equipment)
-      && resolvedProgramComponents(program, equipmentPackage) !== null)
+      && resolvedProgramComponents(program, equipmentPackage) !== null && meetsMinimumCapacity(program))
     .map((program) => [
       program,
       municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipmentPackage)
@@ -743,9 +755,21 @@ export function calculateEstimate(input, publicData) {
       batteryCapacitySource = "user_input";
     }
   }
+  let selectedDegradationScenario = null;
+  let batteryDegradationScenarioSource = "not_applicable";
+  if (selectedEquipmentPackage === calculation.battery_degradation_input.applicable_equipment_package) {
+    const scenarioId = input.batteryDegradationScenario ?? calculation.battery_degradation_input.default;
+    selectedDegradationScenario = batterySystem.degradation_scenarios.find((scenario) => scenario.id === scenarioId);
+    if (!selectedDegradationScenario) {
+      throw new Error("蓄電池劣化シナリオはconservative，conditional_70またはoptimistic_85で指定してください．");
+    }
+    batteryDegradationScenarioSource = input.batteryDegradationScenario == null ? "default" : "user_input";
+  }
   const selectedBatterySystem = {
     ...batterySystem,
-    capacity_kwh: batteryCapacityKwh
+    capacity_kwh: batteryCapacityKwh,
+    annual_capacity_retention_factor: selectedDegradationScenario?.annual_capacity_retention_factor
+      ?? batterySystem.annual_capacity_retention_factor
   };
   const selectedMunicipalityProgramStatus = municipalityStatusForEquipment(
     municipality,
@@ -1020,6 +1044,8 @@ export function calculateEstimate(input, publicData) {
       battery_capacity_kwh: batteryCapacityKwh,
       battery_capacity_source: batteryCapacitySource,
       used_default_battery_capacity: usedDefaultBatteryCapacity,
+      battery_degradation_scenario: selectedDegradationScenario?.id ?? null,
+      battery_degradation_scenario_source: batteryDegradationScenarioSource,
       monthly_electricity_bill_yen: roundYen(monthlyBill),
       used_default_monthly_electricity_bill: usedDefaultBill,
       detail_conditions: detailResult.conditions,
@@ -1041,13 +1067,23 @@ export function calculateEstimate(input, publicData) {
       annual_battery_delivered_kwh: roundYen(annualEnergyFlows[0].annual_battery_delivered_kwh),
       annual_battery_conversion_loss_kwh: roundYen(annualEnergyFlows[0].annual_battery_conversion_loss_kwh),
       battery_usable_capacity_kwh: roundTo(annualEnergyFlows[0].battery_usable_capacity_kwh, 6),
+      battery_degradation: {
+        scenario_id: selectedDegradationScenario?.id ?? null,
+        annual_capacity_retention_factor: selectedDegradationScenario?.annual_capacity_retention_factor ?? null,
+        capacity_retention_at_year_20: selectedDegradationScenario?.capacity_retention_at_year_20 ?? null,
+        positioning: selectedDegradationScenario?.positioning ?? "not_applicable",
+        research_identified_estimate: false,
+        market_average: false,
+        warranty_value: false,
+        basis: selectedDegradationScenario?.basis ?? "太陽光のみでは蓄電池劣化シナリオを適用しない．"
+      },
       annual_exported_kwh: roundYen(exported),
       annual_purchased_kwh: roundYen(purchased),
       battery_model_notes: selectedEquipmentPackage === "solar_plus_standard_battery"
         ? [
           "充放電kW上限を設定しないため，実機より蓄電池便益を上方評価する可能性がある．",
-          "15年目末60％の容量保持は実測平均や期待値ではなく，保証下限に整合する保守的感度パスです．各年は当該年末容量で計算します．",
-          "16～20年の容量は，20年間交換しないシナリオで年率係数を継続した数学的外挿です．一次資料の実測値・保証値ではなく，保証条件のサイクル数を耐用年数へ換算していません．",
+          `${selectedDegradationScenario.label}を適用します．研究で同定した平均，保証値または予測分布ではありません．各年は当該年末容量で計算します．`,
+          `20年目末容量保持率は${Number(selectedDegradationScenario.capacity_retention_at_year_20.toPrecision(12))}です．条件付き比較の増益を実証値として扱いません．`,
           "蓄電池は20年間交換せず，容量劣化を継続する想定です．故障修理・交換費は含まず，20年間の動作を保証するものではありません．"
         ]
         : [],

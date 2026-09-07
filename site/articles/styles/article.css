@@ -746,12 +746,13 @@
   gap: 0.45rem;
   align-items: center;
   color: var(--color-primary-dark);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
+  white-space: nowrap;
   font-weight: 800;
 }
 
 .article-toc__state::before {
-  content: "開く";
+  content: "目次を開く";
 }
 
 .article-toc__state::after {
@@ -761,7 +762,7 @@
 }
 
 .article-toc[open] .article-toc__state::before {
-  content: "閉じる";
+  content: "目次を閉じる";
 }
 
 .article-toc[open] .article-toc__state::after {
@@ -1295,4 +1296,25 @@
   .article-toc ol {
     columns: 1;
   }
+}
+
+/* Explicit editorial roles preserve numbered procedures and comparison tables. */
+.article ul.article-checklist { margin-block: 1rem; padding: 0; list-style: none; }
+.article ul.article-checklist > li { position: relative; padding: 0.4rem 0 0.4rem 1.85rem; margin-block: 0.3rem; line-height: 1.8; }
+.article ul.article-checklist > li::before { content: ""; position: absolute; left: 0; top: 0.65rem; width: 1.15rem; height: 1.15rem; border-radius: 50%; background: #e3eee8; }
+.article ul.article-checklist > li::after { content: ""; position: absolute; left: 0.36rem; top: 0.9rem; width: 0.3rem; height: 0.5rem; border: solid var(--color-primary-dark); border-width: 0 0.13rem 0.13rem 0; transform: rotate(45deg); }
+.article-balance-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin-top: 1rem; }
+.article-balance-groups > div, .article-balance-groups > section { min-width: 0; padding: 1rem; border: 1px solid var(--color-border); border-radius: 0.6rem; }
+.article-balance-group--income { background: #f0f6f2; }
+.article-balance-group--expense { background: #faf3ef; }
+.article-balance-group--income > :is(h3, strong) { color: var(--color-primary-dark); }
+.article-balance-group--expense > :is(h3, strong) { color: #8d3d2e; }
+.article-balance-groups :is(h3, strong) { font-size: 1rem; }
+.article-balance-groups h3 { margin: 0 0 0.75rem; padding: 0; border: 0; }
+.article-balance-groups ul { margin: 0.75rem 0 0; padding-left: 1.2rem; }
+.article-balance-groups li { margin-block: 0.6rem; font-size: 0.94rem; line-height: 1.75; overflow-wrap: anywhere; }
+.article-balance-groups li strong, .article-balance-groups li span { display: block; }
+@media (max-width: 40rem) {
+  .article-balance-groups { grid-template-columns: minmax(0, 1fr); }
+  .article-balance-groups > div, .article-balance-groups > section { padding: 0.9rem; }
 }

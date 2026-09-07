@@ -10,14 +10,14 @@ export function requireMunicipality(input, publicData) {
   return municipality;
 }
 
-export function populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp }, publicData, preferredCode = null) {
+export function populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp, showUnselected = false }, publicData, preferredCode = null) {
   const items = (publicData?.municipalities ?? []).filter((item) => item.prefecture_code === prefecture.value);
   const option = document.createElement("option");
   option.value = "";
   option.textContent = !prefecture.value ? "都道府県を選択してください" : items.length ? "市区町村を選択してください" : "市区町村データは未収集です";
   municipality.replaceChildren(option);
   municipality.disabled = !items.length;
-  municipalityField.hidden = !prefecture.value;
+  municipalityField.hidden = !prefecture.value && !showUnselected;
   for (const item of items) {
     const choice = document.createElement("option");
     choice.value = item.municipality_code;

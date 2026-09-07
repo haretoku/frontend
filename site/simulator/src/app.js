@@ -2,6 +2,8 @@ import { CALCULATION_IMPLEMENTED, calculateEstimate } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 import { requireMunicipality, populateMunicipalitySelect } from "./location-input.js";
 import { decisionAmountParts, scenarioSubsidyCondition, hasUnconfirmedSubsidy } from "./result-presentation.js";
+import { degradationLabel, degradationDescription, outageReferencePresentation, formatBatteryCapacity } from "./battery-presentation.js";
+import { applicationStatusLabels, componentStatusLabels, municipalInformationSummary, programConditionsText } from "./municipal-information.js";
 
 const elements = {
   form: document.querySelector("#estimate-form"),
@@ -35,17 +37,13 @@ const elements = {
   resultSummary: document.querySelector("[data-result-summary]"),
   resultEconomicBenefit: document.querySelector("[data-result-economic-benefit]"),
   resultPayback: document.querySelector("[data-result-payback]"),
-  resultGrossCost: document.querySelector("[data-result-gross-cost]"),
   resultSolarCost: document.querySelector("[data-result-solar-cost]"),
-  resultInitialCost: document.querySelector("[data-result-initial-cost]"),
   resultSelfConsumption: document.querySelector("[data-result-self-consumption]"),
   resultSalesIncome: document.querySelector("[data-result-sales-income]"),
   resultSubsidy: document.querySelector("[data-result-subsidy]"),
   resultSubsidySource: document.querySelector("[data-result-subsidy-source]"),
   resultMaintenanceCost: document.querySelector("[data-result-maintenance-cost]"),
   resultPowerConditionerCost: document.querySelector("[data-result-power-conditioner-cost]"),
-  resultLifecycleCost: document.querySelector("[data-result-lifecycle-cost]"),
-  resultLifecycleStatus: document.querySelector("[data-result-lifecycle-status]"),
   resultProfit: document.querySelector("[data-result-profit]"),
   resultGeneration: document.querySelector("[data-result-generation]"),
   resultConsumption: document.querySelector("[data-result-consumption]"),
@@ -70,6 +68,13 @@ const elements = {
   municipalExcludedList: document.querySelector("[data-municipal-excluded-list]"),
   resultBatteryCost: document.querySelector("[data-result-battery-cost]"),
   batteryYearly: document.querySelector("[data-battery-yearly]"),
+  batteryDegradationControl: document.querySelector("[data-battery-degradation-control]"),
+  batteryDegradationSelect: document.querySelector("#battery-degradation-scenario"),
+  batteryDegradationAssumption: document.querySelector("[data-battery-degradation-assumption]"),
+  batteryDegradationDescription: document.querySelector("[data-battery-degradation-description]"),
+  batteryOutageReference: document.querySelector("[data-battery-outage-reference]"),
+  batteryOutageCapacity: document.querySelector("[data-battery-outage-capacity]"),
+  batteryOutageEnergy: document.querySelector("[data-battery-outage-energy]"),
   batteryCapacityChart: document.querySelector("[data-battery-capacity-chart]"),
   batteryCapacityDescription: document.querySelector("[data-battery-capacity-description]"),
   batteryCapacityInitial: document.querySelector("[data-battery-capacity-initial]"),
@@ -92,6 +97,16 @@ const elements = {
 let frontendData = null;
 let latestResult = null;
 let selectedScenarioId = "standard";
+let batteryDegradationSelection = null;
+
+function recoverInvalidDegradationSelection() {
+  const contract = frontendData?.publicData.calculation.battery_degradation_input;
+  if (contract && batteryDegradationSelection !== null
+    && !contract.options.includes(batteryDegradationSelection)) {
+    batteryDegradationSelection = null;
+    elements.formMessage.textContent = "URLの容量劣化条件を確認できませんでした．条件を確認して再計算すると，保守的な仮定で診断できます．";
+  }
+}
 
 function populatePrefectures(prefectures) {
   const fragment = document.createDocumentFragment();
@@ -240,6 +255,8 @@ function readInput() {
     monthlyElectricityBillYen: monthlyElectricityBill === "" ? null : Number(monthlyElectricityBill),
     systemCapacityKw: Number(elements.capacitySlider.value),
     equipmentPackage: selectedEquipmentPackage(),
+    batteryDegradationScenario: selectedEquipmentPackage() === "solar_plus_standard_battery"
+      ? batteryDegradationSelection : null,
     batteryCapacityKwh: selectedEquipmentPackage() === frontendData.publicData.calculation
       .battery_capacity_input.applicable_equipment_package
       ? Number(elements.batteryCapacitySlider.value)
@@ -266,6 +283,8 @@ function inputFromLocation() {
     monthlyElectricityBillYen: monthlyBill === null || monthlyBill === "" ? null : Number(monthlyBill),
     systemCapacityKw: capacity === null || capacity === "" ? null : Number(capacity),
     equipmentPackage,
+    batteryDegradationScenario: frontendData.publicData.calculation.battery_degradation_input
+      ? params.get(frontendData.publicData.calculation.battery_degradation_input.url_parameter_name) : null,
     batteryCapacityKwh: batteryCapacity === null || batteryCapacity === "" ? null : Number(batteryCapacity),
     daytimeOccupancy,
     detailConditions: roofOrientation ? { roof_orientation: roofOrientation } : undefined
@@ -284,6 +303,11 @@ function writeInputToLocation(input) {
   }
   target.searchParams.set("systemCapacityKw", String(input.systemCapacityKw));
   target.searchParams.set("equipment_package", input.equipmentPackage);
+  const degradationContract = frontendData.publicData.calculation.battery_degradation_input;
+  if (degradationContract && input.equipmentPackage === degradationContract.applicable_equipment_package
+    && input.batteryDegradationScenario !== null) {
+    target.searchParams.set(degradationContract.url_parameter_name, input.batteryDegradationScenario);
+  }
   if (
     input.equipmentPackage === frontendData.publicData.calculation.battery_capacity_input.applicable_equipment_package
     && input.batteryCapacityKwh !== null
@@ -373,7 +397,7 @@ function formatCompactYen(value) {
 }
 
 function formatBasicConditions(result) {
-  const bill = `月額${formatYen(result.input.monthly_electricity_bill_yen)}`;
+  const bill = `電気代 ${formatYen(result.input.monthly_electricity_bill_yen)}／月`;
   const location = result.input.municipality_name
     ? `${result.input.prefecture_name}${result.input.municipality_name}`
     : result.input.prefecture_name;
@@ -405,9 +429,12 @@ function collapseCalculator(result) {
     line.textContent = text;
     return line;
   });
+  const billAmount = document.createElement("strong");
+  billAmount.textContent = `${formatYen(result.input.monthly_electricity_bill_yen)}／月`;
+  lines[1].replaceChildren(document.createTextNode("電気代 "), billAmount);
   if (result.input.used_default_monthly_electricity_bill) {
     const note = document.createElement("small");
-    note.textContent = "地域平均から推定";
+    note.textContent = "地域平均";
     lines[1].append(note);
   }
   elements.conditionSummary.replaceChildren(...lines);
@@ -523,7 +550,7 @@ function renderScenarios(scenarios, input) {
     premise.textContent = `電気料金上昇 年${growthPercent}％`;
     const subsidy = document.createElement("small");
     subsidy.className = "scenario-card__subsidy";
-    subsidy.textContent = scenarioSubsidyCondition(scenario);
+    subsidy.textContent = scenarioSubsidyCondition(scenario, frontendData.publicData.municipalities.find((item) => item.municipality_code === input.municipality_code)?.candidate_summary);
     item.append(label, amount, premise, subsidy);
     elements.scenarioList.append(item);
   }
@@ -547,6 +574,15 @@ function appendProgramList(list, programs, statusText) {
     const note = document.createElement("p");
     note.textContent = typeof statusText === "function" ? statusText(program) : statusText;
     item.append(heading, note);
+    if (program.note) {
+      const conditions = document.createElement("details");
+      const conditionsTitle = document.createElement("summary");
+      conditionsTitle.textContent = "制度の条件・注意事項";
+      const conditionsText = document.createElement("p");
+      conditionsText.textContent = programConditionsText(program.note);
+      conditions.append(conditionsTitle, conditionsText);
+      item.append(conditions);
+    }
     const userConfirmations = (program.required_confirmations ?? []).filter(
       (confirmation) => !confirmation.includes("金額算定ルールを一意に確定できない")
         && !confirmation.includes("入力と対象設備が一致しない")
@@ -566,7 +602,46 @@ function appendProgramList(list, programs, statusText) {
   list.replaceChildren(fragment);
 }
 
+function renderMunicipalInformation(municipality) {
+  const panel = document.querySelector("[data-municipal-information]");
+  const summary = municipality?.candidate_summary;
+  panel.hidden = !summary;
+  if (!summary) return;
+  document.querySelector("[data-municipal-information-status]").textContent = municipalInformationSummary(summary);
+  document.querySelector("[data-municipal-information-names]").textContent = (municipality.candidate_program_names ?? []).join("／");
+  const summaryReason = document.querySelector("[data-municipal-information-reason]");
+  summaryReason.hidden = summary.amount_components.length > 0;
+  summaryReason.textContent = summary.amount_components.length === 0 ? summary.non_adoption_reason ?? "" : "";
+  const equipmentLabels = { solar: "太陽光", battery: "蓄電池", solar_battery: "太陽光・蓄電池", package_bonus: "組合せ加算" };
+  document.querySelector("[data-municipal-information-components]").replaceChildren(...summary.amount_components.map((component) => {
+    const item = document.createElement("li");
+    const title = document.createElement("strong");
+    title.textContent = `${equipmentLabels[component.equipment] ?? "対象設備"}：${component.display_amount}`;
+    const state = document.createElement("p");
+    state.textContent = `${applicationStatusLabels[component.application_status] ?? "受付状況未確認"}．${componentStatusLabels[component.calculation_status] ?? "未確認"}．`;
+    item.append(title, state);
+    for (const text of [component.scope, component.reason]) {
+      if (!text) continue;
+      const paragraph = document.createElement("p");
+      paragraph.textContent = text;
+      item.append(paragraph);
+    }
+    const link = document.createElement("a");
+    link.href = component.official_url;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = `公式情報を確認 ↗（${component.confirmed_at}確認）`;
+    item.append(link);
+    return item;
+  }));
+  const source = document.querySelector("[data-municipal-information-source]");
+  source.href = summary.official_url;
+  source.textContent = `自治体の公式情報を確認 ↗（${summary.confirmed_at}確認）`;
+}
+
 function renderMunicipalSubsidy(result, scenario) {
+  const municipality = frontendData.publicData.municipalities.find((item) => item.municipality_code === result.input.municipality_code);
+  renderMunicipalInformation(municipality);
   const breakdown = scenario.subsidy_breakdown;
   const municipalIncluded = (breakdown?.included_programs ?? []).filter(
     (program) => program.government_level === "municipality"
@@ -612,6 +687,8 @@ function renderMunicipalSubsidy(result, scenario) {
     elements.municipalSubsidySummary.textContent = "利用できる制度がある場合でも，この下振れシナリオは「補助金を利用できない場合」として0円で計算しています．";
   } else if (municipalIncluded.length > 0) {
     elements.municipalSubsidySummary.textContent = summaries.included;
+  } else if (municipalCandidates.some((program) => program.reason_code === "capacity_below_minimum")) {
+    elements.municipalSubsidySummary.textContent = "入力容量が制度の最低容量を下回るため，今回は含めていません．制度がないという意味ではありません．";
   } else if (municipalCandidates.length > 0) {
     elements.municipalSubsidySummary.textContent = summaries.candidate;
   } else if (rawMunicipalExcluded.some((program) => program.calculation_status === "excluded_closed")) {
@@ -621,7 +698,9 @@ function renderMunicipalSubsidy(result, scenario) {
   } else if (municipalExcluded.length > 0) {
     elements.municipalSubsidySummary.textContent = "確認した制度は適用条件と一致しないため，今回は含めていません．";
   } else {
-    elements.municipalSubsidySummary.textContent = summaries[status] ?? summaries.unconfirmed;
+    elements.municipalSubsidySummary.textContent = municipality?.candidate_summary
+      ? municipalInformationSummary(municipality.candidate_summary)
+      : summaries[status] ?? summaries.unconfirmed;
   }
 
   elements.municipalIncluded.hidden = municipalIncluded.length === 0;
@@ -661,6 +740,31 @@ function renderMunicipalSubsidy(result, scenario) {
 function renderBatteryYearly(result) {
   const batterySelected = result.input.equipment_package === "solar_plus_standard_battery";
   elements.batteryYearly.hidden = !batterySelected;
+  const degradation = result.energy.battery_degradation;
+  const contract = frontendData.publicData.calculation.battery_degradation_input;
+  const available = batterySelected && Boolean(contract && degradation?.scenario_id);
+  elements.batteryDegradationControl.hidden = !available;
+  elements.batteryDegradationSelect.disabled = !available;
+  if (available) {
+    const scenarios = frontendData.publicData.calculation.battery_system.degradation_scenarios;
+    if (!elements.batteryDegradationSelect.options.length) {
+      elements.batteryDegradationSelect.replaceChildren(...scenarios.map((scenario) => {
+        const option = document.createElement("option");
+        option.value = scenario.id;
+        option.textContent = degradationLabel(scenario);
+        return option;
+      }));
+    }
+    elements.batteryDegradationSelect.value = degradation.scenario_id;
+    elements.batteryDegradationAssumption.textContent = `今回の収支の前提：${degradationLabel({ ...degradation, id: degradation.scenario_id })}`;
+    elements.batteryDegradationDescription.textContent = degradationDescription(degradation);
+  }
+  const outage = batterySelected ? outageReferencePresentation(frontendData.publicData.calculation.battery_system.outage_reference) : null;
+  elements.batteryOutageReference.hidden = !outage;
+  if (outage) {
+    elements.batteryOutageCapacity.textContent = outage.label;
+    elements.batteryOutageEnergy.textContent = outage.energy;
+  }
   if (!batterySelected) {
     elements.batteryCapacityChart.replaceChildren();
     return;
@@ -696,17 +800,27 @@ function renderBatteryYearly(result) {
     label.textContent = `${capacity.toFixed(1)} kWh`;
     chart.append(label);
   }
+  if (outage && outage.capacity <= nominalCapacity) {
+    chart.append(createSvgElement("line", { x1: x(0), y1: y(outage.capacity), x2: x(20), y2: y(outage.capacity), class: "battery-capacity-chart__reference" }));
+    const label = createSvgElement("text", { x: x(0) + 4, y: y(outage.capacity) - 8, class: "battery-capacity-chart__label" });
+    label.textContent = `24時間の一例 ${outage.label}`;
+    chart.append(label);
+  }
   const pathData = points.map((point, index) => `${index === 0 ? "M" : "L"}${x(point.year)} ${y(point.capacity)}`).join(" ");
   chart.append(createSvgElement("path", { d: pathData, class: "battery-capacity-chart__line" }));
   for (const point of points.filter(({ year }) => [10, 20].includes(year))) {
     chart.append(createSvgElement("circle", { cx: x(point.year), cy: y(point.capacity), r: 5, class: "battery-capacity-chart__point" }));
   }
   const capacities = new Map(points.map((point) => [point.year, point.capacity]));
-  elements.batteryCapacityInitial.textContent = `${nominalCapacity.toFixed(2)} kWh`;
-  elements.batteryCapacityYear1.textContent = `${capacities.get(1).toFixed(2)} kWh`;
-  elements.batteryCapacityYear10.textContent = `${capacities.get(10).toFixed(2)} kWh`;
-  elements.batteryCapacityYear20.textContent = `${capacities.get(20).toFixed(2)} kWh`;
-  elements.batteryCapacityDescription.textContent = `導入時${nominalCapacity.toFixed(2)} kWh，初年度${capacities.get(1).toFixed(2)} kWh，10年後${capacities.get(10).toFixed(2)} kWh，20年後${capacities.get(20).toFixed(2)} kWhです．15年目末60％は保証下限に整合する保守的感度パスで，各年は年末容量をその年の計算に用います．16～20年は年率係数を継続した数学的外挿であり，一次資料の実測値・保証値ではありません．`;
+  elements.batteryCapacityInitial.textContent = `${formatBatteryCapacity(nominalCapacity)} kWh`;
+  elements.batteryCapacityYear1.textContent = `${formatBatteryCapacity(capacities.get(1))} kWh`;
+  elements.batteryCapacityYear10.textContent = `${formatBatteryCapacity(capacities.get(10))} kWh`;
+  elements.batteryCapacityYear20.textContent = `${formatBatteryCapacity(capacities.get(20))} kWh`;
+  elements.batteryCapacityDescription.textContent = `導入時${formatBatteryCapacity(nominalCapacity)} kWh，初年度${formatBatteryCapacity(capacities.get(1))} kWh，10年後${formatBatteryCapacity(capacities.get(10))} kWh，20年後${formatBatteryCapacity(capacities.get(20))} kWhです．15年目末60％は保証下限に整合する保守的感度パスで，各年は年末容量をその年の計算に用います．16～20年は年率係数を継続した数学的外挿であり，一次資料の実測値・保証値ではありません．`;
+  if (available) {
+    elements.batteryCapacityDescription.textContent = `導入時${formatBatteryCapacity(nominalCapacity)} kWh，初年度${formatBatteryCapacity(capacities.get(1))} kWh，10年後${formatBatteryCapacity(capacities.get(10))} kWh，20年後${formatBatteryCapacity(capacities.get(20))} kWhです．${degradationDescription(degradation)}`;
+  }
+  if (outage) elements.batteryCapacityDescription.textContent += `冷蔵庫・照明・スマホ24時間の一例は${outage.label}です．満充電，残量0％まで使用，太陽光補充なしの参考条件です．`;
 }
 
 const SVG_NAMESPACE = "http://www.w3.org/2000/svg";
@@ -986,33 +1100,24 @@ function renderResult(result, options = {}) {
       : `現在の計算前提では，約${selectedScenario.payback_year}年で回収する見込みです．`;
   const netInitialOutlay = selectedScenario.net_initial_outlay_yen
     ?? selectedScenario.initial_cost_yen;
-  const grossInstallationCost = selectedScenario.gross_installation_cost_yen
-    ?? netInitialOutlay + selectedScenario.subsidy_yen;
-  renderBreakdownAmount(elements.resultGrossCost, grossInstallationCost);
   renderBreakdownAmount(elements.resultSolarCost, selectedScenario.solar_installation_cost_yen);
-  renderBreakdownAmount(elements.resultInitialCost, netInitialOutlay);
   renderCashflowAmount(elements.resultSelfConsumption, selectedScenario.total_electricity_savings_yen, "income");
   renderCashflowAmount(elements.resultSalesIncome, selectedScenario.total_sales_income_yen, "income");
   const selectedSubsidyStatus = subsidyStatusFor(selectedScenario, result.input);
   if (selectedSubsidyStatus === "unverified" || (selectedScenario.scenario !== "downside" && selectedScenario.subsidy_yen === 0 && hasUnconfirmedSubsidy(selectedScenario))) {
     renderCashflowAmount(elements.resultSubsidy, null);
-    elements.resultSubsidy.textContent = "未確認（今回は未算入）";
+    const municipalSummary = frontendData.publicData.municipalities.find((item) => item.municipality_code === result.input.municipality_code)?.candidate_summary;
+    elements.resultSubsidy.textContent = selectedSubsidyStatus !== "unverified" && municipalSummary
+      && ["confirmed", "partially_confirmed"].includes(municipalSummary.amount_status)
+      ? "未算入（制度の条件を確認）" : "未確認（今回は未算入）";
   } else {
     renderBreakdownAmount(elements.resultSubsidy, selectedScenario.subsidy_yen, "income");
   }
   const lifecycleCost = selectedScenario.total_maintenance_and_replacement_cost_yen;
-  if (Number.isFinite(lifecycleCost)) {
-    renderBreakdownAmount(elements.resultLifecycleCost, lifecycleCost);
-  } else {
-    renderCashflowAmount(elements.resultLifecycleCost, null);
-  }
   renderBreakdownAmount(elements.resultMaintenanceCost, selectedScenario.total_maintenance_cost_yen);
   renderBreakdownAmount(elements.resultPowerConditionerCost, selectedScenario.total_replacement_cost_yen);
   const batterySelected = result.input.equipment_package === "solar_plus_standard_battery";
-  elements.resultLifecycleStatus.textContent = selectedScenario.lifecycle_cost_status === "applied"
-    ? "点検・機器交換費を含みます．"
-    : "点検・機器交換費は未確認です．";
-  renderCashflowAmount(elements.resultProfit, selectedScenario.profit_yen);
+  elements.resultProfit.textContent = formatSignedYen(selectedScenario.profit_yen);
   elements.resultGeneration.textContent = `${yenFormatter.format(result.energy.annual_generation_kwh)} kWh／年`;
   elements.resultConsumption.textContent = `${yenFormatter.format(result.energy.annual_consumption_kwh)} kWh／年`;
   elements.resultSelfConsumptionRate.textContent = `${(result.energy.self_consumption_rate * 100).toFixed(1)}％`;
@@ -1072,6 +1177,7 @@ async function initialize() {
 
     updateAvailability();
     const initialInput = inputFromLocation();
+    batteryDegradationSelection = initialInput.batteryDegradationScenario;
     const defaultCapacity = frontendData.publicData.calculation.system_capacity_kw;
     initialInput.systemCapacityKw = normalizeCapacity(initialInput.systemCapacityKw, defaultCapacity);
     initialInput.daytimeOccupancy = normalizeDaytimeOccupancy(
@@ -1082,6 +1188,7 @@ async function initialize() {
       initialInput.equipmentPackage,
       frontendData.publicData.calculation
     );
+    if (initialInput.equipmentPackage === "solar_only") batteryDegradationSelection = null;
     if (initialInput.equipmentPackage === frontendData.publicData.calculation.battery_capacity_input.applicable_equipment_package) {
       setBatteryCapacityValue(
         initialInput.batteryCapacityKwh ?? frontendData.publicData.calculation.battery_capacity_input.default
@@ -1102,6 +1209,7 @@ async function initialize() {
     }
   } catch (error) {
     elements.formMessage.textContent = error instanceof Error ? error.message : "公開データを確認できませんでした．";
+    recoverInvalidDegradationSelection();
     elements.result.hidden = true;
   }
 }
@@ -1121,6 +1229,7 @@ elements.form.addEventListener("submit", (event) => {
     elements.formMessage.textContent = "条件を変更して再計算できます．";
   } catch (error) {
     elements.formMessage.textContent = error instanceof Error ? error.message : "計算できませんでした．";
+    recoverInvalidDegradationSelection();
   }
 });
 
@@ -1146,6 +1255,22 @@ elements.equipmentOptions.addEventListener("change", (event) => {
     writeInputToLocation(input);
   } catch (error) {
     elements.formMessage.textContent = error instanceof Error ? error.message : "再計算できませんでした．";
+  }
+});
+
+elements.batteryDegradationSelect.addEventListener("change", () => {
+  if (!frontendData || elements.result.hidden || elements.batteryDegradationSelect.disabled) return;
+  const previousSelection = batteryDegradationSelection;
+  try {
+    batteryDegradationSelection = elements.batteryDegradationSelect.value;
+    const input = readInput();
+    renderResult(calculateEstimate(input, frontendData.publicData), {
+      focus: false, resetDisclosures: false, scroll: false
+    });
+    writeInputToLocation(input);
+  } catch (error) {
+    batteryDegradationSelection = previousSelection;
+    elements.batteryDegradationAssumption.textContent = error instanceof Error ? error.message : "再計算できませんでした．";
   }
 });
 

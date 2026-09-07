@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import { calculateEstimate } from "../../site/simulator/src/calculator.js";
+import { preprocessCapacity } from "../../site/simulator/src/capacity-preprocessing.js";
 
 
 const publicData = JSON.parse(
@@ -12,12 +13,72 @@ const publicData = JSON.parse(
 const calculationCases = JSON.parse(
   await readFile(new URL("../fixtures/calculation-cases.json", import.meta.url), "utf8")
 );
+const capacityPreprocessingCases = JSON.parse(
+  await readFile(new URL("../fixtures/capacity-preprocessing.json", import.meta.url), "utf8")
+);
 
-test("公開契約9.1.0は容量劣化の意味と時点を明示した蓄電池契約を提供する", () => {
+for (const fixture of capacityPreprocessingCases.cases) {
+  test(`backend共通容量前処理fixtureと一致する：${fixture.id}`, () => {
+    assert.equal(
+      preprocessCapacity(fixture.input_capacity_kw, capacityPreprocessingCases.rule),
+      Number(fixture.expected_preprocessed_capacity_kw)
+    );
+    const data = structuredClone(publicData);
+    const program = data.municipal_subsidy_programs.find((item) => item.municipality_code === "14218");
+    Object.assign(program.benefit_components.find((item) => item.component_type === "solar").amount_rule, {
+      capacity_preprocessing_rule: capacityPreprocessingCases.rule,
+      amount_yen_per_kw: capacityPreprocessingCases.amount_yen_per_kw,
+      rounding_rule: capacityPreprocessingCases.rounding_rule,
+      cap_yen: capacityPreprocessingCases.cap_yen
+    });
+    const result = calculateEstimate({
+      prefectureCode: "14", municipalityCode: "14218", monthlyElectricityBillYen: null,
+      systemCapacityKw: fixture.input_capacity_kw
+    }, data);
+    assert.equal(result.scenarios.find((item) => item.scenario === "standard")
+      .subsidy_breakdown.municipality_amount_yen, fixture.expected_amount_yen);
+  });
+}
+
+test("制度固有の容量切捨ては十進境界と指数表記を保ち，省略時は入力不変", () => {
+  for (const [input, expected] of [[1.199999, 1.1], [1.2, 1.2], [1.200001, 1.2], [1.13, 1.1], [1.067, 1], [1.2e-7, 0], [1.2e21, 1.2e21]]) {
+    assert.equal(preprocessCapacity(input, "floor_0_1_kw"), expected);
+  }
+  for (const [input, expected] of [[1.129999, 1.12], [1.13, 1.13], [1.130001, 1.13], [1.067, 1.06], [1.13e-7, 0], [1.13e21, 1.13e21], [Number.MIN_VALUE, 0], [Number.MAX_VALUE, Number.MAX_VALUE]]) {
+    assert.equal(preprocessCapacity(input, "floor_0_01_kw"), expected);
+    assert.equal(preprocessCapacity(input, null), input);
+    assert.equal(preprocessCapacity(input, undefined), input);
+  }
+  assert.throws(() => preprocessCapacity(1.13, "unknown"), /未対応/);
+});
+
+test("容量前処理→単価乗算→金額切捨て→上限の順に自治体補助額へ反映する", () => {
+  // Synthetic amount rule on an existing accepted program; no public data is edited.
+  const data = structuredClone(publicData);
+  const program = data.municipal_subsidy_programs.find((item) => item.municipality_code === "14218");
+  const rule = program.benefit_components.find((item) => item.component_type === "solar").amount_rule;
+  rule.amount_yen_per_kw = 15000;
+  rule.cap_yen = null;
+  const input = { prefectureCode: "14", municipalityCode: "14218", monthlyElectricityBillYen: null, systemCapacityKw: 1.067 };
+  const amount = () => calculateEstimate(input, data).scenarios.find((item) => item.scenario === "standard").subsidy_breakdown.municipality_amount_yen;
+  assert.equal(amount(), 16000);
+  rule.capacity_preprocessing_rule = null;
+  assert.equal(amount(), 16000);
+  rule.capacity_preprocessing_rule = "floor_0_01_kw";
+  rule.rounding_rule = "none";
+  assert.equal(amount(), 15900);
+  rule.rounding_rule = "floor_1000_yen";
+  assert.equal(amount(), 15000);
+  rule.cap_yen = 14500;
+  assert.equal(amount(), 14500);
+  assert.equal(calculateEstimate(input, data).input.system_capacity_kw, 1.067);
+});
+
+test("公開契約9.4.0は容量劣化の意味と時点を明示した蓄電池契約を提供する", () => {
   const calculation = publicData.calculation;
   const occupancyModel = calculation.daytime_occupancy;
 
-  assert.equal(publicData.schema_version, "9.1.0");
+  assert.equal(publicData.schema_version, "9.4.0");
   assert.equal(occupancyModel.model_id, "residential-pv-hourly-overlap-2026");
   assert.equal(occupancyModel.time_bin_definition.count, 8760);
   assert.equal(
@@ -113,7 +174,8 @@ for (const calculationCase of calculationCases.cases) {
         systemCapacityKw: calculationCase.input.system_capacity_kw ?? undefined,
         daytimeOccupancy: calculationCase.input.daytime_occupancy ?? undefined,
         equipmentPackage: calculationCase.input.equipment_package ?? undefined,
-        batteryCapacityKwh: calculationCase.input.battery_capacity_kwh
+        batteryCapacityKwh: calculationCase.input.battery_capacity_kwh,
+        batteryDegradationScenario: calculationCase.input.battery_degradation_scenario
       },
       publicData
     );
@@ -121,11 +183,11 @@ for (const calculationCase of calculationCases.cases) {
   });
 }
 
-test("Schema 9.1正本3ファイルのSHA-256が承認値と一致する", async () => {
+test("Schema 9.4正本3ファイルのSHA-256が承認値と一致する", async () => {
   const expectedHashes = new Map([
-    ["../../data/input/public-data.json", "CB83CCF56ADEF44EE7319686DC7F41EF3CB0B7817B57819223CACC24BA301B50"],
-    ["../fixtures/calculation-cases.json", "91B65F4EC42C66D1F5CBD3C08B719364DB083A9FEF87C3586A6ED8AE300CC5A8"],
-    ["../../data/input/metadata.json", "9B56E2E02F7A4F65BAFD3AE546775929CD706C7C9C8F0D0D7D00EB322CB65B19"]
+    ["../../data/input/public-data.json", "CB77FA757884F6DBF8767AEDF5B87C427F248F4F01D57755A9EBF6B80B63945C"],
+    ["../fixtures/calculation-cases.json", "18CF8811A73B57C8982180569DEB4448768264AA143864A7C6AF212D36C1BBD4"],
+    ["../../data/input/metadata.json", "EC5B65E72A56A250707064060B3E0D1FB162C4EB747DF76A5F78D54E84F15A77"]
   ]);
   for (const [path, expectedHash] of expectedHashes) {
     const contents = await readFile(new URL(path, import.meta.url));
@@ -523,4 +585,86 @@ test("未定義の設備構成を拒否する", () => {
     ),
     /設備選択/
   );
+});
+
+test("劣化選択の既定・明示・不正値と太陽光のみの無効化を区別する", () => {
+  const input = { prefectureCode: "14", municipalityCode: "14218", monthlyElectricityBillYen: null, equipmentPackage: "solar_plus_standard_battery" };
+  const implicit = calculateEstimate(input, publicData);
+  const explicit = calculateEstimate({ ...input, batteryDegradationScenario: "conservative" }, publicData);
+  assert.equal(implicit.input.battery_degradation_scenario_source, "default");
+  assert.equal(explicit.input.battery_degradation_scenario_source, "user_input");
+  assert.deepEqual(implicit.energy, explicit.energy);
+  assert.deepEqual(implicit.scenarios, explicit.scenarios);
+  for (const value of ["", "invalid", 70, false, {}, []]) {
+    assert.throws(() => calculateEstimate({ ...input, batteryDegradationScenario: value }, publicData), /蓄電池劣化シナリオ/);
+    const solar = calculateEstimate({ ...input, equipmentPackage: "solar_only", batteryDegradationScenario: value }, publicData);
+    assert.equal(solar.input.battery_degradation_scenario, null);
+    assert.equal(solar.input.battery_degradation_scenario_source, "not_applicable");
+    assert.deepEqual(solar, calculateEstimate({ ...input, equipmentPackage: "solar_only" }, publicData));
+  }
+  const results = [implicit, ...["conditional_70", "optimistic_85"].map((batteryDegradationScenario) => calculateEstimate({ ...input, batteryDegradationScenario }, publicData))];
+  for (let i = 1; i < results.length; i++) {
+    assert.ok(results[i].energy.annual_energy_flows[19].annual_battery_delivered_kwh > results[i - 1].energy.annual_energy_flows[19].annual_battery_delivered_kwh);
+    assert.ok(results[i].scenarios[1].profit_yen > results[i - 1].scenarios[1].profit_yen);
+    assert.equal(results[i].scenarios.length, 3);
+  }
+});
+
+test("停電参考線はAC負荷と補機を片道効率でDCへ換算し平時計算へ加算しない", () => {
+  const reference = publicData.calculation.battery_system.outage_reference;
+  assert.equal(reference.required_dc_capacity_reference_kwh, (reference.household_appliance_ac_load_kwh + reference.auxiliary_ac_load_kwh) / reference.discharge_efficiency);
+  assert.equal(reference.conditions.initial_state_of_charge, 1);
+  assert.equal(reference.conditions.outage_minimum_state_of_charge, 0);
+  assert.equal(reference.conditions.pv_replenishment_kwh, 0);
+  const modified = structuredClone(publicData);
+  modified.calculation.battery_system.outage_reference.required_dc_capacity_reference_kwh *= 2;
+  const input = { prefectureCode: "14", monthlyElectricityBillYen: null, equipmentPackage: "solar_plus_standard_battery" };
+  assert.deepEqual(calculateEstimate(input, publicData), calculateEstimate(input, modified));
+});
+
+test("最低容量は元の入力で先に判定し，未満を条件不足として残す", () => {
+  const data = structuredClone(publicData);
+  const program = data.municipal_subsidy_programs.find((item) => item.municipality_code === "14218");
+  const rule = program.benefit_components.find((item) => item.component_type === "solar").amount_rule;
+  Object.assign(rule, { calculation_type: "fixed", fixed_amount_yen: 40000, amount_yen_per_kw: null, cap_yen: null, minimum_capacity_kw: 2 });
+  const calculate = (systemCapacityKw) => calculateEstimate({ prefectureCode: "14", municipalityCode: "14218", monthlyElectricityBillYen: null, systemCapacityKw }, data);
+  for (const [capacity, amount] of [[1.999999, 0], [2, 40000], [2.000001, 40000]]) {
+    const result = calculate(capacity);
+    const breakdown = result.scenarios.find((item) => item.scenario === "standard").subsidy_breakdown;
+    assert.equal(breakdown.municipality_amount_yen, amount);
+    assert.equal(breakdown.candidate_programs.some((item) => item.reason_code === "capacity_below_minimum"), capacity < 2);
+    assert.equal(result.input.system_capacity_kw, capacity);
+  }
+  rule.minimum_capacity_kw = null;
+  assert.equal(calculate(1.999999).scenarios[1].subsidy_breakdown.municipality_amount_yen, 40000);
+  delete rule.minimum_capacity_kw;
+  assert.equal(calculate(1.999999).scenarios[1].subsidy_breakdown.municipality_amount_yen, 40000);
+  Object.assign(rule, { minimum_capacity_kw: 2.05, capacity_preprocessing_rule: "floor_0_1_kw", calculation_type: "per_kw", fixed_amount_yen: null, amount_yen_per_kw: 10000 });
+  assert.equal(calculate(2.06).scenarios[1].subsidy_breakdown.municipality_amount_yen, 20000);
+});
+
+const municipalCapacityRules = JSON.parse(await readFile(new URL("../fixtures/municipal-capacity-rules.json", import.meta.url), "utf8"));
+for (const fixture of municipalCapacityRules.cases) {
+  test("自治体容量共通fixtureと一致する：" + fixture.id, () => {
+    if (fixture.expected_preprocessed_capacity_kw) assert.equal(preprocessCapacity(fixture.input_capacity_kw, "floor_0_1_kw"), Number(fixture.expected_preprocessed_capacity_kw));
+    const result = calculateEstimate({ prefectureCode: "14", municipalityCode: fixture.municipality_code, monthlyElectricityBillYen: null, systemCapacityKw: fixture.input_capacity_kw }, publicData);
+    const breakdown = result.scenarios.find((item) => item.scenario === "standard").subsidy_breakdown;
+    assert.equal(breakdown.municipality_amount_yen, fixture.expected_amount_yen);
+    assert.equal(breakdown.candidate_programs.find((item) => item.reason_code === "capacity_below_minimum")?.reason_code ?? null, fixture.expected_reason_code ?? null);
+  });
+}
+
+test("神奈川33自治体の表示専用情報を金額へ転用しない", () => {
+  const municipalities = publicData.municipalities.filter((item) => item.prefecture_code === "14");
+  assert.equal(municipalities.length, 33);
+  for (const municipality of municipalities) {
+    assert.ok(municipality.candidate_summary);
+    const input = { prefectureCode: "14", municipalityCode: municipality.municipality_code, monthlyElectricityBillYen: null };
+    const baseline = calculateEstimate(input, publicData);
+    const modified = structuredClone(publicData);
+    const item = modified.municipalities.find((entry) => entry.municipality_code === municipality.municipality_code);
+    item.candidate_program_names = ["表示専用テスト"];
+    item.candidate_summary.amount_components.forEach((component) => { component.display_amount = "999,999,999円"; });
+    assert.deepEqual(calculateEstimate(input, modified), baseline);
+  }
 });

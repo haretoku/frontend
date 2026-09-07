@@ -32,7 +32,13 @@ function bindSources(metadata) {
 function initializeTableOfContents() {
   const tableOfContents = document.querySelector("details.article-toc");
   if (!tableOfContents) return;
-  tableOfContents.open = window.matchMedia("(min-width: 48rem)").matches;
+  tableOfContents.open = false;
+  const summary = tableOfContents.querySelector("summary");
+  const updateLabel = () => {
+    summary.setAttribute("aria-label", tableOfContents.open ? "目次を閉じる" : "目次を開く");
+  };
+  updateLabel();
+  tableOfContents.addEventListener("toggle", updateLabel);
 }
 
 function populateDaytimeOccupancy(calculation) {

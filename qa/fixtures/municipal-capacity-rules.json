@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0.0",
+  "cases": [
+    {
+      "id": "kamakura-before-1_2",
+      "municipality_code": "14204",
+      "input_capacity_kw": 1.199999,
+      "expected_preprocessed_capacity_kw": "1.1",
+      "expected_amount_yen": 11000
+    },
+    {
+      "id": "kamakura-exact-1_2",
+      "municipality_code": "14204",
+      "input_capacity_kw": 1.2,
+      "expected_preprocessed_capacity_kw": "1.2",
+      "expected_amount_yen": 12000
+    },
+    {
+      "id": "kamakura-after-1_2",
+      "municipality_code": "14204",
+      "input_capacity_kw": 1.200001,
+      "expected_preprocessed_capacity_kw": "1.2",
+      "expected_amount_yen": 12000
+    },
+    {
+      "id": "kawasaki-before-2",
+      "municipality_code": "14130",
+      "input_capacity_kw": 1.999999,
+      "expected_amount_yen": 0,
+      "expected_reason_code": "capacity_below_minimum"
+    },
+    {
+      "id": "kawasaki-exact-2",
+      "municipality_code": "14130",
+      "input_capacity_kw": 2.0,
+      "expected_amount_yen": 40000,
+      "expected_reason_code": null
+    },
+    {
+      "id": "kawasaki-after-2",
+      "municipality_code": "14130",
+      "input_capacity_kw": 2.000001,
+      "expected_amount_yen": 40000,
+      "expected_reason_code": null
+    }
+  ]
+}

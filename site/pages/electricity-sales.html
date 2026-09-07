@@ -66,9 +66,9 @@
             <li><a href="#installation-cost">設置費</a></li>
             <li><a href="#lifecycle-cost">導入後の費用</a></li>
             <li><a href="#factors">収支を変える条件</a></li>
-            <li><a href="#household-comparison">同じ4 kWでも結果が変わる例</a></li>
             <li><a href="#loss-caution">費用を回収できない場合</a></li>
             <li><a href="#suitability">向いている家庭・慎重に考えたい家庭</a></li>
+            <li><a href="#household-comparison">具体例：同じ4 kWでも結果が変わる</a></li>
             <li><a href="#decision-path">判断の進め方</a></li>
             <li><a href="#summary">まとめ</a></li>
           </ol>
@@ -79,17 +79,21 @@
           <p>太陽光の収支は，20年間に得られる<strong>電気代削減と売電収入</strong>に，利用できる補助金を加え，<strong>設置費と維持・交換費</strong>を差し引いて考えます．電気代削減は支出が減る効果，売電収入は余った電気を売って得る収入であり，性質は異なります．</p>
           <figure class="article-diagram article-balance-illustration" aria-labelledby="balance-diagram-caption" aria-describedby="balance-diagram-description">
             <img src="../shared/assets/article-solar-economics-flow.webp" width="1823" height="863" alt="" aria-hidden="true" loading="lazy" decoding="async">
-            <ul class="article-balance-illustration__legend">
-              <li><strong>電気代削減</strong><span>現金を受け取るのではなく，電力会社へ支払う金額が小さくなります．</span></li>
-              <li><strong>売電収入</strong><span>太陽光パネルから送った余剰電力の対価が，家庭の収入になります．</span></li>
-              <li><strong>補助金</strong><span>対象条件を満たす場合，国や自治体等から初期負担を下げる給付を受けます．</span></li>
-              <li><strong>設置費</strong><span>太陽光パネルと工事へ，家計から支出します．</span></li>
-              <li><strong>維持・交換費</strong><span>点検，修理およびパワーコンディショナ交換へ，家計から支出します．</span></li>
-            </ul>
+            <div class="article-balance-groups">
+              <div class="article-balance-group article-balance-group--income"><h3>収入・削減効果</h3><ul>
+                <li><strong>電気代削減</strong><span>現金を受け取るのではなく，電力会社へ支払う金額が小さくなります．</span></li>
+                <li><strong>売電収入</strong><span>太陽光パネルから送った余剰電力の対価が，家庭の収入になります．</span></li>
+                <li><strong>補助金</strong><span>対象条件を満たす場合，国や自治体等から初期負担を下げる給付を受けます．</span></li>
+              </ul></div>
+              <div class="article-balance-group article-balance-group--expense"><h3>支出</h3><ul>
+                <li><strong>設置費</strong><span>太陽光パネルと工事へ，家計から支出します．</span></li>
+                <li><strong>維持・交換費</strong><span>点検，修理およびパワーコンディショナ交換へ，家計から支出します．</span></li>
+              </ul></div>
+            </div>
             <p class="article-diagram__accessible" id="balance-diagram-description">20年間の正味利益は，電気代削減，売電収入および補助金の合計から，設置費と維持・交換費を差し引いて考えます．</p>
             <figcaption id="balance-diagram-caption">図1　家庭に残る効果と，家庭から出ていく費用を分けて捉えます．</figcaption>
           </figure>
-          <p>補助金は初期負担を下げますが，地域，年度，住宅および設備の条件を満たす場合に限られます．制度が表示されても受給が確定するわけではありません．設置費には設備と標準工事だけでなく，屋根や配線による追加工事が生じることがあります．</p>
+          <p>補助金は初期負担を下げますが，地域，年度，住宅および設備の条件を満たす場合に限られます．制度が表示されても受給が確定するわけではありません．<a href="subsidies.html">補助金の探し方と申請の流れ</a>で確認手順を整理できます．設置費には設備と標準工事だけでなく，屋根や配線による追加工事が生じることがあります．</p>
           <p>したがって，「発電量が多い」「補助金がある」「見積価格が安い」のどれか一つだけでは判断できません．収入・削減効果と費用を同じ期間で並べ，条件の確からしさも合わせて確認します．</p>
         </section>
 
@@ -162,8 +166,37 @@
           </tbody></table>
         </section>
 
-        <section id="household-comparison">
-          <h2>同じ4 kWでも，昼間の使い方で結果が変わる</h2>
+        <section class="caution-box" id="loss-caution">
+          <p class="notice-label">注意点</p>
+          <h2>条件によっては費用を回収できません</h2>
+          <p>発電量や自家消費が見込みを下回る場合，設置費や追加工事が高い場合，または補助金を利用できない場合は，20年間でも正味利益がマイナスになり得ます．診断は導入を勧める判定ではありません．</p>
+          <p>採算を見直すときは，設置容量と見積価格を変え，太陽光のみと蓄電池併用を同じ条件で比較します．それでも家計上の負担が大きい場合は，導入を見送ることも妥当です．</p>
+          <p>停電への備えを重視する場合は，経済的な回収とは別の価値として検討します．太陽光単独と蓄電池併用では停電時の制約が異なるため，必要な電力を供給できる設備構成かを施工会社へ確認してください．この確認は，赤字が解消することを意味しません．具体的な給電条件は<a href="disaster.html">停電時，太陽光だけで何ができる？</a>で確認できます．</p>
+        </section>
+
+        <section id="suitability">
+          <h2>向いている家庭と，慎重に考えたい家庭</h2>
+          <h3>比較的，経済効果を得やすい条件</h3>
+          <ul class="article-checklist">
+            <li><strong>電気代が高い：</strong>買電単価と使用量が大きいほど，自家消費で避けられる支出は大きくなりやすい．ただし，夜間中心の使用では効果が限られる．</li>
+            <li><strong>昼間の電力使用が多い：</strong>発電中に電気を使うため，自家消費を増やしやすい．</li>
+            <li><strong>設置費が低い，または補助金を利用できる：</strong>追加工事が少ない見積もりや，条件を満たす補助金は初期負担を下げる．</li>
+            <li><strong>日当たりのよい屋根に十分な容量を載せられる：</strong>影が少なく，必要な容量を設置できる屋根は，発電量を確保しやすい．</li>
+          </ul>
+          <figure class="article-section-illustration" aria-labelledby="suitability-illustration-caption">
+            <img src="../shared/assets/article-solar-suitability.webp" width="1693" height="929" alt="晴れた昼間，太陽光パネル付き住宅で家族が洗濯機，パソコン，エアコンを使い，電気料金の請求額が小さくなる様子" loading="lazy" decoding="async">
+            <figcaption id="suitability-illustration-caption">昼間に発電した電気を家庭で使うと，電力会社から買う量を減らしやすくなります．</figcaption>
+          </figure>
+          <h3>導入を慎重に考えたい条件</h3>
+          <ul class="article-checklist">
+            <li>周囲の建物や樹木の影が大きく，発電量を確保しにくい．</li>
+            <li>電力使用が夜間に偏り，蓄電池を含めない太陽光単体では自家消費しにくい．</li>
+            <li>屋根補強，足場，配線等の追加工事が多く，初期負担が高い．</li>
+            <li>保証対象外の修理や将来の交換費を含めると，家計上の許容範囲を超える．</li>
+          </ul>
+          <p>これらは結果が変わる方向を示す条件であり，「向いている」側に多く当てはまっても利益を保証しません．反対に，慎重に考えたい条件があっても，設置容量や費用を調整すると判断が変わる場合があります．</p>
+                <div id="household-comparison">
+          <h3>具体例：同じ4 kWでも，昼間の使い方で結果が変わる</h3>
           <p>次は，はれトク診断の公開データ2026-09-05版を使い，東京都，4 kW，南向き，月間電気料金は未入力を共通条件として，平日昼間の在宅状況だけを変えた標準シナリオの例です．未入力時には「戸建て・4人以上世帯の地域平均（令和5年度）」である関東甲信15,467円／月を使用します．確認済みの東京都補助金480,000円を含み，電気料金上昇率は比較用仮定として年1.5％です．実際の住宅を示す事例ではなく，条件の違いが結果へ及ぼす方向を確認する比較です（東京都環境公社，2026）．</p>
           <table class="article-table article-table--multi-column article-table--household-comparison">
             <caption>平日昼間に「ほぼ毎日いる」家庭Aと「ほとんどいない」家庭Bの比較</caption>
@@ -179,37 +212,7 @@
           </table>
           <p>家庭Aは家庭Bより年間88 kWh多く自家消費し，その分だけ売電量が少なくなります．20年間では，売電収入が20,337円少ない一方，電気代削減が63,593円多く，正味利益は43,255円改善します．これは，この条件では買電を避ける価値が売電単価を上回る期間が続くためです．</p>
           <p>両家庭とも表示結果は黒字ですが，昼間の在宅が多いことだけで採算が決まるのではありません．発電量，補助金，設置費および維持・交換費を含む全条件を合わせて判断する必要があります．数値の算出方法と採用値は<a href="calculation-method.html">計算方法・使用データ</a>で確認できます．</p>
-        </section>
-
-        <section class="caution-box" id="loss-caution">
-          <p class="notice-label">注意点</p>
-          <h2>条件によっては費用を回収できません</h2>
-          <p>発電量や自家消費が見込みを下回る場合，設置費や追加工事が高い場合，または補助金を利用できない場合は，20年間でも正味利益がマイナスになり得ます．診断は導入を勧める判定ではありません．</p>
-          <p>採算を見直すときは，設置容量と見積価格を変え，太陽光のみと蓄電池併用を同じ条件で比較します．それでも家計上の負担が大きい場合は，導入を見送ることも妥当です．</p>
-          <p>停電への備えを重視する場合は，経済的な回収とは別の価値として検討します．太陽光単独と蓄電池併用では停電時の制約が異なるため，必要な電力を供給できる設備構成かを施工会社へ確認してください．この確認は，赤字が解消することを意味しません．具体的な給電条件は<a href="disaster.html">停電時，太陽光だけで何ができる？</a>で確認できます．</p>
-        </section>
-
-        <section id="suitability">
-          <h2>向いている家庭と，慎重に考えたい家庭</h2>
-          <h3>比較的，経済効果を得やすい条件</h3>
-          <ul>
-            <li><strong>電気代が高い：</strong>買電単価と使用量が大きいほど，自家消費で避けられる支出は大きくなりやすい．ただし，夜間中心の使用では効果が限られる．</li>
-            <li><strong>昼間の電力使用が多い：</strong>発電中に電気を使うため，自家消費を増やしやすい．</li>
-            <li><strong>設置費が低い，または補助金を利用できる：</strong>追加工事が少ない見積もりや，条件を満たす補助金は初期負担を下げる．</li>
-            <li><strong>日当たりのよい屋根に十分な容量を載せられる：</strong>影が少なく，必要な容量を設置できる屋根は，発電量を確保しやすい．</li>
-          </ul>
-          <figure class="article-section-illustration" aria-labelledby="suitability-illustration-caption">
-            <img src="../shared/assets/article-solar-suitability.webp" width="1693" height="929" alt="晴れた昼間，太陽光パネル付き住宅で家族が洗濯機，パソコン，エアコンを使い，電気料金の請求額が小さくなる様子" loading="lazy" decoding="async">
-            <figcaption id="suitability-illustration-caption">昼間に発電した電気を家庭で使うと，電力会社から買う量を減らしやすくなります．</figcaption>
-          </figure>
-          <h3>導入を慎重に考えたい条件</h3>
-          <ul>
-            <li>周囲の建物や樹木の影が大きく，発電量を確保しにくい．</li>
-            <li>電力使用が夜間に偏り，蓄電池を含めない太陽光単体では自家消費しにくい．</li>
-            <li>屋根補強，足場，配線等の追加工事が多く，初期負担が高い．</li>
-            <li>保証対象外の修理や将来の交換費を含めると，家計上の許容範囲を超える．</li>
-          </ul>
-          <p>これらは結果が変わる方向を示す条件であり，「向いている」側に多く当てはまっても利益を保証しません．反対に，慎重に考えたい条件があっても，設置容量や費用を調整すると判断が変わる場合があります．</p>
+        </div>
         </section>
 
         <section id="decision-path">

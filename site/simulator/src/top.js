@@ -11,8 +11,9 @@ const municipalityHelp = document.querySelector("#municipality-help");
 const monthlyElectricityBill = document.querySelector("#monthly-electricity-bill");
 const calculateButton = document.querySelector("#calculate-button");
 const formMessage = document.querySelector("#form-message");
-const dataStatus = document.querySelector("#data-status");
+const returnToForm = document.querySelector("[data-return-to-form]");
 let frontendData = null;
+let dataLoadFailed = false;
 
 function populatePrefectures(prefectures) {
   const fragment = document.createDocumentFragment();
@@ -26,14 +27,20 @@ function populatePrefectures(prefectures) {
 }
 
 function updateMunicipalities() {
-  populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp }, frontendData?.publicData);
+  populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp, showUnselected: true }, frontendData?.publicData);
+  const unsupported = Boolean(prefecture.value && municipality.disabled);
+  municipalityHelp.textContent = unsupported ? "この都道府県は現在，診断に対応していません．" : "";
+  municipalityHelp.hidden = !unsupported;
+  if (unsupported) municipality.options[0].textContent = "選択できません";
+  updateAvailability();
 }
 
 function updateAvailability() {
   const initialized = frontendData?.publicData.data_version !== "uninitialized";
-  calculateButton.disabled = !(frontendData && initialized && CALCULATION_IMPLEMENTED);
-  formMessage.textContent = calculateButton.disabled ? "検証済みデータの準備後に利用できます．" : "";
-  formMessage.hidden = !calculateButton.disabled;
+  const ready = frontendData && initialized && CALCULATION_IMPLEMENTED;
+  calculateButton.disabled = !ready || Boolean(prefecture.value && municipality.disabled);
+  formMessage.textContent = dataLoadFailed ? "使用データを読み込めないため，現在は診断できません．時間をおいて再読み込みしてください．" : !ready ? "検証済みデータの準備後に利用できます．" : "";
+  formMessage.hidden = !formMessage.textContent;
 }
 
 form.addEventListener("submit", (event) => {
@@ -56,13 +63,21 @@ form.addEventListener("submit", (event) => {
 
 prefecture.addEventListener("change", updateMunicipalities);
 
+returnToForm.addEventListener("click", (event) => {
+  event.preventDefault();
+  const target = !prefecture.value || municipality.disabled ? prefecture
+    : !municipality.value ? municipality
+      : monthlyElectricityBill.validity.valid && !calculateButton.disabled ? calculateButton : monthlyElectricityBill;
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ block: "center" });
+});
+
 try {
   frontendData = await loadFrontendData();
   populatePrefectures(frontendData.publicData.prefectures);
   updateMunicipalities();
-  dataStatus.textContent = `公開データ版：${frontendData.metadata.data_version}`;
-} catch (error) {
-  dataStatus.textContent = error instanceof Error ? error.message : "公開データを確認できませんでした．";
+} catch {
+  dataLoadFailed = true;
 }
 
 updateAvailability();
