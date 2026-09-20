@@ -1,11 +1,23 @@
+import { createEquipmentDraft } from "./equipment-draft.js";
+import { setupMobileActions } from "./mobile-actions.js";
+import { housingInput, housingLabel, housingContract, configureHousingInput } from "./housing-input.js";
+import { cashflowMarkers, groupMarkerTargets } from "./chart-markers.js";
+import { noncashBenefitDescription, subsidyGroups, subsidyLevelAmounts, subsidyGovernmentLabel, subsidyResearchMessage, prefectureResearchMessage } from "./subsidy-presentation.js";
 import { CALCULATION_IMPLEMENTED, calculateEstimate } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
-import { requireMunicipality, populateMunicipalitySelect } from "./location-input.js";
-import { decisionAmountParts, scenarioSubsidyCondition, hasUnconfirmedSubsidy } from "./result-presentation.js";
+import { validateLocation, populateMunicipalitySelect } from "./location-input.js";
+import { cashflowChartLayout, formatEnergyRate, subsidyReasonPresentation, energyRoutes, financialTotals, endpointResult, conclusionBreakdown, compactYen, scenarioSubsidyCondition, hasUnconfirmedSubsidy, mainSubsidyPresentation, subsidyBreakdownReason, scenarioRecoveryPresentation, energyBreakdownPresentation } from "./result-presentation.js";
 import { degradationLabel, degradationDescription, outageReferencePresentation, formatBatteryCapacity } from "./battery-presentation.js";
-import { applicationStatusLabels, componentStatusLabels, municipalInformationSummary, programConditionsText } from "./municipal-information.js";
+import { applicationStatusLabel } from "./municipal-information.js";
 
+let housingAgeSelection;
+function housingDisplayContract() {
+  const contract = housingContract(frontendData.publicData.calculation.housing_age_input);
+  const labels = { existing: 'すでに建っている家に設置', new: '新築する家に設置' };
+  return { ...contract, options: contract.options.map(item => ({ ...item, label: labels[item.value] ?? item.label })) };
+}
 const elements = {
+  housingAge: document.querySelector("#housing-age"),
   form: document.querySelector("#estimate-form"),
   prefecture: document.querySelector("#prefecture"),
   municipalityField: document.querySelector("[data-municipality-field]"),
@@ -23,7 +35,7 @@ const elements = {
   cancelConditionsButton: document.querySelector("[data-cancel-conditions]"),
   roofOrientation: document.querySelector("#roof-orientation"),
   daytimeOccupancyOptions: document.querySelector("[data-daytime-occupancy-options]"),
-  equipmentOptions: document.querySelector(".equipment-choice__options"),
+  equipmentOptions: document.querySelector("#equipment-package"),
   batteryCapacityControl: document.querySelector("[data-battery-capacity-control]"),
   batteryCapacitySlider: document.querySelector("#battery-capacity"),
   batteryCapacityOutput: document.querySelector("[data-battery-capacity-output]"),
@@ -34,14 +46,12 @@ const elements = {
   dataStatus: document.querySelector("#data-status"),
   result: document.querySelector("#estimate-result"),
   resultTitle: document.querySelector("#result-title"),
-  resultSummary: document.querySelector("[data-result-summary]"),
   resultEconomicBenefit: document.querySelector("[data-result-economic-benefit]"),
-  resultPayback: document.querySelector("[data-result-payback]"),
+  resultSubsidyNote: document.querySelector("[data-result-subsidy-note]"),
   resultSolarCost: document.querySelector("[data-result-solar-cost]"),
   resultSelfConsumption: document.querySelector("[data-result-self-consumption]"),
   resultSalesIncome: document.querySelector("[data-result-sales-income]"),
   resultSubsidy: document.querySelector("[data-result-subsidy]"),
-  resultSubsidySource: document.querySelector("[data-result-subsidy-source]"),
   resultMaintenanceCost: document.querySelector("[data-result-maintenance-cost]"),
   resultPowerConditionerCost: document.querySelector("[data-result-power-conditioner-cost]"),
   resultProfit: document.querySelector("[data-result-profit]"),
@@ -49,21 +59,15 @@ const elements = {
   resultConsumption: document.querySelector("[data-result-consumption]"),
   resultSelfConsumptionRate: document.querySelector("[data-result-self-consumption-rate]"),
   resultSelfSufficiencyRate: document.querySelector("[data-result-self-sufficiency-rate]"),
-  resultSelfConsumed: document.querySelector("[data-result-self-consumed]"),
   resultDirectSelfConsumed: document.querySelector("[data-result-direct-self-consumed]"),
   resultBatteryDelivered: document.querySelector("[data-result-battery-delivered]"),
   resultBatteryLoss: document.querySelector("[data-result-battery-loss]"),
   resultPurchased: document.querySelector("[data-result-purchased]"),
   resultExported: document.querySelector("[data-result-exported]"),
-  scenarioList: document.querySelector("[data-scenario-list]"),
   municipalSubsidyTitle: document.querySelector("[data-municipal-subsidy-title]"),
   municipalSubsidySummary: document.querySelector("[data-municipal-subsidy-summary]"),
   municipalIncluded: document.querySelector("[data-municipal-included]"),
   municipalIncludedList: document.querySelector("[data-municipal-included-list]"),
-  municipalScenarioUnreflected: document.querySelector("[data-municipal-scenario-unreflected]"),
-  municipalScenarioUnreflectedList: document.querySelector("[data-municipal-scenario-unreflected-list]"),
-  municipalCandidates: document.querySelector("[data-municipal-candidates]"),
-  municipalCandidateList: document.querySelector("[data-municipal-candidate-list]"),
   municipalExcluded: document.querySelector("[data-municipal-excluded]"),
   municipalExcludedList: document.querySelector("[data-municipal-excluded-list]"),
   resultBatteryCost: document.querySelector("[data-result-battery-cost]"),
@@ -81,16 +85,12 @@ const elements = {
   batteryCapacityYear1: document.querySelector("[data-battery-capacity-year1]"),
   batteryCapacityYear10: document.querySelector("[data-battery-capacity-year10]"),
   batteryCapacityYear20: document.querySelector("[data-battery-capacity-year20]"),
+  batteryCapacityYear30: document.querySelector("[data-battery-capacity-year30]"),
   capacitySlider: document.querySelector("#system-capacity"),
   capacityOutput: document.querySelector("[data-capacity-output]"),
-  capacityGeneration: document.querySelector("[data-capacity-generation]"),
-  capacityRevenue: document.querySelector("[data-capacity-revenue]"),
-  capacityCost: document.querySelector("[data-capacity-cost]"),
   capacityStatus: document.querySelector("[data-capacity-status]"),
   cashflowChart: document.querySelector("[data-cashflow-chart]"),
   cashflowDescription: document.querySelector("[data-cashflow-description]"),
-  cashflowEndpoint: document.querySelector("[data-cashflow-endpoint]"),
-  cashflowScenario: document.querySelector("[data-cashflow-scenario]"),
   resultDisclosures: document.querySelectorAll("[data-result-disclosure]")
 };
 
@@ -122,8 +122,55 @@ function populatePrefectures(prefectures) {
 }
 
 function updateMunicipalities(preferredCode = null) {
-  return populateMunicipalitySelect(elements, frontendData?.publicData, preferredCode);
+  const selected = populateMunicipalitySelect({ ...elements, unselectedLabel: "市区町村を選択（任意）" }, frontendData?.publicData, preferredCode);
+  elements.municipalityHelp.hidden = !elements.prefecture.value || !elements.municipality.disabled;
+  return selected;
 }
+
+
+const equipmentEditor = document.querySelector('#equipment-editor');
+const equipmentEditButton = document.querySelector('[data-edit-equipment]');
+const equipmentMessage = document.querySelector('[data-equipment-message]');
+function updateEquipmentSummary() {
+  const battery = selectedEquipmentPackage() === 'solar_plus_standard_battery';
+  document.querySelector('[data-equipment-summary]').textContent = '太陽光 ' + Number(elements.capacitySlider.value) + ' kW' + (battery ? '＋蓄電池 ' + Number(elements.batteryCapacitySlider.value) + ' kWh' : '');
+}
+const equipmentDraft = createEquipmentDraft({
+  read: () => ({ equipment: selectedEquipmentPackage(), solar: elements.capacitySlider.value, battery: elements.batteryCapacitySlider.value, degradation: batteryDegradationSelection }),
+  restore: saved => {
+    selectEquipmentPackage(saved.equipment);
+    elements.capacitySlider.value = saved.solar;
+    elements.capacityOutput.textContent = formatCapacity(saved.solar);
+    setBatteryCapacityValue(saved.battery);
+    batteryDegradationSelection = saved.degradation;
+  },
+  commit: () => {
+    if (!frontendData) throw new Error('使用データの読込み完了後に変更してください．');
+    if (latestResult) {
+      const input = readInput();
+      const result = calculateEstimate(input, frontendData.publicData);
+      renderResult(result, { focus: false, scroll: false, resetDisclosures: false });
+      writeInputToLocation(input);
+    }
+    updateEquipmentSummary();
+  },
+  onEditing: editing => {
+    document.body.classList.toggle('is-editing-equipment', editing);
+    equipmentEditor.hidden = !editing;
+    document.querySelector('[data-equipment-summary-row]').hidden = editing;
+    equipmentEditButton.setAttribute('aria-expanded', String(editing));
+    document.querySelector('[data-previous-result-note]').hidden = !editing || !latestResult;
+    for (const control of document.querySelectorAll('.basic-conditions, .advanced-panel--conditions, .scenario-controls, .result-disclosures')) control.inert = editing;
+    equipmentMessage.textContent = '';
+    if (editing) elements.equipmentOptions.focus({ preventScroll: true });
+    else { updateEquipmentSummary(); equipmentEditButton.focus({ preventScroll: true }); }
+  }
+});
+equipmentEditButton.addEventListener('click', () => equipmentDraft.begin());
+document.querySelector('[data-cancel-equipment]').addEventListener('click', () => equipmentDraft.cancel());
+document.querySelector('[data-apply-equipment]').addEventListener('click', () => {
+  try { equipmentDraft.apply(); } catch (error) { equipmentMessage.textContent = error instanceof Error ? error.message : '変更を反映できませんでした．'; }
+});
 
 function populateRoofOrientations(detailInputs) {
   const orientation = detailInputs.find((item) => item.input_name === "roof_orientation");
@@ -172,15 +219,12 @@ function selectDaytimeOccupancy(value) {
 }
 
 function selectedEquipmentPackage() {
-  return elements.equipmentOptions.querySelector('input[name="equipment_package"]:checked')?.value ?? null;
+  return elements.equipmentOptions.value || null;
 }
 
 function selectEquipmentPackage(value) {
-  const option = elements.equipmentOptions.querySelector(`input[value="${value}"]`);
-  if (option) option.checked = true;
-  for (const label of elements.equipmentOptions.querySelectorAll(".equipment-choice__option")) {
-    label.classList.toggle("is-selected", label.querySelector("input")?.checked === true);
-  }
+  elements.equipmentOptions.value = value;
+  document.querySelector("[data-equipment-premise]").hidden = value !== "solar_plus_standard_battery";
   const batteryApplicable = frontendData?.publicData.calculation.battery_capacity_input
     ?.applicable_equipment_package === value;
   elements.batteryCapacityControl.hidden = !batteryApplicable;
@@ -240,14 +284,16 @@ function updateAvailability() {
     return;
   }
 
-  elements.formMessage.textContent = "都道府県と市区町村を選択して概算結果を確認してください．";
+  elements.formMessage.textContent = "";
 }
 
 function readInput() {
-  requireMunicipality({ prefectureCode: elements.prefecture.value, municipalityCode: elements.municipality.value }, frontendData.publicData);
+  housingInput(housingAgeSelection, frontendData.publicData.calculation.housing_age_input);
+  validateLocation({ prefectureCode: elements.prefecture.value, municipalityCode: elements.municipality.value }, frontendData.publicData);
   const monthlyElectricityBill = elements.monthlyElectricityBill.value;
 
   return {
+    housingAge: housingAgeSelection,
     prefectureCode: elements.prefecture.value,
     municipalityCode: elements.municipality.disabled || !elements.municipality.value
       ? null
@@ -278,6 +324,7 @@ function inputFromLocation() {
   const batteryCapacityParameter = frontendData.publicData.calculation.battery_capacity_input.url_parameter_name;
   const batteryCapacity = params.get(batteryCapacityParameter);
   return {
+    housingAge: params.get(housingContract(frontendData.publicData.calculation.housing_age_input).url_parameter_name) ?? undefined,
     prefectureCode,
     municipalityCode,
     monthlyElectricityBillYen: monthlyBill === null || monthlyBill === "" ? null : Number(monthlyBill),
@@ -294,6 +341,7 @@ function inputFromLocation() {
 function writeInputToLocation(input) {
   const target = new URL(window.location.href);
   target.search = "";
+  if (input.housingAge != null) target.searchParams.set(housingContract(frontendData.publicData.calculation.housing_age_input).url_parameter_name, housingInput(input.housingAge, frontendData.publicData.calculation.housing_age_input).value);
   target.searchParams.set("prefecture", input.prefectureCode);
   if (input.municipalityCode) {
     target.searchParams.set("municipality_code", input.municipalityCode);
@@ -323,14 +371,17 @@ function writeInputToLocation(input) {
   if (input.daytimeOccupancy) {
     target.searchParams.set("daytimeOccupancy", input.daytimeOccupancy);
   }
+  target.searchParams.set("scenario", selectedScenarioId);
   target.searchParams.set("from", "analysis");
   window.history.replaceState(null, "", target);
 }
 
 const yenFormatter = new Intl.NumberFormat("ja-JP");
 
-function formatYen(value) {
-  return `${yenFormatter.format(value)}円`;
+function formatYen(value, rounded = true) {
+  if (rounded && value !== 0 && Math.abs(value) < 1000) return `${value < 0 ? "−" : ""}1,000円未満`;
+  const display = rounded ? Math.round(Math.abs(value) / 1000) * 1000 * Math.sign(value) : value;
+  return `${display !== value ? '約' : ''}${yenFormatter.format(display)}円`;
 }
 
 function formatSignedYen(value, direction = "auto") {
@@ -343,7 +394,7 @@ function formatSignedYen(value, direction = "auto") {
   const sign = direction === "cost" || (direction === "auto" && value < 0)
     ? "−"
     : "＋";
-  return `${sign}${yenFormatter.format(Math.abs(value))}円`;
+  return `${sign}${formatYen(Math.abs(value))}`;
 }
 
 function formatProfit(value) {
@@ -393,11 +444,11 @@ function formatCompactYen(value) {
   if (absolute >= 10_000) {
     return `${value < 0 ? "−" : ""}${yenFormatter.format(Math.round(absolute / 10_000))}万円`;
   }
-  return `${value < 0 ? "−" : ""}${yenFormatter.format(Math.round(absolute))}円`;
+  return `${value < 0 ? "−" : ""}${formatYen(absolute)}`;
 }
 
 function formatBasicConditions(result) {
-  const bill = `電気代 ${formatYen(result.input.monthly_electricity_bill_yen)}／月`;
+  const bill = `電気代 ${formatYen(result.input.monthly_electricity_bill_yen, false)}／月`;
   const location = result.input.municipality_name
     ? `${result.input.prefecture_name}${result.input.municipality_name}`
     : result.input.prefecture_name;
@@ -412,25 +463,43 @@ function formatBasicConditions(result) {
   return [location, bill, `${equipment}・太陽光 ${solarCapacity}${batteryCapacity}`];
 }
 
+function renderDetailSummary(lines) {
+  elements.detailConditionSummary.replaceChildren(...lines.map(text => Object.assign(document.createElement('span'), { className: 'condition-summary-line', textContent: text })));
+}
 function updateDetailConditionSummary(result) {
   const orientation = result.input.detail_conditions?.find(
     (item) => item.input_name === "roof_orientation"
   );
   const summary = [
+    housingLabel(result.input.housing_age, housingDisplayContract()),
     orientation ? `方角：${orientation.label}` : null,
-    result.input.daytime_occupancy ? `日中在宅：${result.input.daytime_occupancy.label}` : null
+    result.input.daytime_occupancy ? `日中の在宅状況：${result.input.daytime_occupancy.value === "unknown_standard" ? "標準設定" : result.input.daytime_occupancy.label}` : null
   ].filter(Boolean);
-  elements.detailConditionSummary.textContent = summary.join("・");
+  renderDetailSummary(summary);
+}
+
+function updateCurrentHousingSummary() {
+  if (!frontendData) return;
+  const occupancy = selectedDaytimeOccupancy();
+  const label = frontendData.publicData.calculation.daytime_occupancy.options.find(item => item.value === occupancy)?.label;
+  renderDetailSummary([housingLabel(elements.housingAge.value, housingDisplayContract()), '方角：' + elements.roofOrientation.selectedOptions[0].textContent, '日中の在宅状況：' + (occupancy === 'unknown_standard' ? '標準設定' : label)]);
+}
+function setBasicEditing(editing) {
+  document.body.classList.toggle("is-editing-basic", editing);
+  document.querySelector("[data-previous-result-note]").hidden = !editing;
+  for (const control of document.querySelectorAll(".analysis-workbench, .scenario-controls, .advanced-panel--conditions")) control.inert = editing;
 }
 
 function collapseCalculator(result) {
-  const lines = formatBasicConditions(result).map((text) => {
+  setBasicEditing(false);
+
+  const lines = formatBasicConditions(result).slice(0, 2).map((text) => {
     const line = document.createElement("span");
     line.textContent = text;
     return line;
   });
   const billAmount = document.createElement("strong");
-  billAmount.textContent = `${formatYen(result.input.monthly_electricity_bill_yen)}／月`;
+  billAmount.textContent = `${formatYen(result.input.monthly_electricity_bill_yen, false)}／月`;
   lines[1].replaceChildren(document.createTextNode("電気代 "), billAmount);
   if (result.input.used_default_monthly_electricity_bill) {
     const note = document.createElement("small");
@@ -444,13 +513,16 @@ function collapseCalculator(result) {
 }
 
 function expandCalculator() {
+  setBasicEditing(Boolean(latestResult));
+  document.querySelector("#calculator-title").textContent = latestResult ? "地域・電気代を変更" : "あなたの条件で診断する";
+
   elements.calculatorCollapsed.hidden = true;
   elements.calculatorExpanded.hidden = false;
   elements.calculator.classList.remove("calculator--collapsed");
   elements.cancelConditionsButton.hidden = latestResult === null;
   elements.calculateLabel.textContent = latestResult === null
     ? "分析結果を表示する"
-    : "この条件で再計算する";
+    : "変更を反映";
   elements.calculator.scrollIntoView({ behavior: "smooth", block: "start" });
   elements.prefecture.focus({ preventScroll: true });
 }
@@ -459,6 +531,8 @@ function cancelConditionChanges() {
   if (!latestResult) {
     return;
   }
+  elements.housingAge.value = latestResult.input.housing_age;
+  housingAgeSelection = latestResult.input.housing_age_source === "default" ? undefined : latestResult.input.housing_age;
   elements.prefecture.value = latestResult.input.prefecture_code;
   updateMunicipalities(latestResult.input.municipality_code);
   elements.monthlyElectricityBill.value = latestResult.input.used_default_monthly_electricity_bill
@@ -490,253 +564,101 @@ function subsidyStatusFor(scenario, input) {
   return scenario.subsidy_yen > 0 ? "applied" : "not_applicable";
 }
 
-const SUBSIDY_SOURCE_FALLBACK_ID = "env-housing-decarbonization-navi-2026";
-const OFFICIAL_SOURCE_CLASSES = new Set(["primary", "official_index"]);
-
-function officialSubsidySource(result, scenario) {
-  const prefecture = frontendData.publicData.prefectures.find(
-    (item) => item.code === result.input.prefecture_code
-  );
-  const candidateIds = [
-    ...(scenario.subsidy_source_ids ?? []),
-    ...(prefecture?.subsidy_programs ?? []).map((program) => program.source_id),
-    ...(prefecture?.subsidy_review_source_ids ?? []),
-    SUBSIDY_SOURCE_FALLBACK_ID
-  ];
-  const sources = new Map(
-    frontendData.metadata.sources.map((source) => [source.source_id, source])
-  );
-  return [...new Set(candidateIds)]
-    .map((sourceId) => sources.get(sourceId))
-    .find((source) => source?.source_url && OFFICIAL_SOURCE_CLASSES.has(source.source_class));
-}
-
-function bindSubsidySourceLink(element, source) {
-  if (!source) {
-    element.hidden = true;
-    element.removeAttribute("href");
-    return;
-  }
-  element.href = source.source_url;
-  element.title = source.source_title;
-  element.textContent = source.source_class === "official_index"
-    ? "環境省の補助金検索で確認 ↗"
-    : "補助金制度の公式情報を確認 ↗";
-  element.hidden = false;
-}
-
 function renderScenarios(scenarios, input) {
-  const labels = { downside: "下振れ", standard: "標準", upside: "上振れ" };
-  const scenarioAssumptions = new Map(
-    frontendData.publicData.scenarios.map((scenario) => [scenario.scenario, scenario])
-  );
-  elements.scenarioList.replaceChildren();
-  for (const scenario of scenarios) {
-    const item = document.createElement("button");
-    item.type = "button";
-    item.className = `scenario-card scenario-card--${scenario.scenario}`;
-    item.dataset.scenario = scenario.scenario;
-    item.setAttribute("aria-pressed", String(scenario.scenario === selectedScenarioId));
-    const label = document.createElement("span");
-    label.className = "scenario-card__label";
-    label.textContent = labels[scenario.scenario];
-    const amount = document.createElement("strong");
-    amount.className = "scenario-card__amount";
-    renderCashflowAmount(amount, scenario.profit_yen);
-    const premise = document.createElement("small");
-    premise.className = "scenario-card__premise";
-    const growthRate = scenarioAssumptions.get(scenario.scenario)?.electricity_price_growth_rate ?? 0;
-    const growthPercent = Number((growthRate * 100).toFixed(3));
-    premise.textContent = `電気料金上昇 年${growthPercent}％`;
-    const subsidy = document.createElement("small");
-    subsidy.className = "scenario-card__subsidy";
-    subsidy.textContent = scenarioSubsidyCondition(scenario, frontendData.publicData.municipalities.find((item) => item.municipality_code === input.municipality_code)?.candidate_summary);
-    item.append(label, amount, premise, subsidy);
-    elements.scenarioList.append(item);
+  const scenario = scenarios.find(item => item.scenario === selectedScenarioId);
+  document.querySelector('#scenario-select').value = selectedScenarioId;
+  for (const option of document.querySelector('#scenario-select').options) {
+    const assumption = frontendData.publicData.scenarios.find(item => item.scenario === option.value);
+    const growth = Number((assumption.electricity_price_growth_rate * 100).toFixed(3));
+    option.textContent = { downside: '下振れ', standard: '標準', upside: '上振れ' }[option.value] + '｜電気代' + (growth > 0 ? '＋' : '') + growth + '％／年｜補助金' + (option.value === 'downside' ? 'なし' : 'あり想定');
   }
+  document.querySelector('#scenario-assumption').textContent = document.querySelector('#scenario-select').selectedOptions[0].textContent;
 }
 
-function appendProgramList(list, programs, statusText) {
-  const fragment = document.createDocumentFragment();
-  for (const program of programs) {
-    const item = document.createElement("li");
-    const heading = document.createElement("strong");
-    if (program.official_url) {
-      const link = document.createElement("a");
-      link.href = program.official_url;
-      link.target = "_blank";
-      link.rel = "noopener noreferrer";
-      link.textContent = `${program.program_name} ↗`;
-      heading.append(link);
-    } else {
-      heading.textContent = program.program_name;
-    }
-    const note = document.createElement("p");
-    note.textContent = typeof statusText === "function" ? statusText(program) : statusText;
-    item.append(heading, note);
-    if (program.note) {
-      const conditions = document.createElement("details");
-      const conditionsTitle = document.createElement("summary");
-      conditionsTitle.textContent = "制度の条件・注意事項";
-      const conditionsText = document.createElement("p");
-      conditionsText.textContent = programConditionsText(program.note);
-      conditions.append(conditionsTitle, conditionsText);
-      item.append(conditions);
-    }
-    const userConfirmations = (program.required_confirmations ?? []).filter(
-      (confirmation) => !confirmation.includes("金額算定ルールを一意に確定できない")
-        && !confirmation.includes("入力と対象設備が一致しない")
-        && !confirmation.includes("現在の受付状態では算入しない")
-    );
-    if (userConfirmations.length) {
-      const confirmations = document.createElement("ul");
-      for (const confirmation of userConfirmations) {
-        const confirmationItem = document.createElement("li");
-        confirmationItem.textContent = confirmation;
-        confirmations.append(confirmationItem);
-      }
-      item.append(confirmations);
-    }
-    fragment.append(item);
+function renderSubsidyRows(list, rows) {
+  list.replaceChildren();
+  if (!rows.length) {
+    const empty = document.createElement('li');
+    empty.textContent = 'この一覧に掲載する制度はありません．地域の確認状況は上記をご確認ください．';
+    list.append(empty);
   }
-  list.replaceChildren(fragment);
-}
-
-function renderMunicipalInformation(municipality) {
-  const panel = document.querySelector("[data-municipal-information]");
-  const summary = municipality?.candidate_summary;
-  panel.hidden = !summary;
-  if (!summary) return;
-  document.querySelector("[data-municipal-information-status]").textContent = municipalInformationSummary(summary);
-  document.querySelector("[data-municipal-information-names]").textContent = (municipality.candidate_program_names ?? []).join("／");
-  const summaryReason = document.querySelector("[data-municipal-information-reason]");
-  summaryReason.hidden = summary.amount_components.length > 0;
-  summaryReason.textContent = summary.amount_components.length === 0 ? summary.non_adoption_reason ?? "" : "";
-  const equipmentLabels = { solar: "太陽光", battery: "蓄電池", solar_battery: "太陽光・蓄電池", package_bonus: "組合せ加算" };
-  document.querySelector("[data-municipal-information-components]").replaceChildren(...summary.amount_components.map((component) => {
-    const item = document.createElement("li");
-    const title = document.createElement("strong");
-    title.textContent = `${equipmentLabels[component.equipment] ?? "対象設備"}：${component.display_amount}`;
-    const state = document.createElement("p");
-    state.textContent = `${applicationStatusLabels[component.application_status] ?? "受付状況未確認"}．${componentStatusLabels[component.calculation_status] ?? "未確認"}．`;
-    item.append(title, state);
-    for (const text of [component.scope, component.reason]) {
-      if (!text) continue;
-      const paragraph = document.createElement("p");
-      paragraph.textContent = text;
-      item.append(paragraph);
+  for (const row of rows) {
+    const item = document.createElement('li');
+    item.dataset.subsidyRecord = row.id;
+    const heading = document.createElement('strong');
+    const equipment = { solar: '太陽光', battery: '蓄電池', solar_battery: '太陽光・蓄電池', package_bonus: '組合せ加算' }[row.target_equipment];
+    heading.textContent = `${subsidyGovernmentLabel(row.government_level)}${equipment ? equipment + '：' : ''}${row.program_name}`;
+    const status = document.createElement('p');
+    status.textContent = `受付状態：${applicationStatusLabel(row)}`;
+    const calculation = document.createElement('p');
+    calculation.textContent = row.included ? `利用を想定する額：${formatYen(row.amount_yen)}` : Number.isFinite(row.amount_yen) ? row.amount_yen > 0 ? `参考額（今回の算入対象外）：${formatYen(row.amount_yen)}` : '今回の算入額：0円' : '試算額：未確定';
+    const noncash = noncashBenefitDescription(row);
+    if (row.included && noncash) calculation.textContent = '経済便益への算入額：' + formatYen(row.amount_yen, false) + '相当（非現金）';
+    item.append(heading, status, calculation);
+    if(row.included && noncash){const benefit=document.createElement('p');benefit.textContent=noncash;item.append(benefit);}
+    if(row.included && row.id==='nagano-20205-row-42-2-2026') {
+      const note=document.createElement('p');
+      note.textContent='蓄電池の税込対象費用は，他の併用可能な補助金を控除する前の額で計算します．補助額は1kWh当たり20万円と対象費用の3分の2の小さい額を千円未満切捨てとします．他の国庫財源による補助との併用は禁止されています．';
+      item.append(note);
     }
-    const link = document.createElement("a");
-    link.href = component.official_url;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.textContent = `公式情報を確認 ↗（${component.confirmed_at}確認）`;
-    item.append(link);
-    return item;
-  }));
-  const source = document.querySelector("[data-municipal-information-source]");
-  source.href = summary.official_url;
-  source.textContent = `自治体の公式情報を確認 ↗（${summary.confirmed_at}確認）`;
+    const branchExclusions = (row.calculation_assumptions ?? []).filter(text => /蓄電池枝.*算入しない/.test(text));
+    if (row.included && branchExclusions.length) {
+      const branchNote = document.createElement('p');
+      branchNote.textContent = branchExclusions.join(' ');
+      item.append(branchNote);
+    }
+    const eligibilityPremises = (row.required_confirmations ?? []).filter(text => /充足.*仮定|申請前確認条件/.test(text));
+    if (row.included && (row.calculation_assumptions?.some(text => /入力(?:項目)?にない|入力外|仮定|解釈|半額上限|設置後/.test(text)) || eligibilityPremises.length)) {
+      const premise = document.createElement('p');
+      premise.textContent = '条件付き概算：' + [...(row.calculation_assumptions ?? []), ...eligibilityPremises].map(text=>text.replace(/(?:独立確認①|管理レビュー)PASS済み算式だけを構造化し，入力外条件を満たすモデル前提で算定する．/g,'入力で確認していない適格条件を満たすと仮定して算定します．').replace('同時導入加算1万ダラーは','非現金の同時導入加算1万ダラーは')).join(' ');
+      if (eligibilityPremises.some(text => /申請前確認条件/.test(text))) premise.textContent += ' 入力で確認していない申請前確認条件の充足を仮定した概算です．申請前に個別の適格性を確認してください．';
+      const confirmation = document.createElement('p');
+      const confirmationText = (row.required_confirmations ?? []).filter(text => !text.includes('実読') && !eligibilityPremises.includes(text)).join(' ');
+      item.append(premise);
+      if (confirmationText) { confirmation.textContent = '要確認事項：' + confirmationText; item.append(confirmation); }
+    }
+    if (row.branch_statuses?.length) {
+      status.textContent = row.branch_statuses.map(branch => ({solar:'太陽光',battery:'蓄電池'}[branch.branch_id] ?? '対象設備') + '：' + (branch.application_status === 'closed' ? '受付終了' : applicationStatusLabel(branch))).join('／');
+    }
+    if (row.included && row.benefit_type === 'noncash_points_equivalent') {
+      const benefit = document.createElement('p');
+      benefit.textContent = '非現金のポイント等の額面10万円相当を経済便益に算入しています．地域協力店等の2倍条件と税抜・値引後の本体価格10万円超を満たす適格製品の採用を仮定しています．';
+      item.append(benefit);
+    }
+    if (!row.included) {
+      const reason = document.createElement('p');
+      reason.textContent = row.reason;
+      item.append(reason);
+    }
+    if (row.official_url) {
+      const link = document.createElement('a');
+      link.href = row.official_url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = heading.textContent + ' ↗';
+      heading.replaceChildren(link);
+    }
+    list.append(item);
+  }
 }
 
 function renderMunicipalSubsidy(result, scenario) {
-  const municipality = frontendData.publicData.municipalities.find((item) => item.municipality_code === result.input.municipality_code);
-  renderMunicipalInformation(municipality);
-  const breakdown = scenario.subsidy_breakdown;
-  const municipalIncluded = (breakdown?.included_programs ?? []).filter(
-    (program) => program.government_level === "municipality"
-  );
-  const rawMunicipalCandidates = (breakdown?.candidate_programs ?? []).filter(
-    (program) => program.government_level === "municipality"
-  );
-  const equipmentMismatch = (program) => (program.required_confirmations ?? []).some(
-    (confirmation) => confirmation.includes("入力と対象設備が一致しない")
-  );
-  const municipalCandidates = rawMunicipalCandidates.filter((program) => !equipmentMismatch(program));
-  const rawMunicipalExcluded = (breakdown?.excluded_programs ?? []).filter(
-    (program) => program.government_level === "municipality"
-  );
-  const municipalExcluded = [
-    ...rawMunicipalExcluded,
-    ...rawMunicipalCandidates.filter(equipmentMismatch)
-  ];
-  const municipalScenarioUnreflected = scenario.scenario === "downside"
-    ? [...new Map(
-      result.scenarios
-        .filter((item) => item.scenario !== "downside")
-        .flatMap((item) => item.subsidy_breakdown?.included_programs ?? [])
-        .filter((program) => program.government_level === "municipality")
-        .map((program) => [program.id, program])
-    ).values()]
-    : [];
-  const status = result.input.municipality_program_status ?? "not_requested";
-  elements.municipalSubsidyTitle.textContent = result.input.municipality_name
-    ? `${result.input.municipality_name}の制度確認`
-    : "市区町村を選ぶと確認できます";
-  const summaries = {
-    not_requested: "市区町村を選択していないため，市区町村制度は判定していません．未選択は補助金0円を意味しません．",
-    no_program: "収集済みの公式情報では，現在利用できる市区町村の補助金を確認できませんでした．",
-    unconfirmed: "補助金額は未確認のため，今回は含めていません．市区町村・制度の公式情報で確認できます．",
-    candidate: `補助金額は未確認のため，今回は含めていません．詳細は${result.input.municipality_name ?? "市区町村"}・該当制度で確認できます．`,
-    included: "受付中，対象設備一致，金額算定可能の3条件を満たす制度を計算に反映しています．個別適格性は公式情報で確認してください．"
-  };
-  const scenarioAssumption = frontendData.publicData.scenarios.find(
-    (item) => item.scenario === scenario.scenario
-  );
-  if (status === "included" && scenarioAssumption?.subsidy_included === false) {
-    elements.municipalSubsidySummary.textContent = "利用できる制度がある場合でも，この下振れシナリオは「補助金を利用できない場合」として0円で計算しています．";
-  } else if (municipalIncluded.length > 0) {
-    elements.municipalSubsidySummary.textContent = summaries.included;
-  } else if (municipalCandidates.some((program) => program.reason_code === "capacity_below_minimum")) {
-    elements.municipalSubsidySummary.textContent = "入力容量が制度の最低容量を下回るため，今回は含めていません．制度がないという意味ではありません．";
-  } else if (municipalCandidates.length > 0) {
-    elements.municipalSubsidySummary.textContent = summaries.candidate;
-  } else if (rawMunicipalExcluded.some((program) => program.calculation_status === "excluded_closed")) {
-    elements.municipalSubsidySummary.textContent = "確認した制度は受付終了または予算終了のため，今回は含めていません．";
-  } else if (municipalExcluded.some(equipmentMismatch)) {
-    elements.municipalSubsidySummary.textContent = "選択した設備構成と対象設備が一致しないため，今回は含めていません．";
-  } else if (municipalExcluded.length > 0) {
-    elements.municipalSubsidySummary.textContent = "確認した制度は適用条件と一致しないため，今回は含めていません．";
-  } else {
-    elements.municipalSubsidySummary.textContent = municipality?.candidate_summary
-      ? municipalInformationSummary(municipality.candidate_summary)
-      : summaries[status] ?? summaries.unconfirmed;
-  }
-
-  elements.municipalIncluded.hidden = municipalIncluded.length === 0;
-  appendProgramList(
-    elements.municipalIncludedList,
-    municipalIncluded,
-    (program) => `${formatYen(program.amount_yen)}を計算に反映しています．契約前に個別適格性と最新の受付状況を確認してください．`
-  );
-  elements.municipalScenarioUnreflected.hidden = municipalScenarioUnreflected.length === 0;
-  appendProgramList(
-    elements.municipalScenarioUnreflectedList,
-    municipalScenarioUnreflected,
-    (program) => `${formatYen(program.amount_yen)}を算定できます．下振れシナリオでは，補助金を利用できない場合として計算へ反映していません．`
-  );
-  elements.municipalCandidates.hidden = municipalCandidates.length === 0;
-  appendProgramList(
-    elements.municipalCandidateList,
-    municipalCandidates,
-    "公式情報で利用条件を確認してください．"
-  );
-  elements.municipalExcluded.hidden = municipalExcluded.length === 0;
-  const excludedLabels = {
-    excluded_closed: "受付終了または予算終了のため，計算に反映していません．",
-    excluded_incompatible: "現在のFIT売電を前提とする計算と両立しないため，計算に反映していません．",
-    excluded_duplicate: "同じ給付目的の重複を避けるため，計算に反映していません．",
-    candidate_missing_conditions: "選択した設備構成と対象設備が一致しないため，今回は含めていません．"
-  };
-  appendProgramList(
-    elements.municipalExcludedList,
-    municipalExcluded,
-    (program) => excludedLabels[program.calculation_status] ?? "計算に反映していません．"
-  );
-
-  bindSubsidySourceLink(elements.resultSubsidySource, officialSubsidySource(result, scenario));
+  const municipality = frontendData.publicData.municipalities.find(item => item.municipality_code === result.input.municipality_code);
+  const exploration = frontendData.publicData.municipality_subsidy_exploration?.find(item => item.municipality_code === result.input.municipality_code);
+  const groups = subsidyGroups(result, scenario, municipality);
+  const names = municipality?.candidate_program_names ?? [];
+  const summaryCovered = names.length > 0 && names.every(name => [...groups.included, ...groups.excluded].some(row => row.program_name === name));
+  elements.municipalSubsidySummary.textContent = [
+    prefectureResearchMessage(scenario.subsidy_breakdown?.prefecture_program_status ?? result.input.prefecture_program_status),
+    subsidyResearchMessage(scenario.subsidy_breakdown?.municipality_program_status ?? result.input.municipality_program_status, exploration),
+    typeof municipality?.candidate_summary === 'string' && !summaryCovered ? municipality.candidate_summary : ''
+  ].filter(Boolean).join(' ');
+  renderSubsidyRows(elements.municipalIncludedList, groups.included);
+  renderSubsidyRows(elements.municipalExcludedList, groups.excluded);
+  renderSubsidyRows(document.querySelector('[data-subsidy-reference-list]'), groups.references);
+  document.querySelector('[data-subsidy-references]').hidden = groups.references.length === 0;
+  elements.municipalSubsidySummary.hidden = !elements.municipalSubsidySummary.textContent;
 }
-
 function renderBatteryYearly(result) {
   const batterySelected = result.input.equipment_package === "solar_plus_standard_battery";
   elements.batteryYearly.hidden = !batterySelected;
@@ -781,7 +703,7 @@ function renderBatteryYearly(result) {
   elements.batteryCapacityChart.setAttribute("viewBox", `0 0 ${width} ${height}`);
   const plotWidth = width - margin.left - margin.right;
   const plotHeight = height - margin.top - margin.bottom;
-  const x = (year) => margin.left + (year / 20) * plotWidth;
+  const x = (year) => margin.left + (year / 30) * plotWidth;
   const y = (capacity) => margin.top + (1 - capacity / nominalCapacity) * plotHeight;
   const chart = elements.batteryCapacityChart;
   chart.replaceChildren();
@@ -789,7 +711,7 @@ function renderBatteryYearly(result) {
     createSvgElement("line", { x1: margin.left, y1: margin.top, x2: margin.left, y2: height - margin.bottom, class: "battery-capacity-chart__axis" }),
     createSvgElement("line", { x1: margin.left, y1: height - margin.bottom, x2: width - margin.right, y2: height - margin.bottom, class: "battery-capacity-chart__axis" })
   );
-  for (const year of [0, 10, 20]) {
+  for (const year of [0, 10, 20, 30]) {
     const tick = createSvgElement("line", { x1: x(year), y1: height - margin.bottom, x2: x(year), y2: height - margin.bottom + 6, class: "battery-capacity-chart__axis" });
     const label = createSvgElement("text", { x: x(year), y: height - 16, class: "battery-capacity-chart__label", "text-anchor": "middle" });
     label.textContent = year === 0 ? "導入時" : `${year}年後`;
@@ -801,14 +723,14 @@ function renderBatteryYearly(result) {
     chart.append(label);
   }
   if (outage && outage.capacity <= nominalCapacity) {
-    chart.append(createSvgElement("line", { x1: x(0), y1: y(outage.capacity), x2: x(20), y2: y(outage.capacity), class: "battery-capacity-chart__reference" }));
+    chart.append(createSvgElement("line", { x1: x(0), y1: y(outage.capacity), x2: x(30), y2: y(outage.capacity), class: "battery-capacity-chart__reference" }));
     const label = createSvgElement("text", { x: x(0) + 4, y: y(outage.capacity) - 8, class: "battery-capacity-chart__label" });
     label.textContent = `24時間の一例 ${outage.label}`;
     chart.append(label);
   }
   const pathData = points.map((point, index) => `${index === 0 ? "M" : "L"}${x(point.year)} ${y(point.capacity)}`).join(" ");
   chart.append(createSvgElement("path", { d: pathData, class: "battery-capacity-chart__line" }));
-  for (const point of points.filter(({ year }) => [10, 20].includes(year))) {
+  for (const point of points.filter(({ year }) => [10, 20, 30].includes(year))) {
     chart.append(createSvgElement("circle", { cx: x(point.year), cy: y(point.capacity), r: 5, class: "battery-capacity-chart__point" }));
   }
   const capacities = new Map(points.map((point) => [point.year, point.capacity]));
@@ -816,9 +738,10 @@ function renderBatteryYearly(result) {
   elements.batteryCapacityYear1.textContent = `${formatBatteryCapacity(capacities.get(1))} kWh`;
   elements.batteryCapacityYear10.textContent = `${formatBatteryCapacity(capacities.get(10))} kWh`;
   elements.batteryCapacityYear20.textContent = `${formatBatteryCapacity(capacities.get(20))} kWh`;
-  elements.batteryCapacityDescription.textContent = `導入時${formatBatteryCapacity(nominalCapacity)} kWh，初年度${formatBatteryCapacity(capacities.get(1))} kWh，10年後${formatBatteryCapacity(capacities.get(10))} kWh，20年後${formatBatteryCapacity(capacities.get(20))} kWhです．15年目末60％は保証下限に整合する保守的感度パスで，各年は年末容量をその年の計算に用います．16～20年は年率係数を継続した数学的外挿であり，一次資料の実測値・保証値ではありません．`;
+  elements.batteryCapacityYear30.textContent = `${formatBatteryCapacity(capacities.get(30))} kWh`;
+  elements.batteryCapacityDescription.textContent = `導入時${formatBatteryCapacity(nominalCapacity)} kWh，初年度${formatBatteryCapacity(capacities.get(1))} kWh，10年後${formatBatteryCapacity(capacities.get(10))} kWh，20年後${formatBatteryCapacity(capacities.get(20))} kWh，30年後${formatBatteryCapacity(capacities.get(30))} kWhです．15年目末60％は保証下限に整合する保守的感度パスで，各年は年末容量をその年の計算に用います．16～30年は年率係数を継続した数学的外挿であり，一次資料の実測値・保証値ではありません．`;
   if (available) {
-    elements.batteryCapacityDescription.textContent = `導入時${formatBatteryCapacity(nominalCapacity)} kWh，初年度${formatBatteryCapacity(capacities.get(1))} kWh，10年後${formatBatteryCapacity(capacities.get(10))} kWh，20年後${formatBatteryCapacity(capacities.get(20))} kWhです．${degradationDescription(degradation)}`;
+    elements.batteryCapacityDescription.textContent = `導入時${formatBatteryCapacity(nominalCapacity)} kWh，初年度${formatBatteryCapacity(capacities.get(1))} kWh，10年後${formatBatteryCapacity(capacities.get(10))} kWh，20年後${formatBatteryCapacity(capacities.get(20))} kWh，30年後${formatBatteryCapacity(capacities.get(30))} kWhです．${degradationDescription(degradation)}`;
   }
   if (outage) elements.batteryCapacityDescription.textContent += `冷蔵庫・照明・スマホ24時間の一例は${outage.label}です．満充電，残量0％まで使用，太陽光補充なしの参考条件です．`;
 }
@@ -909,20 +832,108 @@ function chartCashflowSeries(scenario) {
   return chartSeries;
 }
 
+const cashflowDetail = document.querySelector('#cashflow-detail');
+let activeChartMarker = null;
+let activeChartLines = [];
+let chartDetailMode = null;
+let chartHoverTimer = null;
+function cancelChartHoverClose() { clearTimeout(chartHoverTimer); }
+function scheduleChartHoverClose() {
+  cancelChartHoverClose();
+  chartHoverTimer = setTimeout(() => {
+    if (chartDetailMode === 'hover' && !activeChartMarker?.matches(':hover') && !cashflowDetail.matches(':hover')) closeCashflowDetail();
+  }, 300);
+}
+function closeCashflowDetail(restoreFocus = false) {
+  cancelChartHoverClose();
+  if (restoreFocus && activeChartMarker?.isConnected) activeChartMarker.focus({ preventScroll: true });
+  activeChartMarker?.setAttribute('aria-expanded', 'false');
+  cashflowDetail.hidden = true;
+  activeChartMarker = null;
+  chartDetailMode = null;
+}
+function showCashflowDetail(marker, lines, mode = chartDetailMode) {
+  if (mode === 'hover' && (chartDetailMode === 'fixed' || chartDetailMode === 'focus')) return;
+  cancelChartHoverClose();
+  chartDetailMode = mode;
+  document.querySelector("[data-close-cashflow-detail]").hidden = mode === "hover";
+  activeChartMarker?.setAttribute('aria-expanded', 'false');
+  activeChartMarker = marker;
+  activeChartLines = lines;
+  marker.setAttribute('aria-expanded', 'true');
+  const content = document.querySelector('[data-cashflow-detail-content]');
+  content.replaceChildren(...lines.map(text => { const p = document.createElement('p'); p.textContent = text; return p; }));
+  cashflowDetail.hidden = false;
+  const bounds = marker.getBoundingClientRect();
+  const box = cashflowDetail.getBoundingClientRect();
+  const viewportWidth = document.documentElement.clientWidth;
+  const viewportHeight = document.documentElement.clientHeight;
+  cashflowDetail.style.left = Math.max(8, Math.min(bounds.left, viewportWidth - box.width - 8)) + 'px';
+  const below = bounds.bottom + 10;
+  cashflowDetail.style.top = Math.max(8, Math.min(below + box.height <= viewportHeight ? below : bounds.top - box.height - 10, viewportHeight - box.height - 8)) + 'px';
+}
+cashflowDetail.addEventListener('pointerenter', cancelChartHoverClose);
+cashflowDetail.addEventListener('pointerleave', scheduleChartHoverClose);
+cashflowDetail.addEventListener('focusin', () => { chartDetailMode = 'focus'; cancelChartHoverClose(); });
+document.querySelector('[data-close-cashflow-detail]').addEventListener('click', () => closeCashflowDetail(true));
+document.addEventListener('keydown', event => { if (event.key === 'Escape' && !cashflowDetail.hidden) { event.preventDefault(); closeCashflowDetail(true); } });
+document.addEventListener('pointerdown', event => { if (!cashflowDetail.hidden && !event.target.closest('.cashflow-detail, .cashflow-marker-target')) closeCashflowDetail(); });
+window.addEventListener('scroll', () => { if (activeChartMarker) showCashflowDetail(activeChartMarker, activeChartLines); }, { passive: true });
+const compactViewport = window.matchMedia('(max-width: 40rem)');
+const comparisonControls = document.querySelector('.analysis-workbench');
+const scenarioControls = document.querySelector('.scenario-controls');
+const comparisonHome = document.createComment('equipment controls');
+const scenarioHome = document.createComment('scenario controls');
+comparisonControls.before(comparisonHome);
+scenarioControls.before(scenarioHome);
+function syncComparisonLayout() {
+  const compact = compactViewport.matches && Boolean(latestResult);
+  const activeControl = document.activeElement;
+  const restoreFocus = comparisonControls.contains(activeControl) || scenarioControls.contains(activeControl);
+  if (compact && comparisonControls.parentElement !== document.querySelector('.cashflow-panel')) {
+    document.querySelector('.cashflow-legend').after(comparisonControls);
+    document.querySelector('.cashflow-conclusion').before(scenarioControls);
+  } else if (!compact && comparisonControls.previousSibling !== comparisonHome) {
+    comparisonHome.after(comparisonControls);
+    scenarioHome.after(scenarioControls);
+  }
+  if (restoreFocus && document.activeElement !== activeControl) activeControl.focus({ preventScroll: true });
+  elements.changeConditionsButton.textContent = '変更';
+  elements.changeConditionsButton.setAttribute('aria-label', compact ? '地域・電気代の条件を変更' : '地域・電気代を変更');
+  const housing = document.querySelector('.advanced-panel--conditions');
+  housing.querySelector('.condition-toggle-action').textContent = housing.open ? '閉じる' : '変更';
+}
+compactViewport.addEventListener('change', syncComparisonLayout);
+
+window.addEventListener('resize', () => {
+  syncComparisonLayout();
+  closeCashflowDetail();
+  if (latestResult && !elements.result.hidden) {
+    const selected = latestResult.scenarios.find(scenario => scenario.scenario === selectedScenarioId);
+    renderCashflow(latestResult.scenarios, selected, latestResult.input.equipment_package);
+  }
+});
+
 function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
+  closeCashflowDetail();
+  const markerTargets = [];
+  const endpoint = endpointResult(selectedScenario);
+  const pendingLabel = () => {
+    const label = createSvgElement('text', { x: 12, y: 32, class: 'cashflow-endpoint-label is-neutral' });
+    label.textContent = '30年間の収支：' + endpoint.text;
+    elements.cashflowChart.setAttribute('viewBox', '0 0 280 70');
+    elements.cashflowChart.replaceChildren(label);
+  };
   const availableScenarios = scenarios.filter((scenario) => annualCashflowSeries(scenario).length);
   if (!availableScenarios.length) {
-    elements.cashflowChart.replaceChildren();
-    elements.cashflowEndpoint.textContent = "20年後 補助金確認後に確定";
+    pendingLabel();
     elements.cashflowDescription.textContent = "補助金額が未確認のため，累積損益と回収時点は確定できません．";
     return;
   }
 
   const selectedSeries = annualCashflowSeries(selectedScenario);
   if (!selectedSeries.length) {
-    elements.cashflowChart.replaceChildren();
-    elements.cashflowScenario.textContent = "選択中のシナリオは補助金確認待ち";
-    elements.cashflowEndpoint.textContent = "20年後 補助金確認後に確定";
+    pendingLabel();
     elements.cashflowDescription.textContent = "補助金額が未確認のため，選択中シナリオの累積損益と回収時点は確定できません．下振れシナリオでは補助金0円の結果を確認できます．";
     return;
   }
@@ -930,7 +941,14 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
   const labels = { downside: "下振れ", standard: "標準", upside: "上振れ" };
   const width = Math.min(720, elements.cashflowChart.clientWidth || 720);
   const height = 280;
-  const padding = { top: 24, right: 24, bottom: 42, left: 82 };
+  const endpointLabel = createSvgElement('text', { class: 'cashflow-endpoint-label' + (endpoint.value < 0 ? ' is-negative' : endpoint.value === 0 ? ' is-neutral' : ''), 'data-endpoint-value': endpoint.value });
+  endpointLabel.textContent = endpoint.text;
+  elements.cashflowChart.append(endpointLabel);
+  const estimatedLabelWidth = [...endpoint.text].reduce((sum, char) => sum + (/[^\x00-\x7f]/.test(char) ? 14 : 8), 0);
+  const labelWidth = endpointLabel.getBBox().width || estimatedLabelWidth;
+  const compactChart = compactViewport.matches;
+  const chartLayout = cashflowChartLayout(width, labelWidth, compactChart);
+  const { padding } = chartLayout;
   elements.cashflowChart.setAttribute("viewBox", `0 0 ${width} ${height}`);
   const values = availableScenarios.flatMap((scenario) => (
     chartCashflowSeries(scenario).map((point) => point.cumulative_profit_yen)
@@ -938,7 +956,7 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
   const minimum = Math.min(0, ...values);
   const maximum = Math.max(0, ...values);
   const range = Math.max(maximum - minimum, 1);
-  const x = (year) => padding.left + (year / 20) * (width - padding.left - padding.right);
+  const x = (year) => padding.left + (year / 30) * (width - padding.left - padding.right);
   const y = (value) => padding.top + ((maximum - value) / range) * (height - padding.top - padding.bottom);
   const fragment = document.createDocumentFragment();
 
@@ -969,7 +987,7 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
     .map((point) => `${x(point.year)},${y(point.cumulative_profit_yen)}`)
     .join(" ");
   fragment.append(createSvgElement("polygon", {
-    points: `${x(0)},${y(0)} ${selectedLinePoints} ${x(20)},${y(0)}`,
+    points: `${x(0)},${y(0)} ${selectedLinePoints} ${x(30)},${y(0)}`,
     class: `cashflow-chart__area cashflow-chart__area--${selectedScenario.scenario}`
   }));
 
@@ -987,14 +1005,8 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
     }));
   }
 
-  for (const year of [0, 5, 10, 15, 20]) {
+  for (const year of [0, 10, 20, 30]) {
     const point = selectedSeries.find((item) => item.year === year);
-    if (year > 0) fragment.append(createSvgElement("circle", {
-      cx: x(year),
-      cy: y(point.cumulative_profit_yen),
-      r: 5,
-      class: "cashflow-chart__dot"
-    }));
     const yearLabel = createSvgElement("text", {
       x: x(year),
       y: height - 12,
@@ -1005,13 +1017,13 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
     fragment.append(yearLabel);
   }
 
-  for (const point of selectedSeries.filter((item) => item.maintenance_and_replacement_cost_yen > 0)) {
-    fragment.append(createSvgElement("circle", {
-      cx: x(point.year),
-      cy: y(point.cumulative_profit_yen),
-      r: 4,
-      class: "cashflow-chart__lifecycle-cost"
-    }));
+  for (const point of cashflowMarkers(selectedScenario)) {
+    fragment.append(createSvgElement('circle', { cx: x(point.year), cy: y(point.value), r: point.costs.length ? 4 : 5, class: point.costs.length ? 'cashflow-chart__lifecycle-cost' : 'cashflow-chart__dot' }));
+    const lines = point.costs.length
+      ? [point.year + '年目・費用発生', ...point.costs.map(cost => cost.label + '：' + formatYen(cost.amount))]
+      : [point.year + '年目・累積損益', formatSignedYen(point.value)];
+    if (point.year === 30 && point.costs.length) lines.push('30年目末の累積損益：' + formatSignedYen(point.value));
+    markerTargets.push({ x: x(point.year), y: y(point.value), lines });
   }
 
   for (const scenario of availableScenarios) {
@@ -1025,6 +1037,7 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
       const isFinalRecovery = intersection.direction === "up"
         && Math.abs(intersection.year - finalRecovery.year) < 0.000001;
       const highlighted = selected && isFinalRecovery;
+      markerTargets.push({ x: x(intersection.year), y: y(0), lines: [labels[scenario.scenario] + '・損益ゼロの交点（約' + Number(intersection.year.toFixed(1)) + '年）', '累積損益：0円'] });
       fragment.append(createSvgElement("circle", {
         cx: x(intersection.year),
         cy: y(0),
@@ -1034,26 +1047,49 @@ function renderCashflow(scenarios, selectedScenario, equipmentPackage) {
     }
   }
 
+  for (const target of groupMarkerTargets(markerTargets)) {
+    const marker = createSvgElement('g', { class: 'cashflow-marker-target', tabindex: 0, role: 'button', 'aria-label': target.lines.join('，'), 'aria-controls': 'cashflow-detail', 'aria-expanded': 'false' });
+    for (const point of target.points) marker.append(createSvgElement('circle', { cx: point.x, cy: point.y, r: 12 }));
+    const show = mode => showCashflowDetail(marker, target.lines, mode);
+    marker.addEventListener('pointerenter', event => { if (event.pointerType !== 'touch') show('hover'); });
+    marker.addEventListener('pointerleave', scheduleChartHoverClose);
+    marker.addEventListener('focus', () => show('focus'));
+    marker.addEventListener('click', () => show('fixed'));
+    marker.addEventListener('keydown', event => { if (['Enter', ' '].includes(event.key)) { event.preventDefault(); show('fixed'); } });
+    fragment.append(marker);
+  }
   elements.cashflowChart.replaceChildren(fragment);
+  endpointLabel.setAttribute('x', compactChart ? x(30) : x(30) + 16);
+  endpointLabel.setAttribute('y', compactChart ? chartLayout.labelTop : y(endpoint.value) + 5);
+  if (compactChart) {
+    endpointLabel.setAttribute('text-anchor', 'end');
+    const availableWidth = chartLayout.labelMaxWidth;
+    if (labelWidth > availableWidth) {
+      endpointLabel.setAttribute('textLength', availableWidth);
+      endpointLabel.setAttribute('lengthAdjust', 'spacingAndGlyphs');
+    }
+  }
+  const endpointCaption = createSvgElement('text', { x: endpointLabel.getAttribute('x'), y: Number(endpointLabel.getAttribute('y')) - 19, class: 'cashflow-endpoint-caption', 'text-anchor': compactChart ? 'end' : 'start' });
+  endpointCaption.textContent = '30年間の収支';
+  elements.cashflowChart.append(endpointCaption, endpointLabel);
   for (const legendItem of document.querySelectorAll("[data-legend-scenario]")) {
     legendItem.classList.toggle(
       "is-selected",
       legendItem.dataset.legendScenario === selectedScenario.scenario
     );
   }
-  elements.cashflowScenario.textContent = `${labels[selectedScenario.scenario]}シナリオを選択中`;
-  renderInlineCashflowAmount(elements.cashflowEndpoint, "20年後 ", selectedScenario.profit_yen);
   const paybackDescriptions = availableScenarios.map((scenario) => (
-    `${labels[scenario.scenario]}は${scenario.payback_year === null ? "20年以内の回収なし" : `約${scenario.payback_year}年で回収`}`
+    `${labels[scenario.scenario]}は${scenario.payback_year === null ? "30年以内の回収なし" : `約${scenario.payback_year}年で回収`}`
   ));
   const batteryReplacementDescription = equipmentPackage === "solar_plus_standard_battery"
-    ? "標準蓄電池は20年間交換せず使用する前提です．"
+    ? "標準蓄電池は30年間交換せず使用する前提です．"
     : "";
-  elements.cashflowDescription.textContent = `3シナリオの累積損益を表示しています．4年ごとの定期点検費と15年目のパワーコンディショナー交換費による減少も反映しています．${batteryReplacementDescription}${paybackDescriptions.join("，")}．選択中の${labels[selectedScenario.scenario]}は20年後${formatProfit(selectedScenario.profit_yen)}です．`;
+  elements.cashflowDescription.textContent = `3シナリオの累積損益を表示しています．5年ごとの定期点検費と20年目のパワーコンディショナー交換費による減少も反映しています．${batteryReplacementDescription}${paybackDescriptions.join("，")}．選択中の${labels[selectedScenario.scenario]}は30年後${formatProfit(selectedScenario.profit_yen)}です．`;
 }
 
 function renderResult(result, options = {}) {
   latestResult = result;
+  syncComparisonLayout();
   const selectedScenario = result.scenarios.find(
     (scenario) => scenario.scenario === selectedScenarioId
   ) ?? result.scenarios.find((scenario) => scenario.scenario === "standard");
@@ -1062,6 +1098,8 @@ function renderResult(result, options = {}) {
   }
 
   selectedScenarioId = selectedScenario.scenario;
+  document.querySelector('[data-chart-equipment]').textContent = '太陽光' + Number(result.input.system_capacity_kw) + 'kW' + (result.input.equipment_package === 'solar_plus_standard_battery' ? '＋蓄電池' + Number(result.input.battery_capacity_kwh) + 'kWh' : '');
+  document.querySelector('[data-chart-recovery]').textContent = '回収の目安：' + scenarioRecoveryPresentation(selectedScenario);
   const orientation = result.input.detail_conditions?.find(
     (item) => item.input_name === "roof_orientation"
   );
@@ -1075,61 +1113,56 @@ function renderResult(result, options = {}) {
   }
   updateDetailConditionSummary(result);
   const profitConfirmed = Number.isFinite(selectedScenario.profit_yen);
-  const profitable = profitConfirmed && selectedScenario.profit_yen > 0;
-  const breakEven = profitConfirmed && selectedScenario.profit_yen === 0;
-  if (!profitConfirmed) {
-    elements.resultSummary.textContent = `${result.input.prefecture_name}では，補助金確認後に収支が確定します`;
-  } else if (profitable) {
-    renderBrandOutcome(elements.resultSummary, `${result.input.prefecture_name}では，`, "トク", "になる見込みです", false);
-  } else if (breakEven) {
-    elements.resultSummary.textContent = `${result.input.prefecture_name}では，収支が同額になる見込みです`;
-  } else {
-    elements.resultSummary.textContent = `${result.input.prefecture_name}では，損になる見込みです`;
+  const subsidyReference = result.scenarios.find(item => item.scenario === 'standard');
+  if (!subsidyReference) throw new Error('補助金の基準結果を確認できません．');
+  const shortBreakdown = conclusionBreakdown(selectedScenario);
+  elements.resultSubsidyNote.textContent = compactYen(shortBreakdown.subsidy);
+  elements.resultSubsidyNote.classList.toggle("is-positive", shortBreakdown.subsidy > 0);
+  document.querySelector('[data-conclusion-income]').textContent = compactYen(shortBreakdown.income);
+  document.querySelector('[data-conclusion-cost]').textContent = compactYen(shortBreakdown.cost);
+  const levelAmounts = subsidyLevelAmounts(subsidyReference.subsidy_breakdown);
+  const levelList = document.querySelector('[data-subsidy-level-amounts]');
+  levelList.replaceChildren();
+  for (const row of levelAmounts) {
+    const entry=document.createElement('div'); const term=document.createElement('dt'); const amount=document.createElement('dd');
+    term.textContent=row.label; amount.textContent=row.statusText ?? (Number.isFinite(row.amount) ? formatYen(row.amount) : '未確定');
+    entry.append(term,amount); levelList.append(entry);
   }
-  const decisionAmount = decisionAmountParts(selectedScenario.profit_yen);
-  renderBrandOutcome(elements.resultEconomicBenefit, decisionAmount.amount, decisionAmount.outcome);
-  elements.resultEconomicBenefit.classList.toggle("result-amount--negative", profitConfirmed && selectedScenario.profit_yen < 0);
-  elements.resultEconomicBenefit.classList.toggle("result-amount--neutral", !profitConfirmed || breakEven);
+  document.querySelector("[data-subsidy-breakdown-button]").setAttribute("aria-label", "補助金の内訳");
+  document.querySelector("[data-subsidy-breakdown-button]").textContent = "補助金の内訳";
+  document.querySelector("[data-subsidy-reason-reference]").setAttribute("aria-label", "補助金の内訳");
 
-  elements.resultPayback.textContent = !profitConfirmed
-    ? "補助金額が未確認のため，回収年数は確定できません．"
-    : selectedScenario.payback_year === null
-    ? "現在の計算前提では，20年以内の回収は見込めません．"
-    : selectedScenario.payback_year === 0
-      ? "初期費用は補助金の範囲内です．"
-      : `現在の計算前提では，約${selectedScenario.payback_year}年で回収する見込みです．`;
-  const netInitialOutlay = selectedScenario.net_initial_outlay_yen
-    ?? selectedScenario.initial_cost_yen;
+
+  const totals = financialTotals(selectedScenario);
+  renderCashflowAmount(document.querySelector('[data-income-total]'), totals.income, 'income');
+  renderCashflowAmount(document.querySelector('[data-expense-total]'), totals.cost, 'cost');
   renderBreakdownAmount(elements.resultSolarCost, selectedScenario.solar_installation_cost_yen);
   renderCashflowAmount(elements.resultSelfConsumption, selectedScenario.total_electricity_savings_yen, "income");
   renderCashflowAmount(elements.resultSalesIncome, selectedScenario.total_sales_income_yen, "income");
-  const selectedSubsidyStatus = subsidyStatusFor(selectedScenario, result.input);
-  if (selectedSubsidyStatus === "unverified" || (selectedScenario.scenario !== "downside" && selectedScenario.subsidy_yen === 0 && hasUnconfirmedSubsidy(selectedScenario))) {
-    renderCashflowAmount(elements.resultSubsidy, null);
-    const municipalSummary = frontendData.publicData.municipalities.find((item) => item.municipality_code === result.input.municipality_code)?.candidate_summary;
-    elements.resultSubsidy.textContent = selectedSubsidyStatus !== "unverified" && municipalSummary
-      && ["confirmed", "partially_confirmed"].includes(municipalSummary.amount_status)
-      ? "未算入（制度の条件を確認）" : "未確認（今回は未算入）";
-  } else {
-    renderBreakdownAmount(elements.resultSubsidy, selectedScenario.subsidy_yen, "income");
-  }
-  const lifecycleCost = selectedScenario.total_maintenance_and_replacement_cost_yen;
+  renderBreakdownAmount(elements.resultSubsidy, selectedScenario.subsidy_yen, "income");
   renderBreakdownAmount(elements.resultMaintenanceCost, selectedScenario.total_maintenance_cost_yen);
   renderBreakdownAmount(elements.resultPowerConditionerCost, selectedScenario.total_replacement_cost_yen);
   const batterySelected = result.input.equipment_package === "solar_plus_standard_battery";
-  elements.resultProfit.textContent = formatSignedYen(selectedScenario.profit_yen);
-  elements.resultGeneration.textContent = `${yenFormatter.format(result.energy.annual_generation_kwh)} kWh／年`;
-  elements.resultConsumption.textContent = `${yenFormatter.format(result.energy.annual_consumption_kwh)} kWh／年`;
-  elements.resultSelfConsumptionRate.textContent = `${(result.energy.self_consumption_rate * 100).toFixed(1)}％`;
-  elements.resultSelfSufficiencyRate.textContent = `${(result.energy.self_sufficiency_rate * 100).toFixed(1)}％`;
-  elements.resultSelfConsumed.textContent = `${yenFormatter.format(result.energy.annual_self_consumed_kwh)} kWh／年`;
-  elements.resultDirectSelfConsumed.textContent = `${yenFormatter.format(result.energy.annual_direct_self_consumed_kwh)} kWh／年`;
-  elements.resultBatteryDelivered.textContent = `${yenFormatter.format(result.energy.annual_battery_delivered_kwh)} kWh／年`;
-  elements.resultBatteryLoss.textContent = `${yenFormatter.format(result.energy.annual_battery_conversion_loss_kwh)} kWh／年`;
-  const purchasedEnergy = result.energy.annual_purchased_kwh
-    ?? Math.max(result.energy.annual_consumption_kwh - result.energy.annual_self_consumed_kwh, 0);
-  elements.resultPurchased.textContent = `${yenFormatter.format(purchasedEnergy)} kWh／年`;
-  elements.resultExported.textContent = `${yenFormatter.format(result.energy.annual_exported_kwh)} kWh／年`;
+  renderCashflowAmount(elements.resultProfit, selectedScenario.profit_yen);
+  const routes = energyRoutes(result.energy);
+  for (const [element,key] of [[elements.resultGeneration,'generation'],[elements.resultConsumption,'consumed'],[elements.resultDirectSelfConsumed,'direct'],[elements.resultBatteryDelivered,'delivered'],[elements.resultBatteryLoss,'loss'],[elements.resultPurchased,'purchased'],[elements.resultExported,'exported'],[document.querySelector('[data-energy-charge]'),'charge'],[document.querySelector('[data-energy-stored]'),'stored'],[document.querySelector('[data-energy-purchased-use]'),'purchased']]) {
+    const value = routes[key];
+    if (!Number.isFinite(value)) element.textContent = '未確定';
+    else {
+      const amount = Object.assign(document.createElement('span'), { className: 'energy-quantity', textContent: yenFormatter.format(Math.round(value)) });
+      const unit = Object.assign(document.createElement('span'), { className: 'energy-unit', textContent: 'kWh／年' });
+      element.replaceChildren(amount, document.createTextNode(' '), unit);
+    }
+  }
+  elements.resultSelfConsumptionRate.textContent = formatEnergyRate(result.energy.self_consumption_rate);
+  elements.resultSelfSufficiencyRate.textContent = formatEnergyRate(result.energy.self_sufficiency_rate);
+  const energyPresentation = energyBreakdownPresentation(result.input.equipment_package);
+  for (const row of document.querySelectorAll("[data-battery-only]")) row.hidden = !energyPresentation.battery;
+  document.querySelector("[data-energy-equation]").textContent = energyPresentation.equation;
+  document.querySelector("[data-energy-equation]").hidden = !energyPresentation.equation;
+  document.querySelector(energyPresentation.battery ? "[data-battery-ratio-slot]" : "[data-solar-ratio-slot]").append(document.querySelector("[data-self-consumption-ratio]"));
+  document.querySelector("[data-direct-energy-label]").textContent = energyPresentation.battery ? "家庭で直接使用" : "家庭で使用（自家消費）";
+  document.querySelector("[data-sufficiency-definition]").textContent = energyPresentation.sufficiency;
   if (batterySelected) {
     renderBreakdownAmount(elements.resultBatteryCost, selectedScenario.battery_installation_cost_yen);
   } else {
@@ -1137,25 +1170,13 @@ function renderResult(result, options = {}) {
     elements.resultBatteryCost.textContent = "対象外";
   }
   elements.capacityOutput.textContent = formatCapacity(result.input.system_capacity_kw);
-  elements.capacityGeneration.textContent = `${yenFormatter.format(result.energy.annual_generation_kwh)} kWh`;
-  renderCashflowAmount(elements.capacityRevenue, selectedScenario.total_revenue_yen, "income");
-  const totalTwentyYearCost = Number.isFinite(netInitialOutlay) && Number.isFinite(lifecycleCost)
-    ? netInitialOutlay + lifecycleCost
-    : null;
-  renderCashflowAmount(elements.capacityCost, totalTwentyYearCost, "cost");
-  elements.capacityStatus.textContent = selectedScenario.lifecycle_cost_status === "applied"
-    ? "点検・機器交換費を含みます．"
-    : "点検・機器交換費は未確認です．";
-  renderMunicipalSubsidy(result, selectedScenario);
+  elements.capacityStatus.textContent = "";
+  updateEquipmentSummary();
+  renderMunicipalSubsidy(result, subsidyReference);
   renderBatteryYearly(result);
   renderScenarios(result.scenarios, result.input);
   renderCashflow(result.scenarios, selectedScenario, result.input.equipment_package);
   collapseCalculator(result);
-  if (options.resetDisclosures !== false) {
-    for (const disclosure of elements.resultDisclosures) {
-      disclosure.removeAttribute("open");
-    }
-  }
   elements.result.hidden = false;
   document.body.classList.add("has-analysis-result");
   if (options.scroll !== false) {
@@ -1169,14 +1190,19 @@ function renderResult(result, options = {}) {
 async function initialize() {
   try {
     frontendData = await loadFrontendData();
+    configureHousingInput(elements.housingAge, housingDisplayContract());
     populatePrefectures(frontendData.publicData.prefectures);
     populateRoofOrientations(frontendData.publicData.calculation.detail_inputs ?? []);
     populateDaytimeOccupancy(frontendData.publicData.calculation.daytime_occupancy);
     configureBatteryCapacityInput(frontendData.publicData.calculation.battery_capacity_input);
-    elements.dataStatus.textContent = `公開データ版：${frontendData.metadata.data_version}`;
+    elements.dataStatus.textContent = "";
 
     updateAvailability();
+    const scenarioFromUrl = new URL(window.location.href).searchParams.get("scenario");
+    if (["downside", "standard", "upside"].includes(scenarioFromUrl)) selectedScenarioId = scenarioFromUrl;
     const initialInput = inputFromLocation();
+    housingAgeSelection = initialInput.housingAge;
+    elements.housingAge.value = housingInput(housingAgeSelection).value;
     batteryDegradationSelection = initialInput.batteryDegradationScenario;
     const defaultCapacity = frontendData.publicData.calculation.system_capacity_kw;
     initialInput.systemCapacityKw = normalizeCapacity(initialInput.systemCapacityKw, defaultCapacity);
@@ -1197,15 +1223,19 @@ async function initialize() {
     elements.capacitySlider.value = String(initialInput.systemCapacityKw);
     selectDaytimeOccupancy(initialInput.daytimeOccupancy);
     selectEquipmentPackage(initialInput.equipmentPackage);
+    elements.capacityOutput.textContent = formatCapacity(initialInput.systemCapacityKw);
+    updateEquipmentSummary();
     if (initialInput.detailConditions?.roof_orientation) {
       elements.roofOrientation.value = initialInput.detailConditions.roof_orientation;
     }
+    updateCurrentHousingSummary();
     if (initialInput.prefectureCode) {
       elements.prefecture.value = initialInput.prefectureCode;
       updateMunicipalities(initialInput.municipalityCode);
       elements.monthlyElectricityBill.value = initialInput.monthlyElectricityBillYen ?? "";
-      requireMunicipality(initialInput, frontendData.publicData);
+      validateLocation(initialInput, frontendData.publicData);
       renderResult(calculateEstimate(initialInput, frontendData.publicData));
+      openSubsidyHash();
     }
   } catch (error) {
     elements.formMessage.textContent = error instanceof Error ? error.message : "公開データを確認できませんでした．";
@@ -1226,24 +1256,40 @@ elements.form.addEventListener("submit", (event) => {
     const input = readInput();
     renderResult(calculateEstimate(input, frontendData.publicData));
     writeInputToLocation(input);
-    elements.formMessage.textContent = "条件を変更して再計算できます．";
+    elements.formMessage.textContent = "";
   } catch (error) {
     elements.formMessage.textContent = error instanceof Error ? error.message : "計算できませんでした．";
     recoverInvalidDegradationSelection();
   }
 });
 
+elements.municipality.addEventListener("change", () => {
+  elements.municipalityHelp.hidden = true;
+});
+elements.housingAge.addEventListener("change", () => {
+  if (document.body.classList.contains('is-editing-basic')) return;
+  housingAgeSelection = elements.housingAge.value;
+  if (!frontendData || elements.result.hidden) return;
+  try {
+    const input = readInput();
+    renderResult(calculateEstimate(input, frontendData.publicData), { focus: false, scroll: false, resetDisclosures: false });
+    writeInputToLocation(input);
+  } catch (error) {
+    elements.formMessage.textContent = error instanceof Error ? error.message : '再計算できませんでした．';
+  }
+});
 elements.changeConditionsButton.addEventListener("click", expandCalculator);
 elements.cancelConditionsButton.addEventListener("click", cancelConditionChanges);
 elements.prefecture.addEventListener("change", () => {
   updateMunicipalities();
-  elements.result.hidden = true;
-  elements.formMessage.textContent = elements.municipalityHelp.textContent;
+  elements.result.hidden = !latestResult;
+  elements.formMessage.textContent = "";
 });
 
 elements.equipmentOptions.addEventListener("change", (event) => {
-  if (!event.target.matches('input[name="equipment_package"]')) return;
+  if (!event.target.matches('select[name="equipment_package"]')) return;
   selectEquipmentPackage(event.target.value);
+  if (equipmentDraft.editing) return;
   if (!frontendData || elements.result.hidden) return;
   try {
     const input = readInput();
@@ -1276,6 +1322,7 @@ elements.batteryDegradationSelect.addEventListener("change", () => {
 
 elements.batteryCapacitySlider.addEventListener("input", () => {
   setBatteryCapacityValue(elements.batteryCapacitySlider.value);
+  if (equipmentDraft.editing) return;
   if (!frontendData || elements.result.hidden || elements.batteryCapacitySlider.disabled) return;
   try {
     const input = readInput();
@@ -1291,21 +1338,26 @@ elements.batteryCapacitySlider.addEventListener("input", () => {
   }
 });
 
-elements.scenarioList.addEventListener("click", (event) => {
-  const scenarioButton = event.target.closest("[data-scenario]");
-  if (!scenarioButton || !latestResult) {
+document.querySelector("#scenario-select").addEventListener("change", (event) => {
+  const scenarioRadio = event.target.closest('select[name="scenario"]');
+  if (!scenarioRadio || !latestResult) {
     return;
   }
-  selectedScenarioId = scenarioButton.dataset.scenario;
+  selectedScenarioId = scenarioRadio.value;
+  const scenarioUrl = new URL(window.location.href);
+  scenarioUrl.searchParams.set("scenario", selectedScenarioId);
+  window.history.replaceState(null, "", scenarioUrl);
   renderResult(latestResult, {
     focus: false,
     resetDisclosures: false,
     scroll: false
   });
+  document.querySelector('#scenario-select')?.focus({ preventScroll: true });
 });
 
 elements.capacitySlider.addEventListener("input", () => {
   elements.capacityOutput.textContent = formatCapacity(elements.capacitySlider.value);
+  if (equipmentDraft.editing) return;
   if (!frontendData || elements.result.hidden) {
     return;
   }
@@ -1374,3 +1426,39 @@ const chartResizeObserver = new ResizeObserver((entries) => {
 });
 chartResizeObserver.observe(elements.cashflowChart);
 chartResizeObserver.observe(elements.batteryCapacityChart);
+
+const subsidyDisclosure = document.querySelector('#subsidy-disclosure');
+const subsidyInfoButton = document.querySelector('[data-subsidy-breakdown-button]');
+const syncSubsidyExpanded = () => subsidyInfoButton.setAttribute('aria-expanded', String(subsidyDisclosure.open));
+syncSubsidyExpanded();
+subsidyDisclosure.addEventListener('toggle', syncSubsidyExpanded);
+function openSubsidyTarget(target) {
+  if (!target || !subsidyDisclosure.contains(target)) return;
+  subsidyDisclosure.open = true;
+  if (target.tagName === 'SUMMARY') target.parentElement.open = true;
+  for (let parent = target.parentElement; parent && parent !== subsidyDisclosure; parent = parent.parentElement) {
+    if (parent.tagName === 'DETAILS') parent.open = true;
+  }
+  syncSubsidyExpanded();
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+}
+function openSubsidyReason() { openSubsidyTarget(document.getElementById('subsidy-breakdown-item')); }
+function openSubsidyHash() {
+  if (elements.result.hidden) return;
+  let id;
+  try { id = decodeURIComponent(window.location.hash.slice(1)); } catch { return; }
+  openSubsidyTarget(document.getElementById(id));
+}
+subsidyInfoButton.addEventListener('click', openSubsidyReason);
+document.querySelector('[data-subsidy-reason-reference]').addEventListener('click', event => { event.preventDefault(); openSubsidyReason(); });
+window.addEventListener('hashchange', openSubsidyHash);
+
+const detailConditions = document.querySelector('.advanced-panel--conditions');
+detailConditions.addEventListener('change', updateCurrentHousingSummary);
+detailConditions.addEventListener('toggle', () => {
+  detailConditions.querySelector('.condition-toggle-action').textContent = detailConditions.open ? '閉じる' : '変更';
+  detailConditions.querySelector('summary').setAttribute('aria-label', '住宅・生活条件を' + (detailConditions.open ? '閉じる' : '変更'));
+});
+
+setupMobileActions();

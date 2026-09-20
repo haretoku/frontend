@@ -1,7 +1,14 @@
 export const applicationStatusLabels = {
-  accepting: "受付中", closed: "受付終了", suspended: "受付停止中",
-  unknown: "受付状況未確認", not_applicable: "直接補助なし"
+  accepting: "受付中", waitlist: "受付中",
+  closed: "受付対象外", suspended: "受付対象外", scheduled: "受付対象外", not_open: "受付対象外", not_applicable: "受付対象外",
+  unknown: "不明", unconfirmed: "不明", accepting_with_waitlist_branch: "不明"
 };
+
+export function applicationStatusLabel(record) {
+  const selected = record.branches?.find(branch => branch.id === record.selected_branch);
+  const status = selected ? selected.application_status : record.application_status;
+  return applicationStatusLabels[status] ?? applicationStatusLabels.unknown;
+}
 
 export const amountStatusLabels = {
   confirmed: "金額確認済み", partially_confirmed: "一部の金額・条件を確認済み",
@@ -18,7 +25,7 @@ export const componentStatusLabels = {
 };
 
 export function municipalInformationSummary(summary) {
-  const status = applicationStatusLabels[summary.application_status] ?? applicationStatusLabels.unknown;
+  const status = applicationStatusLabel(summary);
   const amount = amountStatusLabels[summary.amount_status] ?? amountStatusLabels.unresolved;
   return `${status}．${amount}．制度ごとの条件と今回の算入可否は下記で確認できます．`;
 }

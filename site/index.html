@@ -8,17 +8,16 @@
     <link rel="icon" href="shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="shared/styles/main.css">
     <script type="module" src="simulator/src/top.js"></script>
-    <script type="module" src="shared/guide-carousel.js"></script>
   </head>
   <body data-page="top">
     <header class="site-header">
       <div class="page-width site-header__inner">
         <a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a>
-        <span class="site-header__descriptor">太陽光のかんたん採算診断</span>
+        <span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span>
         <nav class="site-nav" aria-label="主要メニュー">
           <a href="/" aria-current="page">トップ</a><a href="simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="solar/">はれ<span class="brand-term">トク</span>ガイド</a>
         </nav>
-        <a class="mobile-guide-link" href="solar/">ガイド</a>
+        <a class="mobile-guide-link" href="solar/">太陽光ガイド</a>
       </div>
     </header>
 
@@ -26,8 +25,9 @@
       <section class="hero-shell">
         <div class="hero page-width" aria-labelledby="hero-title">
           <div class="hero__copy">
+            <p class="hero__audience">太陽光の設置をお考えの方へ</p>
             <h1 id="hero-title"><span class="hero-title__chunk">太陽光，</span><span class="hero-title__chunk">結局いくら<span class="brand-word">トク</span>？</span></h1>
-            <p class="hero__lead">お住まいと電気代から，太陽光の費用と<span class="text-chunk">20年間の収支を</span><span class="text-chunk">かんたんに概算．</span></p>
+            <p class="hero__lead">地域と電気代から，太陽光の導入費と<span class="text-chunk">30年間の収支をかんたんに概算できます．</span></p>
             <ul class="hero__proof" aria-label="診断の特徴"><li>登録不要</li><li>氏名・番地の入力なし</li><li>無料で概算</li></ul>
             <figure class="hero__motif">
               <img src="shared/assets/haretoku-balance-motif.png" width="1616" height="973" alt="太陽光パネルと工具・硬貨を載せた天秤">
@@ -43,8 +43,8 @@
                   <select id="prefecture" name="prefecture" required><option value="">選択してください</option></select>
                 </div>
                 <div class="form-field" data-municipality-field>
-                  <label for="municipality">市区町村<span class="required-label">必須</span></label>
-                  <select id="municipality" name="municipality_code" required aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select>
+                  <label for="municipality">市区町村<span class="optional-label">任意</span></label>
+                  <select id="municipality" name="municipality_code" aria-describedby="municipality-help" disabled><option value="">都道府県を選択してください</option></select>
                   <p id="municipality-help" class="field-help" hidden></p>
                 </div>
                 <div class="form-field">
@@ -52,7 +52,7 @@
                   <div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="1" placeholder="例：12,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div>
                   <p id="electricity-bill-help" class="field-help">未入力なら，地域の標準値を使用します．</p>
                 </div>
-                <button id="calculate-button" class="primary-button" type="submit" disabled>20年間の損得を診断する <span aria-hidden="true">→</span></button>
+                <button id="calculate-button" class="primary-button" type="submit" disabled>30年間の損得を診断する <span aria-hidden="true">→</span></button>
                 <p id="form-message" class="form-message" role="status" aria-live="polite">公開データを確認しています．</p>
               </form>
               <nav class="calculator-links" aria-label="診断の根拠と方針"><a href="pages/calculation-method.html">計算方法・使用データ</a><a href="pages/policy.html">はれ<span class="brand-term">トク</span>の方針</a></nav>
@@ -61,14 +61,14 @@
 
           <ol class="hero-journey" aria-label="診断と任意の見積もりの流れ">
             <li>
-              <span class="hero-journey__number" aria-hidden="true">01</span><h2>はれ<span class="brand-term">トク</span>診断</h2>
-              <p>地域と電気代から，20年間の収支を<span class="text-chunk">概算できます．</span></p>
-              <a class="hero-journey__link" href="#estimate-form" data-return-to-form>診断フォームへ</a>
+              <span class="hero-journey__number" aria-hidden="true">01</span><h2>はれ<span class="brand-term">トク</span>診断でわかること</h2>
+              <p>太陽光を設置すると，どのくらいトク？</p>
+              <ul class="hero-journey__benefits"><li>設置費用</li><li>点検・交換費用</li><li>利用を見込める補助金と金額</li><li>30年間の収支・回収の目安</li></ul>
             </li>
             <li>
-              <span class="hero-journey__number" aria-hidden="true">02</span><h2>見積もりで確認</h2>
-              <p>屋根や工事条件に合う設備・費用を，<span class="text-chunk">施工会社に確認できます．</span></p>
-              <button class="hero-journey__link hero-journey__link--unavailable" type="button" data-route-source="top-affiliate" disabled>無料見積もりで確認する</button>
+              <span class="hero-journey__number" aria-hidden="true">02</span><h2>無料見積もりで確定</h2>
+              <p>屋根や工事条件に合わせて，設置する設備と導入費用を確定させます．</p>
+              <button class="hero-journey__link hero-journey__link--unavailable" type="button" data-route-source="top-affiliate" disabled>無料見積もり（準備中）</button>
               <p class="advertising-label">広告・アフィリエイトを含みます．</p>
             </li>
           </ol>
@@ -78,34 +78,30 @@
 
       <section id="guides" class="guides-section">
         <div class="page-width">
-          <div class="section-intro"><p class="eyebrow">はれ<span class="brand-term">トク</span>ガイド</p><h2>知って，なっ<span class="brand-word">トク</span>．</h2><p>まずは仕組みを知りたい方へ．太陽光の収支や補助金，見積もりの疑問を確認できます．</p></div>
+          <div class="section-intro"><p class="eyebrow">はれ<span class="brand-term">トク</span>ガイド</p><h2>知って，なっ<span class="brand-word">トク</span>．</h2><p>収支・補助金・見積もり・災害への備え．設置前の疑問を解消しましょう．</p></div>
           <div class="guide-grid" id="top-guide-cards" aria-label="代表記事">
             <a class="guide-card guide-card--featured" href="pages/electricity-sales.html">
               <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-mechanics.webp" alt="" width="720" height="540" loading="lazy" decoding="async"></span>
-              <span class="guide-card__category">しくみ｜全国</span>
+              <span class="guide-card__category">収支｜全国</span>
               <strong><span class="text-chunk">太陽光の収支は，</span><span class="text-chunk">何で決まる？</span></strong>
-              <p>収入と費用のしくみを知り，自宅の収支を概算する前の疑問を解消．</p>
+              <p>収入と費用のしくみを知り，自宅の収支を概算する前の疑問を解消できます．</p>
               <span>収支の決まり方を知る →</span>
             </a>
             <a class="guide-card" href="pages/subsidies.html">
               <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-subsidy.webp" alt="" width="720" height="540" loading="lazy" decoding="async"></span>
               <span class="guide-card__category">補助金｜全国｜2026年度</span>
               <strong><span class="text-chunk">補助金は，</span><span class="text-chunk">どう探して</span><span class="text-chunk">どう申請する？</span></strong>
-              <p>制度の探し方と申請の流れ，施工会社へ相談できる支援を確認．</p>
+              <p>制度の探し方と申請の流れ，施工会社へ相談できる支援を確認できます．</p>
               <span>補助金の確認方法を知る →</span>
             </a>
             <a class="guide-card" href="pages/quotes-contractors.html">
               <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-quotes.webp" alt="" width="720" height="540" loading="lazy" decoding="async"></span>
               <span class="guide-card__category">見積もり｜全国</span>
               <strong><span class="text-chunk">太陽光の見積もりは，</span><span class="text-chunk">何を比べる？</span></strong>
-              <p>見積もりの頼み方と，費用・工事・保証を同じ条件で比べるポイントを確認．</p>
+              <p>見積もりの頼み方と，費用・工事・保証を同じ条件で比べるポイントを確認できます．</p>
               <span>見積もりの比べ方を知る →</span>
             </a>
-          </div>
-          <div class="guide-controls" hidden>
-            <button type="button" data-guide-previous aria-label="前の記事" aria-controls="top-guide-cards" aria-disabled="true">←</button>
-            <span data-guide-position role="status" aria-live="polite" aria-atomic="true">1 / 3</span>
-            <button type="button" data-guide-next aria-label="次の記事" aria-controls="top-guide-cards" aria-disabled="false">→</button>
+            <a class="guide-card" href="pages/disaster.html"><span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/guide-disaster.webp" alt="" width="1672" height="941" loading="lazy" decoding="async"></span><span class="guide-card__category">災害への備え｜全国</span><strong>停電時，太陽光だけで何ができる？</strong><p>停電時に使える電気と安全上の制約，蓄電池との違いを確認できます．</p><span>災害への備えを読む →</span></a>
           </div>
           <p class="guides-more"><a href="solar/">すべての記事を見る <span aria-hidden="true">→</span></a></p>
         </div>
@@ -114,6 +110,6 @@
       <p class="site-state page-width"><a href="pages/calculation-method.html">使用データについて <span aria-hidden="true">→</span></a></p>
     </main>
 
-    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a><p>太陽光の採算判断を，短く，わかりやすく．</p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="pages/policy.html#operation">運営方針</a><a href="pages/policy.html#advertising">広告方針</a><a href="pages/policy.html#data">データ方針</a><a href="pages/policy.html#privacy">プライバシー</a><a href="pages/policy.html#disclaimer">免責事項</a></nav><p>結果は概算であり，長期利益または補助金の適用を保証するものではありません．</p></div></div></footer>
+    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="pages/policy.html#operation">運営方針</a><a href="pages/policy.html#advertising">広告方針</a><a href="pages/policy.html#data">データ方針</a><a href="pages/policy.html#privacy">プライバシー</a><a href="pages/policy.html#disclaimer">免責事項</a></nav><p>結果は概算であり，長期利益または補助金の適用を保証するものではありません．</p></div></div></footer>
   </body>
 </html>

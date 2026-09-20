@@ -1,0 +1,9 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {calculateEstimate} from '../../site/simulator/src/calculator.js';
+const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const standard=(code,equipmentPackage='solar_plus_standard_battery',systemCapacityKw=4)=>calculateEstimate({prefectureCode:'29',municipalityCode:code,equipmentPackage,systemCapacityKw,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+test('奈良39自治体11市町村制度を受領する',()=>{const rows=data.municipalities.filter(m=>m.prefecture_code==='29');assert.equal(rows.length,39);assert.equal(new Set(rows.map(m=>m.municipality_code)).size,39);assert.equal(data.diagnostic_subsidy_programs.filter(p=>p.prefecture_code==='29'&&p.government_level==='municipality').length,11);});
+test('奈良4代表額と設備・容量境界を保持する',()=>{for(const[c,n]of [['29205',130000],['29209',130000],['29211',50000],['29322',180000]])assert.equal(standard(c).municipality_amount_yen,n,c);for(const[c,n]of [['29205',80000],['29209',0],['29322',80000]])assert.equal(standard(c,'solar_only').municipality_amount_yen,n,c);assert.equal(standard('29211','solar_plus_standard_battery',10).municipality_amount_yen,0);assert.equal(standard('29211','solar_plus_standard_battery',9.999).municipality_amount_yen,50000);});
+test('奈良3制度は受付継続仮定を明示して算入する',()=>{for(const[c,id]of [['29212','uda-residential-solar-uppy-2026'],['29425','oji-energy-system-battery-2026'],['29453','higashiyoshino-residential-solar-2026']]){const p=standard(c).included_programs.find(p=>p.id===id);assert.ok(p,id);assert.ok(p.amount_yen>0);assert.equal(p.application_status,'accepting');assert.match(p.calculation_assumptions.join(' '),/受付継続を仮定/);}});

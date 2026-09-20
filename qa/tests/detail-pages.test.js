@@ -1,6 +1,8 @@
+import { replacesLegacyPrefecture } from '../../site/simulator/src/diagnostic-subsidy.js';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { runInNewContext } from 'node:vm';
 
 import { calculateEstimate } from "../../site/simulator/src/calculator.js";
 
@@ -9,9 +11,67 @@ const publicData = JSON.parse(
   await readFile(new URL("../../data/input/public-data.json", import.meta.url), "utf8")
 );
 
+test("30年評価の本文は発電劣化と20年終点の蓄電池比較を区別する", async () => {
+  const method = await readFile(new URL("../../site/pages/calculation-method.html", import.meta.url), "utf8");
+  const costs = await readFile(new URL("../../site/pages/costs-maintenance.html", import.meta.url), "utf8");
+  assert.match(method, /0\.997<sup><em>y<\/em>−1<\/sup>（式 \(1a\)）/);
+  assert.match(method, /初年度は係数1で追加の初年度補正を行わず/);
+  assert.match(method, /直接自家消費，売電および蓄電池充電を毎年再計算/);
+  assert.match(method, /20年時点の定義を維持したまま同じ年間容量保持係数で30年目まで延長/);
+  assert.match(method, /30年末に36％/);
+  assert.match(method, /全国平均でも30年間の実測結果でもありません/);
+  assert.match(method, /原典の税区分は未確認/);
+  assert.match(method, /消費税10％を仮置きして317,900円／kW/);
+  assert.match(method, /30年間の収支は，各年に想定する名目額を単純に合計し，現在価値へ割り引きません/);
+  for (const html of [method, costs]) {
+    assert.match(html, /data-installation-cost-new-per-kw>317,900円/);
+    assert.match(html, /data-installation-cost-existing-per-kw>331,100円/);
+    assert.match(html, /data-maintenance-years>5，10，15，20，25，30年目/);
+    assert.match(html, /data-replacement-years>20年目/);
+    assert.doesNotMatch(html, /16～20年目|4，8，12，16，20年目|発電量の経年劣化は反映していません|30年末70％・85％/);
+  }
+  assert.match(costs, /パワーコンディショナ交換を20年間に1回/);
+});
+
+test('制度条件の説明一覧はB2の診断用制度を一度だけ描画し，旧県候補の説明を混ぜない', async () => {
+  const source=await readFile(new URL('../../site/articles/src/article-data.js',import.meta.url),'utf8');
+  const node=tag=>({tag,textContent:'',children:[],append(...children){this.children.push(...children);}});
+  const container=node('div'),status=node('p');
+  const document={querySelector:selector=>selector==='[data-subsidy-assumptions]'?container:selector==='[data-article-data-status]'?status:null,querySelectorAll:()=>[],createElement:node};
+  await runInNewContext(source.replace(/^import .*;\r?\n/gm,'').replace(/^initialize\(\);\r?$/m,'')+'\ninitialize();',{document,loadFrontendData:async()=>({publicData,metadata:{sources:[]}}),setupArticleQuoteBar:()=>{},replacesLegacyPrefecture});
+  assert.match(status.textContent,/公開データ版/);
+  const diagnostic=publicData.diagnostic_subsidy_programs;
+  const b2=diagnostic.filter(program=>['04','05','06'].includes(program.prefecture_code));
+  assert.equal(b2.length,4);
+  for(const program of b2){
+    const rows=container.children.filter(detail=>detail.children[0].textContent===program.program_name);
+    assert.equal(rows.length,1,program.id);
+    const notes=rows[0].children.filter(child=>child.tag==='p').map(child=>child.textContent);
+    for(const assumption of program.calculation_assumptions)assert.ok(notes.includes(assumption),program.id);
+  }
+  for(const code of ['16','20','28','45']){const program=diagnostic.find(p=>p.prefecture_code===code&&p.fit_compatible!==false);const row=container.children.find(detail=>detail.children[0].textContent===program.program_name);const text=row.children.map(node=>node.textContent).join(' ');assert.doesNotMatch(text,/金額は未確定|容量の種類が未確認/);for(const assumption of program.calculation_assumptions)assert.ok(text.includes(assumption));}
+  for(const [rule,patterns] of [['fukushima_residential_solar_fit',[/0\.01kW未満切捨て.*4万円.*16万円/,/千円未満/,/10kW未満/]],['yamanashi_renewable_energy',[/整数kW.*3万円.*27万円/,/整数kWh.*4kWh以上.*25万円/]]]) {
+    const program=diagnostic.find(program=>program.machine_rule===rule),row=container.children.find(detail=>detail.children[0].textContent===program.program_name);
+    const text=row.children.map(node=>node.textContent).join(' ');for(const pattern of patterns)assert.match(text,pattern);
+  }
+  for(const [rule,label] of [['shiga_basic_fit_solar_battery','基本枠（FIT）'],['shiga_priority_non_fit','重点枠（非FIT）']]) {
+    const program=diagnostic.find(program=>program.machine_rule===rule);assert.equal(container.children.filter(detail=>detail.children[0].textContent===program.program_name+' — '+label).length,1);
+  }
+  const diagnosticIds=new Set(diagnostic.map(program=>program.id));
+  const retainedLegacy=publicData.prefectures.filter(region=>!replacesLegacyPrefecture(diagnostic,region.code)).flatMap(region=>region.candidate_subsidy_programs??[]).filter(program=>!diagnosticIds.has(program.id));
+  for(const program of retainedLegacy)assert.ok(container.children.some(detail=>detail.children[0].textContent===program.program_name),program.id);
+  const ishikawa=diagnostic.find(program=>program.prefecture_code==='17');
+  if(ishikawa){assert.equal(container.children.filter(detail=>detail.children[0].textContent===ishikawa.program_name).length,1);const legacy=publicData.prefectures.find(region=>region.code==='17').candidate_subsidy_programs??[];for(const item of legacy)assert.ok(!container.children.some(detail=>detail.children.slice(1).some(node=>node.textContent===item.non_inclusion_reason)));}
+  for(const id of ['daigo-zero-carbon-solar-battery-2026','ranzan-residential-solar-2026']){
+    const program=diagnostic.find(program=>program.id===id);
+    assert.equal(container.children.filter(detail=>detail.children[0].textContent===program.program_name).length,1);
+  }
+});
+
 function formatArticleQuantity(value, unit) {
   const sign = value < 0 ? "−" : "";
-  return `${sign}${Math.abs(value).toLocaleString("ja-JP")}${unit}`;
+  const displayed = unit === "円" ? Math.round(Math.abs(value) / 1000) * 1000 : Math.abs(value);
+  return `${displayed !== Math.abs(value) ? "約" : ""}${sign}${displayed.toLocaleString("ja-JP")}${unit}`;
 }
 
 const pageNames = [
@@ -63,9 +123,9 @@ test("ガイド記事のパンくずはガイド一覧へ戻り，現在地を�
   }
 });
 
-test("計算結果から6つの詳細ページへ接続する", async () => {
+test("計算結果から関連する詳細ページへ接続する", async () => {
   const html = await readFile(new URL("../../site/simulator/index.html", import.meta.url), "utf8");
-  for (const pageName of pageNames) {
+  for (const pageName of pageNames.filter(name => !['costs-maintenance.html', 'quotes-contractors.html'].includes(name))) {
     assert.match(html, new RegExp(`pages/${pageName.replace(".", "\\.")}`));
   }
 });
@@ -85,22 +145,21 @@ test("計算方法と費用記事が維持・交換費の採用範囲を一致�
     assert.match(html, /data-replacement-cost/);
   }
   assert.match(costsHtml, /data-lifecycle-cost-total/);
-  assert.match(costsHtml, /574,000円/);
+  assert.match(costsHtml, /612,000円/);
   assert.match(costsHtml, /38,000円/);
-  assert.match(costsHtml, /190,000円/);
+  assert.match(costsHtml, /228,000円/);
   assert.match(costsHtml, /384,000円/);
   assert.match(costsHtml, /住宅用5 kW設備を想定した業界ヒアリング値/);
   assert.match(costsHtml, /特定製品の保証価格や個別見積価格ではなく/);
-  assert.match(costsHtml, /20年間に1回の交換を15年目に置きます/);
-  assert.match(costsHtml, /いずれも支出時点を定めるサービス評価仮定/);
-  assert.match(costsHtml, /資料自体が15年目の交換を定めているわけではありません/);
-  assert.match(costsHtml, /15年目の故障や交換を保証するものではありません/);
-  assert.match(costsHtml, /新築案件について，システム費用の平均値28\.9万円／kW，中央値29\.4万円／kW/);
+  assert.match(costsHtml, /パワーコンディショナ交換を20年目に1回計上します/);
+  assert.match(costsHtml, /支出時点は診断上の評価仮定/);
+  assert.match(costsHtml, /calculation-method.html#adopted-parameters/);
+  assert.match(costsHtml, /20年目の故障や交換を保証するものではありません/);
+  assert.match(costsHtml, /data-installation-cost-new-per-kw>317,900円<\/span>／kW．4 kWでは1,271,600円/);
   assert.match(costsHtml, /本体価格/);
   assert.match(costsHtml, /システム費用の統計/);
   assert.match(costsHtml, /標準工事込みの見積額/);
   assert.match(costsHtml, /現地調査後の最終見積額/);
-  assert.match(costsHtml, /内訳の表示値を足した金額と総額に丸め差が生じ得ます/);
   assert.match(costsHtml, /全国一律の追加額は置きません/);
   const maintenanceSection = costsHtml.match(/<section id="included-costs">([\s\S]*?)<\/section>/)?.[1];
   assert.ok(maintenanceSection);
@@ -112,9 +171,9 @@ test("計算方法と費用記事が維持・交換費の採用範囲を一致�
   assert.match(maintenanceSection, /日常点検だけで専門業者の定期点検を代替するものではありません/);
   assert.match(maintenanceSection, /href="https:\/\/www\.jpea\.gr\.jp\/house\/longuser\/"/);
   assert.match(calculationHtml, /各年の収支（式 \(11\)）/);
-  assert.match(calculationHtml, /20年間の正味利益（式 \(13\)）/);
+  assert.match(calculationHtml, /30年間の正味利益（式 \(13\)）/);
   assert.match(calculationHtml, /標準蓄電池交換費<\/th><td>0円/);
-  assert.match(costsHtml, /標準蓄電池交換<\/th><td>20年間は交換せず，交換費0円/);
+  assert.match(costsHtml, /標準蓄電池交換<\/th><td>30年間は交換せず，交換費0円/);
   assert.match(costsHtml, /突発的な修理，撤去，保険，借入および税金は含まれません/);
 });
 
@@ -144,10 +203,10 @@ test("3分類の代表記事が読者の問いと次の行動に対応する", a
   );
 
   assert.match(mechanicsHtml, /<h1>太陽光の収支は，何で決まる？<\/h1>/);
-  assert.match(mechanicsHtml, /住宅用太陽光の20年間の収支を考えるためのガイドです/);
+  assert.match(mechanicsHtml, /住宅用太陽光の30年間の収支を考えるためのガイドです/);
   assert.match(mechanicsHtml, /本当に元が取れるのか/);
   assert.match(mechanicsHtml, /売電だけで費用を回収できるのか/);
-  assert.match(mechanicsHtml, /<p class="article-opening-summary">特に，電気代が高く/);
+  assert.match(mechanicsHtml, /<p class="article-opening-summary"[^>]*>特に，電気代が高く/);
   assert.doesNotMatch(mechanicsHtml, /article-opening-answer|先にまとめると/);
   assert.match(mechanicsHtml, /電気代削減と売電収入/);
   for (const heading of [
@@ -180,7 +239,7 @@ test("3分類の代表記事が読者の問いと次の行動に対応する", a
   assert.match(mechanicsHtml, /2026年度の賦課金は4\.18円／kWhで，2026年5月検針分から2027年4月検針分まで適用/);
   assert.match(mechanicsHtml, /2025年度下半期および2026年度に認定される10 kW未満の住宅用太陽光/);
   assert.match(mechanicsHtml, /調達期間は10年間/);
-  assert.match(mechanicsHtml, /11～20年目に置く8\.50円／kWhは，東京電力エナジーパートナー「再エネ買取標準プラン」の例/);
+  assert.match(mechanicsHtml, /11～30年目に置く8\.50円／kWhは，東京電力エナジーパートナー「再エネ買取標準プラン」の例/);
   assert.match(mechanicsHtml, /全国共通の卒FIT価格や将来の保証価格ではありません/);
   assert.match(mechanicsHtml, /住宅用5 kW設備を想定した業界ヒアリング値/);
   assert.match(mechanicsHtml, /専門業者による定期点検を設置後1年，その後は4年ごとに推奨/);
@@ -227,22 +286,18 @@ test("3分類の代表記事が読者の問いと次の行動に対応する", a
   assert.match(quotesHtml, /配置図・配線図と，発電量・経済効果の計算条件を書面で確認/);
   assert.match(quotesHtml, /補助金申請，FIT認定および送配電事業者との系統接続手続/);
   assert.match(quotesHtml, /工事完了に関する保証/);
-  assert.equal((quotesHtml.match(/無料見積もりで確認/g) ?? []).length, 2);
-  assert.equal((quotesHtml.match(/広告・アフィリエイトを含みます/g) ?? []).length, 2);
-  assert.match(quotesHtml, /data-route-source="article-top-affiliate" disabled/);
-  assert.match(quotesHtml, /data-route-source="article-final-affiliate" disabled/);
+  assert.equal((quotesHtml.match(/無料見積もりで確認/g) ?? []).length, 0);
+  assert.equal((quotesHtml.match(/広告・アフィリエイトを含みます/g) ?? []).length, 0);
+  assert.doesNotMatch(quotesHtml, /affiliate-button/);
+  assert.match(quotesHtml, /data-quote-start/);
 });
 
 test("補助金記事は支援節直後の見積もり導線と東京都の条件付き申請例を持つ", async () => {
   const html = await readFile(new URL("../../site/pages/subsidies.html", import.meta.url), "utf8");
-  assert.match(html, /<section id="contractor-support">[\s\S]*?<\/section>\s*<section class="article-entry-actions article-entry-actions--quote-primary article-action-stack"/);
-  const cta = html.match(/<section class="article-entry-actions article-entry-actions--quote-primary[\s\S]*?<\/section>/)?.[0];
-  assert.ok(cta);
-  assert.match(cta, /article-action-stack__row--affiliate/);
-  assert.match(cta, /広告・アフィリエイトを含みます/);
-  assert.match(cta, /data-route-source="article-top-affiliate" disabled/);
-  assert.doesNotMatch(cta, /article-action-stack__row--internal/);
-  assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, 1);
+  assert.match(html, /<section id="contractor-support">[\s\S]*?<\/section>\s*<p class="quote-context">/);
+  assert.match(html, /補助金の申請支援の範囲と/);
+  assert.doesNotMatch(html, /affiliate-button|article-action-stack__row--affiliate/);
+  assert.match(html, /data-quote-start/);
   for (const condition of ["実際の受給事例ではなく", "2026年度", "2026年9月5日", "3.75 kW超", "12万円／kW", "48万円", "助成対象経費が上限", "受付通知", "金融機関発行の証明書", "工事と支払の完了後", "2029年3月30日", "受給は確定しません", "他自治体へ同じ金額や手順を適用しません"]) assert.ok(html.includes(condition), condition);
   assert.match(html, /r8taiyouko_tebiki_20260630\.pdf/);
   assert.match(html, /<ul class="article-checklist">/);
@@ -295,7 +350,7 @@ test("蓄電池記事は選択容量・条件付き劣化比較と年次適用�
   assert.match(calculation, /0\.70または0\.85の20分の1乗/);
   assert.match(calculation, /翌年の容量上限を超える分だけ切り詰め/);
   assert.match(calculation, /年初に満充電へ戻す処理は行いません/);
-  assert.match(calculation, /標準蓄電池は，20年間交換せず/);
+  assert.match(calculation, /標準蓄電池は，30年間交換せず/);
   const outageReference = calculation.match(/<p id="outage-reference">([\s\S]*?)<\/p>/)?.[1];
   assert.ok(outageReference);
   assert.match(outageReference, /0\.9043979452 kWh/);
@@ -310,18 +365,16 @@ test("ガイド5記事は共通構造，2経路，目次および開示を持つ
     assert.match(html, /class="article-width article article--continuous article--guide"/);
     assert.match(html, /class="article-learn"/);
     assert.match(html, /この記事で分かること/);
-    assert.match(html, /class="article-entry-actions /);
+    if (pageName !== "subsidies.html") assert.match(html, /class="article-entry-actions /);
     assert.match(html, /class="article-toc"/);
     assert.match(html, /id="summary"/);
-    assert.equal((html.match(/data-route-source="article-top-affiliate"/g) ?? []).length, 1);
-    const quoteCount = pageName === "subsidies.html" ? 1 : 2;
-    assert.equal((html.match(/data-route-source="article-final-affiliate"/g) ?? []).length, pageName === "subsidies.html" ? 0 : 1);
-    assert.equal((html.match(/無料見積もりで確認/g) ?? []).length, quoteCount);
-    assert.equal((html.match(/広告・アフィリエイトを含みます/g) ?? []).length, quoteCount);
-    assert.equal((html.match(/見積もりサービスの利用は無料です/g) ?? []).length, quoteCount);
-    assert.equal((html.match(/施工会社・条件で確認します/g) ?? []).length, quoteCount);
+    assert.doesNotMatch(html, /affiliate-button|article-action-stack__row--affiliate|data-route-source="article-(?:top|final)-affiliate"/);
+    assert.equal((html.match(/data-quote-start/g) ?? []).length, 1);
+    assert.equal((html.match(/class="quote-context"/g) ?? []).length, 1);
+    assert.match(html, /shared\/styles\/fixed-quote-bar.css/);
+    assert.equal((html.match(/見積もりサービスの利用は無料です/g) ?? []).length, 1);
+    assert.equal((html.match(/施工会社・条件で確認します/g) ?? []).length, 1);
     assert.doesNotMatch(html, /(?:相談|現地調査|見積もり)[^．]{0,24}すべて無料/);
-    assert.equal((html.match(/data-route-source="article-(?:top|final)-affiliate" disabled/g) ?? []).length, quoteCount);
     assert.match(html, /class="article-sources"/);
     assert.match(html, /class="article-related"/);
     assert.equal((html.match(/class="article-action"/g) ?? []).length, 0);
@@ -422,24 +475,13 @@ test("収支記事以外の4記事が確定した記事構造と主題別図版�
 
     const stacks = [...html.matchAll(/<section class="article-entry-actions [^"]*article-action-stack[^"]*"[\s\S]*?<\/section>/g)]
       .map((match) => match[0]);
-    assert.equal(stacks.length, 2, `共通2段CTAは上下2組です：${spec.pageName}`);
+    assert.equal(stacks.length, spec.pageName === 'subsidies.html' ? 1 : 2);
     for (const stack of stacks) {
-      if (spec.pageName === "subsidies.html") continue;
-      assert.equal((stack.match(/class="article-action-stack__row /g) ?? []).length, 2);
+      assert.equal((stack.match(/class="article-action-stack__row /g) ?? []).length, 1);
       assert.match(stack, /article-action-stack__row--internal/);
-      assert.match(stack, /article-action-stack__row--affiliate affiliate-panel/);
       assert.match(stack, /class="article-action__link" href="\.\.\/simulator\/"/);
-      assert.match(stack, /class="secondary-button affiliate-button"[^>]*data-route-source="article-(?:top|final)-affiliate"[^>]*disabled/);
-      assert.match(stack, /広告・アフィリエイトを含みます．/);
+      assert.doesNotMatch(stack, /affiliate-button|article-action-stack__row--affiliate/);
     }
-    const firstStack = stacks[0];
-    if (spec.pageName !== "subsidies.html") assert.ok(
-      firstStack.indexOf(`article-action-stack__row--${spec.topFirstRole}`) <
-        firstStack.indexOf(`article-action-stack__row--${spec.topFirstRole === "internal" ? "affiliate" : "internal"}`),
-      `上部CTAの主従順が異なります：${spec.pageName}`
-    );
-    if (spec.pageName !== "subsidies.html") assert.ok(stacks[1].indexOf("article-action-stack__row--internal") < stacks[1].indexOf("article-action-stack__row--affiliate"));
-
     const endingOrder = [
       'id="summary"',
       'class="article-entry-actions article-entry-actions--final article-action-stack',
@@ -494,7 +536,7 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   assert.match(guideHtml, /class="notice-label">注意点<\/p>/);
   const lossCaution = guideHtml.match(/<section class="caution-box" id="loss-caution">[\s\S]*?<\/section>/)?.[0];
   assert.ok(lossCaution);
-  assert.match(lossCaution, /20年間でも正味利益がマイナスになり得ます/);
+  assert.match(lossCaution, /30年間でも正味利益がマイナスになり得ます/);
   assert.match(lossCaution, /設置容量と見積価格を変え，太陽光のみと蓄電池併用を同じ条件で比較します/);
   assert.match(lossCaution, /導入を見送ることも妥当です/);
   assert.match(lossCaution, /停電への備えを重視する場合は，経済的な回収とは別の価値/);
@@ -511,7 +553,7 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
     "同一の調達価格等算定委員会PDFを参考文献へ重複掲載しません"
   );
   assert.match(guideHtml, /<h2>自分の条件で確かめる<\/h2>/);
-  assert.match(guideHtml, /<h2>実際の設置費を確かめる<\/h2>/);
+  assert.match(guideHtml, /屋根に合う設備と実際の工事費を見積もりで確認し/);
   assert.match(guideHtml, /class="guide-benchmark-page"/);
   assert.match(
     guideHtml,
@@ -548,7 +590,7 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   assert.match(diagrams[0], /class="article-diagram article-balance-illustration"/);
   assert.match(diagrams[0], /article-solar-economics-flow\.webp" width="1823" height="863"/);
   assert.match(diagrams[0], /電気代削減[\s\S]*売電収入[\s\S]*補助金[\s\S]*設置費[\s\S]*維持・交換費/);
-  assert.match(diagrams[0], /20年間の正味利益/);
+  assert.match(diagrams[0], /30年間の正味利益/);
   assert.match(diagrams[1], /class="article-energy-flow__visual" aria-hidden="true"/);
   assert.match(diagrams[1], /太陽光パネル[\s\S]*自家消費[\s\S]*余剰売電/);
   assert.match(diagrams[1], /発電量 ＝ 自家消費量 ＋ 売電量/);
@@ -585,13 +627,13 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   for (const stack of actionStacks) {
     const internalPosition = stack.indexOf("article-action-stack__row--internal");
     const affiliatePosition = stack.indexOf("article-action-stack__row--affiliate");
-    assert.ok(internalPosition >= 0 && affiliatePosition > internalPosition);
+    assert.ok(internalPosition >= 0 && affiliatePosition === -1);
     assert.match(stack, /<h2>自分の条件で確かめる<\/h2>[\s\S]*はれ<span class="brand-term">トク<\/span>診断を始める/);
-    assert.match(stack, /<h2>実際の設置費を確かめる<\/h2>[\s\S]*広告・アフィリエイトを含みます．[\s\S]*無料見積もりで確認/);
+    assert.doesNotMatch(stack, /affiliate-button/);
   }
   assert.equal((guideHtml.match(/<a class="article-action__link" href="\.\.\/simulator\/"/g) ?? []).length, 2);
-  assert.equal((guideHtml.match(/無料見積もりで確認/g) ?? []).length, 2);
-  assert.equal((guideHtml.match(/広告・アフィリエイトを含みます．/g) ?? []).length, 2);
+  assert.equal((guideHtml.match(/無料見積もりで確認/g) ?? []).length, 0);
+  assert.equal((guideHtml.match(/広告・アフィリエイトを含みます．/g) ?? []).length, 0);
   assert.doesNotMatch(guideHtml, /赤字の結果，回収できない結果および見送る判断もそのまま扱います．/);
 
   const householdResults = Object.fromEntries(
@@ -599,7 +641,9 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
       const estimate = calculateEstimate(
         {
           prefectureCode: "13",
-          monthlyElectricityBillYen: 15_467,
+          housingAge: "existing",
+          equipmentPackage: "solar_only",
+          monthlyElectricityBillYen: null,
           systemCapacityKw: 4,
           detailConditions: { roof_orientation: "south" },
           daytimeOccupancy
@@ -614,6 +658,7 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   );
   const householdA = householdResults.almost_every_weekday;
   const householdB = householdResults.almost_never;
+  assert.equal(publicData.calculation.evaluation_period_years, 30, "30年評価データ同期後に家庭比較を照合する");
   assert.ok(householdA.standard);
   assert.ok(householdB.standard);
   for (const household of [householdA, householdB]) {
@@ -631,27 +676,27 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
       householdB.estimate.input.daytime_occupancy.label
     ],
     [
-      "年間の自家消費量",
+      "初年度の自家消費量",
       formatArticleQuantity(householdA.estimate.energy.annual_self_consumed_kwh, " kWh"),
       formatArticleQuantity(householdB.estimate.energy.annual_self_consumed_kwh, " kWh")
     ],
     [
-      "年間の売電量",
+      "初年度の売電量",
       formatArticleQuantity(householdA.estimate.energy.annual_exported_kwh, " kWh"),
       formatArticleQuantity(householdB.estimate.energy.annual_exported_kwh, " kWh")
     ],
     [
-      "20年間の電気代削減",
+      "30年間の電気代削減",
       formatArticleQuantity(householdA.standard.total_electricity_savings_yen, "円"),
       formatArticleQuantity(householdB.standard.total_electricity_savings_yen, "円")
     ],
     [
-      "20年間の売電収入",
+      "30年間の売電収入",
       formatArticleQuantity(householdA.standard.total_sales_income_yen, "円"),
       formatArticleQuantity(householdB.standard.total_sales_income_yen, "円")
     ],
     [
-      "20年間の正味利益",
+      "30年間の正味利益",
       formatArticleQuantity(householdA.standard.profit_yen, "円"),
       formatArticleQuantity(householdB.standard.profit_yen, "円")
     ]
@@ -663,7 +708,7 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
 
   assert.match(
     guideHtml,
-    new RegExp(`年間${formatArticleQuantity(
+    new RegExp(`初年度に${formatArticleQuantity(
       householdA.estimate.energy.annual_self_consumed_kwh - householdB.estimate.energy.annual_self_consumed_kwh,
       " kWh"
     )}多く自家消費`)
@@ -721,24 +766,24 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
 
   const grandDesign = await readFile(new URL("../../site/docs/グランドデザイン.md", import.meta.url), "utf8");
   const screenDesign = await readFile(new URL("../../site/docs/画面設計.md", import.meta.url), "utf8");
-  assert.match(grandDesign, /#### CTA色の役割[\s\S]*内部primaryは濃緑の塗りと白文字[\s\S]*内部secondaryは緑の枠と濃緑の文字[\s\S]*広告・アフィリエイトは黄土色の塗りと白文字/);
+  assert.match(grandDesign, /#### CTA色の役割[\s\S]*内部primaryは濃緑の塗りと白文字[\s\S]*内部secondaryは緑の枠と濃緑の文字[\s\S]*広告・アフィリエイトは有効時に黄土色の塗りと白文字を用い，未接続時は灰色と準備中表示で区別する/);
   assert.match(screenDesign, /CTA色の役割は\[グランドデザイン\]\(グランドデザイン\.md#cta色の役割\)を正本とする/);
-  assert.match(screenDesign, /末尾では，内部primaryの診断，広告・アフィリエイトの無料見積もりの順に，導入直後と同じ共通2段CTA（`\.article-action-stack`）を再利用する/);
+  assert.match(screenDesign, /対象ガイド5記事は見積もりを共通固定バーへ集約/);
   assert.doesNotMatch(screenDesign, /末尾では記事を理解した後の選択肢として，外部見積もりCTAを1件置く/);
   assert.doesNotMatch(screenDesign, /まとめ→末尾の見積もりCTA→/);
   assert.match(screenDesign, /#### 記事デザイン方針/);
   assert.doesNotMatch(screenDesign, /記事デザイン方針（仮）|「仮」は/);
   assert.match(screenDesign, /`site\/pages\/electricity-sales\.html`を一般向け記事の基準実装/);
-  assert.match(screenDesign, /タイトル・説明・対象地域／年度／最終確認日→内容を示すタイトル画像→通常段落の概要→読者の疑問→通常段落の冒頭結論→診断・見積もり共通縦2段CTA→折りたたみ目次/);
+  assert.match(screenDesign, /タイトル・説明・対象地域／年度／最終確認日→内容を示すタイトル画像→通常段落の概要→読者の疑問→通常段落の冒頭結論→記事別のCTA（「ガイド記事の導線」を参照）→折りたたみ目次/);
   assert.match(screenDesign, /概要と冒頭結論は通常段落とし，チェックリストや「先にまとめると」の独立カードにしない/);
   assert.match(screenDesign, /概要，冒頭結論および末尾まとめにも通常段落を用い，カードとして残すのは診断・見積もり等の重要導線に限る/);
   assert.doesNotMatch(screenDesign, /→縦のチェックリスト→|→小さな先取り結論→/);
   assert.match(screenDesign, /PCでは文意と無関係な位置で改行させない[\s\S]*`h2`には太い深緑の左線[\s\S]*`h3`にはそれより弱い灰色の左線/);
   assert.match(screenDesign, /段落ごとのカード化を避ける/);
   assert.match(screenDesign, /生活者向け図版[\s\S]*数式の図解，意味のない装飾/);
-  assert.match(screenDesign, /記事末尾は「通常段落のまとめ→診断・見積もり共通縦2段CTA→控えめな出典→関連記事2～3件」の順/);
+  assert.match(screenDesign, /記事末尾は通常段落のまとめ，記事別CTA，控えめな出典，関連記事2～3件の順/);
   assert.match(screenDesign, /`site\/solar\/index\.html`を一覧の基準実装/);
-  assert.match(screenDesign, /「まず読む3本」を最初に示し，画像，ジャンル，タイトルおよび短い説明を一体化したカード/);
+  assert.match(screenDesign, /一覧は主一覧へ一本化し，先頭を収支→補助金→見積もりとする/);
   assert.match(screenDesign, /公開状態の実在記事だけを表示し，記事が少数の段階では検索，ランキングおよび複雑な絞り込みを設けない/);
   assert.match(screenDesign, /`site\/solar\/data\/articles\.json`を単一データ源/);
 
@@ -815,15 +860,17 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   assert.match(html, /data-source-id="bri-pyhees-residential-total-electricity-load"/);
   assert.match(html, /data-source-id="nedo-solar-radiation-database"/);
   assert.match(html, /国，都道府県，対応済み市区町村の公的制度/);
-  assert.match(html, /2026年9月1日時点/);
-  assert.match(html, /確認できない重複は加算しません/);
+  assert.match(html, /都道府県制度は2026年9月18日の全国監査結果を反映/);
+  assert.match(html, /国・市区町村制度の確認日と対象範囲は制度別の記録/);
+  assert.match(html, /限定した公式導線の調査であり，全制度の網羅確認ではありません/);
+  assert.match(html, /公式に併用可能と確認したことを意味せず/);
   assert.match(html, /予算終了，受付期間，併用可否，住宅・設備条件/);
   assert.match(html, /未収録または確認日後に更新された制度/);
-  assert.match(html, /標準蓄電池は，20年間交換せず使用する前提です/);
+  assert.match(html, /標準蓄電池は，30年間交換せず使用する前提です/);
   assert.match(html, /15年目から16年目にも容量や充電残量をリセットしません/);
-  assert.match(html, /製品の20年寿命または保証を確認した事実ではありません/);
+  assert.match(html, /製品の30年寿命または保証を確認した事実ではありません/);
   assert.match(html, /15年後60％は容量保証の下限を用いた保守的な感度パス/);
-  assert.match(html, /16～20年目は同じ年間保持係数を延長する数学的外挿/);
+  assert.match(html, /16～30年目は同じ年間保持係数を延長する数学的外挿/);
   assert.match(html, /公称容量は電池の名目容量，実効容量は製品が定める初期の使用範囲/);
   assert.match(html, /出力は同時に供給できる電力の大きさで，容量とは別/);
   assert.match(html, /容量保証の下限，保証期間，想定使用期間およびサイクル期待寿命も同一視しません/);
@@ -833,20 +880,20 @@ test("収支ガイドは判断要因に限定し，計算仕様を計算方法�
   assert.match(html, /2026年5月検針分～2027年4月検針分/);
   assert.match(html, /2025年度下半期・2026年度認定，住宅用10 kW未満，調達期間10年間/);
   assert.match(html, /地域・契約条件付き例．全国共通価格ではない/);
-  assert.match(html, /20年間の収入総額は計算結果として返された値を表示し，四捨五入後の内訳から足し直しません/);
+  assert.match(html, /30年間の収入総額は計算結果として返された値を表示し，四捨五入後の内訳から足し直しません/);
   assert.match(html, /戸建て・4人以上世帯の地域平均（令和5年度）/);
   assert.match(html, /関東甲信15,467円／月/);
   assert.match(html, /手入力した値またはURLの<code>monthlyElectricityBill<\/code>がある場合は，その値を優先します/);
   assert.match(html, /点検3\.8万円／回とパワーコンディショナ交換38\.4万円／回は，経済産業省の2026年資料にある住宅用5 kW設備の業界ヒアリング値/);
   assert.match(html, /税区分は未確認/);
-  assert.match(html, /4年ごとの点検と15年目の交換は診断上のサービス評価仮定/);
-  assert.match(html, /資料自体は交換年を15年目と定めていません/);
+  assert.match(html, /5年ごとの点検と20年目の交換は診断上のサービス評価仮定/);
+  assert.match(html, /資料自体は交換年を20年目と定めていません/);
   assert.equal((html.match(/data-source-id=/g) ?? []).length, 16);
-  assert.equal((html.match(/参照日：/g) ?? []).length, 22);
+  assert.equal((html.match(/参照日：/g) ?? []).length, 25);
 });
 
-test("診断内の計算根拠リンクは1つだけで正式名称を使う", async () => {
+test("診断の内訳末尾と末尾から使用データへ接続する", async () => {
   const html = await readFile(new URL("../../site/simulator/index.html", import.meta.url), "utf8");
-  assert.equal((html.match(/href="\.\.\/pages\/calculation-method\.html"/g) ?? []).length, 1);
+  assert.equal((html.match(/href="\.\.\/pages\/calculation-method\.html"/g) ?? []).length, 2);
   assert.match(html, />計算方法・使用データ<\/a>/);
 });

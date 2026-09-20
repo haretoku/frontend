@@ -4,7 +4,7 @@
 
 > **結論：dataは，backendの公開成果物を受け取り，版を検証してsiteへ提供する．**
 
-`input/`にはbackendの`dist/output/`から受け取った`public-data.json`と`metadata.json`を置く．`src/data-loader.js`は両ファイルを読み込み，`schema_version`と`data_version`の一致を確認する．秘密情報，未確認データおよびbackendの内部処理用データを含めない．
+`input/`にはbackendの`dist/output/`から受け取った`public-data.json`と`metadata.json`を置く．受領ファイルをfrontend独自の判断で手修正しない．`src/data-loader.js`は両ファイルを読み込み，`schema_version`と`data_version`の一致を確認する．秘密情報，未確認データおよびbackendの内部処理用データを含めない．
 
 ## QA用データ
 

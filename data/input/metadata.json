@@ -1,8 +1,44 @@
 {
-  "schema_version": "9.4.0",
-  "data_version": "2026-09-06",
-  "generated_at": "2026-09-05T16:16:08+00:00",
+  "schema_version": "11.8.0",
+  "data_version": "2026-09-20",
+  "generated_at": "2026-09-20T01:33:23+00:00",
   "sources": [
+    {
+      "source_id": "akita-housing-reform-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "秋田県",
+      "source_title": "令和8年度住宅リフォーム推進事業",
+      "source_url": "https://www.pref.akita.lg.jp/pages/archive/94314",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "akita-housing-reform-qa-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "秋田県",
+      "source_title": "令和8年度住宅リフォーム推進事業Q&A",
+      "source_url": "https://www.pref.akita.lg.jp/uploads/public/archive_0000094314_00/R8/%E5%BD%93%E5%88%9D%E6%8E%B2%E8%BC%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB/r8qa.pdf",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "aomori-residential-self-consumption-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "青森県",
+      "source_title": "住宅用自家消費型太陽光発電設備等導入支援事業費補助金",
+      "source_url": "https://www.pref.aomori.lg.jp/soshiki/kankyo/energy/R8aomori-taiyoko.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "aomori-residential-solar-group-purchase-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "青森県",
+      "source_title": "令和8年度青森県住宅用太陽光発電設備等共同購入事業",
+      "source_url": "https://www.pref.aomori.lg.jp/soshiki/kankyo/energy/group_purchase.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
     {
       "source_id": "bri-pyhees-residential-total-electricity-load",
       "data_domain": "self_consumption",
@@ -11,6 +47,15 @@
       "source_title": "住宅のエネルギー消費性能計算プログラムの公式計算エンジンpyheesおよび第二章第二節一次エネルギー消費量",
       "source_url": "https://github.com/BRI-EES-House/pyhees",
       "retrieved_at": "2026-09-04T00:00:00+09:00"
+    },
+    {
+      "source_id": "chiba-residential-energy-support-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "千葉県",
+      "source_title": "再生可能エネルギー・省エネルギー設備の支援情報（住宅用）",
+      "source_url": "https://www.pref.chiba.lg.jp/shigen/chikyuukankyou/ne/shien-ippan.html",
+      "retrieved_at": "2026-09-10T00:00:00+09:00"
     },
     {
       "source_id": "criepi-household-co2-pv-self-consumption-2025",
@@ -72,7 +117,7 @@
       "data_domain": "generation",
       "source_class": "primary",
       "publisher": "環境省",
-      "source_title": "第4章 優良事例の考え方の整理と導入促進 表4.3-17 各地の年平均日射量と年間予想発電量",
+      "source_title": "平成26年度廃棄物埋立処分場等への太陽光発電導入促進方策等検討業務報告書 第4章 表4.3-17 各地の年平均日射量と年間予想発電量",
       "source_url": "https://www.env.go.jp/content/900535929.pdf",
       "retrieved_at": "2026-09-01T21:30:21+09:00"
     },
@@ -114,13 +159,22 @@
       "published_at": "2025-10-06"
     },
     {
+      "source_id": "gunma-battery-subsidy-guideline-fy2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "群馬県",
+      "source_title": "令和8年度住宅用蓄電池導入支援事業費補助金募集要領",
+      "source_url": "https://www.pref.gunma.jp/uploaded/attachment/705419.pdf",
+      "retrieved_at": "2026-09-10T00:00:00+09:00"
+    },
+    {
       "source_id": "gunma-renewable-subsidy-guideline-fy2026",
       "data_domain": "subsidy",
       "source_class": "primary",
       "publisher": "群馬県",
       "source_title": "令和8年度太陽光発電設備等導入支援事業費補助金募集要領",
-      "source_url": "https://www.pref.gunma.jp/uploaded/attachment/704768.pdf",
-      "retrieved_at": "2026-09-01T21:41:46+09:00"
+      "source_url": "https://www.pref.gunma.jp/uploaded/attachment/705743.pdf",
+      "retrieved_at": "2026-09-10T00:00:00+09:00"
     },
     {
       "source_id": "gunma-residential-renewable-subsidy-fy2026",
@@ -129,7 +183,43 @@
       "publisher": "群馬県",
       "source_title": "令和8年度の個人住宅・事業者向け再エネ導入支援補助制度",
       "source_url": "https://www.pref.gunma.jp/page/753198.html",
-      "retrieved_at": "2026-09-01T21:41:46+09:00"
+      "retrieved_at": "2026-09-10T00:00:00+09:00"
+    },
+    {
+      "source_id": "hokkaido-energy-subsidy-index-2026",
+      "data_domain": "subsidy",
+      "source_class": "official_index",
+      "publisher": "北海道",
+      "source_title": "省エネ・新エネ関係補助事業",
+      "source_url": "https://www.pref.hokkaido.lg.jp/kz/gxs/policy.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "hokkaido-home-zero-carbon-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "北海道",
+      "source_title": "住まいのゼロカーボン化推進事業",
+      "source_url": "https://www.pref.hokkaido.lg.jp/kn/ksd/159060.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "huasun-hjt-module-degradation",
+      "data_domain": "generation_detail",
+      "source_class": "primary",
+      "publisher": "Huasun Energy",
+      "source_title": "HJTモジュール",
+      "source_url": "https://www.huasunsolar.com/ja/hjt-module",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "ibaraki-prefectural-distributed-energy-fund-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "茨城県",
+      "source_title": "自立・分散型エネルギー設備（家庭用蓄電池）導入促進事業費補助金",
+      "source_url": "https://www.pref.ibaraki.jp/seikatsukankyo/kansei/chikyu/jiritsubunsan.html",
+      "retrieved_at": "2026-09-10T00:00:00+09:00"
     },
     {
       "source_id": "ishikawa-residential-solar-subsidy-2026",
@@ -139,6 +229,24 @@
       "source_title": "令和8年度住宅向け太陽光発電設備等普及促進事業費補助金",
       "source_url": "https://www.pref.ishikawa.lg.jp/ontai/pv/pv.html",
       "retrieved_at": "2026-09-04T00:00:00+09:00"
+    },
+    {
+      "source_id": "iwate-high-performance-housing-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "岩手県",
+      "source_title": "いわて省エネルギー住宅建設推進事業費補助金",
+      "source_url": "https://www.pref.iwate.jp/kurashikankyou/kenchiku/kojin/hojo/1073811.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "iwate-household-decarbonization-index-2026",
+      "data_domain": "subsidy",
+      "source_class": "official_index",
+      "publisher": "岩手県",
+      "source_title": "令和8年度脱炭素に係る補助事業等について《家庭編》",
+      "source_url": "https://www.pref.iwate.jp/kurashikankyou/gx/1073104/1072832.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
     },
     {
       "source_id": "jpea-residential-equipment-service-life",
@@ -157,6 +265,15 @@
       "source_title": "設置方位や設置角度の影響はありますか？",
       "source_url": "https://www.jpea.gr.jp/faq/590/",
       "retrieved_at": "2026-09-01T22:00:00+09:00"
+    },
+    {
+      "source_id": "jpea-residential-solar-installation-cost",
+      "data_domain": "installation_cost",
+      "source_class": "primary",
+      "publisher": "一般社団法人太陽光発電協会",
+      "source_title": "太陽光発電システムの設置費用はどのくらいですか？",
+      "source_url": "https://www.jpea.gr.jp/faq/589/",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
     },
     {
       "source_id": "meti-fit-residential-fy2026",
@@ -205,6 +322,24 @@
       "published_at": "2026-02-05"
     },
     {
+      "source_id": "miyagi-smart-energy-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "宮城県",
+      "source_title": "令和8年度スマートエネルギー住宅普及促進事業補助金",
+      "source_url": "https://www.pref.miyagi.jp/soshiki/kankyo-s/smart-energy.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "miyagi-smart-energy-guide-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "一般財団法人宮城県建築住宅センター",
+      "source_title": "令和8年度スマートエネルギー住宅普及促進事業補助金 申請の手引き",
+      "source_url": "https://www.mkj.or.jp/wp/wp-content/uploads/2026/05/tebiki2026.pdf",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
       "source_id": "nature-energy-home-storage-field-measurements-2024",
       "data_domain": "battery_system",
       "source_class": "primary",
@@ -213,6 +348,15 @@
       "source_url": "https://www.nature.com/articles/s41560-024-01620-9",
       "retrieved_at": "2026-09-05T14:45:00+09:00",
       "published_at": "2024-09-16"
+    },
+    {
+      "source_id": "nedo-monsola20-prefectural-generation-2010-2018",
+      "data_domain": "generation",
+      "source_class": "primary",
+      "publisher": "国立研究開発法人新エネルギー・産業技術総合開発機構",
+      "source_title": "MONSOLA-20 全国1 kmメッシュ日射量データベース",
+      "source_url": "https://www.nedo.go.jp/seika_hyoka/ZZFF_100041.html",
+      "retrieved_at": "2026-09-18T13:28:17+00:00"
     },
     {
       "source_id": "nedo-solar-radiation-database",
@@ -240,6 +384,16 @@
       "source_title": "令和8年度新潟県雪国型ZEH等導入促進補助金",
       "source_url": "https://www.pref.niigata.lg.jp/sec/kankyoseisaku/0583945.html",
       "retrieved_at": "2026-09-01T21:41:46+09:00"
+    },
+    {
+      "source_id": "nlr-pv-lifetime-project-2024",
+      "data_domain": "generation_detail",
+      "source_class": "primary",
+      "publisher": "National Laboratory of the Rockies",
+      "source_title": "PV Lifetime Project 2024 NREL Annual Report",
+      "source_url": "https://research-hub.nlr.gov/en/publications/pv-lifetime-project-2024-nrel-annual-report/",
+      "retrieved_at": "2026-09-18T00:00:00+09:00",
+      "published_at": "2024-01-01"
     },
     {
       "source_id": "panasonic-lda7wwgew1-spec-2026",
@@ -327,6 +481,15 @@
       "retrieved_at": "2026-09-01T21:30:21+09:00"
     },
     {
+      "source_id": "tochigi-residential-solar-battery-subsidy-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "栃木県",
+      "source_title": "個人住宅用太陽光発電設備等導入支援事業",
+      "source_url": "https://www.pref.tochigi.lg.jp/d02/kouhou/kozinzyutakutaiyoukouhozyo.html",
+      "retrieved_at": "2026-09-10T00:00:00+09:00"
+    },
+    {
       "source_id": "tokushima-residential-renewable-subsidy-fy2026",
       "data_domain": "subsidy",
       "source_class": "primary",
@@ -345,6 +508,15 @@
       "retrieved_at": "2026-09-01T21:41:46+09:00"
     },
     {
+      "source_id": "yamagata-mirakuru-energy-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "山形県",
+      "source_title": "令和8年度やまがた未来くるエネルギー補助金",
+      "source_url": "https://www.pref.yamagata.jp/050016/kurashi/kankyo/energy/saiseikanou/saiseikanou_hojo_h31.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
       "source_id": "yamagata-residential-solar-subsidy-fy2026",
       "data_domain": "subsidy",
       "source_class": "primary",
@@ -352,6 +524,24 @@
       "source_title": "令和8年度住宅用太陽光発電設備（自家消費型）導入事業費補助金",
       "source_url": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/r8_taiyoukou_hojo.html",
       "retrieved_at": "2026-09-01T21:41:46+09:00"
+    },
+    {
+      "source_id": "yamagata-self-consumption-solar-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "山形県",
+      "source_title": "令和8年度住宅用太陽光発電設備（自家消費型）導入事業費補助金",
+      "source_url": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/r8_taiyoukou_hojo.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
+    },
+    {
+      "source_id": "yamagata-sun-forest-club-2026",
+      "data_domain": "subsidy",
+      "source_class": "primary",
+      "publisher": "山形県",
+      "source_title": "やまがた太陽と森林の会 太陽光発電設備",
+      "source_url": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/taiyotomorinokai/taiyotomorinokai_taiyo.html",
+      "retrieved_at": "2026-09-18T00:00:00+09:00"
     },
     {
       "source_id": "zeh-lab-prefectural-subsidy-list-2026",

@@ -1,0 +1,4 @@
+@import url('../municipal-review/styles.css');
+th:nth-child(1){width:20%}th:nth-child(2){width:25%}th:nth-child(3){width:30%}th:nth-child(4){width:25%}
+.stage{margin:0 0 12px}.stage:last-child{margin-bottom:0}.stage small{margin-top:3px}nav{margin:12px 0}td p{margin:8px 0}td ul{font-size:inherit}#archive{margin-top:32px;padding:18px;background:#fff;border:1px solid #cddbd3;border-radius:10px}#archive-rows>details{border-top:1px solid #dce4df;padding:10px 0}#archive article>dl{display:grid;grid-template-columns:180px minmax(0,1fr);gap:10px}#archive dt{margin:0}#archive dd,#archive p{white-space:pre-wrap}#empty{padding:20px;background:#e9f2eb;border-radius:8px}#query{min-width:280px}
+@media(max-width:760px){td{grid-template-columns:88px minmax(0,1fr)}#query{min-width:0}#archive{padding:12px}#archive article>dl{display:block}#archive dt{margin-top:10px}}

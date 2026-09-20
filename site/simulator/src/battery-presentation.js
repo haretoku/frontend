@@ -13,9 +13,9 @@ export function degradationLabel(scenario) {
 
 export function degradationDescription(degradation) {
   const premise = degradation.scenario_id === "conservative"
-    ? "15年目末60％は，保証下限に整合する保守的感度パスです．16～20年は同じ年率係数を継続した数学的外挿です．"
+    ? "15年目末60％は，保証下限に整合する保守的感度パスです．16～30年は同じ年率係数を継続した数学的外挿です．"
     : `20年後${(degradation.capacity_retention_at_year_20 * 100).toFixed(0)}％の容量が残る条件付き比較仮定です．研究で同定された平均や保証値ではありません．`;
-  return `${premise}実測平均や期待値ではなく，各年は年末容量をその年の計算に用います．20年間交換しない仮定であり，製品の寿命や動作を保証するものではありません．`;
+  return `${premise}実測平均や期待値ではなく，各年は年末容量をその年の計算に用います．30年間交換しない仮定であり，製品の寿命や動作を保証するものではありません．`;
 }
 
 export function outageReferencePresentation(reference) {

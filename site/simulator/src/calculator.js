@@ -1,3 +1,5 @@
+import { connectDiagnosticSubsidy } from './diagnostic-subsidy.js';
+import { housingInput } from "./housing-input.js";
 import { preprocessCapacity } from "./capacity-preprocessing.js";
 
 export const CALCULATION_IMPLEMENTED = true;
@@ -89,18 +91,20 @@ function temporalOverlap(annualConsumption, annualGeneration, occupancyRate, ori
   };
 }
 
-function batteryEnergyByYear(loadProfile, generationProfile, battery, evaluationYears) {
+function batteryEnergyByYear(loadProfile, generationProfile, battery, evaluationYears, pvRetentionFactor) {
   const chargeEfficiency = battery.charge_efficiency;
   const dischargeEfficiency = battery.discharge_efficiency;
   const retentionFactor = battery.annual_capacity_retention_factor;
   const initialCapacity = battery.capacity_kwh;
-  const annualGeneration = generationProfile.reduce((sum, value) => sum + value, 0);
+  const firstYearGeneration = generationProfile.reduce((sum, value) => sum + value, 0);
   const annualConsumption = loadProfile.reduce((sum, value) => sum + value, 0);
   let stateOfCharge = 0;
   let serviceAge = 0;
   const results = [];
 
   for (let year = 1; year <= evaluationYears; year += 1) {
+    const pvGenerationFactor = pvRetentionFactor ** (year - 1);
+    const annualGeneration = firstYearGeneration * pvGenerationFactor;
     serviceAge += 1;
     const usableCapacity = initialCapacity * retentionFactor ** serviceAge;
     const openingStateOfChargeBeforeAdjustment = stateOfCharge;
@@ -116,7 +120,7 @@ function batteryEnergyByYear(loadProfile, generationProfile, battery, evaluation
 
     for (let index = 0; index < loadProfile.length; index += 1) {
       const load = loadProfile[index];
-      const generation = generationProfile[index];
+      const generation = generationProfile[index] * pvGenerationFactor;
       const direct = Math.min(load, generation);
       const surplus = generation - direct;
       const deficit = load - direct;
@@ -141,6 +145,9 @@ function batteryEnergyByYear(loadProfile, generationProfile, battery, evaluation
     const economicSelfConsumed = directSelfConsumed + batteryDelivered;
     results.push({
       year,
+      pv_generation_factor: pvGenerationFactor,
+      annual_consumption_kwh: annualConsumption,
+      annual_generation_kwh: annualGeneration,
       battery_service_age_year: serviceAge,
       battery_usable_capacity_kwh: usableCapacity,
       opening_state_of_charge_before_adjustment_kwh: openingStateOfChargeBeforeAdjustment,
@@ -164,16 +171,16 @@ function batteryEnergyByYear(loadProfile, generationProfile, battery, evaluation
 
 function validateBatteryReplacementPolicy(battery, evaluationYears) {
   const noReplacementContract = (
-    battery.replacement_policy === "no_replacement_within_20_year_evaluation_period"
-    && battery.replacement_policy_basis === "service_requirement_no_replacement_scenario_with_year_16_to_20_mathematical_extrapolation_and_no_cycle_to_service_life_conversion"
-    && battery.twenty_year_service_life_or_warranty_verified === false
+    battery.replacement_policy === "no_replacement_within_30_year_evaluation_period"
+    && battery.replacement_policy_basis === "service_requirement_no_replacement_scenario_with_annual_retention_mathematically_extrapolated_through_year_30_and_no_cycle_to_service_life_conversion"
+    && battery.thirty_year_service_life_or_warranty_verified === false
     && Array.isArray(battery.replacement_years)
     && battery.replacement_years.length === 0
     && battery.replacement_cost_yen === 0
-    && evaluationYears === 20
+    && evaluationYears === 30
   );
   if (!noReplacementContract) {
-    throw new Error("標準蓄電池の20年間無交換契約を確認できません．");
+    throw new Error("標準蓄電池の30年間無交換契約を確認できません．");
   }
 }
 
@@ -387,9 +394,10 @@ function resolvedProgramComponents(program, equipmentPackage) {
 
 function municipalityStatusForEquipment(municipality, programs, equipmentPackage) {
   if (!municipality) return "not_requested";
-  if (["no_program", "unconfirmed"].includes(municipality.program_status)) {
+  if (["no_program", "unconfirmed", "searched_not_found"].includes(municipality.program_status)) {
     return municipality.program_status;
   }
+  if (municipality.program_status === 'included' && programs.length === 0) return 'included';
   const eligibleEquipment = equipmentPackage === "solar_only"
     ? new Set(["solar", "solar_and_battery_independent"])
     : new Set(["solar", "battery", "solar_and_battery_independent", "solar_and_battery_required"]);
@@ -450,7 +458,7 @@ function maximumCompatibleComponentSubset(program, components) {
   return best;
 }
 
-function municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipmentPackage) {
+function municipalProgramComponentAmounts(program, capacityKw, batteryCapacityKwh, equipmentPackage) {
   const components = resolvedProgramComponents(program, equipmentPackage);
   if (!components) return null;
   const componentAmounts = components.map((component) => [
@@ -458,8 +466,13 @@ function municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipme
     amountFromRule(component.amount_rule, capacityKw, batteryCapacityKwh)
   ]);
   if (componentAmounts.some(([, amount]) => amount === null)) return null;
-  return maximumCompatibleComponentSubset(program, componentAmounts)
-    .reduce((sum, [, amount]) => sum + amount, 0);
+  return Object.fromEntries(maximumCompatibleComponentSubset(program, componentAmounts)
+    .map(([component, amount]) => [component.component_type, amount]));
+}
+
+function municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipmentPackage) {
+  const amounts = municipalProgramComponentAmounts(program, capacityKw, batteryCapacityKwh, equipmentPackage);
+  return amounts === null ? null : Object.values(amounts).reduce((total, amount) => total + amount, 0);
 }
 
 function confirmedCombinationTargets(program) {
@@ -504,19 +517,17 @@ function municipalProgramEvaluation(
   const confirmations = [
     "居住，所有，所得，納税，施工会社，申請時期および住宅区分等は，公式サイトまたは施工会社で確認する．"
   ];
-  if (equipmentPackage === "solar_only"
-    && ["battery", "solar_and_battery_required"].includes(program.target_equipment)) {
-    confirmations.unshift("太陽光のみの入力と対象設備が一致しないため算入しない．");
-  }
-  if (resolvedProgramComponents(program, equipmentPackage) === null) {
-    confirmations.unshift("金額算定ルールを一意に確定できないため算入しない．");
-  }
-  if (program.application_status !== "accepting") {
-    confirmations.unshift("現在の受付状態では算入しない．");
-  }
-  if (reasonCode === "capacity_below_minimum") {
-    confirmations.unshift("入力容量が制度の最低容量を下回るため算入しない．");
-  }
+  const primary = {
+ equipment_package_not_applicable:'入力した設備構成と制度の対象設備が一致しないため算入しない．',
+ capacity_below_minimum:'入力容量が制度の最低容量を下回るため算入しない．',
+ application_closed:'受付終了を確認しているため，現在は算入しない．',
+ application_not_started:'受付開始前を確認しているため，現在は算入しない．',
+ application_status_unconfirmed:'現在の受付状況を確認できないため，算入可否を確定しない．',
+ required_benefit_component_missing:'対象設備の補助内訳が不足しているため，補助額を確定しない．',
+ benefit_amount_rule_unresolved:'金額算定ルールを一意に確定できないため，補助額を確定しない．',
+ combination_status_unconfirmed:'他制度との併用可否を公式資料で確認できないため，単独候補として保持する．'
+  }[reasonCode];
+  if (primary) confirmations.unshift(primary);
   return {
     ...program,
     government_level: "municipality",
@@ -552,26 +563,19 @@ function municipalSubsidyForCapacity(
     return components !== null && components.every((component) => component.amount_rule.minimum_capacity_kw == null
       || capacityKw >= component.amount_rule.minimum_capacity_kw);
   };
-  const candidates = programs
-    .filter((item) => item.application_status === "accepting"
-      && (!eligibleEquipment.has(item.target_equipment)
-        || resolvedProgramComponents(item, equipmentPackage) === null || !meetsMinimumCapacity(item)))
-    .map((item) => municipalProgramEvaluation(
-      item,
-      "candidate_missing_conditions",
-      candidateReason(item),
-      null,
-      equipmentPackage
-    ));
-  const excluded = programs
-    .filter((item) => item.application_status !== "accepting")
-    .map((item) => municipalProgramEvaluation(
-      item,
-      "excluded_closed",
-      "application_closed_or_budget_exhausted",
-      null,
-      equipmentPackage
-    ));
+  const nonCalculableEvaluation = program => {
+    let status, reason;
+    if (!eligibleEquipment.has(program.target_equipment)) { status='excluded_incompatible'; reason='equipment_package_not_applicable'; }
+    else if (resolvedProgramComponents(program,equipmentPackage)!==null && !meetsMinimumCapacity(program)) { status='excluded_incompatible'; reason='capacity_below_minimum'; }
+    else if (program.application_status!=='accepting') {
+      [status,reason]=({closed:['excluded_closed','application_closed'],scheduled:['excluded_closed','application_not_started']}[program.application_status]??['candidate_missing_conditions','application_status_unconfirmed']);
+    } else if (resolvedProgramComponents(program,equipmentPackage)===null) {status='candidate_missing_conditions';reason=candidateReason(program);}
+    else return null;
+    return municipalProgramEvaluation(program,status,reason,null,equipmentPackage);
+  };
+  const classified=programs.map(nonCalculableEvaluation).filter(Boolean);
+  const candidates=classified.filter(item=>item.calculation_status==='candidate_missing_conditions');
+  const excluded=classified.filter(item=>item.calculation_status!=='candidate_missing_conditions');
   if (!subsidyIncluded) {
     return {
       prefectureAmount: prefectureSubsidyYen || 0,
@@ -584,9 +588,7 @@ function municipalSubsidyForCapacity(
   }
 
   const calculable = programs
-    .filter((program) => program.application_status === "accepting"
-      && eligibleEquipment.has(program.target_equipment)
-      && resolvedProgramComponents(program, equipmentPackage) !== null && meetsMinimumCapacity(program))
+    .filter(program => nonCalculableEvaluation(program) === null)
     .map((program) => [
       program,
       municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipmentPackage)
@@ -620,27 +622,13 @@ function municipalSubsidyForCapacity(
       amountById.get(program.id),
       equipmentPackage
     ),
+    component_amounts_yen: municipalProgramComponentAmounts(program, capacityKw, batteryCapacityKwh, equipmentPackage),
     display_note: `${program.municipality_name}の補助制度を利用できた場合`
   }));
-  const duplicateNote = "公式に確認できる併用可能集合のうち総額最大の組合せを採用";
+  const combinationNote = '他制度との併用可否は公式資料上未確認';
   for (const [program, amount] of calculable) {
     if (selectedIds.has(program.id)) continue;
-    const solarOnly = equipmentPackage === "solar_only";
-    const evaluation = {
-      ...municipalProgramEvaluation(
-        program,
-        solarOnly ? "excluded_duplicate" : "candidate_missing_conditions",
-        solarOnly
-          ? "more_advantageous_standalone_program_selected"
-          : "not_in_maximum_confirmed_compatible_subset",
-        amount,
-        equipmentPackage
-      ),
-      display_note: solarOnly
-        ? duplicateNote
-        : "未確認の併用を除外し，公式確認済み集合の総額最大を採用"
-    };
-    (solarOnly ? excluded : candidates).push(evaluation);
+    candidates.push({...municipalProgramEvaluation(program,'candidate_missing_conditions','combination_status_unconfirmed',amount,equipmentPackage),display_note:combinationNote});
   }
   const prefectureSuppressed = prefectureAmount > 0 && selectedPrefecture === 0;
   return {
@@ -707,6 +695,7 @@ function appliedDaytimeOccupancy(input, calculation) {
 }
 
 export function calculateEstimate(input, publicData) {
+  const housing = housingInput(input.housingAge, publicData.calculation.housing_age_input);
   const prefecture = publicData.prefectures.find((item) => item.code === input.prefectureCode);
   if (!prefecture) throw new Error("指定された都道府県のデータがありません．");
   const { municipality, programs: municipalityPrograms } = municipalityEvaluation(
@@ -790,6 +779,7 @@ export function calculateEstimate(input, publicData) {
     (condition) => condition.input_name === "roof_orientation"
   )?.value ?? "south";
   const evaluationYears = calculation.evaluation_period_years;
+  const pvRetentionFactor = calculation.pv_generation_degradation.annual_retention_factor;
   if (selectedEquipmentPackage === "solar_plus_standard_battery") {
     validateBatteryReplacementPolicy(batterySystem, evaluationYears);
   }
@@ -800,37 +790,29 @@ export function calculateEstimate(input, publicData) {
   let purchased;
   let annualEnergyFlows;
   if (selectedEquipmentPackage === "solar_only") {
-    const overlap = temporalOverlap(
-      annualConsumption,
-      annualGeneration,
-      daytimeOccupancy.input.daytime_occupancy_rate,
-      orientation,
-      daytimeOccupancy.model
-    );
-    selfConsumed = overlap.selfConsumed;
-    selfConsumptionRate = overlap.selfConsumptionRate;
-    selfSufficiencyRate = overlap.selfSufficiencyRate;
-    exported = annualGeneration - selfConsumed;
-    purchased = annualConsumption - selfConsumed;
-    annualEnergyFlows = Array.from({ length: evaluationYears }, (_, index) => ({
-      year: index + 1,
-      battery_service_age_year: 0,
-      battery_usable_capacity_kwh: 0,
-      opening_state_of_charge_before_adjustment_kwh: 0,
-      opening_state_of_charge_kwh: 0,
-      closing_state_of_charge_kwh: 0,
-      capacity_fade_spillage_kwh: 0,
-      replacement_disposal_spillage_kwh: 0,
-      annual_direct_self_consumed_kwh: selfConsumed,
-      annual_battery_charge_input_kwh: 0,
-      annual_battery_delivered_kwh: 0,
-      annual_battery_conversion_loss_kwh: 0,
-      annual_economic_self_consumed_kwh: selfConsumed,
-      annual_exported_kwh: exported,
-      annual_purchased_kwh: purchased,
-      self_consumption_rate: selfConsumptionRate,
-      self_sufficiency_rate: selfSufficiencyRate
-    }));
+    annualEnergyFlows = Array.from({ length: evaluationYears }, (_, index) => {
+      const year = index + 1;
+      const factor = pvRetentionFactor ** index;
+      const generation = annualGeneration * factor;
+      const overlap = temporalOverlap(annualConsumption, generation, daytimeOccupancy.input.daytime_occupancy_rate, orientation, daytimeOccupancy.model);
+      return {
+        year, pv_generation_factor: factor, annual_consumption_kwh: annualConsumption, annual_generation_kwh: generation,
+        battery_service_age_year: 0, battery_usable_capacity_kwh: 0,
+        opening_state_of_charge_before_adjustment_kwh: 0, opening_state_of_charge_kwh: 0, closing_state_of_charge_kwh: 0,
+        capacity_fade_spillage_kwh: 0, replacement_disposal_spillage_kwh: 0,
+        annual_direct_self_consumed_kwh: overlap.selfConsumed, annual_battery_charge_input_kwh: 0,
+        annual_battery_delivered_kwh: 0, annual_battery_conversion_loss_kwh: 0,
+        annual_economic_self_consumed_kwh: overlap.selfConsumed,
+        annual_exported_kwh: generation - overlap.selfConsumed, annual_purchased_kwh: annualConsumption - overlap.selfConsumed,
+        self_consumption_rate: overlap.selfConsumptionRate, self_sufficiency_rate: overlap.selfSufficiencyRate
+      };
+    });
+    const first = annualEnergyFlows[0];
+    selfConsumed = first.annual_economic_self_consumed_kwh;
+    selfConsumptionRate = first.self_consumption_rate;
+    selfSufficiencyRate = first.self_sufficiency_rate;
+    exported = first.annual_exported_kwh;
+    purchased = first.annual_purchased_kwh;
   } else {
     const { loadProfile, generationProfile } = temporalProfiles(
       annualConsumption,
@@ -843,7 +825,8 @@ export function calculateEstimate(input, publicData) {
       loadProfile,
       generationProfile,
       selectedBatterySystem,
-      evaluationYears
+      evaluationYears,
+      pvRetentionFactor
     );
     const firstYearEnergy = annualEnergyFlows[0];
     selfConsumed = firstYearEnergy.annual_economic_self_consumed_kwh;
@@ -852,7 +835,7 @@ export function calculateEstimate(input, publicData) {
     exported = firstYearEnergy.annual_exported_kwh;
     purchased = firstYearEnergy.annual_purchased_kwh;
   }
-  const solarInstallationCost = systemCapacity * calculation.installation_cost_yen_per_kw;
+  const solarInstallationCost = systemCapacity * calculation.installation_cost_yen_per_kw_by_housing_age[housing.value];
   const batteryInstallationCost = selectedEquipmentPackage === "solar_plus_standard_battery"
     ? roundYen(batteryCapacityKwh * batterySystem.installed_cost_yen_per_kwh)
     : 0;
@@ -876,10 +859,10 @@ export function calculateEstimate(input, publicData) {
     );
     const originalPrefectureSubsidy = prefectureSubsidy.amount;
     const selectedPrefectureSubsidy = municipalSubsidy.prefectureAmount;
-    const totalSubsidy = selectedPrefectureSubsidy === null
+    let totalSubsidy = selectedPrefectureSubsidy === null
       ? null
       : selectedPrefectureSubsidy + municipalSubsidy.amount;
-    const sourceIds = municipalSubsidy.prefectureSuppressed ? [] : prefectureSubsidy.sourceIds;
+    let sourceIds = municipalSubsidy.prefectureSuppressed ? [] : prefectureSubsidy.sourceIds;
     let subsidyStatus = prefectureSubsidy.status;
     let subsidyNote = prefectureSubsidy.note;
     if (totalSubsidy !== null && totalSubsidy > 0) {
@@ -891,6 +874,63 @@ export function calculateEstimate(input, publicData) {
         subsidyNote = `${subsidyNote} ${municipalNote}`.trim();
       }
     }
+    const legacyBreakdown = {
+        prefecture_program_status: prefecture.prefecture_program_status,
+        prefecture_amount_yen: selectedPrefectureSubsidy,
+        municipality_amount_yen: municipalSubsidy.amount,
+        total_amount_yen: totalSubsidy,
+        municipality_program_status: selectedMunicipalityProgramStatus,
+        included_programs: [
+          ...(selectedPrefectureSubsidy !== null && selectedPrefectureSubsidy > 0
+            ? (prefecture.subsidy_programs ?? [])
+              .filter((program) => program.status === "verified")
+              .filter((program) => !(
+                calculation.active_sale_path === "fit_then_post_fit"
+                && program.fit_compatible === false
+              ))
+              .map((program) => ({
+                id: program.id,
+                government_level: program.government_level,
+                program_name: program.program_name,
+                calculation_status: "included",
+                application_status: "accepting",
+                amount_yen: selectedPrefectureSubsidy,
+                official_url: program.official_url ?? null,
+                reason_code: "verified_prefectural_program_applied",
+                required_confirmations: []
+              }))
+            : []),
+          ...municipalSubsidy.included
+        ],
+        candidate_programs: [
+          ...candidatePrefecturePrograms(prefecture).filter(program=>!(publicData.diagnostic_subsidy_programs??[]).some(diagnostic=>diagnostic.id===program.id)),
+          ...municipalSubsidy.candidates,
+          ...(municipalSubsidy.prefectureSuppressed
+            ? (prefecture.subsidy_programs ?? [])
+              .filter((program) => program.status === "verified")
+              .map((program) => ({
+                id: program.id,
+                government_level: program.government_level,
+                program_name: program.program_name,
+                calculation_status: "candidate_missing_conditions",
+                application_status: "accepting",
+                amount_yen: originalPrefectureSubsidy,
+                official_url: program.official_url ?? null,
+                reason_code: "combination_status_unconfirmed",
+                required_confirmations: ["市区町村制度との併用可否は公式資料上未確認"],
+                display_note: "市区町村制度との併用可否は公式資料上未確認"
+              }))
+            : [])
+        ],
+        excluded_programs: [
+          ...excludedPrefecturePrograms(prefecture, calculation.active_sale_path),
+          ...municipalSubsidy.excluded,
+
+        ]
+      };
+    const connected=connectDiagnosticSubsidy(legacyBreakdown,publicData,{prefectureCode:input.prefectureCode,municipalityCode:input.municipalityCode??null,housingAge:housing.value,equipmentPackage:selectedEquipmentPackage,capacityKw:systemCapacity,batteryCapacityKwh,solarCost:roundYen(solarInstallationCost),batteryCost:batteryInstallationCost,batteryEquipmentCost:roundYen(batteryCapacityKwh*batterySystem.equipment_cost_yen_per_kwh)},scenario.subsidy_included,municipalSubsidy.included);
+    totalSubsidy=connected.breakdown.total_amount_yen;
+    if(connected.enabled&&totalSubsidy!==null&&totalSubsidy>0){subsidyStatus='applied';sourceIds=[...new Set([...sourceIds,...connected.diagnostic.included_programs.flatMap(x=>x.source_ids??[])])];subsidyNote='監査済み制度について，開示した固定仮定の下で費目別上限を同時に満たす最大組合せを適用．';}
     const netInitialOutlay = totalSubsidy === null ? null : grossInstallationCost - totalSubsidy;
     let cumulativeCashFlow = netInitialOutlay === null ? null : -netInitialOutlay;
     let paybackYear = null;
@@ -958,58 +998,7 @@ export function calculateEstimate(input, publicData) {
       subsidy_status: subsidyStatus,
       subsidy_source_ids: sourceIds,
       subsidy_calculation_note: subsidyNote,
-      subsidy_breakdown: {
-        prefecture_amount_yen: selectedPrefectureSubsidy,
-        municipality_amount_yen: municipalSubsidy.amount,
-        total_amount_yen: totalSubsidy,
-        municipality_program_status: selectedMunicipalityProgramStatus,
-        included_programs: [
-          ...(selectedPrefectureSubsidy !== null && selectedPrefectureSubsidy > 0
-            ? (prefecture.subsidy_programs ?? [])
-              .filter((program) => program.status === "verified")
-              .filter((program) => !(
-                calculation.active_sale_path === "fit_then_post_fit"
-                && program.fit_compatible === false
-              ))
-              .map((program) => ({
-                id: program.id,
-                government_level: program.government_level,
-                program_name: program.program_name,
-                calculation_status: "included",
-                application_status: "accepting",
-                amount_yen: selectedPrefectureSubsidy,
-                official_url: program.official_url ?? null,
-                reason_code: "verified_prefectural_program_applied",
-                required_confirmations: []
-              }))
-            : []),
-          ...municipalSubsidy.included
-        ],
-        candidate_programs: [
-          ...candidatePrefecturePrograms(prefecture),
-          ...municipalSubsidy.candidates
-        ],
-        excluded_programs: [
-          ...excludedPrefecturePrograms(prefecture, calculation.active_sale_path),
-          ...municipalSubsidy.excluded,
-          ...(municipalSubsidy.prefectureSuppressed
-            ? (prefecture.subsidy_programs ?? [])
-              .filter((program) => program.status === "verified")
-              .map((program) => ({
-                id: program.id,
-                government_level: program.government_level,
-                program_name: program.program_name,
-                calculation_status: "excluded_duplicate",
-                application_status: "accepting",
-                amount_yen: originalPrefectureSubsidy,
-                official_url: program.official_url ?? null,
-                reason_code: "more_advantageous_municipal_standalone_program_selected",
-                required_confirmations: ["都道府県制度とは自動併用せず，より有利な市区町村制度を単独採用"],
-                display_note: "都道府県制度とは自動併用せず，より有利な市区町村制度を単独採用"
-              }))
-            : [])
-        ]
-      },
+      subsidy_breakdown: connected.breakdown,
       gross_installation_cost_yen: roundYen(grossInstallationCost),
       solar_installation_cost_yen: roundYen(solarInstallationCost),
       battery_installation_cost_yen: batteryInstallationCost,
@@ -1034,8 +1023,11 @@ export function calculateEstimate(input, publicData) {
 
   return {
     input: {
+      housing_age: housing.value,
+      housing_age_source: housing.source,
       prefecture_code: input.prefectureCode,
       prefecture_name: prefecture.name,
+      prefecture_program_status: prefecture.prefecture_program_status,
       municipality_code: municipality?.municipality_code ?? null,
       municipality_name: municipality?.municipality_name ?? null,
       municipality_program_status: selectedMunicipalityProgramStatus,
@@ -1071,6 +1063,7 @@ export function calculateEstimate(input, publicData) {
         scenario_id: selectedDegradationScenario?.id ?? null,
         annual_capacity_retention_factor: selectedDegradationScenario?.annual_capacity_retention_factor ?? null,
         capacity_retention_at_year_20: selectedDegradationScenario?.capacity_retention_at_year_20 ?? null,
+        capacity_retention_at_year_30: selectedDegradationScenario?.capacity_retention_at_year_30 ?? null,
         positioning: selectedDegradationScenario?.positioning ?? "not_applicable",
         research_identified_estimate: false,
         market_average: false,
@@ -1084,13 +1077,14 @@ export function calculateEstimate(input, publicData) {
           "充放電kW上限を設定しないため，実機より蓄電池便益を上方評価する可能性がある．",
           `${selectedDegradationScenario.label}を適用します．研究で同定した平均，保証値または予測分布ではありません．各年は当該年末容量で計算します．`,
           `20年目末容量保持率は${Number(selectedDegradationScenario.capacity_retention_at_year_20.toPrecision(12))}です．条件付き比較の増益を実証値として扱いません．`,
-          "蓄電池は20年間交換せず，容量劣化を継続する想定です．故障修理・交換費は含まず，20年間の動作を保証するものではありません．"
+          `30年目末容量保持率は${Number(selectedDegradationScenario.capacity_retention_at_year_30.toPrecision(12))}です．20年終点を変更せず，同じ年率係数を30年目まで数学的に外挿します．`,
+          "蓄電池は30年間交換せず，容量劣化を継続する想定です．故障修理・交換費は含まず，30年間の動作を保証するものではありません．"
         ]
         : [],
       annual_energy_flows: annualEnergyFlows.map((item) => Object.fromEntries(
         Object.entries(item).map(([key, value]) => [
           key,
-          Number.isInteger(value) ? value : roundTo(value, 6)
+          Number.isInteger(value) ? value : key === "pv_generation_factor" ? Number(value.toFixed(15)) : roundTo(value, 6)
         ])
       ))
     },

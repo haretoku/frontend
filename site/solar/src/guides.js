@@ -12,9 +12,9 @@ function imageUrlFor(article) {
   return guideImages[`../../shared/assets/${fileName}`] ?? article.image.src;
 }
 
-function cardFor(article, featured = false) {
+function cardFor(article) {
   const link = document.createElement("a");
-  link.className = featured ? "guide-article-card guide-article-card--featured" : "guide-article-card";
+  link.className = "guide-article-card";
   link.href = article.href;
 
   const visual = document.createElement("span");
@@ -24,7 +24,7 @@ function cardFor(article, featured = false) {
   image.width = article.image.width;
   image.height = article.image.height;
   image.alt = article.image.alt;
-  image.loading = featured ? "eager" : "lazy";
+  image.loading = "lazy";
   image.decoding = "async";
   visual.append(image);
 
@@ -47,21 +47,18 @@ function cardFor(article, featured = false) {
   return link;
 }
 
-function renderCards(container, articles, featured = false) {
-  container.replaceChildren(...articles.map((article) => cardFor(article, featured)));
+function renderCards(container, articles) {
+  container.replaceChildren(...articles.map((article) => cardFor(article)));
 }
 
 function initializeGuideDirectory() {
-  const featuredContainer = document.querySelector("[data-featured-guides]");
   const libraryContainer = document.querySelector("[data-guide-library]");
   const filterContainer = document.querySelector("[data-guide-filters]");
   const count = document.querySelector("[data-guide-count]");
-  if (!featuredContainer || !libraryContainer || !filterContainer || !count) return;
+  if (!libraryContainer || !filterContainer || !count) return;
 
-  const featuredArticles = guideArticles
-    .filter((article) => Number.isInteger(article.featuredOrder))
-    .sort((first, second) => first.featuredOrder - second.featuredOrder);
-  renderCards(featuredContainer, featuredArticles, true);
+  const mainArticles = [...guideArticles]
+    .sort((first, second) => (first.featuredOrder ?? Infinity) - (second.featuredOrder ?? Infinity));
 
   const availableCategories = categoryOrder
     .map((id) => ({ id, label: guideArticles.find((article) => article.categoryId === id)?.category }))
@@ -70,8 +67,8 @@ function initializeGuideDirectory() {
 
   const selectCategory = (categoryId) => {
     const visibleArticles = categoryId === "all"
-      ? guideArticles
-      : guideArticles.filter((article) => article.categoryId === categoryId);
+      ? mainArticles
+      : mainArticles.filter((article) => article.categoryId === categoryId);
     renderCards(libraryContainer, visibleArticles);
     count.textContent = `${visibleArticles.length}本の記事`;
     for (const button of filterContainer.querySelectorAll("button")) {

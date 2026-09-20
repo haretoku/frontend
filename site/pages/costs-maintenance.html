@@ -8,10 +8,11 @@
     <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../shared/styles/main.css">
     <link rel="stylesheet" href="../articles/styles/article.css">
+    <link rel="stylesheet" href="../shared/styles/fixed-quote-bar.css">
     <script type="module" src="../articles/src/article-data.js"></script>
   </head>
   <body class="article-guide-page">
-    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor">太陽光のかんたん採算診断</span><nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../solar/" aria-current="page">はれ<span class="brand-term">トク</span>ガイド</a></nav></div></header>
+    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span><nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../solar/" aria-current="page">はれ<span class="brand-term">トク</span>ガイド</a></nav></div></header>
     <main>
       <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ <a href="../solar/">はれ<span class="brand-term">トク</span>ガイド</a> ／ 初期費用と維持費</nav>
       <header class="article-width article-hero">
@@ -31,30 +32,23 @@
         <section class="article-learn" aria-labelledby="learn-title">
           <h2 id="learn-title">この記事で分かること</h2>
           <p><strong>初期費用</strong>：診断が前提とする設備・工事費の範囲が分かります．</p>
-          <p><strong>維持・交換費</strong>：20年間に計上する点検と機器交換の時期を確認できます．</p>
+          <p><strong>維持・交換費</strong>：30年間に計上する点検と機器交換の時期を確認できます．</p>
           <p><strong>個別確認する費用</strong>：修理，撤去，屋根工事等，概算へ含めない支出を区別できます．</p>
         </section>
 
-        <p class="article-opening-questions">「設置価格のほかに何がかかるのか」「点検や交換はいつ発生するのか」「診断に含まれない支出は何か」．表示された設置額だけでは，20年間の家計負担を判断できません．</p>
+        <p class="article-opening-questions">「設置価格のほかに何がかかるのか」「点検や交換はいつ発生するのか」「診断に含まれない支出は何か」．表示された設置額だけでは，30年間の家計負担を判断できません．</p>
 
-        <p class="article-opening-summary">広告の表示額を見るときは，機器だけの価格か，標準工事を含む価格かを確認します．最終見積もりでは，自宅に必要な追加工事と別料金の条件を照合し，導入後の点検・交換費も分けて見込みます．</p>
+        <p class="article-opening-summary" data-quote-start>広告の表示額を見るときは，機器だけの価格か，標準工事を含む価格かを確認します．最終見積もりでは，自宅に必要な追加工事と別料金の条件を照合し，導入後の点検・交換費も分けて見込みます．</p>
 
         <section class="article-entry-actions article-entry-actions--diagnosis-primary article-action-stack" aria-label="次の行動">
           <div class="article-action-stack__row article-action-stack__row--internal">
             <div class="article-action-stack__copy">
               <h2>維持費を含む概算を確認する</h2>
-              <p>標準的な初期費用，定期点検費および機器交換費を含めて，20年間の収支を計算します．</p>
+              <p>標準的な初期費用，定期点検費および機器交換費を含めて，30年間の収支を計算します．</p>
             </div>
             <a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
           </div>
-          <div class="article-action-stack__row article-action-stack__row--affiliate affiliate-panel">
-            <div class="article-action-stack__copy">
-              <h2>住宅固有の費用を確かめる</h2>
-              <p>見積もりサービスの利用は無料です．現地調査費は施工会社・条件で確認します．</p>
-              <p class="advertising-label">広告・アフィリエイトを含みます．</p>
-            </div>
-            <button class="secondary-button affiliate-button" type="button" data-route-source="article-top-affiliate" disabled>無料見積もりで確認</button>
-          </div>
+          <p class="quote-context">設備・工事費に加え，点検や交換，追加工事の費用を見積もりで確認しましょう．見積もりサービスの利用は無料です．現地調査費は施工会社・条件で確認します．</p>
         </section>
 
         <details class="article-toc">
@@ -72,11 +66,12 @@
           <h2>初期費用の前提</h2>
           <table class="article-table"><tbody>
             <tr><th>標準設備容量</th><td data-system-capacity>4 kW</td></tr>
-            <tr><th>1 kW当たり導入費用</th><td data-installation-cost-per-kw>331,100円</td></tr>
-            <tr><th>補助金控除前の概算</th><td data-installation-cost-total>1,324,400円</td></tr>
+            <tr><th>既存住宅の1 kW当たり導入費用</th><td data-installation-cost-existing-per-kw>331,100円</td></tr>
+            <tr><th>既存住宅の補助金控除前の概算</th><td data-installation-cost-total>1,324,400円</td></tr>
+            <tr><th>新築住宅の導入費用</th><td><span data-installation-cost-new-per-kw>317,900円</span>／kW．4 kWでは1,271,600円（補助金控除前）．</td></tr>
             <tr><th>標準蓄電池を選ぶ場合</th><td>9.5 kWhの設備費・工事費1,149,500円を加算．</td></tr>
           </tbody></table>
-          <p>診断の1 kW当たり導入費用は，設備費と工事費を含む既築住宅の平均値です．一方，経済産業省の2026年資料では，2025年に設置された住宅用太陽光のうち新築案件について，システム費用の平均値28.9万円／kW，中央値29.4万円／kWが示されています．母集団の異なる統計値であり，既築住宅の診断値や個別見積価格へ置き換える値ではありません．資料に示された費目別平均は表示単位で丸められているため，内訳の表示値を足した金額と総額に丸め差が生じ得ます．</p>
+          <p>診断の導入費用は設備費と工事費を含み，新築と既存住宅で区別します．個別の工事範囲や見積価格を保証する値ではありません．新築の原典価格と税の採用仮定は<a href="calculation-method.html#adopted-parameters">計算方法・使用データ</a>で確認できます．</p>
           <h3>「価格」が指す範囲を分ける</h3>
           <ul>
             <li><strong>本体価格：</strong>パネルやパワーコンディショナ等の機器単体の価格です．</li>
@@ -87,20 +82,20 @@
           <p>屋根面数が増えると架台と配線の構成が複雑になり，屋根材によって固定金具と防水処理が変わります．建物の高さや作業空間は足場に，分電盤・パワーコンディショナの位置と配線の引回しはケーブル長，壁の貫通および仕上げ復旧に影響します．重量のある機器は，搬入経路によって揚重や人員の条件も変わります．足場，申請，既存設備の撤去・処分，配線，搬入および保証が含まれるか，含まれないか，条件付きかを費目ごとに確認します．これらの必要性は現地調査で確認し，全国一律の追加額は置きません．</p>
           <h3>蓄電池は「容量」だけで比較しない</h3>
           <p>蓄電池の公称容量は電池に蓄えられる名目上の容量，実効容量は製品が定める使用範囲を反映した初期の容量です．実際に家庭で利用できる電力量は，その時点の使用可能容量に充放電効率，保護制御，残量および運転モードが影響します．一方，出力は同時に動かせる機器の大きさに関わり，容量とは別の性能です．</p>
-          <p>容量保証の下限，保証期間，メーカーが想定する使用期間およびサイクル期待寿命も分けて確認します．容量保証は所定条件下での下限，サイクル期待寿命は所定試験条件による期待値であり，両者は同じ意味ではありません．診断の既定値である15年後60％は，公開された保証下限を用いた保守的な感度パスです．16～20年目は同じ低下率を継続した数学的外挿であり，実測値でもメーカー保証でもありません．この既定パスでは20年末に約50.6％となります．20年間無交換とする取扱いも，評価用のモデル仮定です（オムロン ソーシアルソリューションズ，2026a，b）．</p>
-        <p>20年末70％・85％も条件付き比較仮定として選べますが，標準期待値，製品保証または研究で同定された平均ではありません．選択すると各年の容量と自家消費・売電を通じて収支も変わります．いずれも20年間交換なしの仮定です．<a href="calculation-method.html#calculation-formulas">劣化仮定の計算方法と一次研究</a>を確認し，製品の保証条件とは分けて比較してください．</p>
+          <p>容量保証の下限，保証期間，メーカーが想定する使用期間およびサイクル期待寿命も分けて確認します．容量保証は所定条件下での下限，サイクル期待寿命は所定試験条件による期待値であり，両者は同じ意味ではありません．診断の既定値である15年後60％は，公開された保証下限を用いた保守的な感度パスです．16～30年目は同じ低下率を継続した数学的外挿であり，実測値でもメーカー保証でもありません．この既定パスでは20年末に約50.6％となります．30年間無交換とする取扱いも，評価用のモデル仮定です（オムロン ソーシアルソリューションズ，2026a，b）．</p>
+        <p>20年末70％・85％も条件付き比較仮定として選べますが，標準期待値，製品保証または研究で同定された平均ではありません．選択すると各年の容量と自家消費・売電を通じて収支も変わります．いずれも30年間交換なしの仮定です．<a href="calculation-method.html#calculation-formulas">劣化仮定の計算方法と一次研究</a>を確認し，製品の保証条件とは分けて比較してください．</p>
         </section>
 
         <section id="included-costs">
           <h2>計算へ含める維持・交換費</h2>
           <table class="article-table"><tbody>
-            <tr><th>定期点検</th><td><span data-maintenance-cost>38,000円</span>／回を<span data-maintenance-years>4，8，12，16，20年目</span>に計上．20年間で<span data-maintenance-total>190,000円</span>．</td></tr>
-            <tr><th>パワーコンディショナ交換</th><td>交換費<span data-replacement-cost>384,000円</span>を<span data-replacement-years>15年目</span>に計上．</td></tr>
-            <tr><th>標準蓄電池交換</th><td>20年間は交換せず，交換費0円として計算．</td></tr>
-            <tr><th>合計</th><td><span data-lifecycle-cost-total>574,000円</span>．太陽光のみ，太陽光＋標準蓄電池のいずれも，入力容量にかかわらない固定費として扱う現行モデルの仮定．</td></tr>
+            <tr><th>定期点検</th><td><span data-maintenance-cost>38,000円</span>／回を<span data-maintenance-years>5，10，15，20，25，30年目</span>に計上．30年間で<span data-maintenance-total>228,000円</span>．</td></tr>
+            <tr><th>パワーコンディショナ交換</th><td>交換費<span data-replacement-cost>384,000円</span>を<span data-replacement-years>20年目</span>に計上．</td></tr>
+            <tr><th>標準蓄電池交換</th><td>30年間は交換せず，交換費0円として計算．</td></tr>
+            <tr><th>合計</th><td><span data-lifecycle-cost-total>612,000円</span>．太陽光のみ，太陽光＋標準蓄電池のいずれも，入力容量にかかわらない固定費として扱う現行モデルの仮定．</td></tr>
           </tbody></table>
           <p>経済産業省の2026年資料は，住宅用5 kW設備を想定した業界ヒアリング値として，点検を3～5年ごとに1回程度，費用を約3.8万円／回，パワーコンディショナ交換を20年間に1回，費用を約38.4万円と示しています．特定製品の保証価格や個別見積価格ではなく，実際の費用は点検範囲，足場，機器，保証および施工条件で異なります．</p>
-          <p>診断では，3～5年ごとの中点を4年として点検を4，8，12，16，20年目に置き，20年間に1回の交換を15年目に置きます．いずれも支出時点を定めるサービス評価仮定であり，資料自体が15年目の交換を定めているわけではありません．</p>
+          <p>診断では，点検を5，10，15，20，25，30年目に，パワーコンディショナ交換を20年目に1回計上します．支出時点は診断上の評価仮定です．<a href="calculation-method.html#adopted-parameters">資料との対応と採用範囲</a>を確認してください．</p>
           <p>JPEAは，所有者が行う日常点検と，専門業者へ依頼する定期点検を区別しています．日常点検では，安全に確認できる範囲で機器の外観，異音・異臭の有無を確認し，発電モニターで発電量を見ます．月に一度，前年同月の発電量と比較することも勧めています．屋根へ上るなどの危険な作業は行わず，異常が気になる場合は販売店等へ相談してください（<a href="https://www.jpea.gr.jp/house/longuser/">JPEA「長く使っていただくために」</a>）．</p>
           <p>JPEAは専門業者による定期点検を設置後1年，その後は4年ごとに推奨しています．これは推奨時期であり，その頻度自体を一律の法定義務とは扱いません．定期点検の項目は設置後の年数や使用・故障状況によって異なるため，販売店，工務店またはメーカーへ内容と費用を確認します．日常点検だけで専門業者の定期点検を代替するものではありません．</p>
           <figure class="article-section-illustration" aria-labelledby="cost-lifecycle-caption">
@@ -117,7 +112,7 @@
             <li><strong>撤去・処分：</strong>故障，建替えまたは屋根工事等で設備を撤去する場合に費用が発生します．</li>
             <li><strong>保険・借入・税金：</strong>契約や利用者の条件によって異なるため，計算へ含めません．</li>
           </ul>
-          <p>パワーコンディショナの実際の交換時期は，製品，設置環境，使用状況および保証条件で異なります．診断の15年目という時点は評価用の配置であり，15年目の故障や交換を保証するものではありません．</p>
+          <p>パワーコンディショナの実際の交換時期は，製品，設置環境，使用状況および保証条件で異なります．診断の20年目という時点は評価用の配置であり，20年目の故障や交換を保証するものではありません．</p>
         </section>
 
         <section class="caution-box" id="inspection-caution">
@@ -128,7 +123,7 @@
 
         <section id="summary">
           <h2>まとめ</h2>
-          <p>現在の診断では，設備・工事費，4年ごとの定期点検費および15年目のパワーコンディショナ交換費を，発生時期に沿って計上します．標準蓄電池は20年間交換せず，交換費0円とするモデル仮定です．</p>
+          <p>現在の診断では，設備・工事費，5年ごとの定期点検費および20年目のパワーコンディショナ交換費を，発生時期に沿って計上します．標準蓄電池は30年間交換せず，交換費0円とするモデル仮定です．</p>
           <p>突発的な修理，撤去，保険，借入および税金は含まれません．概算と実額を混同せず，見積書では追加工事，保証対象外の条件，点検契約および長期の連絡窓口を確認してください．</p>
         </section>
 
@@ -136,18 +131,11 @@
           <div class="article-action-stack__row article-action-stack__row--internal">
             <div class="article-action-stack__copy">
               <h2>維持費を含む概算を確認する</h2>
-              <p>標準的な初期費用，定期点検費および機器交換費を含めて，20年間の収支を計算します．</p>
+              <p>標準的な初期費用，定期点検費および機器交換費を含めて，30年間の収支を計算します．</p>
             </div>
             <a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
           </div>
-          <div class="article-action-stack__row article-action-stack__row--affiliate affiliate-panel">
-            <div class="article-action-stack__copy">
-              <h2>住宅固有の費用を確かめる</h2>
-              <p>見積もりサービスの利用は無料です．現地調査費は施工会社・条件で確認します．</p>
-              <p class="advertising-label">広告・アフィリエイトを含みます．</p>
-            </div>
-            <button class="secondary-button affiliate-button" type="button" data-route-source="article-final-affiliate" disabled>無料見積もりで確認</button>
-          </div>
+
         </section>
 
         <section class="article-sources">
@@ -171,6 +159,6 @@
         <section class="article-related"><h2>関連記事</h2><nav class="article-footer-nav" aria-label="関連ページ"><a href="electricity-sales.html">太陽光の収支は，何で決まる？</a><a href="quotes-contractors.html">太陽光の見積もりは，何を比べる？</a><a href="disaster.html">停電時，太陽光だけで何ができる？</a></nav></section>
       </article>
     </main>
-<footer class="site-footer"><div class="page-width"><nav class="site-footer__links" aria-label="運営情報"><a href="policy.html#operation">運営方針</a><a href="policy.html#advertising">広告方針</a><a href="policy.html#data">データ方針</a><a href="policy.html#privacy">プライバシー</a><a href="policy.html#disclaimer">免責事項</a></nav><p>定期点検と機器交換は正味利益へ反映し，突発的な修理や撤去等は反映していません．</p></div></footer>
+<footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="policy.html#operation">運営方針</a><a href="policy.html#advertising">広告方針</a><a href="policy.html#data">データ方針</a><a href="policy.html#privacy">プライバシー</a><a href="policy.html#disclaimer">免責事項</a></nav><p>定期点検と機器交換は正味利益へ反映し，突発的な修理や撤去等は反映していません．</p></div></div></footer>
   </body>
 </html>
