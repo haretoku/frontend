@@ -25,7 +25,7 @@ jobs:
       - run: corepack enable
       - run: corepack prepare pnpm@10.15.1 --activate
       - run: pnpm install --frozen-lockfile
-      - run: pnpm test
+      - run: pnpm run test:public
       - run: pnpm run build:pages
       - uses: actions/upload-pages-artifact@v3
         with:
