@@ -1,0 +1,178 @@
+[
+  {
+    "municipality_code": "23201",
+    "expected_amount_yen": 52000
+  },
+  {
+    "municipality_code": "23202",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23203",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23204",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23205",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23206",
+    "expected_amount_yen": 60000
+  },
+  {
+    "municipality_code": "23207",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23209",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23210",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23211",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23212",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23213",
+    "expected_amount_yen": 80000
+  },
+  {
+    "municipality_code": "23214",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23215",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23216",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23217",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23219",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23220",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23221",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23222",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23223",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23224",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23225",
+    "expected_amount_yen": 400000
+  },
+  {
+    "municipality_code": "23228",
+    "expected_amount_yen": 400000
+  },
+  {
+    "municipality_code": "23229",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23230",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23231",
+    "expected_amount_yen": 230000
+  },
+  {
+    "municipality_code": "23234",
+    "expected_amount_yen": 40000
+  },
+  {
+    "municipality_code": "23236",
+    "expected_amount_yen": 274000
+  },
+  {
+    "municipality_code": "23237",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23302",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23342",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23362",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23424",
+    "expected_amount_yen": 30000
+  },
+  {
+    "municipality_code": "23425",
+    "expected_amount_yen": 50000
+  },
+  {
+    "municipality_code": "23427",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23441",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23442",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23445",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23446",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23501",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23561",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23562",
+    "expected_amount_yen": 150000
+  },
+  {
+    "municipality_code": "23563",
+    "expected_amount_yen": 400000
+  }
+]

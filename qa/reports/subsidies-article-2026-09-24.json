@@ -1,0 +1,193 @@
+{
+  "date": "2026-09-24",
+  "article": "subsidies",
+  "status": "vertical application flow and wording updated; PC/360 self-QA complete; handoff for delta review; unpublished",
+  "sha256": {
+    "frontend\\site\\pages\\subsidies.html": "19abe8426d50fe2e7ec021a6e55c56dd66ff4390deaa3cd46240ac0c823e32e7",
+    "frontend\\site\\articles\\src\\article-bibliography.json": "5808b58b42b27c706e75265e86e75241ee03f7274348e51de8041cc3d90a7af2",
+    "frontend\\site\\articles\\styles\\guide-chapters.css": "824d94717a04f168504745a538af272441b25dd7086b78421a8af592de8c69b5",
+    "frontend\\data\\input\\public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+    "frontend\\site\\docs\\画面設計.md": "a3e7993b84967ddae5cc4056393277ffeddd37fc2bf9c4627796f1c528769055"
+  },
+  "static": "PASS: local assets/links and fragments, unique IDs, citations in chapter bibliography",
+  "browser": {
+    "widths": [
+      1280,
+      360
+    ],
+    "scrollWidths": [
+      1265,
+      345
+    ],
+    "checks": [
+      "TOC initial closed; Enter and Space open; amount anchor reaches matching section",
+      "PC amount/conditions and flow/table screenshots",
+      "360 amount/conditions, document table, final checklist, footer screenshots",
+      "no overflow; no broken images; console error 0",
+      "quote bar retains disabled state; article-specific equipment/cost/application-support wording"
+    ],
+    "temporaryTab": "closed after verification; viewport reset"
+  },
+  "existingTests": {
+    "selected": 6,
+    "pass": 4,
+    "fail": 2,
+    "unrelatedFailures": [
+      "calculation-method.html duplicate IDs",
+      "costs-maintenance.html to electricity-sales.html#inspection-caution missing"
+    ]
+  },
+  "sourceMapping": [
+    {
+      "claim": "official regional search and stale closed results",
+      "source": "env-housing-decarbonization-navi-2026",
+      "section": "使いかた"
+    },
+    {
+      "claim": "budget cap may close early; not current acceptance claim",
+      "source": "kanagawa-solar-subsidy-second-round-2026",
+      "section": "第2期受付期間"
+    },
+    {
+      "claim": "equipment combinations, pre-decision contract prohibition, paid document preparation caution; already closed",
+      "source": "gunma-residential-renewable-subsidy-fy2026",
+      "section": "対象補助金事業確認表／今後のスケジュール／提出方法"
+    },
+    {
+      "claim": "Tokyo existing home 12万円/kW x 4kW = 48万円; capacity and cost ceiling; duplicate subsidies",
+      "source": "tokyo-residential-solar-subsidy-fy2026",
+      "section": "事業概要／助成対象機器・補助率"
+    },
+    {
+      "claim": "Tokyo normal sequence, deadline and documents",
+      "source": "tokyo-residential-solar-handbook-fy2026",
+      "section": "本文p4–6，別表1・2"
+    }
+  ],
+  "reviewChanges": [
+    "MUST: per-kW unit added in equation",
+    "RECOMMEND: FIT and self-consumption eligibility restored"
+  ],
+  "publicData": "unchanged; 11.17.0 / 2026-09-21",
+  "deployment": "none",
+  "previousIndependentReviews": [
+    {
+      "sha256": {
+        "frontend\\site\\pages\\subsidies.html": "9fc7893c751c2f3bb581506312d8d011d9596f3b225068ad199a82058f28bda8",
+        "frontend\\site\\articles\\src\\article-bibliography.json": "5808b58b42b27c706e75265e86e75241ee03f7274348e51de8041cc3d90a7af2",
+        "frontend\\site\\articles\\styles\\guide-chapters.css": "0eae17c9ad963f6e8c4a4fbf4ec62cdfb966a0f792a69ac882912e7285a29e88",
+        "frontend\\data\\input\\public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91"
+      },
+      "review": {
+        "reviewer": "ハレトク統括",
+        "date": "2026-09-24",
+        "result": "PASS for this article and the scope below; not a whole-site test pass",
+        "version": "All three article HTML, bibliography JSON and CSS hashes below matched after review",
+        "sourcesChecked": [
+          "https://policies.env.go.jp/earth/zeh/search/ : regional search, closed programs may remain in results",
+          "https://www.pref.kanagawa.jp/docs/ap4/prs/r0402281.html : second-round budget closure rule; no claim of current acceptance",
+          "https://www.pref.gunma.jp/page/753198.html : closed acceptance, equipment combinations, FIT/self-consumption conditions, contract before decision prohibition, document-preparation caution",
+          "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/ : eligibility, capacity basis, 12万円/kW above 3.75kW for existing homes, eligible-cost cap and duplicate aid restrictions",
+          "https://tokyo-co2down.g.kuroco-img.app/files/user/files/subsidy/fam_solar/r8/r8taiyouko_tebiki_20260630.pdf : normal procedure, acceptance versus award/payment, earlier-of submission deadline, document tables 1 and 2"
+        ],
+        "content": "Reviewed all article text, headings, emphasis and source correspondence; unit correction and FIT/self-consumption check adopted; no remaining MUST findings",
+        "visual": {
+          "pcWidth": 1280,
+          "mobileWidth": 360,
+          "documentWidths": [
+            1265,
+            345
+          ],
+          "pc": "TOC opening and amount anchor; amount example, contract timing, emphasis, source references and document table",
+          "mobile": "document table, Tokyo procedure and deadline, final responsibility checklist, emphasis and disabled quote bar",
+          "brokenImages": 0,
+          "observedConsoleErrors": 0,
+          "limits": "Representative article sections; not every scroll position or external application flow"
+        },
+        "existingFailures": "Two unrelated cross-page failures below remain outside this article acceptance; no whole-site PASS claimed",
+        "cleanup": "Viewport override reset; existing user tab and shared 5173 retained; no helper process started"
+      }
+    }
+  ],
+  "followUp": {
+    "scope": "第2章見出し・受付確認リンク，原則と地域例の段落整理，見込額と未受給負担，第2章診断カード，第4章見積もりカード・相談導入文，重複案内削除",
+    "files": [
+      "site/pages/subsidies.html",
+      "site/articles/styles/guide-chapters.css",
+      "qa/reports/subsidies-article-2026-09-24.json"
+    ],
+    "static": "PASS: local assets and links/fragments, unique IDs, TOC wording, chapter citations, single diagnosis link, disabled quote card",
+    "visual": {
+      "widths": [
+        1280,
+        360
+      ],
+      "documentWidths": [
+        1265,
+        345
+      ],
+      "checks": [
+        "both action cards match existing design and stay readable",
+        "no horizontal overflow or permanent obstruction by fixed quote bar",
+        "diagnosis navigates to /simulator/",
+        "acceptance link reaches #acceptance-status",
+        "H2 and TOC match; cards excluded from TOC",
+        "quote card and fixed bar disabled; advertising shown",
+        "console error 0"
+      ],
+      "cleanup": "temporary tab closed; viewport reset; shared server retained"
+    },
+    "priorSourceReview": "unchanged official amount/conditions; no new factual source claims",
+    "priorCrossSiteFailures": "unchanged, no repeat whole-site run",
+    "secondaryCorrection": "独立指摘により診断リンクのみ既存secondary-buttonへ変更．#subsidy-diagnosis限定の配置・矢印CSS追加．PC1280/360再目視PASS，白背景・緑枠・深緑文字，文書幅1265/345．他記事に適用なし．",
+    "independentDeltaReview": {
+      "reviewer": "ハレトク統括",
+      "result": "PASS for approved follow-up changes",
+      "htmlSha256": "7d34173f6637915cc452acf2ffc28ad818f2c0df1c765b4d70cb7f2d0ff3e29e",
+      "cssSha256": "2383f0a5e45ee5a5a967e3d87fb9700aa13521177010809f446e34ab22bdf4d2",
+      "checks": [
+        "Read revised wording and preserved conditions/citations; contract timing and estimated-versus-confirmed subsidy clarified",
+        "PC 1280 diagnosis and quote cards inspected; quote card also independently inspected at 360px",
+        "Requested diagnosis secondary styling correction; final corrected diagnosis card independently inspected at 360px",
+        "Final HTML and scoped CSS hashes match self-QA report; no observed console errors"
+      ],
+      "limits": "Final corrected PC secondary styling and navigation checks use frontend self-QA; unchanged factual source review reused; no whole-site test claim",
+      "cleanup": "Viewport reset; user tab and shared localhost retained; no helper process started"
+    }
+  },
+  "buttonColorUnification": {
+    "userInstruction": "診断ボタンを他記事と統一する．直前のsecondary化指示を撤回．",
+    "priorSha256": {
+      "frontend\\site\\pages\\subsidies.html": "7d34173f6637915cc452acf2ffc28ad818f2c0df1c765b4d70cb7f2d0ff3e29e",
+      "frontend\\site\\articles\\src\\article-bibliography.json": "5808b58b42b27c706e75265e86e75241ee03f7274348e51de8041cc3d90a7af2",
+      "frontend\\site\\articles\\styles\\guide-chapters.css": "2383f0a5e45ee5a5a967e3d87fb9700aa13521177010809f446e34ab22bdf4d2",
+      "frontend\\data\\input\\public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91"
+    },
+    "change": "subsidies診断リンクをarticle-action__linkへ戻し，専用secondary CSSを削除．画面設計MDの既存CTA色規則に診断開始は主従を問わず共通緑塗り・白文字と追記．",
+    "qa": "PC1280/360実画面PASS．背景#008653・白文字を確認．文書幅1265/345，診断先../simulator/維持．hoverは既存共通#007447を継承．タブ閉鎖・viewportreset済み．",
+    "independentReview": "preceding content/card review retained for unchanged scope; this small color correction self-checked",
+    "deployment": "none"
+  },
+  "cardTopSpacing": {
+    "change": "#guide-article .article-action-stack__copy h4 margin-top:0．通常本文h4は変更なし．",
+    "selfQA": "PC1280/360で診断・見積もりカードを目視，両見出し上margin0px，緑塗り診断色維持，横幅1265/345．",
+    "scope": "収支記事はguide-chapters.cssを読み込まず対象外．他の現行guide記事に対象カードh4なし．",
+    "cleanup": "tab closed; viewport reset; shared 5173 retained",
+    "deployment": "none"
+  },
+  "applicationFlowUpdate": {
+    "previousSha256": {
+      "frontend\\site\\pages\\subsidies.html": "349f7c1615df32d4f9433e27b81d67eb4c628fa9ae78b4ec3f08a1e247f036d3",
+      "frontend\\site\\articles\\src\\article-bibliography.json": "5808b58b42b27c706e75265e86e75241ee03f7274348e51de8041cc3d90a7af2",
+      "frontend\\site\\articles\\styles\\guide-chapters.css": "a15b2e6c69b288b1680a43cd79b11d4f40419a7e2f9dbed70bc8d1eac9d2e843",
+      "frontend\\data\\input\\public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+      "frontend\\site\\docs\\画面設計.md": "a3e7993b84967ddae5cc4056393277ffeddd37fc2bf9c4627796f1c528769055"
+    },
+    "scope": "申請5手順を意味的olと限定CSSの縦型フローに変更．地域例を自然な表現へ，商品名の容量をカタログに記載されたパネル容量へ．",
+    "static": "PASS: original five step paragraphs and order unchanged; contract timing and earlier-of deadline preserved; unique IDs",
+    "selfQA": "PC1280/360フロー全体の番号と縦線・本文の読み順と折返し目視PASS，文書幅1265/345．診断#008653，両カード見出しmargin-top0pxを両幅確認．360診断カード目視PASS．",
+    "scopeIsolation": "追加CSSは#application-flow配下のみ．他記事やカードへ適用なし．",
+    "cleanup": "temporary tab closed; viewport reset; shared 5173 retained",
+    "deployment": "none"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-22",
+  "basis_file": "qa/reports/electricity-sales-example-2026-09-21.json",
+  "data_version": "2026-09-21",
+  "schema_version": "11.17.0",
+  "public_data_sha256": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+  "solar_input": {
+    "prefectureCode": "13",
+    "monthlyElectricityBillYen": null,
+    "daytimeOccupancy": "almost_every_weekday",
+    "systemCapacityKw": 4,
+    "housingAge": "existing",
+    "equipmentPackage": "solar_only",
+    "roofOrientation": "south"
+  },
+  "battery_input": {
+    "prefectureCode": "13",
+    "monthlyElectricityBillYen": null,
+    "daytimeOccupancy": "almost_every_weekday",
+    "systemCapacityKw": 4,
+    "housingAge": "existing",
+    "equipmentPackage": "solar_plus_standard_battery",
+    "roofOrientation": "south",
+    "batteryCapacityKwh": 9.5
+  },
+  "same_input_except_battery": true,
+  "resolved_monthly_bill_both": 15467,
+  "first_year": {
+    "solar_savings": 56593,
+    "solar_sales": 68946,
+    "battery_savings": 118251,
+    "battery_sales": 16263,
+    "solar_sum": 125539,
+    "battery_sum": 134514,
+    "difference_yen": 8976,
+    "display_yen": 9000,
+    "rounding_note": "同条件のfirst_year_economic_benefit_yen総便益欄を正として比較：134515−125539=8976円．個別円丸め済み内訳の合算差8975円とは1円異なる．いずれも千円丸めで約9000円．",
+    "solar_economic_benefit_yen": 125539,
+    "battery_economic_benefit_yen": 134515,
+    "rounded_components_difference_yen": 8975
+  },
+  "additional_gross_cost": {
+    "solar": 1324400,
+    "battery": 2473900,
+    "difference_yen": 1149500,
+    "display_man_yen": 115,
+    "matches_existing_battery_cost": true
+  },
+  "before_sha256": "9a9299d675deb2c69485764373f245ed9c2f3a72018935b8f66c4fa85eae4200",
+  "after_sha256": "59462d2afc4f5f05aee54d5d1493e509bc8263507ebd962533d8d5dce1306340",
+  "two_paragraph_reverse_byte_identical": true,
+  "third_paragraph_other_body_figures_data_unchanged": true,
+  "existing_data_hash_verified": true,
+  "browser_qa": {
+    "target_section_visual_pass": true,
+    "horizontal_overflow": false,
+    "third_paragraph_preserved": true,
+    "tab_closed": true
+  },
+  "md_qa": "既存RECOMMEND2項目を指定の1項目に統合．重複なし・全段落数値化要求なし．"
+}

@@ -1,0 +1,122 @@
+{
+  "data_version": "2026-09-21",
+  "schema_version": "11.17.0",
+  "public_data_sha256": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+  "calculator": "site/simulator/src/calculator.js calculateEstimate / standard",
+  "basis": "Existing Tokyo article comparison inputs retained, not selected for positive profit. Article headline baseline excludes subsidy by subtracting calculated subsidy from profit; runtime data and calculator unchanged.",
+  "rounding": "Monthly headlines nearest 100 yen; installation/profit nearest 10000 yen; lifecycle cost 612000 yen =61.2 man-yen.",
+  "cases": [
+    {
+      "input": {
+        "prefectureCode": "13",
+        "monthlyElectricityBillYen": null,
+        "daytimeOccupancy": "almost_every_weekday",
+        "systemCapacityKw": 4,
+        "housingAge": "existing",
+        "equipmentPackage": "solar_only",
+        "roofOrientation": "south"
+      },
+      "resolved_monthly_bill": 15467,
+      "annual_self_consumed_kwh": 1813,
+      "annual_exported_kwh": 2873,
+      "results": {
+        "subsidy_yen": 840000,
+        "gross_installation_cost_yen": 1324400,
+        "solar_installation_cost_yen": 1324400,
+        "battery_installation_cost_yen": 0,
+        "net_initial_outlay_yen": 484400,
+        "initial_cost_yen": 484400,
+        "first_year_electricity_savings_yen": 56593,
+        "first_year_sales_income_yen": 68946,
+        "first_year_economic_benefit_yen": 125539,
+        "total_electricity_savings_yen": 2094799,
+        "total_sales_income_yen": 861588,
+        "total_revenue_yen": 2956387,
+        "total_maintenance_cost_yen": 228000,
+        "total_replacement_cost_yen": 384000,
+        "total_battery_replacement_cost_yen": 0,
+        "total_maintenance_and_replacement_cost_yen": 612000,
+        "profit_yen": 1859987,
+        "payback_year": 4
+      },
+      "article_no_subsidy_profit_yen": 1019987,
+      "first_year_monthly_savings_yen": 4716.083333333333,
+      "first_year_monthly_sales_yen": 5745.5
+    },
+    {
+      "input": {
+        "prefectureCode": "13",
+        "monthlyElectricityBillYen": null,
+        "daytimeOccupancy": "almost_never",
+        "systemCapacityKw": 4,
+        "housingAge": "existing",
+        "equipmentPackage": "solar_only",
+        "roofOrientation": "south"
+      },
+      "resolved_monthly_bill": 15467,
+      "annual_self_consumed_kwh": 1722,
+      "annual_exported_kwh": 2964,
+      "results": {
+        "subsidy_yen": 840000,
+        "gross_installation_cost_yen": 1324400,
+        "solar_installation_cost_yen": 1324400,
+        "battery_installation_cost_yen": 0,
+        "net_initial_outlay_yen": 484400,
+        "initial_cost_yen": 484400,
+        "first_year_electricity_savings_yen": 53736,
+        "first_year_sales_income_yen": 71143,
+        "first_year_economic_benefit_yen": 124879,
+        "total_electricity_savings_yen": 1988722,
+        "total_sales_income_yen": 890257,
+        "total_revenue_yen": 2878979,
+        "total_maintenance_cost_yen": 228000,
+        "total_replacement_cost_yen": 384000,
+        "total_battery_replacement_cost_yen": 0,
+        "total_maintenance_and_replacement_cost_yen": 612000,
+        "profit_yen": 1782579,
+        "payback_year": 4
+      },
+      "article_no_subsidy_profit_yen": 942579,
+      "first_year_monthly_savings_yen": 4478,
+      "first_year_monthly_sales_yen": 5928.583333333333
+    },
+    {
+      "input": {
+        "prefectureCode": "13",
+        "monthlyElectricityBillYen": null,
+        "daytimeOccupancy": "almost_every_weekday",
+        "systemCapacityKw": 4,
+        "housingAge": "existing",
+        "equipmentPackage": "solar_plus_standard_battery",
+        "roofOrientation": "south",
+        "batteryCapacityKwh": 9.5
+      },
+      "resolved_monthly_bill": 15467,
+      "annual_self_consumed_kwh": 3789,
+      "annual_exported_kwh": 678,
+      "results": {
+        "subsidy_yen": 1890000,
+        "gross_installation_cost_yen": 2473900,
+        "solar_installation_cost_yen": 1324400,
+        "battery_installation_cost_yen": 1149500,
+        "net_initial_outlay_yen": 583900,
+        "initial_cost_yen": 583900,
+        "first_year_electricity_savings_yen": 118251,
+        "first_year_sales_income_yen": 16263,
+        "first_year_economic_benefit_yen": 134515,
+        "total_electricity_savings_yen": 3717325,
+        "total_sales_income_yen": 327766,
+        "total_revenue_yen": 4045091,
+        "total_maintenance_cost_yen": 228000,
+        "total_replacement_cost_yen": 384000,
+        "total_battery_replacement_cost_yen": 0,
+        "total_maintenance_and_replacement_cost_yen": 612000,
+        "profit_yen": 2849191,
+        "payback_year": 5
+      },
+      "article_no_subsidy_profit_yen": 959191,
+      "first_year_monthly_savings_yen": 9854.25,
+      "first_year_monthly_sales_yen": 1355.25
+    }
+  ]
+}

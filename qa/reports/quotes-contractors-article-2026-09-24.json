@@ -1,0 +1,160 @@
+{
+  "date": "2026-09-24",
+  "article": "quotes-contractors",
+  "classification": "中核記事",
+  "status": "User-approved additional three edits self-QA complete; manager handoff pending; unpublished",
+  "sha256": {
+    "frontend\\site\\pages\\quotes-contractors.html": "5123e8dd3e720ecdc887ae3da5edfbdc7b0cde968d8c26a2dece8f1059f3c0cd",
+    "frontend\\site\\articles\\src\\article-bibliography.json": "e388069f8b51d5dd3aa886f0962b55b110ec41b355a64db9581747d48b3e4dc7",
+    "frontend\\site\\articles\\styles\\guide-chapters.css": "bd0d7d6d8914f1d6bf3ab4662528363b7bbe3ae19f0ad68f6e2aab1c0fe05450",
+    "frontend\\data\\input\\public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91"
+  },
+  "scope": "依頼条件，現地調査，紹介サービス，比較表，収支前提，施工会社・保証，契約前確認の4章9中見出し．費用相場・補助金詳細は既存記事へ分担．",
+  "static": "PASS: local assets and cross-page fragments, unique IDs including contract-ready, H2/H3 TOC labels, citation/section bibliography correspondence",
+  "existingTests": {
+    "command": "node --test --test-name-pattern=ローカルリンク|同一ページ内のアンカー|動的出典ID|共通見積もりバー qa/tests/site-integrity.test.js",
+    "selected": 4,
+    "pass": 4,
+    "fail": 0,
+    "limits": "No whole-site PASS claim; known unrelated duplicate IDs / legacy cross-page fragment failures from previous task are outside this scope"
+  },
+  "browser": {
+    "widths": [
+      1280,
+      360
+    ],
+    "documentWidths": [
+      1265,
+      345
+    ],
+    "checks": [
+      "TOC initial closed; Enter and Space operate; comparison anchor reaches target",
+      "PC: comparison table and hypothetical example, both CTA cards, contract checklist",
+      "360: comparison table, warranty and contract conditions, reference footer, both CTA cards",
+      "diagnosis navigation to /simulator/ confirmed; quotes remain disabled/preparing",
+      "diagnosis background #008653 and white type; card heading margin-top 0px",
+      "no horizontal overflow; broken images 0; observed console errors 0"
+    ],
+    "cleanup": "temporary tab closed; viewport reset; existing shared 5173 preserved"
+  },
+  "sources": [
+    {
+      "id": "article-source-24",
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/hanbaikijun_pamphlet.pdf",
+      "version": "2023年5月5版，旧2020版から更新",
+      "sections": "2-3現地調査，3-2商談，3-3契約（PDF通算p2–3）",
+      "claims": "現地調査後の図面と見積，発電推計非保証，費用と保証範囲，ローン総額，契約書面再確認"
+    },
+    {
+      "id": "article-source-25",
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/hajimeyou_leaflet_2305.pdf",
+      "version": "2023年5月版",
+      "sections": "信頼できる販売・施工業者，トラブルの避け方",
+      "claims": "複数見積，要望・内訳・施工体制・保証比較，契約を急がせる勧誘への注意"
+    },
+    {
+      "id": "caa-door-to-door-sales",
+      "url": "https://www.no-trouble.caa.go.jp/what/doortodoorsales/",
+      "checked": "2026-09-24",
+      "sections": "民事ルール6，適用除外",
+      "claims": "法対象の訪問販売で法定書面受領から原則8日以内．全契約へ一般化しない"
+    },
+    {
+      "id": "caa-consumer-hotline",
+      "url": "https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/",
+      "checked": "2026-09-24",
+      "claims": "188は最寄りの消費生活相談窓口を案内"
+    }
+  ],
+  "numbers": [
+    {
+      "value": "4 kW前後",
+      "basis": "依頼文の仮例．容量の推奨ではないと明記"
+    },
+    {
+      "value": "130万円 / 115万円 + 20万円 = 135万円 / 差5万円",
+      "basis": "説明用仮例．設備・保証等が同じ，足場範囲だけ違う条件．実際の相場ではない"
+    },
+    {
+      "value": "8日以内 / 188",
+      "basis": "消費者庁一次資料，上記条件付き"
+    }
+  ],
+  "resolvedFindings": [
+    "無料サービスの一律断定削除",
+    "現地調査と紹介サービス規約を分離",
+    "保証比較と契約書面一致に役割分担",
+    "転送FAQと点検商法の引用を外しCAA現行ページへ",
+    "補助金リンク文言を契約前へ合わせた"
+  ],
+  "openItems": [
+    "user final draft review; publication requires separate authorization"
+  ],
+  "publicData": "unchanged 11.17.0 / 2026-09-21",
+  "deployment": "No build, commit, push or publish",
+  "independentReview": {
+    "reviewer": "ハレトク統括",
+    "date": "2026-09-24",
+    "result": "PASS for this article; no unresolved MUST findings",
+    "version": "HTML, bibliography and CSS hashes matched sha256 above",
+    "content": "Read complete revised article and rendered emphasis/citations; hypothetical 115+20=135 and difference5 checked; 4kW explicitly illustrative; scope and four chapter responsibilities consistent",
+    "primarySources": [
+      "JPEA 2023 May 5th edition: site survey/quote drawings, generation estimate not guarantee, costs/warranties/finance and contract confirmation",
+      "JPEA 2023 leaflet: multiple quotes, itemized costs, installer checks, pressure sales",
+      "CAA door-to-door sales: statutory document receipt, 8-day period and applicability limits",
+      "CAA hotline: 188 directs to local consumer consultation"
+    ],
+    "visual": {
+      "widths": [
+        1280,
+        360
+      ],
+      "documentWidths": [
+        1265,
+        345
+      ],
+      "checks": [
+        "PC comparison table, hypothetical price example and emphasis",
+        "360 comparison table, contract checklist, diagnosis green card and disabled advertising quote card",
+        "No horizontal overflow; observed broken images0 and console errors0"
+      ],
+      "limits": "Representative sections independently inspected; navigation/TOC operations use frontend self-QA; not every scroll position or external service"
+    },
+    "cleanup": "Viewport reset; user tab retained at article start; shared5173 retained; no helper process started"
+  },
+  "followUpRevision": {
+    "date": "2026-09-24",
+    "scope": [
+      "Hypothetical price example replaced with 3-column accessible table; nearby equal-equipment/warranty and non-market-example note",
+      "First-use short explanations: power conditioner, self-consumption, grid connection",
+      "Footer advertising disclosure rewritten in present tense"
+    ],
+    "previousSha256": {
+      "frontend\\site\\pages\\quotes-contractors.html": "a85f6742b028a9956261bebb68402a9885d8fc9acf9f7f16f9533007d5206a90",
+      "frontend\\site\\articles\\src\\article-bibliography.json": "e388069f8b51d5dd3aa886f0962b55b110ec41b355a64db9581747d48b3e4dc7",
+      "frontend\\site\\articles\\styles\\guide-chapters.css": "0a66546de9d001519f713a4f3b42245a250f4e878343897617ddbc4e90ccee38",
+      "frontend\\data\\input\\public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91"
+    },
+    "selfQA": {
+      "result": "PASS",
+      "viewports": [
+        1280,
+        360
+      ],
+      "documentWidths": [
+        1265,
+        345
+      ],
+      "checks": [
+        "PC and 360 price table, nearby notes and conclusion visually inspected",
+        "360 footer visually inspected; all three definitions confirmed in rendered DOM",
+        "Column headers and row headers verified; hypothetical total 115+20=135 and difference 5",
+        "Diagnosis green rgb(0,134,83), card h4 margin-top 0px retained",
+        "No horizontal overflow, browser error logs empty",
+        "Public data hash unchanged; no official conditions or bibliography changes"
+      ]
+    },
+    "cleanup": "Temporary tab closed; viewport reset; shared 5173 retained",
+    "independentReview": "pending; previous review remains applicable to unchanged scope"
+  }
+}

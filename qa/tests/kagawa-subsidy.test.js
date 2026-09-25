@@ -1,0 +1,19 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {calculateEstimate} from '../../site/simulator/src/calculator.js';
+import {conciseKagawaAssumption,nonInclusionReason,noncashBenefitDescription} from '../../site/simulator/src/subsidy-presentation.js';
+import {applicationStatusLabel} from '../../site/simulator/src/municipal-information.js';
+const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'37',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+test('香川17自治体30規則16採用を同期する',()=>{assert.equal(data.municipalities.filter(p=>p.prefecture_code==='37').length,17);const rows=data.diagnostic_subsidy_programs.filter(p=>/^kagawa-\d{5}-/.test(p.id));assert.equal(rows.length,30);assert.equal(rows.filter(p=>p.machine_rule==='kansai_municipal_formula').length,16);});
+test('丸亀5kWの住宅別上限と別B8万円を維持する',()=>{for(const [housingAge,pv] of [['new',80000],['existing',100000]]){assert.equal(standard('37202',{housingAge,systemCapacityKw:5,equipmentPackage:'solar_only'}).municipality_amount_yen,pv);assert.equal(standard('37202',{housingAge,systemCapacityKw:5}).municipality_amount_yen,pv+80000);}});
+test('善通寺はPV10kWで蓄電池も非算入とし，税抜機器費を表示する',()=>{for(const housingAge of ['existing','new']){assert.ok(standard('37204',{housingAge,systemCapacityKw:9.995}).municipality_amount_yen>0);assert.equal(standard('37204',{housingAge,systemCapacityKw:10}).municipality_amount_yen,0);}for(const code of ['37204','37406'])assert.match(conciseKagawaAssumption({id:`kagawa-${code}-solar_battery-2026`,included:true}),/税抜機器費/);});
+test('さぬき16万円は商品券額面の経済便益で現金と区別する',()=>{const b=standard('37206');assert.equal(b.municipality_amount_yen,160000);const row=b.included_programs.find(p=>p.id==='kagawa-37206-solar_battery-2026');assert.match(noncashBenefitDescription(row),/商品券.*100％.*経済便益.*現金の給付ではありません/);});
+test('三豊・琴平は待機成立仮定で算入し交付未確約を明示する',()=>{for(const [code,amount,pv] of [['37208',180000,80000],['37403',200000,100000]]){for(const housingAge of ['new','existing']){const b=standard(code,{housingAge});assert.equal(b.municipality_amount_yen,amount);assert.equal(standard(code,{housingAge,equipmentPackage:'solar_only'}).municipality_amount_yen,pv);const row=b.included_programs.find(p=>p.id===`kagawa-${code}-solar_battery-2026`);assert.equal(applicationStatusLabel(row),'キャンセル待ち受付中');const text=conciseKagawaAssumption({...row,included:true});assert.match(text,/待機が成立する想定.*交付は確約されていません/);assert.doesNotMatch(text,/未確定|非算入/);}}});
+test('直島はB10kWh未満の単位仮定とPV条件を分け，琴平改修は候補を維持する',()=>{for(const housingAge of ['new','existing']){for(const [batteryCapacityKwh,amount] of [[9.5,314000],[10,200000],[10.5,200000]]){const b=standard('37364',{housingAge,batteryCapacityKwh});assert.equal(b.municipality_amount_yen,amount);if(batteryCapacityKwh>=10)assert.match(nonInclusionReason(b.excluded_programs.find(p=>p.id.includes('battery_capacity'))),/10kWh未満.*太陽光も10kW未満.*公式原文の訂正ではありません/);}
+ assert.equal(standard('37364',{housingAge,systemCapacityKw:10}).municipality_amount_yen,0);}
+ const row=standard('37364').included_programs.find(p=>p.id.includes('battery_capacity'));const t=conciseKagawaAssumption({...row,included:true});assert.match(t,/公式原文.*10kW未満.*仮定.*10kWh未満.*太陽光のkWには適用しません/);assert.doesNotMatch(t,/対応を確認できない/);
+ const pv=conciseKagawaAssumption({id:'kagawa-37364-solar-2026',included:true});assert.doesNotMatch(pv,/太陽光分だけを算入/);
+ const r=standard('37403').candidate_programs.find(p=>p.id.includes('reform_equipment'));assert.match(nonInclusionReason(r),/2026年度.*失効.*年度.*太陽光・蓄電池/);
+});

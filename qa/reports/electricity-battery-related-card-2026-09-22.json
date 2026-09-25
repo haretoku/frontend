@@ -1,0 +1,28 @@
+{
+  "status": "limited_pass",
+  "article_sha256": "35774f428539af8fd0a6a56de0ffff98cf1d026df6454991807f13a031e92a9f",
+  "scope": "battery-use and removal of overview conclusion; marker moved to existing overview footer; scoped reusable card CSS and design rules",
+  "paragraph_count": 3,
+  "links": [
+    "#battery-profit",
+    "disaster.html"
+  ],
+  "pc": {
+    "width": 1280,
+    "overflow": 0,
+    "link_min_height_px": 44,
+    "bar_before_marker": "hidden",
+    "bar_after_marker": "visible"
+  },
+  "mobile": {
+    "width": 360,
+    "overflow": 0,
+    "link_height_px": 65.58,
+    "keyboard_focus": "visible on related article link",
+    "bar_before_marker": "hidden",
+    "bar_after_marker": "visible",
+    "button_disabled": true
+  },
+  "navigation": "internal battery-profit and disaster link destinations verified",
+  "cleanup": "tabs closed; viewport reset; no new helper processes; shared 5173 retained"
+}

@@ -1,0 +1,32 @@
+{
+  "before_sha256": "766b684ebf2d76582f39b5239c100636fdfa2ef54879d80dd65429c6a7a351e7",
+  "after_sha256": "9ff268d6b15500f706df6240602a95b5547ffb18f564ea6c507e1b454aa44875",
+  "changes": [
+    [
+      "売る：<span class=\"energy-routing__unit\">24円／kWh</span><small>〈最初の4年間〉</small>",
+      "売る：<span class=\"energy-routing__unit\">8.3〜24円／kWh</span>"
+    ],
+    [
+      "売る場合が最初の4年間24円／kWhです．",
+      "売る場合がFIT期間中8.3〜24円／kWhです．"
+    ],
+    [
+      "自宅で使う単価は当サイトの東京都の試算条件．売電は2026年度認定の住宅用FITで，最初の4年間の単価です．",
+      "自宅で使う単価は当サイトの東京都の試算条件．売電は2026年度認定の住宅用FIT期間中の単価です．"
+    ]
+  ],
+  "reverse_changes_byte_identical": true,
+  "existing_citations_unchanged": 5,
+  "figure2_unchanged": true,
+  "browser_qa": {
+    "PC": 1280,
+    "mobile": 360,
+    "figure1_visual_pass": true,
+    "horizontal_overflow": false,
+    "all_five_citations_rendered": true,
+    "citation_css": "inline / visible / opacity 1 / positive rect height at both widths",
+    "sales_citation_screenshot_checked": true,
+    "tabs_closed": true,
+    "viewport_reset": true
+  }
+}

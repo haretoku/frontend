@@ -106,17 +106,17 @@ const htmlPaths = [
 ];
 
 function attributeValues(html, attribute) {
-  return [...html.matchAll(new RegExp(`${attribute}="([^"]+)"`, "g"))].map((match) => match[1]);
+  return [...html.matchAll(new RegExp(`(?:^|\\s)${attribute}="([^"]+)"`, "g"))].map((match) => match[1]);
 }
 
 test("主結果は1万円未満を千円単位の概算とし，0円と1万円境界を区別する", () => {
-  assert.deepEqual(decisionAmountParts(1_086), { amount: "約1,000円", outcome: "トク" });
-  assert.deepEqual(decisionAmountParts(-1_086), { amount: "約1,000円", outcome: "損" });
-  assert.deepEqual(decisionAmountParts(9_999), { amount: "約10,000円", outcome: "トク" });
-  assert.deepEqual(decisionAmountParts(-9_999), { amount: "約10,000円", outcome: "損" });
+  assert.deepEqual(decisionAmountParts(1_086), { amount: "1,000円", outcome: "トク" });
+  assert.deepEqual(decisionAmountParts(-1_086), { amount: "1,000円", outcome: "損" });
+  assert.deepEqual(decisionAmountParts(9_999), { amount: "10,000円", outcome: "トク" });
+  assert.deepEqual(decisionAmountParts(-9_999), { amount: "10,000円", outcome: "損" });
   assert.deepEqual(decisionAmountParts(0), { amount: "0円", outcome: "" });
-  assert.deepEqual(decisionAmountParts(10_000), { amount: "約1万円", outcome: "トク" });
-  assert.deepEqual(decisionAmountParts(-10_000), { amount: "約1万円", outcome: "損" });
+  assert.deepEqual(decisionAmountParts(10_000), { amount: "1万円", outcome: "トク" });
+  assert.deepEqual(decisionAmountParts(-10_000), { amount: "1万円", outcome: "損" });
 });
 
 async function localTarget(pagePath, reference) {
@@ -247,7 +247,7 @@ test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在�
   }
 });
 
-test("はれトクガイド一覧がメタデータから一般記事5件を4分類の主一覧に重複なく掲載する", async () => {
+test("はれトクガイド一覧がメタデータから一般記事4件を4分類の主一覧に重複なく掲載する", async () => {
   const html = await readFile(resolve(siteRoot, "solar/index.html"), "utf8");
   const articles = JSON.parse(await readFile(resolve(siteRoot, "solar/data/articles.json"), "utf8"));
   const script = await readFile(resolve(siteRoot, "solar/src/guides.js"), "utf8");
@@ -259,22 +259,21 @@ test("はれトクガイド一覧がメタデータから一般記事5件を4分
   assert.match(html, /src="src\/guides\.js"/);
   assert.doesNotMatch(main, /data-featured-guides/);
   assert.doesNotMatch(main, /data-safety-guides/);
-  assert.match(main, /<h2 id="guide-library-title">記事一覧<\/h2>/);
-  assert.equal(articles.length, 5);
+  assert.match(main, /<h1 id="guide-library-title"[^>]*>/);
+  assert.equal(articles.length, 4);
   assert.equal(articles.filter((article) => Number.isInteger(article.featuredOrder)).length, 3);
   for (const [title, target, articleTitle = title] of [
     ["太陽光の収支は，何で決まる？", "../pages/electricity-sales.html"],
-    ["太陽光の設置・維持に，何がかかる？", "../pages/costs-maintenance.html", "表示額以外に，何がかかる？"],
     ["補助金は，どう探してどう申請する？", "../pages/subsidies.html"],
     ["太陽光の見積もりは，何を比べる？", "../pages/quotes-contractors.html"],
-    ["停電時，太陽光だけで何ができる？", "../pages/disaster.html"]
+    ["停電時，太陽光・蓄電池で何ができる？", "../pages/disaster.html"]
   ]) {
     const article = articles.find((candidate) => candidate.title === title);
     assert.equal(article?.href, target, `ガイド記事がありません：${title}`);
     const targetPath = await localTarget(resolve(siteRoot, "solar/index.html"), target);
     await assert.doesNotReject(access(targetPath));
     const targetHtml = await readFile(targetPath, "utf8");
-    assert.ok(targetHtml.includes(`<h1>${articleTitle}</h1>`), `記事タイトルが一致しません：${title}`);
+    assert.ok(targetHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, "") === articleTitle, `記事タイトルが一致しません：${title}`);
     await assert.doesNotReject(access(await localTarget(resolve(siteRoot, "solar/index.html"), article.image.src)));
     assert.ok(article.image.width > 0 && article.image.height > 0);
     assert.ok(article.image.alt.length > 0);
@@ -287,7 +286,7 @@ test("はれトクガイド一覧がメタデータから一般記事5件を4分
     ["electricity-sales", "subsidies", "quotes-contractors"]
   );
   assert.doesNotMatch(JSON.stringify(articles), /calculation-method\.html|policy\.html/);
-  assert.match(main, /href="\.\.\/simulator\/"><span class="guide-diagnosis__label">はれ<span class="brand-term">トク<\/span>診断へ<\/span>/);
+  assert.match(main, /article-action__link[\s\S]*診断を始める/);
   assert.match(script, /const categoryOrder = \["economics", "subsidies", "quotes", "safety"\]/);
   assert.match(script, /button\.setAttribute\("aria-pressed"/);
   assert.match(script, /link\.className = "guide-article-card"/);
@@ -296,8 +295,9 @@ test("はれトクガイド一覧がメタデータから一般記事5件を4分
   assert.match(css, /@media \(max-width: 62rem\)[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(css, /@media \(max-width: 40rem\)[\s\S]*grid-template-columns: minmax\(0, 1fr\)/);
   assert.match(css, /\.guide-article-card:focus-visible/);
-  assert.match(css, /\.guide-diagnosis__link \{[\s\S]*color: #fff;[\s\S]*background: var\(--color-primary-dark\);/);
-  assert.match(css, /\.guide-diagnosis__label \{[\s\S]*white-space: nowrap;/);
+  assert.match(html, /articles\/styles\/article\.css/);
+  assert.match(main, /article-action-stack__row--internal/);
+  assert.match(css, /\.guide-title-term \{ white-space: nowrap;/);
 });
 
 test("フォーム部品にラベルと入力制約がある", async () => {
@@ -330,10 +330,15 @@ test("フォーム部品にラベルと入力制約がある", async () => {
   );
   assert.match(analysisHtml, /data-calculator-collapsed[^>]*hidden/);
   assert.match(analysisHtml, /data-change-conditions/);
-  assert.match(analysisHtml, /data-cancel-conditions[^>]*hidden/);
-  assert.match(analysisHtml, /id="analysis-title" class="analysis-page-title">はれ<span class="brand-word">トク<\/span>診断<\/h1>/);
-  assert.match(analysisHtml, /data-change-conditions[^>]*>変更/);
-  assert.match(analysisHtml, /<h2 id="calculator-title">あなたの条件で診断する<\/h2>/);
+  assert.equal((analysisHtml.match(/class="text-button condition-edit-button"/g) ?? []).length, 3);
+  assert.match(analysisHtml, /data-edit-housing[^>]*aria-expanded="false"[^>]*aria-controls="housing-conditions-editor"/);
+  assert.match(analysisHtml, /<label for="equipment-package">設備構成<\/label>/);
+  assert.doesNotMatch(analysisHtml, /data-close-equipment|data-close-conditions|<summary aria-label="住宅/);
+  assert.match(analysisHtml, /data-change-conditions[^>]*aria-expanded="true"[^>]*aria-controls="basic-conditions-editor"/);
+  assert.match(analysisHtml, /id="analysis-title" class="analysis-page-title">(?:<svg[^>]*>[\s\S]*?<\/svg>)?はれ<span class="brand-word">トク<\/span>診断<\/h1>/);
+  assert.match(analysisHtml, /data-change-conditions[^>]*>閉じる/);
+  assert.doesNotMatch(analysisHtml, /id="calculator-title"|id="calculate-button"/);
+  assert.match(analysisHtml, /ここに診断結果が表示されます．/);
   assert.doesNotMatch(analysisHtml, /太陽光の30年間採算を診断/);
   assert.doesNotMatch(analysisHtml, /地域データによる概算です．結果を先に示し/);
   assert.match(analysisHtml, /data-detail-condition-summary>選択中の条件/);
@@ -356,7 +361,7 @@ test("フォーム部品にラベルと入力制約がある", async () => {
   assert.doesNotMatch(analysisHtml, /id="battery-capacity"[^>]*(?:min|max|step|value)=/);
   assert.doesNotMatch(analysisHtml, /ほぼ毎日いる|週3～4日いる|週1～2日いる|ほとんどいない/);
   assert.doesNotMatch(analysisHtml, /見積容量|見積設置費|年間予想発電量/);
-  assert.match(analysisHtml, /condition-toggle-title">住宅・生活条件/);
+  assert.match(analysisHtml, /id="housing-conditions-title">住宅・生活条件/);
   assert.doesNotMatch(analysisHtml, /<select disabled>/);
   assert.doesNotMatch(analysisHtml, /data-result-condition/);
   assert.match(analysisHtml, /id="municipality"[^>]*name="municipality_code"/);
@@ -389,7 +394,7 @@ test("フォーム部品にラベルと入力制約がある", async () => {
   assert.doesNotMatch(analysisScript, /standard: "電気料金上昇/);
 });
 
-test("診断は条件と結果の分析領域，見積もり，制度・停電の情報領域の順で見積もりは固定バーへ集約する", async () => {
+test("診断は条件と結果の分析領域に制度詳細を置き見積もりは固定バーへ集約する", async () => {
   const html = await readFile(resolve(siteRoot, "simulator/index.html"), "utf8");
   const app = await readFile(resolve(siteRoot, "simulator/src/app.js"), "utf8");
   const analysisCss = await readFile(resolve(siteRoot, "simulator/styles/analysis.css"), "utf8");
@@ -399,7 +404,7 @@ test("診断は条件と結果の分析領域，見積もり，制度・停電�
   assert.equal((html.match(/class="advertising-label"/g) ?? []).length, 0);
   assert.doesNotMatch(html, /affiliate-button/);
   assert.match(html, /shared\/styles\/fixed-quote-bar.css/);
-  const order = ["analysis-workbench", "panel cashflow-panel", "result-disclosures", "municipal-subsidy", "analysis-information", "loss-guidance"].map(token => html.indexOf(`class="${token}`));
+  const order = ["analysis-workbench", "panel cashflow-panel", "result-disclosures", "municipal-subsidy"].map(token => html.indexOf(`class="${token}`));
   assert.ok(order.every((position, index) => position >= 0 && (index === 0 || position > order[index - 1])));
   assert.doesNotMatch(html, /data-route-source="analysis-affiliate"/);
   assert.equal((html.match(/<details[^>]*class="breakdown-disclosure"/g) ?? []).length, 2);
@@ -420,13 +425,14 @@ test("診断は条件と結果の分析領域，見積もり，制度・停電�
   assert.match(app, /params\.get\("daytimeOccupancy"\)/);
   assert.match(app, /searchParams\.set\("daytimeOccupancy"/);
   assert.match(app, /daytimeOccupancy: selectedDaytimeOccupancy\(\)/);
-  assert.match(app, /日中の在宅状況：/);
+  assert.match(app, /平日昼間の在宅状況：/);
   assert.match(app, /unknown_standard.*標準設定/);
   assert.match(app, /paybackIntersection/);
   assert.match(app, /zeroIntersections/);
   assert.doesNotMatch(app, /cashflow-chart__payback-label/);
   assert.match(app, /selectedScenarioId/);
-  assert.match(app, /cancelConditionChanges/);
+  assert.match(app, /applyLiveConditions/);
+  assert.doesNotMatch(app, /control\.inert = editing|equipmentDraft|cancelConditionChanges/);
   assert.match(html, /収支の内訳/);
   assert.doesNotMatch(html, /計算の前提・根拠を見る/);
   assert.doesNotMatch(html, /1年目の経済効果/);
@@ -467,7 +473,7 @@ test("診断は条件と結果の分析領域，見積もり，制度・停電�
   assert.match(app, /classList\.toggle\(`cashflow-amount--\$\{name\}`/);
 
   assert.match(app, /const profitConfirmed = Number\.isFinite\(selectedScenario\.profit_yen\)/);
-  assert.doesNotMatch(html, /data-loss-guidance hidden/);
+  assert.doesNotMatch(html, /data-loss-guidance|class="analysis-information"/);
   assert.doesNotMatch(app, /elements\.lossGuidance\.hidden/);
   assert.match(html, /家庭の使用量/);
   assert.match(html, /data-result-self-consumption-rate/);
@@ -520,7 +526,7 @@ test("診断は条件と結果の分析領域，見積もり，制度・停電�
   assert.match(screenDesign, /蓄電池の運転モード，既設太陽光への後付けおよび蓄電池単体は対象外/);
   assert.match(screenDesign, /frontendで両比率を再計算しない/);
   assert.match(html, /買電量/);
-  assert.doesNotMatch(html, /data-loss-guidance[^>]*hidden/);
+  assert.doesNotMatch(html, /data-loss-guidance/);
   assert.doesNotMatch(html, /ご自宅の設備と工事費を確かめる/);
   assert.doesNotMatch(html, /屋根に合う設備と工事費を見積もりで確認し，診断結果と比べましょう．/);
   assert.doesNotMatch(html, /data-result-subsidy-source/);
@@ -538,41 +544,32 @@ test("診断は条件と結果の分析領域，見積もり，制度・停電�
   assert.doesNotMatch(html, /diagnostic-quote-context/);
 });
 
-test("トップは診断を主導線，広告を副導線として1か所だけ持つ", async () => {
+test("トップは診断を主導線として説明を集約し記事4件へつなぐ", async () => {
   const html = (await readFile(resolve(siteRoot, "index.html"), "utf8")).replace(/<span class="text-chunk">([^<]+)<\/span>/g, "$1");
   const css = await readFile(resolve(siteRoot, "shared/styles/main.css"), "utf8");
   assert.match(html, /data-route-source="top-analysis"/);
-  assert.equal((html.match(/data-route-source="top-affiliate"/g) ?? []).length, 1);
-  assert.equal((html.match(/広告・アフィリエイトを含みます/g) ?? []).length, 1);
-  assert.match(html, /地域と電気代から，太陽光の導入費と30年間の収支をかんたんに概算できます．/);
+  assert.doesNotMatch(html, /hero-journey|top-affiliate|site-state page-width|guide-card--featured/);
+  assert.match(html, /設置・維持費と補助金を含めて試算します．実際の費用は見積もりで確定します．/);
+  assert.equal((html.match(/class="proof-check"[^>]*aria-hidden="true"/g) ?? []).length, 3);
+  assert.match(html, /地域と電気代から，太陽光の導入費と(?:<span class="text-chunk">)?30年間の収支をかんたんに概算できます．/);
   assert.doesNotMatch(html, /得にならない場合も，結果をそのまま表示/);
   assert.match(html, /<span class="hero-title__chunk">太陽光，<\/span><span class="hero-title__chunk">結局いくら<span class="brand-word">トク<\/span>？<\/span>/);
-  assert.ok(html.indexOf("data-route-source=\"top-analysis\"") < html.indexOf("data-route-source=\"top-affiliate\""));
   assert.doesNotMatch(html, /top-estimate-route|hero-steps/);
-  assert.match(html, /class="hero-journey__link hero-journey__link--unavailable"[^>]*disabled/);
-  assert.match(html, /屋根や工事条件に合わせて，設置する設備と導入費用を確定させます．/);
   assert.doesNotMatch(html, /無料見積もりで詳しく確認|なっトクしたら，無料見積もり/);
-  assert.match(html, /disabled>無料見積もり（準備中）<\/button>/);
   assert.doesNotMatch(html, /affiliate-button__brand-word/);
-  assert.match(html, /登録不要<\/li><li>氏名・番地の入力なし<\/li><li>無料で概算<\/li>/);
-  assert.match(html, /<figure class="hero__motif">\s*<img src="shared\/assets\/haretoku-balance-motif\.png" width="1616" height="973" alt="太陽光パネルと工具・硬貨を載せた天秤">\s*<\/figure>/);
+  assert.match(html, /src="shared\/assets\/hero-solar-low-plants\.webp" width="1536" height="1024"/);
+  assert.match(html, /src="shared\/assets\/hero-haretoku-chart-selected\.svg"/);
   assert.ok(html.indexOf('class="hero__proof"') < html.indexOf('class="hero__motif"'));
   assert.ok(html.indexOf('class="hero__motif"') < html.indexOf('class="calculator"'));
-  assert.match(css, /\.hero__motif \{ width: min\(100%, 20rem\); margin: clamp\(1\.4rem, 3vw, 2rem\) auto 0; \}/);
+  assert.match(css, /\.hero__motif \{ width: min\(100%, 32rem\); margin: clamp\(1\.4rem, 3vw, 2rem\) auto 0; \}/);
   assert.doesNotMatch(html, /hero__motif-labels|得られる効果|かかる費用/);
-  assert.match(css, /@media \(max-width: 40rem\) \{[\s\S]*\.hero__motif \{ display: none; \}/);
-  assert.match(css, /\.hero > \.calculator \.calculator__panel \{ border: 1px solid rgb\(18 63 49 \/ 18%\); border-left: 0\.38rem solid var\(--color-primary\); border-radius: 0\.8rem; \}/);
+  assert.match(css, /@media \(max-width: 40rem\) \{[\s\S]*\.hero__motif \{ width: min\(100%, 18rem\); margin-top: 1rem; \}/);
+  assert.match(css, /\.hero > \.calculator \.calculator__panel \{ border: 1px solid rgb\(18 63 49 \/ 18%\); border-left: 1px solid var\(--color-border\); border-radius: 0\.8rem; \}/);
   assert.match(css, /\.hero > \.calculator \.calculator__panel::before \{ content: none; \}/);
   assert.match(css, /\.primary-button \{[\s\S]*background: var\(--color-primary-dark\);/);
   assert.doesNotMatch(html, /<li>得にならない結果も表示<\/li>/);
-  const journey = html.match(/<ol class="hero-journey"[\s\S]*?<\/ol>/)[0];
-  assert.equal((journey.match(/<span class="hero-journey__number"/g) ?? []).length, 2);
-  assert.match(journey, /診断でわかること/);
-  assert.doesNotMatch(journey, /data-return-to-form/);
-  assert.doesNotMatch(journey, /↑|→|primary-button|affiliate-button/);
   assert.doesNotMatch(html, /蓄電池を付ける場合も比較できます/);
-  assert.doesNotMatch(journey, /見積もりは希望する方だけ/);
-  assert.match(html, /id="calculator-title">はれ<span class="brand-word">トク<\/span>診断/);
+  assert.match(html, /id="calculator-title">(?:<svg[^>]*>[\s\S]*?<\/svg>)?はれ<span class="brand-word">トク<\/span>診断/);
   assert.match(html, /pages\/calculation-method\.html">計算方法・使用データ<\/a>/);
   assert.match(html, /pages\/policy\.html">はれ<span class="brand-term">トク<\/span>の方針<\/a>/);
   assert.doesNotMatch(html, /class="trust-section/);
@@ -589,9 +586,10 @@ test("トップは診断を主導線，広告を副導線として1か所だけ�
   assert.match(html, /見積もりの頼み方と，費用・工事・保証を同じ条件で比べるポイントを確認/);
   assert.match(html, /<p class="guides-more"><a href="solar\/">すべての記事を見る/);
   assert.doesNotMatch(html, /を整理します/);
-  for (const imageName of ["guide-mechanics.webp", "guide-subsidy.webp", "guide-quotes.webp"]) {
-    assert.match(html, new RegExp(`<img src="shared/assets/${imageName.replace(".", "\\.")}" alt="" width="720" height="540" loading="lazy" decoding="async">`));
-  }
+  assert.match(html, /article-solar-economics-photo\.webp" alt="" width="1536" height="1024"/);
+  assert.match(html, /article-subsidies-application-photo\.webp" alt="" width="1536" height="1024"/);
+  assert.match(html, /article-quotes-explanation-photo\.webp/);
+  assert.match(html, /article-disaster-battery-photo\.webp/);
   for (const category of ["収支｜全国", "補助金｜全国｜2026年度", "見積もり｜全国", "災害への備え｜全国"]) {
     assert.match(html, new RegExp(`<span class="guide-card__category">${category}<\\/span>`));
   }
@@ -798,11 +796,11 @@ test('小内訳は未知数をゼロにせず，ゼロ・小額・万円を区�
  const base={total_electricity_savings_yen:100,total_sales_income_yen:200,gross_installation_cost_yen:250,total_maintenance_cost_yen:10,total_replacement_cost_yen:20,total_battery_replacement_cost_yen:5,subsidy_yen:0};
  assert.equal(conclusionBreakdown(base).net,15);
  for(const key of Object.keys(base)) { const parts=conclusionBreakdown({...base,[key]:null});assert.equal(parts.net,null); }
- assert.equal(compactYen(null),'未確定');assert.equal(compactYen(0),'0万円');assert.equal(compactYen(1),'1,000円未満');assert.equal(compactYen(10000),'約1万円');
+ assert.equal(compactYen(null),'未確定');assert.equal(compactYen(0),'0万円');assert.equal(compactYen(1),'1,000円未満');assert.equal(compactYen(10000),'1万円');
 });
 
 test('終点結果は30年目末を使い正負・ゼロ・小額・未知数を区別する', () => {
- for(const [value, expected] of [[100000,'＋約10万円'],[-100000,'−約10万円'],[0,'0円'],[5,'＋1,000円未満'],[-5,'−1,000円未満'],[null,'未確定']]) {
+ for(const [value, expected] of [[100000,'＋10万円'],[-100000,'−10万円'],[0,'0円'],[5,'＋1,000円未満'],[-5,'−1,000円未満'],[null,'未確定']]) {
   assert.deepEqual(endpointResult({profit_yen:999999,annual_cash_flows:[{year:20,cumulative_cash_flow_yen:999999},{year:30,cumulative_cash_flow_yen:value}]}),{value,text:expected});
  }
  assert.equal(endpointResult({annual_cash_flows:[]}).value,null);

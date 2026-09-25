@@ -1,0 +1,15 @@
+{
+  "date": "2026-09-22",
+  "status": "accepted",
+  "scope": "Guide four articles bibliography formatting and existing author-year citations",
+  "independent_checks": [
+    "All bibliography and body citation IDs resolve to article labels and source map",
+    "Publication-year evidence reviewed for confirmed sources",
+    "Single undated source suffix correction verified",
+    "Formatter and canonical design rule reviewed"
+  ],
+  "visual_check": "Frontend owner QA: four articles at 1280 and 360px; root did not repeat browser verification",
+  "evidence": "article-bibliography-2026-09-22.json",
+  "limitation": "25 publication years remain unconfirmed and display 年不明; no inferred dates",
+  "server": "Existing shared 5173 retained; no temporary process started in review"
+}

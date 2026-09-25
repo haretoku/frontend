@@ -1,4 +1,4 @@
-import { kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './kansai-formula.js';
+import { kansaiBelowMinimumCost, kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './kansai-formula.js';
 import { preprocessCapacity } from './capacity-preprocessing.js';
 const floor10000 = value => Math.floor(value / 10000) * 10000;
 const floor1000 = value => Math.floor(value / 1000) * 1000;
@@ -165,6 +165,7 @@ function evaluation(p,status,reason,amount,components,details){
  housing_age_not_applicable:'入力した新築・既存区分が制度の対象住宅区分と一致しないため算入しない．',
  equipment_package_not_applicable:'入力した設備構成が制度の対象設備と一致しないため算入しない．',
  municipality_not_applicable:'入力した市町村が制度の対象地域ではないため算入しない．',
+ eligible_cost_below_minimum:'入力条件から算定した対象経費が制度の最低対象経費を下回るため算入しない．',
  capacity_not_applicable:'入力容量が制度の対象容量範囲と一致しないため算入しない．',
  existing_pv_battery_addition_not_supported:'制度で指定される既設又は先行契約済み太陽光への蓄電池追加経路に該当する必要があり，新規設備を対象とする現行診断では算入しない．',
  regional_eligibility_input_unavailable:'対象地域が県内の一部に限定されるが，現行診断に地域該当性の入力がないため補助額を確定しない．',
@@ -229,6 +230,7 @@ export function diagnosticSubsidy(programs,input,included){
  if(p.machine_rule==='kansai_municipal_formula'){
  const parts=p.formula_components.filter(c=>c.equipment_packages.includes(input.equipmentPackage)&&(!c.housing_ages||c.housing_ages.includes(input.housingAge)));
  if(parts.length && parts.every(c=>(c.solar_output_min_kw!=null && input.capacityKw<c.solar_output_min_kw)||(c.solar_output_max_kw_exclusive!=null && input.capacityKw>=c.solar_output_max_kw_exclusive)||(c.battery_capacity_min_kwh!=null && input.batteryCapacityKwh<c.battery_capacity_min_kwh)||(c.battery_capacity_max_kwh_exclusive!=null && input.batteryCapacityKwh>=c.battery_capacity_max_kwh_exclusive))){excluded.push(evaluation(p,'excluded_incompatible','capacity_not_applicable',null));continue;}
+ if(kansaiBelowMinimumCost(p,input)){excluded.push(evaluation(p,'excluded_incompatible','eligible_cost_below_minimum',null));continue;}
  }
  const capacityFloor=Math.floor(input.capacityKw);
  if((p.solar_output_min_kw!=null&&capacityFloor<p.solar_output_min_kw)||(p.solar_output_max_kw_exclusive!=null&&capacityFloor>=p.solar_output_max_kw_exclusive)){excluded.push(evaluation(p,'excluded_incompatible','capacity_not_applicable',null));continue;}

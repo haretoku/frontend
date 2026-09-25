@@ -1,0 +1,36 @@
+{
+  "date": "2026-09-22",
+  "before_sha256": "1884602d302e82958263e1235cad404c2c55c9ae46c68a4d36c6f7d53848ec4f",
+  "after_sha256": "31e3626b9565a929451576dfdfbbeaf8e0df8cedd961c6f907fd0a3c9246199a",
+  "outside_figure_and_one_example_sentence_byte_identical": true,
+  "arithmetic_man_yen": {
+    "gross": 247,
+    "subsidy": 20,
+    "outlay": 227
+  },
+  "bar_ratios": {
+    "filled": 0.9190283400809717,
+    "unfilled_dashed": 0.08097165991902834
+  },
+  "figure_number_unchanged": 3,
+  "old_two_bar_values_unchanged": [
+    132,
+    247
+  ],
+  "caption": "図3　設備構成と補助金による自己負担の違い",
+  "browser_qa": {
+    "widths": [
+      1280,
+      360
+    ],
+    "three_bar_visual_pass": true,
+    "mobile_overflow": false,
+    "filled_width_px": 287.34375,
+    "dashed_width_px": 25.3125,
+    "dashed_fill": "transparent",
+    "tiny_segment_text": "none",
+    "paragraph_example_matches": true,
+    "tabs_closed": true,
+    "viewport_reset": true
+  }
+}

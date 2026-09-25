@@ -1,0 +1,36 @@
+{
+  "scope": "Approved three localized article edits only",
+  "versions": {
+    "subsidies": {
+      "before": "19abe8426d50fe2e7ec021a6e55c56dd66ff4390deaa3cd46240ac0c823e32e7",
+      "after": "2b0e4a1bb4499ec05ad5a837e79602ac5974c62c0ab7a94caeef89fdbb1338e6",
+      "exactReplacements": 1
+    },
+    "quotes-contractors": {
+      "before": "5123e8dd3e720ecdc887ae3da5edfbdc7b0cde968d8c26a2dece8f1059f3c0cd",
+      "after": "da6a08744f0308b42fc4934b7b138e68966c293ec80283013568ac62d387d81f",
+      "exactReplacements": 2
+    },
+    "disaster": {
+      "before": "42f0c035969c3c7a5b7be79c3706a1ab15830df7d7802d177e8edce1d3e6ca12",
+      "after": "4025a6af84c935b4c5ff824a217773e2895b3df64084fb2f7231745a85d99d71",
+      "exactReplacements": 1
+    }
+  },
+  "status": "Self-QA and manager independent text delta review complete; unpublished",
+  "publicDataSha256": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+  "checks": [
+    "All three modified regions visually inspected at1280x900 and360x800; readable wrapping, no visible overlaps",
+    "Four selected site-integrity tests passed",
+    "Three article IDs unique; current hashes match recorded versions",
+    "No model, subsidy conditions, calculation-method, stylesheet or public-data changes",
+    "Owned tab26 closed, viewport reset, user tabs4/9 retained; no helper processes started; shared5173 retained"
+  ],
+  "independentReview": {
+    "date": "2026-09-24",
+    "scope": "Three localized text edits",
+    "result": "Verified approval scope, placement, conditional wording and unchanged scenario values; current article hashes match",
+    "visual": "PC360 checks by frontend; manager did not repeat visual review because bound user tab was homepage, not target article",
+    "cleanup": "Manager viewport reset succeeded; no helpers started"
+  }
+}

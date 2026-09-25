@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-22",
+  "status": "accepted",
+  "scope": "Citation shortening, related-link label removal, Figure 1 prices and FIT step chart",
+  "independent_checks": [
+    "SVG axis scale matches 24 and 8.3 with zero baseline",
+    "Elapsed-year boundaries 4 and 10 and no future price line",
+    "Body citations omit access marker; list retains marker",
+    "ENEOS same-year publication/access source suffixes disambiguated",
+    "Existing design rules updated"
+  ],
+  "owner_visual_qa": "Figure 1 and FIT chart PC/360; original illustrations preserved",
+  "evidence": "article-fit-graph-2026-09-22.json"
+}

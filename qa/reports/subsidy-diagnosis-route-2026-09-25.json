@@ -1,0 +1,44 @@
+{
+  "versions": {
+    "frontend/site/pages/subsidies.html": {
+      "before": "2b0e4a1bb4499ec05ad5a837e79602ac5974c62c0ab7a94caeef89fdbb1338e6",
+      "after": "645abab8dad9ee9c1d9b18518d04ffa661378b1df9f5ce485832e7226112abdb"
+    },
+    "frontend/site/solar/index.html": {
+      "before": "cab2aa043b8ccf39338f1e3a9729c31edf8faf652c2ca1b5e287b21b448a6450",
+      "after": "3c0e22124d8c8fe861d3b1c94be924d2e2a18b5405f2055334783d7389b1974b"
+    },
+    "business-research/運営/記事目的.md": {
+      "before": "0027111ec5df669a86e20d5a8cc0db3db9c51c1669afba3bd1430f64e64b1517",
+      "after": "52404855a3c323584d861ea74a922be262c5d065a5eeab48f8fb15c9215cac86"
+    }
+  },
+  "status": "Self-QA complete; independent review pending; unpublished",
+  "publicDataSha256": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+  "checks": [
+    "Existing diagnosis card relocated once to search-order; no duplicate card",
+    "TOC matches revised heading; both existing official search links retained",
+    "PC1280 and360px screenshots inspected for both modified cards",
+    "Both CTAs activated with Enter and reached simulator",
+    "Four selected existing integrity tests PASS",
+    "Public-data hash unchanged; no simulator/JS/CSS/data changes",
+    "Owned temporary tab1 closed; viewport reset; shared5173 retained; no helper processes started"
+  ],
+  "relatedCardTrial": {
+    "file": "frontend/site/pages/electricity-sales.html",
+    "sha256": "3e3aa7cc33562c406fb3be5bd68f8220f883118e38805e9fde930f5dc8a8e02a",
+    "scope": "User clarified: co-locate diagnosis with subsidy article referrals. One applicable article-related-card found and replaced with shared action card containing diagnosis button and article link. Procedural inline reference in quotes unchanged.",
+    "checks": [
+      "PC1280 and360 screenshots readable",
+      "Enter on new diagnosis CTA reached simulator",
+      "Local-link and anchor tests passed",
+      "Owned tab3 closed and viewport reset; shared5173 retained"
+    ],
+    "status": "Self-QA complete; manager notified for independent delta review"
+  },
+  "relatedLinksFinal": {
+    "sha256": "b7539e1b0c60970522091b002d7fb2797695e1f3193594a3c310951caaeb6d6b",
+    "change": "Replaced green CTA trial with existing article-related-card two equal link rows; current simulator named explicitly; future Haretoku Data replacement policy in article-purpose MD",
+    "validation": "PC1280 and360 screenshot reviewed; destinations unchanged; temporary tab4 closed and viewport reset"
+  }
+}

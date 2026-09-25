@@ -1,0 +1,325 @@
+{
+  "baseline": {
+    "subsidies": {
+      "ids": [
+        "learn-title",
+        "search-order",
+        "subsidy-check-caption",
+        "acceptance-status",
+        "eligibility-documents",
+        "contractor-support",
+        "application-flow",
+        "tokyo-example",
+        "final-checks",
+        "summary"
+      ],
+      "links": [
+        "../",
+        "../",
+        "../simulator/",
+        "../solar/",
+        "../",
+        "../solar/",
+        "../simulator/",
+        "#search-order",
+        "#acceptance-status",
+        "#eligibility-documents",
+        "#contractor-support",
+        "#application-flow",
+        "#final-checks",
+        "#summary",
+        "https://policies.env.go.jp/earth/zeh/search/",
+        "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/",
+        "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/",
+        "https://tokyo-co2down.g.kuroco-img.app/files/user/files/subsidy/fam_solar/r8/r8taiyouko_tebiki_20260630.pdf",
+        "../simulator/",
+        "electricity-sales.html",
+        "costs-maintenance.html",
+        "quotes-contractors.html",
+        "../",
+        "policy.html#operation",
+        "policy.html#advertising",
+        "policy.html#data",
+        "policy.html#privacy",
+        "policy.html#disclaimer"
+      ],
+      "sources": [
+        "env-housing-decarbonization-navi-2026",
+        "fukushima-renewable-center-application-status-2026",
+        "fukushima-residential-solar-subsidy-guideline-fy2026",
+        "gunma-residential-renewable-subsidy-fy2026",
+        "niigata-snow-country-zeh-subsidy-fy2026",
+        "tokushima-residential-renewable-subsidy-fy2026",
+        "tokyo-residential-solar-subsidy-fy2026",
+        "yamagata-residential-solar-subsidy-fy2026"
+      ]
+    },
+    "quotes-contractors": {
+      "ids": [
+        "learn-title",
+        "unknown-conditions",
+        "comparison-items",
+        "quote-comparison-caption",
+        "contractor-checks",
+        "same-conditions",
+        "before-contract",
+        "pressure-caution",
+        "summary"
+      ],
+      "links": [
+        "../",
+        "../",
+        "../simulator/",
+        "../solar/",
+        "../",
+        "../solar/",
+        "../simulator/",
+        "#unknown-conditions",
+        "#comparison-items",
+        "#contractor-checks",
+        "#same-conditions",
+        "#before-contract",
+        "#pressure-caution",
+        "#summary",
+        "../simulator/",
+        "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2021_06.html",
+        "https://www.kokusen.go.jp/news/data/n-20250604_1.html",
+        "https://www.jpea.gr.jp/wp-content/themes/jpea/pdf/hanbaikijyun.pdf",
+        "https://www.jpea.gr.jp/wp-content/uploads/hajimeyou_leaflet_2305.pdf",
+        "costs-maintenance.html",
+        "subsidies.html",
+        "electricity-sales.html",
+        "../",
+        "policy.html#operation",
+        "policy.html#advertising",
+        "policy.html#data",
+        "policy.html#privacy",
+        "policy.html#disclaimer"
+      ],
+      "sources": []
+    },
+    "disaster": {
+      "ids": [
+        "learn-title",
+        "daily-needs",
+        "requirements",
+        "limitations",
+        "standalone-operation-caption",
+        "other-backup",
+        "battery-backup",
+        "outage-cases",
+        "damage-caution",
+        "before-installation",
+        "summary"
+      ],
+      "links": [
+        "../",
+        "../",
+        "../simulator/",
+        "../solar/",
+        "../",
+        "../solar/",
+        "../simulator/",
+        "#daily-needs",
+        "#requirements",
+        "#limitations",
+        "#other-backup",
+        "#battery-backup",
+        "#outage-cases",
+        "#damage-caution",
+        "#before-installation",
+        "#summary",
+        "calculation-method.html#outage-reference",
+        "../simulator/",
+        "https://www.jpea.gr.jp/house/poweroutage/",
+        "https://www.jpea.gr.jp/house/longuser/",
+        "https://www.jpea.gr.jp/news/23653/",
+        "https://www.jpea.gr.jp/wp-content/uploads/session2_02_sekisui.pdf",
+        "https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html",
+        "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/detail/shizensaigainocyuikanki.html",
+        "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_020/",
+        "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_053/",
+        "https://www.env.go.jp/recycle/waste/lithium_1/index.html",
+        "costs-maintenance.html",
+        "quotes-contractors.html",
+        "electricity-sales.html",
+        "../",
+        "policy.html#operation",
+        "policy.html#advertising",
+        "policy.html#data",
+        "policy.html#privacy",
+        "policy.html#disclaimer"
+      ],
+      "sources": []
+    },
+    "costs-maintenance": {
+      "ids": [
+        "learn-title",
+        "initial-cost",
+        "included-costs",
+        "cost-lifecycle-caption",
+        "excluded-costs",
+        "inspection-caution",
+        "summary"
+      ],
+      "links": [
+        "../",
+        "../",
+        "../simulator/",
+        "../solar/",
+        "../",
+        "../solar/",
+        "../simulator/",
+        "#initial-cost",
+        "#included-costs",
+        "#excluded-costs",
+        "#inspection-caution",
+        "#summary",
+        "calculation-method.html#adopted-parameters",
+        "calculation-method.html#calculation-formulas",
+        "calculation-method.html#adopted-parameters",
+        "https://www.jpea.gr.jp/house/longuser/",
+        "../simulator/",
+        "https://www.jpea.gr.jp/faq/583/",
+        "https://www.jpea.gr.jp/house/longuser/",
+        "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html",
+        "https://www.kokusen.go.jp/news/data/n-20250604_1.html",
+        "https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/",
+        "https://www.kyocera.co.jp/solar/support/topics/flow/",
+        "https://socialsolution.omron.com/jp/ja/products_service/energy/doc/cat/kand-070b_kpbp-a.pdf",
+        "https://socialsolution.omron.com/jp/ja/products_service/energy/product/bt/kpbp-b_spec.html",
+        "electricity-sales.html",
+        "quotes-contractors.html",
+        "disaster.html",
+        "../",
+        "policy.html#operation",
+        "policy.html#advertising",
+        "policy.html#data",
+        "policy.html#privacy",
+        "policy.html#disclaimer"
+      ],
+      "sources": [
+        "meti-residential-solar-cost-2025",
+        "meti-household-storage-cost-2025",
+        "meti-household-storage-degradation-2021"
+      ]
+    }
+  },
+  "photo_assets": {
+    "search": [
+      "article-subsidy-search-photo.webp",
+      "自宅で自治体の補助金情報を調べる手元"
+    ],
+    "documents": [
+      "article-subsidy-documents-photo.webp",
+      "住宅の図面と設備書類を照合する手元"
+    ],
+    "application": [
+      "article-subsidies-application-photo.webp",
+      "申請書に記入する手元"
+    ],
+    "consultation": [
+      "article-quotes-explanation-photo.webp",
+      "見積書の項目を説明する手元"
+    ],
+    "estimate": [
+      "article-solar-estimate-photo.webp",
+      "設置見積書と電卓"
+    ],
+    "inspection": [
+      "article-solar-inspection-photo.webp",
+      "太陽光設備を点検する作業員"
+    ],
+    "day": [
+      "article-disaster-daytime-photo.webp",
+      "昼間に自立運転用コンセントでスマートフォンを充電する場面"
+    ],
+    "night": [
+      "article-disaster-battery-photo.webp",
+      "蓄電池からの夜間給電を想定したスマートフォンと停電用コンセント"
+    ],
+    "prepare": [
+      "article-disaster-preparation-photo.webp",
+      "平常時に取扱説明書と懐中電灯を確認する手元"
+    ]
+  },
+  "status": "limited_self_qa_pass",
+  "legacy_mapping": {
+    "initial-cost": "costs",
+    "included-costs": "lifecycle-cost",
+    "excluded-costs": "removal-cost",
+    "inspection-caution": "inspection-caution",
+    "cost-lifecycle-caption": "maintenance-baseline",
+    "summary": "decision-path",
+    "learn-title": "costs"
+  },
+  "economics_overview_sha256": "d39881400537b656f5979e71031ce889234dcc5a2c98b21cf3b3cee965a4d079",
+  "static_checks": [
+    {
+      "article": "electricity-sales",
+      "chapters": 5,
+      "toc_links": 24,
+      "sha256": "99396d251ae0e7951836ff91d28df28bf215fd522101879a43a657273b8c8ee2"
+    },
+    {
+      "article": "subsidies",
+      "chapters": 4,
+      "toc_links": 10,
+      "sha256": "fbd8b3ebd419d9c3276c8e495597b09a8d361630334f42c944c0442978b6e4f8"
+    },
+    {
+      "article": "quotes-contractors",
+      "chapters": 3,
+      "toc_links": 9,
+      "sha256": "790ee70a47e2269743e38b4893d7b9bbd4a6baff52f0ac82fe4d59a7e338f1bb"
+    },
+    {
+      "article": "disaster",
+      "chapters": 3,
+      "toc_links": 12,
+      "sha256": "61cb0b7a01a629dca90697bfb9fe396771281506926611922732021fb830c482"
+    }
+  ],
+  "ui_checks": {
+    "pc": "1280x900: all four hero and representative chapter photos inspected; final actions and fixed bars checked",
+    "mobile": "360x800: all four actual innerWidth=360; hero, representative chapter/photo, TOC navigation, final actions inspected",
+    "horizontal_overflow": 0,
+    "console_errors": 0,
+    "quote_bar": "hidden before first chapter conclusion; visible afterwards; native disabled and advertising preserved",
+    "legacy_redirects": "base URL and all 7 known anchors verified in browser",
+    "catalog": "4 entries; quotes/disaster editorial dates match hero 2026-09-22",
+    "limitations": "representative browser viewport checks; not physical device or full calculation/site regression"
+  },
+  "cta_roles": {
+    "electricity-sales": "primary diagnosis",
+    "disaster": "primary diagnosis",
+    "subsidies": "primary fixed quote bar; secondary diagnosis text link",
+    "quotes-contractors": "primary fixed quote bar; secondary diagnosis text link"
+  },
+  "preserved_legacy": "qa/reports/costs-maintenance-preserved-2026-09-22.html",
+  "scope": "4 guides, legacy compatibility, reference detail, catalog and relevant frontend documentation; no simulator/data/TOP design changes",
+  "supporting_files_sha256": {
+    "frontend\\site\\articles\\styles\\guide-chapters.css": "c1b5128d7cd3e7d3da2dc56308527014111a195a7cd2c6a244f05cb4ef215f7b",
+    "frontend\\site\\articles\\src\\costs-maintenance-redirect.js": "979a9215fc9b54b76add71b074f2f26970446eddb7e67e3584a9570e4952fc72",
+    "frontend\\site\\pages\\costs-maintenance.html": "2631d9e7d24ca8c183fd1542afdd1a7f3798c432235b0cd1f69535eb594ba05d",
+    "frontend\\site\\pages\\calculation-method.html": "424dc05daf3d8c1a6da49d9bd0535c7a6e90faf4249913607eec15a4bbc57f30",
+    "frontend\\site\\solar\\data\\articles.json": "94dbf530b2fe2b8bcc5b777ebb626340397c1fadf42f2ac2b35f5d841c31a09c"
+  },
+  "root_independent_review": {
+    "status": "accepted",
+    "visual_checks": [
+      "PC subsidy/quotes/disaster hero",
+      "subsidy expanded two-level TOC and chapter 2 photo"
+    ],
+    "dom_checks": [
+      "all TOC targets exist in the three reorganized articles",
+      "no PC horizontal overflow"
+    ],
+    "integration_checks": [
+      "catalog contains 4 articles",
+      "legacy #included-costs navigates to electricity-sales#lifecycle-cost",
+      "economics chapter 1 exactly unchanged"
+    ],
+    "scope_note": "Independent root checks only; mobile checks remain frontend self-QA. Editorial dates aligned; no further QA expansion."
+  }
+}

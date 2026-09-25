@@ -28,7 +28,7 @@
 
 .guide-directory {
   min-width: 0;
-  padding-bottom: clamp(3rem, 7vw, 5.5rem);
+  padding-bottom: 0;
 }
 
 .guide-library {
@@ -98,10 +98,10 @@
 .guide-article-card__visual {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   border-bottom: 1px solid var(--color-border);
-  background: #fffcf3;
+  background: var(--color-surface);
 }
 
 .guide-article-card__visual img {
@@ -132,7 +132,7 @@
   margin-top: 0.35rem;
   font-size: clamp(1.05rem, 1.8vw, 1.25rem);
   line-height: 1.55;
-  text-wrap: balance;
+  text-wrap: wrap;
 }
 
 .guide-article-card__summary {
@@ -181,7 +181,7 @@
 .guide-filter[aria-pressed="true"] {
   border-color: var(--color-primary-dark);
   color: #fff;
-  background: var(--color-primary-dark);
+  background: var(--color-action);
 }
 
 .guide-filter:focus-visible {
@@ -228,13 +228,13 @@
   border: 1px solid var(--color-primary-dark);
   border-radius: 0.3rem;
   color: #fff;
-  background: var(--color-primary-dark);
+  background: var(--color-action);
   font-weight: 900;
   text-decoration: none;
 }
 
 .guide-diagnosis__link:hover {
-  background: var(--color-primary);
+  background: var(--color-action-hover);
 }
 
 .guide-diagnosis__label {
@@ -294,4 +294,33 @@
   .guide-article-card {
     transition: none;
   }
+}
+
+/* ガイドの入口を診断と同じコンパクトな見出しへ揃える． */
+.guide-library { border-top: 0; padding-top: 1.25rem; }
+.guide-page-title { margin: 0; font-size: 1.45rem; }
+.guide-page-title .guide-heading-icon { width: .9em; height: .9em; margin-right: .3em; vertical-align: -.1em; color: var(--color-primary-dark); }
+.guide-index-description { margin: .65rem 0 0; font-size: .9rem; color: var(--color-muted); }
+.guide-filter-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.15rem; }
+.guide-filter-row .guide-filters { margin: 0; }
+.guide-filter-row .guide-library__count { margin: 0; }
+
+.guide-diagnosis-route { margin-bottom: clamp(3rem, 6vw, 5rem); }
+.guide-diagnosis-route .article-action-stack__row--internal { padding: 1rem 1.25rem; border: 1px solid var(--color-border); border-radius: .6rem; background: #fff; }
+@media (max-width: 40rem) {
+  .guide-article-card { display: grid; grid-template-columns: 28% minmax(0, 1fr); height: auto; min-height: 7rem; border-radius: .4rem; }
+  .guide-article-card__visual { position: relative; align-self: stretch; width: calc(100% - 4px); height: calc(100% - 8px); margin: 4px 0 4px 4px; aspect-ratio: auto; border: 0; }
+  .guide-article-card__visual img { position: absolute; inset: 0; }
+  .guide-article-card__body { padding: .75rem; justify-content: center; }
+  .guide-article-card__title { margin-top: .2rem; font-size: 1rem; text-wrap: initial; }
+  .guide-article-card__summary { display: none; }
+  .guide-article-card__meta { margin-top: .4rem; padding-top: 0; font-size: .65rem; }
+  .guide-article-card:hover { transform: none; }
+  .guide-diagnosis-route .article-action-stack__row--internal { padding: 1rem; }
+}
+
+.guide-title-term { white-space: nowrap; }
+@media (max-width: 40rem) {
+  .guide-filter-row { flex-direction: column; align-items: stretch; gap: .5rem; }
+  .guide-filter-row .guide-library__count { text-align: right; }
 }

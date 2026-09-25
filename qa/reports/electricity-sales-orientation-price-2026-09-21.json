@@ -1,0 +1,124 @@
+{
+  "data_version": "2026-09-21",
+  "schema_version": "11.17.0",
+  "public_data_sha256": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91",
+  "calculator": "site/simulator/src/calculator.js calculateEstimate",
+  "note": "roofOrientation is not a calculator input; detailConditions.roof_orientation is used and resolved input checked. Existing south baseline used the default south and is unchanged.",
+  "cases": [
+    {
+      "input": {
+        "prefectureCode": "13",
+        "monthlyElectricityBillYen": null,
+        "daytimeOccupancy": "almost_every_weekday",
+        "systemCapacityKw": 4,
+        "housingAge": "existing",
+        "equipmentPackage": "solar_only",
+        "detailConditions": {
+          "roof_orientation": "south"
+        }
+      },
+      "applied_orientation": {
+        "input_name": "roof_orientation",
+        "value": "south",
+        "label": "南向き",
+        "calculation_status": "supported",
+        "generation_correction_factor": 1,
+        "applied": true,
+        "reason": "ソラカルテの宮城県・宮崎県4.5 kW表示値から同一比率を逆算し，JPEAの南向き基準の方位別比較と整合する全国共通のMVPモデル係数として採用する．地点別精密係数ではない．"
+      },
+      "first_year_generation_kwh": 4686.0452,
+      "display_annual_generation_kwh": 4686,
+      "prices": {
+        "current_purchase_price_yen_per_kwh": 31.21,
+        "sale_price_periods": [
+          {
+            "period_start_year": 1,
+            "period_end_year": 4,
+            "price_yen_per_kwh": 24,
+            "price_type": "fit",
+            "source_id": "meti-fit-residential-fy2026"
+          },
+          {
+            "period_start_year": 5,
+            "period_end_year": 10,
+            "price_yen_per_kwh": 8.3,
+            "price_type": "fit",
+            "source_id": "meti-fit-residential-fy2026"
+          },
+          {
+            "period_start_year": 11,
+            "period_end_year": 30,
+            "price_yen_per_kwh": 8.5,
+            "price_type": "post_fit",
+            "source_id": "tepco-post-fit-standard-plan"
+          }
+        ]
+      }
+    },
+    {
+      "input": {
+        "prefectureCode": "13",
+        "monthlyElectricityBillYen": null,
+        "daytimeOccupancy": "almost_every_weekday",
+        "systemCapacityKw": 4,
+        "housingAge": "existing",
+        "equipmentPackage": "solar_only",
+        "detailConditions": {
+          "roof_orientation": "east_west_unknown"
+        }
+      },
+      "applied_orientation": {
+        "input_name": "roof_orientation",
+        "value": "east_west_unknown",
+        "label": "東西・不明",
+        "calculation_status": "supported",
+        "generation_correction_factor": 0.85,
+        "applied": true,
+        "reason": "ソラカルテの宮城県・宮崎県4.5 kW表示値から同一比率を逆算し，JPEAの南向き基準の方位別比較と整合する全国共通のMVPモデル係数として採用する．地点別精密係数ではない．"
+      },
+      "first_year_generation_kwh": 3983.13842,
+      "display_annual_generation_kwh": 3983,
+      "prices": {
+        "current_purchase_price_yen_per_kwh": 31.21,
+        "sale_price_periods": [
+          {
+            "period_start_year": 1,
+            "period_end_year": 4,
+            "price_yen_per_kwh": 24,
+            "price_type": "fit",
+            "source_id": "meti-fit-residential-fy2026"
+          },
+          {
+            "period_start_year": 5,
+            "period_end_year": 10,
+            "price_yen_per_kwh": 8.3,
+            "price_type": "fit",
+            "source_id": "meti-fit-residential-fy2026"
+          },
+          {
+            "period_start_year": 11,
+            "period_end_year": 30,
+            "price_yen_per_kwh": 8.5,
+            "price_type": "post_fit",
+            "source_id": "tepco-post-fit-standard-plan"
+          }
+        ]
+      }
+    }
+  ],
+  "difference_kwh": 702.9067799999993,
+  "relative_generation": 0.8500000000000001,
+  "purchase_price_basis": {
+    "base_fy2023_yen_per_kwh": 27.1,
+    "consumption_tax_multiplier": 1.1,
+    "fy2023_renewable_surcharge_yen_per_kwh": 1.4,
+    "adopted_yen_per_kwh": 31.21,
+    "meaning": "Area low-voltage revenue divided by sold kWh, tax and FY2023 levy added. Not a marginal tariff of a particular household; basic charges/fuel adjustments are not separately modeled. FY2026 levy is not substituted."
+  },
+  "official_sources": [
+    "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf",
+    "https://www.enecho.meti.go.jp/about/whitepaper/2024/html/2-2-2.html",
+    "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html"
+  ],
+  "source_check": "Official search-index excerpts checked; direct METI/ENECHO fetch returned 403."
+}

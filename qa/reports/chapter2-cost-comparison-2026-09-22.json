@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-22",
+  "before_sha256": "5f5757e9942c87404f73888494bc92ad254c906bdef6db8941b718f49110c70f",
+  "after_sha256": "c868d6916b75f49360d262044324e1413e9c53cdabeeefd024e592e3f53acdaa",
+  "outside_chapter_unchanged_except_figure_number": true,
+  "costs_yen": {
+    "solar": 1324400,
+    "battery_addition": 1149500,
+    "combined": 2473900
+  },
+  "display_man_yen": [
+    132,
+    115,
+    247
+  ],
+  "bar_ratios": {
+    "solar": 0.5344129554655871,
+    "battery": 0.46558704453441296
+  },
+  "basis": "Existing calculation-method adopted cost / public-data installation cost existing 331100 yen/kW times 4 kW; article estimate rather than official total or national average.",
+  "references": "Existing METI committee 2026 citation and chapter bibliography reused.",
+  "subsidy_link_count": 1,
+  "photo_h3_order_installation_conditions_preserved": true,
+  "figure_number_sequence": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "browser_qa": {
+    "widths": [
+      1280,
+      360
+    ],
+    "cost_figure_visual_pass": true,
+    "mobile_overflow": false,
+    "mobile_bar_total_px": 312.66668701171875,
+    "mobile_solar_segment_px": 167.08334350585938,
+    "mobile_battery_segment_px": 145.5729217529297,
+    "subsidy_card_mobile_visual_pass": true,
+    "subsidy_card_click_both_widths": "/pages/subsidies",
+    "tabs_closed": true,
+    "viewport_reset": true
+  }
+}

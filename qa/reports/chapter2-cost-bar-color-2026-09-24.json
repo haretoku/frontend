@@ -1,0 +1,12 @@
+{
+  "date": "2026-09-24",
+  "scope": "CSSの蓄電池区分1規則のみ．濃緑/白文字と左境界1px白線．",
+  "before_sha256": "dc54a8ad7d9109530fd28e73fb95be815366e06fd73788254e9ef8c4ed5d904e",
+  "after_sha256": "73dd8201def082ed860e2527f5e8040e6468eec76a2800abfc0b578cbd77c873",
+  "reverse_replacement_byte_identical": true,
+  "width_unchanged": "46.55870445% (existing border-box keeps outer width unchanged)",
+  "html_unchanged_sha256": "31e3626b9565a929451576dfdfbbeaf8e0df8cedd961c6f907fd0a3c9246199a",
+  "labels_ratios_text_placement_subsidy_dashed_unchanged": true,
+  "browser_qa": "未実施：5173待受なし．依頼どおり再起動調査・起動なし．",
+  "processes_started": false
+}

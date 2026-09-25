@@ -1,0 +1,276 @@
+{
+  "date": "2026-09-24",
+  "article": "disaster",
+  "classification": "中核記事",
+  "status": "Minor editorial revision self-check complete; previous independent review applies to preceding version; manager review pending",
+  "sha256": {
+    "frontend/site/pages/disaster.html": "42f0c035969c3c7a5b7be79c3706a1ab15830df7d7802d177e8edce1d3e6ca12",
+    "frontend/site/pages/calculation-method.html": "e8cfe8a0314c15dc26f3cae49b515c51f7df9f04e4980985d4a8126a9beefb3c",
+    "frontend/site/articles/src/article-bibliography.json": "65f40b7c3df60b91e8e74216c3ad7f736ca358963a4eba314f36d32cb1f06676",
+    "frontend/site/articles/styles/guide-chapters.css": "4d2999fd68971904cbdaed537c5e2a5eff28005550a17d2dcdc1c02f1d690fea",
+    "frontend/data/input/public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91"
+  },
+  "scope": "3 chapters / 9 h3; solar-only limits; battery output/circuit/voltage and duration; pre-installation/pre-outage preparation; diagnosis and quotes cards",
+  "sources": [
+    {
+      "id": "article-source-27",
+      "publisher": "太陽光発電協会",
+      "title": "停電時でも電気が使えます",
+      "url": "https://www.jpea.gr.jp/house/poweroutage/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year.",
+      "accessed_at": "2026-09-24",
+      "access_evidence": "公式本文を再確認．引用範囲は当記事QA記録を参照．",
+      "access_year": 2026
+    },
+    {
+      "id": "article-source-32",
+      "publisher": "消費者庁",
+      "title": "モバイルバッテリーの事故に注意しましょう！",
+      "url": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_020/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year.",
+      "accessed_at": "2026-09-24",
+      "access_evidence": "公式本文を再確認．引用範囲は当記事QA記録を参照．",
+      "access_year": 2026
+    },
+    {
+      "id": "article-source-33",
+      "publisher": "消費者庁",
+      "title": "携帯発電機やポータブル電源の事故に注意！",
+      "url": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_053/",
+      "year": 2021,
+      "year_evidence": "公式公表資料欄：2021年8月25日．",
+      "accessed_at": "2026-09-24",
+      "access_evidence": "公式本文を再確認．引用範囲は当記事QA記録を参照．"
+    },
+    {
+      "id": "jpea-flooded-equipment",
+      "publisher": "太陽光発電協会",
+      "title": "太陽光発電設備が水害によって被害を受けた場合の対処について",
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/t180710_1.pdf",
+      "year": 2018,
+      "year_evidence": "PDF本文冒頭2018年7月9日．リンク元告知2020年ではなく資料の発行年．",
+      "accessed_at": "2026-09-24",
+      "access_evidence": "PDF全2頁．接近・接触の感電，日射による発電，販売施工事業者へ連絡．"
+    },
+    {
+      "id": "nichicon-backup-capacity",
+      "publisher": "ニチコン",
+      "title": "ESS-U2L2シリーズ：製品仕様・使用上の注意",
+      "url": "https://www.nichicon.co.jp/products/ess/series_ess-u2l2.html",
+      "year": null,
+      "year_evidence": "ページ全体の更新年未確定のためアクセス年を表示．",
+      "access_year": 2026,
+      "accessed_at": "2026-09-24",
+      "access_evidence": "製品仕様注2の放電深度・変換効率・環境温度・劣化，使用上の注意の起動時電力・残量不足・医療機器制約を確認．"
+    },
+    {
+      "id": "panasonic-backup-circuits",
+      "publisher": "パナソニック",
+      "title": "創蓄連携システム：パワーステーションS＋",
+      "url": "https://sumai.panasonic.jp/chikuden/sochiku/system/s_plus.html",
+      "year": null,
+      "year_evidence": "公開・更新年未確定のためアクセス年を表示．",
+      "access_year": 2026,
+      "accessed_at": "2026-09-24",
+      "access_evidence": "全回路/特定負荷の構成例，100V/200V，出力超過時停止，気象警報連動の条件"
+    },
+    {
+      "id": "panasonic-battery-operation",
+      "publisher": "パナソニック",
+      "title": "V2H蓄電システム：停電時の使用方法について",
+      "url": "https://sumai.panasonic.jp/saigai/product/battery_blackout.html",
+      "year": null,
+      "year_evidence": "公開・更新年未確定のためアクセス年を表示．",
+      "access_year": 2026,
+      "accessed_at": "2026-09-24",
+      "access_evidence": "蓄電システム節の手動/自動設定，バックアップ回路，復帰方法の機種差"
+    },
+    {
+      "id": "panasonic-battery-outage",
+      "publisher": "パナソニック",
+      "title": "創蓄連携システム：停電時 電気が使えて安心",
+      "url": "https://sumai.panasonic.jp/chikuden/sochiku/failure/",
+      "year": null,
+      "year_evidence": "公開・更新年未確定のためアクセス年を表示．",
+      "access_year": 2026,
+      "accessed_at": "2026-09-24",
+      "access_evidence": "昼間充電と夜間給電，配線の事前設計，自動切替設定，UPSでない注意"
+    },
+    {
+      "id": "panasonic-solar-outage",
+      "publisher": "パナソニック",
+      "title": "太陽光発電システム：停電時の使用方法について",
+      "url": "https://sumai.panasonic.jp/saigai/product/solar_blackout.html",
+      "year": null,
+      "year_evidence": "公開・更新年未確定のためアクセス年を表示．",
+      "access_year": 2026,
+      "accessed_at": "2026-09-24",
+      "access_evidence": "屋内用集中型等の自立出力1500W，日射依存，機種別操作・復帰"
+    }
+  ],
+  "sourceConditions": [
+    "Panasonic 1500W is an example of listed solar-only models, not all products; sunlight limits actual power",
+    "Panasonic S+ configuration used for whole-house/selected-circuit and voltage/output distinctions, not a product recommendation",
+    "Nichicon U2L2 specifications footnote 2: depth of discharge, conversion efficiency, temperature and degradation; usage notes: startup demand",
+    "JPEA flooded equipment PDF dated 2018-07-09, not referring-page date 2020",
+    "CAA020 PSE/recall/abnormalities; CAA053 2021-08-25 generator outdoors conditions"
+  ],
+  "existingTests": {
+    "command": "node --test --test-name-pattern=ローカルリンク|同一ページ内のアンカー|動的出典ID|共通見積もりバー qa/tests/site-integrity.test.js",
+    "pass": 4,
+    "fail": 0,
+    "limits": "Selected existing tests only; no whole-site PASS claim"
+  },
+  "openItems": [
+    "User final review; unpublished",
+    "Pointer activation of wrapped calculation link unverified in browser automation; Enter route passed"
+  ],
+  "previousRevision": {
+    "sha256": {
+      "frontend/site/pages/disaster.html": "4579951f901a129c4ab11c59cee3cb8d8bf1767277ba9c6c746a8082211093ba",
+      "frontend/site/articles/src/article-bibliography.json": "f134df39bc9f119c701f68a54d1d6c5473aa3ba020b0e4883df8427ac285c413",
+      "frontend/site/articles/styles/guide-chapters.css": "1501ea3a884e74c55f15fa14f87abcc35430b1d3d81613f6c5ebbd3d8f47297c",
+      "frontend/data/input/public-data.json": "8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91"
+    },
+    "hypotheticalExample": {
+      "netEnergyKWh": 2,
+      "meanLoadKW": 0.2,
+      "durationHours": 10,
+      "calculation": "2 / 0.2 = 10",
+      "conditions": [
+        "Energy is net available to household appliances after initial state of charge, lower cutoff, conversion losses, system own consumption and degradation; not rated battery capacity",
+        "No solar replenishment; correct wiring/voltage, adequate simultaneous and startup output assumed",
+        "Illustrative arithmetic, not measured runtime or a guarantee for specific appliances"
+      ]
+    },
+    "editorialDecisions": [
+      "Removed lengthy 1.7kWh reference-line explanation; retains link to calculation-method#outage-reference",
+      "Removed 2018 survey and EV 5-day anecdote rather than generalizing to stationary batteries",
+      "Removed ambiguous raster operating diagram; replaced with accessible day/night comparison table",
+      "Removed universal free-service statement",
+      "No generic switching sequence; use model-specific manual",
+      "Failed METI/Enecho retrieval sources removed from this article, registry records preserved",
+      "All previous major IDs retained including external target battery-backup"
+    ],
+    "static": "PASS local assets/cross-page fragments, unique IDs, TOC labels, chapter citations and bibliography matching; sources mapped to official checked pages",
+    "browser": {
+      "widths": [
+        1280,
+        360
+      ],
+      "documentWidths": [
+        1265,
+        345
+      ],
+      "checks": [
+        "TOC initially closed, Enter opens and Space closes",
+        "PC comparison table, hypothetical duration conditions, diagnosis card and quote checklist/card inspected",
+        "360 comparison table, hypothetical duration, both cards, preparation and hazard paragraphs inspected",
+        "Citations render stable a/b/c/d and access-year bibliography",
+        "No horizontal overflow; broken images0, unloaded images0 after traversal; console errors0",
+        "Diagnosis background rgb(0,134,83) with white text; card h4 margin-top0; quotes disabled with advertising label"
+      ],
+      "remaining": "Resolved by independent review: diagnosis CTA navigation confirmed",
+      "cleanup": "Manager confirmed only user tab1 exists; no tab24 present; viewport reset succeeded; shared5173 retained"
+    },
+    "independentReview": {
+      "date": "2026-09-24",
+      "status": "PASS within stated scope; no unresolved MUST findings",
+      "version": "All four recorded SHA256 values matched at independent review completion",
+      "content": [
+        "Full revised article reviewed: 3 chapters / 9 h3, model-specific constraints, kWh versus kW, hypothetical net-energy arithmetic and conditions, CTA purpose, safety wording",
+        "Adopted JPEA outage and flooded-equipment PDF, Panasonic solar/battery operation and failure/S+ pages, Nichicon U2L2 notes, CAA020/053 independently opened and checked against major claims"
+      ],
+      "visual": [
+        "PC1280 comparison table inspected",
+        "360px comparison table, diagnosis card, quote card and safety paragraphs inspected; readable wrapping and green diagnosis button, no excess card heading margin",
+        "Rendered DOM confirmed bold emphasis, reference links and disabled quote buttons"
+      ],
+      "navigation": "PASS: clicked article diagnosis CTA; diagnosis form with prefecture selector rendered; returned to article",
+      "cleanup": "Viewport reset succeeded; browser inventory contained only user tab1, no temporary tab24; user article tab retained; no helper processes started",
+      "limits": "Representative independent display checks, not exhaustive device testing; existing selected tests reported by frontend, no whole-site PASS claim"
+    }
+  },
+  "scenarioRevision": {
+    "usableInitialDcKwh": 5,
+    "dischargeEfficiency": 0.9486832980505138,
+    "auxiliaryWatts": 30,
+    "averagePurchasedKwhYear": 3911,
+    "fiscalYearDays": 366,
+    "averageApplianceKwhDay": 10.685792349726777,
+    "limitedApplianceKwhDay": 0.9043979452054796,
+    "averageTotalKwhDay": 11.405792349726777,
+    "limitedTotalKwhDay": 1.6243979452054795,
+    "averageHours": 9.9810685900124,
+    "limitedHours": 70.0825780419595,
+    "conditions": [
+      "Initial available energy after SOC/degradation/lower cutoff, not nominal capacity",
+      "No PV replenishment; auxiliary consumption proportional to time",
+      "Average external purchased electricity excludes own-PV self-consumption; nationwide mixed households",
+      "Limited case only refrigerator/LED/phone; excludes HVAC/cooking/water heating/router, not whole-life 70h guarantee",
+      "Refrigerator annual specification divided by365; FY2023 average divided by366",
+      "30W based on standby specification, not measured outage consumption"
+    ],
+    "sourceChecks": [
+      "Official environment energy/detail/01:3911kWh FY2023",
+      "Official environment cautions: purchased electricity only",
+      "Existing outage_reference appliance assumptions retained; Panasonic original refrigerator spec fetch failed, official energy catalog search corroborated263kWh"
+    ],
+    "static": "Article IDs and added cross-page anchors unique; selected existing tests4 pass; arithmetic independently recalculated; frozen public data hash unchanged",
+    "browser": {
+      "widths": [
+        1280,
+        360
+      ],
+      "checks": [
+        "Both added tables readable, no horizontal overflow",
+        "Duration assumptions and exclusions near table inspected",
+        "Calculation-method added section readable at both widths",
+        "Enter activated calculation link and return link successfully"
+      ],
+      "limits": "Pointer click did not navigate during automation; keyboard navigation verified",
+      "cleanup": "Owned tab25 closed; viewport reset; user tabs4/9 retained; no helper processes started; shared5173 retained"
+    }
+  },
+  "independentReview": {
+    "date": "2026-09-24",
+    "status": "Content, arithmetic and representative display accepted; pointer interaction unverified",
+    "version": "All current sha256 entries matched at completion; old review remains previousRevision",
+    "sources": [
+      "Environment Ministry FY2023 3911kWh and purchased-energy-only caution independently verified",
+      "Existing public-data limited loads reconciled; official LED7.3W, phone5000mAh and standby30W statements checked; latter is model assumption not outage measurement",
+      "Refrigerator source fetch failed; existing263kWh retained with official catalog search corroboration, not fresh full-page verification"
+    ],
+    "arithmetic": [
+      "3911/366=10.685792349726777 kWh/day",
+      "263/365+.0073*2*6+5*3.85*4/.8/1000=.9043979452054796 kWh/day",
+      "5*sqrt(.9)/(dailyApplianceKwh+.72)*24=9.9810685900124 or70.0825780419595 hours; displayed10/70 correct",
+      "Initial usableDC5kWh, noPV, auxiliary30W, model efficiency and average load assumptions stated; excludes whole-home70h guarantee"
+    ],
+    "display": [
+      "PC1280 duration table and nearby conditions inspected",
+      "360px both added tables inspected, readable wrapping",
+      "Rendered DOM confirmed revised headings and scenario conditions"
+    ],
+    "navigation": "Frontend Enter round-trip passed; manager pointer attempt unchanged, later inspection CDP timeout; pointer navigation unverified",
+    "cleanup": "Viewport reset confirmed; user tab retained; no helpers started; shared5173 retained"
+  },
+  "minorRevision": {
+    "date": "2026-09-24",
+    "previousArticleSha256": "36d3cb3d6e775239f61d40c593249c27aaf5fd0e7064f3aac89bf42e53c270c1",
+    "articleSha256": "42f0c035969c3c7a5b7be79c3706a1ab15830df7d7802d177e8edce1d3e6ca12",
+    "scope": "battery-case only: table display rounded to one decimal; excluded appliances consolidated immediately after table; variation paragraph retains temperature/use/model factors",
+    "checks": [
+      "Six exact replacements only; content before battery-case and after prepare-outage byte-equivalent",
+      "No calculation or calculation-method edits; 10h/70h retained"
+    ],
+    "status": "Diff self-check and manager text review complete; no new visual review for this minor edit",
+    "managerChecks": [
+      "Confirmed four table values rounded to one decimal;10h/70h unchanged",
+      "Excluded appliances retained once near table; variation explanation preserved",
+      "Prior display and navigation review belongs to previousArticleSha256; pointer limitation remains"
+    ]
+  }
+}

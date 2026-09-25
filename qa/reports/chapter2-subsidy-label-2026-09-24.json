@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-24",
+  "html_before_sha256": "31e3626b9565a929451576dfdfbbeaf8e0df8cedd961c6f907fd0a3c9246199a",
+  "html_after_sha256": "9fa904b134b03727836136af16dc4aa0132be95215809af0d85173e92cd8235d",
+  "css_before_sha256": "73dd8201def082ed860e2527f5e8040e6468eec76a2800abfc0b578cbd77c873",
+  "css_after_sha256": "2fb9d1258d928e2e27f8cbcb5c3c89122b7ead3355acbc31489ab3cf4f7658e2",
+  "scope": "第2章図3の補助金ラベルのみ．PC中央/スマホ枠上引出線，重複見出し注記と旧凡例を除去．",
+  "ratios_unchanged": [
+    0.5344129554655871,
+    0.46558704453441296,
+    0.9190283400809717,
+    0.08097165991902834
+  ],
+  "no_process_started": true,
+  "browser_qa": {
+    "url": "http://127.0.0.1:5173/pages/electricity-sales.html#installation-cost-comparison",
+    "pc": {
+      "viewport_width": 1280,
+      "track_width": 800,
+      "subsidy_width": 64.77083587646484,
+      "outlay_width": 735.21875,
+      "label": "補助金",
+      "centered_in_frame": true
+    },
+    "mobile": {
+      "viewport_width": 360,
+      "track_width": 312.66668701171875,
+      "subsidy_width": 25.3125,
+      "outlay_width": 287.34375,
+      "label": "補助金20万円",
+      "above_frame_with_leader": true
+    },
+    "visual_checks": {
+      "no_label_overlap": true,
+      "no_horizontal_overflow": true,
+      "same_green_solar_battery": true,
+      "white_battery_divider": true,
+      "amounts_132_247_227_20_preserved": true
+    },
+    "residual_issues": []
+  }
+}

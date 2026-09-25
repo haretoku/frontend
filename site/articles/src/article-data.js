@@ -1,3 +1,5 @@
+import { QUOTE_ACTION } from "../../shared/fixed-quote-bar.js";
+import { bindArticleBibliography } from "./article-bibliography.js";
 import { replacesLegacyPrefecture } from '../../simulator/src/diagnostic-subsidy.js';
 import { setupArticleQuoteBar } from "./article-quote-bar.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
@@ -87,6 +89,7 @@ async function initialize() {
       const programs = [...diagnosticPrograms, ...(publicData.municipal_subsidy_programs ?? []), ...publicData.prefectures.flatMap(region => [...(region.subsidy_programs ?? []), ...(replacesLegacyPrefecture(diagnosticPrograms,region.code)?[]:(region.candidate_subsidy_programs ?? []).filter(program => !diagnosticIds.has(program.id)))])];
       for (const program of programs) {
         const details = document.createElement('details');
+        details.id = 'subsidy-program-' + program.id;
         const summary = document.createElement('summary');
         const branchLabel = {shiga_basic_fit_solar_battery:'基本枠（FIT）',shiga_priority_non_fit:'重点枠（非FIT）'}[program.machine_rule];
         summary.textContent = program.program_name + (branchLabel ? ' — '+branchLabel : '');
@@ -125,6 +128,7 @@ async function initialize() {
           details.append(paragraph);
         }
         subsidyAssumptions.append(details);
+        if (typeof location !== 'undefined' && decodeURIComponent(location.hash.slice(1)) === details.id) { details.open = true; requestAnimationFrame(() => details.scrollIntoView()); }
       }
     }
 
@@ -167,6 +171,7 @@ async function initialize() {
     }
 
     bindSources(metadata);
+    bindArticleBibliography();
     if (status) {
       status.textContent = `公開データ版：${publicData.data_version}`;
     }
@@ -181,3 +186,8 @@ initializeTableOfContents();
 initialize();
 
 setupArticleQuoteBar();
+
+for (const button of document.querySelectorAll("[data-inline-quote-action]")) {
+  button.textContent = QUOTE_ACTION.label;
+  button.disabled = QUOTE_ACTION.disabled;
+}

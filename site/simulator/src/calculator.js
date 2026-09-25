@@ -29,6 +29,21 @@ function roundTo(value, digits) {
   return Math.round(value * factor) / factor;
 }
 
+// Round this serialized energy field directly from its binary value, as Python round(x, 6).
+// Multiplying by 1e6 first can introduce a second rounding at decimal half boundaries.
+export function roundAnnualGenerationKwh(value) {
+  const magnitude = Math.abs(value);
+  const scaledBinary = magnitude * 128;
+  if (Number.isSafeInteger(scaledBinary) && scaledBinary % 2 === 1) {
+    // Exact half at six decimal places: value * 1e6 = (value * 128) * 15625 / 2.
+    const numerator = BigInt(scaledBinary) * 15625n;
+    const lower = numerator / 2n;
+    const even = lower % 2n === 0n ? lower : lower + 1n;
+    return Math.sign(value) * Number(even) / 1e6;
+  }
+  return Number(value.toFixed(6));
+}
+
 function temporalProfiles(annualConsumption, annualGeneration, occupancyRate, orientation, model) {
   const timeBinCount = model.time_bin_definition.count;
   if (timeBinCount !== 8760) {
@@ -1084,7 +1099,7 @@ export function calculateEstimate(input, publicData) {
       annual_energy_flows: annualEnergyFlows.map((item) => Object.fromEntries(
         Object.entries(item).map(([key, value]) => [
           key,
-          Number.isInteger(value) ? value : key === "pv_generation_factor" ? Number(value.toFixed(15)) : roundTo(value, 6)
+          key === "annual_generation_kwh" ? roundAnnualGenerationKwh(value) : Number.isInteger(value) ? value : key === "pv_generation_factor" ? Number(value.toFixed(15)) : roundTo(value, 6)
         ])
       ))
     },

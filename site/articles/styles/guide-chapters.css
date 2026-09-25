@@ -1,0 +1,205 @@
+/* Guide chapter layout; economics keeps its approved implementation. */
+.guide-hero {
+  margin-block: 1.5rem 2.5rem;
+  padding-block: clamp(3rem, 5vw, 4.5rem);
+  background: #008653;
+  color: #fff;
+}
+.guide-hero__inner {
+  width: min(100% - 4rem, 72rem);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.guide-hero__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; font-size: .82rem; }
+.guide-hero__category { padding: .2rem .8rem; border: 1px solid #fff; border-radius: 2px; font-weight: 700; }
+.guide-hero h1 { margin: 1.15rem 0; color: #fff; font-size: clamp(2rem, 3.1vw, 2.65rem); line-height: 1.45; letter-spacing: .015em; text-wrap: balance; }
+.guide-hero h1 span { display: inline-block; }
+.guide-hero__lead { margin: 0; font-size: 1.05rem; line-height: 2; }
+.guide-hero__scope { margin: 1.25rem 0 0; font-size: .8rem; }
+.guide-hero__visual { margin: 0; }
+.guide-hero__visual img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: .4rem; }
+@media (max-width: 52rem) {
+  .guide-hero { margin-block: 1rem 2rem; padding-block: 1.75rem; }
+  .guide-hero__inner { width: min(100% - 2rem, 38rem); grid-template-columns: 1fr; gap: 1.5rem; }
+  .guide-hero h1 { font-size: clamp(1.75rem, 5.5vw, 2.25rem); }
+  .guide-hero__lead { font-size: .95rem; line-height: 1.85; }
+  .guide-hero__scope { margin-top: 1rem; }
+}
+
+/* Answer-led headings and two-level contents. */
+#guide-article :is(h2, h3, h4) {
+  border: 0;
+  padding-left: 0;
+  font-weight: 800;
+  line-height: 1.55;
+}
+#guide-article > section[id] > h2 {
+  margin: 0 0 1.5rem;
+  color: #008653;
+  font-size: clamp(1.6rem, 2.5vw, 2rem);
+}
+#guide-article section[id] > h3,
+#guide-article #household-comparison > h3 {
+  margin: 2.25rem 0 1rem;
+  color: #202824;
+  font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+}
+#guide-article h4 {
+  margin: 1.75rem 0 .75rem;
+  color: #202824;
+  font-size: 1.1rem;
+}
+#guide-article .article-action-stack__copy h4 {
+  margin-top: 0;
+}
+#guide-article [id] { scroll-margin-top: 1.5rem; }
+#guide-article .article-toc ol {
+  columns: 1;
+  list-style: none;
+  padding-left: 0;
+}
+#guide-article .article-toc > ol { margin: 1.5rem 0 .5rem; }
+#guide-article .article-toc > ol > li { margin: 0 0 1.25rem; }
+#guide-article .article-toc > ol > li > a { font-weight: 800; }
+#guide-article .article-toc ol ol {
+  margin: .5rem 0 0;
+  padding-left: 1.25rem;
+  font-size: .95rem;
+}
+#guide-article .article-toc ol ol li { margin-block: .45rem; }
+#guide-article .article-toc ol ol a { font-weight: 400; }
+
+#guide-article > section { padding-block: 2.5rem; }
+#guide-article > section > .guide-chapter-photo { margin: 0 0 2rem; }
+#guide-article .guide-chapter-photo { overflow: hidden; border-radius: .4rem; }
+#guide-article .guide-chapter-photo img { display: block; width: 100%; height: auto; }
+#guide-article .guide-chapter-footer { margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid #dce3df; font-size: .88rem; line-height: 1.8; }
+#guide-article .guide-resource-label { margin: 0 0 .6rem; font-weight: 700; }
+#guide-article .guide-chapter-footer .source-list { margin: 0 0 1.25rem; }
+#guide-article .guide-chapter-footer li { margin-block: .4rem; }
+#guide-article .guide-action-title { font-size: 1.3rem; font-weight: 800; color: #202824; }
+#guide-article .article-action-stack__row--internal { grid-template-columns: minmax(0,1fr) auto; }
+#guide-article .article-table { width: 100%; table-layout: fixed; }
+#guide-article .article-table th { width: 28%; }
+#guide-article .article-table :is(th,td) { overflow-wrap: anywhere; }
+#guide-article .guide-chapter-conclusion { margin-top: 2rem; }
+@media(max-width:36rem) { #guide-article .article-action-stack__row--internal { grid-template-columns: 1fr; } #guide-article .primary-button { width: 100%; } }
+
+/* Keep the two-column document checklist readable at narrow widths. */
+#application-records .article-table caption {
+  padding-bottom: .75rem;
+  text-align: left;
+  color: var(--color-muted);
+  font-size: .9rem;
+}
+#application-records .article-table { display: table; }
+#application-records .article-table thead { display: table-header-group; }
+#application-records .article-table tbody { display: table-row-group; }
+#application-records .article-table tr { display: table-row; }
+#application-records .article-table :is(th, td) { display: table-cell; }
+#application-records .article-table tr > :first-child { width: 28%; }
+#application-records .article-table tr > :last-child { width: 72%; }
+
+#application-flow .subsidy-application-flow {
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+}
+#application-flow .subsidy-application-flow > li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0 0 1.5rem;
+}
+#application-flow .subsidy-application-flow > li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 2rem;
+  bottom: 0;
+  left: calc(1rem - .5px);
+  width: 1px;
+  background: var(--color-border);
+}
+#application-flow .subsidy-application-flow > li:last-child { padding-bottom: 0; }
+#application-flow .subsidy-application-flow__number {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid var(--color-primary);
+  border-radius: 50%;
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  line-height: 1;
+}
+#application-flow .subsidy-application-flow__title {
+  display: block;
+  line-height: 2rem;
+}
+#application-flow .subsidy-application-flow p { margin: .2rem 0 0; }
+
+#comparison-items .quote-comparison-table { display: table; }
+#comparison-items .quote-comparison-table caption {
+  padding-bottom: .75rem;
+  text-align: left;
+  color: var(--color-muted);
+  font-size: .9rem;
+}
+#comparison-items .quote-comparison-table tbody { display: table-row-group; }
+#comparison-items .quote-comparison-table tr { display: table-row; }
+#comparison-items .quote-comparison-table :is(th, td) { display: table-cell; }
+#comparison-items .quote-comparison-table th { width: 28%; }
+#comparison-items .quote-comparison-table td { width: 72%; }
+
+#comparison-items .quote-price-example thead { display: table-header-group; }
+#comparison-items .quote-price-example :is(th, td) { width: 33.333%; }
+
+/* Keep the outage comparison readable as a three-column table on small screens. */
+#solar-outage .outage-role-table { display: table; table-layout: fixed; }
+#solar-outage .outage-role-table caption { text-align: left; color: var(--color-muted); font-size: .9rem; padding-bottom: .75rem; }
+#solar-outage .outage-role-table thead { display: table-header-group; }
+#solar-outage .outage-role-table tbody { display: table-row-group; }
+#solar-outage .outage-role-table tr { display: table-row; }
+#solar-outage .outage-role-table :is(th, td) { display: table-cell; width: 40%; }
+#solar-outage .outage-role-table tr > :first-child { width: 20%; }
+
+#battery-outage :is(.outage-appliance-table, .outage-duration-table) { display: table; table-layout: fixed; }
+#battery-outage :is(.outage-appliance-table, .outage-duration-table) caption { text-align: left; color: var(--color-muted); font-size: .9rem; padding-bottom: .75rem; }
+#battery-outage :is(.outage-appliance-table, .outage-duration-table) thead { display: table-header-group; }
+#battery-outage :is(.outage-appliance-table, .outage-duration-table) tbody { display: table-row-group; }
+#battery-outage :is(.outage-appliance-table, .outage-duration-table) tr { display: table-row; }
+#battery-outage :is(.outage-appliance-table, .outage-duration-table) :is(th, td) { display: table-cell; }
+#battery-outage .outage-appliance-table tr > :first-child { width: 30%; }
+#battery-outage .outage-appliance-table tr > :last-child { width: 70%; }
+#battery-outage .outage-duration-table :is(th, td) { width: 33.333%; }
+
+@media (max-width: 40rem) {
+  .guide-hero__visual img,
+  #guide-article .guide-chapter-photo img { aspect-ratio: 5 / 2; height: auto; object-fit: cover; }
+  .guide-benchmark-page .quote-bar:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr) 38%; gap: .3rem .75rem; }
+  .guide-benchmark-page .quote-bar__copy { display: contents; }
+  .guide-benchmark-page .quote-bar__copy p { display: block; grid-column: 1; font-size: .75rem; }
+  .guide-benchmark-page .quote-bar__copy small { grid-column: 1; }
+  .guide-benchmark-page .quote-bar__button { grid-column: 2; grid-row: 1 / 3; min-width: 7rem; align-self: center; }
+  #guide-article .quote-price-example th,
+  #guide-article .quote-price-example td { padding-inline: .35rem; }
+  #guide-article .quote-price-example td { white-space: nowrap; }
+}
+
+@media (max-width: 40rem) {
+  #guide-article :is(.outage-duration-table, .outage-role-table),
+  #guide-article :is(.outage-duration-table, .outage-role-table) caption,
+  #guide-article :is(.outage-duration-table, .outage-role-table) tbody { display: block; width: 100%; }
+  #guide-article :is(.outage-duration-table, .outage-role-table) tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: .25rem 1rem; padding: .9rem 0; }
+  #guide-article :is(.outage-duration-table, .outage-role-table) tbody th { display: block; grid-column: 1 / -1; width: auto; padding: 0 0 .35rem; }
+  #guide-article :is(.outage-duration-table, .outage-role-table) tbody td { display: block; width: auto; padding: 0; border: 0; }
+}
+
+/* Separate complete rows consistently, including mobile row headers. */
+#guide-article .article-table tr { border-bottom: 1px solid var(--color-border); }
+#guide-article .article-table :is(th, td) { border-bottom: 0; }

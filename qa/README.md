@@ -1,6 +1,8 @@
 # qa
 
-現在のトップ・記事検収状態は末尾「2026-09-20 トップ・記事の最終検収完了」を参照する．過去の検査記録にある記事の未完・未実施は当時の状態であり，同節で完了した項目を現行残件として扱わない．
+本書の版別記録は当時の事実であり，記録中の停止・待機・固定指示を現行作業へ一般化しない．現在の権限と検収タイミングは[AI分業](../../business-research/運営/AI分業.md#検収代理承認完了条件)に従う．
+
+現在のトップ・記事検収状態は「2026-09-20 トップ・記事の最終検収完了」を参照する．過去の検査記録にある記事の未完・未実施は当時の状態であり，同節で完了した項目を現行残件として扱わない．
 
 ## 役割
 
@@ -75,11 +77,9 @@ AI①は県別内容のfingerprint，日付・担当・範囲・根拠が揃う�
 
 ## 検収の段階
 
-> **結論：①公式資料→収集データ，②収集データ→計算結果，③計算結果→実画面を区別し，③まで合格して初めて対象範囲の画面検収を完了する．**
+> **結論：本書はfrontendの検査範囲・合格条件・結果を定め，担当・実施タイミング・完了承認はAI分業に従う．**
 
-3段階の全体方針と担当は[運営のAI分業](../../business-research/運営/AI分業.md)，①・②の検証は[backend QA方針](../../backend/qa/docs/QA方針.md)，③の実画面検査は本書を参照する．frontendとPythonの共通ケース一致確認（`tests/`と`fixtures/`）は②の連携検査であり，①の公式資料との照合や②の収集データからの計算検証を代替しない．backendの合格やfrontendの自動テスト合格だけで，全体検収または公開完了としない．公開操作は別途の明示承認と公開手順に従う．
-
-独立レビューの実施タイミングは[AI分業「検収・代理承認・完了条件」](../../business-research/運営/AI分業.md#検収代理承認完了条件)に集約する．本書の検査項目は変更担当の自己確認にも使い，微修正ごとに別担当の③検収を要求しない．自己確認による修正完了と独立検収完了を区別する．
+3段階の分担は[AI分業の診断の3段階検収](../../business-research/運営/AI分業.md#診断の3段階検収)，独立レビューの実施条件は[検収・代理承認・完了条件](../../business-research/運営/AI分業.md#検収代理承認完了条件)を参照する．①・②の検証は[backend QA方針](../../backend/qa/docs/QA方針.md)が定める．frontendとPythonの共通ケース一致確認（`tests/`と`fixtures/`）は②の連携検査であり，公式根拠・算式の独立検証とは区別する．
 
 計算処理または計算に関係するデータ連携を変更する場合は，frontend QAを実行し，backend基準計算ケースとの一致を確認する．見た目，レイアウトまたは導線の変更は，自動テストだけで完了とせず，実ブラウザで確認する．検査するケースと範囲は「必須ケースと検査範囲」に従う．
 
@@ -536,3 +536,1016 @@ backendから先行引渡しを受領した`backend/dist/review/aichi-calculatio
 安城150,000円・知立400,000円の各税込仮定閾値について，直前1円・一致・直後1円と標準費1,149,500円を確認した．岩倉は税抜費の4分の1・上限200,000円の基本に，税抜600,000円以上で同率・同上限の追加を1回だけ加え，既存defer_rounding_to_formula_totalで合算後1,000円未満を切り捨てる．税込659,999／660,000／660,001／880,000／1,149,500円に対する149,000／300,000／300,000／400,000／400,000円を確認した．税込663,300円では各150,750円を合算して301,000円となり，成分別丸めの300,000円とは区別する．最低経費未指定・別費目選択・費目欠落も確認した．愛知草案専用3件及び共通方針回帰3件の計6テストPASS．
 
 テストには受領した3規則を固定し，backendファイルを実行時参照しない．今回の対象は評価機能のみで，愛知の併用規則接続・独立②は未了，草案を完成データとして公開同期していない．現publicは静岡版SHA-256 `c9c3e42b5e50f0e58ca526b44017f036542b40ef6afc917ebaf70b2834d81279`を維持する．backend変更なし，ブラウザー検査・追加プロセス起動・commit・push・deployなし．共有Viteは継続閲覧用に保持する．
+
+## 2026-09-20 TOPヒーローの選定写真への差替え
+
+> **結論：ユーザー選定の住宅・太陽光パネル・ノートPC写真をTOPへ組み込み，PC1280px／360px実画像自己確認と対象1テストはPASS．本番公開は行っていない．**
+
+統括から伝達されたユーザーの「トップにいれてみようか」という限定承認に基づく．指定原本`exec-d4ad9776-0b87-4326-927d-02ffff769bd9.png`を保持し，画像全体を1200×800・148,074 bytesの`site/shared/assets/hero-solar-home.webp`へ変換した．TOPの天秤画像参照と代替テキストを差し替え，既存hero__motifをPC最大32 rem・スマートフォン最大18 remへ調整した．縦横比を保持し，屋根と左下のPCが両方見える構図とする．記事カード及び他画像は変更していない．
+
+既存localhost:5173を利用し，PC1280×900と360×800で写真の表示・構図・周囲の見出し及び診断フォームを実画像確認した．写真の切抜き・欠け・重なりなし．360pxでは写真の下にフォームが続く．画像読込完了，natural size1200×800，文書345px／viewport360px，console error0．既存TOPテストの画像・サイズ・モバイル表示期待を現仕様へ更新し，既存リード文のspanを許容して対象1件PASS．画面設計を更新．
+
+変更はTOP HTML，共通CSS内のhero__motif，新WebP，既存TOPテスト，画面設計及び本QA記録．確認タブ36終了・viewport解除済み，共有Viteはユーザー閲覧用に保持．新規補助プロセス起動なし．全国データ作業は停止を維持し，commit・push・deployなし．閲覧URLは`http://127.0.0.1:5173/`．
+
+## 2026-09-20 TOPヒーローC案の反映
+
+> **結論：承認済みC案を実装し，PC1280px／360px実画像・スマホからの診断操作・対象1テストはPASS．公開操作は行っていない．**
+
+選定済みhero-solar-home.webpをPCのヒーロー全幅へ配置し，左の既存見出し・説明・特徴と右の白地フォームを重ねた．文字部分だけ局所的な白グラデーションを加え，屋根と左下のPCを見せる．52 rem以下では重なりを解除し，見出し・説明・特徴→写真→フォームの順とする．01／02案内は写真領域の下へ移動した．既存ロゴ・文言・入力機能を維持し，記事・画像素材・データを変更していない．
+
+既存5173でPC1280×900と360×800を実画像確認し，本文・フォームの欠けや重なりなし．360pxの文書幅345px，横はみ出しなし．静岡県・御殿場市・月12,000円を実UIで入力して診断ボタンを押し，条件付きURLの診断結果へ遷移した．console error0．対象TOPテスト1件PASS．確認画像は一時領域の`haretoku-top-c-pc.png`と`haretoku-top-c-mobile.png`へ保存して統括へ引き渡す．
+
+変更ファイルはsite/index.html，site/shared/styles/main.css，qa/tests/site-integrity.test.js，site/docs/画面設計.md，本QA記録．確認タブ37終了・viewport解除，共有Vite保持．新規補助プロセスなし．全国作業停止を維持し，commit・push・deployなし．閲覧URLは`http://127.0.0.1:5173/`．
+
+## 2026-09-20 TOP左コピーの可読性調整
+
+> **結論：文字背後を白96％に保ち，右・下の外周だけ透明へなじませた．1280px・960px・360pxの実画像確認と対象1テストはPASS．**
+
+ユーザー承認の限定調整として，左コピーの高さに追従する白い背景を追加した．大見出し・リード・特徴の背後は十分な白さを維持し，文字外の右4 rem・下3 remだけマスクで透明へ変化させる．枠・角丸・影なし．写真の配置・色・PC内グラフ，フォント・文言・右フォームは変更していない．背景の基準をコピー領域に限定するため写真figureをコピーの隣へ移し，360pxの写真前余白を調整して既存の縦配置を維持した．
+
+localhost:5173の1280×900及び960×900実画像で，小さいリード・特徴の背景干渉が抑えられ，文字領域外の屋根と左下PCが鮮明なことを確認した．360×800は見出し→写真→フォームの既存配置を維持し，文書345px／viewport360px，console error0．対象TOPテスト1件PASS．画像は一時領域のharetoku-top-legible-1280.png，haretoku-top-legible-960.png，haretoku-top-legible-360.pngへ保存した．変更はsite/index.html，site/shared/styles/main.css，画面設計及び本QA記録のみ．確認タブ38終了・viewport解除，共有Vite保持．全国作業停止継続，commit・push・deployなし．
+
+## 2026-09-20 TOPの青空B案と実グラフ反映
+
+> **結論：最新承認B案へ変更し，PC画面には実際の診断描画SVGを射影した．1280px・960px・360px実画像，SVG検証及び対象1テストはPASS．**
+
+統括追送の原本exec-4523afdc-08a4-48df-a43e-ee810113126c.pngを保持し，1536×1024のhero-solar-sky.webpへ変換した．見出し・説明・特徴は空へ配置し，白い面・グラデーションを廃止．文字は黒寄り濃色，トクのみ既存緑を維持する．PCでは中央下の屋根，左下PC，右白フォームを配置し，360pxは既存の縦配置を維持した．
+
+hero-haretoku-chart.svgはlocalhost診断の実DOMから取得した描画であり，生成画像の模式線ではない．条件は福島07・既存住宅・4kW・solar_only・south・unknown_standard・standard，月額未入力による地域平均17,508円．実描画の3曲線の座標，面，費用発生点，損益ゼロ交点，目盛りと計算済みスタイルを保存した．末尾の強調結果額及びキャプションと操作用透明要素だけを除外し，右の不要な余白をviewBoxで詰めた．これは取得時点の表示例であり，TOP入力に連動する別計算ではない．PC内側四隅(234,622)・(567,619)・(585,820)・(238,839)への射影行列をCSSで適用し，背景と同じ座標系で縮尺を合わせる．原本写真の画面は空白のまま保持する．
+
+1280×900・960×900実画像で空の文字と実グラフの画面内表示を確認した．360×800も写真とグラフが同じ比率で縮小し，見出し→写真→フォームの順序を維持．文書345px／viewport360px，両素材読込完了，console error0．SVGのXML構文・3本のpolyline・強調結果要素不在を確認し，対象TOPテスト1件PASS．スクリーンショットは一時領域のharetoku-top-b-1280.png，haretoku-top-b-960.png，haretoku-top-b-360.pngへ保存して統括へ引き渡す．
+
+変更はsite/index.html，site/shared/styles/main.css，新WebP・実グラフSVG，qa/tests/site-integrity.test.js，画面設計，本QA記録．記事・公開データ・計算コードの変更なし．取得タブ39と確認タブ40終了・viewport解除済み，共有5173保持．新規補助プロセス起動なし．全国作業停止継続，commit・push・deployなし．
+
+## 2026-09-20 低い植栽の背景・グラフ補助表示の除去
+
+> **結論：採用された低い植栽の背景へ差し替え，ヒーロー内の実グラフから軸・数字・目盛り・ゼロ基準線を除去した．1800／1280／960／360pxの表示確認はPASS．**
+
+指定原本exec-7b62fda5-ecf3-4fe7-8fb4-4a10c418ea38.pngを保持し，1536×1024のhero-solar-low-plants.webpを新名称で配置した．グラフもhero-haretoku-chart-clean.svgを新名称で参照し，旧キャッシュと区別する．実描画SVGからtext及びgrid/zeroのline要素だけを除き，3本のpolyline・circle・polygonの全属性が変更前と同一であることを検証した．収支線の形・点・面・点線の濃さは維持し，吹き出しや振れ幅の変更は採用していない．実simulatorは不変更．
+
+既存5173で1800×1000・1280×900・960×900・360×800の実画像を確認し，文字に植物が重ならず，PC画面内の実グラフが読み込まれ，同じ射影位置に表示されることを確認した．1800pxでは従来の背景cover相当の配置によりPC筐体下部がヒーロー下端で切れるが，グラフ本体は表示される．360pxは既存縦配置を維持，文書345px／viewport360px，両素材読込完了，console error0．参照素材名を更新した対象TOPテスト1件PASS．確認画像は一時領域のharetoku-top-lowplants-{1800,1280,960,360}.pngへ保存した．
+
+変更は新背景WebP・表示用SVG，site/index.html，qa/tests/site-integrity.test.js，画面設計及び本記録．CSS・計算・公開データ・記事は不変更．確認タブ41終了・viewport解除，共有Vite保持．全国作業停止継続，commit・push・deployなし．
+
+## 2026-09-20 ヒーローPC内グラフ⑤軸線＋選択点
+
+> **結論：承認⑤を派生SVGへ実装し，PC1280px／360px表示と実曲線座標の不変確認，対象1テストはPASS．**
+
+hero-haretoku-chart-selected.svgを追加し，薄灰色L字の左縦軸・下横軸，実在する20年目費用点(cx=413.3333333333333，cy=129.57800410038718)の緑リング，選択点から下軸への細いガイド線，小さいカーソルを静的に配置した．3本の実曲線のpoints属性を元SVGと照合して不変を確認し，費用点・20年目段差を維持する．代替線のopacityを0.48から0.85へ上げ，viewBoxを60 4 538 250とし，共通表示スケールで上下余白を減らした．線ごとの位置・計算値は変更していない．数字・文字・目盛り・グリッド・ゼロ線・吹き出しなし．
+
+既存5173で1280×900及び360×800の実画像を確認し，PC画面内の射影・読込・はみ出しなし．360pxの文書345px，console error0．対象TOPテスト1件PASS．画像は一時領域のharetoku-top-graph5-pc.pngとharetoku-top-graph5-360.pngへ保存した．変更は派生SVG，site/index.htmlの参照，既存TOPテストの参照期待，画面設計及び本記録のみ．背景・コピー・フォーム・CSS・実simulator・公開データは不変更．元SVG保持．確認タブ42終了・viewport解除，共有5173保持，全国停止継続，commit・push・deployなし．
+
+### 2026-09-20 ⑤の縦ガイド・装飾カーソル除去
+
+最新ユーザー指摘に基づき，hero-haretoku-chart-selected.svgからhero-chart-selection-guideとhero-chart-cursorの2要素だけを除去した．残る全要素が変更前と同一であることをSVG比較で確認し，L字軸・選択点リング・実曲線・点・面・濃さ・スケールを維持した．1280×900のTOP実画像で除去後の表示を確認，画像は一時領域haretoku-top-graph5-simplified.pngへ保存．画面設計の該当記述を整合し，追加全件テストなし．確認タブ43終了・viewport解除，共有5173保持．実simulator及び他デザイン不変更，全国停止継続，commit・push・deployなし．
+
+## 2026-09-20 TOPの画像以外の整理
+
+> **結論：案内をフォーム下へ集約し，記事カードの背景・余白と特徴アイコンを整理した．対象TOPテスト1件，PC1280px／360pxの表示・導線自己確認はPASS．**
+
+01／02案内と準備中の見積もりボタンを撤去し，設置・維持費及び補助金を含む概算と実見積もりの説明をフォーム下へ集約した．記事4件はPC2列を維持し，先頭の濃緑背景を解除してタイトル・説明・リンクの余白を縮小した．特徴3項目のチェックを同じ装飾SVGへ統一し，記事下の「使用データについて」の帯を削除した．フォーム内の計算方法リンクとフッター方針・免責を維持する．写真，グラフ，記事画像とその表示方法，記事タイトル・本文，計算及び公開データは変更していない．
+
+既存5173でPC1280×900／360×800を確認し，PC2列同背景，360px既存リスト，横溢れなし，画像読込，記事からフッターへの連続性を確認した．記事4件のhrefを確認し，代表の収支記事へ実遷移した．TOPで福島県・月額12000円を入力して診断へ進み，入力値の継承と収支表示を確認した．対象TOPテスト1件及びgit diff --checkはPASS．証跡は一時領域haretoku-top-simple-pc.png／haretoku-top-simple-360.pngの通常画面キャプチャ．
+
+変更ファイルはsite/index.html，site/shared/styles/main.css，qa/tests/site-integrity.test.js，site/docs/画面設計.md及び本記録．確認タブ44・45を終了しviewport解除済み．新規補助プロセスなし，共有Vite5173はユーザー閲覧用に保持．全国作業停止継続，commit・push・deployなし．独立検収は統括へ引渡す．
+
+## 2026-09-20 記事代表画像・画像ポリシー・見積もり文言
+
+> **結論：採用された水色のパネル・円硬貨画像を収支記事の3か所へ反映し，画像ポリシーと見積もりの確定対象を正本へ記録した．PC／360px自己確認と対象3テストはPASS．**
+
+指定原本exec-5f7eeae4-9978-47af-8047-3a01e93cabc2.pngを保持し，1536×1024・77,352 bytesのarticle-solar-economics-blue.webpへ変換した．TOPカード，ガイド一覧メタデータ，同記事冒頭から共用する．TOPは既存contain，ガイドは採用画像だけcontainへ変更，記事冒頭は自然比率を保持し，パネルと硬貨を切らない．他記事の画像，本文図解及びTOPヒーローは変更していない．
+
+画面設計「記事画像・イラストポリシー」を正本とし，MUST／RECOMMEND／NITSを記載した．旧写真制限，濃緑カード，使用データ帯，カテゴリー固定図版・配色・4:3制約を最新方針又は同節参照へ整理した．「見積もり導線の表現」では設備仕様・設置費の確定に限定し，将来費用・補助受給・利益の確定と区別した．TOPと収支記事導線，費用記事・見積もり記事の導線文を限定修正し，事実確認や補助条件の確認を一括置換していない．
+
+既存5173でTOP／一覧／記事冒頭を1280×900及び360×800で確認し，採用画像読込，主題全体の表示，参照切れなしを確認した．TOPテストは旧画像期待を更新後PASS，ガイド一覧とローカル参照テストもPASS．証跡は一時領域haretoku-blue-{top,guide,article}-{pc,360}.pngの6枚．確認タブ46終了，viewport解除，共有5173は閲覧用に保持，新規補助プロセスなし．全国停止継続，計算・公開データ変更なし，commit・push・deployなし．統括へ独立検収を引き渡す．
+
+### 2026-09-20 PC記事カードの3:2枠
+
+承認された枠比率変更を実施した．TOPは40 rem超だけ4枚の画像枠を幅100％・高さauto・aspect-ratio 3/2へ変更し，既存containを維持した．ガイド一覧も従来16:9枠による比率不整合があったため，共通枠を3:2へ揃えた．採用画像そのもの，記事冒頭の自然比率，スマートフォンTOPのコンパクト配置は変更していない．画面設計「記事画像・イラストポリシー」に，カード枠規則と原本比率の非強制を区別して追記した．
+
+既存5173で1280×900／360×800のTOP・一覧を実画面確認した．PC TOP4枠は520×346.67px，採用画像は左右帯なしでパネル・硬貨全体を表示．360px TOP4枠は72×72pxのまま，画像読込完了・横溢れなし．一覧も3:2で採用画像全体を表示した．証跡は一時領域haretoku-ratio-{top,guide}-{pc,360}.pngの4枚．追加テスト・全suiteなし，git diff --check PASS．変更はshared/styles/main.css，solar/styles/guides.css，画面設計及び本記録．タブ47終了・viewport解除，共有5173保持，新規補助プロセスなし，全国停止継続，commit・push・deployなし．
+
+### 2026-09-20 収支・補助金の代表写真
+
+採用指定の収支写真案C（exec-50d09691-ea79-4e61-ace0-e1c7944d1e0f.png）と申請書を書く手元（exec-bcf57861-046a-4dc0-a764-ca52d313cf28.png）を，article-solar-economics-photo.webp（196,730 bytes）及びarticle-subsidies-application-photo.webp（138,054 bytes）へ保存した．両方1536×1024．各写真をTOPカード・ガイド一覧・記事冒頭で共用し，一覧と記事のaltを更新，TOPは重複読み上げを避ける既存装飾扱いを維持した．原本と旧イラストは保持する．旧水色背景の専用CSSを除去し，TOPの写真枠背景を透明にして色付き帯を除いた．PC3:2，スマホTOP72px角の配置，本文冒頭の自然比率を維持する．本文図解，TOPヒーロー及び他記事は不変更．
+
+画面設計「記事画像・イラストポリシー」の採用例と媒体選定を更新し，主題の伝わり方・構図の自然さ・カードでの見やすさによって比較し，概念だからイラストと固定しない規則へ整合した．記事目的MDは事業支援の担当で，本作業では他リポジトリを編集していない．
+
+1280×900／360×800でTOP・一覧・両記事冒頭を確認し，写真読込，主題の表示，色付き帯なし，スマホ配置維持を確認した．TOP及び一覧の360px時文書幅345pxで横溢れなし．対象3テスト（TOP・一覧・ローカル参照）及びdiff check PASS．証跡は一時領域haretoku-photo-{top,guide,electricity-sales,subsidies}-{pc,360}.pngの8枚．タブ48終了・viewport解除，共有5173保持，新規補助プロセスなし，全国停止維持，commit・push・deployなし．
+
+
+## 2026-09-20 静岡3町追補の承認版同期と自己検査
+
+> **結論：承認済み正本3ファイルを完全一致で同期し，計算204件とPC・360pxの自己確認を完了した．統括の独立③PASSを受領した．**
+
+引渡し正本：`backend/dist/review/shizuoka-three-town-followup-2026-09-20.json` の `three_municipality_final_proposals.local_release`．統括の独立①②合格連絡（南伊豆4件，松崎境界8件，公開5件及びoptional Schema差分）に基づく同期であり，backend自己31件・Schema確認とfrontend自己検査を独立検収へ読み替えない．Schema 11.8.0，data_version 2026-09-20，generated_at 2026-09-20T13:34:33+00:00．生成物の手編集は行っていない．
+
+|ファイル|SHA-256|
+|---|---|
+|data/input/public-data.json|`babac96a1214a195df1cb15d00a85a3342d49b074d2dfbc70226d637deb09615`|
+|qa/fixtures/calculation-cases.json|`dc7a675b9da1c0f209616b56d8ff956b0c2e4d64f6c72eb09cd5be45dbb836bd`|
+|data/input/metadata.json|`53152a57f9da0710cab521dde508cf99c8ed5febf185d568062d6d8932eade8e`|
+
+自己計算：`node --test qa/tests/shizuoka-subsidy.test.js qa/tests/aichi-formula.test.js qa/tests/calculator.test.js qa/tests/niigata-subsidy.test.js` は204/204 PASS．南伊豆は両設備の既存20万円・新築0円，税込109999/110000/110001円及び3299999/3300000/3300001円で税抜費用下限と高額枝排他を確認．松崎は両住宅・両設備20万円，0.019/0.02/3.999/4/4.001/9.999/10/10.001kWの切捨て・上限・対象外を確認．今回，表示側計算の追加修正は不要だった．SHA期待値を承認版へ更新し，新潟地域テストから古い全国件数固定の2検査を外した（新潟30自治体24制度・代表額・条件の検査は維持）．
+
+画面自己確認：共有ViteのPC1280×900及び360×800で確認．南伊豆はPCの既存20万円，住宅変更による新築0円と住宅区分不一致理由，360pxの太陽光のみ20万円，条件付き注記（居住1年以上・町内登録業者・蓄電池経費除外）を確認．松崎はPCで新築20万円と受付継続仮定を確認し，360pxで内訳と長文の折返しを目視確認．西伊豆は両幅で0円と「調査した範囲では見つかっていません」「制度が存在しないと確定したものではありません」を確認．幅計測はPC1265/1265px，360px345/345px（clientWidth/scrollWidth）で横溢れなし．既存デザインは変更していない．
+
+独立③の入口（電気代12000円，PV4kW，蓄電池9.5kWh，標準）：
+
+- [南伊豆・既存20万円](http://127.0.0.1:5173/simulator/?prefecture=22&municipality_code=22304&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．新築へ変更すると0円，住宅区分不一致の理由を確認する．
+- [松崎・新築20万円](http://127.0.0.1:5173/simulator/?prefecture=22&municipality_code=22305&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis)．受付継続は仮定であり，実際の受付・予算残の確認ではない旨を確認する．既存も20万円．
+- [西伊豆・0円](http://127.0.0.1:5173/simulator/?prefecture=22&municipality_code=22306&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．限定探索の終了を制度不存在へ読み替えない．
+
+未完：長野・岐阜・共通11.8方針の独立③は別件として保持する．この自己検査はそれらを完了扱いにしない．既知の記事詳細テスト3件は今回の検査範囲外である．一時ブラウザータブを閉じ，viewport指定を解除済み．共有Vite PID7756（親24472）はレビュー継続用に保持．追加補助サーバーなし，コミット・プッシュ・公開なし．
+
+
+統括独立③（2026-09-20，受領記録）：上記public `babac96a…` 版でPASS．統括が南伊豆の既存20万円・入力外仮定・蓄電池経費非算入をDOM及びPC画像，新築0円と住宅区分不一致理由をDOMで確認した．松崎の新築20万円と受付継続仮定（実際の受付・予算残は未確認）をDOM・PC・360px画像で確認した．西伊豆の0円と制度不存在を断定しない説明をDOM・PC画像で確認した．松崎360pxは文書幅345px／scrollWidth345px，console error 0件．共通表示及びfrontend自己204件・既存新築確認を再利用した検収であり，自己検査そのものを独立検収とはしていない．
+
+NITS：南伊豆の新築時，非採用欄に費用別2枝が同名制度として2行並ぶ．区別ラベルを検討事項として保存し，今回は変更しない．愛知96枝の接続はbackend進行中で，frontend同期は別途引渡しを待つ．長野・岐阜・共通方針の独立③は未完を維持する．統括の一時タブ6は終了・viewport解除済みとの連絡を受領．共有5173は保持し，本追記後は待機する．
+
+
+## 2026-09-20 富士見町の県制度注記・独立③差戻し対応
+
+> **結論：MUSTの内部承認表現を表示時だけ利用者向けに置換し，対象5テストと富士見PC実画面を確認した．長野・共通方針の独立③全体は未完を維持する．**
+
+`subsidy-presentation.js` の `readableSubsidyAssumption` へ既存表示変換を取り出し，`app.js` の条件付き概算・要確認事項で共用する．「入力蓄電池容量を制度対象容量へ対応させるユーザー承認済み仮定」を「入力した蓄電池容量を制度の対象容量とみなす仮定」へ限定置換した．公式資料の容量種別未確認，実申請時の容量種別・登録設備・事業者・費用・期限確認は維持する．金額計算・データ正本・デザインは変更していない．同じ文言を持つ制度にも同じ表示変換が適用される．
+
+`node --test qa/tests/nagano-subsidy.test.js` は5/5 PASS．実データを用いた表示変換テストで，利用者向け表現，4kWh判定，公式容量種別未確認，申請時確認及び原データの非変更を確認した．富士見20362（既存・PV4kW・蓄電池9.5kWh・月12000円・標準）のPC1280×900実画像及びDOMで，修正文言，県20万円・町10万円・合計30万円，県受給依存の説明を確認した．console error 0件．対象タブ22を終了しviewport解除済み．共有5173は保持．長野・岐阜・共通方針③の未完状態を維持し，この差戻し対応だけで全体PASSとはしない．
+
+
+## 2026-09-20 愛知正式96枝同期・自己検査
+
+> **結論：承認版3ファイルのSHA完全一致で同期し，44算式の承認実額を含む255テスト及びPC・360px代表画面の自己確認を完了した．愛知の独立③は未完で，統括へ引き渡す．**
+
+引渡し正本は `backend/dist/review/aichi-stage0-existing-state-2026-09-20.json` の `formal_release`．統括から，正式96規則と承認草案の完全一致，監査元の岡崎classification1値以外不変，生成public44算式の承認実額との独立再計算一致を受領して同期した．backend自己60件及びSchema PASSとは区別する．Schema 11.8.0，data_version 2026-09-20，generated_at 2026-09-20T14:39:43+00:00．全国830自治体523規則，愛知54自治体96枝（44算式・51非算入・1未確定）．
+
+|ファイル|SHA-256|
+|---|---|
+|data/input/public-data.json|`d1f06b78c30f12e62862df4536f15ec670ec0923075b56a249cc6766338aec2c`|
+|qa/fixtures/calculation-cases.json|`297f6baf9a6fd3e1e8d13b6d86e3f8a7cff7f178199a5379cfe47cc68df7d1ce`|
+|data/input/metadata.json|`f047ef797b39f51c3f263fcc2e94f45712ff7f8d8028e3f15657859196352792`|
+
+自己テスト：`node --test qa/tests/aichi-subsidy.test.js qa/tests/aichi-formula.test.js qa/tests/calculator.test.js qa/tests/nagano-subsidy.test.js qa/tests/shizuoka-subsidy.test.js` は255/255 PASS．承認実額44件を `qa/fixtures/aichi-approved-amounts.json` へQA専用で保存し，実計算と照合した．費用下限・税抜換算・合算後切捨ての既存3テストを再利用．SHA及び全国自治体件数の固定期待値を正式版へ更新した．
+
+必要な表示調整：新築未確認8自治体23211/23221/23231/23236/23342/23561/23562/23563の `housing_age_not_applicable` について，新築適用条件未確認で今回非算入，制度の新築対象外は未確定と説明する．岡崎 `local_renewable_battery` のnull額は指定買電・売電契約とFITの両立未確認，15万円枝を一般2万円へ加算しないと説明する．正本が返す汎用理由コードを変えず，該当IDの表示理由だけを限定変換した．本人所有仮定に付く「2026年9月20日ユーザー承認：」も表示時に除き，公式所有範囲未確認を保持する．金額計算・生成データ・デザインは変更していない．
+
+PC1280×900の配信DOMで既存PV4kW+B9.5kWhの岡崎2万円，豊田15万円，岩倉40万円，田原23万円，みよし27.4万円，美浜15万円を確認した．田原PV単独4万円，みよしPV単独16万円も配信DOMで確認した．岡崎の未確定枝説明をPC及び360×800実画像，豊田新築の未確認説明を360px実画像，みよし単独16万円をPC・360px実画像で確認．豊田360pxの文書幅345／scrollWidth345で横溢れなし．検証タブのconsole error 0件．
+
+独立③用URL（既存PV4kW+B9.5kWh・月12000円・標準）：
+
+- [岡崎・2万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [豊田・15万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23211&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [岩倉・40万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23228&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [田原・23万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23231&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [みよし・27.4万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23236&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [美浜・15万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23446&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+
+豊田等の上記8自治体は住宅条件を新築へ変更すると0円であり，制度の新築禁止を断定しない説明を確認する．田原・みよしは設備構成を太陽光のみに変更すると4万円・16万円．岡崎は「今回選ばなかった制度」の15万円未確定枝で指定契約とFITの両立未確認を確認する．
+
+残件：愛知独立③，長野・岐阜・共通方針③及び直前の富士見文言修正の独立再確認．本自己検査だけではそれらをPASSにしない．一時タブ23終了，viewport解除済み．共有Vite5173は継続確認用に保持し，追加補助サーバーなし．中国着手・コミット・プッシュ・公開なし．
+
+
+## 2026-09-21 独立③差分・駒ヶ根表示と岡崎理由修正版同期
+
+> **結論：駒ヶ根の内部編集口調を表示時に修正し，岡崎理由修正版3ファイルを承認SHAで同期した．対象差分テストと岡崎配信DOMはPASS，独立③全体の完了判定は統括へ引き渡す．**
+
+富士見の直前修正は統括DOMによる独立確認PASSを受領した．県20万円・町10万円，PV単独は参考5万円だが算入0，依存理由と受付維持を確認したとの報告．この個別PASSを長野・共通方針③全体のPASSとはしない．
+
+RECOMMEND対応：駒ヶ根の「非現金ポイントは公式の円相当額を経済便益として扱う承認済み方針を適用し，現金給付とは表示しない．」を「ポイントの公式円相当額を経済便益に含めています．現金の給付ではありません．」へ表示時に限定変換した．非現金説明と要確認事項の2経路へ適用．長野対象6テストPASSで5万円相当，予定数，地区・施工者・税滞納・年齢・世帯属性及び申請時確認を保持することを確認．データ・金額は変更していない．
+
+岡崎のbackend差分は統括によるreason_code・generated_at以外完全一致確認を受領した．non_fit_packageの理由をsale_path_not_applicableとする正本3ファイルを手編集せず同期した．
+
+|ファイル|SHA-256|
+|---|---|
+|data/input/public-data.json|`bb5427e68653d64093bd5f9850b6a2b6b70f5b7a6af8550e1227660e2af4487b`|
+|qa/fixtures/calculation-cases.json|`f06ba8d949ab42ced8623074920b006285939636b9bdfc88aed6d4b931c214d7`|
+|data/input/metadata.json|`b0157a57ebe78bc30e29ddb85354564ddefa05baea02baf18f6b5d05df4a7b8c`|
+
+影響差分のみの `--test-name-pattern='岡崎non_fit_package|正本3ファイルのSHA'`（aichi-subsidy及びcalculator）2/2 PASS．旧255件は再実行していない．岡崎既存PV4kW+B9.5kWh・月12000円・標準の配信DOMで一般枝2万円，non_fit_packageの非FIT・非FIP必須による非算入，別の15万円枝のFIT両立未確認を確認．一時タブ24終了，共有5173保持．デザイン変更・中国着手・コミット・公開なし．愛知・長野・岐阜・共通方針③全体は未完を維持する．
+
+
+## 2026-09-21 愛知・長野・岐阜・共通11.8方針差分の統括独立③完了
+
+> **結論：統括の代表独立確認と影響のない既存検査の再利用に基づき，愛知・長野・岐阜・共通11.8方針差分の独立③PASSを受領した．**
+
+本記録は直前までの独立③未完記録を更新する最新判定である．全自治体・全条件を目視したという判定ではない．統括は前版public `d1f06b78…` の3SHAを照合し，現版 `bb5427e6…` への差分が岡崎reason_code1値及びgenerated_atだけであることをJSON比較で確認した．変更影響のない既存①②，frontend自己255件，差分6件＋2件，過去の自己画面確認を再利用した．
+
+|対象|統括による代表独立確認の範囲|
+|---|---|
+|愛知|岡崎2万円及び15万円未確定枝のDOM・PC画像，修正後の非FIT不適合理由のDOM・360px画像．豊田新築0円と「適用未確認であり対象外確定ではない」説明のDOM．みよしPV単独16万円及び本人所有仮定のDOM・PC画像．|
+|長野|富士見県20万円・町10万円のDOM，PV単独の参考5万円・今回0円・依存制度非採用と受付維持のDOM・PC画像．県の容量説明から内部承認表現が除かれたことをDOM再確認．飯田市866000円・県200000円と控除前税込費用・他国庫禁止のDOM．駒ヶ根非現金5万円相当及び利用者向け修正文言のDOM・360px画像．|
+|岐阜|多治見178000円と転入・Jクレジット加算のDOM・PC画像．白川町は後続共通方針（AI分業121行の統括参照箇所）による現200000円，原文kWとモデルkWhを区別する説明のDOM・360px画像．岐南の調査未完了及び制度不存在を断定しない説明のDOM・360px画像．|
+|共通11.8方針差分|計算方法ページの補助金計算条件（受付継続，将来設置後申請，単位解釈，特別仕様費用据置，別工事除外）のDOM・PC・360px画像．京丹後130000円及び設備別・合算半額上限のDOM・360px画像．松川172000円＋県200000円と将来四半期申請仮定のDOM．韮崎の不明・未確定・限定探索終了及び制度不存在・受付終了を断定しない説明のDOM．|
+
+統括の最終360px確認は文書幅345px／scrollWidth345px，console error 0件．統括の一時タブ8終了・viewport解除済みとの報告を受領．frontendは保存時に現行3ファイルを再照合し，public `bb5427e68653d64093bd5f9850b6a2b6b70f5b7a6af8550e1227660e2af4487b`，cases `f06ba8d949ab42ced8623074920b006285939636b9bdfc88aed6d4b931c214d7`，metadata `b0157a57ebe78bc30e29ddb85354564ddefa05baea02baf18f6b5d05df4a7b8c` の全件一致を確認した．
+
+NITSの同名枝等は検討事項として保持し，追加改修は行わない．共有5173保持．本作業は記録更新及びSHA照合のみであり，追加実装・全件再検査・コミット・公開は行っていない．
+
+
+## 2026-09-21 岡崎指定契約仮定の反映準備・新版待ち
+
+> **結論：既承認指定契約仮定に合わせた表示・テストの準備を完了した．現行データは2万円のまま保持し，新版の①②PASS及びSHA引渡しを待つ．**
+
+統括及び事業支援がAI分業の指定契約仮定・岡崎15万円補助メニューの採用承認（115–117行，56行訂正）と後続撤回なしを照合し，既存実装への反映漏れを認定した．従前の独立③PASSはその版の履歴として保持し，修正予定新版のPASSには転記しない．
+
+`subsidy-presentation.js` の岡崎local_renewable_batteryに対する「FIT両立未確認なので15万円を非算入」とする旧個別説明を除去し，null額には既存の汎用未確認表示を用いる．`designatedContractAssumption` は当該補助メニューが実計算で正額算入された場合だけ，指定買電・売電契約を満たす仮定及び実際の単価差・費用差未反映を表示する．金額を表示側で強制しない．現行3データファイルのSHAは直前bb5427/f06ba8/b0157a版と完全一致し，岡崎2万円を維持．
+
+岡崎の限定3テスト（承認fixtureとの現行実額一致，正額算入時だけの契約注記・未確定汎用表示，non_fit_packageのFIT不適合）PASS．将来の15万円表示注記は合成入力で確認した準備段階であり，正式新版の計算検収・配信画面確認ではない．旧15万円保留期待値を除き，現行実額は承認fixtureへ照合する．
+
+再開地点：統括の新版①②PASS・3SHA引渡し後，backend正式3ファイルを照合・同期し，承認fixtureの岡崎期待値及び枝数等の差分を更新する．15万円算入，一般2万円との重複なし，非FIT35万円補助メニュー非算入，指定契約仮定・単価差費用差未反映の配信表示を確認して新版の独立③へ引き渡す．それまでは追加同期しない．デザイン変更・コミット・公開なし，共有5173保持．
+
+
+## 2026-09-21 岡崎15万円修正版同期・限定QA・注記統合
+
+> **結論：統括①②PASS後の正本3点同期，限定8テスト，build検証，PC・360px自己確認を完了した．契約仮定を条件付き概算の1段落へ統合し，新版の独立③へ引き渡す．**
+
+引渡し正本 `backend/dist/review/okazaki-correction-2026-09-21.json`．公式根拠照合・統括独立Decimal208条件，backend関連52テスト・Schema結果を受領．正式公開規則の差分は岡崎2枝，自治体差分は23202だけとの統括確認に基づき同期した．Schema11.8.0，data_version2026-09-21，generated_at2026-09-20T16:31:01+00:00（日本時間2026-09-21T01:31:01+09:00）．
+
+|ファイル|SHA-256|
+|---|---|
+|data/input/public-data.json|`28f6488a323b1ebd62f31e2127216ffb5219267275e7b620f97b08d5abfa4b14`|
+|qa/fixtures/calculation-cases.json|`1a731c3fdb10fb5835c7f00c8b8b71a0f8350f7e5d7edf64fe95c1a1f7be3eb3`|
+|data/input/metadata.json|`47ed98e52145a5a07d0e847a95f1c0a45398fd1388f607204882d451eb732f7f`|
+
+限定QAは `--test-name-pattern='岡崎|実額一致：23202|愛知正式|okazaki|正本3ファイルのSHA'`（aichi-subsidy，calculator）8/8 PASS．新築・既存15万円，一般2万円排他，非FIT35万円補助メニュー除外，新規backend基準2ケース，指定契約表示，SHAを確認した．承認fixtureの岡崎額を15万円へ更新し，愛知96枝の内訳を45算式・51非算入・未確定0へ更新．旧全255件の再実行は行っていない．
+
+統括差戻しの重複注記は該当IDだけ修正した．指定契約仮定を既存「条件付き概算」1段落へ統合し，売電単価・設置費は標準モデル据置，実際の単価差・費用差未反映，契約とFIT単価の両立は公式確認済みではない旨を保持した．要確認事項及び他制度の説明を削除していない．表示調整後も正本3SHAは不変．同名見出しの整理やデザイン変更なし．
+
+最終buildはpackage.jsonと同じ順序でprepare-build→vite build→finalize-build→verify-buildをNodeから実行し，全工程exit0／BUILD_AND_VERIFY_PASS．初回はWranglerの既定ログ先へのEPERM表示があったため，最終buildではWRANGLER_LOG_PATHを一時領域へ指定し正常完了した．デプロイはしていない．
+
+PC1280×900及び360×800で既存15万円，指定契約仮定1段落，要確認事項の保持をDOM・実画像で確認．一般2万円は参考額・今回非算入，非FITメニューはFIT不適合として除外されることをDOM及び360px実画像で確認した．360pxで新築15万円もDOM確認．文書幅345px／scrollWidth345px，契約仮定の該当段落1個，console error0件．
+
+検収URL：[岡崎・既存15万円](http://127.0.0.1:5173/simulator/?prefecture=23&municipality_code=23202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．housingAge=newも15万円．旧③PASSは本修正版へ転記しない．本修正版の独立③，特に最終1段落化の確認は統括へ引き渡す．一時タブ25終了・viewport解除済み．buildの子プロセスは同期終了し，追加サーバーなし，共有5173保持．コミット・プッシュ・公開なし．
+
+
+## 2026-09-21 岡崎15万円修正版・統括独立③PASS
+
+> **結論：統括による正本3SHA照合及び代表画面の独立確認をもって，岡崎15万円修正版の独立③PASSを受領した．**
+
+統括が実ファイルの3SHA一致を確認した．対象はpublic `28f6488a323b1ebd62f31e2127216ffb5219267275e7b620f97b08d5abfa4b14`，cases `1a731c3fdb10fb5835c7f00c8b8b71a0f8350f7e5d7edf64fe95c1a1f7be3eb3`，metadata `47ed98e52145a5a07d0e847a95f1c0a45398fd1388f607204882d451eb732f7f`．直前の本修正版③待ち記録は，本受領記録により完了へ更新する．旧版③PASSの転記ではない．
+
+PC1280px及び360pxで，既存住宅・PV4kW・蓄電池9.5kWhの合計15万円，算入150000円，一般メニュー参考20000円の除外と併用不可，非FITメニュー除外を統括が独立DOM確認した．指定契約仮定は条件付き概算1段落のみ（noteCount1）であり，実際の単価差・費用差未反映及びFIT単価との両立は公式確認済みではない旨を保持する．360pxは段落末尾までスクリーンショットで目視確認し，clientWidth345px＝scrollWidth345px，console error0件．
+
+新築・太陽光のみ・補助なしの数値境界は，独立①②の208条件及びfrontend限定8テストを再利用した．今回それらの全操作を目視したという記録ではない．共有5173を維持し，統括の一時タブ閉鎖・viewport解除済みとの報告を受領．本作業はQA記録追記のみで，追加実装なし．
+
+
+## 2026-09-21 鳥取正式接続版同期・自己QA
+
+> **結論：鳥取19自治体の正式3ファイルを承認SHAで同期し，211テスト及びPC・360px代表自己QAを完了した．鳥取独立③は統括へ引き渡す．**
+
+統括①②受入正本は `backend/dist/review/tottori-manager-review-2026-09-21.json`，正式接続記録は `backend/dist/review/tottori-formal-connection-2026-09-21.json`．backend関連63テスト及び公開・rules・台帳・138計算結果Schema PASS，旧126ケース・523規則・830自治体の実値不変との引渡しを受領．Schema11.8.0／data2026-09-21，849自治体・547規則・138ケース．鳥取は16採用規則＋8除外規則．
+
+|ファイル|SHA-256|
+|---|---|
+|data/input/public-data.json|`49a37d1a4e0f6af59171d25778031e463de299a027133d915cc6eeb050ac4047`|
+|qa/fixtures/calculation-cases.json|`daaff913dd655388d28f208b567222147b420d95e42db2067602bfebb2371f49`|
+|data/input/metadata.json|`e3ca7321aaed7e6b977d6bea1e21af8cda86ce85dec4d03d8c3f81da273feff2`|
+
+`node --test qa/tests/tottori-subsidy.test.js qa/tests/calculator.test.js` は211/211 PASS．追加12基準ケース（八頭単独・同時，南部FIT-B，岩美既存・新築，湯梨浜税抜，大山単独・同時，伯耆同時，日南総額丸め，三朝概算，倉吉終了）と既存基準を照合した．対象テストで八頭の一設備排他，南部と仮想の正額国費制度との排他，大山の単独20万／同時PV50万＋B50万，湯梨浜の税抜換算，新築未確認5町の既存正額／新築0と説明を確認．SHA及び全国件数期待値を更新し，愛知地域テストの古い全国件数固定だけを除去した．
+
+表示側の限定対応：岩美31302・若桜31325・智頭31328・三朝31364・日南31401の新築は適用条件未確認として非算入し，制度の新築対象外を断定しない．「概算前提」を含む条件も既存の条件付き概算・要確認事項の表示対象とし，八頭の一設備制限等を表示する．鳥取の共通税区分注記は「税抜と明記された制度を除き，税区分が確認できない場合は税込費用で試算しています．」へ表示時だけ変換した．計算式・正本データ・デザインは独自変更していない．
+
+自己画面：PC1280×900で八頭20万円・一設備条件・PV参考144000円の排他をDOM確認し，算入欄を実画像確認．南部40万円・国費併用不可，大山100万円（PV及びB各50万円上限），湯梨浜税抜及び丸め処理順未確認をPC DOM確認．湯梨浜はPC・360×800画像で表示492000円と注記を確認（計算値492333円を既存の千円単位表示で丸めており，計算結果を492000円へ変更していない）．岩美新築0円と未確認・対象外未確定の説明を360px DOM・画像確認．湯梨浜360px文書幅345／scrollWidth345，検証タブconsole error0件．
+
+独立③用URL（PV4kW＋B9.5kWh，月12000円，標準）：
+
+- [八頭：20万円，一設備制限](http://127.0.0.1:5173/simulator/?prefecture=31&municipality_code=31329&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [南部：40万円，国費排他](http://127.0.0.1:5173/simulator/?prefecture=31&municipality_code=31389&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [大山：100万円，同時上限](http://127.0.0.1:5173/simulator/?prefecture=31&municipality_code=31386&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [湯梨浜：表示492000円，計算492333円，税抜・丸め留保](http://127.0.0.1:5173/simulator/?prefecture=31&municipality_code=31370&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [岩美：0円，新築適用未確認](http://127.0.0.1:5173/simulator/?prefecture=31&municipality_code=31302&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis)．
+
+留保：三朝・湯梨浜の複数設備千円丸め順未確認，太陽光単独は千円切捨て，新築未確認5町は既存のみ，FIT除外メニューの非算入を維持．今回の自己QAを独立③PASSとはしない．一時タブ26閉鎖済み，viewport解除済みで，共有ブラウザーの幅指定を残していない．共有5173保持，新規補助プロセスなし．島根先行・コミット・公開なし．
+
+
+### 2026-09-21 鳥取独立③の中間結果・南部補正待ち
+
+統括がPCで八頭20万円＋太陽光参考144000円の排他，大山100万円から太陽光単独20万円への即時更新，南部40万円，湯梨浜492000円表示と丸め留保，倉吉終了，岩美新築0円と適用未確認説明を独立確認した．360pxは文書幅345px／scrollWidth345px，岩美注記末尾の画像及びconsole error0件を確認したとの報告を受領．
+
+差戻し：南部の除外3メニューの受付不明表示，及びカーポートの「受付状況を確認できない」という理由が，公式受付・非FIT又は別構造物による除外と整合しないためbackend補正中．鳥取独立③全体は未完を維持する．新版3SHA受領後に3ファイルを同期し，南部の差分表示だけを確認する．自己211件及び既存画面検査は再利用し，一律再実行しない．統括のviewportは解除済み，一時タブ10は補正確認用に保持中との連絡を受領した．frontendから当該タブを操作・閉鎖しない．共有5173保持，追加実装・同期は補正版引渡し待ち．
+
+
+南部等8除外メニュー補正の先行表示対応：backendからの依頼に基づき，`business_only` は「事業者向けの制度であり，住宅向けのこの診断には含めていません．」，`not_direct_grant` は「個人への直接補助ではないため，この診断には含めていません．」として，受付未確認の汎用理由より優先表示するよう限定修正した．受付終了・停止の優先処理は維持し，受付状態そのものは変更しない．対象1テストPASSでunknown状態・null額の非変更及び他の受付不明表示の保持を確認．新版3SHA未受領のためデータ同期は未実施，正式補正版受領後の差分表示QAを再開地点とする．
+
+
+## 2026-09-21 鳥取除外受付・理由の補正版再同期
+
+> **結論：補正版3SHA一致で再同期し，限定3テスト及び南部・鳥取市・米子・日野の配信DOM差分を確認した．残りの独立③へ引き渡す．**
+
+正本は `backend/dist/review/tottori-excluded-status-correction-2026-09-21.json`．backend関連64テスト・Schema PASS，採用規則及び全138ケース全数値不変の引渡しを受領した．同期SHAはpublic `38a236d7e729b5d524d89e7ef191b7536542013ac0bb88bedac93385a48b0378`，cases `5b3db0195ba335e3da3296856c392de3d1ea37b5730144e28bf34fc9e51a02bd`，metadata `20b1fc0c26381cd72dab54029bd4bd98af3372c83abbcfcd02521c22e095a589`．3ファイルを手編集せず照合・同期し，SHAテスト期待値を更新した．
+
+限定3テスト（正本3SHA，事業者向け・直接補助外の理由優先，補正版の受付・理由・南部40万円）PASS．自己211件及び既存画面検査は再利用し，一律再実行しない．配信DOMで南部40万円と除外3メニュー受付中，非FIT2メニューのFIT不適合，カーポートの別構造物理由を確認した．鳥取市共同購入は受付不明のまま個人直接補助外，中小企業向けは受付終了，米子は受付不明のまま別工事，日野は受付不明のまま事業者向けを表示することを確認した．console error0件．
+
+今回は差分DOM確認のみでviewportを変更していない（前回指定は解除済み）．frontend一時タブ27閉鎖済み．統括保持タブ10は操作していない．共有5173保持．新規プロセス・島根先行・コミット・公開なし．鳥取独立③全体は統括の補正再確認待ち．
+
+
+## 2026-09-21 鳥取修正版の統括独立③PASS・完了
+
+> **結論：統括の最終受入により鳥取の独立③PASSを受領し，鳥取の同期・検収工程を完了とする．**
+
+統括記録は `backend/dist/review/tottori-manager-review-2026-09-21.json` の `final_acceptance`．統括が下記3SHAの実ファイル一致及び採用16規則不変を確認した．直前の鳥取独立③待ち記録は本最終受入で更新する．
+
+|対象|SHA-256|
+|---|---|
+|data/input/public-data.json|`38a236d7e729b5d524d89e7ef191b7536542013ac0bb88bedac93385a48b0378`|
+|qa/fixtures/calculation-cases.json|`5b3db0195ba335e3da3296856c392de3d1ea37b5730144e28bf34fc9e51a02bd`|
+|data/input/metadata.json|`20b1fc0c26381cd72dab54029bd4bd98af3372c83abbcfcd02521c22e095a589`|
+
+補正後の実配信について，統括が南部3メニューの受付中表示と非FIT・別構造物による除外理由，鳥取市の共同購入・事業者向け終了，米子の別工事，日野の事業者対象理由を独立確認した．console error0件．直前版のPC・360pxで確認済みの金額・操作・岩美新築適用未確認表示は変更影響外として再利用した．補正後に全自治体・全条件の画面を再確認したという意味ではない．
+
+統括の一時タブ10閉鎖・viewport解除済みとの報告を受領．本作業は記録追記のみで，追加実装・全件再試験なし．共有5173を保持する．バックエンドには統括から島根の次工程が指示済みであり，frontendの次回同期は正式引渡しを待つ．
+
+
+## 2026-09-21 島根正式版同期・自己QA・通常説明短文化
+
+> **結論：承認3SHA一致で同期し，calculator222件及び修正後の島根対象6件がPASS．PC・360px代表自己QAを完了し，島根の独立③へ引き渡す．**
+
+引渡し正本は `backend/dist/review/shimane-formal-connection-2026-09-21.json` 及び同日の `shimane-manager-review`．統括①②PASSを受領して同期．Schema11.8.0／data2026-09-21，868自治体・569規則・154ケース．backend自己56件・Schema及び旧547規則・849自治体・138ケース不変の結果を受領し，frontend自己検査とは区別する．
+
+|ファイル|SHA-256|
+|---|---|
+|data/input/public-data.json|`261c076f764a5b1a2cf153dc88a8f2e9c8160c599eb5203d6b4d5f48d26cc04c`|
+|qa/fixtures/calculation-cases.json|`8d23f9ebf9b476545f7439d506147ed6eb6de0875be95e6c86c8fb65801fafb6`|
+|data/input/metadata.json|`e973a3383a8e55ebffc240a9a3fcb133f9c0ba554bc2e4ff483b3864386e5124`|
+
+計算検査：calculator全222件PASS（島根追加16基準ケースを含む）．初回合計227件中，島根の補助テスト1件だけが「奥出雲PVも税抜費用算式」とする誤ったテスト期待で失敗した．PVは容量単価，Bが税抜費用算式という正本を確認し，テストを修正．短文化テストを追加した島根6件を再実行して6/6 PASS．計算実装の変更は不要だった．3.199kW奥出雲259000円，3.999kW西ノ島165000円は基準ケース及び対象テストで一致．
+
+表示差分：新築未確認の益田32204・飯南32386・津和野32501・隠岐の島32528は0円とし，公式対象外と断定しない説明へ限定対応．統括MUST指摘に従い，島根の算入制度は通常注記を短文化した．浜田は「39歳以下などの条件を満たす想定です．適用条件と補助額は，自治体へ確認してください．」，他制度は住宅・設備・申請条件の充足想定と自治体確認の短文とする．通常欄に監査用の長い要確認事項を重複表示せず，既存の「この制度の計算条件・確認事項」へのリンクを保持する．浜田の既存詳細欄を展開し，39歳以下，丸め順未確認，申請条件が保持されていることをDOM確認した．原本データを変更していない．島根採用規則全件の短文出力に内部運用語がないことを対象テストで確認．
+
+画面自己確認：浜田80万円・年齢仮定短文をPC1280×900と360×800のDOM・実画像で確認．PC DOMで雲南22万円，飯南34万円，奥出雲4kW30万円，吉賀9万円，西ノ島4kW22万円，大田10万円，美郷0円を確認した．吉賀B終了，美郷非FITをDOM確認．大田Bは受付中・金額未確定・限定探索終了の説明をPC DOM・画像確認．飯南新築0円と適用未確認説明を360px DOM・画像確認．最終360pxはclientWidth345px＝scrollWidth345px，console error0件．
+
+容量境界の画面確認範囲：現行UIは容量スライダーの刻みに入力値を正規化するため，URLの3.199kW・3.999kWはそのまま計算へ渡らず，奥出雲表示250000円・西ノ島表示220000円となる．小数境界値の259000円・165000円は計算層で検証済みであり，UIで同じ小数入力を維持したと記録しない．既存UI刻みの変更は本同期に含めない．
+
+独立③用入口（PV4kW+B9.5kWh，月12000円，標準）：
+
+- [浜田：80万円・39歳以下想定](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [雲南：22万円](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32209&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [飯南：34万円](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32386&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [飯南新築：0円・適用未確認](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32386&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis)．
+- [奥出雲：30万円](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32343&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [吉賀：9万円・B終了](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32505&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [西ノ島：22万円](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32526&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [大田：10万円・B未確定](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32205&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+- [美郷：0円・非FIT](http://127.0.0.1:5173/simulator/?prefecture=32&municipality_code=32448&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis)．
+
+島根独立③は未完であり，本自己QAからPASSへ転記しない．一時タブ28閉鎖済み，viewport解除済み．共有5173保持，新規補助プロセスなし，デザイン変更・コミット・公開なし．
+
+
+## 2026-09-21 島根の統括独立③PASS・完了
+
+> **結論：統括の最終受入により島根の独立③PASSを受領し，同期・検収工程を完了とする．**
+
+正本 `backend/dist/review/shimane-manager-review-2026-09-21.json` の `final_acceptance` を参照し，status `complete_stage1_stage2_stage3` と対象SHAを確認した．統括はbackend/frontendの3SHA一致を照合済み．対象はpublic `261c076f764a5b1a2cf153dc88a8f2e9c8160c599eb5203d6b4d5f48d26cc04c`，cases `8d23f9ebf9b476545f7439d506147ed6eb6de0875be95e6c86c8fb65801fafb6`，metadata `e973a3383a8e55ebffc240a9a3fcb133f9c0ba554bc2e4ff483b3864386e5124`．直前の島根③待ち記録は本受入で更新する．
+
+統括の独立確認範囲は，PC1280×900で浜田80万円と39歳以下の短文修正，UI自治体変更による吉賀9万円・蓄電池終了，大田10万円・蓄電池受付中かつ算定未確定，雲南22万円，奥出雲30万円，西ノ島22万円，飯南34万円及び新築切替時0円・適用未確認説明．360×800では飯南新築の注記末尾まで実画像で確認し，clientWidth345px＝scrollWidth345px，console error0件．
+
+3.199／3.999kWの境界値は計算層の検収として保持する．UIの刻みによる正規化があるため，同じ小数入力を画面操作で検証したとは扱わない．frontend自己calculator222件・島根6件及び影響のない既存確認を再利用し，全自治体・全条件を今回目視したという判定ではない．新築未確認4自治体，丸め留保，大田蓄電池の費目不明等は保持する．
+
+統括の一時タブ12閉鎖・viewport解除済みとの報告を受領．本作業は記録追記のみで，新実装・全件再検査なし，共有5173保持．岡山はbackendへ割当済みで，frontendは正式引渡しまで同期しない．
+
+
+## 2026-09-21 岡山正式同期前・新見round_0_1互換対応
+
+> **結論：容量0.1kW単位のhalf-upを限定追加し，Decimal照合4境界及び対象6テストを確認した．正本3ファイルは未同期で，岡山草案全体の①②完了を意味しない．**
+
+統括から，新見公式要綱別表2 p6「小数点以下第1位未満を四捨五入」の独立照合済み指定を受領．草案 `backend/dist/review/okayama-municipal-draft-2026-09-21.json` の `capacity_preprocessing=round_0_1` に対応した．変更は `site/simulator/src/kansai-formula.js` の前処理識別子追加，スケール10及び既存BigInt有理数half-up処理の適用だけ．容量にMath.roundを使わず十進値の境界を保持する．frontendに当該enumの別型定義はなく，既存floor_1・floor_0_1・floor_0_01・round_0_01・noneの意味は変更していない．
+
+|入力kW|half-up後kW|25000円/kW乗算後|上限10万円・千円切捨て後|
+|---|---|---|---|
+|3.149|3.1|77500円|77000円|
+|3.15|3.2|80000円|80000円|
+|3.249|3.2|80000円|80000円|
+|3.25|3.3|82500円|82000円|
+
+期待値はPython DecimalのROUND_HALF_UP及びROUND_DOWNで別途照合．`node --test qa/tests/okayama-capacity.test.js` は6/6 PASS．上記4境界に加え10万円上限，既存5前処理の結果，不明識別子拒否を確認した．これは制度算式層の互換QAであり，市内条件を満たす仮定の正式採用やUI小数入力の検収ではない．
+
+正本3ファイルは島根受入版261c076f…／8d23f9eb…／e973a338…からSHA不変を確認．データ同期・画面変更・build・コミット・公開なし．補助プロセス起動なし，共有5173保持．再開地点は岡山全体の統括①②PASS及び正式3SHA引渡し後の同期・対象計算照合・画面自己QAとする．
+
+
+## 2026-09-21 岡山正式同期・フロント自己確認
+
+> **結論：schema 11.9.0の正式3点をSHA一致で同期し，計算258件と代表PC／360px表示の自己確認を通過した．独立③検収は統括へ引き渡す．**
+
+- 対象：data_version 2026-09-21，895自治体・610規則・174ケース．岡山27自治体，41規則（16算入，25非算入）．backend/dist/review/okayama-formal-connection-2026-09-21.jsonを受領根拠とする．
+- SHA256：public-data `7f62df14ace152f5337bf5dcb1ad1f764f55825becade0860932d064efb28ab2`，calculation-cases `ba71e46587e5defe100d6e0c2ffd63a76da118eba55ca559aa540b84d6967871`，metadata `7d8382f3f90cac261e214fa62fd0804f92df4286caa91bbd76c709f5b37be795`．コピー前後の一致確認済み，公開JSONの手修正なし．
+- 自動検査：calculator 242件，okayama-capacity 6件，shimane-subsidy 6件の計254件PASS，追加okayama-subsidy 4件PASS．新見PV単独3.149／3.15／3.249／3.25kWは77／80／80／82千円．小数境界は計算層で検証し，UI容量刻みと混同しない．
+- 代表計算：月12,000円，PV4kW，B9.5kWh，標準，既存で岡山262,000円，倉敷140,000円，井原234,950円，高梁1,000,000円，新見204,000円，真庭250,000円，和気95,000円，矢掛・西粟倉0円．
+- 表示修正：通常注記を短文化し，高梁の空き家バンク購入・市内施工・対象児童3人，倉敷新築PVの平成30年7月豪雨被災住宅の市内建替え例外，和気のB単独申請（上限12万円，PVと共同申請総額未算定），井原・真庭の併設丸め順未確認を保持．詳細リンクと正式データの原文を保持．矢掛は費用範囲未確認を明記．
+- 住宅条件：既存限定6自治体の内訳は，高梁＝新築非該当，新見・真庭・鏡野・奈義・美咲＝新築適用未確認の5自治体．6自治体すべてを新築未確認とは表現しない．新築時0円と理由を自動検証．
+- 実配信127.0.0.1:5173で自己確認：PC1280×900の高梁100万円と属性仮定を画像確認．条件変更操作で倉敷新築14万円，和気新築95,000円，新見新築0円・未確認理由をDOM確認．360×800の倉敷例外注記を画像確認し，clientWidth／scrollWidthは345／345で横はみ出しなし．矢掛は未確定・費用範囲不足，西粟倉は受付終了，真庭25万円・他補助0円・丸め留保をDOM確認．井原は内部234,950円を表示235,000円とし，詳細リンクの該当制度に到達して原文保持を確認．console error 0件．
+- 制約：真庭は他補助0円の現行範囲に限定．将来の正額併用には率適用後の額控除の実装・独立検収が必要．井原・真庭の併設丸め順は未確定のまま．公式根拠の①②検収をこの表示検査で代替しない．
+- 清掃：自己作成tab29を閉じ，viewportをreset済み．一時テストログを削除．補助プロセスの新規起動なし，共有Vite PID7756は継続検収用に保持．commit／push／公開なし．広島未着手．
+
+
+## 2026-09-21 岡山③差戻し修正版・フロント自己確認
+
+> **結論：新見ZEHの誤ったFIT表示・新築未確認の重複を修正し，倉敷ZEH受付終了の正式新版へ同期した．差分の自己確認を完了し，統括③再検収へ引き渡す．**
+
+- MUST対応：`required_external_work`の説明未定義から汎用`excluded_incompatible`をFIT不適合と解釈していた．住宅全体の工事・性能条件，外部設備，明示非FIT理由を分離し，汎用除外状態だけではFITを推測しない．`required_external_work`枝は明示受付終了・停止を優先し，受付中なら住宅工事条件を表示する．
+- 表示統合：新見・真庭・鏡野・奈義・美咲のmain/new_unconfirmedを，対応ID・理由・公式URLが一致する新築未確認の場合だけ1行にする．元の計算明細・正式監査JSONは変更せず，表示用行に両IDと根拠配列を保持．ZEHや別理由の枝は統合しない．
+- 正式新版：backend引渡し`stage3_status_correction`，schema11.9.0/data2026-09-21，895自治体610規則174ケース．SHA256はpublic-data `b0c6fbcae425e51f6fe0c8fddb2e9288b83a502c276fec87f08e4e931535a60a`，cases `80dbf5b47c7df43cb6729b5ab48b17727dc07d6fb2e3268ce97acca96579034f`，metadata `7d8382f3f90cac261e214fa62fd0804f92df4286caa91bbd76c709f5b37be795`．3点をコピー前後・最終で照合済み．
+- 自動検査：新版calculator242件PASS．岡山7件・鳥取7件PASS，意味分類・制度分類のsite-integrity選択10件PASS．倉敷終了優先の初回回帰1件失敗を修正し関係14件を再実行して全PASS．別途site-integrity全体と岡山の旧6件を合わせて54件実行した際は52PASS・2FAIL（未変更のガイド一覧5件期待及びトップ左罫線0.38rem期待）．この2件は今回の岡山修正外であり，全体QA合格とはしない．
+- 実画面：PV4kW＋B9.5kWh，月12,000円，新築・標準．新版で新見0円，新築未確認1行，ZEH枝は受付中・住宅全体工事条件で対象外（FIT誤表示なし）．倉敷14万円を保持し，ZEH枝は受付対象外・受付終了を表示．PC1280×900と360×800の差分をDOM／画像確認，360pxの横幅345/345．エラー0件．先行統括PASSの高梁PC及び倉敷例外注記は再実装していない．
+- 清掃：自己作成tab30閉鎖・viewport reset，一時検査ログ3点削除．新規補助プロセスなし，検査コマンドは終了，共有Vite7756を保持．公開なし，広島未着手．独立③再検収は統括担当．
+
+- 統括独立③検収完了：修正版の3SHA一致，新見新築の未確認1行・ZEH住宅工事理由，倉敷ZEH受付終了を統括が実配信で再確認しPASS．先行の高梁PC100万円・倉敷360px例外注記のPASSと合わせ，`backend/dist/review/okayama-manager-review-2026-09-21.json`の`final_acceptance`へ保存済みとの引渡しを受領．岡山③は完了．今回無関係な広域テスト2件の失敗は別件として保持し，デザイン変更は行わない．広島はバックエンド正式引渡し後に同期する．
+
+
+## 2026-09-21 広島正式同期・フロント自己確認
+
+> **結論：広島の正式3成果物を同期し，計算・回帰266件とPC／360pxの差分表示を自己確認した．統括の独立③検収へ引き渡す．**
+
+- 正本：backend/dist/review/hiroshima-formal-connection-2026-09-21.json及びhiroshima-manager-review-2026-09-21.json．schema11.10.0/data2026-09-21，918自治体634規則186ケース．広島23自治体24規則（6採用・18非採用）．3成果物は指定SHAのコピー前後一致を確認し，手修正なし．
+- SHA256：public-data `c23e3ae0589ab0b8abe7dcc43f95235f6610bb38bfddacfbb4c3a85c62e9cd27`，cases `61e323a57aaa65a96b922bbc2724e932a0535cd30580d3bb228c74c9553fb9be`，metadata `2eeab3e2bf9d8c85897f25f523fc7a58c7103df1bd8778448b335b6577b7ba02`．
+- 自動検査：calculator254件＋hiroshima-subsidy5件＋okayama-subsidy7件＝266件PASS．既存，月12,000円，PV4kW＋B9.5kWh，標準で広島3万円，呉5万円，三原5万円，府中町13万円，大崎上島5万円，世羅9.5万円．府中町はPV5kWで合計15万円，4.199kWで13.2万円を確認（計算層，UI刻みとは分離）．
+- 表示：6採用の条件説明を短文化し，三原は他補助0円限定，府中町は端数処理未確認，世羅は町内施工・定格/実効区分と端数未確認を明記．詳細原文は保持．呉新築は未確認0円とし，対応するbattery/battery_new_unconfirmedを表示のみ1行へ統合．非FIT別制度は統合しない．カーポート，別省エネ設備・工事，設備対象外はFIT不適合と区別．
+- 実配信：呉既存5万円をPC1280×900で画像確認，住宅条件変更で新築0円・未確認1行をDOM確認．東広島は360×800でB受付終了とPV受付中・非FITを別行として画像確認．熊野は0円でも「制度情報未確認，補助金がないことを意味しない」をDOM確認し，収集完了や不存在へ読み替えていない．採用6自治体の金額と三原・世羅の留保をDOM確認．360pxのclientWidth/scrollWidthは345/345，console error0．世羅の詳細リンクが該当制度へ到達し原文保持を確認．
+- 留保：三原で国県等が正額になる場合は他補助控除後1/2と組合せ最適化の実装・再検収が必要．現行は国県0円を確認．呉は容量入力20kWh超へ拡張する場合に包含上限の再検収が必要．今回の表示検査を公式根拠の独立①②や公開承認の代替としない．
+- 再検収URL（共通条件を埋込み）：
+  - 呉既存：<http://127.0.0.1:5173/simulator/?prefecture=34&municipality_code=34202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+  - 呉新築：<http://127.0.0.1:5173/simulator/?prefecture=34&municipality_code=34202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis>
+  - 東広島：<http://127.0.0.1:5173/simulator/?prefecture=34&municipality_code=34212&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+  - 熊野：<http://127.0.0.1:5173/simulator/?prefecture=34&municipality_code=34307&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+  - 三原：<http://127.0.0.1:5173/simulator/?prefecture=34&municipality_code=34204&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+- 清掃：自己作成tab31閉鎖，viewport reset，一時検査ログ削除．新規補助プロセスなし，検査コマンド終了，共有5173 PID7756は継続検収用に保持．無関係なデザイン変更・commit・push・公開なし．山口未着手．
+
+- 統括独立③検収完了：3SHA一致，呉既存5万円から新築未確認0円への変更・未確認1行表示，東広島の枝別受付状態・理由と360px表示を統括が実配信で確認しPASS．統括review JSONへ保存済みとの引渡しを受領．広島③は完了し，山口の正式引渡し待ちとする．現行デザインと共有5173を保持する．
+
+
+## 2026-09-21 山口初回正式同期・影響しない範囲の自己確認
+
+> **結論：初回正式版を同期し，防府・山陽小野田などの表示検査を保存した．最新判断による下関新築・宇部一般改修の正式修正版を待ち，山口全体の③完了とはしない．**
+
+- 初回版：schema11.11.0/data2026-09-21，937自治体654規則198ケース．backend/dist/review/yamaguchi-formal-connection-2026-09-21.json及びyamaguchi-manager-review-2026-09-21.jsonを受領．3成果物をコピー前後SHA一致で同期，手修正なし．public-data `cfe747e1b923510d3d01eb611b7f40a480ab89d3b6b315c0cfd0cb1e0a605180`，cases `fba04d78dc53330af44fc917e32d29891f517e70cf0da90ce2dde8f895a48e1e`，metadata `895bd604e5663b6f93eea23cd299121609396521e74c0e3c747a9ba3ef20a4b3`．
+- 自動検査：初回版calculator266件及び広島5件PASS．山口4件は初回に表示統合ID対応と費用下限未達時nullのテスト取扱いで2件失敗し，修正後4件PASS．表示統合への影響確認として山口4・広島5・岡山7の計16件を再実行し全PASS．山陽小野田の税込費用109999/110000/219999/220000/769999/770000円に対する給付0/10000/10000/20000/60000/70000円を検査．このうち109999円は税抜最低費用未達で規則不採用，丸めによるゼロとは区別．
+- 表示修正：防府は通常明細に商品券10万円相当（非現金），額面100％使用仮定，現金給付ではないことを明記．宇部再エネ枝は新築注文住宅・建売原則不可，併設30万円は設備全体への給付と説明．山陽小野田は1万円未満切捨て，併設7万円は対象工事全体への給付と説明．内部solar帰属を公式設備別給付へ変換しない．下関先行地区は指定地区・再エネ電力条件を満たす仮定で，所在地や契約を確認済みではないと明記．
+- 実画面：月12,000円，PV4kW＋B9.5kWh，標準．防府既存10万円相当をPC1280×900及び360×800で画像確認．山陽小野田既存7万円と丸め注記，宇部再エネ新築30万円と注文住宅条件，下関既存696,000円と地区・契約仮定をDOM確認．詳細リンクで下関の指定町名等の原文保持を確認．360px横幅345/345，console error0．
+- 最新指示：下関先行地区の新築と宇部一般改修は採否見直し中．現行非算入・初回版のテスト期待値を最終判断へ流用しない．正式修正版の引渡し後に当該差分と必要な版検査を更新し，影響のないPC/360検査を不必要に反復しない．保存72ファイルの地区ルール確認で追加算入差分0とのbackend報告は受領済み．
+- 再検収URL：
+  - 防府既存：<http://127.0.0.1:5173/simulator/?prefecture=35&municipality_code=35206&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+  - 山陽小野田既存：<http://127.0.0.1:5173/simulator/?prefecture=35&municipality_code=35216&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+  - 宇部再エネ新築：<http://127.0.0.1:5173/simulator/?prefecture=35&municipality_code=35202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis>
+  - 下関既存：<http://127.0.0.1:5173/simulator/?prefecture=35&municipality_code=35201&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+- 清掃：自己作成tab32閉鎖・viewport reset・一時ログ2点削除．新規補助プロセスなし，検査終了，共有5173 PID7756保持．無関係デザイン変更・commit・push・公開なし．残件は正式修正版受領後の差分同期・表示確認と統括③検収．
+
+
+## 2026-09-21 山口修正版11.11.1・差分自己確認
+
+> **結論：正式修正版3点を同期し，差分12テストと下関PC・宇部360pxを確認した．2.999kWは計算層限定，一般改修採用時短文は実画面未到達として統括③へ引き渡す．**
+
+- 現行正本：backend/dist/review/yamaguchi-correction-connection-2026-09-21.json．schema11.11.1/data2026-09-21，937自治体654規則198ケース．初回版の下関新築未確認及び宇部一般改修非算入の結論は本節で置き換える．
+- SHA256（コピー前後一致，手修正なし）：public-data `7d7245bc6d8c7f1ffdc69de16177dbe35a4c92b12941e26d291503fc7987e9c0`，cases `1b7a61bc5cf80ef87cada5788ac98b72d7608e39c3921c5a19fa9e2f02ee72ac`，metadata `4942638c23930db4f9d7af96103943d40d80907eae958d9cc0c69ab01292aa80`．
+- 差分自動検査：変更されたbackend基準5ケース＋公開契約＋3SHAの7件PASS，yamaguchi-subsidy5件PASS．下関新築PV4kW＋B9.5kWhは696,000円，旧新築未確認候補なし．宇部PV2.999kW＋B9.5kWhは既存300,000円，新築0円．2.5/2.999/3/4kWで既存の自治体給付は1制度のみ，30万円を二重加算しない．宇部一般改修PV明示対象外を理由文でも確認．
+- 採用時説明：下関は新築適用がモデル仮定で公式個別明記ではないこと，地区・再エネ条件の充足仮定を明記．宇部一般改修はB設置が類似省エネ工事に該当する仮定，自治体認定済みではないこと，居住誘導区域内の空き家購入（2026/4/1以降）・改修転居期限（2027/2/26），PV除外を短文へ反映．当該短文は自動テストPASS，通常UIでは採用時表示に未到達であり実画面PASSとはしない．
+- 実画面：月12,000円・標準．下関新築4kW＋B9.5をPC1280×900で696,000円・新築/地区/契約仮定・旧候補消失確認．スマートハウス190,000円は参考額・併用不可として保持．宇部既存の実際のUI容量3kW＋B9.5を360×800で再エネ300,000円採用，一般改修B参考300,000円・併用不可，別行のPV明示対象外をDOM/画像確認．横幅345/345，console error0．
+- 入力制約：通常UIはPV最小3kW・0.5kW刻み．2.999kW及び2.5kWのURL入力は3kWへ補正されるため，そのURLを厳密容量の実画面検査と扱わない．統括指示に従い入力契約を変更せず，2.999kW既存30万円／新築0円は計算層限定で確認した．防府PC/360商品券，山陽小野田等の影響しない初回検証は再利用．
+- ③用URL：
+  - 下関新築：<http://127.0.0.1:5173/simulator/?prefecture=35&municipality_code=35201&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis>
+  - 宇部既存・実画面3kW：<http://127.0.0.1:5173/simulator/?prefecture=35&municipality_code=35202&monthlyElectricityBill=12000&systemCapacityKw=3&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+- 清掃：自己作成tab33閉鎖・viewport reset済み．一時ファイル追加なし，検査コマンド終了，新規補助プロセスなし．共有5173 PID7756は継続検収用に保持．デザイン・入力契約の変更，commit，push，公開なし．独立③は統括担当．
+
+
+## 2026-09-21 徳島11.12.0同期・代表表示自己確認
+
+> **結論：正式3点の同期と代表PC／360px表示を確認し，年次発電量の局所丸め修正後に292件PASS・全218基準ケース一致となった．統括は局所修正コードと最終3SHAを確認し，独立③を受入済みである．**
+
+- 正本：backend/dist/review/tokushima-formal-connection-2026-09-21.json，frontend連携仕様11.12.0節．data2026-09-21，961自治体678規則218ケース．徳島24自治体24市町村枝（採用8候補10除外6）．3成果物をコピー前後SHA一致で同期，公開JSON手修正なし．
+- SHA256：public-data `42c3833bff528b92b925c5cda86766852d9d067cbe06bd6681ab1e384a66b409`，cases `9a405c78971506251b27eb7dd3e10065cbfde9cdf48d5832c8bac793542ec088`，metadata `229f326dd488393406b0194791e112aa797f0fbf4048f64961a52bb4028332bd`．
+- 自動検査：calculator286件中285PASS・1FAIL．基準218ケースの217件一致，松茂`tokushima-36401-new-solar_only-3.995`の年次発電量1値がfrontend4916.586975/backend4916.586974（差0.000001kWh）．補助額・収支の不一致なし．丸め順序・規約をbackendへ確認依頼し，一律許容差緩和や公開値書換えは行わない．徳島固有5テストはPASS（8採用額，住宅状態，丸め境界，未確認状態）．
+- 標準・月12,000円・PV4kW＋B9.5kWh・既存の市町村額：鳴門20万円，阿南17万円，阿波5万円，美馬40万円，上勝20万円，美波28万円，海陽16万円，松茂10万円．鳴門PV単独5万円，併設は同時加算5万円を含む総額であり，内部solar帰属を公式設備別配分へ変換しない．
+- 表示修正：通常注記を短文化．美馬は市外5年以上・転入前/1年未満・空き家バンク本人居住を仮定と明記．同じPV費用は一方選択・部分配賦未対応とし，別B費補助まで禁止しない．上勝新築の未確認2枝は表示だけ1行に統合し公式対象外と断定しない．北島の非FIT太陽光に付帯するBを明記．海陽は双方出力へ同じ入力値を対応し，四捨五入後10kW未満と説明．9.994/9.995kW境界は計算層で16万円/0円を検査し，UI範囲は拡張しない．
+- 実画面：PC1280×900の鳴門20万円と同時加算注記を画像確認，設備変更でPV単独5万円．美馬既存PV40万円・移住/併用留保，新築0円をDOM確認．上勝新築0円・未確認1行を360×800画像確認．北島新築PV+Bの非FIT付帯理由，徳島市既存の受付終了，板野と未発見代表の勝浦の情報未確認（不存在とはしない），海陽16万円・丸め後10kW未満をDOM確認．未発見5町（勝浦・石井・牟岐・藍住・つるぎ）は自動検査で未確認保持を確認．360幅345/345，console error0．
+- 代表URL（共通条件を埋込み）：
+  - 鳴門：<http://127.0.0.1:5173/simulator/?prefecture=36&municipality_code=36202&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+  - 美馬：<http://127.0.0.1:5173/simulator/?prefecture=36&municipality_code=36207&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_only&housingAge=existing&scenario=standard&from=analysis>
+  - 上勝新築：<http://127.0.0.1:5173/simulator/?prefecture=36&municipality_code=36302&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_only&housingAge=new&scenario=standard&from=analysis>
+  - 北島新築：<http://127.0.0.1:5173/simulator/?prefecture=36&municipality_code=36402&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis>
+  - 板野：<http://127.0.0.1:5173/simulator/?prefecture=36&municipality_code=36404&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis>
+- 清掃：自己作成tab34閉鎖・viewport reset．新規補助プロセスなし，検査処理終了，共有5173 PID7756保持．一時失敗ログは丸め差調査中のため保持し引渡し後削除する．無関係デザイン・commit・push・公開なし．残件は年次発電量1値の扱い確定・必要差分検査後の統括③最終引渡し．
+
+
+### 年次発電量丸め差の解消・最終引渡し
+
+- backendの再現確認により，松茂のraw値`3.995 * 1230.6851`はbinary値で`4916.5869744999999966…`．JSの100万倍→Math.roundでは乗算時に中間値へ丸められる二重丸めが原因だった．`annual_energy_flows[].annual_generation_kwh`の出力だけを元binary値から6桁へ丸める局所関数へ変更．厳密中間値は偶数側を選び，0.0078125→0.007812，0.0234375→0.023438等を検査．計算途中・他出力項目・補助額・公開3ファイルは変更していない．
+- 最終再検査：calculator286件（全218基準ケース一致を含む）＋徳島6件＝292件PASS，失敗0．先行の217一致という未解消状態は本追記で解消．版と3SHAは本節冒頭から不変．既確認のPC/360pxは表示額・状態に影響しないため再利用する．
+- `tokushima-test.tmp.txt`及び`tokushima-final.tmp.txt`を結果集約後に削除．検査プロセスは正常終了，tab34閉鎖・viewport resetの状態を維持，共有5173保持．統括へ独立③最終検収を引渡し，公開操作は行っていない．
+
+- 徳島最終受入：統括が11.12.0の独立③を受入し，manager-reviewの`final_acceptance`へ保存済みとの通知を受領．上記の初回失敗・確認中の記述は解消経緯として保持する．追加検査は行わず，香川のバックエンド正式引渡し待ちとする．
+
+
+## 2026-09-21 住宅区分共通政策11.12.1の同期・自己検査
+
+> **結論：19制度への住宅区分仮定と旧7候補の削除を同期し，256基準ケースの完全一致を含む400検査，代表4自治体のPC／360px表示を担当自己QAで確認した．統括は上勝の住宅区分切替と呉の実画面及び同期SHAを独立確認し，独立③検収を完了した．**
+
+- 正式受領：backendの `housing-scope-policy-connection-2026-09-21.json` と11.12.1連携仕様．schema 11.12.1，data 2026-09-21，961自治体，671規則，256ケース．生成物3ファイルをバイト単位でコピーし，同期前後のSHA-256一致を確認した．
+- public-data：`68f9574c10a8e55382990af7a87de99ee7fb1270b598cef6aba35047d37e06a3`．cases：`ab923c13596595e987c41520f6fce3a90f27c9e086e23c2fb6d6f2c0d7550cdc`．metadata：`c7bb9f554f067e83205d890786d4aa69095b13a8080a0b31043766f10264f0fb`．
+- 表示：対象19制度に「確認した資料に住宅区分の指定がないため，新築・既存の両方を対象と仮定」「公式に両区分の適用が明記されたものではない」を表示する．地域別注記と詳細リンクを維持し，旧新築未確認理由の上書き・削除済み7候補の表示統合を撤去した．鳥取の未確認理由，明示的な既存限定，非FIT，終了・資料不足の扱いは維持した．年次発電量の出力丸め修正も保持する．
+- 自動検査：calculator，aichi-subsidy，shimane-subsidy，okayama-subsidy，hiroshima-subsidy，tokushima-subsidyの6ファイル399 PASS，housing-scope-policy 1 PASS．256ケースはシナリオ・年次出力を含め基準一致．19仮定の表示，7候補不存在，高梁・美馬の新築非算入，非FIT・終了の区別を検査した．
+- 実画面：新築，PV4kW＋標準蓄電池9.5kWh，月額12,000円，標準シナリオ．上勝20万円，呉5万円，豊田15万円，真庭25万円を1280×900及び360×800で確認した．仮定と公式確認の区別，真庭の他補助0円・端数順序未確認，上勝の累計上限余裕を表示．横幅はPC1265／1265，360px345／345で横あふれなし．上勝・真庭は画面画像でも確認した．ブラウザーerror 0．真庭の詳細リンクは該当制度アンカーへ到達した．
+- 再現URL：`http://127.0.0.1:5173/simulator/?prefecture=36&municipality_code=36302&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis`．呉はprefecture=34／municipality_code=34202，豊田は23／23211，真庭は33／33214に変更する．
+- 起動した補助プロセスなし．検査タブ35を閉じ，viewport指定を解除した．共有Vite PID7756／親24472は継続利用用に保持する．コミット・プッシュ・公開・追加ビルドは行っていない．
+
+- 統括独立③：実ファイルの3SHA一致，上勝PV4kWの既存→新築→既存の画面切替で各20万円，採用仮定表示及び旧非算入説明の不存在，呉新築PV4kW＋B9.5kWhの5万円・仮定表示，console error 0を確認したとの通知を受領．統括検証タブ18は閉鎖済み．自己QA400検査と豊田・真庭を含むPC／360px記録は提出済みで，追加再試験をせず最終報告する．
+
+- 最終受入：統括から独立③受入完了の通知を受領．`backend/dist/review/housing-scope-manager-review-2026-09-21.json` の `final_acceptance` に保存済み．統括の実画面確認は上勝の住宅区分切替と呉であり，豊田・真庭及び代表4自治体のPC／360px確認は担当自己QAとして区別する．追加試験は行わず，香川の正式引渡しまで待機する．
+
+
+## 2026-09-21 香川11.13.0の同期・自己検査
+
+> **結論：香川13採用規則を含む正式版を同期し，328基準ケース完全一致を含む408検査と代表5自治体のPC／360px表示を確認した．13採用規則は統括の独立③受入済みである．政策2件は未回答であり，政策・資料不足の候補を含む香川全体の完了ではない．**
+
+- 正式受領：`backend/dist/review/kagawa-formal-connection-2026-09-21.json` 及び11.13.0連携仕様．schema 11.13.0／data 2026-09-21，978自治体，701規則，328ケース．香川17自治体・30規則（採用13）．3生成物をバイト単位で同期し，前後SHA一致を確認した．
+- SHA-256：public-data `0f6db7fb8d9d2d9120304c784c35d20b6bad44f7ed5552071593a31458f69b6c`，cases `395c96229094c9e9371e824b3e4d430785c75ec3b2e858c2a062c66e952e8a11`，metadata `eeaf0ff022248bb54feb4c342622a3ea7a7a76448c40a4d5883122c95922e36c`．
+- 自動検査：calculator396 PASS（全328基準ケースのシナリオ・年次出力一致を含む），kagawa-subsidy6 PASS，yamaguchi-subsidy及びhousing-scope-policy計6 PASS，合計408 PASS／失敗0．丸亀PV5kW新築8万円・既存10万円と別B8万円，善通寺PV9.995kW算入／10kWではBも非算入，商品券・キャンセル待ち・直島B・琴平改修の未確認理由を検査した．善通寺及びまんのうBは工事費を除く税抜機器費と表示する．
+- 表示変更：香川採用制度の条件を短文化し詳細リンクを保持．さぬき16万円は商品券の額面100％利用を仮定する経済便益で，現金給付と区別する．三豊・琴平PV/Bは「キャンセル待ち受付中」と交付確約なし・算入方針未確定による非算入を表示．直島はPV20万円を算入し，B容量上限のkWと入力kWhの対応未確認を表示．琴平リフォームは2026年度募集の存在，リンク先要綱の旧失効規定，年度整合性と設備単独適用の未確認を区別する．
+- 実画面：PC1280×900と360×800で丸亀・さぬき・三豊・直島・琴平を確認．丸亀はPCの住宅区分操作で新築PV8万＋B8万から既存PV10万＋B8万へ更新し，360pxでも既存18万円を確認．他4自治体はPV4kW＋B9.5kWh・既存・月額12,000円・標準で上記額と留保を確認．PC1265／1265，360px345／345で横あふれなし．直島PC，琴平及びさぬき360pxは画面画像も確認．console error 0．さぬき詳細リンクは対応制度アンカーに到達．善通寺10kWは画面上限6kWの範囲外であり，画面範囲を拡張せず計算検査だけで確認した．
+- 再現URL：`http://127.0.0.1:5173/simulator/?prefecture=37&municipality_code=37202&monthlyElectricityBill=12000&systemCapacityKw=5&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=new&scenario=standard&from=analysis`．さぬき37206，三豊37208，直島37364，琴平37403は容量4・housingAge=existingで確認する．
+- プロセス：検査コマンド正常終了，一時ログを記録後に削除．検査タブ36閉鎖・viewport解除．新規サーバー等の補助プロセスなし，共有Vite PID7756／親24472は継続利用用に保持．無関係デザイン変更，コミット・プッシュ・公開・追加ビルドなし．次県へ進まず独立③を引き渡す．
+
+- 統括独立③最終受入：`backend/dist/review/kagawa-manager-review-2026-09-21.json` の `final_acceptance` 保存済みとの通知を受領．統括は3SHA一致，丸亀PV5kW単独の新築8万円→既存10万円，さぬきPV4kW単独8万円相当の商品券・非現金表示，三豊0円及びキャンセル待ち受付中を実画面で確認した．console error 0，統括検査タブ19閉鎖済み．上記のB併設額・他代表及びPC／360px確認は担当自己QAとして区別する．善通寺10kW境界はUI上限外のため計算検証のみである．追加再検査は行わない．政策2件は未回答であり，香川全体完了とはしない．
+
+
+## 2026-09-21 香川政策差分11.13.1の同期・自己検査
+
+> **結論：直島B及び三豊・琴平の待機受付を承認仮定で算入し，修正版334基準ケースの完全一致を含む408検査と3枝のPC／360px自己QAを完了した．政策判断待ちは0件，琴平一般改修の資料不足候補は維持し，統括独立③受入済みである．**
+
+- 正式受領：`backend/dist/review/kagawa-policy-connection-2026-09-21.json`，schema 11.13.1／data 2026-09-21，978自治体・701規則・334ケース．香川は16採用／1候補／13除外．公開成果物は手修正せずコピーし，最終3SHAをbackend実ファイルと再照合した．
+- SHA-256：public-data `7ad9f274c4d39030d23d7038252f7059418513a03ade13589c4d69a14c4728ce`，cases `c2eabdf9a49f28e4dd0355a64b749c4f368e28a617982eb50233b48faa6c5ff7`，metadata `6ff24a2f399b0d4eb1ee8400891b305dc7e6e9edd123d2f757bb20e0d841f937`．
+- 初回照合では直島B10／10.5kWh×住宅2の4件について，合計額は一致したがbackendの詳細未確認候補とfrontend既存評価器の容量非該当が不一致だった．backendへ差し戻し，全成分容量外判定のB上限チェック漏れを修正した正式casesを再受領した．旧cases SHA `9cd4d68c30f81666432a4b857f2a0946535c6a18d65afe1cf089b3708c256aae` は修正前の記録であり，最終PASSではない．公開データ・金額・画面コードはこの修正で不変．
+- 最終自動検査：calculator402 PASS（全334基準ケースの内訳分類・シナリオ・年次出力完全一致を含む）＋kagawa-subsidy6 PASS＝408 PASS／失敗0．直島は有効入力9.5／10／10.5kWh×住宅2で31.4／20／20万円，PV10kWではBも非算入．9.999／10.001kWhは診断入力契約外のためfrontend全体の検査対象とせず，backend計算層の境界検査と区別した．三豊・琴平は両住宅・両設備を照合し，琴平一般改修の未確認理由を維持した．
+- 表示：直島Bは公式原文「10kW未満」を保持し，蓄電池のkWを診断上kWhと読む仮定・公式訂正でないこと・太陽光へ適用しないことを明示．10kWh以上は容量条件外の理由を表示する．PV欄の旧「太陽光分だけを算入」は「この欄は太陽光分の給付額」へ更新．三豊・琴平はキャンセル待ち受付中，待機成立の想定，予算復活・交付未確約を算入制度欄に表示し，旧方針未確定の非算入説明を削除した．琴平Bの機器費・税込仮定及び三豊Bの税抜対象費からの他補助控除を短文で保持した．
+- 実画面：PV4kW＋B9.5kWh，既存，月額12,000円，標準で，直島31.4万円・三豊18万円・琴平20万円と上記仮定をPC1280×900／360×800で確認．直島PCは容量スライダー9.5→10→10.5で31.4→20→20万円，360pxは9.5→10→9.5で採用・容量非該当の切替を確認．PCの琴平一般改修候補，360pxの直島公式原文と仮定は画面画像でも確認．三豊・琴平の旧方針未確定説明なし．横あふれなし（PC1265／1265，360px345／345），console error 0．基準側修正はfixtureのみなので表示の重複再検査は行わない．
+- 再現URL：`http://127.0.0.1:5173/simulator/?prefecture=37&municipality_code=37364&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis`．三豊37208，琴平37403へ変更する．
+- 検査プロセス正常終了，一時ログ2件を結果集約後に削除．検査タブ37を閉鎖しviewport解除．新規補助サーバーなし，共有Vite PID7756／親24472は継続利用用に保持．コミット・プッシュ・公開・追加ビルドなし．
+- 表示コード識別：`frontend/site/simulator/src/subsidy-presentation.js` SHA-256 `02358008cb77efe6049b2edd2abff153717bcf420cafcea297ae228f43c8ab0e`，`frontend/site/simulator/src/app.js` SHA-256 `3a3be4df70960a973ae9b373b66ee4d5c25f8f4603d15ab276b229b635f2896e`，`frontend/site/simulator/src/municipal-information.js` SHA-256 `0b6dc887c1be89469904403a9394ffc9a21987c0f5c0ecb4d32a0ae75bbcec16`．
+
+- 統括独立③最終受入：policy-manager-reviewの `final_acceptance` 保存済みとの通知を受領．統括は最終3SHA一致，直島B9.5→10kWhの314,000→200,000円，三豊180,000円と待機成立仮定の表示を実画面確認した．console error 0，統括検査タブ20閉鎖済み．琴平等のPC／360px確認は担当自己QAとして区別する．追加再検査は行わず，愛媛の正式引渡し待ちとする．
+
+
+## 2026-09-21 愛媛の固定控除・最低費用条件対応
+
+> **結論：最低費用未達を確定した費用条件外へ修正し，正式版11.14.1の全446基準一致を含む530検査と対象画面の自己QAを完了した．統括独立③の最終受入を完了し，高知の正式データ引渡し待ちである．**
+
+- 11.14.0／2026-09-21は998自治体・739規則・446ケース．初回3SHAはpublic `fb7fe067b001bc2849950067ae794fcad32cd15b6a2656a477ed116588e7347c`，cases `68b55e716b11844edd366449e482c6bd2fed2bc009c4e1e17b029fead74d0dbb`，metadata `e5afe7b376f9eec86a5f92ad263935f113c3f9351545408b7381d09fb90b698a`．3点をバイト単位で同期しSHAを照合した．初回517検査PASSは最低費用分類修正前の版に限り，修正版のPASSへ読み替えない．
+- 新フィールド `eligible_cost_deduction_yen` は費目・税区分と最低費用を判定後，率適用前に一度だけ控除し，下限0とする．証跡の対象費用は控除後の値とし，後段の他補助控除で固定額を再控除しない．フィールド未指定時は従来の証跡を維持する．frontend固有の型・Schema定義はない．
+- 最低費用修正：大洲・四国中央・伊方の既存B4kWhは50万円未達だが，両計算器が詳細未確認候補としていた．統括指示とbackendの修正契約に合わせ，全成分容量外判定の直後に住宅・設備に適合する全成分の控除前・税区分確定後費用を比較する．全成分未達だけを `excluded_incompatible / eligible_cost_below_minimum` とし，下限未指定・対象費不明・適合成分なしは推測しない．限定10検査で固定控除，税抜換算，境界一致，混在成分，移住候補の除外分類，愛南併用を確認した．
+- 画面自己QA：PC1280×900で伊方既存B4.5kWh36.3万円，愛南既存B9.5kWh89.4万円（通常12.8万＋移住76.6万），愛南の住宅区分変更で新築20万円を確認．360×800で伊方新築B9.5kWh18.9万円と20万円控除，愛南既存89.4万円・控除併用・子3人以上を含む条件充足仮定を確認．移住属性を本人の適格性確認済みとは表示せず，住宅取得費・他工事費を含めないこと，同じB費の部分配賦未対応を明示する．
+- 分類修正後は360pxの伊方既存B4→4.5kWhで5.6→36.3万円，PCで4.5→4kWhへ戻し5.6万円，4kWhの「対象費用が制度の最低額に届かない」と4.5kWhでの旧理由消去を確認．PC1265／1265，360px345／345で横あふれなし，console error 0．検査タブ38閉鎖・viewport解除済み．共有Vite PID7756／親24472を継続利用用に保持，新規補助サーバーなし，コミット・プッシュ・公開・追加ビルドなし．
+
+- 最終正式受領：`backend/dist/review/ehime-minimum-cost-correction-2026-09-21.json`，schema 11.14.1／data 2026-09-21，998自治体・739規則・446ケース．backend正本3点を手修正せずコピーし，SHA一致を確認した．public `d70d73202470288dfb68b0a3e3e093d4a6abbdeff26ad81c468a5c59c0660d02`，cases `1d58ed6a1505df02565c99e7c292ee0f433fb1b17aaf4eb31da4cc8d6ff9c88e`，metadata `bb5989e72569fe4cd0ea77edf8adc61b4e4434fdda80a170169af9877003aa25`．
+- 最終自動検査：calculator514（全446基準ケースの分類・内訳・シナリオ・年次出力一致を含む），eligible-cost-deduction4，ehime-subsidy6，kagawa-subsidy6，計530 PASS／失敗0．backend旧新比較では大洲・四国中央・伊方の既存B4kWhにある移住評価3件だけが変更され，補助額及び旧334ケースは版以外不変である．これは共通基準との一致検査で，統括の独立算式検収とは区別する．
+- 最終同期後の実画面：伊方既存B4kWhの56,000円と最低費用未達理由を再確認し，容量スライダーで4.5kWhへ変更して363,000円へ更新した．console error 0，検査タブ39閉鎖．画面コード及び計算に用いる公開規則は既実施のPC／360px自己QAから不変で，正式版の追加確認として扱う．一時検査ログを集約後に削除し，共有Viteのみ保持する．
+- 最終コード識別：`site/simulator/src/kansai-formula.js` SHA-256 `160d7774e28cad18b1b82eaa87a514682316e9602f3ceb7571e1634f6eeb1f2e`．
+- 最終コード識別：`site/simulator/src/diagnostic-subsidy.js` SHA-256 `372e493033578e6be41817fd1f925c8e3475f678fec27c5219441b5f7fd24024`．
+- 最終コード識別：`site/simulator/src/subsidy-presentation.js` SHA-256 `3470f4027e8088d3d19cf669844ebc51303f1074aae3d0b77098bd7c1f8d10ab`．
+- 最終コード識別：`site/simulator/src/app.js` SHA-256 `1229c90f54cd1c999474e2038190aa1f4dacaee4316174ae9d19e2d58f11e20b`．
+
+- 統括独立③最終受入：`backend/dist/review/ehime-manager-review-2026-09-21.json` の `final_acceptance` を確認．正式3SHAと4コードSHAが一致し，統括は伊方新築189,000円・定額控除説明，最低費用未達理由への修正，最終同期後の既存4→4.5kWhで56,000→363,000円，愛南894,000円（通常128,000円＋移住766,000円）をPC実画面で確認した．360pxは担当自己QAと区別する．統括検査タブ21閉鎖済み．追加検査は行わず，高知の正式データ引渡しを待つ．
+
+## 2026-09-21 高知正式接続前の容量処理準備
+
+> **結論：安田のfloor_0_001を十進有理数処理へ追加し，限定6検査を通過した．公開データは11.14.1を維持し，高知の正式SHA付き引渡し・全基準照合・画面自己QA・統括独立③は未完である．**
+
+- 統括の高知草案074a4056独立①②受入と準備指示に基づく．backendの `_kansai_capacity_value` と同じく小数第3位で切り捨て，率・千円端数・上限を後段適用する．1.0099kWは1.009kWとして121,000円となり，0.01切捨ての120,000円と区別する．1.0169kWは121,000円で，0.01四捨五入の122,000円と区別する．
+- 自動検査：kochi-capacity2及び既存eligible-cost-deduction4，計6 PASS／失敗0．PVの5kW上限とBの1.025kWh端数・10kWh上限を確認した．任意小数容量は計算層限定であり，UI入力範囲の拡張や画面検収を意味しない．正式引渡し後に全基準照合と代表PC／360px確認を行う．
+- 新規サーバー・ブラウザ・常駐補助プロセスなし．検査コマンド正常終了．共有5173は保持し，コミット・プッシュ・公開なし．
+
+## 2026-09-21 高知11.15.0の同期・自己検査
+
+> **結論：高知34市町村・52枝を正式同期し，全582基準ケース一致を含む665検査と代表PC／360px自己QAを完了した．統括独立③の最終受入済みであり，11.15.0を保持して福岡の正式引渡しを待つ．**
+
+- 正式受領：`backend/dist/review/kochi-formal-connection-2026-09-21.json`，schema 11.15.0／data 2026-09-21，1,032自治体・791規則・582ケース．高知は25採用・9候補・18除外．backend正本3点を手修正せずバイト同期し，SHA一致を確認した．public `8b2c81455b1093f022d78ac46fbadc1f15f612517c2a0e8fe0b31a4754f08969`，cases `249ddcbb66fb13b2af04cf3b3f33b828d6beac67f46845501cee8746b8516e10`，metadata `eefad1f2150bce2dc618b7e01930dc8ab0b5b7ba4b3b51df7e11a28ddcd2cd82`．backend差分確認では旧446ケース・739規則・998自治体は版情報以外不変である．
+- 自動検査：calculator650（全582基準ケースの分類・内訳・シナリオ・年次出力一致），kochi-capacity2，ehime-subsidy6，eligible-cost-deduction4の662 PASSに，kochi-subsidy3 PASSを加え，計665 PASS／失敗0．安田の1.0099→1.009と4.0259→4.025，0.01切捨て・四捨五入との差，PV/B上限を計算層で確認．任意小数をUI契約へ追加していない．
+- 条件表示：受付継続と予算残未確認，住宅区分指定なしの仮定を公式事実と区別して短文化した．田野等の設備別算定額を合算後千円切捨て，香南PV単体・税抜50万円/kW条件，黒潮Bの実績報告までのPV導入・同一B事業の他補助禁止，梼原の前年度要望調査・10年以上居住・メーカー保証・本体附属機器費のみ，本山・大月の他補助0円と受給時控除確認，四万十市の税抜費用上限を保持．内部の追加実装・検収文言は利用者文へ出さない．
+- PC1280×900：PV4kW・B9.5kWh・既存・月額12,000円・標準で，安田860,000円，田野540,000円，黒潮380,000円，梼原264,000円表示（計算値263,625円），本山・大月・四万十市各540,000円を確認．香南はPV単体60,000円．個別条件を確認し，PC1265／1265で横あふれなし．安田の展開表示は画像でも確認．
+- 360×800：安田・田野・黒潮・梼原・香南の同条件と注意文を確認し，幅345／345で横あふれなし．香南の設備操作でPV単体60,000→併設0→PV単体60,000円となり，PV枝の設備非該当と併設枝の受付終了を区別．黒潮B380,000円採用と別PV枝の非FIT除外を確認．香南の除外欄及び黒潮の採用条件は画像でも確認．console error 0．
+- 代表URL：`http://127.0.0.1:5173/simulator/?prefecture=39&municipality_code=39304&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis`．田野39303，香南39211（PV単体はequipment_package=solar_only），黒潮39428，梼原39405，本山39341，大月39424，四万十市39210．
+- 留保：本山・大月の他補助非ゼロ，四万十市の任意低費用での丸め順，香南の任意価格での単価上限へ合格範囲を拡張しない．有限探索・公式事実とモデル仮定の区別・県間接財源の別加算禁止を維持する．
+- 検査コマンド正常終了，一時ログ集約後削除．検査タブ40閉鎖・viewport解除．新規補助サーバーなし，共有Vite PID7756／親24472は継続利用用に保持．無関係なデザイン変更・コミット・プッシュ・公開・追加ビルドなし．
+- コード識別：`site/simulator/src/kansai-formula.js` SHA-256 `1f026a00949fa05f927e6702543927e9148493a45c0572255aefec8f9d4dbd78`．
+- コード識別：`site/simulator/src/subsidy-presentation.js` SHA-256 `ac7a3167509014fbc32e6648d4a34538eec46108d31368e30470efc2e0075b3b`．
+- コード識別：`site/simulator/src/app.js` SHA-256 `d5e88988aa86a89f0028ac23f530280966f4ef029d69d9f185c130f0eb02b9ff`．
+
+- 統括独立③最終受入：`backend/dist/review/kochi-manager-review-2026-09-21.json` の `final_acceptance` を確認．正式3SHA・3コードSHA一致．統括はPC1280で安田860,000円と条件，香南の併設0→単体60,000円と除外分類，黒潮B380,000円と別PV枝の非FIT除外を実画面確認した．幅1265／1265，console error 0，統括タブ22閉鎖済み．360px及びその他の代表確認は担当自己QAと区別する．追加重複検査は行わず，11.15.0を保持して福岡の正式引渡しを待つ．
+
+## 2026-09-21 福岡正式接続前のサービス円丸め対応
+
+> **結論：明示したcapacity_rate・1円単位の成分だけにservice_half_upを適用し，差分9検査及び受入草案の6成分照合を通過した．データは11.15.0を維持し，福岡の正式引渡し後の同期・全基準照合・画面検収は未完である．**
+
+- `site/simulator/src/kansai-formula.js`は費用・金額上限適用後の非負額を十進有理数で円四捨五入する．明示指定が容量単価式・1円単位以外なら拒否し，未指定の既存規則は従来どおり切り捨てる．証跡のrounding_modeも指定時だけ出力する．コードSHA-256 `b0fb6767a13f85caff7b1255ea373804b022cbfe6aa8b59fce35236641decd38`．
+- `fukuoka-rounding`3＋`kochi-capacity`2＋`eligible-cost-deduction`4＝9 PASS／失敗0．筑紫野PV3.12347kWは指定あり78,087円・未指定78,086円．0.5円境界の前後と一致，上限・費用制限・下限0，不適合指定の拒否，未指定千円切捨て及び証跡互換を確認した．
+- 受入草案c2d8864cの筑紫野・太宰府・筑前6成分を読み，容量3.12347の計算を別途照合した．太宰府PV62,469円，他5成分78,087円で一致．任意小数は計算層検査であり，画面入力範囲を拡張していない．
+- 正式データ3点・表示デザインは未変更．新規ブラウザ・補助サーバーなし，検査プロセス正常終了．共有5173を保持し，コミット・プッシュ・公開なし．
+
+## 2026-09-21 福岡11.16.0の同期と候補理由差戻し
+
+> **結論：11.16.0で検出した資料不足候補7枝の理由不整合を正本修正版11.16.1で解消し，全830基準一致を含む909検査と対象表示の自己QAを完了した．統括独立③最終受入済みであり，現行版を保持して佐賀の正式成果物を待つ．**
+
+- 11.16.0は1,092自治体・826規則・830ケース，福岡60市町村・35枝（16採用・7候補・12除外）．初回SHAはpublic `02fa91ce8ceabf5d7df4509a72b22b6b79fe1ae2c7e9d05b309d4e307914c870`，cases `b247cfd6fb0f7b5d8a60cfb76ac6f20c217e6e184d26f9790591ef58d4caf906`，metadata `9e7ec1688dc462f5bbb13e1a0719e46ec3a3742ec203c221d888226191cb7f29`．3点をバイト同期・SHA照合した．
+- 初回906 PASSはcalculator898（830基準一致）＋fukuoka-rounding3＋kochi-capacity2＋kochi-subsidy3．修正版のPASSへ転用しない．追加の中古加算・候補表示テスト3件は初回表示補正を含む段階でPASSしたが，ID別表示補正は統括指示で撤去し，それを前提とする候補テストも除去した．
+- 資料不足候補7枝がrequired_external_workを返し，共通表示で住宅工事等の必須条件を断定する問題を検出．直方改修B・空き家改修，飯塚改修，うきは地区B，鞍手一般改修，東峰PV，吉富未到達が対象．候補分類と金額を独自変更せず，backendの理由コード修正後に共通表示を検査する．
+- 金額に関する自己QA：PC1280×900で福岡市B8.5→9kWhの150,000→300,000円，13.5→14kWhの300,000→450,000円，税抜機器費・工事費除外・PV/HEMS条件を確認．地域セレクタで鞍手へ変更し，中古加算300,000円，新築へ変更して0円と住宅区分非該当を確認．設備セレクタのPV単体／B併設も操作した．
+- 360×800で鞍手の中古加算300,000円・中古取得定住仮定・本人適格性未確認・住宅基本補助除外を表示し，新築切替0円を確認．福岡市13.5→14kWhの450,000円への切替も確認．PC1265／1265，360px345／345で横あふれなし．鞍手360px条件欄を画像確認．ここまでconsole error 0．候補理由に関する旧表示は未合格とする．
+
+- 最終受領：`backend/dist/review/fukuoka-r5-correction-2026-09-21.json` の11.16.1．件数は1,092自治体・826規則・830ケースで不変．3成果物を手修正せずバイト同期・SHA照合した．public `75eac803522606c68056ac5e542110867c82b217eb64ae473b7ba8fe0833b467`，cases `57d41b53ca151dad73f45b9b9be79151d90c11a7441a0c451e8a035f119d46bc`，metadata `a739e9dda08078245e1a8480a7c471bc762506ac4db2a6ca976cbe75196d70d4`．backend差分は候補7枝と対象24ケースの理由・連動注記だけで，全830金額及び他819規則は不変である．
+- 最終自動検査：calculator898（全830基準の分類・内訳・シナリオ・年次出力完全一致），fukuoka-rounding3，fukuoka-subsidy3，kochi-capacity2，kochi-subsidy3，計909 PASS／失敗0．候補7枝は共通calculation_detail_unconfirmed・金額nullを確認し，ID別表示置換は行っていない．公式端数未確認3制度6成分のサービス円四捨五入と未指定既存切捨ての区別を維持した．
+- 最終表示自己QA：PC1280×900のうきはで中古設備加算100,000円，入力外条件の仮定・本人適格性未確認・住宅基本補助を含めない短文，地区B候補の「算定に必要な制度詳細を確認できていません」，別PV枝の非FIT除外を確認．統括・承認等の内部経緯は短文へ出さない．360pxでもうきはの同じ候補理由と幅345／345を確認．吉富は360pxで合計0円，受付不明・試算額未確定・「受付状況を確認できていません」を確認し，画像でも工事必須の誤説明が消えたことを確認．PCうきはも画像確認．console error 0．金額不変のため，前段の容量・地域・住宅・設備操作を重複実行していない．
+- 代表URL：`http://127.0.0.1:5173/simulator/?prefecture=40&municipality_code=40130&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=8.5&housingAge=existing&scenario=standard&from=analysis`．9/13.5/14kWhへ容量を変更．鞍手40402，うきは40225，吉富40642はB9.5kWhで再現できる（前段の鞍手操作は福岡市から地域変更したB14kWh）．
+- 留保：福岡市の他補助非ゼロ時の控除順は追加実装留保のままで，現行他補助0円条件への合格とする．有限探索・候補の事実不足・住宅や端数処理のモデル仮定を公式確認へ読み替えない．
+- 検査コマンド正常終了・一時ログ集約後削除．検査タブ41/42閉鎖・viewport解除．新規補助サーバーなし，共有Vite PID7756／親24472は継続利用用に保持．無関係なデザイン変更・コミット・プッシュ・公開・追加ビルドなし．
+- 最終コード識別：`site/simulator/src/kansai-formula.js` SHA-256 `b0fb6767a13f85caff7b1255ea373804b022cbfe6aa8b59fce35236641decd38`．
+- 最終コード識別：`site/simulator/src/subsidy-presentation.js` SHA-256 `5476313faebc8e1c12234dd32123e5915566a737a6d804741d42b6fa2b876994`．
+- 最終コード識別：`site/simulator/src/app.js` SHA-256 `57c4c527f264a160b6b8841cf95b4d4068ca71832e2d482c2678ed03423830a6`．
+
+- 統括独立③最終受入：`backend/dist/review/fukuoka-manager-review-2026-09-21.json` の `final_acceptance` を確認．正式3SHA・3コードSHA一致．統括はPC1280でうきは100,000円・中古条件・住宅基本額除外・地区B資料不足・別PV非FIT，福岡市の容量9.5→8.5→9kWhによる300,000→150,000→300,000円，吉富0円・受付不明・額未確定を実画面確認した．幅1265／1265，console error 0，統括タブ23閉鎖済み．360pxは担当自己QAと区別する．追加重複検査は行わず，11.16.1を保持して佐賀の正式成果物を待つ．
+
+## 2026-09-21 佐賀11.17.0の同期・自己検査
+
+> **結論：佐賀20市町・42規則を正式同期し，全958基準ケース一致を含む1,036検査と代表PC／360px自己QAを完了した．統括独立③最終受入済みであり，11.17.0を保持して次県の正式引渡しを待つ．**
+
+- 正式受領：`backend/dist/review/saga-formal-connection-2026-09-21.json`，schema 11.17.0／data 2026-09-21，1,112自治体・868規則・958ケース．佐賀5採用・11候補・26除外．公開3点を手修正せずバイト同期しSHA一致を確認．public `8dfd5fdbae2dcad14bc0991bc47b0ea949b64b5e1ac3dabf5c0871b161862d91`，cases `802adc99b8344d3b53bdc87cd71a4c1ccb83dac7459cce6089513d1d230265d7`，metadata `40fc0f533dc0947c5e944d9408086e22d935552e8e5fe77af833778870bb59c0`．
+- 自動検査：calculator1026（全958基準ケースの分類・内訳・シナリオ・年次出力一致），fukuoka-subsidy3，fukuoka-rounding3，saga-subsidy4，計1,036 PASS／失敗0．佐賀市のPV単体50,000円／併設100,000円の排他，基山の既存PV3kW0→3.5kW100,000円・新築除外，上峰3／3.5／4kW60,000／70,000／80,000円，鹿島60,000円を検査．全20市町の既存B併設入力で候補11枝すべてのamount_yen=nullを確認した．
+- 表示変更は共通仮定文4種の短文化のみ．納税等の入力外条件，受付継続と予算残未確認，容量対応・税区分仮定，本人所有居住の想定と公式所有要件未確認を保持する．固有IDによる理由の置換・候補分類変更・デザイン変更はない．制度固有の要確認事項は原文を保持し，佐賀市抽選・排他，基山税抜100万円以上・同一PV工事の重複禁止，鹿島税抜65万円/kW以下を表示する．
+- PC1280×900：月額12,000円・既存・標準で佐賀市PV4kW単体50,000円から設備切替でB9.5kWh併設100,000円へ更新，150,000円としないことを確認．佐賀空き家は受付終了と試算額未確定を確認．基山PV単体3→3.5kWの0→100,000円と最低費用未達理由の解消，新築切替0円・住宅区分非該当を確認．上峰PV単体3→3.5→4kWの60,000→70,000→80,000円，鹿島PV4kW+B9.5kWh60,000円と費用条件，吉野ヶ里の合計0円・受付不明・試算額未確定を確認．PC1265／1265で横あふれなし，吉野ヶ里は画像でも確認．
+- 360×800：PV4kW+B9.5kWh（基山のみPV3.5kW），既存で佐賀市100,000円，基山100,000円，上峰80,000円，鹿島60,000円と個別条件，吉野ヶ里の受付不明・試算額未確定を確認．佐賀空き家の受付終了と試算額未確定も確認．幅345／345で横あふれなし，佐賀市採用条件・吉野ヶ里候補は画像確認．console error 0．
+- 代表URL：`http://127.0.0.1:5173/simulator/?prefecture=41&municipality_code=41201&monthlyElectricityBill=12000&systemCapacityKw=4&equipment_package=solar_plus_standard_battery&batteryCapacityKwh=9.5&housingAge=existing&scenario=standard&from=analysis`．基山41341（PV3／3.5kW），上峰41345（PV3／3.5／4kW），鹿島41207，吉野ヶ里41327．PV単体はequipment_package=solar_only，新築はhousingAge=new．
+- 留保：鹿島の任意費用での税抜65万円/kW上限ガード未対応を維持する．今回の固定モデル費用への合格を任意費用へ拡張しない．候補11枝を補助額0円確定や制度不存在とせず，候補の適用事実不足・吉野ヶ里公式本文未取得を保持する．
+- 検査コマンド正常終了・一時ログ集約後削除．検査タブ43閉鎖・viewport解除．新規補助サーバーなし，共有Vite PID7756／親24472は継続利用用に保持．コミット・プッシュ・公開・追加ビルドなし．
+- コード識別：`site/simulator/src/kansai-formula.js` SHA-256 `b0fb6767a13f85caff7b1255ea373804b022cbfe6aa8b59fce35236641decd38`．
+- コード識別：`site/simulator/src/subsidy-presentation.js` SHA-256 `6df92061a8edbf688551900206803f0c46dab3a4728ca4b8c97f073b4ccde540`．
+- コード識別：`site/simulator/src/app.js` SHA-256 `57c4c527f264a160b6b8841cf95b4d4068ca71832e2d482c2678ed03423830a6`．
+
+- 統括独立③最終受入：`backend/dist/review/saga-manager-review-2026-09-21.json` の `final_acceptance` を確認．正式3SHA一致と共通仮定4種の短文化を確認済み．統括はPC1280で佐賀市PV50,000→B併設100,000円・空き家受付終了／試算額未確定，基山B併設でPV3→3.5kWの0→100,000円・最低費用未達理由の解消，吉野ヶ里の受付不明／試算額未確定を実UI確認した．幅1265／1265，console error 0，基山は画像確認済み．360px・上峰・鹿島は担当自己QAと区別する．追加検査は行わず，11.17.0を保持して次県の正式引渡しを待つ．
+
+## 2026-09-21 収支記事ヒーロー単記事試作
+
+> **結論：収支記事だけに緑背景の統合ヒーローを実装し，PC1280・360・412pxで自己確認した．統括のPC独立レビュー受入済みであり，他記事への展開はユーザー判断を待つ．**
+
+- 対象URL：`http://127.0.0.1:5173/pages/electricity-sales`．`site/pages/electricity-sales.html`の冒頭ヒーローと写真を統合し，当該ページだけが読む`site/articles/styles/electricity-sales-hero.css`を追加した．PCは記事情報左／既存写真右，背景#008653と白文字，本文は白．既存タイトルを保持し，リードをPC2行・360px3行に整理．カテゴリは統括レビューにより「収支」へ統一した．更新日2026-09-21は今回の実編集日で，旧最終確認日のデータ版自動表示とは分けた．本文以降・目次・出典・固定バー開始マーカーを変更していない．
+- PC1280×900：ヒーロー高約436px，リード高約62px・2行，既存画像の読込と左情報／右写真を画像確認．360×800は縦配置，タイトルを「太陽光の収支は，／何で決まる？」で改行，リード3行・画像と本文への接続を画像確認．横幅PC1265／1265，360px345／345，412px397／397で横あふれなし．白／緑のコントラスト比4.63:1．console error 0．
+- 低影響のHTML/CSS試作として新規自動テスト・全件再検査・ビルドは追加せず，実画面と範囲限定確認を実施．佐賀11.17.0のデータ3SHAを保持．長崎同期・収集は再開していない．
+- 検査タブ44閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472をユーザー画面レビュー用に保持．コミット・プッシュ・公開なし．
+- 試作コード識別：`site/pages/electricity-sales.html` SHA-256 `4a6fb7dc9b6bfb02ea7372682f6401700e58512619fb817fbf6818316d2cffe9`．
+- 試作コード識別：`site/articles/styles/electricity-sales-hero.css` SHA-256 `51072572301fe62910f444e686379d9cd5d4346acf9b8471ee74ebf3399aa067`．
+
+- 統括独立レビュー受入：最終reload後のPC実画面でカテゴリ「収支」・編集日・タイトル・既存画像・本文冒頭を確認．幅1265／1265，console error 0，最終スクリーンショット良好，統括タブ26閉鎖済み．360／412pxは担当自己QAと区別する．追加変更や他記事への展開は行わず，次のユーザー判断を待つ．
+
+## 2026-09-21 収支記事リード拡充
+
+> **結論：ユーザー承認に基づき単記事のリードを3文に拡充し，本文冒頭の重複を整理した．PC・360px自己QAと統括独立PC確認を完了した．**
+
+- 対象は同じ収支記事のみ．費用回収の問い，収支を左右する条件，効果・費用の整理という3文のリードへ変更し，PCの上下余白を拡大した．タイトルの拡大や新規の数値・事実の追加はない．本文冒頭の重複部分を除き，屋根条件・設備容量・見積価格を既存結論段落に保持した．`data-quote-start`と固定バーのコードは維持した．上記の初回試作記録は変更前の履歴である．
+- PC1280×900：左右配置，リード4行，ヒーロー高約462pxを画像確認．横幅1265／1265．開始マーカー下端約739pxで固定バー非表示，通過後約-161pxで表示を確認．
+- 360×800：情報・写真の縦配置，タイトル2行，リード7行，ヒーロー高約672pxを画像確認．横幅345／345で横あふれなし．マーカー下端約1054pxで固定バー非表示，通過後約-546pxで表示．console error 0．今回の412px再検査は実施していない．
+- 統括独立PC確認：タブ27で厚いリード4行と写真の横並び，本文重複除去，スクロール後の固定バー広告表記とdisabled無料見積もりを確認．横幅1265／1265，console error 0，タブ閉鎖済み．
+- 佐賀11.17.0の公開データ・metadata・計算fixtureの3SHA一致を確認．長崎同期なし．低影響の文章・CSS変更として全件再検査・新規自動テスト・ビルドは追加しない．検査タブ45閉鎖・viewport解除，新規補助プロセスなし．共有Vite PID7756／親24472は画面レビュー継続用に保持．コミット・プッシュ・公開なし．
+- コード識別：`site/pages/electricity-sales.html` SHA-256 `0c7c792bc550d9a64f7cefd49f4854d3fd03fc67d4ff6c6f54045b6989a09c3d`．
+- コード識別：`site/articles/styles/electricity-sales-hero.css` SHA-256 `523b007ef6ac9b4d18542821262d5a3dafec72460012686b79ca5a8f27ada608`．
+
+
+## 2026-09-21 収支記事の目次・本文見出し改修
+
+> **結論：収支記事のみの1列2階層目次と本文見出しを実装し，PC1280・360pxの自己QAと統括独立PC確認を完了し，受入済みである．**
+
+- 対象URL：`http://127.0.0.1:5173/pages/electricity-sales`．主要な問い4群とまとめ，配下10項目の計15リンク．全リンクの文言と対象h2/h3が一致し，ID重複なし．既存IDを保持し，`#sales`クリック後に売電見出し上端約24pxへの到達を確認．目次のクリック開閉とEnter再展開を確認．
+- PC1280×900：目次1列・主要項目太字・子項目字下げを画像確認．本文h2/h3/h4は32／24／17.6px，緑／濃い灰色／濃い灰色，いずれも太字800・左線0px．判断手順のh2/h3と売電h3を画像確認．幅1265／1265で横あふれなし．
+- 360×800：目次1列と字下げ，回収条件節のh2/h3/h4を画像確認．文字サイズ25.6／19.2／17.6px，左線0px．幅345／345で横あふれなし．固定バー表示を維持，console error 0．
+- 編集時に既存段落・図表・旧ID・ヒーロー保持を範囲限定照合．その後，補助金段落末の追加工事の1文を設置費節へ移動した．判断手順の箇条書きは同内容の段落とh3へ整理した．新規の調査・数値追加なし．自動テスト新設・全件再検査・ビルドなし．
+- タブ46閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472は継続レビュー用に保持．佐賀11.17.0維持，データ同期・収集・コミット・公開なし．
+- コード識別：`site/pages/electricity-sales.html` SHA-256 `16deb25e2b1ba1769fd888558829dce5ed93792c58b055adaa1b65fbb9ab9a58`．
+- コード識別：`site/articles/styles/electricity-sales-hero.css` SHA-256 `183d64eee94714353b6ad74623cf6550c1f6e22bcdddd2e6d2082330e00be869`．
+
+- 統括独立PC受入：タブ28で目次展開1列2階層を画像確認，15リンクの対象存在・見出し文言一致をDOM確認．売電・費用リンクの実クリック到達，h2緑32px／h3濃灰24px／h4濃灰17.6px・左線0，費用h2とh3の並びを画像確認．幅1265／1265，console error 0，固定バー出現．統括タブ閉鎖済み．
+
+
+## 2026-09-21 収支記事の章構成整理
+
+> **結論：収支記事に承認済みの章構成を適用し，PC1280・360px自己QAと統括独立PCレビューを完了した．**
+
+- ヒーロー直後は目次．4主要h2の直後にfigureを置き，家計は既存収支図，費用は既存設置・点検・交換図，回収条件は既存家庭利用図，判断は新規HTML/SVG手順図解とした．既存段落の内容・比較表・旧ID・出典バインド，ヒーローと共通フッターを編集時に照合した．重複診断カードは最終的に削除し，主カードはまとめ後1件，判断章末は短い診断リンクと関連ガイドとした．
+- 既存参考文献13件を家計7／費用5／回収条件1へ移し，判断章は0．全件のリンク・名称表示をDOM確認．記事末尾の文献・関連記事一括再掲なし．目次15リンクは対象見出し文言と一致．
+- PC1280×900：ヒーロー→目次，家計h2→収支図，費用の既存画像，判断h2→横3段階図解，章末文献を画像確認．本文画像3点読込済み．幅1265／1265．目次から第1章へ移った時点で固定バー非表示．結論段落下端約249pxで非表示，通過後約-651pxで表示を確認．
+- 360×800：判断図解の縦配置，回収条件の画像，まとめ→主カード→共通フッターを画像確認．幅345／345で横あふれなし．結論段落下端約494pxで固定バー非表示，約-306pxで表示を確認．console error 0．主カード1件をreload後確認．
+- 統括独立PC受入：タブ29でヒーロー→目次直接配置，4主要h2直後のfigure，文献7／5／1／0計13件，費用画像・判断図解を確認．費用・判断章へ目次リンクで移動，幅1265／1265，console error 0．最終reload後に主カード1件，判断章末の関連ガイドと短い診断リンク，目次欠損0を確認．章末診断リンクを実クリックして`/simulator/`到達．統括タブ閉鎖済み．
+- 検査タブ47閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472を継続レビュー用に保持．佐賀11.17.0維持，長崎同期・全国収集・コミット・公開・追加ビルドなし．表示整理に限定し，新規自動テスト・全件再検査なし．
+- コード識別：`site/pages/electricity-sales.html` SHA-256 `18ae0fdad85f549678f028b4bd83a51ad0f5a34f4726ac3ada83590999af490a`．
+- コード識別：`site/articles/styles/electricity-sales-hero.css` SHA-256 `d7ee81b23d825aece01d5eb121c71cd248f053bad0c31cc12c7b5ef103c44561`．
+
+
+## 2026-09-21 収支記事の5章再構成
+
+> **結論：承認済み5章・20小見出しへ本文と目次を再構成し，代表計算・PC/360px自己QA・統括独立PC確認を完了した．5章の入口写真は未対応として残す．**
+
+- 対象は`site/pages/electricity-sales.html`．電気代・売電／設置費／設置後費用／30年収支／自宅の判断の5章とまとめ，目次26リンク．金額→初年度月平均の説明→共通代表条件の順とし，条件を読むための前置きを避けた．見出しにkWを出さず，共通条件へ第1～4章から接続．既存図解は本文内へ移し，入口写真の代替完了とは扱わない．未採用4写真案は掲載せず，画像生成なし．
+- 根拠は[代表計算JSON](reports/electricity-sales-example-2026-09-21.json)．既存の東京都・既存戸建・南向き4kW・平日昼ほぼ毎日在宅・月料金未入力15467円の条件を引き継ぎ，佐賀11.17.0保存データと現行`calculateEstimate`のstandardで算出した．黒字地域の探索はしていない．見出しは補助金0円の比較用算術調整で，ランタイムの補助金計算や公開データは変更しない．
+- 初年度削減56,593円／年÷12→月約4,700円，売電68,946円／年÷12→月約5,700円（100円単位）．設置1,324,400円→約132万円．点検38,000円×6＋PCS交換384,000円＝612,000円（61.2万円）．30年削減2,094,799＋売電861,588－設置1,324,400－維持交換612,000＝1,019,987円→約102万円．初年度と季節差，年1.5％買電料金上昇，補助金0，回収保証なしを近接表示した．
+- 蓄電池9.5kWh併用の同条件・補助金0比較は，費用2,473,900円，30年効果4,045,091円，維持交換612,000円，利益959,191円→約96万円．標準の30年交換なしと実際の交換可能性を区別．突発修理・撤去/処分・屋根工事・保険・借入・税金等の除外費用を明示．旧東京都補助金84万円込みA/B比較は別例とし，保存版で再計算した値と整合することを確認した．
+- 統括独立計算：代表JSON3ケースの全resultsを同データ・同関数で再計算し不一致0，補助金なし利益3値も一致．太陽光のみの元補助金840,000円・元利益1,859,987円からの調整とも一致．
+- 限定検査：全旧ID保持・重複0，記事内全フラグメントとローカルリンク解決，目次26件の見出し文言一致，見出しkW表記0．出典の名称・リンク表示を確認．既存13種類を保持し，共通の費用資料を設置費章と維持費章の両方に置くため文献表示は14件．主診断カード1件．
+- PC1280×900：目次，金額→条件，約102万円の補助金0/年1.5％/保証なし注記，判断図解の「導入費用を確定させる」を画像確認．幅1265／1265．第1章結論下端約321pxで固定バー非表示，約-579pxで表示．360×800：長い小見出し・条件本文と目次の折り返し，開閉クリック/Enterを画像確認．幅345／345で横あふれなし，既存本文画像3件読込済み，console error 0．
+- 旧`#sales`直接移動で対象上端約24pxを確認．章末診断リンク実クリックで`/simulator/`到達．収支だけ`data-quote-description`で指定説明へ上書きし，共通記事初期化は属性なしの場合に従来既定値を使う．収支の説明/disabledと，費用記事の既定説明/disabledを実ブラウザで確認した．
+- 統括途中PC確認：タブ30で目次26リンク全到達，重複ID0，横overflow0，維持費章リンク実クリック成功，console error 0．その後の制作経緯文削除と収支固定バー説明の差戻し2点は反映済み．最終受入は下記に記録する．
+- 検査タブ48閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472を継続レビュー用に保持．公開データ・metadata・fixtureの佐賀11.17.0の3SHA不変．CSS・他記事HTML・計算コード変更なし，全国収集・長崎同期・コミット・公開・ビルドなし．全件再検査は行わず，上記の範囲限定検査を実施．
+- コード識別：記事HTML SHA-256 `71615b042243350a1ffa673a11ad4ea202175315568b91cb99358bf804ff0f2d`．記事固定バー初期化JS SHA-256 `1bc927e56c7e16e076cbc089a0e7dca5ff066be3307b8180f57b2eba1c6061a1`．計算根拠JSON SHA-256 `a0421a1594d0ab423f7275ded68ed1843222e7b602e410e041ba65af1eb96abc`．
+
+- 統括最終独立受入：PC目次26リンク到達・重複ID0・幅1265横overflow0，維持費章と判断章の目次実クリックと両章の画像を確認．図の導入費用確定文言，最終reload後の固定バー指定文言を確認．3代表ケース全results再計算不一致0．統括タブ30終了・追加プロセスなし．入口写真5章分は未対応として留保する．
+
+## 2026-09-21 収支記事の見出し短縮
+
+> **結論：承認された短い見出しへ本文・目次を揃え，蓄電池交換を機器修理・交換へ統合した．**
+
+- 対象は`site/pages/electricity-sales.html`．5主要章・19小見出し・まとめの目次25リンクへ整理．主要h2は変更せず，指定h3のみ短縮した．
+- 蓄電池交換の本文は`#equipment-repairs`内へ移し，旧`#battery-replacement`を保持．変更前後の全段落テキストの多重集合と全ID集合が一致し，ID重複なし．初年度月平均・補助金0円・維持交換612,000円等の条件と根拠本文は保持した．
+- PC1280×900で目次と統合後本文を画像確認．目次25リンクの文言が対象見出しと全件一致．機器修理・交換への実クリックで対象上端約24pxへ移動．幅1265／1265で横あふれなし，console error 0．
+- 検査タブ49閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472は継続レビュー用に保持．今回の変更は記事HTMLと本QA追記に限定し，CSS・画像・データ・他記事は変更していない．
+- コード識別：記事HTML SHA-256 `0bb5e7629f2e4a65c4786a020363be673fb783fa5966e2c182d3aca34056dca6`．
+
+## 2026-09-21 収支記事の計算根拠を参考ページへ集約
+
+> **結論：記事の長い条件・モデル定義・精密な算術説明を計算方法へ集約し，本文を短い意味づけと参考リンクへ整理した．**
+
+- 記事の旧`#example-conditions`は「試算の目安です．」と参考リンクの位置へ保持．合意済みh2・h3，目次25件，旧ID，既存出典リンクを保持．暮らしへの説明と比較表は残した．
+- `calculation-method.html#electricity-sales-example`へ東京の代表条件，補助金0円，初年度月平均，設置・点検交換費，30年利益，蓄電池比較，補助金込み家庭比較の根拠を集約．既存の式・採用値へのリンクで重複説明を抑えた．元の料金参照例・売電対象地域も移し，維持費原資料の頻度と東京都出典を補った．全国平均の新規計算は行わない．
+- 画面設計の一般記事ルールを，判断に必要な短い意味づけだけ本文に残し，計算定義・詳細条件は参考ページへ接続する方針に統一．
+- 差分QA：記事h2/h3不変，目次25件一致，旧ID保持，ID重複0，両ページの内部フラグメント・ページ間リンクの解決を確認．PC1280×900で短縮本文・移管先を画像確認し，参考リンク実クリックで代表試算節へ到達．両ページ幅1265／1265，console error 0．計算コード・CSS・画像・公開データ変更なし，追加ビルド・全件再検査なし．
+- 検査タブ50閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472を継続レビュー用に保持．
+- SHA-256：`electricity-sales.html` `3158fb4584727f3e21a2d5dd69dc4252a67c35d4932c97223a41f8a5adaae1d5`．
+- SHA-256：`calculation-method.html` `b6916eef4496e38c1dee74a07f5a1e3404bc0c2dbb18073f46ab23a6efa3f73a`．
+- SHA-256：`画面設計.md` `5d9b29a72f5aa7aff7ac25b62825ebf7652e1b0730030e6cc8544f6f1030ef18`．
+
+## 2026-09-21 収支記事の5章入口写真を適用
+
+> **結論：承認済み5章写真を主要h2直下へ配置し，PCと360pxで写真・診断グラフの表示を確認した．**
+
+- 第1～3章は`output/imagegen/electricity-sales-five-chapters-20260921/01-household-budget.png`，`02-installation-estimate.png`，`03-maintenance-inspection.png`を元に，それぞれ`article-electricity-budget-photo.webp`，`article-solar-estimate-photo.webp`，`article-solar-inspection-photo.webp`へ形式変換．1536×1024を保持し，WebP quality 88，124,440／169,732／120,382 bytes．新規生成・内容編集なし，PNG原本保持．
+- 第4章は既存`article-solar-economics-photo.webp`，第5章は既存`hero-solar-low-plants.webp`と`hero-haretoku-chart-selected.svg`を採用．TOPの`hero__photo`・SVG foreignObject・射影クラスをそのまま再利用し，参照パスと遅延読込のみ記事へ合わせた．TOP HTML・共通CSS・グラフSVGは変更なし．
+- 5枚とも本文と同幅・自然な3:2比率，alt・寸法・lazy指定，写真に図番号なし．既存本文図解は元の位置，まとめ写真なし．全段落・h2/h3/h4・目次テキストとID列は変更前後で一致．
+- PC1280×900で全5章の写真を画像確認．写真幅800，高さ533.33，5写真とグラフ読込済み．第5章のグラフがPC画面四隅に沿って表示されることを確認．ページ幅1265／1265．
+- 360×800で目次から第5章へ実クリックし，グラフ位置と写真全体を画像確認．第1章の通常写真と見出し折返しも確認．全5写真幅312.67，高さ208.44，ページ幅345／345，横あふれなし．console error 0．
+- 画面設計の5章写真未対応記載を適用済みに更新し，以前の4写真案は未採用として区別．本文文章・計算・佐賀データ変更なし，収集再開・ビルド・コミット・公開なし．タブ51閉鎖・viewport解除，新規補助プロセスなし，共有Vite PID7756／親24472保持．
+- SHA-256：`site/pages/electricity-sales.html` `4efcf81d21b743b2a5788ae2c94cea1e3ef9a7d0534a68d74781b012e230d273`．
+- SHA-256：`site/articles/styles/electricity-sales-hero.css` `4c77e29a852ccbaeec3d591c94dcade6d25fc8c77b1096ef0975e60ef37b7a6a`．
+- SHA-256：`site/shared/assets/article-electricity-budget-photo.webp` `b779da2a0ac1d921dc26c1802a7ce1bb0e7a8674809a9cbb783575470cdf4355`．
+- SHA-256：`site/shared/assets/article-solar-estimate-photo.webp` `26bee319fcddab95eec2a97e5df2afc4bc7f3676d33c8cdd85a9befe257b9cc5`．
+- SHA-256：`site/shared/assets/article-solar-inspection-photo.webp` `519094e02c265217b76e5d1f49294c5163cc9aadec7a5e31e85228f98cfec010`．
+- 統括独立PC受入：全5主要h2直後のFIGUREと採用画像src一致，まとめ写真なしを確認．第1・第5章の画像確認，第5章のPC画面内グラフ表示，目次からdecision-pathへの実クリック成功．幅1265／1265で横あふれなし，console error 0．
+
+## 2026-09-21 収支記事のまとめ章を削除し診断導線を第5章へ移設
+
+> **結論：独立したまとめ章と目次項目を削除し，第5章末の主診断導線1件から共通フッターへ接続した．**
+
+- 記事直下は既存5主要章のみ，目次は24件．第5章末の短い診断リンクは重複を避けて除去し，既存主カードを同章末へ移設．関連記事と公開データ版表示は章末に保持．旧`#summary`は主カード位置に保持し，まとめ見出し・本文は削除した．
+- 画面設計の基本順序と記事末尾ルールを更新し，まとめ章を必須とせず最終章末へ主導線を置く方針を反映．他記事は変更しない．本文全面改稿，図・画像・CSS・固定見積導線・データの変更なし．
+- 差分確認：既存5章の対象外本文・見出し・画像参照・出典・旧ID保持．目次24件は本文と全件一致，内部リンク欠損なし．PC1280×900で関連記事→主診断カード1件→共通フッターと固定見積バーを画像確認．幅1265／1265，console error 0．主診断ボタン実クリックで`/simulator/`到達．
+- 検査タブ52閉鎖・viewport解除．新規補助プロセスなし，共有Vite PID7756／親24472保持．追加ビルド・全件再検査・コミット・公開なし．
+- 記事HTML SHA-256：`b990ec6dafdaa685120305baa9672973b1d9eaebac346396051910e7fdcb42b0`．
+- 統括差分受入：まとめh2・目次項目なし，主CTA1件と第5章末配置，5入口写真保持，ページ内参照欠損・ID重複0，画面設計の整合を確認．旧summaryアンカーの主カード移設も互換維持として受入済み．
+
+## 2026-09-21 収支記事の本文・比較・図解レビューを反映
+
+> **結論：承認された6項目を反映し，家庭比較の補助金基準統一と本文・図解の重複整理を完了した．**
+
+- 執筆者向けの法定義務説明を読者向けの点検相談へ変更．保証・確認の反復を整理し，保証対象外費用，赤字・見送り，蓄電池交換，現地調査費など判断に必要な注意は保持．第2章の工事条件は屋根・足場・配線・搬入と見積内訳へ短文化．診断は収支の目安，見積もりは導入費用の確定へ表現を整理した．
+- 第4章の適性リスト・慎重条件・7条件表を3項目の条件表へ統合．設置費・補助金・維持費・容量は既存の各該当節で説明し，重ねない．家庭比較は同じ補助金なしへ統一し，表は在宅状況・電気代削減・売電・正味利益の4行に整理．
+- 保存済み代表JSONから，A 1,859,987−840,000＝1,019,987円，B 1,782,579−840,000＝942,579円，差77,408円を確認．本文表は1万円単位の約102万円／約94万円，差約8万円．計算方法の比較節を同じ基準・丸め方へ更新．計算や公開データの変更・再計算なし．
+- 本文図解はHTMLの電気の使い道と診断→見積もりの2点を残し，共通の色・書体・余白・キャプションへ整理，図1・図2とした．本文と重なる維持費・収支・暮らしのラスター図3点は掲載を外し，画像ファイルは保持．旧図アンカーは互換用に残した．入口写真5枚とヒーローは同一，承認h2/h3・目次24項目・旧ID・5章末主CTA1件を保持．
+- 差分自己検査：全記事リンク先・フラグメント解決，ID重複なし，目次文言一致，保存JSONのA/B/差一致．PC1280×900で条件表・家庭比較・2図解・第5章導線を画像確認，幅1265／1265．360×800で家庭比較と2図解を確認．条件表の列見出しが縦崩れしたため狭幅で非表示・項目幅を修正し，再表示で解消を確認．幅345／345，console error 0．
+- 対象は記事HTML・専用CSS・計算方法参考節・画面設計の参照整合・QA．共通CSS・他記事・画像ファイル・計算コード・データ変更なし．一時検査タブ終了・viewport解除，新規補助プロセスなし，共有Vite PID7756／親24472保持．コミット・公開・収集再開・追加ビルド・全件再検査なし．本文最終レビューはユーザー確認へ引き渡す．
+- SHA-256：`site/pages/electricity-sales.html` `113b99e86783cfb9a51508c48c4592a56bbab98fd9aae1900873e1e1072d04ee`．
+- SHA-256：`site/pages/calculation-method.html` `5354d922d57634a018927a9ff62cf0cb3862d71052032ba2ec6e8abd0254b82b`．
+- SHA-256：`site/articles/styles/electricity-sales-hero.css` `8a7a594e9d15afc2b49ab0b917bc4a3995bd9a9fdb2ab5cce02050566daf64ef`．
+- SHA-256：`site/docs/画面設計.md` `b9dd81b416d96cdbe14755013dd1587bd1bd9c8d0b810296c62078aab71e7313`．
+- 統括独立差分受入：h2/h3保持，第2章短文化，点検の執筆指示文除去，第4章整理，家庭比較102／94万円・差8万円と参考算術の整合を確認．保存JSONの補助金除外額1,019,987／942,579／蓄電池959,191円を独立確認し，本文図解2点への整理も受入済み．
+
+## 2026-09-21 第1章の自然な説明と分岐図
+
+> **結論：第1章の金額・発電条件・売電・蓄電池の説明を整理し，仕組みの直後へ白背景の分岐図を配置した．**
+
+- 金額は月約4,700円／月約5,700円を維持．太陽光のみの導入初年度の年間額を月平均にした当サイトの試算と説明し，季節差と公的な日射量データ・電気料金統計・国の売電価格を用いたことを自然な記事文で示した．独立した「試算の目安」段落を除去し，旧`example-conditions`を章末「計算方法・使用データ」の参考リンクへ移した．
+- 日当たり・屋根の向き・パネルの量による発電量の違いを補い，昼間の使用時間と買う電気の単価へ接続．蓄電池はためられる量の限界，夜間すべてを賄うとは限らないこと，売電減・充放電損失を短く説明．
+- FITは運転開始後の年数に応じた価格設定と説明し，新しい数値は本文へ追加しない．裏付けは既存出典の経産省[2026年調達価格等に関する意見](https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf)の検索索引にある「運転開始から4年目まで／5〜10年目」の記載と，資源エネルギー庁[2026年度FIT・FIPガイドブック](https://www.enecho.meti.go.jp/category/saving_and_new/saiene/data/kaitori/2026_fit_fip_guidebook.pdf)の該当図を説明した検索索引で確認．既存ニュースリリースとPDFの直接取得は403であり，PDF実画面の読取とは区別する．既存公式リンクは保持．
+- 図1は最初のh3の仕組み説明直後へ移設．白背景，太陽＋パネルから家＋家電／電柱＋硬貨へ2方向に分岐．SVG線画・緑の矢印/要点・太陽の黄アクセントを使い，面背景と枠を除去．読み上げ説明・旧ID保持，蓄電池は描かない．第5章図の緑背景・配置は変更なし．
+- 差分は第1章HTMLと専用CSS・本QAのみ．他章のHTMLは元のバイト列を保持し，ヒーロー，入口写真5枚，h2/h3，目次24件，計算方法，計算コード，データは変更なし．内部参照欠損・ID重複なし，目次一致．
+- PC1280×900で冒頭の図と試算説明，売電・蓄電池本文を画像確認．360×800で太陽光から左右へ分かれる図・文字折返しを確認し，幅345／345（PC1265／1265），console error 0．章末参考リンクを実クリックして計算方法の代表試算節へ到達．一時タブ終了・viewport解除，新規補助プロセスなし，共有Vite PID7756／親24472保持．追加ビルド・全件検査・コミット・公開なし．
+- SHA-256：`electricity-sales.html` `7a8343a65f0005ac48718cbab8292a74d22318bb7cf9a1f599eac5dc333959c6`．
+- SHA-256：`electricity-sales-hero.css` `1bc80a627d722910a7395825ccf43842a055df8d29c8f49dfe98817bacaf4fc3`．
+- 統括限定独立受入：第1章全文差分を受入，第2章以降のHTML元バイト列一致を確認．実PCタブ33で第一小見出しの本文とアイコン図を目視し，白背景・緑の矢印と強調・黄の太陽・2分岐・配置を確認．統括タブ33閉鎖済み，追加プロセスなし．
+
+## 2026-09-21 第1章図をベタ塗り・中央寄せへ修正
+
+> **結論：第1章図の3イラストを塗り主体にし，図全体とキャプションを中央寄せした．**
+
+- 画面設計の記事画像・イラストポリシーにある明快な配色・ベタ塗りを確認し，パネル，家と家電，電柱と硬貨を面で識別できるSVGへ変更．白背景，緑の2分岐矢印・要点，黄の太陽を保持．本文・第一段落・試算条件・読み上げ文・第5章図・入口写真は変更なし．
+- PC1280×900と360×800の図を画像確認．中央位置の差0px，横あふれ0，console error 0．一時検査タブ終了・viewport解除，新規補助プロセスなし，共有Vite保持．変更は第1章図・専用CSS・本QA追記のみ．
+
+## 2026-09-21 第1小見出しの確定本文と暮らしイラスト
+
+> **結論：承認された第2・第3段落と，屋根パネル・室内家電・電柱を描く暮らしイラストを適用した．**
+
+- 第1段落は保持．第2段落は東京都・太陽光のみ・最初の1年間の月平均4,700円／5,700円とNEDO等を使った当サイト計算，第3段落は地域・日当たり・使用時間帯・季節差から次の説明へ接続する承認文をそのまま反映．
+- 統括生成の`output/imagegen/electricity-flow-20260921/solar-home-flow.png`を確認し，1536×1024を保持して`site/shared/assets/article-solar-home-flow.webp`へ変換（quality90，113,082 bytes）．原本と生成プロンプトは元の場所に保持．重複生成・画像内容編集なし．
+- 画像を中央寄せし，SVGの緑矢印を屋根→室内家電，屋根→電柱へ重ねた．番号1・2に対応する説明を画像下のHTMLへ置き，PCは2列，360pxは縦並び・要点16pxで表示．キャプション・代替説明を保持．
+- PC1280×900と360×800で家・家電・人物を潰さない配置，2矢印の接続先，説明の判読性を画像確認．幅1265／1265，345／345，console error0．見出し・目次24件・第5章図・入口写真・他章・計算/データは保持，ID重複なし．一時タブ終了・viewport解除，新規補助プロセスなし，共有Vite保持．
+- SHA-256：`electricity-sales.html` `8c0dd16abfec926792000fd2c508798b68c1a34fc13ed236e414355dff986711`．
+- SHA-256：`electricity-sales-hero.css` `b96cbf8984e1a0c4b1d9a63860cc56c17f2b536011ed5c5ad0faaf851980b87d`．
+- SHA-256：`article-solar-home-flow.webp` `c16d7ed7f961d89125f64fd3d20ef4c18d89b25feead92940c74b5b5802cf90e`．
+
+## 2026-09-21 第1章の発電量・昼間の使い方を更新
+
+> **結論：承認されたh3・4段落を反映し，FIT補足を蓄電池節後へ移した．**
+
+- energy-conditionsのh3と目次を同文へ更新し，指定4段落を完全一致で反映．section#sales/h4と既存説明は蓄電池節後・章結論前へそのまま移設．第一小節・図1・写真・蓄電池本文・他章は保持．
+- 限定構造確認：指定本文一致，目次24件全一致，旧ID保持・重複0，記事内リンク欠損なし，sales前後順と移設本文不変を確認．CSS・画像・金額・データ変更なしのため全幅再検査は行わない．新規タブ・補助プロセスなし，共有Vite保持．
+- 記事HTML SHA-256：`01af379d38fe1c63caa72b5d382f031d7cc3b88246621b50020b214161e2e304`．
+
+
+## 2026-09-21 第1章の方位・電力単価の比較例を追加
+
+> **結論：東京4 kWの方位比較と1 kWh当たりの目安を実計算から追記し，本文の4段落構成を保持した．**
+
+- 対象はelectricity-sales.html，calculation-method.html及び本QA・再現JSONのみ．本文は南向き年約4,700 kWh，東・西向き年約4,000 kWh（約15％減），自家消費約31円/kWhとFIT最初の4年間24円/kWhを示す．5～10年目8.3円/kWhはsales補足へ置き，根拠リンクは既存の章末に集約した．
+- 再現条件・結果は[方位・単価の比較原本](reports/electricity-sales-orientation-price-2026-09-21.json)．detailConditions.roof_orientationのsouth／east_west_unknownを指定し，反映済み入力を確認．初年度4,686.0452／3,983.13842 kWh，差702.90678 kWh，係数比0.85．「東西・不明」は共通モデル区分で，影の独立試算はしていない．
+- 購入代表単価31.21円/kWhは2023年度低圧平均27.1×消費税1.1＋同年度賦課金1.40．基本料金・燃料費調整額を別々に扱う限界単価ではなく，個別契約の実際の節約額とは区別．公式検索インデックスの抜粋を確認し，直接取得403の制約を原本に明記した．
+- 限定自己QA PASS：4段落，後半2段落・第1小節・蓄電池小節・図の保持，目次24リンクと見出しの一致，重複IDなし，参考ページの小節と章末リンクの有効性．1280 pxの変更節を目視し，横はみ出し・console errorなし．今回は文章差分のみで360 px・全サイト検査は再実施していない．
+- 記事SHA256 e9c0f119bf4ddb4ea481b761b1f9b4495824b04f53bafbe1c4284ca3b110c0f1．参考ページSHA256 f107ff1bad26c5a649e76d80fb8f813309fab3f2eb83debfc79971a309691d76．公開データは佐賀11.17.0を保持．ビルド・公開・データ同期なし．新規補助プロセスなし，検証タブ終了済み，共有Viteは継続利用のため保持．
+
+## 2026-09-21 自家消費の結論明確化・図1復元
+
+> **結論：指定の冒頭1文へ変更し，図1を直前のベタ塗りSVG版へ復元した．**
+
+- energy-conditions第2段落冒頭を「この試算では，発電した電気を売るより，自宅で使う方がトクです．」へ変更．約31円とFIT24円・最初4年間・契約差及び4段落を保持．
+- 過去の作業記録から元の分岐HTMLとベタ塗り3SVGを回収し復元．残存専用CSSを再利用したためCSS変更不要．生成された暮らし画像資産は未使用で保持．第一小節の確定3段落，数値追記，第5章は不変を確認．
+- 限定自己QA PASS：PC1280 pxで白背景・太陽パネルから家家電／電柱硬貨の2分岐・中央寄せ（中心差0 px）を目視，横overflow0，console error0，内部リンクと重複IDの検査PASS．全面・360 px再検査なし．
+- 記事SHA256 eef44bfdb03eabf8b666da8f64d1d98a1c4fe18a4619db7557ad3acb1a09ed5c．一時復元ファイル・検証タブを終了・除去済み．新規補助プロセスなし，共有5173は継続利用のため保持．公開・ビルド・データ変更なし．
+
+## 2026-09-22 ガイド全5記事へ数字の意味・暮らしの具体例を適用
+
+> **結論：一覧掲載の5記事を読み，説明が必要な19箇所を修正した．収支第1章と確定構造は保持した．**
+
+- 対象はarticles.json及び一覧guides.jsが参照する収支・補助金・見積もり・設置維持費・停電対策の5記事．計算方法とポリシーは一般記事の対象外．計算方法には停電の詳細1段落のみ移設した．
+- 収支4箇所：設置費の試算条件，点検・機器交換費の意味，在宅勤務と通勤・通学の比較，引っ越し・建替えによる利用期間の違いを平易化．第1章は不変．
+- 補助金2箇所：新築と後付けによる条件差を例示し，48万円の条件付き試算であることと費用上限の意味を平易化．制度額・手順・受付確認日は保持．
+- 見積もり2箇所：130万円／115万円は説明用の仮例と明記．家族が昼間留守なら自家消費を多く見込みすぎないよう，生活条件を伝える例を追加．
+- 設置維持費7箇所：設備容量と単価による概算，屋根・搬入路の具体例，容量と出力の使い分け，蓄電池の容量低下の仮定，試算上の支出時期を平易化．点検は推奨と明記したうえで自宅の作業・費用を相談する文へ統合し，法律解釈の注意文を除いた．数値と保証ではない旨を保持．
+- 停電4箇所：昼の充電と夜の照明・冷蔵庫の違い，約1.7 kWhの意味，容量と実際の残量の違いを平易化．家電の仕様値・電圧・効率・補機の詳細段落は4出典リンクを含め計算方法のoutage-reference直後へ原文移設．機器・残量・回路・安全条件を保持．
+- [変更原本](reports/guide-readable-examples-2026-09-21.json)に19箇所の前後文と記事SHAを保存．確認済み本文・根拠を使用し，新しい数値・外部事実の追加や更新はない．今回の文章変更を妨げる根拠不足はなし．保証・実測ではない留保と既存の確認日時は維持．
+- 限定静的QA PASS：見出し・目次・図・画像・導線不変，収支第1章不変，重複IDなし，全5記事のローカルリンクとフラグメント解決．出典リンクは停電の4件を参考先へ移設した以外不変．文字中心の修正としてブラウザ・全幅・計算の再検査，ビルドは実施しない．一時編集スクリプト除去済み，新規補助プロセスなし，共有5173保持．コミット・公開・データ変更なし．
+
+## 2026-09-22 4カテゴリ各1記事へ統合・記事設計の全面適用
+
+> **結論：代表4記事へ章構造・画像・目次・主副導線を適用し，費用記事の情報と旧URL互換を保持した．**
+
+- 正本記事は収支・補助金・見積もり・停電の4件．収支の承認済み第1章・図1・5章構造・既存数値を保持．補助金4章，見積もり3章，停電3章へ再編し，緑のヒーロー→直後の1列2階層目次→問いのh2・章写真・答えのh3→必要な章末資料→最終導線→共通フッターを適用．冒頭概要・重複まとめを整理し，全既存IDを保持．目次は収支24，補助金10，見積もり9，停電12リンク．
+- 統括生成の追加写真4点を目視確認し，1536×1024のままWebP quality88へ変換．原本・プロンプトはoutput/imagegen/guide-four-articles-20260921に保持．既存写真は章主題に合うものを再利用し，同一記事内の章写真を無意味に反復しない．本文図解と代表写真は保持．
+- 設置維持費の固有内容は収支2・3章へ統合．日常確認と専門点検の違い，点検契約を急がない注意，除外費用，蓄電池の容量と出力・保証を追加．詳細な保証・容量低下等の説明と出典は計算方法cost-maintenance-notesへ保持．旧費用記事本文は[保存成果物](reports/costs-maintenance-preserved-2026-09-22.html)へ保持し，公開旧ページは簡潔な移転案内とJSなしのリンクへ変更．既知アンカー7件を対応節へlocation.replaceする．
+- articles.jsonは4件へ統合し，全ローカル incoming参照を対応先へ変更．一覧の見積もり・停電の更新日とheroを2026-09-22で一致させ，対象年度ラベルは保持．画面設計・グランドデザイン・pages READMEの対象数・適用範囲を実態へ整合．事業側記事目的MDは統括へ報告し担当外編集なし．
+- 主副導線は最新指示に従い，収支・停電は主診断カード，補助金・見積もりは固定見積もりバーを主とし診断を控えめなテキストリンクにした．固定バーは全4記事とも最初の章の結論後に開始し，共通の広告表示・native disabledを保持．
+- 限定静的QA PASS：全4記事のローカルリンク・アンカー，目次文言と見出し，ID重複なし，全h2直下の写真，旧ID保持，収支第1章同一性．PC1280×900と360×800で全4記事のヒーロー，代表章写真・本文，目次操作・最終導線を目視．各mobileタブはinnerWidth=360を個別確認．横overflow0，console error0，固定バーの初期非表示・結論後表示・disabled維持．一覧4件と更新日を確認．旧URL本体＋全7アンカーの移動成功．実端末・全計算・全サイト再検査とは区別．
+- [検査原本・対象SHA](reports/guide-four-articles-2026-09-22.json)を保存．統括の限定独立確認として，補助金hero/目次/章2写真，一覧4件，旧included-costs転送，収支第1章の同一性の受入報告を受領．検証タブ終了・viewport解除，一時編集スクリプト除去，新規補助プロセスなし，共有5173保持．データ・計算・診断・TOPデザイン・コミット・公開・ビルド変更なし．
+
+- 統括独立検収完了：PCで補助金・見積もり・停電hero，補助金の2階層目次展開・章2写真を目視．再編3記事の全目次遷移先DOM存在・PC横overflowなし，一覧4件，旧費用included-costsから収支lifecycle-costへの実遷移，収支第1章の前後完全同一を確認．更新日整合後の追加QA拡張なし．担当の360 px自己QAとは区別して検査原本へ記録した．
+
+## 2026-09-22 収支第1章の売電・蓄電池説明を整理
+
+> **結論：売電をh3へ上げて蓄電池の前へ移し，蓄電池は節約・停電・限界の3段落にした．**
+
+- 第1章をelectricity-savings→energy-conditions→sales→battery-useへ並べ，sales見出しを「売電単価は途中で下がるため，初年度の収入は続かない」に変更．目次にも同順・同名で追加し，全25リンクの見出し一致を確認．売電本文・数値，第1小見出し本文・図1，energy-conditionsは保持．
+- 蓄電池は夜の自家消費と節約，対応設備での停電時利用，容量・出力・充放電損失と費用回収を分けた3段落．既存battery-profitリンクと，末尾disaster.html関連記事リンクの参照先を確認．
+- 画面設計は関連記事を関連h3末尾にも配置可・章末重複不要，参考文献はh2章末基本と整理．本文にh4がある場合は目次へ載せ，目次だけのためのh4新設はしない規則へ更新．他章・他記事の目次再構成は今回の限定範囲に含めない．
+- 限定QA PASS：4小節順序，3本文段落，目次25件，ID重複なし，確定部分保持．PC1280pxで売電・蓄電池・関連記事を目視し，横overflow0・console error0．360px・全件・計算再検査なし．記事SHA256 86d012d6a521bf5d136f49e74203dba0657ef699390ddb2b1cf379a8503ff625．検証タブ終了，viewport変更なし，新規補助プロセスなし，共有5173保持．コミット・公開なし．
+
+- 統括独立レビュー後の限定追従：energy-conditions末尾の「次に，蓄電池を組み合わせると何が変わるかを見ていきましょう．」のみ削除し，前文を保持．対象1文以外のバイト不変を確認．更新後記事SHA256 723cf1f3c5d7e83a722d109ddc947bcf3bc665aabb8a388e914e03af06810673．追加UI検査なし．
+
+
+## 2026-09-22 FIT終了後の売電先比較例
+
+> **結論：売電節を3段落に整理し，同地域の買取価格比較と将来価格の留保を示した．**
+
+- sales見出しと目次を「売電単価は途中で下がり，FIT終了後は売電先によって変わる」へ変更．FIT24円／8.3円・10年終了，満了前の比較と自家消費・売電併用，関東の2プラン比較を3段落で説明．
+- 統括確認済み公式根拠を使用．2026年度税込8.5円／11円，ENEOSは他サービス契約条件のない通常価格．年間2,000 kWhは仮の比較量とし，17,000円／22,000円・差5,000円をDecimalで照合．2026年9月確認例で10年後の保証ではない旨を保持．ENEOS公式2リンクを章末追加，既存TEPCO参照保持．
+- 限定静的QA PASS：3段落，目次同名・同リンク，ID重複なし，指定3差分を逆変換して旧全文バイト一致．図1・他小節・他章・データ・モデル不変．[確認原本](reports/electricity-sales-post-fit-example-2026-09-22.json)に根拠URL・算術・対象SHAを保存．ブラウザ・広域QA・ビルドなし，新規プロセスなし，共有5173保持．
+
+
+## 2026-09-22 自家消費と卒FIT買取例の比較文を更新
+
+> **結論：指定の比較文へ置換し，蓄電池への独立誘導段落を削除した．**
+
+- energy-conditions第2段落に約31円対約8.5〜11円・約3倍の承認文を反映．買取例は2026年9月確認の関東と明記し，既存章末の根拠を保持．独立した「昼間は留守で…」段落を削除して全3段落とした．
+- 限定差分確認PASS：指定2編集の逆変換で旧全文バイト一致，第1・旧第3段落を保持．他本文・図・目次・計算不変．記事SHA256 8a23acbe585f7d04d87f7ce5c5855c06c31ed2f862f2aa1171b63613286acdea．新規ブラウザ・広域QA・補助プロセスなし，共有5173保持．
+
+
+## 2026-09-22 蓄電池の関連カードと章末発火位置
+
+> **結論：説明を節約→制約・採算→停電に並べ，2リンクを節末の白背景細枠カードへまとめた．**
+
+- 停電段落は保持し，本文中の収支リンクをカードへ移設．主診断ボタンは既存末尾のまま．章末誘導文を削除し，data-quote-startは既存の第1章footerへ移した．図1・他小節・売電・目次・モデルは不変．共通CSSはarticle-related-cardに限定して追加．画面設計の関連導線・非カード文献・任意の章末まとめ・主診断の強調・開始位置を整合．
+- 限定QA PASS：3段落・リンク2件，指定領域以外の本文バイト不変．PC1280pxと360pxで枠・余白・緑リンク・矢印・折返しを目視．リンク高44px以上，360pxのキーボードフォーカス可視，節内・別記事への実移動成功．カード閲覧中／マーカー下端未通過はバー非表示，通過後はPC・360pxとも表示・disabled保持．横overflow0，console error0．
+- [検査原本](reports/electricity-battery-related-card-2026-09-22.json)へSHAと範囲保存．全件・計算再検査なし．検証タブ終了・viewport解除，新規補助プロセスなし，共有5173保持．コミット・公開なし．
+
+
+### 2026-09-22：一般向け4記事の参考文献表記
+
+- 章末文献38項目（34資料）を「発行機関（発行年）．資料名」に統一し，資料名だけをリンクにした．収支記事の既存著者年引用5か所を同一書誌mappingに接続した．
+- 同一記事・機関・年の別資料のみa/bを付与し，本文・文献を一致させた．単独資料に枝番は付けない．発行年未確認25資料は年不明とし，確認日・対象年度から推定しない．
+- 図写真・見出し・表および引用以外の本文を変更前と比較し一致を確認した．4記事をPC1280/360幅で確認し，横スクロールなし，PCコンソールエラーなし．文献の視覚確認も実施．検証タブを閉じ，画面幅の指定を解除した．共有5173は保持，新規補助プロセスなし．
+- 記録：[限定QA](reports/article-bibliography-2026-09-22.json)，[発行年根拠・未確認一覧](reports/article-bibliography-year-review-2026-09-22.json)．
+
+
+### 2026-09-22：4記事のカード共通化・参考資料アクセス年
+
+- 4記事専用属性で関連カード1件と診断カード2件の外枠を統一．白背景，細枠，角丸，共通余白とし，診断の左太線を削除．関連見出し1つと記事内注記へ整理．診断の緑ボタン・リンク先は保持．
+- 参考資料へ改称し，発行年確定9資料は保持，未確定25資料は取得日/アクセス試行日を根拠にアクセス年を表示．2資料の取得失敗を記録し，内容再確認成功とは扱わない．静的HTMLとJS mappingの一致，本文引用，枝番，リンク，本文・図表・見出しの保持を確認．
+- 4記事PC1280/360で横溢れなし．PC/360の該当カード・参考資料を視覚確認し，記事内・別記事・診断のリンクを実操作確認．検証タブを閉じ，viewport解除．共有5173保持，新規プロセス・コミット・公開なし．
+- [対象差分・自己QA・アクセス根拠](reports/article-card-access-2026-09-22.json)．
+
+
+### 2026-09-22：本文引用簡略化と単価の図示
+
+- 関連カードの「この記事内」付記を除去．本文引用のみ「年アクセス」を省き，一覧はアクセス年明示を保持．発行年/アクセス年を横断する機関・年グループで枝番を一意化（収支ENEOS2026a/2026年アクセスb），静的HTMLとJS表示を一致させた．画面設計の既存規則を置換．
+- 図1の既存SVGイラストを保持し，自宅約31円/kWh・売電24円/kWh〈最初の4年間〉と前提を追記．新図2は24→8.3の段差，4/10年境界，軸単位，代替説明を備え，11年目以降は価格線を描かない．診断フローは図3へ採番変更．
+- PC1280/360で図1/図2を視覚確認，横溢れなし，360コンソールエラーなし，単価単位の途中改行を防止．本文他段落・写真・図1SVG・見出し・表・リンクの保持と引用一覧対応を静的比較で確認．
+- [対象SHA・限定QA](reports/article-fit-graph-2026-09-22.json)．検証タブ終了，viewport解除，新規補助プロセスなし，共有5173保持．コミット・公開なし．
+
+
+### 2026-09-22：図1売電単価の幅・本文引用表示確認
+
+- 図1売電を8.3〜24円/kWhへ変更し，4年間限定ラベルを除去．図下は2026年度認定の住宅用FIT期間中と明示し，代替説明も一致させた．3置換の逆変換で旧全文バイト一致を確認（図2・他本文・引用は不変）．
+- PC1280/360で図1表示良好・横溢れなし．本文引用5か所は両幅ともinline/visible/opacity 1で有効な表示領域があり，売電節を実画面でも確認．消失・非表示CSSなし，復元/無根拠な追加引用なし．
+- [限定QA](reports/figure1-fit-range-2026-09-22.json)．検証タブ終了・viewport解除，共有5173保持，新規プロセス・コミット公開なし．
+
+
+### 2026-09-22：収支記事第1章の本文引用補完
+
+- 方位の一般説明，卒FIT買取単価例，買取単価・通常契約条件へ計3引用を追加．既存FIT引用は保持．JPEA FAQ590を章末へ追加し2026cを安定割当（既存a/b保持）．独自試算値や算術，一般的な蓄電池説明への機関引用は追加しない．
+- 3引用spanと対応li1件を除くと変更前HTMLのSHAが一致．対象本文引用は実画面で表示・折返し・一覧対応を確認．[主張ごとの付記判断と限定QA](reports/chapter1-citations-2026-09-22.json)．MD変更・追加資料調査・他記事巡回なし．検証タブ終了，共有5173保持，新規プロセス・コミット公開なし．
+
+
+### 2026-09-22：蓄電池の初年度家計効果・追加費用の具体化
+
+- 既存東京代表条件の太陽光のみ/9.5kWh蓄電池追加を比較．同一入力・解決電気代・現行データSHA一致．初年度総便益134515−125539=8976円（約9000円），追加導入費2473900−1324400=1149500円（約115万円，補助金控除前）．丸め済み内訳合算との差1円も記録．
+- battery-use冒頭2段落のみ具体化し，第3段落・他本文・図・データ原本は保持．2段落逆変換で変更前バイト一致．対象節の実表示良好，横溢れなし．執筆ガイドライン既存2項目を指定RECOMMEND1項目に統合．
+- [入力・X/Y算術・対象SHA・限定QA](reports/battery-use-concrete-example-2026-09-22.json)．検証タブ終了，共有5173保持，新規プロセス・コミット公開なし．
+
+
+### 2026-09-22：第1章の比較条件・蓄電池説明を整理
+
+- 初年度9000円の後に，他条件一定で売電単価が下がると自家消費の利点が増える旨を追記．充放電ロスは第1段落，費用目安/回収は第2，容量・同時利用家電の限界は停電の第3へ整理．約3倍は該当買取価格との比較と明示．
+- MD既存数値RECOMMENDに目安/平均/制度条件/比較条件を統合し，既存の「初年度の月平均」例を月額目安へ合わせた．数字による具体化・意味根拠・暮らし例の推奨を維持．
+- [4置換の逆変換バイト一致・限定表示QA](reports/chapter1-comparison-wording-2026-09-22.json)．対象段落表示良好，横溢れなし，引用・数字・図・他章不変．検証タブ終了，共有5173保持，新規プロセス・調査・コミット公開なし．
+
+
+### 2026-09-22：第2章の設置費説明と比較図
+
+- 国の資料を参考に既存住宅4kWの当サイト試算と明記し，機器＋工事約132万円の目安を説明．補助金控除前の横棒図3を追加（132＋115＝247万円，表示金額比の長さ）．入口写真・小見出し順序保持．
+- 蓄電池節を容量/停電給電範囲/工事条件による価格変動へ整理．補助金の利点を先に説明し，本文/章末の重複リンクを節末共通カード1件へ集約．他章は診断フロー図4採番のみ．
+- [対象SHA・金額/棒比率・限定QA](reports/chapter2-cost-comparison-2026-09-22.json)．PC1280/360で図文字良好，横溢れなし，両幅でカードリンク遷移確認．第2章＋図番号以外を逆変換して旧HTML全文一致，写真/小見出し順/工事条件保持．検証タブ終了viewport解除，共有5173保持，新規プロセス/コミット公開なし．
+
+
+### 2026-09-22：第2章の章導入・4小節構成
+
+- 入口写真→導入→既存比較図→移行文→4h3詳細へ再構成．小節段落数3/2/3/3，補助金は仮の20万円/自己負担112万円例，カード保持．目次4件同期，図写真/引用要素保持，章+目次以外バイト一致．
+- [限定QA・対象SHA](reports/chapter2-structure-2026-09-22.json)．PC1280/360で図・移行文配置良好，360補助金段落良好，横溢れなし．目次4リンクはEnterでhash遷移確認（自動ポインタークリックでは更新が観測できず）．
+- 共有5173停止を確認して復旧．現在PID60200，起動親54288，継続利用のため保持．失敗起動26584は終了確認済み．正常検証タブ終了・viewport解除．失敗タブ25はdata URL制約によりclose不可，未保持の一時タブとして残る．MD/データ/図番号不変，コミット公開なし．
+
+
+### 2026-09-22：比較図3に補助金後の自己負担を追加
+
+- 太陽光132万円/太陽光＋蓄電池247万円を保持し，3本目を自己負担227万円＋点線未塗り20万円へ．全長は247万円と同じ，末尾内の文字なし．控除前ラベルを上2行へ限定，20万円が仮の例である注記を追加．本文例も247−20＝227に一致．図3キャプションを設備構成と補助金による自己負担の違いへ更新．
+- [限定差分/比率/QA](reports/chapter2-subsidy-bar-2026-09-22.json)．PC1280/360で図文字と点線枠を視覚確認，横溢れなし，本文例一致．対象図＋例文以外保持．検証タブ終了viewport解除，共有5173保持，コミット公開なし．
+
+## 2026-09-25 GitHub Pages公開準備
+
+> **結論：担当の全1,120テストとPages成果物検証はPASS．本番設定・公開・メール実送受信は未実施である．**
+
+対象はGitHub Pages専用vite.pages.config.js，公開9URLのメタ情報，旧費用記事転送，404，運営者・窓口とprivacy，手動workflow及び公開手順．公開データはschema_version=11.17.0／data_version=2026-09-21を保持し，同梱したpublic-data.jsonとmetadata.jsonの原バイト一致を検証した．データ同期・計算変更はない．
+
+担当自己検査：pnpm testは1,120件PASS（skip0／fail0）．build:pagesとverify-pagesは63ファイル・11HTML・正規9URLのcanonical／OGP／sitemap，参照資産，開発QA非混入でPASS．旧5記事・旧CSS・逐語期待を承認済み4記事へ更新し，家庭別30年表の計算値／補助金控除後102万円・96万円，式番号・依存関係，出典辞書解決，制度条件の描画検査を維持した．トップ入力VMに共通見積もりバーのモックを追加し，id検査がdata-source-idを誤認しないよう属性境界を修正した．旧inspection-cautionの不在リンクはHTML／転送JSともinspection-conditionsへ修正した．
+
+自己実画面は4173の公開成果物でpolicy PC1280／360と404の360を確認．統括の独立確認は正規9URL HTTP200／canonical一致／noindexなし，未知URL404，佐賀4kW標準の30年＋619,000円・約23年とグラフ，360で診断・policy横はみ出しなし／console error0，最終63ファイル11HTMLの不在静的アンカー0件でPASSを受領した．ブラウザ幅検証であり実端末ではない．Google Fontsは既存外部書体読込としてprivacyへ明記し，外部計測は追加していない．
+
+公開時の残件はSettingsのPages Source／Custom domain・環境保護，DNS／HTTPS／www転送，メール実送受信，検収版のcommit／pushと公開承認後の手動workflow，本番URLでの最終確認・切戻し手順の実施である．ローカル検証を本番公開確認へ読み替えない．共有5173は保持し，一時4173は独立検査完了後に終了する．
+
+## 2026-09-25 GA4未設定状態の接続準備
+
+> **結論：ID未設定・計測無効の準備実装を完了し，外部GA4通信と本番計測の受入はID取得・設定確認後に残す．**
+
+対象はshared/analytics-{config,core}.jsとanalytics.js，公開9HTMLのmodule入口，app.jsの有効結果描画後の通知，Pagesビルド専用フラグ及びポリシー状態検査．UIと計算値・公開データを変更しない．configはmeasurementId空，enabled=false，enhancedMeasurementDisabled=falseを維持．policyは未導入の説明のままである．
+
+自己QA：全1,127テストPASS（fail0／skip0）．その後，統括指摘により記事押下イベント名をarticle_diagnosis_clickへ明確化し，変更後の計測専用7テストもPASS．未設定／未確認／dev／localhost／preview／www／偽装host等でタグ・キューを作らないこと，模擬本番のコマンドにquery／hashの検査用文字列を含めないこと，広告関連拒否，自動page_view無効，無効・外部リンク除外，同一画面の再計算・履歴変化で完了が増えないことを検査した．これはスタブによる送信予定コマンド検査であり，実Googleタグの全通信を確認したものではない．
+
+最終build:pages／verify-pagesは64ファイル11HTML，正規9URL，データ原バイト一致，QA非混入，計測状態とpolicy一致でPASS．共有5173の東京県のみ診断で有効結果（標準約185万円・約4年）とGoogleタグscript0，console error0を実画面確認した．一時タブを閉じ，共有5173保持，新規補助プロセスなし．
+
+ID受領後はGA4の拡張計測全OFF（履歴・検索・フォーム・外部クリック等を含む），signals／広告パーソナライズ／ユーザー提供データ等の不要収集なしを統括が確認する．有効化フラグ・policyを同時更新し，独立確認と公開承認後に本番collectのpage_location／page_referrer・追加値とGA4到着を確認する．send_page_view=falseだけでは履歴拡張計測を防げない点を実装方針へ記録した．Search ConsoleのTXT・所有確認は統括担当で，今回サイトへの追加タグはない．commit／push／公開／規約同意は行っていない．
+
+
+## GA4公開候補の有効化準備（2026年9月25日）
+
+> **結論：確認済み管理設定に合わせて公開候補を有効化し，ローカル非送信とポリシー表示を自己検査した．実Google通信・到着の確認は公開後に残る．**
+
+統括の割当とユーザーの計測準備承認に基づき，measurementId=G-CK29TBEBPC，enabled=true，enhancedMeasurementDisabled=trueへ更新した．管理画面確認済みの拡張計測マスターOFF，signals・ユーザー提供データ未有効，広告パーソナライズ全307地域不許可，任意データ共有4項目OFFを実装方針へ反映．policyはGA4利用目的，Cookie，入力条件を送信対象にしない設計，Googleの取扱いと対応ブラウザでのオプトアウト方法を記載し，状態マーカーもenabledへ揃えた．前節のID未設定・無効という記録は準備時点の履歴であり，現在の公開候補の状態ではない．
+
+計測専用7テストPASS．既存site-integrity 48テストPASS．初回の併合実行では旧「現configは無効」の前提1件が失敗したため，未設定・無効の検査は維持し，現configはローカル拒否・模擬本番許可を検査する形に修正して計測専用を再実行した．URLのquery／hash／utm／入力値の検査文字列除去，再計算・履歴変化による完了の重複抑制，dev／localhost／preview／www等の非送信を確認した．この検査は送信予定コマンドのスタブ検査であり，Googleタグの実collect検査とは異なる．
+
+Pagesビルド・公開物検査PASS（64ファイル，正規9URL，公開データ11.17.0原バイト一致，QA非混入，policyと設定一致）．生成物を127.0.0.1:4173で配信し，policyのPC・360px実画面でGA4本文とリンクの表示，横はみ出しなし，Google計測タグscript0，console error0を確認した．外部通信ゼロはGA4計測の範囲を指し，既存Google Fonts等まで通信なしと扱わない．
+
+残件は独立検収と公開承認，本番公開後のcollect（dl／dr・追加値）の検査とGA4到着・イベント順序・重複確認．commit／push／deployは未実施．自己確認用4173サーバー（PID27352，親1576）を終了し，一時タブを閉じてviewport指定を解除する．既存サーバーは終了していない．

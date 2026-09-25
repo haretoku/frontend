@@ -16,3 +16,5 @@ qa/screenshots/
 Thumbs.db
 .vscode/
 .idea/
+
+dist-pages/

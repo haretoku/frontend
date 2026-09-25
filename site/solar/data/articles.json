@@ -9,10 +9,10 @@
     "metaLabel": "対象年度",
     "metaValue": "2026年度",
     "image": {
-      "src": "../shared/assets/article-solar-economics-hero.webp",
-      "width": 1734,
-      "height": 907,
-      "alt": "太陽光パネル付き住宅と，電気代削減，売電収入，設置費を表したイラスト"
+      "src": "../shared/assets/article-solar-economics-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "太陽光パネルの上に高さの異なる3つの硬貨の山を並べた写真"
     },
     "featuredOrder": 1
   },
@@ -26,10 +26,10 @@
     "metaLabel": "対象年度",
     "metaValue": "2026年度",
     "image": {
-      "src": "../shared/assets/guide-subsidy.webp",
-      "width": 720,
-      "height": 480,
-      "alt": "太陽の印と円記号が付いた補助金の袋を受け取るイラスト"
+      "src": "../shared/assets/article-subsidies-application-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "机の上で申請書にペンで記入する手元の写真"
     },
     "featuredOrder": 2
   },
@@ -41,46 +41,29 @@
     "title": "太陽光の見積もりは，何を比べる？",
     "summary": "総額だけで決めないために，設備，発電試算，工事範囲と保証の比べ方を確認します．",
     "metaLabel": "更新日",
-    "metaValue": "2026-09-01",
+    "metaValue": "2026-09-22",
     "image": {
-      "src": "../shared/assets/guide-quotes.webp",
-      "width": 720,
-      "height": 480,
-      "alt": "住宅用太陽光の複数の見積書を比較するイラスト"
+      "src": "../shared/assets/article-quotes-explanation-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "業者が見積書の項目をペンで示し，依頼者へ説明する手元の写真"
     },
     "featuredOrder": 3
-  },
-  {
-    "id": "costs-maintenance",
-    "href": "../pages/costs-maintenance.html",
-    "categoryId": "economics",
-    "category": "収支",
-    "title": "太陽光の設置・維持に，何がかかる？",
-    "summary": "設置時の初期費用と，点検・修理・機器交換など導入後の支出を整理します．",
-    "metaLabel": "更新日",
-    "metaValue": "2026-09-01",
-    "image": {
-      "src": "../shared/assets/guide-mechanics.webp",
-      "width": 720,
-      "height": 480,
-      "alt": "太陽光パネルと工具，円硬貨を天秤に載せたイラスト"
-    },
-    "featuredOrder": null
   },
   {
     "id": "disaster",
     "href": "../pages/disaster.html",
     "categoryId": "safety",
     "category": "災害への備え",
-    "title": "停電時，太陽光だけで何ができる？",
-    "summary": "自立運転の使い方，取り出せる電力の制約と，蓄電池との違いを確認します．",
+    "title": "停電時，太陽光・蓄電池で何ができる？",
+    "summary": "太陽光単独の昼間利用と蓄電池の夜間給電を分け，出力・残量・回路と安全上の制約を確認します．",
     "metaLabel": "更新日",
-    "metaValue": "2026-09-01",
+    "metaValue": "2026-09-22",
     "image": {
-      "src": "../shared/assets/guide-disaster.webp",
-      "width": 1672,
-      "height": 941,
-      "alt": "停電した住宅地で，太陽光発電から室内の照明と携帯電話へ給電するイラスト"
+      "src": "../shared/assets/article-disaster-battery-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "夜間の停電時に，蓄電池からの給電を想定した停電用コンセントでスマートフォンを充電する写真"
     },
     "featuredOrder": null
   }

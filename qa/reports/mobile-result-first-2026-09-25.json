@@ -1,0 +1,30 @@
+{
+  "sha256": {
+    "frontend/site/simulator/index.html": "c9af32b8f7ae43fbeef935a4fae22a4667c1634c485be336cfc0cc989de25968",
+    "frontend/site/simulator/src/app.js": "1c881e3222e2aa00fa16ac086957559152b9c60446554474d84a56ebdb4fda4f",
+    "frontend/site/simulator/styles/analysis.css": "c59f893e6dc0f27cdf382dda6270e9d325fe4f68390a4cf95b982c139c695fcd",
+    "frontend/site/simulator/src/mobile-actions.js": "b670d5d1d8e890e8d7462f7f9090f39be809abe7254bf61ab8570ed349cbd84f"
+  },
+  "checks": [
+    "390/360 result screen screenshots: compact applied location/equipment then scenario/chart",
+    "Toggle opens/closes panel and aria-expanded updates; equipment within editor",
+    "Roof orientation change updates result URL; editor stays open until closed",
+    "1280: mobile bar hidden, existing panel visible and scenario restored",
+    "360 without URL input: bar hidden, basic editor visible",
+    "Node syntax check and3 targeted integrity tests passed",
+    "Temporary tab closed, viewport reset; shared5173 retained"
+  ],
+  "limits": "Representative UI checks; full scenario and calculation regression not rerun; calculations/data unchanged",
+  "status": "Trial self-QA complete; independent review pending",
+  "grouped_conditions_revision": {
+    "checks": [
+      "390px: four condition sections grouped with separators and common graph return action",
+      "Scenario changed to downside: summary updated; graph return collapsed panel and focused cashflow-title",
+      "360px: no horizontal overflow; initial no-input panel remains visible",
+      "1280px: conditions remain in left column, mobile bar hidden, no horizontal overflow",
+      "JavaScript syntax checks and 3 targeted site integrity tests passed",
+      "Temporary browser tab closed and viewport reset"
+    ],
+    "status": "Self-QA passed"
+  }
+}

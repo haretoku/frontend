@@ -1,0 +1,52 @@
+{
+  "date": "2026-09-22",
+  "articles": {
+    "electricity-sales": {
+      "sha256": "766b684ebf2d76582f39b5239c100636fdfa2ef54879d80dd65429c6a7a351e7",
+      "static_citations_and_references_match": true,
+      "suffix_unique_across_publication_access_years": true,
+      "other_body_images_headings_tables_links_preserved": true
+    },
+    "subsidies": {
+      "sha256": "7d4be2632bbbf42ede3a671c8362edb0be8ab53ebb89d6cc7fbbe74463e79957",
+      "static_citations_and_references_match": true,
+      "suffix_unique_across_publication_access_years": true,
+      "other_body_images_headings_tables_links_preserved": true
+    },
+    "quotes-contractors": {
+      "sha256": "52bc75eade78d02a55af21db79480d2dc1bd7307b48523443baae1f7e35c0510",
+      "static_citations_and_references_match": true,
+      "suffix_unique_across_publication_access_years": true,
+      "other_body_images_headings_tables_links_preserved": true
+    },
+    "disaster": {
+      "sha256": "d1b4b0fc2a4b19dc4e19965cbd103e383ad1d01f9d54cf77345f37171bfebec8",
+      "static_citations_and_references_match": true,
+      "suffix_unique_across_publication_access_years": true,
+      "other_body_images_headings_tables_links_preserved": true
+    }
+  },
+  "diagram1_original_svg_preserved": true,
+  "graph": {
+    "x_axis": "0,4,10 elapsed years; x=52,132,252 (20 units/year)",
+    "y_axis": "0,8.3,24 yen/kWh; y=228,170,60 (7 units/yen, 0.1-unit rounding at 8.3)",
+    "price_path": "M52 60H132V170H252",
+    "post_fit_price_line": false,
+    "accessible_title_description": true,
+    "figure_numbers": [
+      1,
+      2,
+      3
+    ]
+  },
+  "browser_qa": {
+    "PC_width": 1280,
+    "mobile_width": 360,
+    "figures_reviewed": true,
+    "mobile_console_errors": [],
+    "horizontal_overflow": false,
+    "tabs_closed": true,
+    "viewport_reset": true
+  },
+  "processes": "新規起動なし，共有5173保持．"
+}

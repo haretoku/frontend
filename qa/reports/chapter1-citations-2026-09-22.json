@@ -1,0 +1,49 @@
+{
+  "date": "2026-09-22",
+  "scope": "electricity-sales 第1章のみ．引用3か所追加，既存FIT引用保持，章末に方位FAQ1件追加．",
+  "before_sha256": "9ff268d6b15500f706df6240602a95b5547ffb18f564ea6c507e1b454aa44875",
+  "after_sha256": "9a9299d675deb2c69485764373f245ed9c2f3a72018935b8f66c4fa85eae4200",
+  "reverse_changes_byte_identical": true,
+  "claim_decisions": [
+    {
+      "section": "electricity-savings",
+      "decision": "追加不要",
+      "reason": "自家消費/売電の一般的説明と独自試算（月4700/5700円）．試算の採用元は既存章末資料と計算方法で確認可能．機関の公表値として引用しない．"
+    },
+    {
+      "section": "energy-conditions",
+      "decision": "方位による発電量変化の一般説明直後，および買取例8.5〜11円の直後に引用追加",
+      "source_ids": [
+        "tepco-post-fit-standard-plan",
+        "article-source-8",
+        "jpea-residential-orientation-angle-impact"
+      ],
+      "reason": "外部の買取単価を明示．31円，約3倍，方位別4700/4000kWhは当サイトの計算・比較であり機関値として引用しない．日当たり・生活時間の一般的説明は追加不要．",
+      "orientation_basis": "統括がJPEA FAQ590の方位/角度による発電量変化を公式本文確認．影や方位別の当サイト試算値の根拠には拡張しない．"
+    },
+    {
+      "section": "sales",
+      "decision": "既存FIT引用を保持し，買取単価/通常契約条件を説明する2文の末尾にまとめて引用追加",
+      "source_ids": [
+        "tepco-post-fit-standard-plan",
+        "article-source-8",
+        "article-source-9"
+      ],
+      "reason": "外部単価8.5/11円とENEOS通常契約条件．仮定2000kWhに対する17000/22000円・差5000円の算術には引用不要．"
+    },
+    {
+      "section": "battery-use",
+      "decision": "追加不要",
+      "reason": "昼間蓄電/夜間使用，容量/出力制約/損失/機種工事依存という一般的説明．固有の外部数値・調査結果はなく，無関係な資料を付けない．"
+    }
+  ],
+  "existing_evidence": "qa/reports/electricity-sales-post-fit-example-2026-09-22.json の統括確認済み公式買取根拠と書誌mappingを利用．追加資料調査なし．",
+  "orientation_reference_added": "jpea-residential-orientation-angle-impact",
+  "preservation": "3本文引用と対応章末資料以外の本文・図・数値・他章は保持．",
+  "browser_qa": {
+    "all_four_chapter_citations_visible": true,
+    "three_added_citations_visual_review": true,
+    "reference_mapping_matches": true,
+    "tab_closed": true
+  }
+}

@@ -6,7 +6,7 @@ export function mobileKeyboardLikely(inputFocused, layoutHeight, visualHeight) {
   return Boolean(inputFocused) || layoutHeight - visualHeight > 120;
 }
 export const intersects = (rect, top, bottom) => rect.height > 0 && rect.bottom > top && rect.top < bottom;
-export function mountFixedQuoteBar({ readState, content, observations = [] }) {
+export function mountFixedQuoteBar({ readState, content, action = QUOTE_ACTION, alwaysVisible = false, observations = [] }) {
   if (document.querySelector('[data-quote-bar]')) return;
   const bar = document.createElement('aside');
   bar.className = 'quote-bar mobile-quote-bar';
@@ -14,11 +14,11 @@ export function mountFixedQuoteBar({ readState, content, observations = [] }) {
   bar.setAttribute('aria-label', '見積もり案内');
   bar.hidden = true;
   const copy = document.createElement('div'); copy.className = 'quote-bar__copy';
-  const description = document.createElement('p'); description.textContent = QUOTE_ACTION.description;
-  const advertising = document.createElement('small'); advertising.textContent = '広告・アフィリエイト';
+  const description = document.createElement('p'); description.textContent = action.description;
+  const advertising = document.createElement('small'); advertising.textContent = '広告・アフィリエイト' + (action.status ? ' ／ ' + action.status : '');
   const button = document.createElement('button');
   button.type = 'button'; button.className = 'quote-bar__button mobile-quote-button';
-  button.textContent = QUOTE_ACTION.label; button.disabled = QUOTE_ACTION.disabled;
+  button.textContent = action.label; button.disabled = QUOTE_ACTION.disabled;
   copy.append(description, advertising); bar.append(copy, button); document.body.append(bar);
   let scheduled = false, barHeight = 60;
   function update() {
@@ -31,7 +31,8 @@ export function mountFixedQuoteBar({ readState, content, observations = [] }) {
     const focusCovered = !bar.contains(active) && active?.matches('a, button, input, select, textarea, summary, [tabindex]') && intersects(active.getBoundingClientRect(), bottom - barHeight, bottom);
     const state = readState({ top, bottom, active, barHeight });
     document.body.classList.toggle('has-quote-space', state.eligible);
-    bar.hidden = !quoteBarVisible({ ...state, keyboard, focusCovered: Boolean(focusCovered) });
+    bar.hidden = alwaysVisible ? !state.eligible : !quoteBarVisible({ ...state, keyboard, focusCovered: Boolean(focusCovered) });
+    if (alwaysVisible && state.eligible && focusCovered) active.scrollIntoView({ block: 'center', behavior: 'instant' });
   }
   function schedule() { if (!scheduled) { scheduled = true; requestAnimationFrame(update); } }
   window.addEventListener('scroll', schedule, { passive: true });

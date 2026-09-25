@@ -1,0 +1,324 @@
+{
+  "articles": {
+    "electricity-sales": [
+      "bri-pyhees-residential-total-electricity-load",
+      "nedo-solar-radiation-database",
+      "criepi-household-co2-pv-self-consumption-2025",
+      "enecho-regional-low-voltage-price-fy2023",
+      "article-source-5",
+      "meti-fit-residential-fy2026",
+      "tepco-post-fit-standard-plan",
+      "article-source-8",
+      "article-source-9",
+      "meti-residential-solar-cost-2025",
+      "article-source-11",
+      "article-source-12",
+      "jpea-residential-equipment-service-life",
+      "article-source-14",
+      "article-source-15",
+      "tokyo-residential-solar-subsidy-fy2026"
+    ],
+    "subsidies": [
+      "env-housing-decarbonization-navi-2026",
+      "fukushima-renewable-center-application-status-2026",
+      "fukushima-residential-solar-subsidy-guideline-fy2026",
+      "gunma-residential-renewable-subsidy-fy2026",
+      "niigata-snow-country-zeh-subsidy-fy2026",
+      "tokushima-residential-renewable-subsidy-fy2026",
+      "yamagata-residential-solar-subsidy-fy2026",
+      "tokyo-residential-solar-subsidy-fy2026"
+    ],
+    "quotes-contractors": [
+      "article-source-24",
+      "article-source-25",
+      "article-source-26",
+      "article-source-15"
+    ],
+    "disaster": [
+      "article-source-27",
+      "article-source-28",
+      "article-source-29",
+      "article-source-14",
+      "article-source-30",
+      "article-source-31",
+      "article-source-32",
+      "article-source-33",
+      "article-source-34"
+    ]
+  },
+  "sources": [
+    {
+      "id": "bri-pyhees-residential-total-electricity-load",
+      "publisher": "国立研究開発法人建築研究所",
+      "title": "住宅のエネルギー消費性能計算プログラムの公式計算エンジンpyheesおよび第二章第二節一次エネルギー消費量",
+      "url": "https://github.com/BRI-EES-House/pyhees",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "nedo-solar-radiation-database",
+      "publisher": "国立研究開発法人新エネルギー・産業技術総合開発機構",
+      "title": "日射に関するデータベース",
+      "url": "https://www.nedo.go.jp/seika_hyoka/ZZFF_100041.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "criepi-household-co2-pv-self-consumption-2025",
+      "publisher": "エネルギー・資源学会",
+      "title": "太陽光発電の自家消費率などの実態把握―家庭CO2統計の個票データを用いた分析―",
+      "url": "https://doi.org/10.24778/jjser.46.4_167",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "enecho-regional-low-voltage-price-fy2023",
+      "publisher": "資源エネルギー庁",
+      "title": "電気料金の全国比較：供給区域ごとの2023年度実績単価",
+      "url": "https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-5",
+      "publisher": "東京電力エナジーパートナー",
+      "title": "料金単価表‐電灯",
+      "url": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "meti-fit-residential-fy2026",
+      "publisher": "経済産業省",
+      "title": "再生可能エネルギーのFIT制度・FIP制度における2026年度以降の買取価格等と2026年度の賦課金単価を設定します",
+      "url": "https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "tepco-post-fit-standard-plan",
+      "publisher": "東京電力エナジーパートナー",
+      "title": "再エネ買取標準プラン",
+      "url": "https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-8",
+      "publisher": "ENEOS Power",
+      "title": "2026年度 太陽光買取価格",
+      "url": "https://www.eneos-power.co.jp/solar-kaitori/images/pdf/attention_20260213.pdf",
+      "year": 2026,
+      "year_evidence": "公式PDF表紙：2026年2月．"
+    },
+    {
+      "id": "article-source-9",
+      "publisher": "ENEOS Power",
+      "title": "ENEOS太陽光買取",
+      "url": "https://www.eneos-power.co.jp/solar-kaitori/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "meti-residential-solar-cost-2025",
+      "publisher": "調達価格等算定委員会",
+      "title": "令和8年度以降（2026年度以降）の調達価格等に関する意見",
+      "url": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+      "year": 2026,
+      "year_evidence": "環境省公式portfolio_tool_manual.pdf p38に2026年2月と明記．https://policies.env.go.jp/policy/roadmap/local_keikaku/jimu/files/tool/re-energy/portfolio_tool_manual.pdf"
+    },
+    {
+      "id": "article-source-11",
+      "publisher": "京セラ",
+      "title": "太陽光発電の設置費用はいくら？",
+      "url": "https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/",
+      "year": 2024,
+      "year_evidence": "公式本文冒頭：2024/01/12．"
+    },
+    {
+      "id": "article-source-12",
+      "publisher": "京セラ",
+      "title": "設置工事の流れについて",
+      "url": "https://www.kyocera.co.jp/solar/support/topics/flow/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "jpea-residential-equipment-service-life",
+      "publisher": "太陽光発電協会",
+      "title": "機器の耐用年数はどれくらいですか？",
+      "url": "https://www.jpea.gr.jp/faq/583/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-14",
+      "publisher": "太陽光発電協会",
+      "title": "長く使っていただくために",
+      "url": "https://www.jpea.gr.jp/house/longuser/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-15",
+      "publisher": "国民生活センター",
+      "title": "太陽光発電システムの点検商法が急増！",
+      "url": "https://www.kokusen.go.jp/news/data/n-20250604_1.html",
+      "year": 2025,
+      "year_evidence": "公式ページ：2025年6月4日公表，2025年9月22日更新．"
+    },
+    {
+      "id": "tokyo-residential-solar-subsidy-fy2026",
+      "publisher": "東京都環境公社",
+      "title": "令和8年度 家庭における太陽光発電導入促進事業",
+      "url": "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "env-housing-decarbonization-navi-2026",
+      "publisher": "環境省",
+      "title": "住宅脱炭素NAVI 全国省エネ住宅支援検索",
+      "url": "https://policies.env.go.jp/earth/zeh/search/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "fukushima-renewable-center-application-status-2026",
+      "publisher": "福島県再生可能エネルギー推進センター",
+      "title": "福島県住宅用太陽光発電補助制度",
+      "url": "https://fukushima-pv-hojo.org/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "fukushima-residential-solar-subsidy-guideline-fy2026",
+      "publisher": "福島県",
+      "title": "令和8年度福島県住宅用太陽光発電設備等導入支援補助金交付事業取扱要領",
+      "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/745282.pdf",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "gunma-residential-renewable-subsidy-fy2026",
+      "publisher": "群馬県",
+      "title": "令和8年度の個人住宅・事業者向け再エネ導入支援補助制度",
+      "url": "https://www.pref.gunma.jp/page/753198.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "niigata-snow-country-zeh-subsidy-fy2026",
+      "publisher": "新潟県",
+      "title": "令和8年度新潟県雪国型ZEH等導入促進補助金",
+      "url": "https://www.pref.niigata.lg.jp/sec/kankyoseisaku/0583945.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "tokushima-residential-renewable-subsidy-fy2026",
+      "publisher": "徳島県",
+      "title": "令和8年度徳島県地域脱炭素移行・再エネ推進事業補助金",
+      "url": "https://www.pref.tokushima.lg.jp/ippannokata/kurashi/shizen/7241363/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "yamagata-residential-solar-subsidy-fy2026",
+      "publisher": "山形県",
+      "title": "令和8年度住宅用太陽光発電設備（自家消費型）導入事業費補助金",
+      "url": "https://www.pref.yamagata.jp/050015/kurashi/kankyo/ondanka/r8_taiyoukou_hojo.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-24",
+      "publisher": "太陽光発電協会",
+      "title": "太陽光発電協会 販売規準",
+      "url": "https://www.jpea.gr.jp/wp-content/themes/jpea/pdf/hanbaikijyun.pdf",
+      "year": 2020,
+      "year_evidence": "公式PDF表紙：2020年3月4版．"
+    },
+    {
+      "id": "article-source-25",
+      "publisher": "太陽光発電協会",
+      "title": "始めようソーラー生活",
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/hajimeyou_leaflet_2305.pdf",
+      "year": 2023,
+      "year_evidence": "公式PDF末尾：2023年5月発行／改訂．"
+    },
+    {
+      "id": "article-source-26",
+      "publisher": "国民生活センター",
+      "title": "突然訪問されて太陽光発電設備と家庭用蓄電池を契約した",
+      "url": "https://www.kokusen.go.jp/t_box/data/t_box-faq_qa2021_06.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year.",
+      "link_note": "現在のリンク先：相談事例・FAQ一覧"
+    },
+    {
+      "id": "article-source-27",
+      "publisher": "太陽光発電協会",
+      "title": "停電時でも電気が使えます",
+      "url": "https://www.jpea.gr.jp/house/poweroutage/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-28",
+      "publisher": "太陽光発電協会",
+      "title": "災害時における太陽光発電の自立運転についての実態調査結果",
+      "url": "https://www.jpea.gr.jp/news/23653/",
+      "year": 2018,
+      "year_evidence": "公式記事公表日：2018/10/18．"
+    },
+    {
+      "id": "article-source-29",
+      "publisher": "積水化学工業",
+      "title": "カーボンニュートラルを見据えた住宅用ＰＶのあり方",
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/session2_02_sekisui.pdf",
+      "year": 2021,
+      "year_evidence": "公式PDF表紙：2021/11/10．"
+    },
+    {
+      "id": "article-source-30",
+      "publisher": "資源エネルギー庁",
+      "title": "あらためて学ぶ，停電の時にすべきこと・すべきでないこと",
+      "url": "https://www.enecho.meti.go.jp/about/special/johoteikyo/teiden_info.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-31",
+      "publisher": "経済産業省",
+      "title": "自然災害による再エネ発電設備の事故防止及び保安管理の徹底",
+      "url": "https://www.meti.go.jp/policy/safety_security/industrial_safety/sangyo/electric/detail/shizensaigainocyuikanki.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-32",
+      "publisher": "消費者庁",
+      "title": "モバイルバッテリーの事故に注意しましょう！",
+      "url": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_020/",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    },
+    {
+      "id": "article-source-33",
+      "publisher": "消費者庁",
+      "title": "携帯発電機やポータブル電源の事故に注意！",
+      "url": "https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_053/",
+      "year": 2021,
+      "year_evidence": "公式公表資料欄：2021年8月25日．"
+    },
+    {
+      "id": "article-source-34",
+      "publisher": "環境省",
+      "title": "リチウムイオン電池関係",
+      "url": "https://www.env.go.jp/recycle/waste/lithium_1/index.html",
+      "year": null,
+      "year_evidence": "Not inferred from retrieval date, URL or target fiscal year."
+    }
+  ]
+}

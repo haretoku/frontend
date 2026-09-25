@@ -35,7 +35,11 @@ function cardFor(article) {
   category.textContent = article.category;
   const title = document.createElement("strong");
   title.className = "guide-article-card__title";
-  title.textContent = article.title;
+  const titleParts = article.title.split(/(蓄電池)/);
+  title.append(...titleParts.map(text => {
+    if (text !== '蓄電池') return document.createTextNode(text);
+    return Object.assign(document.createElement('span'), { className: 'guide-title-term', textContent: text });
+  }));
   const summary = document.createElement("span");
   summary.className = "guide-article-card__summary";
   summary.textContent = article.summary;
@@ -70,7 +74,7 @@ function initializeGuideDirectory() {
       ? mainArticles
       : mainArticles.filter((article) => article.categoryId === categoryId);
     renderCards(libraryContainer, visibleArticles);
-    count.textContent = `${visibleArticles.length}本の記事`;
+    count.textContent = `${visibleArticles.length}件`;
     for (const button of filterContainer.querySelectorAll("button")) {
       button.setAttribute("aria-pressed", String(button.dataset.category === categoryId));
     }

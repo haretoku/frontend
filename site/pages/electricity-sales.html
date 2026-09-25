@@ -1,265 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="住宅用太陽光の30年間の収支を，電気代削減，売電，補助金，設置費，維持・交換費および家庭別比較から説明します．">
+    <link rel="canonical" href="https://haretoku.jp/pages/electricity-sales.html">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="太陽光の収支は，何で決まる？｜はれトク">
+    <meta property="og:description" content="住宅用太陽光の30年間の収支を，電気代削減，売電，補助金，設置費，維持・交換費および家庭別比較から説明します．">
+    <meta property="og:url" content="https://haretoku.jp/pages/electricity-sales.html">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="はれトク">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://haretoku.jp/og-image.png">
+    <meta property="og:image:alt" content="太陽光の収支を確かめる，はれトク">
+    <meta name="twitter:card" content="summary_large_image">
     <title>太陽光の収支は，何で決まる？｜はれトク</title>
     <link rel="icon" href="../shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="../shared/styles/main.css">
     <link rel="stylesheet" href="../articles/styles/article.css">
+    <link rel="stylesheet" href="../articles/styles/electricity-sales-hero.css">
     <link rel="stylesheet" href="../shared/styles/fixed-quote-bar.css">
     <script type="module" src="../articles/src/article-data.js"></script>
+      <script type="module" src="../shared/analytics.js"></script>
   </head>
-  <body class="guide-benchmark-page">
-    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span><nav class="site-nav" aria-label="主要メニュー"><a href="../">トップ</a><a href="../simulator/">はれ<span class="brand-term">トク</span>診断</a><a href="../solar/" aria-current="page">はれ<span class="brand-term">トク</span>ガイド</a></nav></div></header>
+  <body class="guide-benchmark-page economics-page">
+    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span><nav class="site-nav" aria-label="主要メニュー"><a href="../"><svg class="site-nav__icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"></path></svg><span>ホーム</span></a><a href="../simulator/"><svg class="site-nav__icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"></path></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="../solar/" aria-current="page"><svg class="site-nav__icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a></nav></div></header>
     <main>
       <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="../">トップ</a> ／ <a href="../solar/">はれ<span class="brand-term">トク</span>ガイド</a> ／ 太陽光の収支</nav>
-      <header class="article-width article-hero">
-        <p class="eyebrow">しくみ</p>
-        <h1>太陽光の収支は，何で決まる？</h1>
-        <p class="article-hero__lead">住宅用太陽光の30年間の収支を考えるためのガイドです．</p>
-        <dl class="article-meta">
-          <div><dt>対象地域</dt><dd>全国</dd></div>
-          <div><dt>対象年度</dt><dd>2026年度</dd></div>
-          <div><dt>最終確認日</dt><dd><span data-data-version>2026-09-01</span></dd></div>
-        </dl>
-      </header>
-      <figure class="article-width article-hero-visual">
-        <img src="../shared/assets/article-solar-economics-hero.webp" width="1734" height="907" alt="太陽光パネル付き住宅を中心に，電気代が小さくなる様子，売電収入，設置費の支払いを表したイラスト" fetchpriority="high" decoding="async">
-      </figure>
-      <article class="article-width article article--continuous article--guide">
-        <section class="article-learn" aria-labelledby="learn-title">
-          <h2 id="learn-title">この記事で分かること</h2>
-          <p><strong>得られる効果</strong>：電気代削減，売電収入および利用できる補助金を確認できます．</p>
-          <p><strong>かかる費用</strong>：設置費に加え，点検費と機器交換費まで確認できます．</p>
-          <p><strong>収支が変わる条件</strong>：電気の使い方，屋根，設備容量および見積価格の影響が分かります．</p>
-        </section>
-
-        <p class="article-opening-questions">「本当に元が取れるのか」「電気代が高い家庭ほど得なのか」「売電だけで費用を回収できるのか」「点検や機器交換まで含めると，結局いくら残るのか」．導入前には，収入だけでなく将来の支出も気になります．</p>
-
-        <p class="article-opening-summary" data-quote-start>特に，電気代が高く，昼間にも電気を使う家庭では，太陽光の経済効果が大きくなりやすい傾向があります．ただし，電気代の高さだけで利益は決まりません．昼間に使う量，余剰電力の売電，設置費，補助金および将来の維持・交換費を，同じ期間で比べる必要があります．</p>
-
-        <section class="article-entry-actions article-entry-actions--diagnosis-primary article-action-stack" aria-label="次の行動">
-          <div class="article-action-stack__row article-action-stack__row--internal">
-            <div class="article-action-stack__copy">
-              <h2>自分の条件で確かめる</h2>
-              <p>地域，電気料金，屋根方位および昼間の在宅状況から，30年間の概算を確認できます．</p>
-            </div>
-            <a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
+      <header class="economics-hero">
+        <div class="economics-hero__inner">
+          <div class="economics-hero__copy">
+            <div class="economics-hero__meta"><span class="economics-hero__category">収支</span><span>更新日 <time datetime="2026-09-24">2026.09.24</time></span></div>
+            <h1><span>太陽光の収支は，</span><span>何で決まる？</span></h1>
+            <p class="economics-hero__lead">太陽光を設置すると，電気代はどれくらい減り，費用は回収できるのでしょうか．収支は，発電量だけでなく，昼間の電気の使い方や設置費，補助金によって変わります．この記事では，電気代削減・売電による効果と，設置から維持・交換までの費用を整理し，自宅の収支を考えるポイントを紹介します．</p>
+            <p class="economics-hero__scope">全国の住宅用太陽光 ／ 2026年度</p>
           </div>
-          <p class="quote-context">屋根に合う設備と実際の工事費を見積もりで確認し，概算と比べましょう．見積もりサービスの利用は無料です．現地調査費は施工会社・条件で確認します．</p>
-        </section>
-
-        <details class="article-toc">
+          <figure class="economics-hero__visual">
+            <img src="../shared/assets/article-solar-economics-photo.webp" width="1536" height="1024" alt="太陽光パネルの上に高さの異なる3つの硬貨の山を並べた写真" decoding="async" fetchpriority="high">
+          </figure>
+        </div>
+      </header>
+      <article data-guide-presentation id="economics-article" data-quote-description="自宅の導入費用を，見積もりで確認しましょう．" class="article-width article article--continuous article--guide"><details class="article-toc">
           <summary><span class="article-toc__title">目次</span><span class="article-toc__state" aria-hidden="true"></span></summary>
-          <ol>
-            <li><a href="#overview">収支の全体像</a></li>
-            <li><a href="#electricity-savings">電気代削減</a></li>
-            <li><a href="#sales">売電収入</a></li>
-            <li><a href="#installation-cost">設置費</a></li>
-            <li><a href="#lifecycle-cost">導入後の費用</a></li>
-            <li><a href="#factors">収支を変える条件</a></li>
-            <li><a href="#loss-caution">費用を回収できない場合</a></li>
-            <li><a href="#suitability">向いている家庭・慎重に考えたい家庭</a></li>
-            <li><a href="#household-comparison">具体例：同じ4 kWでも結果が変わる</a></li>
-            <li><a href="#decision-path">判断の進め方</a></li>
-            <li><a href="#summary">まとめ</a></li>
-          </ol>
-        </details>
+<ol><li><a href="#overview">太陽光で，電気代は安くなる？</a><ol><li><a href="#electricity-savings">電気代削減と売電収入は，30年間で合計約296万円</a></li><li><a href="#energy-conditions">発電量と昼間の使い方で，節約額・売電収入は変わる</a></li><li><a href="#sales">売電単価は途中で下がり，FIT終了後は売電先によって変わる</a></li><li><a href="#battery-use">蓄電池があれば，昼間の余った電気を夜にも使える</a></li></ol></li><li><a href="#costs">太陽光の設置には，いくらかかる？</a><ol><li><a href="#installation-cost">太陽光の設備・工事費は，約132万円が目安</a></li><li><a href="#battery-installation">蓄電池を加えると，約115万円の追加が目安</a></li><li><a href="#subsidy-benefit">補助金を利用できれば，自己負担を減らせる</a></li><li><a href="#installation-conditions">住宅や工事の条件によって，実際の費用は変わる</a></li></ol></li><li><a href="#lifecycle-cost">太陽光は，設置した後も費用がかかる？</a><ol><li><a href="#maintenance-baseline">点検・機器交換は，30年間で約61万円が目安</a></li><li><a href="#inspection-conditions">点検の頻度や依頼先によって，費用は変わる</a></li><li><a href="#equipment-repairs">機器の交換時期や保証の範囲によって，費用は変わる</a></li><li><a href="#removal-cost">パネルの撤去・処分や，屋根工事に伴う取り外しには費用がかかる</a></li></ol></li><li><a href="#payback">太陽光で，どのくらいトクする？</a><ol><li><a href="#profit-baseline">30年間で約102万円トクする試算</a></li><li><a href="#initial-outlay">設置費が安く，補助金が多いほど，収支は改善する</a></li><li><a href="#profit-energy">発電量や昼間の自家消費が増えると，収支は改善する</a></li><li><a href="#battery-profit">蓄電池を加えると，30年間で約96万円トクする試算</a></li><li><a href="#evaluation-period">使用期間が短くなったり，維持費が増えたりすると，収支は悪化する</a></li></ol></li><li><a href="#decision-path">自宅でトクするか，どう判断する？</a><ol><li><a href="#diagnosis">はれトク診断で，自宅の収支の目安を知る</a></li><li><a href="#quotes">見積もりの導入費用で，収支を確かめる</a></li></ol></li></ol></details>
 
-        <section id="overview">
-          <h2>収支の全体像</h2>
-          <p>太陽光の収支は，30年間に得られる<strong>電気代削減と売電収入</strong>に，利用できる補助金を加え，<strong>設置費と維持・交換費</strong>を差し引いて考えます．電気代削減は支出が減る効果，売電収入は余った電気を売って得る収入であり，性質は異なります．</p>
-          <figure class="article-diagram article-balance-illustration" aria-labelledby="balance-diagram-caption" aria-describedby="balance-diagram-description">
-            <img src="../shared/assets/article-solar-economics-flow.webp" width="1823" height="863" alt="" aria-hidden="true" loading="lazy" decoding="async">
-            <div class="article-balance-groups">
-              <div class="article-balance-group article-balance-group--income"><h3>収入・削減効果</h3><ul>
-                <li><strong>電気代削減</strong><span>現金を受け取るのではなく，電力会社へ支払う金額が小さくなります．</span></li>
-                <li><strong>売電収入</strong><span>太陽光パネルから送った余剰電力の対価が，家庭の収入になります．</span></li>
-                <li><strong>補助金</strong><span>対象条件を満たす場合，国や自治体等から初期負担を下げる給付を受けます．</span></li>
-              </ul></div>
-              <div class="article-balance-group article-balance-group--expense"><h3>支出</h3><ul>
-                <li><strong>設置費</strong><span>太陽光パネルと工事へ，家計から支出します．</span></li>
-                <li><strong>維持・交換費</strong><span>点検，修理およびパワーコンディショナ交換へ，家計から支出します．</span></li>
-              </ul></div>
-            </div>
-            <p class="article-diagram__accessible" id="balance-diagram-description">30年間の正味利益は，電気代削減，売電収入および補助金の合計から，設置費と維持・交換費を差し引いて考えます．</p>
-            <figcaption id="balance-diagram-caption">図1　家庭に残る効果と，家庭から出ていく費用を分けて捉えます．</figcaption>
-          </figure>
-          <p>補助金は初期負担を下げますが，地域，年度，住宅および設備の条件を満たす場合に限られます．制度が表示されても受給が確定するわけではありません．<a href="subsidies.html">補助金の探し方と申請の流れ</a>で確認手順を整理できます．設置費には設備と標準工事だけでなく，屋根や配線による追加工事が生じることがあります．</p>
-          <p>したがって，「発電量が多い」「補助金がある」「見積価格が安い」のどれか一つだけでは判断できません．収入・削減効果と費用を同じ期間で並べ，条件の確からしさも合わせて確認します．</p>
-        </section>
+<section id="overview"><h2>太陽光で，電気代は安くなる？</h2><figure class="economics-chapter-photo"><img src="../shared/assets/article-electricity-budget-photo.webp" width="1536" height="1024" alt="家計簿と電気料金の明細を広げた机" loading="lazy" decoding="async"></figure><section id="electricity-savings"><h3>電気代削減と売電収入は，30年間で<span class="heading-term">合計</span><span class="heading-term">約296万円</span></h3><p>東京都の既存住宅に太陽光4 kWを設置し，蓄電池を付けずに30年間使う当サイトの試算では，電気代削減が約209万円，売電収入が約86万円で，合わせて約296万円の効果があります．合計は，丸める前の金額から計算しています．<strong>設置費や維持費を差し引く前の金額であり，利益ではありません</strong>．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><p>太陽光で発電した電気を自宅で使えば，電力会社から買う電気が減り，電気代の節約につながります．使い切れずに余った電気は，売電収入になります．この試算の最初の1年間では，電気代削減は月平均約4,700円，売電収入は月平均約5,700円です．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><figure class="economics-explainer economics-energy-diagram" aria-labelledby="energy-flow-caption" aria-describedby="energy-flow-description"><div class="energy-routing" aria-hidden="true"><div class="energy-routing__source"><svg class="energy-routing__illustration" viewbox="0 0 120 90" aria-hidden="true"><circle cx="93" cy="18" r="12" fill="#f5c84c"></circle><path d="M93 1v2 M93 34v3 M76 18h-3 M113 18h3 M81 6l-2-2 M105 30l2 2 M81 30l-2 2 M105 6l2-2" stroke="#e7ae21" stroke-width="3"></path><path d="M48 64h9v17H48z" fill="#687d88"></path><rect x="30" y="79" width="46" height="6" rx="2" fill="#526771"></rect><path d="M21 32h67l15 39H7z" fill="#2c536e"></path><path d="M25 37h59l11 28H15z" fill="#4d8bb7"></path><path d="M21 46h67 M18 55h74 M43 37l-4 28 M63 37l6 28" stroke="#c5e3ed" stroke-width="2"></path></svg><strong>太陽光で発電</strong></div><svg class="energy-routing__arrows" viewbox="0 0 70 220"><path d="M2 110h23V45h40 M25 110v65h40 M57 37l8 8-8 8 M57 167l8 8-8 8"></path></svg><svg class="energy-routing__arrows-mobile" viewbox="0 0 240 40"><path d="M120 0v14H60v23 M120 14h60v23 M54 30l6 7 6-7 M174 30l6 7 6-7"></path></svg><div class="energy-routing__destinations"><div><svg class="energy-routing__illustration" viewbox="0 0 120 90" aria-hidden="true"><path d="M17 35h51v46H17z" fill="#f3e7cf"></path><path d="M7 37 42 8l36 29-7 7-29-24-29 24z" fill="#008653"></path><rect x="29" y="53" width="17" height="28" rx="1" fill="#b78659"></rect><rect x="49" y="43" width="12" height="15" fill="#83c5de"></rect><rect x="73" y="38" width="39" height="46" rx="4" fill="#9bc9c2"></rect><path d="M73 42a4 4 0 0 1 4-4h31a4 4 0 0 1 4 4v9H73z" fill="#397d75"></path><circle cx="92" cy="66" r="12" fill="#f5faf9"></circle><circle cx="92" cy="66" r="8" fill="#80bad0"></circle><circle cx="80" cy="45" r="2" fill="#fff"></circle><rect x="88" y="43" width="15" height="3" rx="1" fill="#d7ece6"></rect></svg><div><span>自宅で使う：<span class="energy-routing__unit">約31円／kWh</span></span><strong>電気代を減らす</strong></div></div><div><svg class="energy-routing__illustration" viewbox="0 0 120 90" aria-hidden="true"><path d="M31 7h8v77h-8z" fill="#758c98"></path><rect x="12" y="23" width="47" height="6" rx="2" fill="#526771"></rect><rect x="8" y="44" width="55" height="6" rx="2" fill="#526771"></rect><path d="M18 13h5v12h-5z M48 13h5v12h-5z M13 35h5v11h-5z M53 35h5v11h-5z" fill="#99b2b9"></path><path d="M35 51 21 83 M35 51l15 32" stroke="#526771" stroke-width="4"></path><path d="M67 55h43v25c0 10-43 10-43 0z" fill="#ddb032"></path><ellipse cx="88.5" cy="55" rx="21.5" ry="8" fill="#f5cf58"></ellipse><path d="M68 64c10 7 31 7 41 0 M68 73c10 7 31 7 41 0" stroke="#b78524" stroke-width="2"></path><ellipse cx="88.5" cy="55" rx="12" ry="4" fill="#e9b838"></ellipse></svg><div><span>売る：<span class="energy-routing__unit">8.3〜24円／kWh</span></span><strong>売電収入を得る</strong></div></div></div></div><p class="article-diagram__accessible" id="energy-flow-description">太陽光で発電した電気は，自宅で使って電気代を減らす分と，余った電気を売って売電収入を得る分に分かれます．単価の例は自宅で使う場合が約31円／kWh，売る場合がFIT期間中8.3〜24円／kWhです．</p><figcaption id="energy-flow-caption">図1　発電した電気の使い道</figcaption><p class="economics-figure-note">自宅で使う単価は当サイトの東京都の試算条件．売電は2026年度認定の住宅用FIT期間中の単価です．</p></figure><p>太陽光パネルは長期間使う設備で，近年は30年間の出力保証を設けた製品もあります<span data-cite-sources="longi-hi-mo-x6-30-year-output-warranty">（LONGi，2024）</span>．当サイトでは30年間の利用を想定し，売電単価の変化や経年による発電量の低下を織り込んで試算しています．<strong>初年度の月額が30年間続くわけではありません</strong>．途中で必要になる機器の交換費用は，後の章で説明します．実際の効果は，地域や屋根の日当たり，電気の使い方によっても変わります．ここからは，その違いを見ていきましょう．</p></section><section id="energy-conditions"><h3>発電量と昼間の使い方で，節約額・売電収入は変わる</h3><p>日照に恵まれ，屋根に影がかかりにくい家ほど，発電量を確保しやすくなります．屋根の向きや広さ，載せられるパネルの量によっても，自宅で使ったり売ったりできる電気の量が変わります<span data-cite-sources="jpea-residential-orientation-angle-impact">（太陽光発電協会，2026c）</span>． 例えば，東京都で同じ4 kWのパネルを設置する当サイトの試算では，初年度の発電量は南向きで年約4,700 kWh，東・西向きで年約4,000 kWhとなり，<strong>東・西向きは南向きより約15％少なくなります</strong>．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><p>基本的には，発電した電気は売るよりも，自宅で使う方がおトクです．例えば，1 kWhを自宅で使えば約31円の電気代を減らせるのに対し，2026年9月に確認した関東の買取例では，FIT終了後に売る場合は約8.5〜11円の収入になります<span data-cite-sources="tepco-post-fit-standard-plan article-source-8">（東京電力エナジーパートナー，2026b；ENEOS Power，2026a）</span>．この買取価格との比較では，同じ電気でも，自宅で使う方が約3倍の家計への効果があります．</p><p>在宅勤務をしている人や，日中も家で過ごす家族がいる家庭では，エアコンや調理，洗濯などに発電した電気を使えます．家族が多くても，昼間は全員が外出する家庭では使える量が限られます．人数だけでなく，誰が何時ごろ家にいて，電気を使うかがポイントです．同じ発電量なら，自宅で使う分が増えると売電収入は減りますが，電気代の節約は増えます．</p></section><section id="sales"><h3>売電単価は途中で下がり，FIT終了後は売電先によって変わる</h3><p>売電収入は，売る電気の量と買取価格によって変わります．2026年度認定の住宅用FITでは，買取価格は運転開始から<strong>最初の4年間が1 kWh当たり24円，5～10年目が8.3円</strong>です．10年間のFIT期間が終わると，その後は売電先の買取条件によって収入が変わります<span data-cite-sources="meti-fit-residential-fy2026 tepco-post-fit-standard-plan">（経済産業省，2026；東京電力エナジーパートナー，2026b）</span>．</p><figure id="fit-price-chart" class="economics-fit-chart" aria-labelledby="fit-price-caption"><svg viewBox="0 0 360 280" role="img" aria-labelledby="fit-price-title fit-price-description"><title id="fit-price-title">住宅用FITの売電単価の推移</title><desc id="fit-price-description">2026年度認定の住宅用FIT．運転開始から最初の4年間は24円毎キロワット時，5年目から10年目は8.3円毎キロワット時．11年目以降は売電先によって変わるため価格線を描いていません．横軸は運転開始からの経過年数，縦軸は売電単価です．</desc><text x="12" y="21" class="fit-axis-title">売電単価（円/kWh）</text><rect x="252" y="37" width="100" height="191" fill="#f1f4f2"/><path d="M52 60H252 M52 170H252" class="fit-grid"/><path d="M132 40V228 M252 37V228" class="fit-boundary"/><path d="M52 37V228H352" class="fit-axis"/><path d="M52 60H132V170H252" class="fit-price-line"/><g class="fit-tick"><text x="42" y="66" text-anchor="end">24</text><text x="42" y="176" text-anchor="end">8.3</text><text x="42" y="234" text-anchor="end">0</text><text x="52" y="251" text-anchor="middle">0</text><text x="132" y="251" text-anchor="middle">4</text><text x="252" y="251" text-anchor="middle">10</text></g><text x="92" y="49" text-anchor="middle" class="fit-price-label">24円</text><text x="192" y="157" text-anchor="middle" class="fit-price-label">8.3円</text><g class="fit-future" text-anchor="middle"><text x="301" y="96">11年目以降</text><text x="301" y="133">売電先</text><text x="301" y="157">による</text></g><text x="200" y="277" text-anchor="middle" class="fit-axis-title">運転開始からの経過年数</text></svg><figcaption id="fit-price-caption">図2　売電単価は，4年間を過ぎると下がる</figcaption><p class="economics-figure-note">2026年度認定の住宅用FIT．最初の4年間は24円／kWh，5〜10年目は8.3円／kWh．11年目以降の単価は確定していません．</p></figure><p>例えば，2026年度の関東では，東京電力エナジーパートナーの再エネ買取標準プランは1 kWh当たり8.5円，ENEOS太陽光買取は11円です（ともに税込）．ENEOSは，他サービスの契約を条件としない通常価格です<span data-cite-sources="tepco-post-fit-standard-plan article-source-8 article-source-9">（東京電力エナジーパートナー，2026b；ENEOS Power，2026a；ENEOS Power，2026b）</span>．仮に年間2,000 kWhを売る比較例なら，年間の売電収入は17,000円と22,000円で，差は5,000円になります．これらは2026年9月に確認した価格であり，10年後の買取価格を保証するものではありません．</p><p>FITの満了を見越して，売電先の価格や契約条件を比べておきましょう．蓄電池を使い，昼間の余った電気を夜に自宅で使う分を増やす方法もあります．自家消費と売電は組み合わせられるため，自宅で使う分と売る分を考えながら選びましょう．蓄電池の効果と注意点は，次の節で紹介します．</p></section><section id="battery-use"><h3><span class="heading-term">蓄電池</span>があれば，昼間の余った電気を夜にも使える</h3><p>蓄電池があれば，昼間の余った電気をため，夜に使うことで，電力会社から買う電気を減らせます．充電・放電の際には電気の一部が失われます．東京都を例にした試算では，9.5 kWhの蓄電池を追加すると，電気代の節約と売電収入を合わせた家計への効果が，<strong>太陽光のみより最初の1年間で約9,000円増えます</strong>．ほかの条件が同じなら，売電単価が下がると，ためて自宅で使うメリットは大きくなります．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><p>蓄電池の追加導入費は，補助金を差し引く前で約115万円が目安です．元が取れるかは，節約が増える額や将来の交換費によって変わります．<a href="calculation-method.html#adopted-parameters">費用の採用値・計算根拠</a></p><p>停電に対応した設備なら，蓄電池に残っている電気の範囲で，夜の照明やスマートフォンの充電などにも使えます．ためられる電気の量や一度に使える家電には限りがあり，接続先も機種や工事の内容によって異なります．</p><nav class="article-related-card" aria-label="蓄電池の関連情報"><p class="article-related-card__label">あわせて読みたい</p><div class="article-related-card__item"><a href="#battery-profit"><span>蓄電池の追加費用を含めた収支を見る</span><span aria-hidden="true">→</span></a></div><div class="article-related-card__item"><a href="disaster.html"><span>停電時，太陽光・蓄電池で何ができる？</span><span aria-hidden="true">→</span></a></div></nav></section>
 
-        <section id="electricity-savings">
-          <h2>電気代削減は，昼間に使える量で変わる</h2>
-          <p>太陽光が発電している時間に家庭で電気を使うと，電力会社から買う電力量を減らせます．この自家消費量に買電単価を掛けた金額が，電気代削減の基本です．同じ発電量でも，昼間に在宅して家電を使う家庭と，電力使用が夜間に偏る家庭では，自家消費できる量が異なります．</p>
-          <p>買電単価が高いほど，1 kWhを自家消費したときに避けられる支出は大きくなります．ただし，月間電気料金が高くても，使用時間が夜間中心なら，昼間の発電と重ならず削減効果が限られる場合があります．電気料金の総額だけでなく，<strong>いつ電気を使うか</strong>を確認する必要があります．</p>
-          <p>実際の買電料金は，1つの単価を全使用量へ掛けるとは限りません．東京電力エナジーパートナー「従量電灯B」の30 A契約を例にすると，基本料金は935.25円／月，電力量料金は最初の120 kWhまで29.80円／kWh，120 kWh超300 kWhまで36.40円／kWh，300 kWh超の部分が40.49円／kWhです．40.49円／kWhを月間使用量の全量へ掛ける計算ではありません（東京電力エナジーパートナー，2026a）．</p>
-          <p>これらに燃料費調整額と再生可能エネルギー発電促進賦課金等が加わります．2026年度の賦課金は4.18円／kWhで，2026年5月検針分から2027年4月検針分まで適用されます（経済産業省，2026）．契約プラン，契約容量，使用量および検針月を分けて確認してください．</p>
-          <p>はれトク診断は，地域別の買電単価と年間発電量に加え，標準住宅の8760時間需要と屋根方位別の日射量を重ね，平日昼間の在宅状況に応じて年間の自家消費量を概算します．これは個別住宅の時間帯別負荷を再現するものではないため，生活時間が季節や曜日で大きく変わる家庭では幅を持って見ます（建築研究所，2026；NEDO，年不明；エネルギー・資源学会，2025）．</p>
-        </section>
-
-        <section id="sales">
-          <h2>売電収入は，余る量と時期ごとの単価で変わる</h2>
-          <p>発電した電気のうち，家庭で使い切れなかった余剰電力が売電の対象です．発電量が同じなら，自家消費が少ないほど売電量は増えます．したがって，電気代削減と売電収入は別々に最大化されるのではなく，同じ発電電力量を自家消費と売電へ分ける関係にあります．</p>
-          <figure class="article-diagram article-energy-flow" aria-labelledby="energy-flow-caption" aria-describedby="energy-flow-description">
-            <div class="article-energy-flow__visual" aria-hidden="true">
-              <div class="article-energy-flow__source">
-                <span class="article-diagram__kicker">発電</span>
-                <strong>太陽光パネル</strong>
-              </div>
-              <span class="article-energy-flow__arrow"></span>
-              <div class="article-energy-flow__branches">
-                <p class="article-energy-flow__split-label">発電した電気を2つに分ける</p>
-                <div class="article-energy-flow__branch article-energy-flow__branch--self-use">
-                  <span>家庭内で使う分</span>
-                  <strong>自家消費</strong>
-                  <small>買電を減らす</small>
-                </div>
-                <div class="article-energy-flow__branch article-energy-flow__branch--export">
-                  <span>使い切れない分</span>
-                  <strong>余剰売電</strong>
-                  <small>電力会社等へ売る</small>
-                </div>
-              </div>
-              <p class="article-energy-flow__equation">発電量 ＝ 自家消費量 ＋ 売電量</p>
-            </div>
-            <p class="article-diagram__accessible" id="energy-flow-description">太陽光パネルで発電した電気は，発電と同時に家庭内で使う自家消費分と，家庭で使い切れず電力会社等へ売る余剰売電分に分かれます．発電量は，自家消費量と売電量の合計です．</p>
-            <figcaption id="energy-flow-caption">図2　発電した電気は，自家消費した分と，余って売電した分に分かれます．</figcaption>
-          </figure>
-          <p>2025年度下半期および2026年度に認定される10 kW未満の住宅用太陽光では，FITの買取価格は1～4年目が24円／kWh，5～10年目が8.3円／kWhで，調達期間は10年間です（経済産業省，2026）．同じ売電量でも，年によって収入が変わるため，24円／kWhを10年間や30年間の全期間へ適用してはいけません．</p>
-          <p>FIT期間終了後は，電力会社等が提示する条件で売電先を選びます．はれトク診断が11～30年目に置く8.50円／kWhは，東京電力エナジーパートナー「再エネ買取標準プラン」の例です．対象は同社所定の栃木県，群馬県，茨城県，埼玉県，千葉県，東京都の島しょ地域を除く地域，神奈川県，山梨県および静岡県の富士川以東で，FIT満了までの売電先等に応じて手続も異なります．全国共通の卒FIT価格や将来の保証価格ではありません（東京電力エナジーパートナー，2026b）．</p>
-        </section>
-
-        <section id="installation-cost">
-          <h2>設置費は，容量だけでなく屋根と工事で変わる</h2>
-          <p>設置費には，太陽光パネル，パワーコンディショナ，架台，配線，標準工事および諸経費が含まれます．容量を増やすと発電量は増えやすい一方，必要なパネルと機器も増えるため，費用も同時に変わります．はれトク診断は，新築・既存住宅の区分に応じた1 kW当たりの代表費用を用います．採用値と根拠は<a href="calculation-method.html#adopted-parameters">計算方法・使用データ</a>で確認できます．</p>
-          <p>実際の総額は，屋根面数，屋根材，足場，分電盤・パワーコンディショナの位置，配線の引回し，機器の重量および搬入方法で変わります．屋根面が分かれるほど架台・配線の構成が複雑になり，屋根材が異なれば固定金具と防水処理も変わります．建物の高さや周囲の作業空間は足場に，分電盤・パワーコンディショナと屋根の距離や壁内配線の可否は配線長，貫通部および仕上げ復旧に影響します．重量のある機器を狭い通路や上階へ運ぶ場合は，搬入経路と揚重方法の確認も必要です（京セラ，2026a，b）．</p>
-          <p>これらは追加工事が必要になる理由であり，現地確認前の追加額を示すものではありません．同じ容量でも，追加工事の範囲や見積書の内訳が違えば価格は一致しません．施工会社による価格差が，機器・工事・保証のどの差から生じるかを切り分けます．</p>
-          <p>診断では代表費用を使って採算の目安を確認し，見積もりでは自宅に設置できる容量と工事範囲を確認します．補助金控除前の税込総額，追加費用が生じる条件および保証対象を同じ形式で比較すると，価格差の理由を追いやすくなります．</p>
-        </section>
-
-        <section id="lifecycle-cost">
-          <h2>導入後の費用は，発生する年を分けて見る</h2>
-          <p>太陽光は設置時だけでなく，点検，修理および機器交換にも費用がかかります．ただし，これらがすべて毎年発生するわけではありません．経済産業省の2026年資料は，住宅用5 kW設備を想定した業界ヒアリング値として，3～5年ごとに1回程度の定期点検と約3.8万円／回，20年間に1回のパワーコンディショナ交換と約38.4万円を示しています．特定製品・施工会社の価格や保証内容を示す値ではありません（調達価格等算定委員会，2026）．</p>
-          <p>太陽光発電協会は，専門業者による定期点検を設置後1年，その後は4年ごとに推奨しています．これは同協会が示す推奨時期であり，その頻度自体を一律の法定義務として説明しません．必要な点検は設備，使用・故障状況および適用される制度で異なるため，販売店，工務店またはメーカーへ確認します（太陽光発電協会，年不明）．</p>
-          <p>実際の故障時期と費用は製品，保証，設置環境および使用状況で変わります．保証期間内でも，出張費，足場，撤去・再設置等が対象外となる場合があるため，見積書と保証書で負担範囲を確認します．日常点検と専門業者の定期点検の違いは，<a href="costs-maintenance.html#included-costs">費用記事の維持・交換費</a>で確認できます．</p>
-        </section>
-
-        <section id="factors">
-          <h2>収支を大きく変える条件</h2>
-          <table class="article-table"><tbody>
-            <tr><th>発電量</th><td>地域の日射，屋根方位および影で変わります．地域と屋根方位は診断，影と設置可否は現地調査で確認します．</td></tr>
-            <tr><th>昼間の使用量</th><td>発電中に使う量が多いほど自家消費が増えやすくなります．平日昼間の在宅状況は診断，時刻別の実態は電力使用データで確認します．</td></tr>
-            <tr><th>買電・売電単価</th><td>買電単価は電気代削減，売電単価は余剰電力の収入を変えます．現在の契約と将来の見直し可能性を分けます．</td></tr>
-            <tr><th>設置容量</th><td>容量を増やすと発電量と設置費がともに変わります．診断で容量別に比較し，屋根へ載せられる容量は現地調査と見積もりで確認します．</td></tr>
-            <tr><th>設置費・追加工事</th><td>屋根，足場，配線，機器および施工会社で変わります．診断では代表値，正式な金額は同条件の見積書で確認します．</td></tr>
-            <tr><th>補助金</th><td>地域，年度，設備，契約・着工時期等の条件を満たす場合に初期負担を下げます．適用可否は公式情報で確認します．</td></tr>
-            <tr><th>維持・交換費</th><td>点検，修理，機器交換の時期と保証範囲で変わります．診断の代表支出と契約上の負担を区別します．</td></tr>
-          </tbody></table>
-        </section>
-
-        <section class="caution-box" id="loss-caution">
-          <p class="notice-label">注意点</p>
-          <h2>条件によっては費用を回収できません</h2>
-          <p>発電量や自家消費が見込みを下回る場合，設置費や追加工事が高い場合，または補助金を利用できない場合は，30年間でも正味利益がマイナスになり得ます．診断は導入を勧める判定ではありません．</p>
-          <p>採算を見直すときは，設置容量と見積価格を変え，太陽光のみと蓄電池併用を同じ条件で比較します．それでも家計上の負担が大きい場合は，導入を見送ることも妥当です．</p>
-          <p>停電への備えを重視する場合は，経済的な回収とは別の価値として検討します．太陽光単独と蓄電池併用では停電時の制約が異なるため，必要な電力を供給できる設備構成かを施工会社へ確認してください．この確認は，赤字が解消することを意味しません．具体的な給電条件は<a href="disaster.html">停電時，太陽光だけで何ができる？</a>で確認できます．</p>
-        </section>
-
-        <section id="suitability">
-          <h2>向いている家庭と，慎重に考えたい家庭</h2>
-          <h3>比較的，経済効果を得やすい条件</h3>
-          <ul class="article-checklist">
-            <li><strong>電気代が高い：</strong>買電単価と使用量が大きいほど，自家消費で避けられる支出は大きくなりやすい．ただし，夜間中心の使用では効果が限られる．</li>
-            <li><strong>昼間の電力使用が多い：</strong>発電中に電気を使うため，自家消費を増やしやすい．</li>
-            <li><strong>設置費が低い，または補助金を利用できる：</strong>追加工事が少ない見積もりや，条件を満たす補助金は初期負担を下げる．</li>
-            <li><strong>日当たりのよい屋根に十分な容量を載せられる：</strong>影が少なく，必要な容量を設置できる屋根は，発電量を確保しやすい．</li>
-          </ul>
-          <figure class="article-section-illustration" aria-labelledby="suitability-illustration-caption">
-            <img src="../shared/assets/article-solar-suitability.webp" width="1693" height="929" alt="晴れた昼間，太陽光パネル付き住宅で家族が洗濯機，パソコン，エアコンを使い，電気料金の請求額が小さくなる様子" loading="lazy" decoding="async">
-            <figcaption id="suitability-illustration-caption">昼間に発電した電気を家庭で使うと，電力会社から買う量を減らしやすくなります．</figcaption>
-          </figure>
-          <h3>導入を慎重に考えたい条件</h3>
-          <ul class="article-checklist">
-            <li>周囲の建物や樹木の影が大きく，発電量を確保しにくい．</li>
-            <li>電力使用が夜間に偏り，蓄電池を含めない太陽光単体では自家消費しにくい．</li>
-            <li>屋根補強，足場，配線等の追加工事が多く，初期負担が高い．</li>
-            <li>保証対象外の修理や将来の交換費を含めると，家計上の許容範囲を超える．</li>
-          </ul>
-          <p>これらは結果が変わる方向を示す条件であり，「向いている」側に多く当てはまっても利益を保証しません．反対に，慎重に考えたい条件があっても，設置容量や費用を調整すると判断が変わる場合があります．</p>
-                <div id="household-comparison">
-          <h3>具体例：同じ4 kWでも，昼間の使い方で結果が変わる</h3>
-          <p>次は，はれトク診断の公開データ2026-09-18版を使い，東京都，4 kW，南向き，月間電気料金は未入力を共通条件として，平日昼間の在宅状況だけを変えた標準シナリオの例です．未入力時には「戸建て・4人以上世帯の地域平均（令和5年度）」である関東甲信15,467円／月を使用します．本人所有・本人居住の既存戸建てを対象とし，採用仮定を満たす場合の東京都補助金840,000円を含み，電気料金上昇率は比較用仮定として年1.5％です．実際の住宅を示す事例ではなく，条件の違いが結果へ及ぼす方向を確認する比較です（東京都環境公社，2026）．</p>
-          <p>この例は，認定防眩ガラスレス屋根材と出力最適化機器を採用し，機能性換算出力を入力容量と同じとする診断上の固定仮定です．機能性製品の追加費用は設置費へ分離計上していません．実機・指定工法・対象経費・申請条件の確認が必要で，受給やこの利益額を保証するものではありません．</p>
-          <table class="article-table article-table--multi-column article-table--household-comparison">
-            <caption>平日昼間に「ほぼ毎日いる」家庭Aと「ほとんどいない」家庭Bの比較</caption>
+        <footer class="economics-chapter-footer" aria-label="この章の補足" data-quote-start><p class="economics-resource-label">この章の参考資料</p><ul class="source-list"><li data-bibliography-source="bri-pyhees-residential-total-electricity-load">国立研究開発法人建築研究所（2026年アクセス）．<a data-source-id="bri-pyhees-residential-total-electricity-load" href="https://github.com/BRI-EES-House/pyhees">住宅のエネルギー消費性能計算プログラムの公式計算エンジンpyheesおよび第二章第二節一次エネルギー消費量</a></li>
+            <li data-bibliography-source="nedo-solar-radiation-database">国立研究開発法人新エネルギー・産業技術総合開発機構（2026年アクセス）．<a data-source-id="nedo-solar-radiation-database" href="https://www.nedo.go.jp/seika_hyoka/ZZFF_100041.html">日射に関するデータベース</a></li>
+            <li data-bibliography-source="criepi-household-co2-pv-self-consumption-2025">エネルギー・資源学会（2026年アクセス）．<a data-source-id="criepi-household-co2-pv-self-consumption-2025" href="https://doi.org/10.24778/jjser.46.4_167">太陽光発電の自家消費率などの実態把握―家庭CO2統計の個票データを用いた分析―</a></li>
+            <li data-bibliography-source="enecho-regional-low-voltage-price-fy2023">資源エネルギー庁（2026年アクセス）．<a data-source-id="enecho-regional-low-voltage-price-fy2023" href="https://www.enecho.meti.go.jp/committee/council/basic_policy_subcommittee/2024/058/058_004.pdf">電気料金の全国比較：供給区域ごとの2023年度実績単価</a></li>
+            <li data-bibliography-source="article-source-5">東京電力エナジーパートナー（2026年アクセスa）．<a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html">料金単価表‐電灯</a></li>
+            <li data-bibliography-source="meti-fit-residential-fy2026">経済産業省（2026年アクセス）．<a data-source-id="meti-fit-residential-fy2026" href="https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html">再生可能エネルギーのFIT制度・FIP制度における2026年度以降の買取価格等と2026年度の賦課金単価を設定します</a></li>
+            <li data-bibliography-source="tepco-post-fit-standard-plan">東京電力エナジーパートナー（2026年アクセスb）．<a data-source-id="tepco-post-fit-standard-plan" href="https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html">再エネ買取標準プラン</a></li><li data-bibliography-source="article-source-8">ENEOS Power（2026a）．<a href="https://www.eneos-power.co.jp/solar-kaitori/images/pdf/attention_20260213.pdf">2026年度 太陽光買取価格</a></li><li data-bibliography-source="article-source-9">ENEOS Power（2026年アクセスb）．<a href="https://www.eneos-power.co.jp/solar-kaitori/">ENEOS太陽光買取</a></li>
+            <li data-bibliography-source="jpea-residential-orientation-angle-impact">太陽光発電協会（2026年アクセスc）．<a data-source-id="jpea-residential-orientation-angle-impact" href="https://www.jpea.gr.jp/faq/590/">設置方位や設置角度の影響はありますか？</a></li><li data-bibliography-source="longi-hi-mo-x6-30-year-output-warranty">LONGi（2024）．<a href="https://www.longi.com/jp/news/hi-mo-x6-guardian-resistance-to-moisture-and-heat-product-launch/">太陽光パネル「Hi-MO X6」に両面発電・ダブルガラスモデルを投入</a></li></ul><p id="example-conditions"><a href="calculation-method.html#electricity-sales-example">計算方法・使用データ</a></p></footer></section><section id="costs"><h2>太陽光の設置には，いくらかかる？</h2><figure class="economics-chapter-photo"><img src="../shared/assets/article-solar-estimate-photo.webp" width="1536" height="1024" alt="太陽光発電の設置見積書と電卓" loading="lazy" decoding="async"></figure><p>太陽光の設置には，機器と工事の費用がかかります．蓄電池を加えると費用は増えますが，補助金を利用できれば自己負担を減らせます．実際の金額は，住宅や工事の条件によって変わります．</p><figure class="economics-cost-comparison" id="installation-cost-comparison" aria-labelledby="installation-cost-caption" aria-describedby="installation-cost-note"><p class="economics-cost-comparison__basis">設備・工事費と，補助金を利用した場合の自己負担</p><div class="economics-cost-comparison__row"><p class="economics-cost-comparison__label"><strong>太陽光のみ</strong><span>約132万円<small>補助金控除前</small></span></p><div class="economics-cost-comparison__track"><div class="economics-cost-comparison__solar economics-cost-comparison__solar--only">太陽光 132万円</div></div></div><div class="economics-cost-comparison__row"><p class="economics-cost-comparison__label"><strong>太陽光＋蓄電池</strong><span>合計 約247万円<small>補助金控除前</small></span></p><div class="economics-cost-comparison__track"><div class="economics-cost-comparison__solar">太陽光<br>132万円</div><div class="economics-cost-comparison__battery">蓄電池<br>115万円</div></div></div><div class="economics-cost-comparison__row"><p class="economics-cost-comparison__label economics-cost-comparison__label--subsidy"><strong>太陽光＋蓄電池＋補助金</strong><span>自己負担 約227万円</span></p><div class="economics-cost-comparison__track" aria-label="設備・工事費247万円のうち，自己負担227万円，補助金20万円"><div class="economics-cost-comparison__outlay">自己負担 227万円</div><div class="economics-cost-comparison__subsidy" aria-hidden="true"><span class="economics-cost-comparison__subsidy-desktop">補助金</span><span class="economics-cost-comparison__subsidy-mobile">補助金20万円</span></div></div></div><figcaption id="installation-cost-caption">図3　設備構成と補助金による自己負担の違い</figcaption><p class="economics-figure-note" id="installation-cost-note">既存住宅に太陽光4 kWを設置する試算．蓄電池ありは9.5 kWhを追加．棒の長さは表示金額の比率です．設備・工事費247万円は同じで，補助金分だけ自己負担が減ります．</p><p class="economics-figure-note">相模原市の2026年度制度で，太陽光と連系する対象蓄電池への奨励金20万円を受けられた場合の例です<span data-cite-sources="sagamihara-smart-energy-incentive-2026">（相模原市，2026）</span>．この奨励金のみを差し引いています．利用には制度の要件を満たす必要があります．</p></figure><p>ここからは，太陽光・蓄電池の費用，補助金，住宅・工事条件を順に見ていきましょう．</p><section id="installation-cost"><h3>太陽光の設備・工事費は，<span class="heading-term">約132万円</span>が目安</h3><p>太陽光パネルなどの機器と設置工事を合わせて，補助金を差し引く前で約132万円が目安です．国の費用資料を参考に，既存住宅へ4 kWを設置する条件で当サイトが計算した金額です<span data-cite-sources="meti-residential-solar-cost-2025">（調達価格等算定委員会，2026）</span>．</p><p>費用には，太陽光パネル，発電した電気を家庭で使えるようにするパワーコンディショナ，取付部材，配線，標準工事および諸経費が含まれます．</p><p>設置するパネルの容量が大きくなると，導入費用も増えます．当サイトの試算では，既存住宅への設置で，<strong>容量が1 kW増えるごとに約33万円増える計算</strong>です．補助金を差し引く前の目安です．<a href="calculation-method.html#adopted-parameters">費用単価の出典・採用条件</a></p><p>実際の費用は，選ぶメーカーや製品，屋根や工事の条件によって変わります．パネルの変換効率や保証内容も製品によって異なるため，工事費を含む総額と合わせて比較しましょう．変換効率が高いパネルは，同じ面積でより大きな容量を確保できます．</p></section><section id="battery-installation"><h3><span class="heading-term">蓄電池</span>を加えると，<span class="heading-term">約115万円</span>の追加が目安</h3><p>当サイトの試算では，9.5 kWhの蓄電池を加えると，設備・工事費が約115万円増えます．既存住宅に設置する太陽光4 kWと合わせて，補助金を差し引く前の総額は約247万円が目安です．<a href="calculation-method.html#adopted-parameters">設備・工事費の計算根拠</a></p><p>蓄電池の容量が大きくなると，導入費用も増えます．当サイトの試算では，<strong>容量が1 kWh増えるごとに約12万円増える計算</strong>です．補助金を差し引く前の目安で，実際の費用はメーカーや製品，工事の条件によって変わります．<a href="calculation-method.html#adopted-parameters">容量当たりの費用の採用根拠</a></p></section><section id="subsidy-benefit"><h3>補助金を利用できれば，自己負担を減らせる</h3><p>補助金を利用すると，設備費や工事費の自己負担を減らせます．例えば，相模原市の2026年度制度では，太陽光と接続して使う対象の家庭用蓄電池に，一律20万円の奨励金が交付されます<span data-cite-sources="sagamihara-smart-energy-incentive-2026">（相模原市，2026）</span>．この奨励金を受けられれば，先ほどの設備・工事費約247万円から20万円を差し引いた自己負担は約227万円です．ほかの補助金は含めていません．</p><p>利用できる制度や金額は，地域，年度，住宅・設備の条件によって異なります．お住まいの地域の制度を調べ，自宅や導入予定の設備が対象になるか確認しましょう．</p><p>申請のタイミングは制度によって異なり，契約・着工前に申請して交付決定を受ける必要がある制度もあります<span data-cite-sources="gunma-residential-renewable-subsidy-fy2026">（群馬県，2026）</span>．また，<strong>申込みが予算上限に達すると，受付期間中でも終了する場合があります</strong><span data-cite-sources="kanagawa-solar-subsidy-second-round-2026">（神奈川県，2026）</span>．見積もりと並行して，申請時期と最新の受付状況を早めに確認しましょう．</p><nav class="article-related-card" aria-label="補助金の関連情報"><p class="article-related-card__label">あわせて読みたい</p><div class="article-related-card__item"><a href="../simulator/"><span>自宅の補助金の目安を確認する（はれトク診断）</span><span aria-hidden="true">→</span></a></div><div class="article-related-card__item"><a href="subsidies.html"><span>補助金は，どう探してどう申請する？</span><span aria-hidden="true">→</span></a></div><p>補助金の目安は参考情報です．最新の募集状況・適用条件は，各自治体などの公式情報で確認してください．</p></nav></section>
+<section id="installation-conditions"><h3>住宅や工事の条件によって，実際の費用は変わる</h3><p>ここまでの金額は当サイトの試算であり，実際の費用は住宅の状態や工事内容によって，<strong>目安より安くなる場合も高くなる場合もあります</strong>．例えば，屋根の補修や配線の延長など，標準工事の範囲を超える作業が必要になると，費用が増えることがあります<span data-cite-sources="article-source-11 article-source-12">（京セラ，2026a；京セラ，2026b）</span>．</p><p>自宅の場合の費用は，現地調査を踏まえた見積もりで確かめましょう．必要な工事を確認し，標準工事に含まれる範囲と別途かかる費用を分けて見ます．複数社の見積もりは，設備・工事・保証の条件をそろえて比較しましょう．</p><aside class="economics-inline-quote article-action-stack" aria-label="無料見積もりの案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4>自宅の導入費用を確かめる</h4><p>屋根や工事の条件に合わせた見積もりで，実際にかかる費用を確認できます．</p><p class="advertising-label">広告・アフィリエイト</p></div><button type="button" class="article-action__link" data-inline-quote-action disabled>無料見積もり（準備中）</button></div></aside><nav class="article-related-card" aria-label="見積もりの関連情報"><p class="article-related-card__label">あわせて読みたい</p><div class="article-related-card__item"><a href="quotes-contractors.html"><span>太陽光の見積もりは，何を比べる？</span><span aria-hidden="true">→</span></a></div></nav></section><footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料</p><ul class="source-list"><li data-bibliography-source="meti-residential-solar-cost-2025">調達価格等算定委員会（2026）．<a data-source-id="meti-residential-solar-cost-2025" href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">令和8年度以降（2026年度以降）の調達価格等に関する意見</a></li>
+            <li data-bibliography-source="article-source-11">京セラ（2026a）．<a href="https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/">太陽光発電の設置費用はいくら？</a></li>
+            <li data-bibliography-source="article-source-12">京セラ（2026年アクセスb）．<a href="https://www.kyocera.co.jp/solar/support/topics/flow/">設置工事の流れについて</a></li>
+            <li data-bibliography-source="gunma-residential-renewable-subsidy-fy2026">群馬県（2026年アクセス）．<a href="https://www.pref.gunma.jp/page/753198.html">令和8年度の個人住宅・事業者向け再エネ導入支援補助制度</a></li><li data-bibliography-source="kanagawa-solar-subsidy-second-round-2026">神奈川県（2026）．<a href="https://www.pref.kanagawa.jp/docs/ap4/prs/r0402281.html">住宅用太陽光発電・蓄電池導入費補助金の第2期受付等を開始！</a></li><li data-bibliography-source="sagamihara-smart-energy-incentive-2026">相模原市（2026年アクセス）．<a href="https://www.city.sagamihara.kanagawa.jp/kurashi/1026489/kankyo/hojyo/1008083.html">住宅用スマートエネルギー設備等導入奨励金（令和8年度）</a></li></ul><p><a href="calculation-method.html#adopted-parameters">設備・工事費の採用値を確認する</a></p></footer></section><section id="lifecycle-cost"><h2>太陽光は，設置した後も費用がかかる？</h2><figure class="economics-chapter-photo"><img src="../shared/assets/article-solar-inspection-photo.webp" width="1536" height="1024" alt="太陽光発電の機器を点検する作業員" loading="lazy" decoding="async"></figure><p>設置後も点検・機器交換の費用がかかります．将来の支出も見込んでおきましょう．</p><section id="maintenance-baseline"><h3>点検・機器交換は，30年間で<span class="heading-term">約61万円</span>が目安</h3><p>当サイトの試算では，30年間の点検・機器交換費は約61万円が目安です．国の資料では，点検は3～5年ごと，パワーコンディショナの交換は20年間で1回が想定され，費用は点検1回3.8万円，交換1回38.4万円とされています<span data-cite-sources="meti-residential-solar-cost-2025">（調達価格等算定委員会，2026）</span>．パワーコンディショナは，発電した電気を家庭で使えるように変換する機器です．当サイトでは，点検を5年ごとに6回，機器交換を20年目に1回計上し，合計61.2万円と計算しています．</p><figure class="economics-maintenance-chart" aria-labelledby="costs-illustration-caption"><p class="economics-maintenance-chart__total">30年間の合計：<strong>約61万円</strong></p><svg class="economics-maintenance-chart__plot" viewBox="0 0 640 300" role="img" aria-labelledby="maintenance-chart-title maintenance-chart-desc"><title id="maintenance-chart-title">年ごとの点検・機器交換費用</title><desc id="maintenance-chart-desc">当サイトの試算．5，10，15，25，30年目に点検費3.8万円．20年目には点検費3.8万円と機器交換費38.4万円，合計42.2万円．30年間の合計61.2万円．縦軸はその年の費用，単位は万円．</desc><text x="42" y="25" class="maintenance-axis-title">費用（万円）</text><line x1="42" y1="236.0" x2="607" y2="236.0" class="maintenance-grid"/><text x="32" y="241.0" text-anchor="end">0</text><line x1="42" y1="160.0" x2="607" y2="160.0" class="maintenance-grid"/><text x="32" y="165.0" text-anchor="end">20</text><line x1="42" y1="84.0" x2="607" y2="84.0" class="maintenance-grid"/><text x="32" y="89.0" text-anchor="end">40</text><text x="52" y="262" text-anchor="middle">0</text><text x="142" y="262" text-anchor="middle">5</text><rect x="130" y="221.56" width="24" height="14.44" fill="#008653"/><text x="232" y="262" text-anchor="middle">10</text><rect x="220" y="221.56" width="24" height="14.44" fill="#008653"/><text x="322" y="262" text-anchor="middle">15</text><rect x="310" y="221.56" width="24" height="14.44" fill="#008653"/><text x="412" y="262" text-anchor="middle">20</text><rect x="400" y="221.56" width="24" height="14.44" fill="#008653"/><rect x="400" y="75.64" width="24" height="145.92" fill="#008653"/><line x1="400" y1="221.56" x2="424" y2="221.56" stroke="white" stroke-width="2"/><text x="502" y="262" text-anchor="middle">25</text><rect x="490" y="221.56" width="24" height="14.44" fill="#008653"/><text x="592" y="262" text-anchor="middle">30</text><rect x="580" y="221.56" width="24" height="14.44" fill="#008653"/><text x="330" y="293" text-anchor="middle" class="maintenance-axis-title">設置後の年数（年）</text><text x="432" y="48" class="maintenance-callout">機器交換 38.4万円</text><path d="M422 54 H412 V69" class="maintenance-leader"/><text x="132" y="178" class="maintenance-callout maintenance-callout--inspection">点検：5年ごとに3.8万円</text><path d="M142 188 V214" class="maintenance-leader"/></svg><p class="economics-maintenance-chart__breakdown"><span>点検3.8万円×6回</span><span>＋交換38.4万円×1回</span><span>＝61.2万円</span></p><figcaption id="costs-illustration-caption">図4　当サイトの試算で計上する，年ごとの点検・機器交換費用</figcaption><p class="economics-figure-note">点検・交換の時期と回数は，当サイトの試算上の設定です．<a href="calculation-method.html#cost-maintenance-notes">費用の採用値・試算条件</a></p></figure><p>実際の点検・交換の時期や金額は，設備の状態や依頼先によって変わります．約61万円には，<strong>突発的な修理，蓄電池の交換，撤去などの費用は含めていません</strong>．ここからは，費用が変わる要因と，必要に応じて見込む支出を見ていきましょう．</p></section><section id="inspection-conditions"><h3>点検の頻度や依頼先によって，費用は変わる</h3><p>当サイトでは，点検費を1回3.8万円，5年ごとに6回として試算しています（<a href="calculation-method.html#cost-maintenance-notes">費用の採用値・試算条件</a>）．同じ料金でも，点検回数が増えると総費用は増えます．太陽光発電協会は，設置後1年目，その後は4年に1度の定期点検を推奨しています<span data-cite-sources="article-source-14">（太陽光発電協会，2026b）</span>．試算上の頻度をそのまま点検の予定にせず，自宅の設備に必要な時期は販売店やメーカーへ確認しましょう．</p><p>1回当たりの料金も，依頼先や点検に含まれる作業によって変わります．見積もりでは，点検項目，足場などの費用，保守契約に含まれる範囲と別途料金を確認しましょう．点検と修理は別の作業なので，不具合が見つかった場合の修理費まで含むかも確かめておくと，必要な支出を見込みやすくなります．</p></section><section id="equipment-repairs"><h3>機器の交換時期や保証の範囲によって，費用は変わる</h3><p>当サイトの試算には，パワーコンディショナを20年目に1回交換する費用を含めています．実際の交換時期や回数，交換にかかる金額によって，総費用は変わります．突発的な修理費や，蓄電池を設置した場合の交換費は含めていないため，必要に応じて別に見込んでおきましょう．<a href="calculation-method.html#cost-maintenance-notes">費用の採用値・含まない費用</a><span id="battery-replacement"></span></p><p>修理・交換時の自己負担は，保証の対象になるかどうかでも変わります．保証の期間や対象範囲は，製品や契約によって異なります<span data-cite-sources="solar-frontier-residential-warranty">（ソーラーフロンティア，2017）</span>．保証書と見積書で，対象となる機器や故障の条件に加え，<strong>機器代や作業費のどこまで保証されるか</strong>を確認しましょう．</p></section><section id="removal-cost"><h3>パネルの撤去・処分や，屋根工事に伴う取り外しには費用がかかる</h3><p>屋根の補修・葺き替えでは，太陽光パネルの取り外しが必要になる場合があります<span data-cite-sources="jpea-residential-solar-removal">（太陽光発電協会，2026d）</span>．工事後も使い続ける場合は，再設置まで含めて販売店や施工店に相談しましょう．屋根自体の工事費に加え，パネルの取り外し・再設置にいくらかかるかを見積もりで確認しておくと，必要な支出を把握しやすくなります．</p><p>太陽光設備を使い終えて撤去する場合は，屋根から取り外す費用のほか，運搬や処分の費用も見込む必要があります<span data-cite-sources="jpea-residential-solar-removal">（太陽光発電協会，2026d）</span>．これらの費用や，屋根工事に伴う一時撤去・再設置の費用は，この章で示した約61万円には含めていません．自宅の工事計画や設備の使い方に合わせて，別に見込みましょう．<a href="calculation-method.html#cost-maintenance-notes">費用の採用値・含まない費用</a></p></section><footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料</p><ul class="source-list"><li data-bibliography-source="meti-residential-solar-cost-2025">調達価格等算定委員会（2026）．<a data-source-id="meti-residential-solar-cost-2025" href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">令和8年度以降（2026年度以降）の調達価格等に関する意見</a></li>
+            
+            <li data-bibliography-source="article-source-14">太陽光発電協会（2026年アクセスb）．<a href="https://www.jpea.gr.jp/house/longuser/">長く使っていただくために</a></li>
+            <li data-bibliography-source="solar-frontier-residential-warranty">ソーラーフロンティア（2017）．<a href="https://www.solar-frontier.com/jpn/residential/sp/features/hosyou/">充実の保証内容で、トータルにサポート</a></li><li data-bibliography-source="jpea-residential-solar-removal">太陽光発電協会（2026年アクセスd）．<a href="https://www.jpea.gr.jp/house/waste/">住宅用太陽光発電システムの廃棄を検討している方へ</a></li></ul><p><a href="calculation-method.html#cost-maintenance-notes">費用の採用値・含まない費用を確認する</a></p></footer></section><section id="payback"><h2>太陽光で，どのくらいトクする？</h2><figure class="economics-chapter-photo"><img src="../shared/assets/article-solar-economics-photo.webp" width="1536" height="1024" alt="太陽光パネルの上に高さの異なる硬貨の山が並ぶ様子" loading="lazy" decoding="async"></figure><p>節約と売電で得られる効果が，設置後の費用も含めた支出をどれだけ上回るかが，収支を見るポイントです．</p><section id="profit-baseline"><h3>30年間で<span class="heading-term">約102万円</span>トクする試算</h3><p>当サイトの試算では，<strong>太陽光のみを設置し，補助金を利用しない場合</strong>，30年間で約102万円トクする計算です．電気代削減の約209万円と売電収入の約86万円から，設置費の約132万円と点検・機器交換費の約61万円を差し引いています．金額は丸めて表示していますが，収支は丸める前の数値から計算しています．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><p>約102万円は，一定の条件を置いた目安であり，どの住宅でも同じ結果になるわけではありません．設置費や補助金，発電量，電気の使い方，維持費や使用期間によって収支は変わります．ここからは，それぞれの条件による違いと，蓄電池を加えた場合の収支を見ていきましょう．</p><span id="balance-diagram-description"></span><span id="balance-diagram-caption"></span></section><section id="initial-outlay"><h3>設置費が安く，補助金が多いほど，収支は改善する</h3><p>発電量や電気の使い方，維持費など，ほかの条件が同じなら，設置費が下がった分，または補助金を受け取った分だけ，30年間の収支は改善します．前節の約102万円は補助金なしの試算なので，利用できる補助金があれば，その金額を収支に加えて考えられます．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><p>自宅の収支を確かめるときは，見積もりの設置費から，実際に利用できる補助金を差し引いて自己負担を確認しましょう．見積もりは，設備の容量や性能，工事の範囲，保証の条件をそろえて比較することが大切です．補助金の対象条件や申請時期は，設置費の章の<a href="#subsidy-benefit">補助金を利用できれば，自己負担を減らせる</a>で確認できます．</p></section><section id="profit-energy"><h3>発電量や昼間の自家消費が増えると，収支は改善する</h3><span id="suitability-illustration-caption"></span><div id="suitability"><p id="factors">同じ設備・費用条件なら，発電量を確保できるほど，電気代削減や売電による効果が大きくなります．屋根の日当たりがよく，建物や木の影が少ないかを確認しましょう．設置容量が同じでも，日当たりなどの条件によって発電量は変わります．</p></div><p>同じ発電量でも，電気を使う時間によって，自宅で使う分と売る分の配分が変わります．今回の試算条件では，昼間の自家消費が多い家庭のほうが，収支はよくなります．普段必要な洗濯などの電気の使用を，無理のない範囲で発電する時間帯へ移すことが，買う電気を減らす工夫になります．</p><div id="household-comparison"><p class="economics-figure-note">以下は，東京都の既存住宅に南向きの太陽光4 kWを設置し，蓄電池・補助金なしとした比較です．地域，設備，電気料金の入力条件などをそろえ，平日昼間の在宅状況だけを変えて試算しています．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><table class="article-table article-table--multi-column article-table--household-comparison">
+            <caption>昼間の在宅状況による30年間の収支の違い</caption>
             <thead><tr><th>項目</th><th>家庭A</th><th>家庭B</th></tr></thead>
             <tbody>
               <tr><th>平日昼間の在宅状況</th><td data-label="家庭A">ほぼ毎日いる</td><td data-label="家庭B">ほとんどいない</td></tr>
-              <tr><th>初年度の自家消費量</th><td data-label="家庭A">1,813 kWh</td><td data-label="家庭B">1,722 kWh</td></tr>
-              <tr><th>初年度の売電量</th><td data-label="家庭A">2,873 kWh</td><td data-label="家庭B">2,964 kWh</td></tr>
-              <tr><th>30年間の電気代削減</th><td data-label="家庭A">約2,095,000円</td><td data-label="家庭B">約1,989,000円</td></tr>
-              <tr><th>30年間の売電収入</th><td data-label="家庭A">約862,000円</td><td data-label="家庭B">約890,000円</td></tr>
-              <tr><th>30年間の正味利益</th><td data-label="家庭A">約1,860,000円</td><td data-label="家庭B">約1,783,000円</td></tr>
+              <tr><th>30年間の電気代削減</th><td data-label="家庭A">約209万円</td><td data-label="家庭B">約199万円</td></tr>
+              <tr><th>30年間の売電収入</th><td data-label="家庭A">約86万円</td><td data-label="家庭B">約89万円</td></tr>
+              <tr><th>30年間の収支</th><td data-label="家庭A">約102万円</td><td data-label="家庭B">約94万円</td></tr>
             </tbody>
-          </table>
-          <p>金額は1,000円単位の概算表示で，差額は表示丸め前の値から計算しています．家庭Aは家庭Bより初年度に91 kWh多く自家消費し，その分だけ売電量が少なくなります．30年間では，売電収入が約29,000円少ない一方，電気代削減が約106,000円多く，正味利益は約77,000円改善します．これは，この条件では買電を避ける価値が売電単価を上回る期間が続くためです．</p>
-          <p>両家庭とも表示結果は黒字ですが，昼間の在宅が多いことだけで採算が決まるのではありません．発電量，補助金，設置費および維持・交換費を含む全条件を合わせて判断する必要があります．数値の算出方法と採用値は<a href="calculation-method.html">計算方法・使用データ</a>で確認できます．</p>
-        </div>
-        </section>
+          </table><p>この例では，家庭Aは家庭Bより売電収入が少なくても，電気代を多く減らせるため，<strong>30年間の収支が約8万円よくなります</strong>．ただし，自家消費による節約額と売電収入の関係は，電気を買う単価・売る単価や使い方によって変わるため，どの家庭でも同じ差額になるわけではありません．</p></div></section><section id="battery-profit"><h3><span class="heading-term">蓄電池</span>を加えると，30年間で<span class="heading-term">約96万円</span>トクする試算</h3><p>当サイトの試算では，蓄電池を加えた設備全体で，30年間に約96万円トクする計算です．太陽光のみの約102万円と比べると，収支は約6万円小さくなります．これは補助金を利用せず，<strong>蓄電池を30年間交換せずに使うと仮定し，交換費を含めない試算</strong>です．蓄電池の容量や導入価格，利用できる補助金によって結果は変わり，途中で蓄電池を交換する場合は，その費用も差し引いて考える必要があります．<a href="calculation-method.html#electricity-sales-example">試算の条件・計算根拠</a></p><p>一方，<strong>停電時に必要な家電へ電気を供給できることも，蓄電池を選ぶ判断材料になります</strong>．使える家電や時間は，蓄電池の容量・残量，出力，接続する回路などによって変わります．停電時に何をどれくらい使いたいかを整理し，収支の差と合わせて，備えとしての価値を考えましょう．詳しくは，<a href="disaster.html">停電時の太陽光・蓄電池の使い方</a>をご覧ください．</p></section><section id="evaluation-period"><h3>使用期間が短くなったり，維持費が増えたりすると，収支は悪化する</h3><p>建替えなどで30年より早く利用を終える場合，設置費を電気代削減や売電収入で回収する期間も短くなります．一方，使用期間によって，その間に必要な点検・機器交換の回数も変わります．30年間の収支を単純に年数で割るのではなく，自宅で<strong>使う予定の期間に合わせて，得られる効果と発生する費用の両方を確認</strong>しましょう．</p><p>想定より機器の交換回数が増えたり，修理や撤去などの支出が生じたりすると，その分だけ収支は下がります．前章の<a href="#maintenance-baseline">設置後にかかる費用</a>を参考に，設備の状態や自宅の工事計画から必要な支出を見込み，試算に含まれていない費用を加えて判断しましょう．</p></section>
+<div id="loss-caution"><p>発電量が少ない，追加工事の費用が高いなどの条件では，<strong>30年間使っても費用を回収できない場合があります</strong>．容量や見積価格を変えて比べ，家計の負担が大きければ導入を見送ることも選択肢です．</p></div><footer class="economics-chapter-footer" aria-label="この章の補足"><p><a href="calculation-method.html">計算方法・使用データを確認する</a></p></footer></section><section id="decision-path"><h2>自宅でトクするか，どう判断する？</h2><figure class="economics-chapter-photo"><div class="hero__photo">
+                <img src="../shared/assets/hero-solar-low-plants.webp" width="1536" height="1024" alt="青空と太陽光パネルのある家，実際のはれトク累積収支グラフを表示したノートPC" loading="lazy" decoding="async">
+                <svg class="hero__graph-overlay" viewbox="0 0 1536 1024" aria-hidden="true">
+                  <foreignobject width="1536" height="1024">
+                    <div xmlns="http://www.w3.org/1999/xhtml" class="hero__screen"><img src="../shared/assets/hero-haretoku-chart-selected.svg" alt="" width="597" height="280" loading="lazy" decoding="async"></div>
+                  </foreignobject>
+                </svg>
+              </div></figure><p>まず診断で自宅の収支の目安をつかみ，導入を検討する場合は見積もりへ進みましょう．</p><section id="diagnosis"><h3>はれトク診断で，自宅の収支の目安を知る</h3><p>太陽光の収支は，地域や電気の使い方，設置費，補助金など，さまざまな条件で変わります．これらを一つずつ調べて計算するには手間がかかります．はれトク診断では，自宅の条件を入力すると，<strong>電気代削減・売電収入と費用を踏まえた30年間の収支を概算できます</strong>．</p><p id="compare-conditions">パネル容量や蓄電池の有無を変え，費用を差し引いた収支を比べてみましょう．節約額の大きさだけでなく，<strong>得られる効果の増加が追加費用に見合うか</strong>を確認することが，設備を選ぶポイントです．</p><aside id="summary" class="economics-inline-quote article-action-stack" aria-label="はれトク診断の案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4>まず，自宅の収支の目安を知る</h4><p>自宅の条件で，太陽光のみ・蓄電池ありの収支を比較できます．</p></div><a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a></div></aside></section>
+<section id="quotes"><h3>見積もりの導入費用で，収支を確かめる</h3><p>診断で示す導入費用は概算であり，屋根の状態や必要な工事によって，実際の費用は変わります．導入を具体的に検討する場合は，現地調査で設置できる設備と工事の範囲を確かめ，それらを踏まえた<strong>見積もりで自宅の導入費用を確認</strong>しましょう．</p><p>複数社の見積もりは，設備の容量や性能，工事の範囲，保証の条件をそろえて比較しましょう．利用できる補助金を差し引いた自己負担と，将来の点検・交換などの費用を含めて，電気代削減・売電収入でどれくらい回収できるかを確かめることが大切です．</p><aside class="economics-inline-quote article-action-stack" aria-label="無料見積もりの案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4>自宅の導入費用を確かめる</h4><p>屋根や工事の条件に合わせた見積もりで，実際にかかる費用を確認できます．</p><p class="advertising-label">広告・アフィリエイト</p></div><button type="button" class="article-action__link" data-inline-quote-action disabled>無料見積もり（準備中）</button></div></aside></section>
+          <footer class="economics-chapter-footer" aria-label="この章の補足"><p><a href="quotes-contractors.html">太陽光の見積もりは，何を比べる？</a></p><p class="article-data-status" data-article-data-status>公開データを確認しています．</p></footer></section>
 
-        <section id="decision-path">
-          <h2>記事で理解し，診断で概算し，見積もりで個別条件を確認する</h2>
-          <ol>
-            <li><strong>記事で構造を理解する：</strong>自分の収支を増減させる条件と，見落としやすい費用を把握します．</li>
-            <li><strong>診断で概算する：</strong>地域，電気料金，屋根方位，昼間の在宅状況および容量を変え，30年間の収支と不利なシナリオを確認します．</li>
-            <li><strong>必要なら見積もりで個別条件を確認する：</strong>現地調査に基づく屋根条件，設置可能容量，追加工事の範囲・金額および保証を同じ仕様で比較します．発電見込みは算定前提を，補助金は適用条件と申請時期を確認します．</li>
-          </ol>
-          <p>診断結果が赤字なら，その時点で見送ることも合理的です．黒字でも，概算で確定できない住宅固有条件を確認するまでは，利益が確定したとは扱いません．</p>
-        </section>
+        
 
-        <section id="summary">
-          <h2>まとめ</h2>
-          <p>太陽光の収支は，発電量だけでなく，発電した電気の使い方と売り方，補助金，設置費および導入後の費用を同じ30年間で比べて判断します．</p>
-
-        </section>
-
-        <section class="article-entry-actions article-entry-actions--final article-action-stack" aria-label="記事を読んだ後の次の行動">
-          <div class="article-action-stack__row article-action-stack__row--internal">
-            <div class="article-action-stack__copy">
-              <h2>自分の条件で確かめる</h2>
-              <p>地域，電気料金，屋根方位および昼間の在宅状況から，30年間の概算を確認できます．</p>
-            </div>
-            <a class="article-action__link" href="../simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
-          </div>
-
-        </section>
-
-        <section class="article-sources">
-          <h2>参考文献</h2>
-          <p><a href="calculation-method.html">正式な計算方法と使用データを確認する</a></p>
-          <ul class="source-list">
-            <li><a data-source-id="bri-pyhees-residential-total-electricity-load"></a></li>
-            <li><a data-source-id="nedo-solar-radiation-database"></a></li>
-            <li><a data-source-id="criepi-household-co2-pv-self-consumption-2025"></a></li>
-            <li><a data-source-id="enecho-regional-low-voltage-price-fy2023"></a></li>
-            <li><a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html">東京電力エナジーパートナー「料金単価表‐電灯」</a></li>
-            <li><a data-source-id="meti-fit-residential-fy2026"></a></li>
-            <li><a data-source-id="tepco-post-fit-standard-plan"></a></li>
-            <li><a data-source-id="meti-residential-solar-cost-2025"></a></li>
-            <li><a data-source-id="jpea-residential-equipment-service-life"></a></li>
-            <li><a href="https://www.jpea.gr.jp/house/longuser/">太陽光発電協会「長く使っていただくために」</a></li>
-            <li><a href="https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/">京セラ「太陽光発電の設置費用はいくら？」</a></li>
-            <li><a href="https://www.kyocera.co.jp/solar/support/topics/flow/">京セラ「設置工事の流れについて」</a></li>
-            <li><a data-source-id="tokyo-residential-solar-subsidy-fy2026"></a></li>
-          </ul>
-          <p class="article-data-status" data-article-data-status>公開データを確認しています．</p>
-        </section>
-
-        <section class="article-related"><h2>関連記事</h2><nav class="article-footer-nav" aria-label="関連ページ"><a href="subsidies.html">補助金は，どう探してどう申請する？</a><a href="costs-maintenance.html">表示額以外に，何がかかる？</a><a href="quotes-contractors.html">太陽光の見積もりは，何を比べる？</a></nav></section>
-      </article>
+        </article>
     </main>
 <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="policy.html#operation">運営方針</a><a href="policy.html#advertising">広告方針</a><a href="policy.html#data">データ方針</a><a href="policy.html#privacy">プライバシー</a><a href="policy.html#disclaimer">免責事項</a></nav><p>売電単価と電気料金は，実際の契約条件によって異なります．</p></div></div></footer>
   </body>

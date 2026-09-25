@@ -1,0 +1,22 @@
+{
+  "scope": "Calculator path replaced by axis/line-chart path in10 existing headers; data table icon policy recorded for future release",
+  "sha256": {
+    "frontend\\site\\index.html": "c3c74936b91996820d619ea63af5a5a694a8a9aea370869c5acec3c0872b4877",
+    "frontend\\site\\pages\\calculation-method.html": "8767765a753f99ea2277f7bc8156be966d003a00680c6a9e4b95c965a7846100",
+    "frontend\\site\\pages\\costs-maintenance.html": "84f806f7e5bab78eb530b9f481a22335bbe31ddc980ff558739f80216a332cc1",
+    "frontend\\site\\pages\\disaster.html": "19af5b43a48e6cdf0d41be9c5ce8a37fa5a5dea4c6381c966fc67252ad7b5955",
+    "frontend\\site\\pages\\electricity-sales.html": "a8dc99daf055d8533ba9399c88c02be4c4e1fd1aff250a77b0f4c39764ffb4b7",
+    "frontend\\site\\pages\\policy.html": "a086e2cd0a5e4451a647ddd237fe84e9f9a5f27add5461dc235d827647fdc623",
+    "frontend\\site\\pages\\quotes-contractors.html": "8547f4b5e693447b3fdb0d990a9add860820c76108c49add56fd2dca68551180",
+    "frontend\\site\\pages\\subsidies.html": "32390cec511cc6519887effda0836b947a7b9badaad9956c575d13aad5cdc7a3",
+    "frontend\\site\\simulator\\index.html": "dca6972a7c1d274afc246a80ec437745a03b70c1b6cf8d9ec00340e4b2b8c9e1",
+    "frontend\\site\\solar\\index.html": "c0d288e0ac1b6f58cb38aff3098101523039f8ca7a9437230d72faa5b72033a8"
+  },
+  "checks": [
+    "10 pages use identical path; existing classes, labels, aria-hidden and focusable retained",
+    "PC1280 screenshot confirms icon;360 preserves existing hidden nav",
+    "Existing common-header test passed",
+    "Temporary tab closed and viewport reset; shared5173 retained"
+  ],
+  "status": "Self-QA complete; no publish"
+}

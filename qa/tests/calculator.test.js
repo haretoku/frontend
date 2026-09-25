@@ -153,11 +153,11 @@ test("容量前処理→単価乗算→金額切捨て→上限の順に自治�
   assert.equal(calculateEstimate(input, data).input.system_capacity_kw, 1.067);
 });
 
-test("公開契約11.8.0は容量劣化の意味と時点を明示した蓄電池契約を提供する", () => {
+test("公開契約11.17.0は容量劣化の意味と時点を明示した蓄電池契約を提供する", () => {
   const calculation = publicData.calculation;
   const occupancyModel = calculation.daytime_occupancy;
 
-  assert.equal(publicData.schema_version, "11.8.0");
+  assert.equal(publicData.schema_version, "11.17.0");
   assert.equal(occupancyModel.model_id, "residential-pv-hourly-overlap-2026");
   assert.equal(occupancyModel.time_bin_definition.count, 8760);
   assert.equal(
@@ -176,7 +176,7 @@ test("公開契約11.8.0は容量劣化の意味と時点を明示した蓄電�
   assert.equal(Object.hasOwn(calculation, "purchase_price"), false);
   assert.equal(Object.hasOwn(occupancyModel, "baseline_self_consumption_rate"), false);
   assert.equal(Object.hasOwn(occupancyModel, "daytime_occupancy_effect_percentage_points"), false);
-  assert.equal(publicData.municipalities.length, 776);
+  assert.equal(publicData.municipalities.length, 1112);
   assert.ok(Array.isArray(publicData.municipal_subsidy_programs));
   assert.deepEqual(calculation.equipment_packages, ["solar_only", "solar_plus_standard_battery"]);
   assert.equal(calculation.default_equipment_package, "solar_only");
@@ -265,11 +265,11 @@ for (const calculationCase of calculationCases.cases) {
   });
 }
 
-test("Schema 11.8正本3ファイルのSHA-256が承認値と一致する", async () => {
+test("Schema 11.12正本3ファイルのSHA-256が承認値と一致する", async () => {
   const expectedHashes = new Map([
-    ["../../data/input/public-data.json", "C9C3E42B5E50F0E58CA526B44017F036542B40EF6AFC917EBAF70B2834D81279"],
-    ["../fixtures/calculation-cases.json", "6A1B7A7A39421AC923EF59602BFB401E132178C7A13614D54952778910054845"],
-    ["../../data/input/metadata.json", "BB79EA3D2240765E07B9CA8C040002B46A19F2B910C236685C8009DC75B123D3"]
+    ["../../data/input/public-data.json", "8DFD5FDBAE2DCAD14BC0991BC47B0EA949B64B5E1AC3DABF5C0871B161862D91"],
+    ["../fixtures/calculation-cases.json", "802ADC99B8344D3B53BDC87CD71A4C1CCB83DAC7459CCE6089513D1D230265D7"],
+    ["../../data/input/metadata.json", "40FC0F533DC0947C5E944D9408086E22D935552E8E5FE77AF833778870BB59C0"]
   ]);
   for (const [path, expectedHash] of expectedHashes) {
     const contents = await readFile(new URL(path, import.meta.url));

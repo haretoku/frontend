@@ -5,7 +5,7 @@ html:has(.has-quote-space) { scroll-padding-bottom: var(--quote-space, calc(60px
 .quote-bar__copy { max-width: 42rem; }
 .quote-bar__copy p { margin: 0; font-size: .85rem; line-height: 1.5; }
 .quote-bar__copy small { font-size: .65rem; line-height: 1.4; color: var(--color-muted); }
-.quote-bar__button { min-width: 14rem; min-height: 44px; padding: .4rem 1rem; border: 0; border-radius: .35rem; font: inherit; font-size: .88rem; font-weight: 700; line-height: 1.5; background: #986000; color: #fff; }
+.quote-bar__button { min-width: 14rem; min-height: 44px; padding: .4rem 1rem; border: 0; border-radius: .35rem; font: inherit; font-size: .88rem; font-weight: 700; line-height: 1.5; background: var(--color-action); color: #fff; }
 .quote-bar__button:disabled { color: #58615c; background: #edf0ee; opacity: 1; cursor: not-allowed; }
 .quote-bar__button:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .quote-context { margin: .85rem 0; padding: 0; border: 0; background: transparent; color: var(--color-muted); font-size: .85rem; line-height: 1.7; }
@@ -18,3 +18,5 @@ html:has(.has-quote-space) { scroll-padding-bottom: var(--quote-space, calc(60px
  .quote-bar__copy p { display: none; }
  .quote-bar__button { flex: 1; min-width: 0; padding-inline: .5rem; font-size: .82rem; }
 }
+
+.quote-bar__button:hover:not(:disabled) { background: var(--color-action-hover); }

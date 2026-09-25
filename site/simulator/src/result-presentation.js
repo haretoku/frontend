@@ -38,13 +38,13 @@ export function decisionAmountParts(value) {
   }
   if (absoluteYen < 10_000) {
     return {
-      amount: absoluteYen < 1000 ? "1,000円未満" : `約${yenFormatter.format(Math.round(absoluteYen / 1000) * 1000)}円`,
+      amount: absoluteYen < 1000 ? "1,000円未満" : `${yenFormatter.format(Math.round(absoluteYen / 1000) * 1000)}円`,
       outcome: roundedYen > 0 ? "トク" : "損"
     };
   }
 
   return {
-    amount: `約${yenFormatter.format(Math.round(absoluteYen / 10_000))}万円`,
+    amount: `${yenFormatter.format(Math.round(absoluteYen / 10_000))}万円`,
     outcome: roundedYen > 0 ? "トク" : "損"
   };
 }
@@ -80,8 +80,8 @@ export function compactYen(value) {
   if (!Number.isFinite(value)) return '未確定';
   if (value === 0) return '0万円';
   if (Math.abs(value) < 1000) return (value < 0 ? '−' : '') + '1,000円未満';
-  if (Math.abs(value) < 10000) return '約' + yenFormatter.format(Math.round(value / 1000) * 1000) + '円';
-  return '約' + yenFormatter.format(Math.round(value / 10000)) + '万円';
+  if (Math.abs(value) < 10000) return yenFormatter.format(Math.round(value / 1000) * 1000) + '円';
+  return yenFormatter.format(Math.round(value / 10000)) + '万円';
 }
 
 export function endpointResult(scenario) {

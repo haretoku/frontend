@@ -29,11 +29,11 @@ function element() {
 }
 
 async function initialize(loadFrontendData) {
-  const selectors = ["#estimate-form", "#prefecture", "[data-municipality-field]", "#municipality", "#municipality-help", "#monthly-electricity-bill", "#calculate-button", "#form-message"];
+  const selectors = ["main","#estimate-form", "#prefecture", "[data-municipality-field]", "#municipality", "#municipality-help", "#monthly-electricity-bill", "#calculate-button", "#form-message"];
   const nodes = Object.fromEntries(selectors.map((selector) => [selector, element()]));
   const navigations = [];
   const context = {
-    URL, CALCULATION_IMPLEMENTED: true, loadFrontendData,
+    QUOTE_ACTION: {disabled:true}, mountFixedQuoteBar: () => {}, URL, CALCULATION_IMPLEMENTED: true, loadFrontendData,
     document: {
       querySelector(selector) { assert.ok(nodes[selector], `Unexpected element: ${selector}`); return nodes[selector]; },
       createDocumentFragment: element, createElement: element

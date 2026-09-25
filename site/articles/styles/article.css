@@ -119,12 +119,12 @@
   border: 0;
   border-left: 0.3rem solid var(--color-accent);
   border-radius: 0.2rem;
-  background: #fffaf0;
+  background: var(--color-surface);
 }
 
 .article:not(.article--continuous) .caution-box {
   border-color: #dfc36e;
-  background: #fff9e7;
+  background: var(--color-surface);
 }
 
 .notice-label {
@@ -276,7 +276,7 @@
   padding: 0.8rem 1.15rem;
   border-radius: 0.25rem;
   color: #fff !important;
-  background: var(--color-primary-dark);
+  background: var(--color-action);
   font-weight: 900;
   text-decoration: none;
 }
@@ -287,7 +287,7 @@
 }
 
 .article-action__link:hover {
-  background: var(--color-primary);
+  background: var(--color-action-hover);
 }
 
 .article-affiliate .affiliate-button {
@@ -428,7 +428,7 @@
   height: auto;
   border: 1px solid var(--color-border);
   border-radius: 0.8rem;
-  background: #fffcf3;
+  background: var(--color-surface);
 }
 
 .guide-benchmark-page .article-opening-questions {
@@ -442,7 +442,7 @@
   border: 1px solid var(--color-border);
   border-left: 0.3rem solid var(--color-primary-dark);
   border-radius: 0.45rem;
-  background: #f5faf7;
+  background: var(--color-surface);
 }
 
 .guide-benchmark-page .article-opening-answer__label {
@@ -496,14 +496,14 @@
 .article-action-stack__row--affiliate {
   border: 1px solid var(--color-affiliate-border);
   border-left: 0.35rem solid var(--color-accent);
-  background: #fffdf6;
+  background: var(--color-surface);
 }
 
 .article-action-stack__copy {
   min-width: 0;
 }
 
-.article-action-stack__copy h2 {
+.article-action-stack__copy :is(h2, h4) {
   margin: 0 0 0.25rem;
   padding: 0;
   border: 0;
@@ -601,7 +601,7 @@
   height: auto;
   border: 1px solid var(--color-border);
   border-radius: 0.7rem;
-  background: #fffcf3;
+  background: var(--color-surface);
 }
 
 .article-guide-page .article-opening-questions {
@@ -615,7 +615,7 @@
   border: 1px solid var(--color-border);
   border-left: 0.3rem solid var(--color-primary-dark);
   border-radius: 0.55rem;
-  background: #f5faf7;
+  background: var(--color-surface);
 }
 
 .article-guide-page .article-opening-answer__label {
@@ -639,7 +639,7 @@
   height: auto;
   border: 1px solid var(--color-border);
   border-radius: 0.65rem;
-  background: #fffcf3;
+  background: var(--color-surface);
 }
 
 .article-guide-page .article-section-illustration figcaption {
@@ -914,7 +914,7 @@
   height: auto;
   border: 1px solid var(--color-border);
   border-radius: 0.75rem;
-  background: #fffcf3;
+  background: var(--color-surface);
 }
 
 .guide-benchmark-page .article-section-illustration figcaption {
@@ -948,7 +948,7 @@
   padding: 1rem;
   border: 1px solid rgb(18 63 49 / 20%);
   border-radius: 0.55rem;
-  background: #f5faf7;
+  background: var(--color-surface);
   text-align: center;
 }
 
@@ -998,13 +998,13 @@
   padding: 0.9rem;
   border-top: 0.3rem solid var(--color-primary);
   border-radius: 0.45rem;
-  background: #f5faf7;
+  background: var(--color-surface);
   align-content: center;
 }
 
 .guide-benchmark-page .article-energy-flow__branch--export {
   border-top-color: var(--color-accent);
-  background: #fff9eb;
+  background: var(--color-surface);
 }
 
 .guide-benchmark-page .article-energy-flow__branch span,
@@ -1093,7 +1093,7 @@
   padding: 0.85rem 1rem;
   border-left: 0.25rem solid var(--color-accent);
   color: var(--color-muted);
-  background: #fffaf0;
+  background: var(--color-surface);
 }
 
 .article-formula__number {
@@ -1318,3 +1318,19 @@
   .article-balance-groups { grid-template-columns: minmax(0, 1fr); }
   .article-balance-groups > div, .article-balance-groups > section { padding: 0.9rem; }
 }
+
+.article .primary-button:not(:disabled), .article .affiliate-button:not(:disabled) { background: var(--color-action); color: #fff; border-color: var(--color-action); }
+.article .primary-button:hover:not(:disabled), .article .affiliate-button:hover:not(:disabled) { background: var(--color-action-hover); }
+.article.article--guide .article-affiliate .affiliate-button:disabled, .article.article--continuous .article-affiliate .affiliate-button:disabled { background: #edf0ee; color: #58615c; border-color: var(--color-border); }
+
+/* Secondary article/section navigation; primary diagnosis remains at article end. */
+/* Only the four public guide articles share this card presentation. */
+.article[data-guide-presentation] :is(.article-related-card, .article-action-stack__row--internal) { padding: 1rem 1.25rem; border: 1px solid var(--color-border, #dce3df); border-radius: .6rem; background: #fff; }
+.article[data-guide-presentation] .article-related-card { margin: 1rem 0; }
+.article[data-guide-presentation] .article-related-card__item + .article-related-card__item { margin-top: .25rem; }
+.article[data-guide-presentation] .article-related-card__label { margin: 0 0 .35rem; color: #526158; font-size: .82rem; font-weight: 700; }
+.article[data-guide-presentation] .article-related-card a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 44px; padding-block: .35rem; color: #00653e; font-weight: 700; line-height: 1.7; text-underline-offset: .2em; }
+.article[data-guide-presentation] .article-related-card a > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.article[data-guide-presentation] .article-related-card a > span:last-child { flex: 0 0 auto; }
+.article[data-guide-presentation] .article-related-card a:focus-visible { outline: 2px solid #008653; outline-offset: 4px; border-radius: .15rem; }
+@media (max-width: 36rem) { .article[data-guide-presentation] :is(.article-related-card, .article-action-stack__row--internal) { padding: 1rem; } }

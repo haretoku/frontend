@@ -13,10 +13,10 @@ const minimum = (a, b) => a[0] * b[1] <= b[0] * a[1] ? a : b;
 function capacityValue(value, rule) {
  const x = decimal(value);
  if (rule === 'none') return x;
- const scale = rule === 'floor_1' ? 1n : rule === 'floor_0_1' ? 10n : 100n;
- if (!['floor_1', 'floor_0_1', 'floor_0_01', 'round_0_01'].includes(rule)) throw new Error('未対応の関西容量前処理です．');
+ const scale = rule === 'floor_1' ? 1n : ['floor_0_1', 'round_0_1'].includes(rule) ? 10n : rule === 'floor_0_001' ? 1000n : 100n;
+ if (!['floor_1', 'floor_0_1', 'floor_0_01', 'floor_0_001', 'round_0_01', 'round_0_1'].includes(rule)) throw new Error('未対応の関西容量前処理です．');
  const numerator = x[0] * scale;
- const rounded = rule === 'round_0_01' ? (2n * numerator + x[1]) / (2n * x[1]) : numerator / x[1];
+ const rounded = ['round_0_01', 'round_0_1'].includes(rule) ? (2n * numerator + x[1]) / (2n * x[1]) : numerator / x[1];
  return [rounded, scale];
 }
 export function kansaiFormulaComponents(program, input) {
@@ -38,6 +38,14 @@ export function kansaiFormulaComponents(program, input) {
     excluded.push({scope:item.scope,reason_code:'eligible_cost_below_minimum',eligible_cost_min_yen:item.eligible_cost_min_yen});
     continue;
    }
+  }
+  // Store the once-deducted eligible cost for later other-subsidy allocation.
+  const fixedDeduction = item.eligible_cost_deduction_yen ?? 0;
+  if (fixedDeduction) {
+   if (!eligible || item.formula_type !== 'cost_fraction') throw new Error('定額経費控除は対象費率式に限ります．');
+   const deduction = decimal(fixedDeduction);
+   const numerator = eligible[0] * deduction[1] - deduction[0] * eligible[1];
+   eligible = [numerator > 0n ? numerator : 0n, eligible[1] * deduction[1]];
   }
   let amount, capacityAmount = null;
   if (item.formula_type === 'fixed') amount = decimal(item.fixed_amount_yen);
@@ -67,10 +75,12 @@ export function kansaiFormulaComponents(program, input) {
   if (eligible) amount = minimum(amount, eligible);
   if (item.cap_yen != null) amount = minimum(amount, decimal(item.cap_yen));
   const unit = BigInt(item.rounding_unit_yen);
-  const yen = amount[0] < 0n ? 0 : Number(amount[0] / (amount[1] * unit) * unit);
+  const serviceHalfUp = item.rounding_mode === 'service_half_up';
+  if (serviceHalfUp && (item.formula_type !== 'capacity_rate' || item.rounding_unit_yen !== 1)) throw new Error('サービス円丸めは1円単位の容量単価式に限定する．');
+  const yen = amount[0] < 0n ? 0 : serviceHalfUp ? Number((2n * amount[0] + amount[1]) / (2n * amount[1])) : Number(amount[0] / (amount[1] * unit) * unit);
   components[item.scope] = (components[item.scope] ?? 0) + yen;
   rawComponents[item.scope]=add(rawComponents[item.scope]??[0n,1n],item.defer_rounding_to_formula_total?amount:decimal(yen));
-  applied.push({housing_ages:item.housing_ages??null,deduct_other_subsidies:item.deduct_other_subsidies??true,fixed_amount_yen:item.fixed_amount_yen??null,capacity_amount_rounding_unit_yen:item.capacity_amount_rounding_unit_yen??null,defer_rounding_to_formula_total:item.defer_rounding_to_formula_total??false,amount_yen_before_deferred_rounding:decimalText(amount),scope:item.scope, formula_type:item.formula_type, amount_yen:yen, cost_scope:item.cost_scope ?? null, cost_tax:item.cost_tax ?? null, capacity_preprocessing:item.capacity_preprocessing ?? null, eligible_cost_yen_unrounded:eligible ? decimalText(eligible) : null, capacity_amount_yen_unrounded:capacityAmount ? decimalText(capacityAmount) : null, fraction_numerator:item.fraction_numerator ?? null, fraction_denominator:item.fraction_denominator ?? null, capacity_unit_cost_cap_yen:item.capacity_unit_cost_cap_yen ?? null, cap_yen:item.cap_yen ?? null, rounding_unit_yen:item.rounding_unit_yen});
+  applied.push({...(Object.hasOwn(item,'rounding_mode') ? {rounding_mode:item.rounding_mode} : {}),...(fixedDeduction ? {eligible_cost_deduction_yen:fixedDeduction} : {}),housing_ages:item.housing_ages??null,deduct_other_subsidies:item.deduct_other_subsidies??true,fixed_amount_yen:item.fixed_amount_yen??null,capacity_amount_rounding_unit_yen:item.capacity_amount_rounding_unit_yen??null,defer_rounding_to_formula_total:item.defer_rounding_to_formula_total??false,amount_yen_before_deferred_rounding:decimalText(amount),scope:item.scope, formula_type:item.formula_type, amount_yen:yen, cost_scope:item.cost_scope ?? null, cost_tax:item.cost_tax ?? null, capacity_preprocessing:item.capacity_preprocessing ?? null, eligible_cost_yen_unrounded:eligible ? decimalText(eligible) : null, capacity_amount_yen_unrounded:capacityAmount ? decimalText(capacityAmount) : null, fraction_numerator:item.fraction_numerator ?? null, fraction_denominator:item.fraction_denominator ?? null, capacity_unit_cost_cap_yen:item.capacity_unit_cost_cap_yen ?? null, cap_yen:item.cap_yen ?? null, rounding_unit_yen:item.rounding_unit_yen});
  }
  if (!applied.length) return null;
  const details={formula_components_applied:applied, formula_source:'independently_reviewed_kansai_municipal_audit', ...(excluded.length ? {formula_components_excluded:excluded} : {})};
@@ -137,4 +147,18 @@ export function kansaiResidualAmount(item,maximum,other) {
  if(item.cap_yen!=null)amount=minimum(amount,decimal(item.cap_yen));
  const unit=BigInt(item.rounding_unit_yen);
  return Math.min(maximum,Number(amount[0]/(amount[1]*unit)*unit)+(item.nonResidualAmount??0));
+}
+
+// Minimum eligible costs are checked before any fixed deduction.
+export function kansaiBelowMinimumCost(program, input) {
+ const parts=(program.formula_components ?? []).filter(c=>c.equipment_packages.includes(input.equipmentPackage)&&(!c.housing_ages||c.housing_ages.includes(input.housingAge)));
+ return parts.length>0 && parts.every(c=>{
+  if(c.eligible_cost_min_yen==null)return false;
+  const cost={solar:input.solarCost,battery:input.batteryCost,battery_equipment:input.batteryEquipmentCost,combined:input.solarCost+input.batteryCost}[c.cost_scope];
+  if(cost==null)return false;
+  let eligible=decimal(cost);
+  if(c.cost_tax==='exclusive')eligible=multiply(eligible,[10n,11n]);
+  const limit=decimal(c.eligible_cost_min_yen);
+  return eligible[0]*limit[1]<limit[0]*eligible[1];
+ });
 }

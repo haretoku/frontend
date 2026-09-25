@@ -5,6 +5,7 @@ export const applicationStatusLabels = {
 };
 
 export function applicationStatusLabel(record) {
+  if (/^kagawa-(?:37208|37403)-solar_battery-2026$/.test(record.id ?? '') && record.application_status === 'accepting') return 'キャンセル待ち受付中';
   const selected = record.branches?.find(branch => branch.id === record.selected_branch);
   const status = selected ? selected.application_status : record.application_status;
   return applicationStatusLabels[status] ?? applicationStatusLabels.unknown;

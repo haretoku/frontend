@@ -9,8 +9,10 @@
   "scripts": {
     "dev": "vite dev",
     "build": "node site/hosting/prepare-build.js && vite build && node site/hosting/finalize-build.js && node site/hosting/verify-build.js",
+    "build:pages": "vite build --config vite.pages.config.js && node site/hosting/finalize-pages.js && node site/hosting/verify-pages.js",
+    "preview:pages": "vite preview --config vite.pages.config.js",
     "preview": "vite preview",
-    "test": "node --test qa/tests/calculator.test.js qa/tests/detail-pages.test.js qa/tests/site-integrity.test.js qa/tests/top-input.test.js qa/tests/guide-carousel.test.js qa/tests/local-municipal-review.test.js qa/tests/local-prefecture-review.test.js"
+    "test": "node --test qa/tests/analytics.test.js qa/tests/calculator.test.js qa/tests/detail-pages.test.js qa/tests/site-integrity.test.js qa/tests/top-input.test.js qa/tests/guide-carousel.test.js qa/tests/local-municipal-review.test.js qa/tests/local-prefecture-review.test.js"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "1.37.1",

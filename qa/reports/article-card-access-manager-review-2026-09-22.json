@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-22",
+  "status": "accepted",
+  "scope": "Four guide articles: cards, related labels, reference materials and access years",
+  "independent_checks": [
+    "Dedicated guide attribute limits shared card CSS",
+    "Old reference headings and unknown-year labels absent from four articles",
+    "Publication and access labels remain distinguishable",
+    "Canonical rules reviewed"
+  ],
+  "visual_checks": "Owner targeted PC/360 QA and navigation checks; not repeated by coordinator",
+  "limitations": "Two official pages failed retrieval; attempts recorded separately from successful reading",
+  "evidence": "article-card-access-2026-09-22.json"
+}

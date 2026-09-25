@@ -1,0 +1,20 @@
+{
+  "status": "limited_static_pass",
+  "article_sha256": "58abe599e3c96d514d92bfff844d28ec2f5a640bd5d5abbb9599f360cc2dffc6",
+  "paragraphs": 3,
+  "annual_export_comparison_kwh": 2000,
+  "tepco_yen_per_kwh": 8.5,
+  "eneos_yen_per_kwh": 11,
+  "annual_revenue_yen": [
+    17000,
+    22000
+  ],
+  "difference_yen": 5000,
+  "basis": "Supervisor-confirmed official sources; FY2026 Kanto tax-inclusive prices checked September 2026. Comparison quantity is hypothetical, not average; not a year-11 model tariff update.",
+  "sources": [
+    "https://www.tepco.co.jp/ep/renewable_energy/institution/notice/202201.html",
+    "https://www.eneos-power.co.jp/solar-kaitori/images/pdf/attention_20260213.pdf",
+    "https://www.eneos-power.co.jp/solar-kaitori/"
+  ],
+  "scope_check": "Only sales section, corresponding TOC label and two chapter source links changed; all other bytes unchanged."
+}

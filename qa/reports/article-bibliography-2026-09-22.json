@@ -1,0 +1,70 @@
+{
+  "date": "2026-09-22",
+  "static_checks": {
+    "electricity-sales": {
+      "references": 17,
+      "citations": 5,
+      "figures_headings_tables_body_preserved": true,
+      "sha256": "1e967601e10350b1198d02f01b572531b5452a4e64bad04af10f29565c7c2c5a"
+    },
+    "subsidies": {
+      "references": 8,
+      "citations": 0,
+      "figures_headings_tables_body_preserved": true,
+      "sha256": "b55efc23199e578e5a774583cefd2531396324ca2d24d8ca32ed8aa0d0500b68"
+    },
+    "quotes-contractors": {
+      "references": 4,
+      "citations": 0,
+      "figures_headings_tables_body_preserved": true,
+      "sha256": "0c871bbf36782e37bfe787ddf097d4793b59255f0265d111820993144d0fbecd"
+    },
+    "disaster": {
+      "references": 9,
+      "citations": 0,
+      "figures_headings_tables_body_preserved": true,
+      "sha256": "097189f7040cc39eaf57ff677d2edfda85f491f269111dea58c730c6303442e5"
+    }
+  },
+  "unknown_year_sources": [
+    "bri-pyhees-residential-total-electricity-load",
+    "nedo-solar-radiation-database",
+    "criepi-household-co2-pv-self-consumption-2025",
+    "enecho-regional-low-voltage-price-fy2023",
+    "article-source-5",
+    "meti-fit-residential-fy2026",
+    "tepco-post-fit-standard-plan",
+    "article-source-9",
+    "article-source-12",
+    "jpea-residential-equipment-service-life",
+    "article-source-14",
+    "tokyo-residential-solar-subsidy-fy2026",
+    "env-housing-decarbonization-navi-2026",
+    "fukushima-renewable-center-application-status-2026",
+    "fukushima-residential-solar-subsidy-guideline-fy2026",
+    "gunma-residential-renewable-subsidy-fy2026",
+    "niigata-snow-country-zeh-subsidy-fy2026",
+    "tokushima-residential-renewable-subsidy-fy2026",
+    "yamagata-residential-solar-subsidy-fy2026",
+    "article-source-26",
+    "article-source-27",
+    "article-source-30",
+    "article-source-31",
+    "article-source-32",
+    "article-source-34"
+  ],
+  "metadata_sha256": "40fc0f533dc0947c5e944d9408086e22d935552e8e5fe77af833778870bb59c0",
+  "browser_checks": {
+    "viewport_widths": [
+      1280,
+      360
+    ],
+    "all_four_articles_no_horizontal_overflow": true,
+    "console_errors_at_1280": [],
+    "visual_review": "PC：見積もり・補助金・停電の章末文献，360幅：収支の長い文献名の折り返しを確認．",
+    "tabs_closed": true,
+    "viewport_reset": true
+  },
+  "scope": "章末文献38項目（34資料），既存本文引用5か所を統一．新しい本文引用の追加は行わない．",
+  "shared_server": "既存5173を継続利用のため保持．補助プロセス新規起動なし．"
+}

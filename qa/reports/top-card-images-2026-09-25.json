@@ -1,0 +1,15 @@
+{
+  "sha256": "3fd926bd3d096c6275b08299c0fa9e076ac475d344f41b37914cc4d41df482b7",
+  "scope": "TOP cards only: mobile28% edge-to-edge image; desktop3:2 upper image flush to border,24px text inset",
+  "checks": [
+    "360 screenshot: all4 image subjects recognizable; readable titles; no excess image padding",
+    "1280 screenshot and DOM: all4 images ratio1.5, border-only edge inset,24px text padding",
+    "Temporary browser tab closed, viewport reset; shared5173 retained"
+  ],
+  "status": "Self-QA complete; unpublished",
+  "insetRevision": {
+    "sha256": "799cf21e24db4038b59df86ac9fa6c5c3772e58cdaa26e06bc4938aa95c47664",
+    "change": "4px photo inset: mobile top/bottom/left, desktop top/left/right",
+    "validation": "360 screenshot checked;1280 DOM inset4px plus border,ratio3:2 retained; viewport reset and temporary tab closed"
+  }
+}

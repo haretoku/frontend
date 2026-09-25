@@ -1,0 +1,62 @@
+{
+  "date": "2026-09-22",
+  "before_sha256": "c868d6916b75f49360d262044324e1413e9c53cdabeeefd024e592e3f53acdaa",
+  "after_sha256": "1884602d302e82958263e1235cad404c2c55c9ae46c68a4d36c6f7d53848ec4f",
+  "outside_chapter_and_toc_byte_identical": true,
+  "cost_figure_preserved_verbatim": true,
+  "h3_ids": [
+    "installation-cost",
+    "battery-installation",
+    "subsidy-benefit",
+    "installation-conditions"
+  ],
+  "paragraph_counts": {
+    "installation-cost": 3,
+    "battery-installation": 2,
+    "subsidy-benefit": 3,
+    "installation-conditions": 3
+  },
+  "hypothetical_subsidy_example_man_yen": {
+    "gross": 132,
+    "subsidy": 20,
+    "out_of_pocket": 112,
+    "is_actual_scheme": false
+  },
+  "static_checks": {
+    "introduction_order": "h2/photo/intro/chart/transition/four h3 sections",
+    "figure_photo_card_citation_elements_preserved": true,
+    "toc_matches_h3_all_four": true,
+    "subsidy_link_single": true,
+    "hypothetical_arithmetic": true
+  },
+  "browser_qa": {
+    "widths": [
+      1280,
+      360
+    ],
+    "introduction_chart_transition_visual_pass": true,
+    "subsidy_three_paragraphs_mobile_visual_pass": true,
+    "mobile_overflow": false,
+    "toc_four_keyboard_links_hash_match": true,
+    "verified_settled_target_top_px": {
+      "installation-cost": 23.677,
+      "subsidy-benefit": 24.01,
+      "installation-conditions": 24.323
+    },
+    "pointer_click_note": "自動クリックではhash更新が観測できず，同じリンクをEnterで検証．リンク実装変更なし．",
+    "viewport_reset": true,
+    "successful_test_tabs_closed": true,
+    "failed_tab": "tab25接続失敗のdata URL画面はツールのURL制約でcloseできず，未保持の一時タブとして残存．"
+  },
+  "shared_preview": {
+    "pid": 60200,
+    "launcher_parent_pid": 54288,
+    "port": 5173,
+    "host": "127.0.0.1",
+    "purpose": "承認済み共有プレビューの継続利用",
+    "retained": true,
+    "failed_attempt_pid": 26584,
+    "failed_attempt_exited": true,
+    "restart_reason": "旧7756/24472と待受なし．通常起動はWrangler設定EPERM，昇格起動で復旧．"
+  }
+}
