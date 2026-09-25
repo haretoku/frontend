@@ -1558,3 +1558,12 @@ Pagesビルド・公開物検査PASS（64ファイル，正規9URL，公開デ�
 v0.1.0のActions run 36121129705は，自治体監査原本不足1件と都道府県監査投影不足3件で失敗し，deployには進んでいない（統括確認）．Pagesは`test:public`を必須にし，`test:local-review`を分離した．`pnpm test`は両者を順に実行して失敗を伝播する．旧検査8ファイルと分離後6＋2の集合が一致することを確認し，skipや失敗無視は追加していない．package版は0.1.1で，既存v0.1.0タグの変更は行わない．
 
 自己検査：隣接backendのない一時frontendコピーで，公開用1,100件PASS（fail0／skip0），Pagesビルド・公開物検査PASS．依存パッケージだけ既存node_modulesを再利用し，サイト・データ・QAはコピー内を使用した．ローカルpnpmラッパーが依存再取得を試みネットワーク制限で停止したため，package scriptsと同一のNodeテストコマンド及びVite→finalize-pages→verify-pagesを直接実行した．CIのLinux／依存インストール自体の再確認は統括のActions再実行で行う．公開用ビルド64ファイルは修正前の成果物と全SHA256一致．公開実装，公開データ，fixtureの変更なし．ローカル専用監査QAは今回再実行対象外とし，隣接backendが必要な検査として保持する．一時コピー・ログ・依存参照は検査後に削除し，サーバーは起動していない．commit／push／tag／deployは統括が行う．
+
+
+## 公開CSS読み込み順の修復（v0.1.2）
+
+> **結論：共通CSSの後勝ちで診断外枠が2列化する不具合を，公開HTMLのCSS順序補正と生成物検査で修復した．**
+
+修正前の生成HTMLは診断専用→article→固定バー→mainとなり，mainの.analysis-introが専用のblock指定を上書きした．finalizeでmain→article→残りの安定順へ補正．新検査は修正前成果物をFAIL，修正後の64ファイルをPASSとした．CSS本体・計算JS・公開データは変更していない．package版0.1.2．
+
+公開生成物をVite previewで配信し，PC1265pxと360pxで佐賀県のみ診断の条件・グラフ配置を確認．PCは外枠block，結果幅約719px，スマホは約295px，双方横はみ出しなし．収支＋619,000円・回収約23年一致．TOP・ガイド・代表記事electricity-salesのPC/スマホも表示確認し，console error0．初回のPython一時配信は接続リセットとなり停止し，Vite previewへ切り替えた．サーバーと一時タブは検査終了時に停止・閉鎖する．共有5173は操作していない．本番の独立確認・commit/push/tag/deployは統括担当．

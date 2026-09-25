@@ -27,6 +27,11 @@ for (const url of urls) {
 }
 for (const file of files.filter(file => extname(file) === ".html")) {
   const html = await readFile(file, "utf8");
+  const styles = [...html.matchAll(/<link\b[^>]*rel="stylesheet"[^>]*href="([^"]+)"/g)].map(match => match[1]);
+  const mainIndex = styles.findIndex(href => /\/main-[^/]+\.css$/.test(href));
+  const articleIndex = styles.findIndex(href => /\/article-[^/]+\.css$/.test(href));
+  assert(mainIndex < 0 || mainIndex === 0, `共通CSSは最初に読む: ${file}`);
+  assert(articleIndex < 0 || articleIndex === (mainIndex < 0 ? 0 : 1), `記事ベースCSSは固有CSSより前: ${file}`);
   assert(!/<script[^>]+src=["']https?:/i.test(html), "外部スクリプトは未承認です");
   for (const [, reference] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (/^(?:[a-z]+:|#|\/\/)/i.test(reference)) continue;
