@@ -6,7 +6,8 @@ import { runInNewContext } from 'node:vm';
 
 import { calculateEstimate } from "../../site/simulator/src/calculator.js";
 
-const readPage = name => readFile(new URL(`../../site/pages/${name}.html`, import.meta.url), "utf8");
+const guideSlugs = {"electricity-sales": "solar-economics", "subsidies": "subsidies", "disaster": "disaster", "quotes-contractors": "quotes-contractors"};
+const readPage = name => readFile(new URL(`../../site/${guideSlugs[name] ? `guides/${guideSlugs[name]}/index.html` : `pages/${name}.html`}`, import.meta.url), "utf8");
 const prose = html => html.replace(/<[^>]+>/g, "");
 
 test("公開4記事は章ごとの問い・結論・参考文献・関連記事と診断導線を持つ", async () => {
@@ -17,7 +18,7 @@ test("公開4記事は章ごとの問い・結論・参考文献・関連記事�
     assert.match(html, /article--continuous/);
     assert.match(html, /article-toc/);
     assert.match(html, /article-data\.js/);
-    assert.match(html, /href="\.\.\/simulator\//);
+    assert.match(html, /href="\/simulator\//);
     assert.match(html, /data-quote-start/);
     assert.match(html, /fixed-quote-bar\.css/);
     assert.match(html, /data-inline-quote-action disabled/);
@@ -32,8 +33,8 @@ test("公開4記事は章ごとの問い・結論・参考文献・関連記事�
     assert.doesNotMatch(html, /class="key-point"|先にまとめると/);
     const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map(m => m[1]));
     for (const [, id] of html.matchAll(/href="#([^"]+)"/g)) assert(ids.has(id), `${name}: ${id}`);
-    const related = [...html.matchAll(/href="(electricity-sales|subsidies|disaster|quotes-contractors)\.html(?:#[^"]*)?"/g)].map(m => m[1]);
-    assert(related.some(target => target !== name), `${name}: 関連記事`);
+    const related = [...html.matchAll(/href="\/guides\/(solar-economics|subsidies|disaster|quotes-contractors)\/(?:#[^"]*)?"/g)].map(m => m[1]);
+    assert(related.some(target => target !== guideSlugs[name]), `${name}: 関連記事`);
     for (const [, id] of html.matchAll(/data-source-id="([^"]+)"/g)) assert(sources.has(id), `${name}: ${id}`);
   }
 });
@@ -54,7 +55,7 @@ test("収支記事に統合した設置・維持費は出典と計算根拠へ�
   const redirect = await readPage("costs-maintenance");
   assert.match(redirect, /noindex,follow/);
   assert.match(redirect, /costs-maintenance-redirect\.js/);
-  assert.match(redirect, /electricity-sales\.html#inspection-conditions/);
+  assert.match(redirect, /guides\/solar-economics\/#inspection-conditions/);
 });
 
 test("補助金記事は地域別条件・早期終了・契約前手続と公式根拠を示す", async () => {
@@ -197,8 +198,8 @@ const guidePageNames = pageNames.filter((pageName) => pageName !== "calculation-
 
 test("ガイド記事のパンくずはガイド一覧へ戻り，現在地をリンクにしない", async () => {
   for (const pageName of pageNames.filter((pageName) => pageName !== "calculation-method.html")) {
-    const html = await readFile(new URL(`../../site/pages/${pageName}`, import.meta.url), "utf8");
-    assert.match(html, /href="\.\.\/solar\/">はれ<span class="brand-term">トク<\/span>ガイド<\/a> ／ [^<]+<\/nav>/);
+    const html = await readPage(pageName.replace(".html", ""));
+    assert.match(html, /href="\/guides\/">はれ<span class="brand-term">トク<\/span>ガイド<\/a> ／ [^<]+<\/nav>/);
   }
 });
 
@@ -233,7 +234,7 @@ test("蓄電池記事は選択容量・条件付き劣化比較と年次適用�
 
 test("診断情報と運営ポリシーへ一般記事テンプレートを適用しない", async () => {
   for (const pageName of ["calculation-method.html", "policy.html"]) {
-    const html = await readFile(new URL(`../../site/pages/${pageName}`, import.meta.url), "utf8");
+    const html = await readPage(pageName.replace(".html", ""));
     assert.doesNotMatch(html, /article--guide|article-entry-actions|article-toc/);
   }
 });
@@ -348,4 +349,29 @@ test("診断の内訳末尾と末尾から使用データへ接続する", async
   const html = await readFile(new URL("../../site/simulator/index.html", import.meta.url), "utf8");
   assert.equal((html.match(/href="\.\.\/pages\/calculation-method\.html"/g) ?? []).length, 2);
   assert.match(html, />計算方法・使用データ<\/a>/);
+});
+
+
+test("旧ガイドURLはクエリとハッシュを保持し，JSなしでも新URLへ進める", async () => {
+  const script = await readFile(new URL("../../site/shared/legacy-redirect.js", import.meta.url), "utf8");
+  for (const [oldPath, destination] of [["solar/index.html", "/guides/"], ...Object.entries(guideSlugs).map(([id, slug]) => [`pages/${id}.html`, `/guides/${slug}/`])]) {
+    const html = await readFile(new URL(`../../site/${oldPath}`, import.meta.url), "utf8");
+    assert(html.includes(`data-redirect-target href="${destination}"`));
+    assert(html.includes(`rel="canonical" href="https://haretoku.jp${destination}"`));
+    assert(!html.includes("analytics.js"));
+    assert.match(html, /<body><noscript><p><a data-redirect-target/);
+    assert(!html.includes("移転のお知らせ"));
+    let actual;
+    runInNewContext(script, { URL, document: { querySelector: () => ({getAttribute: () => destination}) }, location: {origin: "https://haretoku.jp", search: "?from=old", hash: "#summary", replace: value => {actual = value;}} });
+    assert.equal(actual, `https://haretoku.jp${destination}?from=old#summary`);
+  }
+});
+
+test("未接続の見積もり本文カードは初期HTMLから非表示にする", async () => {
+  for (const name of Object.keys(guideSlugs)) {
+    const html = await readPage(name);
+    const cards = [...html.matchAll(/<aside\b[^>]*>[\s\S]*?<\/aside>/g)].map(m => m[0]).filter(card => card.includes("data-inline-quote-action"));
+    assert(cards.length > 0);
+    assert(cards.every(card => /^<aside hidden data-quote-promotion/.test(card)));
+  }
 });

@@ -5,7 +5,7 @@ import { analyticsAllowed, cleanReferrer, createAnalytics } from "../../site/sha
 import { analyticsConfig } from "../../site/shared/analytics-config.js";
 
 const configured = { enabled: true, enhancedMeasurementDisabled: true, measurementId: "G-TEST123456" };
-function fixture(href, config = configured, productionBuild = true, referrer = "https://haretoku.jp/pages/subsidies.html?private=CANARY#CANARY") {
+function fixture(href, config = configured, productionBuild = true, referrer = "https://haretoku.jp/guides/subsidies/?private=CANARY#CANARY") {
   const scripts = [], handlers = {};
   const window = { location: { href } };
   const document = {
@@ -52,7 +52,7 @@ test("URL・referrerのクエリー/ハッシュと任意title/utmをコマン�
   assert(!JSON.stringify(f.commands()).includes("CANARY"));
   for (const command of events(f)) {
     assert.equal(command[2].page_location, "https://haretoku.jp/simulator/");
-    assert.equal(command[2].page_referrer, "https://haretoku.jp/pages/subsidies.html");
+    assert.equal(command[2].page_referrer, "https://haretoku.jp/guides/subsidies/");
     assert.deepEqual(Object.keys(command[2]).sort(), ["page_id", "page_location", "page_referrer", "page_title", "send_to"].sort());
   }
   assert.equal(cleanReferrer("https://search.example/CANARY?q=CANARY#CANARY"), "https://search.example");
@@ -73,13 +73,13 @@ test("広告関連の同意を拒否し，自動page_viewとsignalsを無効化�
 });
 
 test("記事閲覧・診断リンクだけを計測し無効な見積もりや外部リンクを計測しない", () => {
-  const f = fixture("https://haretoku.jp/pages/subsidies.html");
+  const f = fixture("https://haretoku.jp/guides/subsidies/");
   function click(href, extra = {}) {
     f.handlers.click({ button: 0, target: { closest: () => ({ href, hasAttribute: () => false, getAttribute: () => null }) }, ...extra });
   }
   assert.deepEqual(events(f).map(c => c[1]), ["page_view", "article_view"]);
   click("https://outside.example/simulator/");
-  click("https://haretoku.jp/pages/quotes-contractors.html");
+  click("https://haretoku.jp/guides/quotes-contractors/");
   click("https://haretoku.jp/simulator/", { defaultPrevented: true });
   assert.equal(events(f).length, 2);
   click("https://haretoku.jp/simulator/?private=CANARY#CANARY");
@@ -101,14 +101,22 @@ test("最初の有効結果だけを記録し再計算・履歴変更で完了�
 });
 
 test("公開9ページだけに入口があり結果描画成功後にだけ完了を通知する", async () => {
-  const pages = ["index.html", "solar/index.html", "simulator/index.html", ...["electricity-sales", "subsidies", "disaster", "quotes-contractors", "policy", "calculation-method"].map(n => `pages/${n}.html`)];
+  const pages = ["index.html", "guides/index.html", "simulator/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
   for (const page of pages) {
     const html = await readFile(new URL(`../../site/${page}`, import.meta.url), "utf8");
-    assert.equal((html.match(/src="(?:\.\.\/)?shared\/analytics\.js"/g) ?? []).length, 1, page);
+    assert.equal((html.match(/src="(?:\.\.\/|\/)?shared\/analytics\.js"/g) ?? []).length, 1, page);
   }
   const app = await readFile(new URL("../../site/simulator/src/app.js", import.meta.url), "utf8");
   assert.equal((app.match(/if \(profitConfirmed\) recordDiagnosisComplete\(\);/g) ?? []).length, 1);
   assert(app.indexOf("elements.result.hidden = false;") < app.indexOf("if (profitConfirmed) recordDiagnosisComplete();"));
   const policy = await readFile(new URL("../../site/pages/policy.html", import.meta.url), "utf8");
   assert(policy.includes(`data-analytics-policy="${analyticsConfig.enabled ? "enabled" : "disabled"}"`));
+});
+
+
+test("旧ガイドURLでは計測せず，新URLのindex別名を正規化する", () => {
+  for (const path of ["/solar/", "/solar/index.html", ...["electricity-sales", "subsidies", "disaster", "quotes-contractors"].map(id => `/pages/${id}.html`)]) {
+    assert.equal(analyticsAllowed(configured, `https://haretoku.jp${path}`, true), false);
+  }
+  assert.equal(analyticsAllowed(configured, "https://haretoku.jp/guides/solar-economics/index.html", true), true);
 });

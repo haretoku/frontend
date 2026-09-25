@@ -81,7 +81,7 @@ img { max-width: 100%; }
   color: inherit;
   font-family: inherit;
   font-size: inherit;
-  font-weight: 700;
+  font-weight: inherit;
   letter-spacing: inherit;
   white-space: nowrap;
 }
@@ -420,8 +420,8 @@ body[data-page="top"] .top-heading-icon { width: 0.9em; height: 0.9em; margin-ri
 
 /* サイト共通の白基調・ブランド色．状態色と暗背景の白文字は保持する． */
 .site-header .brand { color: var(--color-primary-dark); }
-.site-header .brand__toku,
-.guides-section .section-intro .brand-term { color: var(--color-brand-green); }
+.site-header .brand__toku { color: var(--color-brand-green); }
+.guides-section .section-intro .brand-term { color: inherit; }
 h1, h2, h3 { color: var(--color-primary-dark); }
 body[data-page="top"] .hero__copy h1 { color: var(--color-primary-dark); }
 .optional-label, select:disabled { color: var(--color-muted); background: #f0f2f1; }

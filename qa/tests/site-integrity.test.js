@@ -1,4 +1,4 @@
-import { quoteBarVisible, mobileKeyboardLikely, QUOTE_ACTION } from "../../site/shared/fixed-quote-bar.js";
+import { quoteBarVisible, mobileKeyboardLikely, QUOTE_ACTION, mountFixedQuoteBar } from "../../site/shared/fixed-quote-bar.js";
 import { cashflowMarkers, groupMarkerTargets } from "../../site/simulator/src/chart-markers.js";
 import { subsidyGroups, nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
 import assert from "node:assert/strict";
@@ -94,14 +94,14 @@ test("劣化比較の説明は選択した仮定を使い，停電線はDC容量
 const siteRoot = resolve(repositoryRoot, "site");
 const htmlPaths = [
   resolve(siteRoot, "index.html"),
-  resolve(siteRoot, "solar/index.html"),
+  resolve(siteRoot, "guides/index.html"),
   resolve(siteRoot, "simulator/index.html"),
   resolve(siteRoot, "pages/calculation-method.html"),
   resolve(siteRoot, "pages/costs-maintenance.html"),
-  resolve(siteRoot, "pages/electricity-sales.html"),
-  resolve(siteRoot, "pages/subsidies.html"),
-  resolve(siteRoot, "pages/disaster.html"),
-  resolve(siteRoot, "pages/quotes-contractors.html"),
+  resolve(siteRoot, "guides/solar-economics/index.html"),
+  resolve(siteRoot, "guides/subsidies/index.html"),
+  resolve(siteRoot, "guides/disaster/index.html"),
+  resolve(siteRoot, "guides/quotes-contractors/index.html"),
   resolve(siteRoot, "pages/policy.html")
 ];
 
@@ -206,13 +206,7 @@ test("全ページの共通フッターが方針の対応見出しへ接続す�
     const html = await readFile(pagePath, "utf8");
     const footerNav = html.match(/<nav class="site-footer__links"[\s\S]*?<\/nav>/)?.[0];
     assert.ok(footerNav, `共通フッターの方針リンクがありません：${pagePath}`);
-    const prefix = pagePath === resolve(siteRoot, "index.html")
-      ? "pages/policy.html#"
-      : pagePath === resolve(siteRoot, "pages/policy.html")
-        ? "#"
-        : [resolve(siteRoot, "solar/index.html"), resolve(siteRoot, "simulator/index.html")].includes(pagePath)
-          ? "../pages/policy.html#"
-          : "policy.html#";
+    const prefix = pagePath.includes(resolve(siteRoot, "guides")) ? "/pages/policy.html#" : pagePath === resolve(siteRoot, "index.html") ? "pages/policy.html#" : pagePath === resolve(siteRoot, "pages/policy.html") ? "#" : pagePath === resolve(siteRoot, "simulator/index.html") ? "../pages/policy.html#" : "policy.html#";
     for (const [id, label] of footerItems) {
       assert.match(footerNav, new RegExp(`<a href="${prefix}${id}">${label}<\\/a>`));
     }
@@ -221,23 +215,19 @@ test("全ページの共通フッターが方針の対応見出しへ接続す�
 
 test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在地を示す", async () => {
   const guideCurrentPaths = new Set([
-    resolve(siteRoot, "solar/index.html"),
+    resolve(siteRoot, "guides/index.html"),
     resolve(siteRoot, "pages/costs-maintenance.html"),
-    resolve(siteRoot, "pages/electricity-sales.html"),
-    resolve(siteRoot, "pages/subsidies.html"),
-    resolve(siteRoot, "pages/disaster.html"),
-    resolve(siteRoot, "pages/quotes-contractors.html")
+    resolve(siteRoot, "guides/solar-economics/index.html"),
+    resolve(siteRoot, "guides/subsidies/index.html"),
+    resolve(siteRoot, "guides/disaster/index.html"),
+    resolve(siteRoot, "guides/quotes-contractors/index.html")
   ]);
 
   for (const pagePath of htmlPaths) {
     const html = await readFile(pagePath, "utf8");
     const siteNav = html.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0];
     assert.ok(siteNav, `共通ヘッダーがありません：${pagePath}`);
-    const href = pagePath === resolve(siteRoot, "index.html")
-      ? "solar/"
-      : pagePath === resolve(siteRoot, "solar/index.html")
-        ? "./"
-        : "../solar/";
+    const href = "/guides/";
     const guideLinks = [...siteNav.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].filter(([,attrs]) => attrs.includes('href="' + href + '"'));
     assert.equal(guideLinks.length, 1, 'ガイド導線を重複させない');
     const [,attrs,body] = guideLinks[0];
@@ -248,7 +238,7 @@ test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在�
 });
 
 test("はれトクガイド一覧がメタデータから一般記事4件を4分類の主一覧に重複なく掲載する", async () => {
-  const html = await readFile(resolve(siteRoot, "solar/index.html"), "utf8");
+  const html = await readFile(resolve(siteRoot, "guides/index.html"), "utf8");
   const articles = JSON.parse(await readFile(resolve(siteRoot, "solar/data/articles.json"), "utf8"));
   const script = await readFile(resolve(siteRoot, "solar/src/guides.js"), "utf8");
   const css = await readFile(resolve(siteRoot, "solar/styles/guides.css"), "utf8");
@@ -256,25 +246,25 @@ test("はれトクガイド一覧がメタデータから一般記事4件を4分
   assert.ok(main);
   assert.match(html, /<title>はれトクガイド｜住宅用太陽光の記事一覧<\/title>/);
   assert.match(html, /meta name="description" content="[^"]+"/);
-  assert.match(html, /src="src\/guides\.js"/);
+  assert.match(html, /src="\/solar\/src\/guides\.js"/);
   assert.doesNotMatch(main, /data-featured-guides/);
   assert.doesNotMatch(main, /data-safety-guides/);
   assert.match(main, /<h1 id="guide-library-title"[^>]*>/);
   assert.equal(articles.length, 4);
   assert.equal(articles.filter((article) => Number.isInteger(article.featuredOrder)).length, 3);
   for (const [title, target, articleTitle = title] of [
-    ["太陽光の収支は，何で決まる？", "../pages/electricity-sales.html"],
-    ["補助金は，どう探してどう申請する？", "../pages/subsidies.html"],
-    ["太陽光の見積もりは，何を比べる？", "../pages/quotes-contractors.html"],
-    ["停電時，太陽光・蓄電池で何ができる？", "../pages/disaster.html"]
+    ["太陽光の収支は，何で決まる？", "/guides/solar-economics/"],
+    ["補助金は，どう探してどう申請する？", "/guides/subsidies/"],
+    ["太陽光の見積もりは，何を比べる？", "/guides/quotes-contractors/"],
+    ["停電時，太陽光・蓄電池で何ができる？", "/guides/disaster/"]
   ]) {
     const article = articles.find((candidate) => candidate.title === title);
     assert.equal(article?.href, target, `ガイド記事がありません：${title}`);
-    const targetPath = await localTarget(resolve(siteRoot, "solar/index.html"), target);
+    const targetPath = await localTarget(resolve(siteRoot, "guides/index.html"), target);
     await assert.doesNotReject(access(targetPath));
     const targetHtml = await readFile(targetPath, "utf8");
     assert.ok(targetHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, "") === articleTitle, `記事タイトルが一致しません：${title}`);
-    await assert.doesNotReject(access(await localTarget(resolve(siteRoot, "solar/index.html"), article.image.src)));
+    await assert.doesNotReject(access(await localTarget(resolve(siteRoot, "guides/index.html"), article.image.src)));
     assert.ok(article.image.width > 0 && article.image.height > 0);
     assert.ok(article.image.alt.length > 0);
   }
@@ -584,7 +574,7 @@ test("トップは診断を主導線として説明を集約し記事4件へつ�
   assert.match(html, /制度の探し方と申請の流れ，施工会社へ相談できる支援を確認/);
   assert.match(html, /太陽光の見積もりは，何を比べる？/);
   assert.match(html, /見積もりの頼み方と，費用・工事・保証を同じ条件で比べるポイントを確認/);
-  assert.match(html, /<p class="guides-more"><a href="solar\/">すべての記事を見る/);
+  assert.match(html, /<p class="guides-more"><a href="\/guides\/">すべての記事を見る/);
   assert.doesNotMatch(html, /を整理します/);
   assert.match(html, /article-solar-economics-photo\.webp" alt="" width="1536" height="1024"/);
   assert.match(html, /article-subsidies-application-photo\.webp" alt="" width="1536" height="1024"/);
@@ -940,4 +930,21 @@ test('富山・長野の旧未確定理由を残さず，別の不適合理由�
   for(const [code,expected] of [['capacity_not_applicable',/対象容量範囲/],['housing_age_not_applicable',/住宅区分/],['equipment_package_not_applicable',/異なる設備/]]){const text=nonInclusionReason({...common,id,reason_code:code});assert.match(text,expected);assert.doesNotMatch(text,/本体価格|容量の種類/);}
  }
  assert.equal(nonInclusionReason({...common,id:'another-program'}),'算定に必要な制度詳細を確認できていません．');
+});
+
+
+test("未接続の固定見積もりバーはDOMも下部余白も作らない", () => {
+  assert.equal(QUOTE_ACTION.disabled, true);
+  assert.doesNotThrow(() => mountFixedQuoteBar({readState: () => {throw new Error("非表示時は参照しない");}}));
+});
+
+
+test("移転先ページのメタ情報はURL以外をパス化しない", async () => {
+  for (const path of ["guides/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(slug => `guides/${slug}/index.html`)]) {
+    const html = await readFile(resolve(siteRoot, path), "utf8");
+    assert.match(html, /name="viewport" content="width=device-width, initial-scale=1"/);
+    assert.match(html, /name="referrer" content="strict-origin-when-cross-origin"/);
+    assert.match(html, /property="og:type" content="website"/);
+    assert.doesNotMatch(html, /content="\/(?:solar|pages)\//);
+  }
 });

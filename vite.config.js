@@ -21,14 +21,16 @@ export default defineConfig({
         rollupOptions: {
           input: {
             index: resolve(siteRoot, "index.html"),
-            guides: resolve(siteRoot, "solar/index.html"),
+            guides: resolve(siteRoot, "guides/index.html"),
+            legacyGuides: resolve(siteRoot, "solar/index.html"),
+            ...Object.fromEntries(["electricity-sales", "subsidies", "disaster", "quotes-contractors"].map(name => [`legacy-${name}`, resolve(siteRoot, `pages/${name}.html`)])),
             simulator: resolve(siteRoot, "simulator/index.html"),
             calculationMethod: resolve(siteRoot, "pages/calculation-method.html"),
             costsMaintenance: resolve(siteRoot, "pages/costs-maintenance.html"),
-            electricitySales: resolve(siteRoot, "pages/electricity-sales.html"),
-            subsidies: resolve(siteRoot, "pages/subsidies.html"),
-            disaster: resolve(siteRoot, "pages/disaster.html"),
-            quotesContractors: resolve(siteRoot, "pages/quotes-contractors.html"),
+            electricitySales: resolve(siteRoot, "guides/solar-economics/index.html"),
+            subsidies: resolve(siteRoot, "guides/subsidies/index.html"),
+            disaster: resolve(siteRoot, "guides/disaster/index.html"),
+            quotesContractors: resolve(siteRoot, "guides/quotes-contractors/index.html"),
             policy: resolve(siteRoot, "pages/policy.html")
           }
         }

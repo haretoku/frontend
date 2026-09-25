@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+
+
+  <head>
+
+
+    <meta charset="utf-8">
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <meta name="description" content="停電時の太陽光単独の昼間利用と蓄電池の夜間給電，出力・残量・給電回路の制約及び災害時の安全を説明します．">
+
+
+    <link rel="canonical" href="https://haretoku.jp/guides/disaster/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="停電時，太陽光・蓄電池で何ができる？｜はれトク">
+    <meta property="og:description" content="停電時の太陽光単独の昼間利用と蓄電池の夜間給電，出力・残量・給電回路の制約及び災害時の安全を説明します．">
+    <meta property="og:url" content="https://haretoku.jp/guides/disaster/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="はれトク">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://haretoku.jp/og-image.png">
+    <meta property="og:image:alt" content="太陽光の収支を確かめる，はれトク">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>停電時，太陽光・蓄電池で何ができる？｜はれトク</title>
+
+
+    <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+
+
+    <link rel="stylesheet" href="/shared/styles/main.css">
+
+
+    <link rel="stylesheet" href="/articles/styles/article.css">
+
+
+    <link rel="stylesheet" href="/shared/styles/fixed-quote-bar.css">
+
+
+    <script type="module" src="/articles/src/article-data.js"></script>
+
+
+  <link rel="stylesheet" href="/articles/styles/guide-chapters.css">    <script type="module" src="/shared/analytics.js"></script>
+  </head>
+
+
+  <body class="guide-benchmark-page">
+
+
+    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span><nav class="site-nav" aria-label="主要メニュー"><a href="/"><svg class="site-nav__icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"></path></svg><span>トップ</span></a><a href="/simulator/"><svg class="site-nav__icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"></path></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/" aria-current="page"><svg class="site-nav__icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a></nav></div></header>
+
+
+    <main>
+
+
+      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a> ／ <a href="/guides/">はれ<span class="brand-term">トク</span>ガイド</a> ／ 防災・停電時の利用</nav>
+
+
+      <header class="guide-hero"><div class="guide-hero__inner"><div><div class="guide-hero__meta"><span class="guide-hero__category">災害への備え</span><span>更新日 <time datetime="2026-09-24">2026.09.24</time></span></div><h1><span>停電時，太陽光・蓄電池で</span><span>何ができる？</span></h1><p class="guide-hero__lead">停電しても，いつもと同じように電気を使えるとは限りません．太陽光のみと蓄電池を組み合わせた場合を比べ，必要な家電，出力・残量・回路と安全な備え方を確認します．</p><p class="guide-hero__scope">住宅用太陽光・蓄電池 ／ 導入検討から停電前の備えまで</p></div><figure class="guide-hero__visual"><img src="/shared/assets/article-disaster-battery-photo.webp" width="1536" height="1024" alt="蓄電池からの夜間給電を想定したスマートフォンと停電用コンセント" decoding="async" fetchpriority="high"></figure></div></header><article data-guide-presentation data-quote-description="停電時に使いたい家電に合わせて，設備・配線と導入費用を確認しましょう．" class="article-width article article--continuous article--guide" id="guide-article"><details class="article-toc"><summary><span class="article-toc__title">目次</span><span class="article-toc__state" aria-hidden="true"></span></summary><ol><li><a href="#solar-outage">停電中，太陽光だけで何ができる？</a><ol><li><a href="#requirements">昼間は，自立運転でスマホの充電などに使える</a></li><li><a href="#limitations">夜間は発電せず，昼間も天候と出力上限に左右される</a></li></ol></li><li><a href="#battery-outage">蓄電池があれば，何をどのくらい使える？</a><ol><li><a href="#battery-backup">蓄えた電気があれば，夜も照明や冷蔵庫などに使える</a></li><li><a href="#backup-circuits">使える家電は，出力・回路・電圧の対応で決まる</a></li><li><a href="#battery-case">家電を絞ると，同じ蓄電量でも長く使える</a></li></ol></li><li><a href="#prepare-outage">導入前・停電前に，何を確認する？</a><ol><li><a href="#daily-needs">導入前に，使いたい家電と対応設備を見積もりで確認する</a></li><li><a href="#before-installation">設置後は，切替方法と使える接続先を確認する</a></li><li><a href="#other-backup">照明や予備電源を用意し，太陽光・蓄電池だけに頼らない</a></li><li><a href="#damage-caution">破損・浸水した設備には近づかず，施工会社へ連絡する</a></li></ol></li></ol></details>
+<section id="solar-outage"><span id="learn-title"></span><h2>停電中，太陽光だけで何ができる？</h2>
+<figure class="guide-chapter-photo"><img src="/shared/assets/article-disaster-daytime-photo.webp" width="1536" height="1024" alt="昼間の自立運転でスマートフォンを充電する場面のイメージ" loading="lazy" decoding="async"></figure>
+<p>太陽光だけでも，発電している昼間には対応機器から電気を使えます．ただし，普段のコンセントがすべて使えるわけではなく，天候や設備によって使える範囲が限られます．</p>
+<section id="requirements"><h3>昼間は，自立運転でスマホの充電などに使える</h3>
+<p><strong>自立運転に対応していれば，停電中も発電した電気を使えます</strong>．自立運転とは，電力会社の送配電網から切り離して電気を供給する運転です．パワーコンディショナ（発電した電気を家庭で使える形に変える機器）などの機能と，指定のコンセント・回路を確認しましょう<span data-cite-sources="article-source-27">（太陽光発電協会，2026）</span>．</p>
+<p>例えば，スマホの充電や照明など，必要な機器を指定コンセントにつないで使う方法があります．自動で切り替わるか，手動操作が必要かは機種や設定によって異なるため，操作は自宅の取扱説明書に従ってください<span data-cite-sources="panasonic-solar-outage">（パナソニック，2026a）</span>．</p></section>
+<section id="limitations"><h3>夜間は発電せず，昼間も天候と出力上限に左右される</h3>
+<p>太陽光だけでは，発電していない夜間の電気をまかなえません．曇りや雨などで日射が弱くなると，昼間でも使える電力が減ります．<strong>パネルの容量が大きくても，停電時にその容量分を使えるとは限りません</strong>．</p>
+<p>パナソニックの案内には，自立運転で使える電力が最大1,500 W（1.5 kW）の機種があります．これはその機種の上限であり，日射によってはそこまで使えないとされています<span data-cite-sources="panasonic-solar-outage">（パナソニック，2026a）</span>．選ぶ機器の「自立運転時の出力」を確認し，使いたい家電の消費電力と照らし合わせましょう．</p>
+<span id="outage-cases"></span><table class="article-table outage-role-table article-table--household-comparison"><caption id="standalone-operation-caption">太陽光のみと蓄電池を組み合わせた場合の違い</caption><thead><tr><th scope="col">場面</th><th scope="col">太陽光のみ</th><th scope="col">太陽光＋蓄電池</th></tr></thead><tbody><tr><th scope="row">昼間</th><td data-label="太陽光のみ">その時に発電する電気を使う</td><td data-label="太陽光＋蓄電池">発電した電気と，蓄えた電気を使う</td></tr><tr><th scope="row">夜間</th><td data-label="太陽光のみ">発電しないため給電できない</td><td data-label="太陽光＋蓄電池">使える残量があれば給電できる</td></tr><tr><th scope="row">主な制約</th><td data-label="太陽光のみ">日射，出力上限，接続先</td><td data-label="太陽光＋蓄電池">太陽光のみの制約に加え，残量と蓄電容量</td></tr></tbody></table>
+<p>いずれも停電時の給電に対応した機器・配線が必要です．蓄電池を組み合わせると昼間の発電を夜間へ回せますが，使える家電と時間には次の制約があります<span data-cite-sources="panasonic-battery-outage">（パナソニック，2026b）</span>．</p></section>
+<footer class="guide-chapter-footer" aria-label="この章の補足" data-quote-start><p class="guide-resource-label">この章の参考資料</p><ul class="source-list"><li data-bibliography-source="article-source-27">太陽光発電協会（2026年アクセス）．<a href="https://www.jpea.gr.jp/house/poweroutage/">停電時でも電気が使えます</a></li><li data-bibliography-source="panasonic-solar-outage">パナソニック（2026年アクセスa）．<a href="https://sumai.panasonic.jp/saigai/product/solar_blackout.html">太陽光発電システム：停電時の使用方法について</a></li><li data-bibliography-source="panasonic-battery-outage">パナソニック（2026年アクセスb）．<a href="https://sumai.panasonic.jp/chikuden/sochiku/failure/">創蓄連携システム：停電時 電気が使えて安心</a></li></ul></footer></section>
+<section id="battery-outage"><h2>蓄電池があれば，何をどのくらい使える？</h2>
+<figure class="guide-chapter-photo"><img src="/shared/assets/article-disaster-battery-photo.webp" width="1536" height="1024" alt="蓄電池からの夜間給電を想定したスマートフォンと停電用コンセント" loading="lazy" decoding="async"></figure>
+<p>蓄電池は，蓄えた電気を夜間や発電が少ない時間にも使う備えになります．使える家電は出力と接続先，使える時間は残量と電気の使い方で判断します．</p>
+<section id="battery-backup"><h3>蓄えた電気があれば，夜も照明や冷蔵庫などに使える</h3>
+<p>停電時の給電に対応した蓄電システムなら，<strong>発電していない夜間も，蓄えた電気を使えます</strong>．太陽光から停電中に充電できる構成では，翌日の発電を再び蓄えることもできます<span data-cite-sources="panasonic-battery-outage">（パナソニック，2026b）</span>．</p>
+<p>ただし，停電が始まった時に満充電とは限りません．残量が少なければ使える時間は短く，悪天候が続けば十分に補充できないこともあります．「蓄電池があるから何日でも暮らせる」と考えず，優先する家電を絞って使うことが大切です．</p></section>
+<section id="backup-circuits"><h3>使える家電は，出力・回路・電圧の対応で決まる</h3>
+<p>蓄電池の<strong>容量（kWh）は蓄えられる電気の量，出力（kW）は同時に供給できる電力</strong>です．容量が十分でも出力が足りなければ，家電を同時に動かせません．仕様がkVAで示されている場合もあるため，数値だけでkWと同じとせず，使用できる家電を施工会社に確認しましょう<span data-cite-sources="panasonic-battery-outage">（パナソニック，2026b）</span>．</p>
+<p>接続先にも違いがあります．特定負荷型はあらかじめ選んだ回路へ，全負荷型は家全体の回路へ給電する構成です．ただし，<strong>全負荷型でも，すべての家電を同時に使えるわけではありません</strong>．メーカーの構成例でも，家全体への給電には対応する切替機器が必要で，出力を超えると停止するとされています<span data-cite-sources="panasonic-backup-circuits">（パナソニック，2026c）</span>．</p>
+<p>使いたい家電は，型式と同時に使う組合せを伝えて確認します．特にモーターを使う機器などは，動き始めに必要な電力も確認しましょう<span data-cite-sources="nichicon-backup-capacity">（ニチコン，2026）</span>．</p><table class="article-table outage-appliance-table"><caption>使いたい家電と，導入前に確認すること</caption><thead><tr><th scope="col">家電の例</th><th scope="col">確認すること</th></tr></thead><tbody><tr><th scope="row">スマホ・照明</th><td>充電器や照明を接続するコンセント・回路に給電できるか</td></tr><tr><th scope="row">冷蔵庫</th><td>設置場所への給電，起動時の電力，夜間も必要な残量</td></tr><tr><th scope="row">エアコン・IH調理器</th><td>家電の100 V・200 V，停電時の対応電圧，起動時と同時使用時の出力</td></tr></tbody></table><p>この表は使用を保証する一覧ではありません．全負荷・特定負荷の名称だけで決めず，必要な機器と配線を確認してください．</p></section>
+<section id="battery-case"><h3>家電を絞ると，同じ蓄電量でも長く使える</h3>
+<p>停電時に使う家電を絞ると，蓄電池の電気を長く持たせられます．次は，<strong>停電開始時に取り出せる電力量を5 kWhと仮定した比較</strong>です．製品の公称容量ではなく，残量・劣化・使い切れない下限を考慮した後の，家庭用の電気へ変換する前の量を共通にしています．</p>
+<table class="article-table outage-duration-table article-table--household-comparison"><caption>同じ5 kWhを取り出せる場合の，使用時間の目安</caption><thead><tr><th scope="col">比較項目</th><th scope="col">全国平均の購入電力量を基準にする例</th><th scope="col">冷蔵庫・照明・スマホに絞る例</th></tr></thead><tbody><tr><th scope="row">計算上の使用時間</th><td data-label="全国平均を基準"><strong>約10時間</strong></td><td data-label="家電を絞る"><strong>約70時間</strong></td></tr><tr><th scope="row">家電の消費量</th><td data-label="全国平均を基準">約10.7 kWh／日</td><td data-label="家電を絞る">約0.9 kWh／日</td></tr><tr><th scope="row">設備自身の消費を含む量</th><td data-label="全国平均を基準">約11.4 kWh／日</td><td data-label="家電を絞る">約1.6 kWh／日</td></tr></tbody></table>
+<p>家電を絞る例は冷蔵庫・照明・スマホだけの想定で，冷暖房・調理・給湯・洗濯・テレビ・通信ルーターなどの固定回線機器・医療機器は含みません．約70時間は，生活全体をその時間維持できるという意味ではありません．</p><p>共通条件は，太陽光からの補充なし，放電ロス約5％，設備自身の消費30 Wです．ロスと設備消費は当サイトの計算用仮定で，実機の停電中の測定値ではありません．計算は丸める前の値で行い，詳しい算式は<a href="/pages/calculation-method.html#outage-scenarios">給電時間の比較条件・計算根拠</a>に示しています．</p>
+<p>全国平均を基準にする例は，環境省の2023年度調査の<strong>全国全世帯平均3,911 kWh／年</strong>を同年度の366日で割った値を使います<span data-cite-sources="env-household-electricity-2023">（環境省，2026a）</span>．戸建住宅や特定の世帯人数に限った平均ではありません．また，この統計は電力会社などからの購入分で，自宅の太陽光で発電して使った分を含みません<span data-cite-sources="env-household-electricity-cautions">（環境省，2026b）</span>．自宅の総消費量や，夏・冬の特定の日を再現した例ではない点に注意してください．</p>
+<p id="essential-loads">家電を絞る例は，次の3種類だけを毎日使う当サイトの仮定です．<strong>公的な最低必要量や，生活に十分な量を示すものではありません</strong>．家電の仕様値と換算方法は，<a href="/pages/calculation-method.html#outage-reference">停電参考線の家電内訳・一次資料</a>と共通です．</p>
+<ul><li>冷蔵庫1台：24時間通電する想定で，年間消費電力量から1日分を換算</li><li>LED電球2灯：各6時間使用</li><li>スマホ4台：各1日1回，空から満充電する想定</li></ul>
+<p>気温や冷蔵庫の開閉などの使い方，機器の型式によって必要な電気は変わります．</p>
+<p>この時間は，1日の消費量を24時間で均した比較です．接続回路・電圧・同時使用時と起動時の出力が対応していることを前提としており，<strong>実際に連続して使える時間や，すべての家電の動作を保証するものではありません</strong>．導入前に，使いたい家電と時間を施工会社へ伝えて確認しましょう．</p>
+<p>防災への備えと日常の経済性は，分けて確認します．導入費や維持費を含む収支は，<a href="/guides/solar-economics/#payback">太陽光・蓄電池の収支</a>で説明しています．</p>
+<aside id="outage-diagnosis" class="article-action-stack" aria-label="はれトク診断の案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4>備えたい設備の，費用と収支を比べる</h4><p>はれトク診断で太陽光・蓄電池の経済性を概算できます．停電時に使える家電や持続時間を判定するものではありません．</p></div><a class="article-action__link" href="/simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a></div></aside></section>
+<footer class="guide-chapter-footer" aria-label="この章の補足"><p class="guide-resource-label">この章の参考資料</p><ul class="source-list"><li data-bibliography-source="panasonic-battery-outage">パナソニック（2026年アクセスb）．<a href="https://sumai.panasonic.jp/chikuden/sochiku/failure/">創蓄連携システム：停電時 電気が使えて安心</a></li><li data-bibliography-source="panasonic-backup-circuits">パナソニック（2026年アクセスc）．<a href="https://sumai.panasonic.jp/chikuden/sochiku/system/s_plus.html">創蓄連携システム：パワーステーションS＋</a></li><li data-bibliography-source="nichicon-backup-capacity">ニチコン（2026年アクセス）．<a href="https://www.nichicon.co.jp/products/ess/series_ess-u2l2.html">ESS-U2L2シリーズ：製品仕様・使用上の注意</a></li><li data-bibliography-source="env-household-electricity-2023">環境省（2026年アクセスa）．<a href="https://www.env.go.jp/earth/ondanka/kateico2tokei/energy/detail/01/">家庭でのエネルギー消費量について（令和5年度確報）</a></li><li data-bibliography-source="env-household-electricity-cautions">環境省（2026年アクセスb）．<a href="https://www.env.go.jp/earth/ondanka/kateico2tokei/cautions/">掲載図表をご覧いただく上でのご注意点</a></li></ul></footer></section>
+<section id="prepare-outage"><h2>導入前・停電前に，何を確認する？</h2>
+<figure class="guide-chapter-photo"><img src="/shared/assets/article-disaster-preparation-photo.webp" width="1536" height="1024" alt="平常時に取扱説明書と懐中電灯を確認する手元" loading="lazy" decoding="async"></figure>
+<p>導入前は使いたい家電と時間を決め，対応する機器・配線を確認します．設置後は停電時の操作を家族で共有し，設備が使えない場合の備えも用意しましょう．</p>
+<section id="daily-needs"><h3>導入前に，使いたい家電と対応設備を見積もりで確認する</h3>
+<p>まずは「昼間にスマホを充電したい」「夜も照明や冷蔵庫を使いたい」など，<strong>どの家電を，いつ，どのくらい使いたいか</strong>を整理しましょう．必要な範囲が決まれば，太陽光だけで足りるか，蓄電池や別の電源も必要かを考えやすくなります．</p>
+<p>見積もりでは，容量だけでなく次の点を確認します．例えばパナソニックの創蓄連携システムでも，停電時に使う機器は事前の配線設計が必要とされています<span data-cite-sources="panasonic-battery-outage">（パナソニック，2026b）</span>．</p>
+<ul class="article-checklist"><li>必要な家電の型式と，設置場所のコンセント・回路に給電できるか</li><li>同時使用と起動時の電力，100 V・200 Vに対応できるか</li><li>想定する残量・使い方で，どの程度の時間を見込めるか</li><li>切替機器や配線工事を含む総額と，保証の対象は何か</li></ul>
+<p>見積書の比べ方は，<a href="/guides/quotes-contractors/#comparison-items">設備と工事の範囲をそろえた比較</a>も参考にしてください．</p>
+<aside hidden data-quote-promotion id="outage-quotes" class="article-action-stack" aria-label="見積もりの案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4>停電時に使いたい家電を伝える</h4><p>必要な家電に対応する設備・配線と，導入費用を施工会社へ確認しましょう．</p><p class="advertising-label">広告・アフィリエイト</p></div><button type="button" class="article-action__link" data-inline-quote-action disabled>無料見積もり（準備中）</button></div></aside></section>
+<section id="before-installation"><h3>設置後は，切替方法と使える接続先を確認する</h3>
+<p>取扱説明書で，自立運転の開始方法と，電気が復旧した後の戻し方を確認しましょう．<strong>自動・手動の切替は，機種と設定によって異なります</strong>．取扱説明書や販売店・施工店の案内に沿って確認し，操作方法と連絡先を家族で共有しておくと，停電時に迷いにくくなります<span data-cite-sources="article-source-27">（太陽光発電協会，2026）</span><span data-cite-sources="panasonic-battery-operation">（パナソニック，2026d）</span>．</p>
+<p>蓄電池は，停電に備えて残量を確保する設定や，事前充電の方法も確認します．気象警報に合わせて自動充電する機能がある機種もありますが，対応機器や設定が必要です<span data-cite-sources="panasonic-backup-circuits">（パナソニック，2026c）</span>．機能があると思い込まず，自宅の設定を確かめましょう．</p>
+<p>また，自動で給電が始まっても，切替時に一時的に電気が途切れる場合があります．メーカーも，蓄電システムはUPS（無停電電源装置）ではないと注意しています<span data-cite-sources="panasonic-battery-outage">（パナソニック，2026b）</span>．電源を切らせない医療機器などは，家庭用の蓄電池だけで対応できると考えず，機器のメーカーや医療機関へ必要な備えを確認してください．</p></section>
+<section id="other-backup"><h3>照明や予備電源を用意し，太陽光・蓄電池だけに頼らない</h3>
+<p>日射不足や残量切れに備え，懐中電灯や充電済みのモバイルバッテリーなども用意しましょう．モバイルバッテリーは購入時にPSEマークとリコール情報を確認し，膨張・異臭・異常な発熱があれば使用を中止します<span data-cite-sources="article-source-32">（消費者庁，2026）</span>．</p>
+<p>ポータブル電源を使う場合は，接続する家電の定格と取扱説明書を確認します．燃料を使う携帯発電機は別の機器で，<strong>一酸化炭素中毒のおそれがあるため屋内では絶対に使いません</strong>．屋外でも換気の悪い場所を避け，建物などから製品指定の距離を取る必要があります<span data-cite-sources="article-source-33">（消費者庁，2021）</span>．</p></section>
+<section id="damage-caution"><h3>破損・浸水した設備には近づかず，施工会社へ連絡する</h3>
+<p><strong>破損・浸水した太陽光設備には近づいたり触れたりしないでください</strong>．被災したパネルでも日射を受けて発電する場合があり，パネルやケーブル，パワーコンディショナへの接触で感電するおそれがあります<span data-cite-sources="jpea-flooded-equipment">（太陽光発電協会，2018）</span>．</p>
+<p>設備に損傷がある場合は自立運転を試さず，安全な場所から販売店・施工店へ連絡します．自分で配線を直したり，設備を動かしたりせず，避難が必要なときは自治体などの安全情報を優先しましょう．</p></section>
+<p id="summary">使いたい家電に合わせた設備選びと，平常時の確認を組み合わせることが，停電時に電気を役立てる備えになります．</p>
+<footer class="guide-chapter-footer" aria-label="この章の補足"><p class="guide-resource-label">この章の参考資料</p><ul class="source-list"><li data-bibliography-source="panasonic-battery-outage">パナソニック（2026年アクセスb）．<a href="https://sumai.panasonic.jp/chikuden/sochiku/failure/">創蓄連携システム：停電時 電気が使えて安心</a></li><li data-bibliography-source="article-source-27">太陽光発電協会（2026年アクセス）．<a href="https://www.jpea.gr.jp/house/poweroutage/">停電時でも電気が使えます</a></li><li data-bibliography-source="panasonic-battery-operation">パナソニック（2026年アクセスd）．<a href="https://sumai.panasonic.jp/saigai/product/battery_blackout.html">V2H蓄電システム：停電時の使用方法について</a></li><li data-bibliography-source="panasonic-backup-circuits">パナソニック（2026年アクセスc）．<a href="https://sumai.panasonic.jp/chikuden/sochiku/system/s_plus.html">創蓄連携システム：パワーステーションS＋</a></li><li data-bibliography-source="article-source-32">消費者庁（2026年アクセス）．<a href="https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_020/">モバイルバッテリーの事故に注意しましょう！</a></li><li data-bibliography-source="article-source-33">消費者庁（2021）．<a href="https://www.caa.go.jp/policies/policy/consumer_safety/caution/caution_053/">携帯発電機やポータブル電源の事故に注意！</a></li><li data-bibliography-source="jpea-flooded-equipment">太陽光発電協会（2018）．<a href="https://www.jpea.gr.jp/wp-content/uploads/t180710_1.pdf">太陽光発電設備が水害によって被害を受けた場合の対処について</a></li></ul></footer></section>
+</article>
+
+
+    </main>
+
+
+<footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a><a href="/pages/policy.html#advertising">広告方針</a><a href="/pages/policy.html#data">データ方針</a><a href="/pages/policy.html#privacy">プライバシー</a><a href="/pages/policy.html#disclaimer">免責事項</a></nav><p>防災上の価値は，はれトクの金銭的利益へ合算していません．</p></div></div></footer>
+
+
+  </body>
+
+
+</html>

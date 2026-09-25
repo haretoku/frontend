@@ -1,17 +1,17 @@
 const ORIGIN = "https://haretoku.jp";
 const PAGES = Object.freeze({
   "/": { id: "home", title: "はれトク", article: false },
-  "/solar/": { id: "guides", title: "はれトクガイド", article: false },
+  "/guides/": { id: "guides", title: "はれトクガイド", article: false },
   "/simulator/": { id: "diagnosis", title: "はれトク診断", article: false },
   ...Object.fromEntries([
     ["electricity-sales", "太陽光の収支"], ["subsidies", "補助金"],
     ["disaster", "停電への備え"], ["quotes-contractors", "見積もり"],
     ["policy", "はれトクの方針"], ["calculation-method", "計算方法・使用データ"]
-  ].map(([id, title]) => [`/pages/${id}.html`, { id, title, article: !["policy", "calculation-method"].includes(id) }]))
+  ].map(([id, title]) => [["policy", "calculation-method"].includes(id) ? `/pages/${id}.html` : `/guides/${id === "electricity-sales" ? "solar-economics" : id}/`, { id, title, article: !["policy", "calculation-method"].includes(id) }]))
 });
 
 export function canonicalPath(path) {
-  if (["/index.html", "/solar/index.html", "/simulator/index.html"].includes(path)) return path.replace("index.html", "");
+  if (path.endsWith("/index.html") && PAGES[path.replace("index.html", "")]) return path.replace("index.html", "");
   return PAGES[path] ? path : null;
 }
 

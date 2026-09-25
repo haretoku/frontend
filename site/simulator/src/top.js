@@ -8,7 +8,7 @@ import { validateLocation, populateMunicipalitySelect } from "./location-input.j
 mountFixedQuoteBar({
   content: document.querySelector('main'),
   alwaysVisible: true,
-  action: { ...QUOTE_ACTION, label: 'みつもりで確定', description: '導入費用を具体的に知りたい方へ', status: '準備中' },
+  action: { ...QUOTE_ACTION, label: '無料見積もり', description: '導入費用を具体的に知りたい方へ', status: '準備中' },
   readState() {
     return { eligible: window.matchMedia('(min-width: 52.001rem)').matches };
   }

@@ -7,7 +7,7 @@ export function mobileKeyboardLikely(inputFocused, layoutHeight, visualHeight) {
 }
 export const intersects = (rect, top, bottom) => rect.height > 0 && rect.bottom > top && rect.top < bottom;
 export function mountFixedQuoteBar({ readState, content, action = QUOTE_ACTION, alwaysVisible = false, observations = [] }) {
-  if (document.querySelector('[data-quote-bar]')) return;
+  if (QUOTE_ACTION.disabled || document.querySelector('[data-quote-bar]')) return;
   const bar = document.createElement('aside');
   bar.className = 'quote-bar mobile-quote-bar';
   bar.dataset.quoteBar = '';

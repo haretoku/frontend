@@ -15,7 +15,8 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       input: Object.fromEntries([
-        "index.html", "solar/index.html", "simulator/index.html", "404.html",
+        "index.html", "solar/index.html", "guides/index.html",
+        ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(name => `guides/${name}/index.html`), "simulator/index.html", "404.html",
         ...["calculation-method", "costs-maintenance", "electricity-sales", "subsidies", "disaster", "quotes-contractors", "policy"].map(name => `pages/${name}.html`)
       ].map(path => [path.replaceAll("/", "-").replace(".html", ""), resolve(root, path)]))
     }

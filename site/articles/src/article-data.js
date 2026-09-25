@@ -190,4 +190,6 @@ setupArticleQuoteBar();
 for (const button of document.querySelectorAll("[data-inline-quote-action]")) {
   button.textContent = QUOTE_ACTION.label;
   button.disabled = QUOTE_ACTION.disabled;
+  const promotion = button.closest("[data-quote-promotion]");
+  if (promotion) promotion.hidden = QUOTE_ACTION.disabled;
 }

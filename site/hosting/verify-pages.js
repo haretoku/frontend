@@ -12,8 +12,14 @@ async function walk(dir) {
 }
 const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-image\.png)$/.test(path)), "未承認の配信ファイルがあります");
+assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|guides\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-image\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
+for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ...Object.entries({"electricity-sales":"solar-economics", "subsidies":"subsidies", "disaster":"disaster", "quotes-contractors":"quotes-contractors"}).map(([old, slug]) => [`pages/${old}.html`, `/guides/${slug}/`])]) {
+  const html = await readFile(resolve(output, oldPath), "utf8");
+  assert(html.includes(`rel="canonical" href="https://haretoku.jp${newPath}"`));
+  assert(html.includes(`data-redirect-target href="${newPath}"`));
+  assert(html.includes('content="noindex,follow"'));
+}
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
 assert.equal(urls.length, 9);
@@ -22,6 +28,8 @@ for (const url of urls) {
   assert.equal(new URL(url).origin, "https://haretoku.jp");
   const html = await readFile(resolve(output, `.${path}${path.endsWith("/") ? "index.html" : ""}`), "utf8");
   assert(html.includes(`rel="canonical" href="${url}"`), `canonical: ${path}`);
+  assert(html.includes('name="viewport" content="width=device-width, initial-scale=1"'), `viewport: ${path}`);
+  assert(html.includes('property="og:type" content="website"'), `og:type: ${path}`);
   assert(html.includes(`property="og:url" content="${url}"`), `og:url: ${path}`);
   assert(html.includes('content="https://haretoku.jp/og-image.png"'));
 }

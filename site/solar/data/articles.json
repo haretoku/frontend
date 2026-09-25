@@ -1,7 +1,7 @@
 [
   {
     "id": "electricity-sales",
-    "href": "../pages/electricity-sales.html",
+    "href": "/guides/solar-economics/",
     "categoryId": "economics",
     "category": "収支",
     "title": "太陽光の収支は，何で決まる？",
@@ -18,7 +18,7 @@
   },
   {
     "id": "subsidies",
-    "href": "../pages/subsidies.html",
+    "href": "/guides/subsidies/",
     "categoryId": "subsidies",
     "category": "補助金",
     "title": "補助金は，どう探してどう申請する？",
@@ -35,7 +35,7 @@
   },
   {
     "id": "quotes-contractors",
-    "href": "../pages/quotes-contractors.html",
+    "href": "/guides/quotes-contractors/",
     "categoryId": "quotes",
     "category": "見積もり",
     "title": "太陽光の見積もりは，何を比べる？",
@@ -52,7 +52,7 @@
   },
   {
     "id": "disaster",
-    "href": "../pages/disaster.html",
+    "href": "/guides/disaster/",
     "categoryId": "safety",
     "category": "災害への備え",
     "title": "停電時，太陽光・蓄電池で何ができる？",

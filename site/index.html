@@ -28,9 +28,9 @@
         <a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a>
         <span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span>
         <nav class="site-nav" aria-label="主要メニュー">
-          <a href="/" aria-current="page"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"/></svg><span>ホーム</span></a><a href="simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="solar/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a>
+          <a href="/" aria-current="page"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"/></svg><span>トップ</span></a><a href="simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a>
         </nav>
-        <a class="mobile-guide-link" href="solar/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a>
+        <a class="mobile-guide-link" href="/guides/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a>
       </div>
     </header>
 
@@ -72,7 +72,7 @@
                 <div class="form-field">
                   <label for="monthly-electricity-bill">月々の電気代<span class="optional-label">任意</span></label>
                   <div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="1" placeholder="例：12,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div>
-                  <p id="electricity-bill-help" class="field-help">未入力なら，地域の標準値を使用します．</p>
+                  <p id="electricity-bill-help" class="field-help">未入力なら，地域の戸建て・4人以上世帯の平均を使用します．</p>
                 </div>
                 <button id="calculate-button" class="primary-button" type="submit" disabled>30年間の損得を診断する <span aria-hidden="true">→</span></button>
                 <p id="form-message" class="form-message" role="status" aria-live="polite">公開データを確認しています．</p>
@@ -90,30 +90,30 @@
         <div class="page-width">
           <div class="section-intro"><p class="eyebrow"><svg class="site-nav__icon top-heading-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg>はれ<span class="brand-term">トク</span>ガイド</p><h2>知って，なっ<span class="brand-word">トク</span>．</h2><p>収支・補助金・見積もり・災害への備え．設置前の疑問を解消しましょう．</p></div>
           <div class="guide-grid" id="top-guide-cards" aria-label="代表記事">
-            <a class="guide-card" href="pages/electricity-sales.html">
+            <a class="guide-card" href="/guides/solar-economics/">
               <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-solar-economics-photo.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"></span>
               <span class="guide-card__category">収支｜全国</span>
               <strong><span class="text-chunk">太陽光の収支は，</span><span class="text-chunk">何で決まる？</span></strong>
               <p>収入と費用のしくみを知り，自宅の収支を概算する前の疑問を解消できます．</p>
               <span>収支の決まり方を知る →</span>
             </a>
-            <a class="guide-card" href="pages/subsidies.html">
+            <a class="guide-card" href="/guides/subsidies/">
               <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-subsidies-application-photo.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"></span>
               <span class="guide-card__category">補助金｜全国｜2026年度</span>
               <strong><span class="text-chunk">補助金は，</span><span class="text-chunk">どう探して</span><span class="text-chunk">どう申請する？</span></strong>
               <p>制度の探し方と申請の流れ，施工会社へ相談できる支援を確認できます．</p>
               <span>補助金の確認方法を知る →</span>
             </a>
-            <a class="guide-card" href="pages/quotes-contractors.html">
+            <a class="guide-card" href="/guides/quotes-contractors/">
               <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-quotes-explanation-photo.webp" width="1536" height="1024" alt="" decoding="async" loading="lazy"></span>
               <span class="guide-card__category">見積もり｜全国</span>
               <strong><span class="text-chunk">太陽光の見積もりは，</span><span class="text-chunk">何を比べる？</span></strong>
               <p>見積もりの頼み方と，費用・工事・保証を同じ条件で比べるポイントを確認できます．</p>
               <span>見積もりの比べ方を知る →</span>
             </a>
-            <a class="guide-card" href="pages/disaster.html"><span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-disaster-battery-photo.webp" width="1536" height="1024" alt="" decoding="async" loading="lazy"></span><span class="guide-card__category">災害への備え｜全国</span><strong>停電時，太陽光・蓄電池で何ができる？</strong><p>太陽光単独の昼間利用と蓄電池の夜間給電，出力・残量・安全上の制約を確認できます．</p><span>災害への備えを読む →</span></a>
+            <a class="guide-card" href="/guides/disaster/"><span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-disaster-battery-photo.webp" width="1536" height="1024" alt="" decoding="async" loading="lazy"></span><span class="guide-card__category">災害への備え｜全国</span><strong>停電時，太陽光・蓄電池で何ができる？</strong><p>太陽光単独の昼間利用と蓄電池の夜間給電，出力・残量・安全上の制約を確認できます．</p><span>災害への備えを読む →</span></a>
           </div>
-          <p class="guides-more"><a href="solar/">すべての記事を見る <span aria-hidden="true">→</span></a></p>
+          <p class="guides-more"><a href="/guides/">すべての記事を見る <span aria-hidden="true">→</span></a></p>
         </div>
       </section>
     </main>
