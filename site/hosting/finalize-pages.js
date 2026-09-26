@@ -8,8 +8,10 @@ await writeFile(resolve(output, "sitemap.xml"), `<?xml version="1.0" encoding="U
 await writeFile(resolve(output, "robots.txt"), "User-agent: *\nAllow: /\n\nSitemap: https://haretoku.jp/sitemap.xml\n");
 await writeFile(resolve(output, ".nojekyll"), "");
 await writeFile(resolve(output, "CNAME"), "haretoku.jp\n");
-// OGPはハッシュに依存しない固定URLで配信する．既存画像を再利用する．
-await copyFile(resolve(root, "site/shared/assets/haretoku-balance-motif.png"), resolve(output, "og-image.png"));
+// TOPの既存写真とSVGグラフをHTML/CSSで描画してJPEG化した共有画像．画像変更時はURLも更新し旧キャッシュと区別する．
+await copyFile(resolve(root, "site/shared/assets/og-home-photo-20260926.jpg"), resolve(output, "og-home-photo-20260926.jpg"));
+// 旧メタを保持する共有サービス向けに，旧URLにも同じ表示のPNGを配信する．
+await copyFile(resolve(root, "site/hosting/assets/og-home-photo-20260926.png"), resolve(output, "og-image.png"));
 
 // Viteの共有CSS分割で順序が変わっても，共通ベース→記事ベース→ページ固有を維持する．
 async function restoreStyleOrder(dir) {

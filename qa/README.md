@@ -1587,3 +1587,13 @@ v0.1.0のActions run 36121129705は，自治体監査原本不足1件と都道�
 ### v0.1.3公開前の統括確認（2026-09-26）
 
 最終メタ情報・告知削除後の公開用ビルドを再生成し，70ファイル・正規9URL・公開データ11.17.0原バイト一致の検査PASS．統括が公開用4173でガイド一覧・収支記事・TOPを360px指定で独立実画面確認した．clientWidth=scrollWidth=345px，収支記事の破損画像0，TOPの見積もり固定バー0．TOPキャッチ・診断見出し及びガイド見出しの画像重ねロゴを保持し，パンくずは通常文字であることを確認．前日からの最終スマホ検査の阻害は解消．一時viewportは解除．次版は0.1.3とする．
+
+## 2026-09-26 共有画像の旧天秤参照修正
+
+> **結論：bfbcf74後の共有画像差分で，現TOPのグラフ重ねを含む新JPEGと旧URL互換PNGを確認し，公開・LINE再共有確認は統括へ引き渡す．**
+
+現TOPのhero__photo HTMLを抜き出し，既存hero-solar-low-plants.webp＋hero-haretoku-chart-selected.svgをmain.cssのmatrix3d・foreignObjectでそのまま描画した．ブラウザー描画の1536×1024領域をラスタライズし，`og-home-photo-20260926.jpg`（192,132 bytes）へ保存．新グラフ設計・画像生成・本文変更なし．元の写真，既存SVG，射影CSSは不変で，描画画像とdist出力を目視してPC画面の実グラフと四隅の整合を確認した．初回の白画面JPEG案は未公開のまま本画像へ置換した．
+
+JPEG SHA-256は`fdda3c3685a39dcffd0f21e525a7bd09e28562c5aa79341864be0040764536ec`．旧og-image.png向けに同じ表示のPNGを作成し，JPEG復号後とPNGのRGB画素が完全一致することを確認．PNG SHA-256は`295ad9efaf9d820256866df344b4529bea80c80ef53bdd900327b96c4b74b6fa`．9正規ページは新JPEG URLを参照し，旧画像URLも新表示のPNGとして保持する．
+
+Pages build/finalize/verifyは71ファイル・正規9URL・全OGP参照とJPEG形式・寸法メタ・新旧画像原バイト一致・互換PNG署名/1536×1024でPASS．前差分のメタ情報・参照先テスト2件もPASS．一時キャプチャHTMLは削除し，検査タブを閉じてviewportを解除した．新規補助サーバーなし，共有5173を維持．commit/push/deployなし．公開URLでの配信・LINEのページ情報キャッシュ更新と再共有結果は公開後の確認とする．
