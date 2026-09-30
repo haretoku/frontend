@@ -29,16 +29,16 @@ function element() {
 }
 
 async function initialize(loadFrontendData) {
-  const selectors = ["main","#estimate-form", "#prefecture", "[data-municipality-field]", "#municipality", "#municipality-help", "#monthly-electricity-bill", "#calculate-button", "#form-message"];
+  const selectors = ["#top-subsidy-data-link","main","#estimate-form", "#prefecture", "[data-municipality-field]", "#municipality", "#municipality-help", "#monthly-electricity-bill", "#calculate-button", "#form-message"];
   const nodes = Object.fromEntries(selectors.map((selector) => [selector, element()]));
   const navigations = [];
   const context = {
-    QUOTE_ACTION: {disabled:true}, mountFixedQuoteBar: () => {}, URL, CALCULATION_IMPLEMENTED: true, loadFrontendData,
+    QUOTE_ACTION: {disabled:true}, mountFixedQuoteBar: () => {}, URL, URLSearchParams, CALCULATION_IMPLEMENTED: true, loadFrontendData,
     document: {
       querySelector(selector) { assert.ok(nodes[selector], `Unexpected element: ${selector}`); return nodes[selector]; },
       createDocumentFragment: element, createElement: element
     },
-    window: { location: { href: "http://127.0.0.1:5173/", assign(url) { navigations.push(url); } } }
+    window: { addEventListener() {}, location: { href: "http://127.0.0.1:5173/", assign(url) { navigations.push(url); } } }
   };
   await runInNewContext(`(async () => {${housingSource.replace(/^export /gm, "")}
 ${locationSource.replace(/^export /gm, "")}\n${topSource.replace(/^import .*;$/gm, "")}\n})()`, context);
@@ -91,4 +91,19 @@ test('住宅区分の表示変更は値と明示入力の由来を維持する',
  assert.match(app,/すでに建っている家に設置/); assert.match(app,/新築する家に設置/);
  const result=runInNewContext(housingSource.replace(/^export /gm,'')+"; housingInput('new')");
  assert.equal(result.value,'new'); assert.equal(result.source,'user_input');
+});
+
+test('データ案内は地域だけを引き継ぎ，県変更時に旧市を残さない',async()=>{
+ const {nodes}=await initialize(async()=>({publicData}));
+ const link=nodes['#top-subsidy-data-link'],pref=nodes['#prefecture'],city=nodes['#municipality'];
+ assert.equal(link.href,'/data/subsidies/');
+ pref.value='14';pref.listeners.change();
+ assert.equal(link.href,'/data/subsidies/?prefecture=14');
+ city.value='14130';nodes['#monthly-electricity-bill'].value='12000';city.listeners.change();
+ assert.equal(link.href,'/data/subsidies/?prefecture=14&municipality_code=14130');
+ pref.value='08';pref.listeners.change();
+ assert.equal(link.href,'/data/subsidies/?prefecture=08');
+ city.value='14130';city.listeners.change();
+ assert.equal(link.href,'/data/subsidies/?prefecture=08');
+ pref.value='';pref.listeners.change();assert.equal(link.href,'/data/subsidies/');
 });

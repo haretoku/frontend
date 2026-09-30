@@ -1,3 +1,28 @@
+import './hokkaido-subsidy.test.js';
+import {receiveSchemeRules} from '../../data/src/scheme-adapter.js';
+import './hokkaido-combined-v5.test.js';
+import './hokkaido-combined-v7.test.js';
+import './hokkaido-combined-v8.test.js';
+import './hokkaido-combined-v9.test.js';
+import './hokkaido-combined-v10.test.js';
+import './abashiri-cost.test.js';
+import './sapporo-cost.test.js';
+import './tenei-capacity.test.js';
+import './fukushima-subsidy.test.js';
+import './yamagata-subsidy.test.js';
+import './akita-subsidy.test.js';
+import './subsidy-display-groups.test.js';
+import './iwate-subsidy.test.js';
+import './miyagi-subsidy.test.js';
+import './aomori-subsidy.test.js';
+import './okinawa-subsidy.test.js';
+import './kagoshima-subsidy.test.js';
+import './miyazaki-subsidy.test.js';
+import './oita-subsidy.test.js';
+import './mie-subsidy.test.js';
+import './kumamoto-subsidy.test.js';
+import './scheduled-subsidy.test.js';
+import './nagasaki-subsidy.test.js';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
@@ -103,7 +128,7 @@ for (const fixture of capacityPreprocessingCases.cases) {
       Number(fixture.expected_preprocessed_capacity_kw)
     );
     const data = structuredClone(publicData);
-    const program = data.municipal_subsidy_programs.find((item) => item.municipality_code === "14218");
+    const program = receiveSchemeRules(data).municipal.find((item) => item.municipality_code === "14218");
     Object.assign(program.benefit_components.find((item) => item.component_type === "solar").amount_rule, {
       capacity_preprocessing_rule: capacityPreprocessingCases.rule,
       amount_yen_per_kw: capacityPreprocessingCases.amount_yen_per_kw,
@@ -134,7 +159,7 @@ test("制度固有の容量切捨ては十進境界と指数表記を保ち，�
 test("容量前処理→単価乗算→金額切捨て→上限の順に自治体補助額へ反映する", () => {
   // Synthetic amount rule on an existing accepted program; no public data is edited.
   const data = structuredClone(publicData);
-  const program = data.municipal_subsidy_programs.find((item) => item.municipality_code === "14218");
+  const program = receiveSchemeRules(data).municipal.find((item) => item.municipality_code === "14218");
   const rule = program.benefit_components.find((item) => item.component_type === "solar").amount_rule;
   rule.amount_yen_per_kw = 15000;
   rule.cap_yen = null;
@@ -153,11 +178,11 @@ test("容量前処理→単価乗算→金額切捨て→上限の順に自治�
   assert.equal(calculateEstimate(input, data).input.system_capacity_kw, 1.067);
 });
 
-test("公開契約11.17.0は容量劣化の意味と時点を明示した蓄電池契約を提供する", () => {
+test("公開契約12.0.0-review.1は容量劣化の意味と時点を明示した蓄電池契約を提供する", () => {
   const calculation = publicData.calculation;
   const occupancyModel = calculation.daytime_occupancy;
 
-  assert.equal(publicData.schema_version, "11.17.0");
+  assert.equal(publicData.schema_version, "12.0.0-review.1");
   assert.equal(occupancyModel.model_id, "residential-pv-hourly-overlap-2026");
   assert.equal(occupancyModel.time_bin_definition.count, 8760);
   assert.equal(
@@ -176,7 +201,7 @@ test("公開契約11.17.0は容量劣化の意味と時点を明示した蓄電�
   assert.equal(Object.hasOwn(calculation, "purchase_price"), false);
   assert.equal(Object.hasOwn(occupancyModel, "baseline_self_consumption_rate"), false);
   assert.equal(Object.hasOwn(occupancyModel, "daytime_occupancy_effect_percentage_points"), false);
-  assert.equal(publicData.municipalities.length, 1112);
+  assert.equal(publicData.municipalities.length, 1562);
   assert.ok(Array.isArray(publicData.municipal_subsidy_programs));
   assert.deepEqual(calculation.equipment_packages, ["solar_only", "solar_plus_standard_battery"]);
   assert.equal(calculation.default_equipment_package, "solar_only");
@@ -265,11 +290,11 @@ for (const calculationCase of calculationCases.cases) {
   });
 }
 
-test("Schema 11.12正本3ファイルのSHA-256が承認値と一致する", async () => {
+test("採用済み公開ペアと既存計算fixtureのSHA-256が承認値と一致する", async () => {
   const expectedHashes = new Map([
-    ["../../data/input/public-data.json", "8DFD5FDBAE2DCAD14BC0991BC47B0EA949B64B5E1AC3DABF5C0871B161862D91"],
-    ["../fixtures/calculation-cases.json", "802ADC99B8344D3B53BDC87CD71A4C1CCB83DAC7459CCE6089513D1D230265D7"],
-    ["../../data/input/metadata.json", "40FC0F533DC0947C5E944D9408086E22D935552E8E5FE77AF833778870BB59C0"]
+    ["../../data/input/public-data.json", "E791078BCABC5A46C4A8ADF48E310C535ADB9E6D0527476421BD8EE40F1E081A"],
+    ["../fixtures/calculation-cases.json", "E3171DCD87C1384364EC91713E4DC7213062EAD5C0CC1FF722B83D5A513A6582"],
+    ["../../data/input/metadata.json", "9F5D4934567D277A8F821A2F1A6D5213DE8A9BB6594B9A1402F5E55E37F120DB"]
   ]);
   for (const [path, expectedHash] of expectedHashes) {
     const contents = await readFile(new URL(path, import.meta.url));
@@ -709,7 +734,7 @@ test("停電参考線はAC負荷と補機を片道効率でDCへ換算し平時�
 
 test("最低容量は元の入力で先に判定し，未満を条件不足として残す", () => {
   const data = structuredClone(publicData);
-  const program = data.municipal_subsidy_programs.find((item) => item.municipality_code === "14218");
+  const program = receiveSchemeRules(data).municipal.find((item) => item.municipality_code === "14218");
   const rule = program.benefit_components.find((item) => item.component_type === "solar").amount_rule;
   Object.assign(rule, { calculation_type: "fixed", fixed_amount_yen: 40000, amount_yen_per_kw: null, cap_yen: null, minimum_capacity_kw: 2 });
   const calculate = (systemCapacityKw) => calculateEstimate({ prefectureCode: "14", municipalityCode: "14218", monthlyElectricityBillYen: null, systemCapacityKw }, data);
@@ -883,14 +908,14 @@ test('全国47県の県のみ診断は市区町村補助を算入せず県確認
 });
 
 test('資料不足8件とB2の理由は診断接続後も重複せず受付と未確定額を維持する', () => {
- const targets=publicData.diagnostic_subsidy_programs.filter(p=>p.machine_rule==='municipal_unconfirmed_not_included'||['04','05','06'].includes(p.prefecture_code));
+ const targets=publicData.diagnostic_subsidy_programs.filter(p=>p.machine_rule==='municipal_unconfirmed_not_included'||(p.government_level==='prefecture'&&['05','06'].includes(p.prefecture_code)));
  assert.equal(targets.filter(p=>p.machine_rule==='municipal_unconfirmed_not_included').length,8);
  for(const p of targets){
   const r=calculateEstimate({prefectureCode:p.prefecture_code,municipalityCode:p.municipality_code??null,housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',monthlyElectricityBillYen:null},publicData);
   const b=r.scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
   const rows=[...b.included_programs,...b.candidate_programs,...b.excluded_programs].filter(x=>x.id===p.id);
   assert.equal(rows.length,1,p.id);assert.equal(rows[0].amount_yen,null);assert.equal(rows[0].application_status,p.application_status);
-  const expected=p.machine_rule==='municipal_unconfirmed_not_included'?'investigation_closed_insufficient_information':p.prefecture_code==='04'?'application_scheduled':p.prefecture_code==='05'?'calculation_detail_unconfirmed':'sale_path_not_applicable';
+  const expected=p.machine_rule==='municipal_unconfirmed_not_included'?'investigation_closed_insufficient_information':p.prefecture_code==='05'?'calculation_detail_unconfirmed':'sale_path_not_applicable';
   assert.equal(rows[0].reason_code,expected,p.id);
  }
 });

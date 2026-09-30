@@ -100,8 +100,8 @@ test("最初の有効結果だけを記録し再計算・履歴変更で完了�
   assert(!JSON.stringify(f.commands()).includes("CHANGED"));
 });
 
-test("公開9ページだけに入口があり結果描画成功後にだけ完了を通知する", async () => {
-  const pages = ["index.html", "guides/index.html", "simulator/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
+test("既存9ページとデータ2ページに入口があり結果描画成功後にだけ完了を通知する", async () => {
+  const pages = ["index.html", "guides/index.html", "simulator/index.html", "data/index.html", "data/subsidies/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
   for (const page of pages) {
     const html = await readFile(new URL(`../../site/${page}`, import.meta.url), "utf8");
     assert.equal((html.match(/src="(?:\.\.\/|\/)?shared\/analytics\.js"/g) ?? []).length, 1, page);
@@ -119,4 +119,24 @@ test("旧ガイドURLでは計測せず，新URLのindex別名を正規化する
     assert.equal(analyticsAllowed(configured, `https://haretoku.jp${path}`, true), false);
   }
   assert.equal(analyticsAllowed(configured, "https://haretoku.jp/guides/solar-economics/index.html", true), true);
+});
+
+test('データページは地域・受付・金額を送らず，診断遷移を一度だけ記録する',()=>{
+ for(const path of ['/data/','/data/subsidies/','/data/subsidies/index.html']){
+  const f=fixture('https://haretoku.jp'+path+'?prefecture=CANARY&municipality_code=CANARY&reception=CANARY#CANARY',configured,true,'https://haretoku.jp/data/subsidies/?secret=CANARY');
+  assert.equal(f.analytics.active,true);
+  assert.deepEqual(events(f).map(c=>c[1]),['page_view']);
+  const click=href=>f.handlers.click({button:0,target:{closest:()=>({href,hasAttribute:()=>false,getAttribute:()=>null})}});
+  click('https://outside.example/simulator/');
+  click('https://haretoku.jp/data/subsidies/');
+  assert.equal(events(f).length,1);
+  click('https://haretoku.jp/simulator/?prefecture=CANARY&from=data');
+  click('https://haretoku.jp/simulator/');
+  assert.deepEqual(events(f).map(c=>c[1]),['page_view','data_diagnosis_click']);
+  assert.equal(f.analytics.diagnosisComplete(),false);
+  assert.equal(events(f)[0][2].page_referrer,'https://haretoku.jp/data/subsidies/');
+  assert(!JSON.stringify(f.commands()).includes('CANARY'));
+  assert.equal(fixture('http://localhost:5173'+path).analytics.active,false);
+  assert.equal(fixture('https://haretoku.jp'+path,configured,false).analytics.active,false);
+ }
 });

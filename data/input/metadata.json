@@ -1,7 +1,7 @@
 {
-  "schema_version": "11.17.0",
-  "data_version": "2026-09-21",
-  "generated_at": "2026-09-21T07:48:12+00:00",
+  "schema_version": "12.0.0-review.1",
+  "data_version": "2026-09-28",
+  "generated_at": "2026-09-30T21:13:59.108641Z",
   "sources": [
     {
       "source_id": "akita-housing-reform-2026",

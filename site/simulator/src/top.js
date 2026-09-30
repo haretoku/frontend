@@ -22,6 +22,7 @@ const municipalityHelp = document.querySelector("#municipality-help");
 const monthlyElectricityBill = document.querySelector("#monthly-electricity-bill");
 const calculateButton = document.querySelector("#calculate-button");
 const formMessage = document.querySelector("#form-message");
+const subsidyDataLink = document.querySelector("#top-subsidy-data-link");
 let frontendData = null;
 let dataLoadFailed = false;
 
@@ -40,6 +41,19 @@ function updateMunicipalities() {
   populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp, showUnselected: true }, frontendData?.publicData);
   municipalityHelp.hidden = !prefecture.value || !municipality.disabled;
   updateAvailability();
+  updateSubsidyDataLink();
+}
+
+function updateSubsidyDataLink() {
+  const params = new URLSearchParams();
+  const data = frontendData?.publicData;
+  if (data?.prefectures.some(p => p.code === prefecture.value)) {
+    params.set('prefecture', prefecture.value);
+    if (!municipality.disabled && data.municipalities.some(m => m.prefecture_code === prefecture.value && m.municipality_code === municipality.value)) {
+      params.set('municipality_code', municipality.value);
+    }
+  }
+  subsidyDataLink.href = '/data/subsidies/' + (params.size ? '?' + params : '');
 }
 
 function updateAvailability() {
@@ -69,6 +83,8 @@ form.addEventListener("submit", (event) => {
 });
 
 prefecture.addEventListener("change", updateMunicipalities);
+municipality.addEventListener("change", updateSubsidyDataLink);
+window.addEventListener("pageshow", updateSubsidyDataLink);
 
 try {
   frontendData = await loadFrontendData();

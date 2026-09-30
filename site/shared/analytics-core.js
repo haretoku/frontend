@@ -3,6 +3,8 @@ const PAGES = Object.freeze({
   "/": { id: "home", title: "はれトク", article: false },
   "/guides/": { id: "guides", title: "はれトクガイド", article: false },
   "/simulator/": { id: "diagnosis", title: "はれトク診断", article: false },
+  "/data/": { id: "data", title: "はれトクデータ", article: false, data: true },
+  "/data/subsidies/": { id: "data_subsidies", title: "太陽光・蓄電池の補助金", article: false, data: true },
   ...Object.fromEntries([
     ["electricity-sales", "太陽光の収支"], ["subsidies", "補助金"],
     ["disaster", "停電への備え"], ["quotes-contractors", "見積もり"],
@@ -69,7 +71,7 @@ export function createAnalytics({ config, productionBuild, window: win, document
     event("page_view");
     if (page.article) event("article_view");
     let started = false, completed = false;
-    if (page.article) doc.addEventListener("click", e => {
+    if (page.article || page.data) doc.addEventListener("click", e => {
       if (e.defaultPrevented || (e.button !== undefined && e.button !== 0) || started) return;
       const link = e.target?.closest?.("a[href]");
       if (!link || link.hasAttribute("download") || link.getAttribute("aria-disabled") === "true") return;
@@ -77,7 +79,7 @@ export function createAnalytics({ config, productionBuild, window: win, document
         const target = new URL(link.href, win.location.href);
         if (target.origin !== ORIGIN || canonicalPath(target.pathname) !== "/simulator/") return;
         started = true;
-        event("article_diagnosis_click");
+        event(page.data ? "data_diagnosis_click" : "article_diagnosis_click");
       } catch { /* 不正なリンクは計測しない． */ }
     });
     const script = doc.createElement("script");

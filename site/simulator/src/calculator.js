@@ -1,4 +1,5 @@
 import { connectDiagnosticSubsidy } from './diagnostic-subsidy.js';
+import { prepareSubsidyData } from '../../../data/src/scheme-adapter.js';
 import { housingInput } from "./housing-input.js";
 import { preprocessCapacity } from "./capacity-preprocessing.js";
 
@@ -17,9 +18,21 @@ function validatedProfile(values, expectedLength, label) {
   return values;
 }
 
+// Python 3.12 sum uses compensated addition for finite floats.
+// Preserve low-order terms when normalizing and totaling 8760-hour energy profiles.
+export function compensatedSum(values) {
+  let total = 0, correction = 0;
+  for (const value of values) {
+    const next = total + value;
+    correction += Math.abs(total) >= Math.abs(value) ? (total - next) + value : (value - next) + total;
+    total = next;
+  }
+  return total + correction;
+}
+
 function normalizedProfile(values, expectedLength, label) {
   const validatedValues = validatedProfile(values, expectedLength, label);
-  const total = validatedValues.reduce((sum, value) => sum + value, 0);
+  const total = compensatedSum(validatedValues);
   if (total <= 0) throw new Error(`${label}の合計は0より大きい必要があります．`);
   return validatedValues.map((value) => value / total);
 }
@@ -95,10 +108,9 @@ function temporalOverlap(annualConsumption, annualGeneration, occupancyRate, ori
     orientation,
     model
   );
-  const selfConsumed = loadProfile.reduce(
-    (sum, load, index) => sum + Math.min(load, generationProfile[index]),
-    0
-  );
+  const selfConsumed = compensatedSum(loadProfile.map(
+    (load, index) => Math.min(load, generationProfile[index])
+  ));
   return {
     selfConsumed,
     selfConsumptionRate: annualGeneration > 0 ? selfConsumed / annualGeneration : 0,
@@ -111,8 +123,8 @@ function batteryEnergyByYear(loadProfile, generationProfile, battery, evaluation
   const dischargeEfficiency = battery.discharge_efficiency;
   const retentionFactor = battery.annual_capacity_retention_factor;
   const initialCapacity = battery.capacity_kwh;
-  const firstYearGeneration = generationProfile.reduce((sum, value) => sum + value, 0);
-  const annualConsumption = loadProfile.reduce((sum, value) => sum + value, 0);
+  const firstYearGeneration = compensatedSum(generationProfile);
+  const annualConsumption = compensatedSum(loadProfile);
   let stateOfCharge = 0;
   let serviceAge = 0;
   const results = [];
@@ -417,7 +429,7 @@ function municipalityStatusForEquipment(municipality, programs, equipmentPackage
     ? new Set(["solar", "solar_and_battery_independent"])
     : new Set(["solar", "battery", "solar_and_battery_independent", "solar_and_battery_required"]);
   return programs.some((program) => (
-    program.application_status === "accepting"
+    ["accepting", "scheduled"].includes(program.application_status)
     && eligibleEquipment.has(program.target_equipment)
     && resolvedProgramComponents(program, equipmentPackage) !== null
   )) ? "included" : "candidate";
@@ -536,13 +548,13 @@ function municipalProgramEvaluation(
  equipment_package_not_applicable:'入力した設備構成と制度の対象設備が一致しないため算入しない．',
  capacity_below_minimum:'入力容量が制度の最低容量を下回るため算入しない．',
  application_closed:'受付終了を確認しているため，現在は算入しない．',
- application_not_started:'受付開始前を確認しているため，現在は算入しない．',
  application_status_unconfirmed:'現在の受付状況を確認できないため，算入可否を確定しない．',
  required_benefit_component_missing:'対象設備の補助内訳が不足しているため，補助額を確定しない．',
  benefit_amount_rule_unresolved:'金額算定ルールを一意に確定できないため，補助額を確定しない．',
  combination_status_unconfirmed:'他制度との併用可否を公式資料で確認できないため，単独候補として保持する．'
   }[reasonCode];
   if (primary) confirmations.unshift(primary);
+  if (program.application_status === 'scheduled') confirmations.push('受付開始前であり，所定の契約・設置・申請期間を満たす仮定で評価する．現在受付中又は受給確定を意味しない．');
   return {
     ...program,
     government_level: "municipality",
@@ -582,8 +594,8 @@ function municipalSubsidyForCapacity(
     let status, reason;
     if (!eligibleEquipment.has(program.target_equipment)) { status='excluded_incompatible'; reason='equipment_package_not_applicable'; }
     else if (resolvedProgramComponents(program,equipmentPackage)!==null && !meetsMinimumCapacity(program)) { status='excluded_incompatible'; reason='capacity_below_minimum'; }
-    else if (program.application_status!=='accepting') {
-      [status,reason]=({closed:['excluded_closed','application_closed'],scheduled:['excluded_closed','application_not_started']}[program.application_status]??['candidate_missing_conditions','application_status_unconfirmed']);
+    else if (!['accepting','scheduled'].includes(program.application_status)) {
+      [status,reason]=({closed:['excluded_closed','application_closed']}[program.application_status]??['candidate_missing_conditions','application_status_unconfirmed']);
     } else if (resolvedProgramComponents(program,equipmentPackage)===null) {status='candidate_missing_conditions';reason=candidateReason(program);}
     else return null;
     return municipalProgramEvaluation(program,status,reason,null,equipmentPackage);
@@ -710,6 +722,7 @@ function appliedDaytimeOccupancy(input, calculation) {
 }
 
 export function calculateEstimate(input, publicData) {
+  publicData = prepareSubsidyData(publicData);
   const housing = housingInput(input.housingAge, publicData.calculation.housing_age_input);
   const prefecture = publicData.prefectures.find((item) => item.code === input.prefectureCode);
   if (!prefecture) throw new Error("指定された都道府県のデータがありません．");

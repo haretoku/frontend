@@ -1,3 +1,4 @@
+import {prepareSubsidyData} from './scheme-adapter.js';
 const PUBLIC_DATA_URL = new URL("../input/public-data.json", import.meta.url);
 const METADATA_URL = new URL("../input/metadata.json", import.meta.url);
 
@@ -21,13 +22,13 @@ function validateVersion(publicData, metadata) {
   }
 }
 
-export async function loadFrontendData() {
+export async function loadFrontendData({publicDataUrl=PUBLIC_DATA_URL,metadataUrl=METADATA_URL}={}) {
   const [publicData, metadata] = await Promise.all([
-    loadJson(PUBLIC_DATA_URL),
-    loadJson(METADATA_URL)
+    loadJson(publicDataUrl),
+    loadJson(metadataUrl)
   ]);
 
   validateVersion(publicData, metadata);
 
-  return { publicData, metadata };
+  return { publicData:prepareSubsidyData(publicData), metadata };
 }

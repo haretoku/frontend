@@ -1435,7 +1435,7 @@ input[type="radio"] { accent-color: var(--color-primary); }
 .mobile-graph-return { display: none; }
 @media (max-width: 52rem) {
  .site-header .site-nav { display: flex; margin-left: auto; gap: 0; }
- .site-header .site-nav a:not(.analysis-guide-link) { display: none; }
+ .site-header .site-nav a:not(.analysis-guide-link):not(.site-data-link) { display: none; }
  .site-header .site-nav .analysis-guide-link { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 .5rem; font-size: .85rem; }
  .guide-label-desktop { display: none; }
  .guide-label-mobile { display: inline; }

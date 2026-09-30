@@ -1,6 +1,6 @@
 export const applicationStatusLabels = {
   accepting: "受付中", waitlist: "受付中",
-  closed: "受付対象外", suspended: "受付対象外", scheduled: "受付対象外", not_open: "受付対象外", not_applicable: "受付対象外",
+  closed: "受付対象外", suspended: "受付対象外", scheduled: "受付開始前", not_open: "受付対象外", not_applicable: "受付対象外",
   unknown: "不明", unconfirmed: "不明", accepting_with_waitlist_branch: "不明"
 };
 

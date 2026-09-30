@@ -1,0 +1,1143 @@
+{
+  "fixture_only": true,
+  "source_sha256": "74a1c525781f75f5729620faadd299a679298801bd0c742f286b88cba0eac825",
+  "schema_version": "12.0.0-review.1",
+  "data_version": "2026-09-28",
+  "prefectures": [
+    {
+      "code": "01",
+      "name": "北海道",
+      "annual_generation_kwh_per_kw": 1042.3816,
+      "annual_generation_source_id": "nedo-monsola20-prefectural-generation-2010-2018",
+      "annual_generation_source_period": "2010-2018",
+      "annual_generation_representative_point": "北海道庁舎",
+      "annual_generation_mesh_id": "64414277",
+      "annual_generation_orientation_azimuth_degrees": 0,
+      "annual_generation_tilt_degrees": 30,
+      "annual_generation_performance_ratio": 0.73,
+      "annual_generation_calculation_conditions": "MONSOLA-20の2010～2018年平均について，都道府県庁舎所在3次メッシュの真南（方位角0度）・傾斜角30度の月平均日積算斜面日射量を平年の月日数で加重し，総合係数0.73を乗じて標準日射強度1 kW／m²で除した1 kW当たり年間予想発電量．0.73は全国一律のサービス評価仮定であり，現代住宅の実測代表値ではない．",
+      "electricity_price_yen_per_kwh": 32.86,
+      "default_monthly_electricity_bill_yen": 18475,
+      "default_annual_electricity_bill_ten_thousand_yen": 22.17,
+      "default_electricity_bill_household_scope": "建て方別・世帯人数別（4区分）_戸建_4人以上",
+      "default_electricity_bill_label": "戸建て・4人以上世帯の地域平均（令和5年度）",
+      "default_electricity_bill_source_id": "env-household-co2-electricity-payment-fy2023",
+      "default_electricity_bill_surveyed_households": 93,
+      "default_electricity_bill_sampling_weight_adjusted_households": 377,
+      "subsidy_amount_for_4kw_yen": 0,
+      "subsidy_programs": [],
+      "subsidy_review_source_ids": [
+        "hokkaido-energy-subsidy-index-2026",
+        "hokkaido-home-zero-carbon-2026"
+      ],
+      "subsidy_data_status": "no_eligible_program_found",
+      "prefecture_program_status": "current_scope_reviewed",
+      "candidate_subsidy_programs": []
+    }
+  ],
+  "municipalities": [],
+  "listing_municipalities": [
+    {
+      "municipality_code": "01371",
+      "municipality_name": "せたな町",
+      "prefecture_code": "01"
+    },
+    {
+      "municipality_code": "01394",
+      "municipality_name": "蘭越町",
+      "prefecture_code": "01"
+    },
+    {
+      "municipality_code": "01433",
+      "municipality_name": "妹背牛町",
+      "prefecture_code": "01"
+    },
+    {
+      "municipality_code": "01437",
+      "municipality_name": "北竜町",
+      "prefecture_code": "01"
+    },
+    {
+      "municipality_code": "01457",
+      "municipality_name": "上川町",
+      "prefecture_code": "01"
+    },
+    {
+      "municipality_code": "01662",
+      "municipality_name": "厚岸町",
+      "prefecture_code": "01"
+    }
+  ],
+  "subsidy_schemes": [
+    {
+      "record_id": "scheme-835057463eb14c75bfe4b7ee65e1ef2d",
+      "target_year": "2026年度",
+      "scheme_name": "厚岸町住宅用太陽光発電システム設置奨励金",
+      "government_level": "municipality",
+      "prefecture_code": "01",
+      "municipality_code": "01662",
+      "branches": [
+        {
+          "branch_id": "hokkaido-additional-akkeshi-pv",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "太陽光パネル"
+          ],
+          "application_start": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2026-04-01"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2027-01-25"
+            }
+          ],
+          "application_status": "受付中",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "太陽光は新品で，モジュール公称最大出力合計とパワーコンディショナ定格出力合計の小さい方が10kW未満です．低圧逆潮流の系統連系，電力受給契約及び発電量記録装置が必要です．"
+          ],
+          "gaps": [
+            "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．"
+          ],
+          "evidence_urls": [
+            "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+            "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+            "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "legacy_municipal_rule_ids": []
+        },
+        {
+          "branch_id": "hokkaido-additional-akkeshi-existing-pv-battery",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "蓄電池"
+          ],
+          "application_start": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2026-04-01"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2027-01-25"
+            }
+          ],
+          "application_status": "受付中",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "蓄電池は新品のリチウムイオン電池で，容量1kWh以上17.76kWh未満，対象の太陽光設備へ常時接続することが必要です．",
+            "この区分は既設太陽光へ蓄電池を新設する場合です．"
+          ],
+          "gaps": [
+            "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．"
+          ],
+          "evidence_urls": [
+            "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+            "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+            "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "legacy_municipal_rule_ids": []
+        },
+        {
+          "branch_id": "hokkaido-additional-akkeshi-new-pv-battery",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "太陽光パネル",
+            "蓄電池"
+          ],
+          "application_start": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2026-04-01"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2027-01-25"
+            }
+          ],
+          "application_status": "受付中",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "太陽光は新品で，モジュール公称最大出力合計とパワーコンディショナ定格出力合計の小さい方が10kW未満です．低圧逆潮流の系統連系，電力受給契約及び発電量記録装置が必要です．",
+            "蓄電池は新品のリチウムイオン電池で，容量1kWh以上17.76kWh未満，対象の太陽光設備へ常時接続することが必要です．",
+            "この区分は新築住宅へ太陽光と蓄電池を同時設置する場合です．"
+          ],
+          "gaps": [
+            "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．"
+          ],
+          "evidence_urls": [
+            "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+            "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+            "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "legacy_municipal_rule_ids": []
+        },
+        {
+          "branch_id": "hokkaido-additional-akkeshi-existing-pv-battery-combined",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "太陽光パネル",
+            "蓄電池"
+          ],
+          "application_start": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2026-04-01"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "annual",
+              "label": "年度募集",
+              "date": "2027-01-25"
+            }
+          ],
+          "application_status": "受付中",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "太陽光は新品で，モジュール公称最大出力合計とパワーコンディショナ定格出力合計の小さい方が10kW未満です．低圧逆潮流の系統連系，電力受給契約及び発電量記録装置が必要です．",
+            "蓄電池は新品のリチウムイオン電池で，容量1kWh以上17.76kWh未満，対象の太陽光設備へ常時接続することが必要です．",
+            "上乗せは既存住宅への太陽光・蓄電池の同時設置で，太陽光モジュール公称最大出力合計も10kW未満であることが条件です．2023年7月14日以降の契約，住宅・設備・工事の広報利用への許諾が必要で，道の予算がなくなり次第終了します．"
+          ],
+          "gaps": [
+            "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．",
+            "既存住宅の同時設置に関する上乗せ加算式と，募集案内の合算上限との対応は未確認です．上限未満の場合の加算額を確定していません．"
+          ],
+          "evidence_urls": [
+            "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+            "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+            "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "legacy_municipal_rule_ids": []
+        }
+      ],
+      "diagnostic_rules": [],
+      "legacy_municipal_rules": []
+    },
+    {
+      "record_id": "scheme-afdac8dac64242749556dcd75dae90c2",
+      "target_year": "2026年度",
+      "scheme_name": "住宅用太陽光発電システム等設置補助金",
+      "government_level": "municipality",
+      "prefecture_code": "01",
+      "municipality_code": "01437",
+      "branches": [
+        {
+          "branch_id": "hokkaido-additional-hokuryu-solar",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "太陽光パネル"
+          ],
+          "application_start": [
+            {
+              "branch_id": "saved-period-1",
+              "label": "保存期間1",
+              "date": "2026-05-01"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "saved-period-1",
+              "label": "保存期間1",
+              "date": "2026-12-21"
+            }
+          ],
+          "application_status": "受付中",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内に住所を有する人又は設置報告時までに転入する人が対象で，申請者と同居家族に税の滞納がないことが必要です．",
+            "加算枠は既存住宅が対象です．太陽光と蓄電池の同時設置又は既設太陽光への蓄電池新設が条件で，太陽光モジュール10kW未満，蓄電池17.76kWh未満です．",
+            "受付は毎年度5月1日から12月20日までで，休日の場合は翌開庁日です．交付決定後に着工し，完成後30日以内又は当該年度2月15日の早い日までに報告します．設置後2年間は年1回の運転実績報告が必要です．",
+            "太陽光設備にはJ-PEAへの適合条件があります．"
+          ],
+          "gaps": [
+            "町単独の基本枠での設備単独設置の扱い，所有条件の細則，他制度との併用，端数処理及び予算残は未確認です．",
+            "受付終了日の2026年12月21日は通常の休日規定に基づく日付です．臨時閉庁の有無は未確認です．"
+          ],
+          "evidence_urls": [
+            "https://www.town.hokuryu.hokkaido.jp/kurashi/taiyou-hojokin/"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [],
+          "legacy_municipal_rule_ids": []
+        },
+        {
+          "branch_id": "hokkaido-additional-hokuryu-battery",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "蓄電池"
+          ],
+          "application_start": [
+            {
+              "branch_id": "saved-period-1",
+              "label": "保存期間1",
+              "date": "2026-05-01"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "saved-period-1",
+              "label": "保存期間1",
+              "date": "2026-12-21"
+            }
+          ],
+          "application_status": "受付中",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内に住所を有する人又は設置報告時までに転入する人が対象で，申請者と同居家族に税の滞納がないことが必要です．",
+            "加算枠は既存住宅が対象です．太陽光と蓄電池の同時設置又は既設太陽光への蓄電池新設が条件で，太陽光モジュール10kW未満，蓄電池17.76kWh未満です．",
+            "受付は毎年度5月1日から12月20日までで，休日の場合は翌開庁日です．交付決定後に着工し，完成後30日以内又は当該年度2月15日の早い日までに報告します．設置後2年間は年1回の運転実績報告が必要です．",
+            "対象設備は新品の定置用蓄電池です．"
+          ],
+          "gaps": [
+            "町単独の基本枠での設備単独設置の扱い，所有条件の細則，他制度との併用，端数処理及び予算残は未確認です．",
+            "受付終了日の2026年12月21日は通常の休日規定に基づく日付です．臨時閉庁の有無は未確認です．",
+            "蓄電池補助の原文は発電容量1kW当たりの額を示しています．計算に用いる容量の種類・単位は未確定で，蓄電容量のkWh単価として読み替えていません．"
+          ],
+          "evidence_urls": [
+            "https://www.town.hokuryu.hokkaido.jp/kurashi/taiyou-hojokin/"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [],
+          "legacy_municipal_rule_ids": []
+        }
+      ],
+      "diagnostic_rules": [],
+      "legacy_municipal_rules": []
+    },
+    {
+      "record_id": "scheme-0539e0b4486c4394b8b929b5d4a279b5",
+      "target_year": "2026年度",
+      "scheme_name": "住宅リフォーム等補助金（新・省エネルギー設備改修）",
+      "government_level": "municipality",
+      "prefecture_code": "01",
+      "municipality_code": "01457",
+      "branches": [
+        {
+          "branch_id": "hokkaido-additional-kamikawa-solar",
+          "diagnostic_rule_ids": [],
+          "target_equipment": [
+            "太陽光パネル"
+          ],
+          "application_start": [
+            {
+              "branch_id": "saved-period-1",
+              "label": "保存期間1",
+              "date": "2026-05-11"
+            }
+          ],
+          "application_end": [
+            {
+              "branch_id": "saved-period-1",
+              "label": "保存期間1",
+              "date": "2026-09-30"
+            }
+          ],
+          "application_status": "不明",
+          "amount": {
+            "display_text": null,
+            "evidence_status": "not_classified"
+          },
+          "official_conditions": [
+            "町内に住民登録があり，自分が所有して居住する住宅が対象です．世帯に町税等の滞納がなく，同一人・同一住宅につき1回です．",
+            "住宅用太陽光発電設備は寒冷地仕様の未使用品が対象です．町内に本社がある施工業者を利用し，着手前に申請手続を行い，2027年2月末までに完了します．"
+          ],
+          "gaps": [
+            "太陽光固有の補助上限の内訳，最低対象経費，税区分，端数処理，容量条件，新築への適用，他制度との併用及び予算残は未確認です．",
+            "一般リフォームの所得要件を太陽光の条件には適用していません．蓄電池の対象性も未確認です．"
+          ],
+          "evidence_urls": [
+            "https://www.town.hokkaido-kamikawa.lg.jp/section/d57c9r0000000wah.html",
+            "https://www.town.hokkaido-kamikawa.lg.jp/section/d57c9r0000000wah-att/d57c9r0000000we2.pdf"
+          ],
+          "checked_at": "2026-09-29",
+          "display_basis": "retained_reviewed_display",
+          "migration_status": "pending_review",
+          "model_assumptions": [],
+          "legacy_municipal_rule_ids": []
+        }
+      ],
+      "diagnostic_rules": [],
+      "legacy_municipal_rules": []
+    }
+  ],
+  "subsidy_catalog": {
+    "scope": "municipality",
+    "display_policy": "reviewed_display_text_only",
+    "fallback_policy": "preserve_existing_reviewed_display_else_preparing",
+    "national_prefecture_policy": "preserve_existing",
+    "rows": [
+      {
+        "branch_id": "hokkaido-additional-akkeshi-pv",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01662",
+        "scheme_name": "厚岸町住宅用太陽光発電システム設置奨励金",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "太陽光パネル"
+        ],
+        "amount": {
+          "raw_text": "PVはmin(モジュール公称最大出力合計，PCS定格出力合計)kWを小数第2位未満切捨て×3万円，金額千円未満切捨て．単独上限15万円．厚岸ほほえみギフト券で交付．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "受付中",
+        "application_start": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2026-04-01"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2027-01-25"
+          }
+        ],
+        "housing_age_scope": [
+          "新築",
+          "既存"
+        ],
+        "combination_conditions": "同一世帯の同一対象設備への本制度既受給は不可．他制度併用・控除は未確認．PV+Bの上限は合算であり設備ごとに重複適用しない．",
+        "conditions": {
+          "official": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "太陽光は新品で，モジュール公称最大出力合計とパワーコンディショナ定格出力合計の小さい方が10kW未満です．低圧逆潮流の系統連系，電力受給契約及び発電量記録装置が必要です．"
+          ],
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "raw": {
+            "adopted_housing_performance": "町内で自己居住又は居住予定（店舗等併用含む），住宅又は同一敷地設置・設備付住宅購入．借家は建物所有者承諾と所有証明必要．設備は申請者所有必須．",
+            "adopted_personal_attributes": "完了報告までに町内住所．同一世帯の町税・国保・後期医療・介護・ごみ手数料・町営住宅料・水道下水道料・受益者負担金非滞納．暴力団員/関係事業者除外．",
+            "adopted_equipment": "PV：min(モジュール公称最大出力合計，PCS定格出力合計)<10kW，新品，低圧逆潮流連系，電力受給契約，発電量記録装置．B：新品Li-ion，常時対象PV接続，1kWh以上17.76kWh未満，PV同時新設又は既設PVへ接続．",
+            "adopted_other_conditions": "先着順，不備補正完了時点を提出とする．予算超過日は同日全件抽選．完了又は建売引渡し30日以内と申請年度2月末の早い日まで完了報告．財産適正管理期間PV17年，B6年．交付は厚岸ほほえみギフト券．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+          "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+          "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-akkeshi-existing-pv-battery",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01662",
+        "scheme_name": "厚岸町住宅用太陽光発電システム設置奨励金",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "蓄電池"
+        ],
+        "amount": {
+          "raw_text": "B容量kWhを小数第2位未満切捨て×2万円，金額千円未満切捨て．既設PV接続B単独上限15万円．厚岸ほほえみギフト券で交付．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "受付中",
+        "application_start": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2026-04-01"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2027-01-25"
+          }
+        ],
+        "housing_age_scope": [
+          "既存"
+        ],
+        "combination_conditions": "同一世帯の同一対象設備への本制度既受給は不可．他制度併用・控除は未確認．PV+Bの上限は合算であり設備ごとに重複適用しない．",
+        "conditions": {
+          "official": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "蓄電池は新品のリチウムイオン電池で，容量1kWh以上17.76kWh未満，対象の太陽光設備へ常時接続することが必要です．",
+            "この区分は既設太陽光へ蓄電池を新設する場合です．"
+          ],
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "raw": {
+            "adopted_housing_performance": "町内で自己居住又は居住予定（店舗等併用含む），住宅又は同一敷地設置・設備付住宅購入．借家は建物所有者承諾と所有証明必要．設備は申請者所有必須．",
+            "adopted_personal_attributes": "完了報告までに町内住所．同一世帯の町税・国保・後期医療・介護・ごみ手数料・町営住宅料・水道下水道料・受益者負担金非滞納．暴力団員/関係事業者除外．",
+            "adopted_equipment": "PV：min(モジュール公称最大出力合計，PCS定格出力合計)<10kW，新品，低圧逆潮流連系，電力受給契約，発電量記録装置．B：新品Li-ion，常時対象PV接続，1kWh以上17.76kWh未満，PV同時新設又は既設PVへ接続．",
+            "adopted_other_conditions": "先着順，不備補正完了時点を提出とする．予算超過日は同日全件抽選．完了又は建売引渡し30日以内と申請年度2月末の早い日まで完了報告．財産適正管理期間PV17年，B6年．交付は厚岸ほほえみギフト券．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+          "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+          "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-akkeshi-new-pv-battery",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01662",
+        "scheme_name": "厚岸町住宅用太陽光発電システム設置奨励金",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "太陽光パネル",
+          "蓄電池"
+        ],
+        "amount": {
+          "raw_text": "PVはmin(モジュール公称最大出力合計，PCS定格出力合計)kWを小数第2位未満切捨て×3万円，金額千円未満切捨て．B容量kWhを小数第2位未満切捨て×2万円，金額千円未満切捨て．同時設置は合算上限15万円．厚岸ほほえみギフト券で交付．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "受付中",
+        "application_start": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2026-04-01"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2027-01-25"
+          }
+        ],
+        "housing_age_scope": [
+          "新築"
+        ],
+        "combination_conditions": "同一世帯の同一対象設備への本制度既受給は不可．他制度併用・控除は未確認．PV+Bの上限は合算であり設備ごとに重複適用しない．",
+        "conditions": {
+          "official": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "太陽光は新品で，モジュール公称最大出力合計とパワーコンディショナ定格出力合計の小さい方が10kW未満です．低圧逆潮流の系統連系，電力受給契約及び発電量記録装置が必要です．",
+            "蓄電池は新品のリチウムイオン電池で，容量1kWh以上17.76kWh未満，対象の太陽光設備へ常時接続することが必要です．",
+            "この区分は新築住宅へ太陽光と蓄電池を同時設置する場合です．"
+          ],
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "raw": {
+            "adopted_housing_performance": "町内で自己居住又は居住予定（店舗等併用含む），住宅又は同一敷地設置・設備付住宅購入．借家は建物所有者承諾と所有証明必要．設備は申請者所有必須．",
+            "adopted_personal_attributes": "完了報告までに町内住所．同一世帯の町税・国保・後期医療・介護・ごみ手数料・町営住宅料・水道下水道料・受益者負担金非滞納．暴力団員/関係事業者除外．",
+            "adopted_equipment": "PV：min(モジュール公称最大出力合計，PCS定格出力合計)<10kW，新品，低圧逆潮流連系，電力受給契約，発電量記録装置．B：新品Li-ion，常時対象PV接続，1kWh以上17.76kWh未満，PV同時新設又は既設PVへ接続．",
+            "adopted_other_conditions": "先着順，不備補正完了時点を提出とする．予算超過日は同日全件抽選．完了又は建売引渡し30日以内と申請年度2月末の早い日まで完了報告．財産適正管理期間PV17年，B6年．交付は厚岸ほほえみギフト券．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+          "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+          "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-akkeshi-existing-pv-battery-combined",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01662",
+        "scheme_name": "厚岸町住宅用太陽光発電システム設置奨励金",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "太陽光パネル",
+          "蓄電池"
+        ],
+        "amount": {
+          "raw_text": "PVはmin(モジュール公称最大出力合計，PCS定格出力合計)kWを小数第2位未満切捨て×3万円，金額千円未満切捨て．B容量kWhを小数第2位未満切捨て×2万円，金額千円未満切捨て．募集案内は同時設置合算上限30万円．要綱第4条第2項は第1項算出方法により上限15万円を各号算出金額へ加算可能と記す．上限未満の加算方式は未照合のため原文保持し計算確定しない．厚岸ほほえみギフト券で交付．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "受付中",
+        "application_start": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2026-04-01"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "annual",
+            "label": "年度募集",
+            "date": "2027-01-25"
+          }
+        ],
+        "housing_age_scope": [
+          "既存"
+        ],
+        "combination_conditions": "同一世帯の同一対象設備への本制度既受給は不可．他制度併用・控除は未確認．PV+Bの上限は合算であり設備ごとに重複適用しない．",
+        "conditions": {
+          "official": [
+            "町内で自ら居住する又は居住予定の住宅が対象で，店舗等との併用住宅を含みます．住宅又は同一敷地への設置及び設備付き住宅の購入が対象です．借家では建物所有者の承諾と所有証明が必要で，設備は申請者が所有することが条件です．",
+            "完了報告までに町内に住所を有し，同一世帯の町税・国民健康保険・後期高齢者医療・介護・ごみ手数料・町営住宅料・上下水道料・受益者負担金に滞納がなく，暴力団員等に該当しないことが必要です．",
+            "同一世帯で同じ対象設備について本制度の補助を既に受けている場合は対象外です．太陽光と蓄電池の合算上限を，設備ごとに重複して適用しません．",
+            "申請は先着順で，不備の補正が完了した時点を提出とします．予算を超えた日の申請は同日分を抽選します．完了又は建売住宅の引渡し後30日以内と申請年度2月末の早い日までに完了報告が必要です．",
+            "給付は厚岸ほほえみギフト券です．設備の適正管理期間は太陽光17年，蓄電池6年です．",
+            "太陽光は新品で，モジュール公称最大出力合計とパワーコンディショナ定格出力合計の小さい方が10kW未満です．低圧逆潮流の系統連系，電力受給契約及び発電量記録装置が必要です．",
+            "蓄電池は新品のリチウムイオン電池で，容量1kWh以上17.76kWh未満，対象の太陽光設備へ常時接続することが必要です．",
+            "上乗せは既存住宅への太陽光・蓄電池の同時設置で，太陽光モジュール公称最大出力合計も10kW未満であることが条件です．2023年7月14日以降の契約，住宅・設備・工事の広報利用への許諾が必要で，道の予算がなくなり次第終了します．"
+          ],
+          "model_assumptions": [
+            "はれトクで商品券の便益を評価する場合は，公式額面を円相当額として扱います．"
+          ],
+          "raw": {
+            "adopted_housing_performance": "町内で自己居住又は居住予定（店舗等併用含む），住宅又は同一敷地設置・設備付住宅購入．借家は建物所有者承諾と所有証明必要．設備は申請者所有必須．",
+            "adopted_personal_attributes": "完了報告までに町内住所．同一世帯の町税・国保・後期医療・介護・ごみ手数料・町営住宅料・水道下水道料・受益者負担金非滞納．暴力団員/関係事業者除外．",
+            "adopted_equipment": "PV：min(モジュール公称最大出力合計，PCS定格出力合計)<10kW，新品，低圧逆潮流連系，電力受給契約，発電量記録装置．B：新品Li-ion，常時対象PV接続，1kWh以上17.76kWh未満，PV同時新設又は既設PVへ接続． 上乗せはモジュール公称最大出力合計も10kW未満，既存住宅PV+B同時設置．",
+            "adopted_other_conditions": "先着順，不備補正完了時点を提出とする．予算超過日は同日全件抽選．完了又は建売引渡し30日以内と申請年度2月末の早い日まで完了報告．財産適正管理期間PV17年，B6年．交付は厚岸ほほえみギフト券． 上乗せは2023-07-14以降契約，住宅・設備・工事の広報利用許諾，道予算なくなり次第終了．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "現在の予算残と受付停止の有無，蓄電容量の定格・実効の区分，他制度との併用・対象費用の控除及び手引きにある手続の詳細は未確認です．",
+          "既存住宅の同時設置に関する上乗せ加算式と，募集案内の合算上限との対応は未確認です．上限未満の場合の加算額を確定していません．"
+        ],
+        "evidence_urls": [
+          "https://www.akkeshi-town.jp/kurashi/sumai/house/zyutaku_shien/taiyoukou/",
+          "https://www.akkeshi-town.jp/reiki_file/reiki_honbun/a204RG00001214.html",
+          "https://www.akkeshi-town.jp/file/contents/1505/12576/tebiki.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-hokuryu-solar",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01437",
+        "scheme_name": "住宅用太陽光発電システム等設置補助金",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "太陽光パネル"
+        ],
+        "amount": {
+          "raw_text": "町単独PV7万円/kW・上限28万円．条件適合時加算2万円/kW・上限8万円．端数未確認．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "受付中",
+        "application_start": [
+          {
+            "branch_id": "saved-period-1",
+            "label": "保存期間1",
+            "date": "2026-05-01"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "saved-period-1",
+            "label": "保存期間1",
+            "date": "2026-12-21"
+          }
+        ],
+        "housing_age_scope": [
+          "新築",
+          "既存"
+        ],
+        "combination_conditions": "未確認．",
+        "conditions": {
+          "official": [
+            "町内に住所を有する人又は設置報告時までに転入する人が対象で，申請者と同居家族に税の滞納がないことが必要です．",
+            "加算枠は既存住宅が対象です．太陽光と蓄電池の同時設置又は既設太陽光への蓄電池新設が条件で，太陽光モジュール10kW未満，蓄電池17.76kWh未満です．",
+            "受付は毎年度5月1日から12月20日までで，休日の場合は翌開庁日です．交付決定後に着工し，完成後30日以内又は当該年度2月15日の早い日までに報告します．設置後2年間は年1回の運転実績報告が必要です．",
+            "太陽光設備にはJ-PEAへの適合条件があります．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "自宅．加算は既存住宅限定．",
+            "adopted_personal_attributes": "町内住所又は設置報告時までの転入予定，申請者同居家族税滞納なし．",
+            "adopted_equipment": "J-PEA適合PV．加算はPV+B同時設置又は既設PVへのB新設，PVモジュール10kW未満・B17.76kWh未満．",
+            "adopted_other_conditions": "毎年度5/1–12/20，休日翌開庁日．2026/12/20日曜のため12/21として展開（臨時閉庁未確認）．交付決定後着工，完成30日以内又は年度2/15の早い日まで報告．2年間年1回運転実績報告．",
+            "rationale_and_gaps": "2026/6/30公式本文．要綱リンク取得失敗，単独PV/B基本枠可否・所有細則・併用・端数・予算残は未確認．加算条件と基本枠条件を混同しない．"
+          }
+        },
+        "gaps": [
+          "町単独の基本枠での設備単独設置の扱い，所有条件の細則，他制度との併用，端数処理及び予算残は未確認です．",
+          "受付終了日の2026年12月21日は通常の休日規定に基づく日付です．臨時閉庁の有無は未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.town.hokuryu.hokkaido.jp/kurashi/taiyou-hojokin/"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-hokuryu-battery",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01437",
+        "scheme_name": "住宅用太陽光発電システム等設置補助金",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "蓄電池"
+        ],
+        "amount": {
+          "raw_text": "原文は町単独『発電容量1kWあたり1万円（上限4万円）』，加算『発電容量1kWあたり1万円（上限4万円）』．蓄電容量のkW表記をkWhへ読み替える既承認方針に照らす候補だが，発電容量という対象量自体も要綱で確認してから正式計算へ採用．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "受付中",
+        "application_start": [
+          {
+            "branch_id": "saved-period-1",
+            "label": "保存期間1",
+            "date": "2026-05-01"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "saved-period-1",
+            "label": "保存期間1",
+            "date": "2026-12-21"
+          }
+        ],
+        "housing_age_scope": [
+          "新築",
+          "既存"
+        ],
+        "combination_conditions": "未確認．",
+        "conditions": {
+          "official": [
+            "町内に住所を有する人又は設置報告時までに転入する人が対象で，申請者と同居家族に税の滞納がないことが必要です．",
+            "加算枠は既存住宅が対象です．太陽光と蓄電池の同時設置又は既設太陽光への蓄電池新設が条件で，太陽光モジュール10kW未満，蓄電池17.76kWh未満です．",
+            "受付は毎年度5月1日から12月20日までで，休日の場合は翌開庁日です．交付決定後に着工し，完成後30日以内又は当該年度2月15日の早い日までに報告します．設置後2年間は年1回の運転実績報告が必要です．",
+            "対象設備は新品の定置用蓄電池です．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "自宅．加算は既存住宅限定．",
+            "adopted_personal_attributes": "町内住所又は設置報告時までの転入予定，申請者同居家族税滞納なし．",
+            "adopted_equipment": "新品定置用蓄電池．加算は既存住宅，PV+B同時又は既設PVへのB新設，PVモジュール10kW未満・B17.76kWh未満．",
+            "adopted_other_conditions": "毎年度5/1–12/20，休日翌開庁日．2026/12/20日曜のため12/21として展開（臨時閉庁未確認）．交付決定後着工，完成30日以内又は年度2/15の早い日まで報告．2年間年1回運転実績報告．",
+            "rationale_and_gaps": "2026/6/30公式本文．要綱リンク取得失敗，単独PV/B基本枠可否・所有細則・併用・端数・予算残は未確認．加算条件と基本枠条件を混同しない．原式の対象量・単位を保持して未確定扱い．"
+          }
+        },
+        "gaps": [
+          "町単独の基本枠での設備単独設置の扱い，所有条件の細則，他制度との併用，端数処理及び予算残は未確認です．",
+          "受付終了日の2026年12月21日は通常の休日規定に基づく日付です．臨時閉庁の有無は未確認です．",
+          "蓄電池補助の原文は発電容量1kW当たりの額を示しています．計算に用いる容量の種類・単位は未確定で，蓄電容量のkWh単価として読み替えていません．"
+        ],
+        "evidence_urls": [
+          "https://www.town.hokuryu.hokkaido.jp/kurashi/taiyou-hojokin/"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-kamikawa-solar",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01457",
+        "scheme_name": "住宅リフォーム等補助金（新・省エネルギー設備改修）",
+        "target_year": "2026年度",
+        "target_equipment": [
+          "太陽光パネル"
+        ],
+        "amount": {
+          "raw_text": "対象経費の10分の1以内．公式表は『2万円～20万円を上限』と記載．設備別上限の内訳・税区分・端数未確認につきPV上限20万円と一律確定しない．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "不明",
+        "application_start": [
+          {
+            "branch_id": "saved-period-1",
+            "label": "保存期間1",
+            "date": "2026-05-11"
+          }
+        ],
+        "application_end": [
+          {
+            "branch_id": "saved-period-1",
+            "label": "保存期間1",
+            "date": "2026-09-30"
+          }
+        ],
+        "housing_age_scope": [
+          "既存"
+        ],
+        "combination_conditions": "未確認．",
+        "conditions": {
+          "official": [
+            "町内に住民登録があり，自分が所有して居住する住宅が対象です．世帯に町税等の滞納がなく，同一人・同一住宅につき1回です．",
+            "住宅用太陽光発電設備は寒冷地仕様の未使用品が対象です．町内に本社がある施工業者を利用し，着手前に申請手続を行い，2027年2月末までに完了します．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "",
+            "adopted_personal_attributes": "町内住民登録，所有し居住する住宅，世帯の町税等滞納なし，同一人同一住宅1回．",
+            "adopted_equipment": "住宅用太陽光発電設備，寒冷地仕様・未使用品．",
+            "adopted_other_conditions": "町内本社の施工業者，着手前申請手続，2027年2月末までに完了．",
+            "rationale_and_gaps": "R8案内2頁を画像確認．一般リフォームの所得800万円要件をPVへ拡張しない．PV固有上限内訳・容量・併用・新築適用・予算残未確認．蓄電池の明示未確認．"
+          }
+        },
+        "gaps": [
+          "太陽光固有の補助上限の内訳，最低対象経費，税区分，端数処理，容量条件，新築への適用，他制度との併用及び予算残は未確認です．",
+          "一般リフォームの所得要件を太陽光の条件には適用していません．蓄電池の対象性も未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.town.hokkaido-kamikawa.lg.jp/section/d57c9r0000000wah.html",
+          "https://www.town.hokkaido-kamikawa.lg.jp/section/d57c9r0000000wah-att/d57c9r0000000we2.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-rankoshi-solar",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01394",
+        "scheme_name": "蘭越町住宅エコ化支援事業（住宅用太陽光発電システム）",
+        "target_year": "",
+        "target_equipment": [
+          "太陽光パネル"
+        ],
+        "amount": {
+          "raw_text": "太陽電池の出力（kW，小数点以下2桁未満切捨て）×24,000円，上限240,000円．補助金額1,000円未満切捨て．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "不明",
+        "application_start": [],
+        "application_end": [],
+        "housing_age_scope": [
+          "新築",
+          "既存"
+        ],
+        "combination_conditions": "国補助の紹介あり．現行の他制度併用・控除条件は未確認．断熱改修に関する補助控除をPVへ転用しない．",
+        "conditions": {
+          "official": [
+            "町内で自ら居住する住宅が対象で，新築・取得住宅及び設備付き取得住宅を含みます．町税の完納が必要です．",
+            "新品・未使用の太陽光設備で，最大出力10kW未満，低圧の逆潮流ありの系統連系と電灯契約が必要です．税別設置費は1kW当たり60万円以下で，特殊工事費等を控除できる場合があります．",
+            "町内で事業活動を行う業者が施工し，着工前又は設備付き住宅の取得前に申請します．国内クレジット排出削減事業等への意思表明が必要で，FITの利用は問いません．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "町内の自己居住住宅，新築・取得住宅及び設備付き取得住宅．所有条件の詳細未確認．",
+            "adopted_personal_attributes": "町税完納．",
+            "adopted_equipment": "新品未使用，屋根等に適した設備，低圧逆潮流あり連系，太陽電池最大出力10kW未満．税別設置費60万円/kW以下（特殊工事費等控除可）．変換効率等の要件あり，具体値未確認．電灯契約締結，国内クレジット排出削減事業等への意思表明．FIT利用不問．",
+            "adopted_other_conditions": "町内で事業活動を行う業者の施工．着工前又は設備付き住宅取得前に申請．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "対象年度，2026年度の受付日程・予算残，所有条件の詳細及び変換効率等の具体的な要件は未確認です．",
+          "現在の他制度との併用・控除条件は未確認です．断熱改修の控除条件は太陽光へ転用していません．"
+        ],
+        "evidence_urls": [
+          "https://www.town.rankoshi.hokkaido.jp/administration/life/detail.html?content=88"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-setana-solar",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01371",
+        "scheme_name": "せたな町脱炭素化推進補助金",
+        "target_year": "",
+        "target_equipment": [
+          "太陽光パネル"
+        ],
+        "amount": {
+          "raw_text": "モジュール公称最大出力×10万円/kW，上限100万円，千円未満切捨（手引き）．申請様式の出力欄は小数点以下切捨であり，出力端数の適用を留保．税抜機器・施工費が対象．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "不明",
+        "application_start": [],
+        "application_end": [],
+        "housing_age_scope": [
+          "新築",
+          "既存"
+        ],
+        "combination_conditions": "同一対象機器等の町補助受給歴なし，同一人同一機器1回．他補助申請欄は存在するが併用・控除詳細は未確認．",
+        "conditions": {
+          "official": [
+            "個人向けは自己所有の土地・物件に自ら居住する場合が対象です．町内の新築・既存住宅，建設予定及び併用住宅を含みます．",
+            "完了届までの転入予定者を含む町民が対象です．本人と世帯全員に町税等の滞納による行政サービス制限がなく，暴力団等に該当しないことが必要です．",
+            "同一対象機器等について町の補助を受けた履歴がなく，同一人・同一機器につき1回です．交付決定後に着工し，手引きでは翌年2月末までの設置完了が必要です．",
+            "新品の太陽光で，モジュール出力10kW未満，低圧逆潮流の系統連系・電力需給契約及び発電記録装置が必要です．処分制限は17年です．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "町内新築・既存（建設予定・併用住宅含む）で本人居住．個人は自己所有の土地・物件で自己居住．",
+            "adopted_personal_attributes": "完了届までの転入予定者を含む町民．本人及び世帯全員が町税等滞納による行政サービス制限なし，非暴力団等．事業者枠の上限は住宅個人枠へ混用しない．",
+            "adopted_equipment": "新品，低圧逆潮流系統連系・電力需給契約，モジュール出力10kW未満，発電記録装置．",
+            "adopted_other_conditions": "交付決定後着工，翌年2月末まで設置完了（手引き）．PV17年/B6年の処分制限．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "対象年度，2026年度の募集・受付期間及び予算残は未確認です．令和8年6月版手引きの掲載だけでは受付中と判断できません．",
+          "他補助の申請欄はありますが，併用・対象費用の控除の詳細は未確認です．別の住宅リフォーム補助における太陽光・蓄電池の対象性も未確認です．",
+          "太陽光の出力端数の扱いは，手引きと申請様式との適用対応が未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.town.setana.lg.jp/industry/saiene/post_2054.html",
+          "https://www.town.setana.lg.jp/69b2633392c32473f71e4874ebbb6f27.pdf",
+          "https://www.town.setana.lg.jp/7a9114f4bcddd9814dc7300ef2bdb24c.pdf",
+          "https://www.town.setana.lg.jp/fc9f7599f16f9a81e49e568b313a2593.pdf",
+          "https://www.town.setana.lg.jp/%E3%81%9B%E3%81%9F%E3%81%AA%E7%94%BA%E8%84%B1%E7%82%AD%E7%B4%A0%E5%8C%96%E6%8E%A8%E9%80%B2%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-setana-battery",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01371",
+        "scheme_name": "せたな町脱炭素化推進補助金",
+        "target_year": "",
+        "target_equipment": [
+          "蓄電池"
+        ],
+        "amount": {
+          "raw_text": "税抜蓄電池機器・設置工事費1/3，上限37万円．原文括弧書き「1kWh当たり個人15.51万円」は費用上限か補助上限か不明，勝手に式へ展開しない．様式の容量は小数点第2位以下切捨．金額端数処理未確認．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "不明",
+        "application_start": [],
+        "application_end": [],
+        "housing_age_scope": [
+          "新築",
+          "既存"
+        ],
+        "combination_conditions": "同一対象機器等の町補助受給歴なし，同一人同一機器1回．他補助申請欄は存在するが併用・控除詳細は未確認．",
+        "conditions": {
+          "official": [
+            "個人向けは自己所有の土地・物件に自ら居住する場合が対象です．町内の新築・既存住宅，建設予定及び併用住宅を含みます．",
+            "完了届までの転入予定者を含む町民が対象です．本人と世帯全員に町税等の滞納による行政サービス制限がなく，暴力団等に該当しないことが必要です．",
+            "同一対象機器等について町の補助を受けた履歴がなく，同一人・同一機器につき1回です．交付決定後に着工し，手引きでは翌年2月末までの設置完了が必要です．",
+            "新品のリチウムイオン定置用蓄電池で，公称容量1kWh以上，太陽光への常時接続及びメーカー指定環境への設置が必要です．処分制限は6年です．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "町内新築・既存（建設予定・併用住宅含む）で本人居住．個人は自己所有の土地・物件で自己居住．",
+            "adopted_personal_attributes": "完了届までの転入予定者を含む町民．本人及び世帯全員が町税等滞納による行政サービス制限なし，非暴力団等．事業者枠の上限は住宅個人枠へ混用しない．",
+            "adopted_equipment": "新品，PV常時接続リチウムイオン定置蓄電池，公称1kWh以上，メーカー指定環境．",
+            "adopted_other_conditions": "交付決定後着工，翌年2月末まで設置完了（手引き）．PV17年/B6年の処分制限．",
+            "rationale_and_gaps": ""
+          }
+        },
+        "gaps": [
+          "対象年度，2026年度の募集・受付期間及び予算残は未確認です．令和8年6月版手引きの掲載だけでは受付中と判断できません．",
+          "他補助の申請欄はありますが，併用・対象費用の控除の詳細は未確認です．別の住宅リフォーム補助における太陽光・蓄電池の対象性も未確認です．",
+          "原文の1kWh当たり個人15.51万円が費用上限か補助上限か，及び補助金額の端数処理は未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.town.setana.lg.jp/industry/saiene/post_2054.html",
+          "https://www.town.setana.lg.jp/69b2633392c32473f71e4874ebbb6f27.pdf",
+          "https://www.town.setana.lg.jp/7a9114f4bcddd9814dc7300ef2bdb24c.pdf",
+          "https://www.town.setana.lg.jp/fc9f7599f16f9a81e49e568b313a2593.pdf",
+          "https://www.town.setana.lg.jp/%E3%81%9B%E3%81%9F%E3%81%AA%E7%94%BA%E8%84%B1%E7%82%AD%E7%B4%A0%E5%8C%96%E6%8E%A8%E9%80%B2%E8%A3%9C%E5%8A%A9%E9%87%91%E7%94%B3%E8%AB%8B%E3%81%AE%E6%89%8B%E5%BC%95%E3%81%8D.pdf"
+        ],
+        "checked_at": "2026-09-29",
+        "diagnostic_program_ids": []
+      },
+      {
+        "branch_id": "hokkaido-additional-moseushi-solar-historical",
+        "government_level": "municipality",
+        "prefecture_code": "01",
+        "municipality_code": "01433",
+        "scheme_name": "妹背牛町住宅用太陽光発電システム設置費補助金",
+        "target_year": "2016年度",
+        "target_equipment": [
+          "太陽光パネル"
+        ],
+        "amount": {
+          "raw_text": "平成28年度町公式一覧の原式は7万円/1kW，上限21万円．出力の定義・端数処理・基準費用は未確認．",
+          "display_text": null,
+          "evidence_status": "not_classified"
+        },
+        "application_status": "不明",
+        "application_start": [],
+        "application_end": [],
+        "housing_age_scope": [],
+        "combination_conditions": "他制度併用・控除は未確認．",
+        "conditions": {
+          "official": [
+            "平成28年度（2016年度）の町公式一覧に掲載された住宅用太陽光発電システムの制度です．"
+          ],
+          "model_assumptions": [],
+          "raw": {
+            "adopted_housing_performance": "住宅用設備と記載．新築・既存，所有・居住の詳細は未確認．",
+            "adopted_personal_attributes": "対象者条件は未確認．",
+            "adopted_equipment": "住宅用太陽光発電システム．容量・連系・自家消費条件は未確認．",
+            "adopted_other_conditions": "申請時期・設置期限・施工者・予算条件は未確認．",
+            "rationale_and_gaps": "町公式の平成28年度一覧で原式を確認．2026年度の実施・受付又は廃止は未確認．診断算入せず，歴史的制度としてハレトクデータ用に保持する．商工会住宅リフォーム支援はPV対象が未確認のため別のPV制度として提案しない．"
+          }
+        },
+        "gaps": [
+          "2026年度の実施・受付又は廃止は未確認です．",
+          "新築・既存，所有・居住，対象者，設備容量・連系・自家消費の条件，出力の定義・端数処理・基準費用及び他制度との併用・控除は未確認です．",
+          "申請時期，設置期限，施工者及び予算の条件は未確認です．"
+        ],
+        "evidence_urls": [
+          "https://www.town.moseushi.hokkaido.jp/news/kakushu-jigyo.html",
+          "https://www.town.moseushi.hokkaido.jp/news/files/10.pdf"
+        ],
+        "checked_at": "2026-09-30",
+        "diagnostic_program_ids": []
+      }
+    ]
+  },
+  "subsidy_scheme_links": {
+    "diagnostic_rule_order": [],
+    "legacy_municipal_rule_order": [],
+    "diagnostic": {},
+    "legacy_municipal": {},
+    "unassigned_diagnostic_rules": [],
+    "record_id_aliases": {},
+    "retained_branches": [
+      {
+        "branch_id": "hokkaido-additional-rankoshi-solar",
+        "record_id": null,
+        "retention_status": "identity_unresolved_records",
+        "diagnostic_rule_ids": [],
+        "catalog_branch_id": "hokkaido-additional-rankoshi-solar"
+      },
+      {
+        "branch_id": "hokkaido-additional-setana-solar",
+        "record_id": null,
+        "retention_status": "identity_unresolved_records",
+        "diagnostic_rule_ids": [],
+        "catalog_branch_id": "hokkaido-additional-setana-solar"
+      },
+      {
+        "branch_id": "hokkaido-additional-setana-battery",
+        "record_id": null,
+        "retention_status": "identity_unresolved_records",
+        "diagnostic_rule_ids": [],
+        "catalog_branch_id": "hokkaido-additional-setana-battery"
+      },
+      {
+        "branch_id": "hokkaido-additional-moseushi-solar-historical",
+        "record_id": null,
+        "retention_status": "historical_records",
+        "diagnostic_rule_ids": [],
+        "catalog_branch_id": "hokkaido-additional-moseushi-solar-historical"
+      }
+    ]
+  }
+}

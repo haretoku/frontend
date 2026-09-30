@@ -12,7 +12,7 @@ async function walk(dir) {
 }
 const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|guides\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png)$/.test(path)), "未承認の配信ファイルがあります");
+assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
 for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ...Object.entries({"electricity-sales":"solar-economics", "subsidies":"subsidies", "disaster":"disaster", "quotes-contractors":"quotes-contractors"}).map(([old, slug]) => [`pages/${old}.html`, `/guides/${slug}/`])]) {
   const html = await readFile(resolve(output, oldPath), "utf8");
@@ -60,7 +60,7 @@ for (const sourceName of ["public-data", "metadata"]) {
   const deployed = jsonFiles.filter(file => file.split(/[\\/]/).at(-1).startsWith(`${sourceName}-`));
   assert.equal(deployed.length, 1, `${sourceName}の同梱`);
   assert(source.equals(await readFile(deployed[0])), `${sourceName}が受領版と不一致`);
-  assert.equal(JSON.parse(source).schema_version, "11.17.0", "公開データ版が変更されています");
+  assert.equal(JSON.parse(source).schema_version, "12.0.0-review.1", "公開データ版が変更されています");
 }
 assert.equal((await readFile(resolve(output, "CNAME"), "utf8")).trim(), "haretoku.jp");
 assert((await readFile(resolve(output, "robots.txt"), "utf8")).includes("Sitemap: https://haretoku.jp/sitemap.xml"));
@@ -88,4 +88,4 @@ assert(legacyShareOutput.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13,
 assert.equal(legacyShareOutput.readUInt32BE(16), 1536);
 assert.equal(legacyShareOutput.readUInt32BE(20), 1024);
 
-console.log(`Pages検証PASS: ${files.length}ファイル，正規9URL，公開データ11.17.0同一，ローカル参照・QA非混入`);
+console.log(`Pages検証PASS: ${files.length}ファイル，正規9URL，公開データ12.0.0-review.1同一，ローカル参照・QA非混入`);

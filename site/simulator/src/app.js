@@ -1,8 +1,9 @@
+import {subsidyTermsIndex, subsidyAmountFields} from './subsidy-amount-presentation.js';
 import { recordDiagnosisComplete } from "../../shared/analytics.js";
 import { setupMobileActions } from "./mobile-actions.js";
 import { housingInput, housingLabel, housingContract, configureHousingInput } from "./housing-input.js";
 import { cashflowMarkers, groupMarkerTargets } from "./chart-markers.js";
-import { conciseFukuokaAssumption, conciseKochiAssumption, conciseEhimeAssumption, conciseKagawaAssumption, housingScopeAssumption, conciseTokushimaAssumption, conciseYamaguchiAssumption, conciseHiroshimaAssumption, conciseOkayamaAssumption, conciseShimaneAssumption, designatedContractAssumption, readableSubsidyAssumption, noncashBenefitDescription, subsidyGroups, subsidyLevelAmounts, subsidyGovernmentLabel, subsidyResearchMessage, prefectureResearchMessage } from "./subsidy-presentation.js";
+import { groupSubsidyDisplayRows, conciseHokkaidoAssumption, conciseFukushimaAssumption, conciseYamagataAssumption, conciseAkitaAssumption, conciseMiyagiAssumption, conciseIwateAssumption, conciseAomoriAssumption, conciseOkinawaAssumption, conciseKagoshimaAssumption, conciseOitaAssumption, conciseMieAssumption, conciseKumamotoAssumption, conciseFukuokaAssumption, conciseKochiAssumption, conciseEhimeAssumption, conciseKagawaAssumption, housingScopeAssumption, conciseTokushimaAssumption, conciseYamaguchiAssumption, conciseHiroshimaAssumption, conciseOkayamaAssumption, conciseShimaneAssumption, designatedContractAssumption, readableSubsidyAssumption, noncashBenefitDescription, subsidyGroups, subsidyLevelAmounts, subsidyGovernmentLabel, subsidyResearchMessage, prefectureResearchMessage } from "./subsidy-presentation.js";
 import { CALCULATION_IMPLEMENTED, calculateEstimate } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 import { validateLocation, populateMunicipalitySelect } from "./location-input.js";
@@ -525,31 +526,72 @@ function renderScenarios(scenarios, input) {
   }
 }
 
-function renderSubsidyRows(list, rows) {
+function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
   list.replaceChildren();
   if (!rows.length) {
     const empty = document.createElement('li');
     empty.textContent = 'この一覧に掲載する制度はありません．地域の確認状況は上記をご確認ください．';
     list.append(empty);
   }
+  if (mode === 'group') {
+    for (const group of groupSubsidyDisplayRows(rows)) {
+      if (group.length === 1) {
+        const temporary = document.createElement('ul');
+        renderSubsidyRows(temporary, group, 'single', termsIndex);
+        list.append(...temporary.childNodes);
+        continue;
+      }
+      const item = document.createElement('li');
+      const heading = document.createElement('strong');
+      const link = document.createElement('a');
+      link.href = group[0].official_url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.textContent = subsidyGovernmentLabel(group[0].government_level) + group[0].program_name + ' ↗';
+      heading.append(link);
+      const branches = document.createElement('ul');
+      renderSubsidyRows(branches, group, 'branches', termsIndex);
+      item.append(heading, branches);
+      list.append(item);
+    }
+    return;
+  }
   for (const row of rows) {
     const item = document.createElement('li');
     item.dataset.subsidyRecord = row.id;
     const heading = document.createElement('strong');
     const equipment = { solar: '太陽光', battery: '蓄電池', solar_battery: '太陽光・蓄電池', package_bonus: '組合せ加算' }[row.target_equipment];
-    heading.textContent = `${subsidyGovernmentLabel(row.government_level)}${equipment ? equipment + '：' : ''}${row.program_name}`;
+    const program = mode === 'branches' ? frontendData.publicData.diagnostic_subsidy_programs.find(program => program.id === row.id) : null;
+    const scopeLabel = (program?.expense_scopes ?? []).map(scope => ({solar:'太陽光',battery:'蓄電池'}[scope])).filter(Boolean).join('・');
+    const branchLabel = {'hokkaido-kitahiroshima-solar':'太陽光','hokkaido-kitahiroshima-battery':'蓄電池','hokkaido-ebetsu-package':'太陽光・蓄電池の同時設置','hokkaido-ebetsu-solar-addition':'太陽光の追加設置','hokkaido-ebetsu-battery-addition':'蓄電池の追加設置'}[row.id];
+    heading.textContent = mode === 'branches' ? branchLabel || equipment || scopeLabel || '対象設備・条件' : `${subsidyGovernmentLabel(row.government_level)}${equipment ? equipment + '：' : ''}${row.program_name}`;
     const status = document.createElement('p');
     status.textContent = `受付状態：${applicationStatusLabel(row)}`;
+    const amounts = subsidyAmountFields(row, termsIndex);
+    const institution = document.createElement('p');
+    institution.dataset.subsidyInstitutionAmount = amounts.institutionStatus;
+    institution.textContent = '制度の補助額：' + amounts.institutionText;
     const calculation = document.createElement('p');
-    calculation.textContent = row.included ? `利用を想定する額：${formatYen(row.amount_yen)}` : Number.isFinite(row.amount_yen) ? row.amount_yen > 0 ? `参考額（今回の算入対象外）：${formatYen(row.amount_yen)}` : '今回の算入額：0円' : '試算額：未確定';
+    calculation.dataset.subsidyIncludedAmount = '';
+    calculation.textContent = '今回の試算に算入した額：' + (Number.isFinite(amounts.includedAmountYen) ? formatYen(amounts.includedAmountYen) : '未確認');
     const noncash = noncashBenefitDescription(row);
-    if (row.included && noncash) calculation.textContent = '経済便益への算入額：' + formatYen(row.amount_yen, false) + '相当（非現金）';
-    item.append(heading, status, calculation);
+    if (row.included && noncash) calculation.textContent = '今回の試算に算入した額：' + (Number.isFinite(amounts.includedAmountYen) ? formatYen(amounts.includedAmountYen, false) + '相当' : '未確認') + '（非現金）';
+    item.append(heading, status, institution, calculation);
+    if (amounts.referenceAmountYen !== null || amounts.inputAmountPending) {
+      const reference = document.createElement('p');
+      reference.textContent = 'この条件での参考試算額：' + (amounts.referenceAmountYen !== null ? formatYen(amounts.referenceAmountYen) + (noncash ? '相当（非現金）' : '') : '未確定');
+      item.append(reference);
+    }
+    if (row.included && row.application_status === 'scheduled') {
+      const period = document.createElement('p');
+      period.textContent = '所定の契約・設置・申請期間を満たす想定で，補助金の利用を想定しています．現在は受付開始前で，受給を保証するものではありません．';
+      item.append(period);
+    }
     const contractAssumption = designatedContractAssumption(row);
-    const regionalAssumption = conciseFukuokaAssumption(row) || conciseKochiAssumption(row) || conciseEhimeAssumption(row) || conciseKagawaAssumption(row) || conciseTokushimaAssumption(row) || conciseYamaguchiAssumption(row) || conciseHiroshimaAssumption(row) || conciseOkayamaAssumption(row) || conciseShimaneAssumption(row);
+    const regionalAssumption = conciseHokkaidoAssumption(row) || conciseFukushimaAssumption(row) || conciseYamagataAssumption(row) || conciseAkitaAssumption(row) || conciseMiyagiAssumption(row) || conciseIwateAssumption(row) || conciseAomoriAssumption(row) || conciseOkinawaAssumption(row) || conciseKagoshimaAssumption(row) || conciseOitaAssumption(row) || conciseMieAssumption(row) || conciseKumamotoAssumption(row) || conciseFukuokaAssumption(row) || conciseKochiAssumption(row) || conciseEhimeAssumption(row) || conciseKagawaAssumption(row) || conciseTokushimaAssumption(row) || conciseYamaguchiAssumption(row) || conciseHiroshimaAssumption(row) || conciseOkayamaAssumption(row) || conciseShimaneAssumption(row);
     const housingAssumption = housingScopeAssumption(row);
-    const conciseAssumption = [housingAssumption, regionalAssumption || (housingAssumption ? '住宅・設備・申請などの条件を満たす想定です．適用条件と補助額は，自治体へ確認してください．' : '')].filter(Boolean).join(' ');
-    if(row.included && noncash){const benefit=document.createElement('p');benefit.textContent=noncash;item.append(benefit);}
+    const conciseAssumption = row.id === 'miyagi-smart-energy-2026' ? '10kW未満の太陽光と蓄電池を同時に新設する想定です．太陽光3万円・蓄電池4万円を，各設備の税抜費用と他の補助金を踏まえて計算します．募集期間・予算・抽選・過去の受給条件を公式情報で確認してください．' : [housingAssumption, regionalAssumption || (housingAssumption ? '住宅・設備・申請などの条件を満たす想定です．適用条件と補助額は，自治体へ確認してください．' : '')].filter(Boolean).join(' ');
+    if(noncash && (row.included || amounts.referenceAmountYen !== null)){const benefit=document.createElement('p');benefit.textContent=noncash;item.append(benefit);}
     if(row.included && row.id==='nagano-20205-row-42-2-2026') {
       const note=document.createElement('p');
       note.textContent='蓄電池の税込対象費用は，他の併用可能な補助金を控除する前の額で計算します．補助額は1kWh当たり20万円と対象費用の3分の2の小さい額を千円未満切捨てとします．他の国庫財源による補助との併用は禁止されています．';
@@ -581,7 +623,7 @@ function renderSubsidyRows(list, rows) {
       item.append(detail);
     }
     if (row.branch_statuses?.length) {
-      status.textContent = row.branch_statuses.map(branch => ({solar:'太陽光',battery:'蓄電池'}[branch.branch_id] ?? '対象設備') + '：' + (branch.application_status === 'closed' ? '受付終了' : applicationStatusLabel(branch))).join('／');
+      status.textContent = row.branch_statuses.map(branch => ({solar:'太陽光',battery:'蓄電池',morioka_existing_pv:'既存住宅の太陽光',morioka_new_housing_closed_2026:'新築住宅の太陽光'}[branch.branch_id] ?? '対象設備') + '：' + (branch.application_status === 'closed' ? '受付終了' : applicationStatusLabel(branch))).join('／');
     }
     if (row.included && row.benefit_type === 'noncash_points_equivalent') {
       const benefit = document.createElement('p');
@@ -590,10 +632,10 @@ function renderSubsidyRows(list, rows) {
     }
     if (!row.included) {
       const reason = document.createElement('p');
-      reason.textContent = row.reason;
+      reason.textContent = '今回の試算に含めていない理由：' + row.reason;
       item.append(reason);
     }
-    if (row.official_url) {
+    if (row.official_url && mode !== 'branches') {
       const link = document.createElement('a');
       link.href = row.official_url;
       link.target = '_blank';
@@ -605,10 +647,15 @@ function renderSubsidyRows(list, rows) {
   }
 }
 
-function renderMunicipalSubsidy(result, scenario) {
+function renderMunicipalSubsidy(result, scenario, selectedScenario = scenario) {
   const municipality = frontendData.publicData.municipalities.find(item => item.municipality_code === result.input.municipality_code);
   const exploration = frontendData.publicData.municipality_subsidy_exploration?.find(item => item.municipality_code === result.input.municipality_code);
   const groups = subsidyGroups(result, scenario, municipality);
+  // Eligibility uses the standard reference; actual inclusion follows the selected scenario.
+  if (selectedScenario.scenario === 'downside') {
+    groups.excluded = [...groups.included.map(row => ({...row, included:false, reason_code:'selected_scenario_without_subsidy', reason:'下振れシナリオでは，補助金を試算に含めない設定です．'})), ...groups.excluded];
+    groups.included = [];
+  }
   const names = municipality?.candidate_program_names ?? [];
   const summaryCovered = names.length > 0 && names.every(name => [...groups.included, ...groups.excluded].some(row => row.program_name === name));
   elements.municipalSubsidySummary.textContent = [
@@ -616,9 +663,10 @@ function renderMunicipalSubsidy(result, scenario) {
     subsidyResearchMessage(scenario.subsidy_breakdown?.municipality_program_status ?? result.input.municipality_program_status, exploration),
     typeof municipality?.candidate_summary === 'string' && !summaryCovered ? municipality.candidate_summary : ''
   ].filter(Boolean).join(' ');
-  renderSubsidyRows(elements.municipalIncludedList, groups.included);
-  renderSubsidyRows(elements.municipalExcludedList, groups.excluded);
-  renderSubsidyRows(document.querySelector('[data-subsidy-reference-list]'), groups.references);
+  const termsIndex = subsidyTermsIndex(frontendData.publicData, result.input);
+  renderSubsidyRows(elements.municipalIncludedList, groups.included, 'group', termsIndex);
+  renderSubsidyRows(elements.municipalExcludedList, groups.excluded, 'group', termsIndex);
+  renderSubsidyRows(document.querySelector('[data-subsidy-reference-list]'), groups.references, 'group', termsIndex);
   document.querySelector('[data-subsidy-references]').hidden = groups.references.length === 0;
   elements.municipalSubsidySummary.hidden = !elements.municipalSubsidySummary.textContent;
 }
@@ -1130,7 +1178,7 @@ function renderResult(result, options = {}) {
   elements.capacityOutput.textContent = formatCapacity(result.input.system_capacity_kw);
   elements.capacityStatus.textContent = "";
   updateEquipmentSummary();
-  renderMunicipalSubsidy(result, subsidyReference);
+  renderMunicipalSubsidy(result, subsidyReference, selectedScenario);
   renderBatteryYearly(result);
   renderScenarios(result.scenarios, result.input);
   renderCashflow(result.scenarios, selectedScenario, result.input.equipment_package);

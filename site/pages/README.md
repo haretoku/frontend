@@ -13,10 +13,10 @@
 | `calculation-method.html` | 診断情報 | ガイド一覧へ表示しない |
 | `policy.html` | 運営ポリシー | ガイド一覧へ表示せず，フッターから各方針へ接続する |
 | `costs-maintenance.html` | 旧URLの互換ページ | 収支記事の該当節へ移動．元本文は保持 |
-| `electricity-sales.html` | はれトクガイド | 収支 |
-| `subsidies.html` | はれトクガイド | 補助金 |
-| `disaster.html` | はれトクガイド | 災害への備え |
-| `quotes-contractors.html` | はれトクガイド | 見積もり |
+| `electricity-sales.html` | 旧URLの互換ページ | `/guides/solar-economics/`へ転送 |
+| `subsidies.html` | 旧URLの互換ページ | `/guides/subsidies/`へ転送 |
+| `disaster.html` | 旧URLの互換ページ | `/guides/disaster/`へ転送 |
+| `quotes-contractors.html` | 旧URLの互換ページ | `/guides/quotes-contractors/`へ転送 |
 
 将来の「設備・製品」は，個別製品を継続して更新・検証できる体制が整ってから追加する．「パネル比較」は独立分類ではなく，「設備・製品」の記事形式として扱う．
 

@@ -13,28 +13,65 @@ const minimum = (a, b) => a[0] * b[1] <= b[0] * a[1] ? a : b;
 function capacityValue(value, rule) {
  const x = decimal(value);
  if (rule === 'none') return x;
- const scale = rule === 'floor_1' ? 1n : ['floor_0_1', 'round_0_1'].includes(rule) ? 10n : rule === 'floor_0_001' ? 1000n : 100n;
- if (!['floor_1', 'floor_0_1', 'floor_0_01', 'floor_0_001', 'round_0_01', 'round_0_1'].includes(rule)) throw new Error('未対応の関西容量前処理です．');
+ if (rule === 'min_input_round_0_01') return minimum(x, capacityValue(value, 'round_0_01'));
+ const scale = rule === 'floor_1' ? 1n : ['floor_0_1', 'round_0_1'].includes(rule) ? 10n : ['floor_0_001', 'round_0_001'].includes(rule) ? 1000n : 100n;
+ if (!['floor_1', 'floor_0_1', 'floor_0_01', 'floor_0_001', 'round_0_001', 'round_0_01', 'round_0_1'].includes(rule)) throw new Error('未対応の関西容量前処理です．');
  const numerator = x[0] * scale;
- const rounded = ['round_0_01', 'round_0_1'].includes(rule) ? (2n * numerator + x[1]) / (2n * x[1]) : numerator / x[1];
+ const rounded = ['round_0_001', 'round_0_01', 'round_0_1'].includes(rule) ? (2n * numerator + x[1]) / (2n * x[1]) : numerator / x[1];
  return [rounded, scale];
+}
+// Only the solar upper bound uses this optional preprocessing; amount rounding is independent.
+export function kansaiSolarAboveMaximum(component, capacityKw) {
+ const maximum = component.solar_output_max_kw_exclusive;
+ if (maximum == null) return false;
+ const rule = component.solar_output_max_kw_preprocessing ?? 'none';
+ if (!['none', 'round_0_001'].includes(rule)) throw new Error('未対応の太陽光上限判定用容量前処理です．');
+ const value = capacityValue(capacityKw, rule), threshold = decimal(maximum);
+ return value[0] * threshold[1] >= threshold[0] * value[1];
+}
+export function subsidyCostPrerequisiteFailure(program, input) {
+ const solarMinimum = program.solar_cost_tax_invariant_min_inclusive_yen;
+ if (solarMinimum != null && (input.solarCost == null || input.solarCost < solarMinimum)) return ['candidate_missing_conditions', 'eligible_cost_tax_basis_unconfirmed'];
+ const minimum = program.battery_cost_tax_invariant_min_inclusive_yen;
+ if (minimum != null && input.batteryCost < minimum) return ['candidate_missing_conditions', 'eligible_cost_tax_basis_unconfirmed'];
+ const unitLimit = program.battery_equipment_unit_cost_unconfirmed_tax_max_yen;
+ if (unitLimit != null) {
+  if (input.batteryCapacityKwh <= 0) return ['excluded_incompatible', 'capacity_not_applicable'];
+  const cost = decimal(input.batteryEquipmentCost);
+  const ceiling = multiply(decimal(unitLimit), decimal(input.batteryCapacityKwh));
+  if (cost[0] * ceiling[1] * 10n > ceiling[0] * cost[1] * 11n) return ['excluded_incompatible', 'equipment_unit_cost_above_limit'];
+  if (cost[0] * ceiling[1] > ceiling[0] * cost[1]) return ['candidate_missing_conditions', 'equipment_unit_cost_tax_basis_unconfirmed'];
+ }
+ const purchaseMinimum = program.confirmed_battery_purchase_cost_min_exclusive_yen;
+ if (purchaseMinimum != null) {
+  const cost = decimal(input.batteryEquipmentCost), threshold = decimal(purchaseMinimum);
+  if (cost[0] * threshold[1] * 10n < threshold[0] * cost[1] * 11n) return ['candidate_missing_conditions', 'combined_equipment_purchase_cost_unconfirmed'];
+ }
+ return null;
 }
 export function kansaiFormulaComponents(program, input) {
  const components = {}, rawComponents = {}, applied = [], excluded = [];
  for (const item of program.formula_components ?? []) {
+  if (item.eligible_cost_must_exceed_grant && (item.formula_type !== 'capacity_rate' || item.cost_scope == null || item.cost_tax == null || item.defer_rounding_to_formula_total || Object.hasOwn(program,'formula_total') || Object.hasOwn(program,'formula_scope_totals'))) throw new Error('補助額を上回る対象費用の条件は，共有上限・丸め繰越のない費目・税区分付き容量単価式に限ります．');
   if (item.housing_ages && !item.housing_ages.includes(input.housingAge)) continue;
   if (!item.equipment_packages.includes(input.equipmentPackage)) continue;
   if (item.battery_capacity_max_kwh_exclusive != null && input.batteryCapacityKwh >= item.battery_capacity_max_kwh_exclusive) { excluded.push({scope:item.scope,reason_code:'capacity_not_applicable',battery_capacity_max_kwh_exclusive:item.battery_capacity_max_kwh_exclusive}); continue; }
   if (item.battery_capacity_min_kwh != null && input.batteryCapacityKwh < item.battery_capacity_min_kwh) { excluded.push({scope:item.scope,reason_code:'capacity_not_applicable',battery_capacity_min_kwh:item.battery_capacity_min_kwh}); continue; }
-  if (item.solar_output_max_kw_exclusive != null && input.capacityKw >= item.solar_output_max_kw_exclusive) { excluded.push({scope:item.scope,reason_code:'capacity_not_applicable',solar_output_max_kw_exclusive:item.solar_output_max_kw_exclusive}); continue; }
+  if (kansaiSolarAboveMaximum(item, input.capacityKw)) { excluded.push({scope:item.scope,reason_code:'capacity_not_applicable',solar_output_max_kw_exclusive:item.solar_output_max_kw_exclusive}); continue; }
+  if (item.solar_output_min_kw_exclusive != null && input.capacityKw <= item.solar_output_min_kw_exclusive) { excluded.push({scope:item.scope,reason_code:'capacity_not_applicable',solar_output_min_kw_exclusive:item.solar_output_min_kw_exclusive}); continue; }
   if (item.solar_output_min_kw != null && input.capacityKw < item.solar_output_min_kw) { excluded.push({scope:item.scope,reason_code:'capacity_not_applicable',solar_output_min_kw:item.solar_output_min_kw}); continue; }
-  const cost = {solar: input.solarCost, battery: input.batteryCost, battery_equipment: input.batteryEquipmentCost, combined: input.solarCost + input.batteryCost}[item.cost_scope];
+  const cost = {solar: input.solarCost, battery: input.batteryCost, battery_equipment: input.batteryEquipmentCost, combined: item.eligible_cost_must_exceed_grant && (input.solarCost == null || input.batteryCost == null) ? null : input.solarCost + input.batteryCost}[item.cost_scope];
   let eligible = cost == null ? null : decimal(cost);
+  if (item.eligible_cost_must_exceed_grant && !eligible) throw new Error('補助額と比較する対象費用がありません．');
   if (eligible && item.cost_tax === 'exclusive') eligible = multiply(eligible, [10n, 11n]);
   if (item.eligible_cost_min_yen != null) {
-   if (!eligible) throw new Error('対象経費最低額にcost_scopeがありません．');
+   const minimumScope = item.eligible_cost_min_scope ?? item.cost_scope;
+   const minimumInput = {solar:input.solarCost,battery:input.batteryCost,battery_equipment:input.batteryEquipmentCost,combined:input.solarCost == null || input.batteryCost == null ? null : input.solarCost+input.batteryCost}[minimumScope];
+   if (minimumInput == null) throw new Error('対象経費最低額の判定に必要な費用がありません．');
+   let minimumEligible = decimal(minimumInput);
+   if (item.cost_tax === 'exclusive') minimumEligible = multiply(minimumEligible,[10n,11n]);
    const minimumCost = decimal(item.eligible_cost_min_yen);
-   if (eligible[0] * minimumCost[1] < minimumCost[0] * eligible[1]) {
+   if (minimumEligible[0] * minimumCost[1] < minimumCost[0] * minimumEligible[1]) {
     excluded.push({scope:item.scope,reason_code:'eligible_cost_below_minimum',eligible_cost_min_yen:item.eligible_cost_min_yen});
     continue;
    }
@@ -72,17 +109,23 @@ export function kansaiFormulaComponents(program, input) {
    const fraction = multiply(eligible, [BigInt(item.fraction_numerator), BigInt(item.fraction_denominator)]);
    amount = amount ? minimum(amount, fraction) : fraction;
   }
+  if (item.eligible_cost_must_exceed_grant) {
+   if (item.cap_yen != null) amount = minimum(amount, decimal(item.cap_yen));
+   const grant = roundedGrant(amount, item), threshold = decimal(grant);
+   if (eligible[0] * threshold[1] <= threshold[0] * eligible[1]) {
+    excluded.push({scope:item.scope,reason_code:'eligible_cost_not_above_grant',eligible_cost_yen_unrounded:decimalText(eligible),grant_before_cost_test_yen:grant});
+    continue;
+   }
+   amount = threshold;
+  }
   if (eligible) amount = minimum(amount, eligible);
   if (item.cap_yen != null) amount = minimum(amount, decimal(item.cap_yen));
-  const unit = BigInt(item.rounding_unit_yen);
-  const serviceHalfUp = item.rounding_mode === 'service_half_up';
-  if (serviceHalfUp && (item.formula_type !== 'capacity_rate' || item.rounding_unit_yen !== 1)) throw new Error('サービス円丸めは1円単位の容量単価式に限定する．');
-  const yen = amount[0] < 0n ? 0 : serviceHalfUp ? Number((2n * amount[0] + amount[1]) / (2n * amount[1])) : Number(amount[0] / (amount[1] * unit) * unit);
+  const yen = roundedGrant(amount, item);
   components[item.scope] = (components[item.scope] ?? 0) + yen;
   rawComponents[item.scope]=add(rawComponents[item.scope]??[0n,1n],item.defer_rounding_to_formula_total?amount:decimal(yen));
   applied.push({...(Object.hasOwn(item,'rounding_mode') ? {rounding_mode:item.rounding_mode} : {}),...(fixedDeduction ? {eligible_cost_deduction_yen:fixedDeduction} : {}),housing_ages:item.housing_ages??null,deduct_other_subsidies:item.deduct_other_subsidies??true,fixed_amount_yen:item.fixed_amount_yen??null,capacity_amount_rounding_unit_yen:item.capacity_amount_rounding_unit_yen??null,defer_rounding_to_formula_total:item.defer_rounding_to_formula_total??false,amount_yen_before_deferred_rounding:decimalText(amount),scope:item.scope, formula_type:item.formula_type, amount_yen:yen, cost_scope:item.cost_scope ?? null, cost_tax:item.cost_tax ?? null, capacity_preprocessing:item.capacity_preprocessing ?? null, eligible_cost_yen_unrounded:eligible ? decimalText(eligible) : null, capacity_amount_yen_unrounded:capacityAmount ? decimalText(capacityAmount) : null, fraction_numerator:item.fraction_numerator ?? null, fraction_denominator:item.fraction_denominator ?? null, capacity_unit_cost_cap_yen:item.capacity_unit_cost_cap_yen ?? null, cap_yen:item.cap_yen ?? null, rounding_unit_yen:item.rounding_unit_yen});
  }
- if (!applied.length) return null;
+ if (!applied.length) return excluded.some(item=>item.reason_code==='eligible_cost_not_above_grant') ? {components:{},details:{formula_components_applied:[],formula_components_excluded:excluded,formula_exclusion_reason:'eligible_cost_not_above_grant'}} : null;
  const details={formula_components_applied:applied, formula_source:'independently_reviewed_kansai_municipal_audit', ...(excluded.length ? {formula_components_excluded:excluded} : {})};
  const scopeTotals=[];
  for(const total of program.formula_scope_totals??[]){
@@ -116,6 +159,13 @@ export function kansaiFormulaComponents(program, input) {
   details.formula_total_applied={cost_scope:total.cost_scope,cost_tax:total.cost_tax??null,eligible_cost_yen_unrounded:decimalText(eligible),fraction_numerator:total.fraction_numerator??null,fraction_denominator:total.fraction_denominator??null,cap_yen:total.cap_yen??null,rounding_unit_yen:total.rounding_unit_yen,raw_component_total_yen:raw[0]%raw[1]===0n?Number(raw[0]/raw[1]):decimalText(raw),amount_yen:yen,binding_reduction_allocation:'battery_then_solar_diagnostic_only'};
  }
  return {components,details};
+}
+
+function roundedGrant(amount, item) {
+ const unit = BigInt(item.rounding_unit_yen);
+ const serviceHalfUp = item.rounding_mode === 'service_half_up';
+ if (serviceHalfUp && (item.formula_type !== 'capacity_rate' || item.rounding_unit_yen !== 1)) throw new Error('サービス円丸めは1円単位の容量単価式に限定する．');
+ return amount[0] < 0n ? 0 : serviceHalfUp ? Number((2n * amount[0] + amount[1]) / (2n * amount[1])) : Number(amount[0] / (amount[1] * unit) * unit);
 }
 
 // Plain decimal notation for diagnostic evidence; numerical fields use exact fractions.
@@ -154,7 +204,7 @@ export function kansaiBelowMinimumCost(program, input) {
  const parts=(program.formula_components ?? []).filter(c=>c.equipment_packages.includes(input.equipmentPackage)&&(!c.housing_ages||c.housing_ages.includes(input.housingAge)));
  return parts.length>0 && parts.every(c=>{
   if(c.eligible_cost_min_yen==null)return false;
-  const cost={solar:input.solarCost,battery:input.batteryCost,battery_equipment:input.batteryEquipmentCost,combined:input.solarCost+input.batteryCost}[c.cost_scope];
+  const cost={solar:input.solarCost,battery:input.batteryCost,battery_equipment:input.batteryEquipmentCost,combined:input.solarCost == null || input.batteryCost == null ? null : input.solarCost+input.batteryCost}[c.eligible_cost_min_scope ?? c.cost_scope];
   if(cost==null)return false;
   let eligible=decimal(cost);
   if(c.cost_tax==='exclusive')eligible=multiply(eligible,[10n,11n]);

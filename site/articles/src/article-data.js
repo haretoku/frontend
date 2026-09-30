@@ -114,7 +114,9 @@ async function initialize() {
         const notes = [formula,scopeClarification,program.diagnostic_scope?.basis, program.note, ...(program.calculation_assumptions ?? []), ...(program.required_confirmations ?? [])].filter(Boolean);
         for (const text of [...new Set(notes)]) {
           const paragraph = document.createElement('p');
-          paragraph.textContent = text;
+          paragraph.textContent = program.id === 'miyagi-smart-energy-2026'
+            ? text.replace('公式の受付開始前をscheduledで保持し，', '受付開始前の制度について，').replace('金額・設備・費用上限・募集別基準日は2026-09-27に公式手引を限定再確認．confirmed_at=2026-09-18は前回の公式受付確認日として保持し，受付中へ変更しない．', '金額・設備・費用上限・募集別基準日は2026年9月27日に公式手引を再確認しました．受付状態は2026年9月18日時点で確認した「受付開始前」を表示しています．')
+            : text;
           details.append(paragraph);
         }
         for (const url of [...new Set([program.official_url, ...(program.official_urls ?? []), ...(program.benefit_components ?? []).map(component => component.official_url)].filter(Boolean))]) {
@@ -128,7 +130,12 @@ async function initialize() {
           details.append(paragraph);
         }
         subsidyAssumptions.append(details);
-        if (typeof location !== 'undefined' && decodeURIComponent(location.hash.slice(1)) === details.id) { details.open = true; requestAnimationFrame(() => details.scrollIntoView()); }
+        if (typeof location !== 'undefined' && decodeURIComponent(location.hash.slice(1)) === details.id) {
+          for (let ancestor = details; ancestor; ancestor = ancestor.parentElement) {
+            if (ancestor.tagName === 'DETAILS') ancestor.open = true;
+          }
+          requestAnimationFrame(() => details.scrollIntoView());
+        }
       }
     }
 

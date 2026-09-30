@@ -421,7 +421,7 @@ body[data-page="top"] .top-heading-icon { width: 0.9em; height: 0.9em; margin-ri
 /* サイト共通の白基調・ブランド色．状態色と暗背景の白文字は保持する． */
 .site-header .brand { color: var(--color-primary-dark); }
 .site-header .brand__toku { color: var(--color-brand-green); }
-.guides-section .section-intro .brand-term { color: inherit; }
+:is(.guides-section,.top-data-section) .section-intro .brand-term { color: inherit; }
 h1, h2, h3 { color: var(--color-primary-dark); }
 body[data-page="top"] .hero__copy h1 { color: var(--color-primary-dark); }
 .optional-label, select:disabled { color: var(--color-muted); background: #f0f2f1; }
@@ -443,3 +443,33 @@ input::placeholder { color: #606a64; }
 @media (min-width: 40.001rem) {
   body[data-page="top"] .guides-section { padding-top: clamp(3rem, 5vw, 4rem); }
 }
+
+/* Data navigation shares the existing guide/diagnosis icon treatment. */
+@media (min-width: 52.001rem) and (max-width: 72rem) {
+  .site-header__descriptor { display: none; }
+  .site-nav { margin-left: auto; gap: 1.1rem; }
+}
+@media (max-width: 52rem) {
+  .site-header__inner { gap: .65rem; }
+  .site-header .site-nav { display: flex; margin-left: auto; gap: .8rem; }
+  .site-header .site-nav a { display: none; }
+  .site-header .site-nav a[href="/guides/"], .site-header .site-nav a.site-data-link { display: inline-flex; font-size: .85rem; }
+  .site-header .site-nav a[href="/guides/"] > span, .site-header .site-nav a.site-data-link > span { display: none; }
+  .site-header .site-nav a[href="/guides/"]::after { content: 'ガイド'; }
+  .site-header .site-nav a.site-data-link::after { content: 'データ'; }
+  body[data-page="top"] .mobile-guide-link { display: none; }
+}
+
+/* Shared identity for article, data and diagnosis routes. */
+.content-route-icon{display:inline-block;width:1em;height:1em;margin-inline-end:.4em;vertical-align:-.12em;flex:none;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+/* Data and guides are peer sections below the primary diagnosis. */
+.top-data-section{padding-block:0 clamp(3rem,6vw,5rem);background:var(--color-background-cool)}
+.top-data-section .section-intro{margin-bottom:1.5rem}
+.top-data-card{display:flex;align-items:center;gap:1.5rem;padding:1.75rem 2rem;border:1px solid var(--color-border);border-radius:.6rem;background:#fff;color:var(--color-ink);text-decoration:none}
+.top-data-card:hover{background:var(--color-primary-pale)}
+.top-data-card__icon{width:48px;height:48px;flex:none;fill:none;stroke:var(--color-primary);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.top-data-card>div{flex:1;min-width:0}.top-data-card h3{margin:0 0 .5rem;font-size:1.2rem;line-height:1.5}.top-data-card p{margin:0;color:var(--color-muted);font-size:1rem}
+.top-data-card__arrow{flex:none;font-size:1.5rem;color:var(--color-primary)}
+.top-data-card:focus-visible{outline:2px solid var(--color-focus);outline-offset:4px}
+@media(max-width:36rem){.top-data-card{padding:1.25rem;gap:1rem;align-items:flex-start}.top-data-card__icon{width:36px;height:36px}.top-data-card h3{font-size:1.1rem}.top-data-card p{font-size:.9rem}.top-data-card__arrow{font-size:1.25rem}}

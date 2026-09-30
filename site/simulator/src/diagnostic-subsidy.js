@@ -1,4 +1,4 @@
-import { kansaiBelowMinimumCost, kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './kansai-formula.js';
+import { kansaiSolarAboveMaximum, subsidyCostPrerequisiteFailure, kansaiBelowMinimumCost, kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './kansai-formula.js';
 import { preprocessCapacity } from './capacity-preprocessing.js';
 const floor10000 = value => Math.floor(value / 10000) * 10000;
 const floor1000 = value => Math.floor(value / 1000) * 1000;
@@ -25,15 +25,20 @@ export function gunmaProgramBReference(batteryCapacityKwh,batteryCost) {
  const cost=Math.min(batteryCost,141000*rated);return {rated_capacity_kwh:rated,eligible_cost_yen:Math.trunc(cost),battery_yen:floor1000(cost/3)};
 }
 export function diagnosticComponents(program, input) {
+ if(subsidyCostPrerequisiteFailure(program,input))return null;
  const {housingAge:h,equipmentPackage:e,capacityKw:k,batteryCapacityKwh:b,solarCost:s,batteryCost:c,batteryEquipmentCost:bc}=input;
  if(!program.housing_ages.includes(h)||!program.equipment_packages.includes(e))return null;
  const battery=e==='solar_plus_standard_battery', components={}, details={};
  switch(program.machine_rule){
- case 'kansai_municipal_formula': return kansaiFormulaComponents(program,input);
+ case 'kansai_municipal_formula': {
+   const result=kansaiFormulaComponents(program,input);
+   if(!result||result.details.formula_exclusion_reason)return result;
+   const components=Object.fromEntries(Object.entries(result.components).filter(([,amount])=>amount>0));
+   return Object.keys(components).length?{...result,components}:null;
+ }
  case 'kansai_municipal_unresolved': return null;
  case 'national_dr_battery_closed':
  case 'municipal_unconfirmed_not_included':
- case 'miyagi_smart_energy_scheduled':
  case 'akita_residential_reform_battery_unresolved':
  case 'yamagata_mirakuru_battery_non_fit_or_post_fit':
  case 'yamagata_self_consumption_solar_non_fit':
@@ -51,6 +56,10 @@ export function diagnosticComponents(program, input) {
  case 'oita_self_consumption_solar_battery_closed':
  case 'miyazaki_solar_battery_non_fit':
  return null;
+ case 'miyagi_smart_energy_scheduled':
+ if(!battery || k>=10)return null;
+ components.solar=30000;components.battery=40000;
+ details.tax_exclusive_cost_mapping='各設備の税込モデル設置費を1.1で除して税抜実費へ対応する仮定．他補助との合計が各費目上限を超える組合せは不成立とし，県定額を任意減額しない．';break;
  case 'toyama_noncash_solar':
  components.solar=100000;
  Object.assign(details,{benefit_type:'noncash_points_equivalent',
@@ -161,18 +170,23 @@ export function diagnosticComponents(program, input) {
 }
 function evaluation(p,status,reason,amount,components,details){
  const row={id:p.id,government_level:p.government_level,program_name:p.program_name,calculation_status:status,application_status:p.application_status,amount_yen:amount,official_url:p.official_urls[0],reason_code:reason,required_confirmations:p.required_confirmations,calculation_assumptions:p.calculation_assumptions,combination_status:'assumed_permitted_unverified_unless_explicitly_prohibited',source_ids:p.source_ids};
+ if(p.branch_statuses?.length)row.branch_statuses=p.branch_statuses;
  const confirmation = {
  housing_age_not_applicable:'入力した新築・既存区分が制度の対象住宅区分と一致しないため算入しない．',
  equipment_package_not_applicable:'入力した設備構成が制度の対象設備と一致しないため算入しない．',
  municipality_not_applicable:'入力した市町村が制度の対象地域ではないため算入しない．',
+    eligible_cost_tax_basis_unconfirmed: '対象費用の税込・税抜の扱いを確認できず，今回の費用では補助額が変わるため，金額を確定していません．',
+    equipment_unit_cost_tax_basis_unconfirmed: '蓄電池本体の単価上限が税込・税抜のどちらかを確認できず，今回の単価では対象か判断できないため，金額を確定していません．',
+    equipment_unit_cost_above_limit: '蓄電池本体の単価が，税込・税抜のいずれで見ても制度の上限を超えるため，含めていません．',
+    combined_equipment_purchase_cost_unconfirmed: '太陽光と蓄電池の本体購入費が制度の最低額を満たすか，今回の費用情報だけでは確認できないため，金額を確定していません．',
  eligible_cost_below_minimum:'入力条件から算定した対象経費が制度の最低対象経費を下回るため算入しない．',
+ eligible_cost_not_above_grant:'制度の税区分で計算した対象費用が補助額を上回らないため算入しない．',
  capacity_not_applicable:'入力容量が制度の対象容量範囲と一致しないため算入しない．',
  existing_pv_battery_addition_not_supported:'制度で指定される既設又は先行契約済み太陽光への蓄電池追加経路に該当する必要があり，新規設備を対象とする現行診断では算入しない．',
  regional_eligibility_input_unavailable:'対象地域が県内の一部に限定されるが，現行診断に地域該当性の入力がないため補助額を確定しない．',
  sale_path_not_applicable:'制度が求める非FIT・非FIP又は卒FITの売電経路と，現行の新設FIT売電経路が一致しないため算入しない．',
  application_closed:'受付終了を確認しているため，現在は算入しない．',
  application_suspended:'受付停止を確認しているため，現在は算入しない．',
- application_scheduled:'次回募集の開始前であり，現在は申請できないため補助額を算入しない．',
  calculated_zero_amount:'確認済み算式と開示した計算仮定による算定額が0円のため，補助額を加算しない．',
  application_status_unconfirmed:'現在の受付状態を確認できないため，補助額を算入しない．',
  required_external_structure_or_housing_work:'太陽光・蓄電池とは別の構造物又は住宅工事が制度全体若しくは該当枝の必須条件であるため，診断対象へ算入しない．',
@@ -190,16 +204,21 @@ function evaluation(p,status,reason,amount,components,details){
  row.required_confirmations = [...(confirmation ? [confirmation] : []), ...p.required_confirmations];
  const branch = details?.branches?.find(item => item.id === details.selected_branch);
  if (branch) row.application_status = branch.application_status ?? 'unknown';
+ if(row.application_status==='scheduled')row.calculation_assumptions=[...row.calculation_assumptions,'受付開始前でも，所定の契約・設置・申請期間を満たす仮定で評価する．現在受付中又は受給確定を意味しない．'];
  if(components!=null)row.component_amounts_yen=components;return {...row,...details};
 }
 export function allocateDiagnosticScope(options,limit,scope=null,detailsById={},priorScopeSubsidies=0){
  if(!options.length)return {total:0,allocation:{}};let best=null;
+ // 宮城は設備ごとに申請しない選択を比較する．定額の残額への減額は不可．
+ const miyagi=options.filter(([p])=>p.machine_rule==='miyagi_smart_energy_scheduled');
+ const withoutMiyagi=miyagi.length?allocateDiagnosticScope(options.filter(o=>!miyagi.includes(o)),limit,scope,detailsById,priorScopeSubsidies):null;
+ if(miyagi.length)limit=Math.floor(limit*10/11);
  const deferred=options.filter(([p])=>p.machine_rule==='daigo_zero_carbon_solar_battery');
  const residual=options.filter(([p])=>['nagano_roof_solar_battery','miyazaki_battery_existing_or_contracted_pv'].includes(p.machine_rule)||kansaiResidualItem(p,detailsById[p.id],scope));
  const ordinary=options.filter(option=>!deferred.includes(option)&&!residual.includes(option));
  for(const order of permutations(ordinary)){let remaining=limit,feasible=true;const allocation={};
  for(const [p,maximum] of order){let amount;const rule=p.machine_rule;
- if(['national_zeh_battery','national_mirai_eco_battery','hachioji_renewable_energy','hyogo_awaji_battery'].includes(rule)){if(maximum>remaining){feasible=false;break;}amount=maximum;}else amount=Math.min(maximum,remaining);
+ if(['national_zeh_battery','national_mirai_eco_battery','hachioji_renewable_energy','hyogo_awaji_battery','miyagi_smart_energy_scheduled'].includes(rule)){if(maximum>remaining){feasible=false;break;}amount=maximum;}else amount=Math.min(maximum,remaining);
  if(['tokyo_residential_battery','tokyo_zero_emi'].includes(rule))amount=floor1000(amount);
  if(rule==='saitama_residential_battery')amount=floor10000(amount);
  amount=Math.max(0,amount);allocation[p.id]=amount;remaining-=amount;}
@@ -209,7 +228,9 @@ export function allocateDiagnosticScope(options,limit,scope=null,detailsById={},
  for(const [p,maximum] of deferred){const amount=Math.max(0,Math.min(maximum,floor1000(remaining/2)));allocation[p.id]=amount;remaining-=amount;}
  const total=sum(Object.values(allocation)),tie=Object.entries(allocation).sort(([a],[b])=>compare(a,b));
  if(!best||compare([total,tie],[best.total,best.tie])>0)best={total,allocation,tie};
- }return best;
+ }
+ if(withoutMiyagi && (!best || withoutMiyagi.total>best.total))return {total:withoutMiyagi.total,allocation:{...withoutMiyagi.allocation,...Object.fromEntries(miyagi.map(([p])=>[p.id,0]))}};
+ return best;
 }
 export function diagnosticSubsidy(programs,input,included){
  const relevant=programs.filter(p=>p.government_level==='national'||p.government_level==='prefecture'&&input.prefectureCode===p.prefecture_code||p.government_level==='municipality'&&p.municipality_code===input.municipalityCode);
@@ -229,7 +250,7 @@ export function diagnosticSubsidy(programs,input,included){
  if(p.battery_capacity_min_kwh!=null&&input.batteryCapacityKwh<p.battery_capacity_min_kwh){excluded.push(evaluation(p,'excluded_incompatible','capacity_not_applicable',null));continue;}
  if(p.machine_rule==='kansai_municipal_formula'){
  const parts=p.formula_components.filter(c=>c.equipment_packages.includes(input.equipmentPackage)&&(!c.housing_ages||c.housing_ages.includes(input.housingAge)));
- if(parts.length && parts.every(c=>(c.solar_output_min_kw!=null && input.capacityKw<c.solar_output_min_kw)||(c.solar_output_max_kw_exclusive!=null && input.capacityKw>=c.solar_output_max_kw_exclusive)||(c.battery_capacity_min_kwh!=null && input.batteryCapacityKwh<c.battery_capacity_min_kwh)||(c.battery_capacity_max_kwh_exclusive!=null && input.batteryCapacityKwh>=c.battery_capacity_max_kwh_exclusive))){excluded.push(evaluation(p,'excluded_incompatible','capacity_not_applicable',null));continue;}
+ if(parts.length && parts.every(c=>(c.solar_output_min_kw_exclusive!=null && input.capacityKw<=c.solar_output_min_kw_exclusive)||(c.solar_output_min_kw!=null && input.capacityKw<c.solar_output_min_kw)||(kansaiSolarAboveMaximum(c,input.capacityKw))||(c.battery_capacity_min_kwh!=null && input.batteryCapacityKwh<c.battery_capacity_min_kwh)||(c.battery_capacity_max_kwh_exclusive!=null && input.batteryCapacityKwh>=c.battery_capacity_max_kwh_exclusive))){excluded.push(evaluation(p,'excluded_incompatible','capacity_not_applicable',null));continue;}
  if(kansaiBelowMinimumCost(p,input)){excluded.push(evaluation(p,'excluded_incompatible','eligible_cost_below_minimum',null));continue;}
  }
  const capacityFloor=Math.floor(input.capacityKw);
@@ -238,8 +259,8 @@ export function diagnosticSubsidy(programs,input,included){
  if(p.diagnostic_scope.status==='excluded_existing_pv_battery_addition'){excluded.push(evaluation(p,'excluded_incompatible','existing_pv_battery_addition_not_supported',null));continue;}
  if(!p.diagnostic_scope.in_scope_housing_ages.includes(input.housingAge)){excluded.push(evaluation(p,'excluded_incompatible','required_external_structure_or_housing_work',null));continue;}
  if(p.fit_compatible===false){excluded.push(evaluation(p,'excluded_incompatible','sale_path_not_applicable',null));continue;}
- if(!['accepting','accepting_with_waitlist_branch'].includes(p.application_status)){
- const reason={closed:'application_closed',suspended:'application_suspended',scheduled:'application_scheduled'}[p.application_status]??'application_status_unconfirmed';
+ if(!['accepting','accepting_with_waitlist_branch','scheduled'].includes(p.application_status)){
+ const reason={closed:'application_closed',suspended:'application_suspended'}[p.application_status]??'application_status_unconfirmed';
  (p.application_status==='closed'?excluded:candidates).push(evaluation(p,p.application_status==='closed'?'excluded_closed':'candidate_missing_conditions',reason,null));continue;
  }
  if(p.machine_rule==='municipal_unconfirmed_not_included'){
@@ -248,11 +269,14 @@ export function diagnosticSubsidy(programs,input,included){
  if(p.machine_rule==='kansai_municipal_unresolved' && input.equipmentPackage==='solar_only' && p.branch_statuses?.some(b=>b.branch_id==='solar' && b.application_status==='closed')){
  excluded.push(evaluation(p,'excluded_closed','application_closed',null,null,{branch_statuses:p.branch_statuses,selected_branch:'solar',branches:[{id:'solar',application_status:'closed'}]}));continue;
  }
+ const costFailure=subsidyCostPrerequisiteFailure(p,input);
+ if(costFailure){const [status,reason]=costFailure;(status==='candidate_missing_conditions'?candidates:excluded).push(evaluation(p,status,reason,null));continue;}
  const c=diagnosticComponents(p,input);
+ if(c?.details?.formula_exclusion_reason){excluded.push(evaluation(p,'excluded_incompatible',c.details.formula_exclusion_reason,null,c.components,c.details));continue;}
  if(!c){candidates.push(evaluation(p,'candidate_missing_conditions',p.machine_rule==='kansai_municipal_unresolved'?'capacity_definition_input_unavailable':'calculation_detail_unconfirmed',null,null,p.machine_rule==='kansai_municipal_unresolved'?{branch_statuses:p.branch_statuses??[]}:null));continue;}
  if(p.application_status==='accepting_with_waitlist_branch'){
  const branchStatus=c.details.branches?.find(branch=>branch.id===c.details.selected_branch)?.application_status??'unknown';
- if(!['accepting','waitlist'].includes(branchStatus)){
+ if(!['accepting','waitlist','scheduled'].includes(branchStatus)){
  const reason={closed:'application_closed',suspended:'application_suspended'}[branchStatus]??'application_status_unconfirmed';
  (branchStatus==='closed'?excluded:candidates).push(evaluation(p,branchStatus==='closed'?'excluded_closed':'candidate_missing_conditions',reason,null,c.components,c.details));continue;
  }}

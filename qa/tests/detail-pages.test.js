@@ -6,6 +6,10 @@ import { runInNewContext } from 'node:vm';
 
 import { calculateEstimate } from "../../site/simulator/src/calculator.js";
 
+const publicData = JSON.parse(
+  await readFile(new URL("../../data/input/public-data.json", import.meta.url), "utf8")
+);
+
 const guideSlugs = {"electricity-sales": "solar-economics", "subsidies": "subsidies", "disaster": "disaster", "quotes-contractors": "quotes-contractors"};
 const readPage = name => readFile(new URL(`../../site/${guideSlugs[name] ? `guides/${guideSlugs[name]}/index.html` : `pages/${name}.html`}`, import.meta.url), "utf8");
 const prose = html => html.replace(/<[^>]+>/g, "");
@@ -120,9 +124,6 @@ test("4記事の本文引用・章末参考文献は同じ文献辞書で解決�
 });
 
 
-const publicData = JSON.parse(
-  await readFile(new URL("../../data/input/public-data.json", import.meta.url), "utf8")
-);
 
 test("30年評価の本文は発電劣化と20年終点の蓄電池比較を区別する", async () => {
   const method = await readFile(new URL("../../site/pages/calculation-method.html", import.meta.url), "utf8");
@@ -154,13 +155,19 @@ test('制度条件の説明一覧はB2の診断用制度を一度だけ描画し
   await runInNewContext(source.replace(/^import .*;\r?\n/gm,'').replace(/^initialize\(\);\r?$/m,'')+'\ninitialize();',{document,loadFrontendData:async()=>({publicData,metadata:{sources:[]}}),bindArticleBibliography:()=>{},setupArticleQuoteBar:()=>{},replacesLegacyPrefecture});
   assert.match(status.textContent,/公開データ版/);
   const diagnostic=publicData.diagnostic_subsidy_programs;
-  const b2=diagnostic.filter(program=>['04','05','06'].includes(program.prefecture_code));
-  assert.equal(b2.length,4);
+  const b2=diagnostic.filter(program=>['04','05','06','07'].includes(program.prefecture_code));
+  assert.equal(b2.length,158);
   for(const program of b2){
-    const rows=container.children.filter(detail=>detail.children[0].textContent===program.program_name);
+    const rows=container.children.filter(detail=>detail.id==='subsidy-program-'+program.id);
     assert.equal(rows.length,1,program.id);
+    assert.equal(rows[0].children[0].textContent,program.program_name+(program.diagnostic_scope?.status==='excluded_required_external_work'?'（診断対象外）':''));
     const notes=rows[0].children.filter(child=>child.tag==='p').map(child=>child.textContent);
-    for(const assumption of program.calculation_assumptions)assert.ok(notes.includes(assumption),program.id);
+    for(const assumption of program.calculation_assumptions){
+      if(program.id==='miyagi-smart-energy-2026' && assumption.includes('scheduled')){
+        assert.match(notes.join(' '), /受付開始前.*所定の契約・設置・申請期間/);
+        assert.doesNotMatch(notes.join(' '), /scheduled|confirmed_at/);
+      }else assert.ok(notes.includes(assumption),program.id);
+    }
   }
   for(const code of ['16','20','28','45']){const program=diagnostic.find(p=>p.prefecture_code===code&&p.fit_compatible!==false);const row=container.children.find(detail=>detail.children[0].textContent===program.program_name);const text=row.children.map(node=>node.textContent).join(' ');assert.doesNotMatch(text,/金額は未確定|容量の種類が未確認/);for(const assumption of program.calculation_assumptions)assert.ok(text.includes(assumption));}
   for(const [rule,patterns] of [['fukushima_residential_solar_fit',[/0\.01kW未満切捨て.*4万円.*16万円/,/千円未満/,/10kW未満/]],['yamanashi_renewable_energy',[/整数kW.*3万円.*27万円/,/整数kWh.*4kWh以上.*25万円/]]]) {

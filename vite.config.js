@@ -22,6 +22,8 @@ export default defineConfig({
           input: {
             index: resolve(siteRoot, "index.html"),
             guides: resolve(siteRoot, "guides/index.html"),
+            data: resolve(siteRoot, "data/index.html"),
+            subsidiesData: resolve(siteRoot, "data/subsidies/index.html"),
             legacyGuides: resolve(siteRoot, "solar/index.html"),
             ...Object.fromEntries(["electricity-sales", "subsidies", "disaster", "quotes-contractors"].map(name => [`legacy-${name}`, resolve(siteRoot, `pages/${name}.html`)])),
             simulator: resolve(siteRoot, "simulator/index.html"),

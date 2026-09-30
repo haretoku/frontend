@@ -30,7 +30,7 @@
       <div class="page-width site-header__inner">
         <a class="brand" href="../" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="../shared/assets/yen-sun-mark.svg" alt=""></span></a>
         <span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span>
-        <nav class="site-nav" aria-label="主要メニュー"><a href="../"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"/></svg><span>トップ</span></a><a href="../simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a></nav>
+        <nav class="site-nav" aria-label="主要メニュー"><a href="../"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"/></svg><span>トップ</span></a><a href="../simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a><a class="site-data-link" href="/data/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8h18M3 14h18M10 8v12"/></svg><span>はれ<span class="brand-term">トク</span>データ</span></a></nav>
       </div>
     </header>
     <main>
@@ -134,7 +134,7 @@
           </div>
 
           <h3 id="subsidy-assumptions">補助金の計算条件・注意事項</h3>
-          <p>公式資料に差がある場合は対象年度，交付主体の資料，公式募集本文の順で適用資料を選びます．現行の公式案内に終了・停止・開始前の明示がない場合は受付継続を仮定します．設置後申請の制度は，対象設置期間と期限を満たし，将来の所定申請期間に申請する前提で算入します．受付表示や利用想定額は，現在の申請可否や交付を保証しません．</p>
+          <p>公式資料に差がある場合は対象年度，交付主体の資料，公式募集本文の順で適用資料を選びます．現行の公式案内に終了・停止・開始前の明示がない場合は受付継続を仮定します．公式募集と適用条件・補助額が確認できる受付開始前の制度も，所定の契約・設置・申請期間を満たす想定で算入します．受付表示は「受付開始前」を維持し，受付終了・停止や条件不一致，金額未確定の制度はこの扱いで算入しません．設置後申請の制度は，対象設置期間と期限を満たし，将来の所定申請期間に申請する前提で算入します．受付表示や利用想定額は，現在の申請可否や交付を保証しません．</p>
           <p>蓄電池の容量当たり補助単価が原文でkW表記でも，入力蓄電容量に対応する場合は誤記と仮定し，kWh単価として計算します．原文単位とモデル上の解釈は区別します．特別仕様・認定製品の条件は満たすと仮定し，設置費は標準費用に据え置きます．実際の製品差額は反映しておらず，追加費用が不要と確認された意味ではありません．</p>
           <p>診断の利用想定額は，太陽光・蓄電池の導入範囲内で制度条件を満たす仮定による概算です．カーポート新設など，現行診断の対象外となる別工事が必須の制度・申請枠は含めません．入力にない住宅性能・断熱条件等を充足すると仮定して採用する制度は，この対象外の別工事とは区別し，制度欄に条件を示します．性能認定やDR参加の条件，代表価格と通常の設置工事は引き続き計算の前提とします．</p>
           <p>受付表示は「受付中／受付対象外／不明」の3区分です．新規申請できる補欠受付も「受付中」と表示しますが，交付には補欠からの繰上げが必要です．利用想定額は交付された場合の額であり，交付を保証しません．制度ごとの対象範囲，条件と公式情報を確認してください．</p>
@@ -229,26 +229,26 @@
           </ol>
         </section>
       <section id="outage-scenarios"><h2>停電時の給電時間を比べる条件</h2><p>災害記事の比較は，停電開始時に取り出せる直流側の電力量を5 kWhと置いた説明用の試算です．製品の公称容量ではなく，開始残量・劣化・保護下限を反映した後の，放電損失前の電力量を仮定します．太陽光からの補充はなく，接続回路・電圧・同時使用及び起動時の出力条件が合うものとします．</p><p>片道放電効率は既存モデルの√0.9（約94.87％），設備自身の消費は交流側換算で30 W（0.72 kWh／日）とし，両ケースへ同じように適用します．補機消費は使用時間に比例させます．これらは計算用の仮定で，停電中の実測値ではありません．30 Wは<a href="https://www.nichicon.co.jp/products/ess/qa_ess-tribrid-t1.html">メーカーの待機電力の説明</a>を参考にした仮定です．</p><p>全国平均を基準にするケースの家電消費は，<a href="https://www.env.go.jp/earth/ondanka/kateico2tokei/energy/detail/01/">環境省の2023年度全国全世帯平均3,911 kWh／年</a>を同年度の366日で換算し，3,911 ÷ 366＝10.6857923497 kWh／日とします．これは<a href="https://www.env.go.jp/earth/ondanka/kateico2tokei/cautions/">購入電力量のみで，自宅太陽光の自家消費を含みません</a>．戸建・人数別の平均や，特定季節の実際の負荷ではありません．</p><p>家電を絞るケースは上記<a href="#outage-reference">停電参考線</a>と同じ家電側0.9043979452 kWh／日です．冷蔵庫は263 ÷ 365＝0.7205479452 kWh／日，LEDは7.3 W × 2灯 × 6時間 ÷ 1,000＝0.0876 kWh／日，スマホは5 Ah × 3.85 V × 4台 ÷ 0.8 ÷ 1,000＝0.09625 kWh／日とし，毎日同じ使い方を繰り返す仮定です．スマホの電圧と充電効率は当サイトの仮定です．冷暖房・調理・給湯等を含まず，公的な最低必要量ではありません．</p><p>計算式は，使用時間（時間）＝5 kWh × √0.9 ÷｛（家電消費量（kWh／日）＋0.72 kWh／日）÷24時間｝です（式 (15)）．全国平均を基準にするケースは約9.9811時間，家電を絞るケースは約70.0826時間となり，記事では約10時間・約70時間と表示します．中間値は丸めずに計算しています．</p><p>1日分の消費を均した電力量の比較であり，負荷の時間帯や瞬間的な出力を再現していません．実機で連続して使える時間を保証せず，必要な家電の対応と運転条件を別に確認します．<a href="/guides/disaster/#battery-case">停電時の記事へ戻る</a>．</p></section>
-<section id="cost-maintenance-notes"><h2>設置・維持費の補足資料</h2><p>設置・維持費の記事は収支記事へ統合しました．費用の採用値は上の採用パラメータ，交換・容量低下の仮定は計算式の節を参照してください．</p><h3>費用と保証の読み方</h3><p>蓄電池の公称容量は電池に蓄えられる名目上の容量，実効容量は製品が定める使用範囲を反映した初期の容量です．実際に家庭で利用できる電力量は，その時点の使用可能容量に充放電効率，保護制御，残量および運転モードが影響します．一方，出力は同時に動かせる機器の大きさに関わります．冷蔵庫を長く動かしたいときは容量，ほかの家電も一緒に使いたいときは出力も確認します．</p>
-          <p>容量保証の下限，保証期間，メーカーが想定する使用期間およびサイクル期待寿命も分けて確認します．容量保証は所定条件下での下限，サイクル期待寿命は所定試験条件による期待値であり，両者は同じ意味ではありません．診断では，公開された容量保証の下限を参考に，15年後に当初の60％まで蓄えられる量が減る場合を計算します．16～30年目も同じ割合で減ると仮定すると，20年末は約50.6％です．実測値やその期間のメーカー保証ではなく，30年間交換しないことも試算の前提です（オムロン ソーシアルソリューションズ，2026a，b）．</p>
-        <p>20年末に70％・85％残る場合も，比較用の条件として選べます．実際の平均や製品保証ではありません．蓄えられる量が変わると，昼間の電気を夜に回せる量や売る量が変わるため，収支も変わります．いずれも30年間交換なしの仮定です．<a href="calculation-method.html#calculation-formulas">劣化仮定の計算方法と一次研究</a>を確認し，製品の保証条件とは分けて比較してください．</p>
-        <h3>試算に含めない支出</h3><ul>
-            <li><strong>突発的な修理：</strong>故障の有無と修理額を一律に置けないため，定期点検と機器交換以外は含めません．</li>
-            <li><strong>屋根工事との調整：</strong>屋根の補修・葺き替え時に，パネルの一時撤去や再設置が必要になる場合があります．</li>
-            <li><strong>撤去・処分：</strong>故障，建替えまたは屋根工事等で設備を撤去する場合に費用が発生します．</li>
-            <li><strong>保険・借入・税金：</strong>契約や利用者の条件によって異なるため，計算へ含めません．</li>
-          </ul>
-          <h3>根拠資料</h3><ul class="source-list"><li><a data-source-id="meti-residential-solar-cost-2025"></a></li>
-            <li><a href="https://www.jpea.gr.jp/faq/583/">太陽光発電協会「機器の耐用年数はどれくらいですか？」</a></li>
-            <li><a href="https://www.jpea.gr.jp/house/longuser/">太陽光発電協会「長く使っていただくために」</a></li>
-            <li><a href="https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html">資源エネルギー庁「FIT・FIP制度 よくある質問」</a></li>
-            <li><a href="https://www.kokusen.go.jp/news/data/n-20250604_1.html">国民生活センター「太陽光発電システムの点検商法が急増！」</a></li>
-            <li><a href="https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/">京セラ「太陽光発電の設置費用はいくら？」</a></li>
-            <li><a href="https://www.kyocera.co.jp/solar/support/topics/flow/">京セラ「設置工事の流れについて」</a></li>
-            <li><a data-source-id="meti-household-storage-cost-2025"></a></li>
-            <li><a data-source-id="meti-household-storage-degradation-2021"></a></li>
-            <li><a href="https://socialsolution.omron.com/jp/ja/products_service/energy/doc/cat/kand-070b_kpbp-a.pdf">オムロン ソーシアルソリューションズ「KPBP-A マルチ蓄電プラットフォーム カタログ」</a></li>
-            <li><a href="https://socialsolution.omron.com/jp/ja/products_service/energy/product/bt/kpbp-b_spec.html">オムロン ソーシアルソリューションズ「KPBP-Bシリーズ 蓄電池ユニット仕様」</a></li>
+<section id="cost-maintenance-notes"><h2>設置・維持費の補足資料</h2><p>設置・維持費の記事は収支記事へ統合しました．費用の採用値は上の採用パラメータ，交換・容量低下の仮定は計算式の節を参照してください．</p><h3>費用と保証の読み方</h3><p>蓄電池の公称容量は電池に蓄えられる名目上の容量，実効容量は製品が定める使用範囲を反映した初期の容量です．実際に家庭で利用できる電力量は，その時点の使用可能容量に充放電効率，保護制御，残量および運転モードが影響します．一方，出力は同時に動かせる機器の大きさに関わります．冷蔵庫を長く動かしたいときは容量，ほかの家電も一緒に使いたいときは出力も確認します．</p>
+          <p>容量保証の下限，保証期間，メーカーが想定する使用期間およびサイクル期待寿命も分けて確認します．容量保証は所定条件下での下限，サイクル期待寿命は所定試験条件による期待値であり，両者は同じ意味ではありません．診断では，公開された容量保証の下限を参考に，15年後に当初の60％まで蓄えられる量が減る場合を計算します．16～30年目も同じ割合で減ると仮定すると，20年末は約50.6％です．実測値やその期間のメーカー保証ではなく，30年間交換しないことも試算の前提です（オムロン ソーシアルソリューションズ，2026a，b）．</p>
+        <p>20年末に70％・85％残る場合も，比較用の条件として選べます．実際の平均や製品保証ではありません．蓄えられる量が変わると，昼間の電気を夜に回せる量や売る量が変わるため，収支も変わります．いずれも30年間交換なしの仮定です．<a href="calculation-method.html#calculation-formulas">劣化仮定の計算方法と一次研究</a>を確認し，製品の保証条件とは分けて比較してください．</p>
+        <h3>試算に含めない支出</h3><ul>
+            <li><strong>突発的な修理：</strong>故障の有無と修理額を一律に置けないため，定期点検と機器交換以外は含めません．</li>
+            <li><strong>屋根工事との調整：</strong>屋根の補修・葺き替え時に，パネルの一時撤去や再設置が必要になる場合があります．</li>
+            <li><strong>撤去・処分：</strong>故障，建替えまたは屋根工事等で設備を撤去する場合に費用が発生します．</li>
+            <li><strong>保険・借入・税金：</strong>契約や利用者の条件によって異なるため，計算へ含めません．</li>
+          </ul>
+          <h3>根拠資料</h3><ul class="source-list"><li><a data-source-id="meti-residential-solar-cost-2025"></a></li>
+            <li><a href="https://www.jpea.gr.jp/faq/583/">太陽光発電協会「機器の耐用年数はどれくらいですか？」</a></li>
+            <li><a href="https://www.jpea.gr.jp/house/longuser/">太陽光発電協会「長く使っていただくために」</a></li>
+            <li><a href="https://www.enecho.meti.go.jp/category/saving_and_new/saiene/kaitori/fit_faq.html">資源エネルギー庁「FIT・FIP制度 よくある質問」</a></li>
+            <li><a href="https://www.kokusen.go.jp/news/data/n-20250604_1.html">国民生活センター「太陽光発電システムの点検商法が急増！」</a></li>
+            <li><a href="https://www.kyocera.co.jp/solar/support/topics/202401-cost-of-installing-solar/">京セラ「太陽光発電の設置費用はいくら？」</a></li>
+            <li><a href="https://www.kyocera.co.jp/solar/support/topics/flow/">京セラ「設置工事の流れについて」</a></li>
+            <li><a data-source-id="meti-household-storage-cost-2025"></a></li>
+            <li><a data-source-id="meti-household-storage-degradation-2021"></a></li>
+            <li><a href="https://socialsolution.omron.com/jp/ja/products_service/energy/doc/cat/kand-070b_kpbp-a.pdf">オムロン ソーシアルソリューションズ「KPBP-A マルチ蓄電プラットフォーム カタログ」</a></li>
+            <li><a href="https://socialsolution.omron.com/jp/ja/products_service/energy/product/bt/kpbp-b_spec.html">オムロン ソーシアルソリューションズ「KPBP-Bシリーズ 蓄電池ユニット仕様」</a></li>
           </ul><p><a href="/guides/solar-economics/#costs">設置費の説明</a> ／ <a href="/guides/solar-economics/#lifecycle-cost">設置後の費用の説明</a></p></section>
 </article>
     </main>

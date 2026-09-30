@@ -14,10 +14,11 @@ import { cashflowChartLayout, formatEnergyRate, subsidyReasonPresentation, energ
 
 
 const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
-test('公開受付ラベルは3区分で，混在制度は採用枝を参照し内部値を変更しない', () => {
+test('公開受付ラベルは開始前を区別し，混在制度は採用枝を参照し内部値を変更しない', () => {
   for(const status of ['accepting','waitlist']) assert.equal(applicationStatusLabel({application_status:status}),'受付中');
-  for(const status of ['closed','suspended','scheduled','not_open','not_applicable']) assert.equal(applicationStatusLabel({application_status:status}),'受付対象外');
+  for(const status of ['closed','suspended','not_open','not_applicable']) assert.equal(applicationStatusLabel({application_status:status}),'受付対象外');
   for(const status of ['unknown','unconfirmed','accepting_with_waitlist_branch']) assert.equal(applicationStatusLabel({application_status:status}),'不明');
+  assert.equal(applicationStatusLabel({application_status:'scheduled'}),'受付開始前');
   const record={application_status:'accepting_with_waitlist_branch',selected_branch:'a',branches:[{id:'a',application_status:'waitlist'},{id:'b',application_status:'closed'}]};
   const before=structuredClone(record);
   assert.equal(applicationStatusLabel(record),'受付中');
@@ -33,7 +34,11 @@ test('公開データと計算結果の全受付状態に表示ラベルがあ�
     if (Object.hasOwn(value,'application_status')) assert.ok(Object.hasOwn(applicationStatusLabels,value.application_status), `未対応の受付状態：${value.application_status}`);
     Object.values(value).forEach(inspect);
   };
-  inspect(data); inspect(fixtures);
+  // Catalog raw_text and municipality exploration preserve official Japanese labels.
+  // Only normalized diagnostic contracts and calculation fixtures use these enums.
+  for (const key of ['municipal_subsidy_programs','diagnostic_subsidy_programs']) inspect(data[key]);
+  inspect(fixtures);
+  inspect(calculateEstimate({prefectureCode:'13',municipalityCode:'13201',housingAge:'existing',equipmentPackage:'solar_only',monthlyElectricityBillYen:null},data));
   assert.notEqual(applicationStatusLabels.accepting_with_waitlist_branch,applicationStatusLabels.accepting);
   assert.equal(applicationStatusLabels.waitlist,applicationStatusLabels.accepting);
   const result=calculateEstimate({prefectureCode:'13',municipalityCode:'13201',housingAge:'existing',equipmentPackage:'solar_only',monthlyElectricityBillYen:null},data);
@@ -65,7 +70,7 @@ test('診断範囲外の工事枝は除外し，既存の一般枠は補欠と�
   assert.match(nonInclusionReason({reason_code:'expense_scope_limit_in_maximum_combination',application_status:'waitlist'}),/対象費用の上限/);
 });
 test("制度情報は受付状態・非算入理由と確認済み金額を区別する", () => {
-  assert.equal(new Set(Object.values(applicationStatusLabels)).size, 3);
+  assert.equal(new Set(Object.values(applicationStatusLabels)).size, 4);
   assert.equal(new Set(Object.values(componentStatusLabels)).size, 6);
   assert.match(municipalInformationSummary({ application_status: "suspended", amount_status: "partially_confirmed" }), /受付対象外.*一部の金額/);
   assert.match(municipalInformationSummary({ application_status: "not_applicable", amount_status: "not_applicable" }), /受付対象外/);
