@@ -1,4 +1,6 @@
-import {subsidyTermsIndex, subsidyAmountFields} from './subsidy-amount-presentation.js';
+import {appendInstitutionalAmount} from './diagnostic-amount-dom.js';
+import {subsidyTermsIndex, subsidyAmountFields, subsidyAmountPolicy} from './subsidy-amount-presentation.js';
+import {diagnosticPilotNotice, diagnosticPilotSections, diagnosticPilotCommonSupplement, diagnosticTrialSourceTexts} from './diagnostic-display-pilot.js';
 import { recordDiagnosisComplete } from "../../shared/analytics.js";
 import { setupMobileActions } from "./mobile-actions.js";
 import { housingInput, housingLabel, housingContract, configureHousingInput } from "./housing-input.js";
@@ -535,7 +537,8 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
   }
   if (mode === 'group') {
     for (const group of groupSubsidyDisplayRows(rows)) {
-      if (group.length === 1) {
+      const explicitBranch = frontendData.publicData.subsidy_schemes?.some(scheme => scheme.branches.some(branch => branch.branch_label && branch.diagnostic_rule_ids?.includes(group[0].id)));
+      if (group.length === 1 && !explicitBranch) {
         const temporary = document.createElement('ul');
         renderSubsidyRows(temporary, group, 'single', termsIndex);
         list.append(...temporary.childNodes);
@@ -563,21 +566,24 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
     const equipment = { solar: '太陽光', battery: '蓄電池', solar_battery: '太陽光・蓄電池', package_bonus: '組合せ加算' }[row.target_equipment];
     const program = mode === 'branches' ? frontendData.publicData.diagnostic_subsidy_programs.find(program => program.id === row.id) : null;
     const scopeLabel = (program?.expense_scopes ?? []).map(scope => ({solar:'太陽光',battery:'蓄電池'}[scope])).filter(Boolean).join('・');
-    const branchLabel = {'hokkaido-kitahiroshima-solar':'太陽光','hokkaido-kitahiroshima-battery':'蓄電池','hokkaido-ebetsu-package':'太陽光・蓄電池の同時設置','hokkaido-ebetsu-solar-addition':'太陽光の追加設置','hokkaido-ebetsu-battery-addition':'蓄電池の追加設置'}[row.id];
-    heading.textContent = mode === 'branches' ? branchLabel || equipment || scopeLabel || '対象設備・条件' : `${subsidyGovernmentLabel(row.government_level)}${equipment ? equipment + '：' : ''}${row.program_name}`;
+    const branchLabel = {'hokkaido-kitahiroshima-solar':'太陽光','hokkaido-kitahiroshima-battery':'蓄電池','hokkaido-ebetsu-package':'太陽光・蓄電池の同時設置','hokkaido-ebetsu-solar-addition':'太陽光の設置','hokkaido-ebetsu-battery-addition':'蓄電池の設置'}[row.id];
+    const receivedBranchLabel = frontendData.publicData.subsidy_schemes?.flatMap(scheme => scheme.branches).find(branch => branch.diagnostic_rule_ids?.includes(row.id))?.branch_label;
+    heading.textContent = mode === 'branches' ? branchLabel || receivedBranchLabel || equipment || scopeLabel || '対象設備・条件' : `${subsidyGovernmentLabel(row.government_level)}${equipment ? equipment + '：' : ''}${row.program_name}`;
     const status = document.createElement('p');
     status.textContent = `受付状態：${applicationStatusLabel(row)}`;
     const amounts = subsidyAmountFields(row, termsIndex);
-    const institution = document.createElement('p');
-    institution.dataset.subsidyInstitutionAmount = amounts.institutionStatus;
-    institution.textContent = '制度の補助額：' + amounts.institutionText;
+    const amountPolicy = subsidyAmountPolicy(row, termsIndex);
     const calculation = document.createElement('p');
     calculation.dataset.subsidyIncludedAmount = '';
     calculation.textContent = '今回の試算に算入した額：' + (Number.isFinite(amounts.includedAmountYen) ? formatYen(amounts.includedAmountYen) : '未確認');
     const noncash = noncashBenefitDescription(row);
     if (row.included && noncash) calculation.textContent = '今回の試算に算入した額：' + (Number.isFinite(amounts.includedAmountYen) ? formatYen(amounts.includedAmountYen, false) + '相当' : '未確認') + '（非現金）';
-    item.append(heading, status, institution, calculation);
-    if (amounts.referenceAmountYen !== null || amounts.inputAmountPending) {
+    item.append(heading, status);
+    appendInstitutionalAmount(document, item, amounts, diagnosticPilotSections(row, termsIndex), diagnosticPilotCommonSupplement(row, termsIndex), amountPolicy);
+    const supplementDisclosure = item.querySelector(':scope > .subsidy-branch-detail');
+    supplementDisclosure?.remove();
+    if (!amountPolicy) item.append(calculation);
+    if (!amountPolicy && (amounts.referenceAmountYen !== null || amounts.inputAmountPending)) {
       const reference = document.createElement('p');
       reference.textContent = 'この条件での参考試算額：' + (amounts.referenceAmountYen !== null ? formatYen(amounts.referenceAmountYen) + (noncash ? '相当（非現金）' : '') : '未確定');
       item.append(reference);
@@ -604,15 +610,17 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
       item.append(branchNote);
     }
     const eligibilityPremises = (row.required_confirmations ?? []).filter(text => /充足.*仮定|申請前確認条件/.test(text));
-    if (row.included && (conciseAssumption || contractAssumption || row.calculation_assumptions?.some(text => /入力(?:項目)?にない|入力外|仮定|概算前提|解釈|半額上限|設置後/.test(text)) || eligibilityPremises.length)) {
+    const pilotNotice = diagnosticPilotNotice(row, termsIndex);
+    if (row.included && (pilotNotice || conciseAssumption || contractAssumption || row.calculation_assumptions?.some(text => /入力(?:項目)?にない|入力外|仮定|概算前提|解釈|半額上限|設置後/.test(text)) || eligibilityPremises.length)) {
       const premise = document.createElement('p');
       const tokyo = row.id === 'tokyo-residential-solar-2026-audit';
       const readable = readableSubsidyAssumption;
       const assumptions = [...new Set([...(row.calculation_assumptions ?? []), ...eligibilityPremises].map(readable))];
-      premise.textContent = '条件付き概算：' + (conciseAssumption || contractAssumption || (tokyo ? '対象製品・工法に指定条件があります．詳細は施工会社へ確認してください．架台・防水の加算は含めていません．' : assumptions.join(' ')));
+      premise.textContent = pilotNotice || '条件付き概算：' + (conciseAssumption || contractAssumption || (tokyo ? '対象製品・工法に指定条件があります．詳細は施工会社へ確認してください．架台・防水の加算は含めていません．' : assumptions.join(' ')));
+      if (pilotNotice) premise.style.whiteSpace = 'pre-line';
       item.append(premise);
       const confirmationText = [...new Set((row.required_confirmations ?? []).filter(text => !text.includes('実読') && !eligibilityPremises.includes(text)).map(readable))].filter(text => !assumptions.includes(text)).join(' ');
-      if (!tokyo && !conciseAssumption && confirmationText) {
+      if (!pilotNotice && !tokyo && !conciseAssumption && confirmationText) {
         const confirmation = document.createElement('p');
         confirmation.textContent = '要確認事項：' + confirmationText;
         item.append(confirmation);
@@ -632,8 +640,15 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
     }
     if (!row.included) {
       const reason = document.createElement('p');
+      reason.dataset.subsidyExclusionReason = '';
       reason.textContent = '今回の試算に含めていない理由：' + row.reason;
       item.append(reason);
+      if (diagnosticTrialSourceTexts(frontendData.publicData, row.id).length) {
+        const detail = document.createElement('a');
+        detail.href = '../pages/calculation-method.html#subsidy-program-' + encodeURIComponent(row.id);
+        detail.textContent = 'この制度の計算条件・確認事項';
+        item.append(detail);
+      }
     }
     if (row.official_url && mode !== 'branches') {
       const link = document.createElement('a');
@@ -643,6 +658,7 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
       link.textContent = heading.textContent + ' ↗';
       heading.replaceChildren(link);
     }
+    if (supplementDisclosure) item.append(supplementDisclosure);
     list.append(item);
   }
 }

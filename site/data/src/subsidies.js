@@ -1,6 +1,8 @@
 import dataUrl from '../../../data/input/public-data.json?url';
 import {usesSchemeContract} from '../../../data/src/scheme-adapter.js';
 import {selectSchemeGroups} from './scheme-model.js';
+import {diagnosticPilotTerms} from '../../simulator/src/diagnostic-display-pilot.js';
+import {orderedSupplementRows} from '../../simulator/src/diagnostic-amount-dom.js';
 import {listingMunicipalities,listingNotes,diagnosisDescription,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
 // The import path is relative to site/data/src; only the received public dataset is used.
 const pref = document.querySelector('#prefecture');
@@ -27,6 +29,19 @@ function appendLines(cell,texts) {
   }
 }
 let data;
+function disclosure(label) {
+  const details=node('details',null,'data-branch-detail');const summary=node('summary',label+'を開く');details.append(summary);
+  details.addEventListener('toggle',()=>{summary.textContent=label+(details.open?'を閉じる':'を開く');});
+  return details;
+}
+function appendConditions(parent,sections) {
+  for(const section of sections){
+    parent.append(node('h5',section.label));if(section.note)parent.append(node('p',section.note));
+    // A received fact stays one paragraph. Source line wrapping is ordinary whitespace,
+    // never a new condition or a reason to repeat an equipment label.
+    for(const text of [...new Set(section.lines)]){const p=node('p');appendDatedText(p,text);parent.append(p);}
+  }
+}
 function populateCities(value='') {
   city.replaceChildren(option('','市区町村を選択（任意）'));
   const cities=listingMunicipalities(data).filter(m=>m.prefecture_code===pref.value).sort((a,b)=>a.municipality_code.localeCompare(b.municipality_code));
@@ -53,7 +68,8 @@ function render(updateUrl=true) {
     if(level==='municipality'&&!city.value)continue;
     const rows=groups.filter(g=>g[0].government_level===level);
     const section=node('section');const sectionHeading=node('div',null,'data-section-heading');sectionHeading.append(node('h3',label),node('span',rows.length+'件','data-section-count'));section.append(sectionHeading);
-    const table=node('table',null,'data-table');table.setAttribute('aria-label',label+'の補助制度 '+rows.length+'件');if(!rows.length)table.classList.add('data-table--empty');const thead=node('thead');const hr=node('tr');for(const t of ['制度名・公式情報','補助金額','補助条件','受付状況・申請期間','確認日']){const th=node('th',t);th.scope='col';hr.append(th);}thead.append(hr);table.append(thead);const tbody=node('tbody');
+    if(!rows.length){section.append(node('p','掲載制度なし','data-muted'));container.append(section);continue;}
+    const table=node('table',null,'data-table data-table--comparison');table.setAttribute('aria-label',label+'の補助制度 '+rows.length+'件');const thead=node('thead');const hr=node('tr');for(const t of ['制度名・年度','補助内容','受付状況']){const th=node('th',t);th.scope='col';hr.append(th);}thead.append(hr);table.append(thead);const tbody=node('tbody');
     for(const group of rows){
       const tr=node('tr');const title=node('th');title.scope='row';const heading=node('h4');
       const url=group[0].official_urls?.find(url=>/^https?:\/\//.test(url));
@@ -63,17 +79,39 @@ function render(updateUrl=true) {
       if(group[0]._catalog)title.append(node('p','対象年度：'+(year||'未確認')));
       for(const note of [...new Set(group.flatMap(listingNotes))])title.append(node('p',note));
       if(level==='municipality'&&!data.municipalities.some(m=>m.prefecture_code===pref.value&&m.municipality_code===city.value))title.append(node('p','この自治体の補助制度は診断に未反映です．'));
-      const dates=node('td',null,'data-confirmed');dates.dataset.label='確認日';appendLines(dates,group.map(p=>p.confirmed_at||'未確認'));
-      const amount=node('td');amount.dataset.label='補助金額';appendLines(amount,group.map(p=>{const text=amountSummary(p);return !p._catalog?.branch_label&&/^(太陽光|蓄電池|共通上限|共通)：/.test(text)?text:equipmentLabel(p)+'：'+text;}));
-      const state=node('td');state.dataset.label='受付状況・申請期間';for(const text of groupedEquipmentSummary(group,statusLabel))state.append(node('p',text,'data-badge'+(text.endsWith('受付中')||text.endsWith('キャンセル待ち')?' data-badge--open':'')));
-      appendLines(state,groupedEquipmentSummary(group,applicationPeriod));
-      const target=node('td');target.dataset.label='補助条件';
-      for(const section of conditionSections(group)) {
-        if(section.label!=='補助条件'){const heading=node('p');heading.append(node('strong',section.label));target.append(heading);}
-        if(section.note)target.append(node('p',section.note));
-        appendLines(target,section.lines);
+      const amount=node('td');amount.dataset.label='補助内容';
+      const official=group.map(p=>p._catalog?.conditions?.official||[]);
+      const common=group.length>1&&group.every(p=>p._catalog)?[...new Set(official[0].filter(text=>official.every(parts=>parts.includes(text))))]:[];
+      const termsByBranch=group.map(p=>diagnosticPilotTerms(data,p));
+      const complete=termsByBranch.every(terms=>terms?.conditionDisplayComplete);
+      const commonDisplay=complete&&group.length>1?[...new Set(termsByBranch[0].commonSupplement.filter(text=>termsByBranch.every(terms=>terms.commonSupplement.includes(text))))]:[];
+      for(const p of group){
+        const block=node('section',null,'data-amount-summary');block.append(node('h5',equipmentLabel(p)));
+        const terms=termsByBranch[group.indexOf(p)];
+        const detail=disclosure('補足・適用条件');
+        if(terms?.sections?.length){
+          const shared=(terms.commonSupplement||[]).filter(text=>!commonDisplay.includes(text));
+          for(const section of terms.sections){
+            if(terms.sections.length>1)block.append(node('strong',section.label));
+            appendLines(block,['制度の補助額：'+section.text]);
+            const rows=terms.sections.length===1?orderedSupplementRows([...section.supplement,...shared]):section.supplement;
+            if(rows.length){if(terms.sections.length>1)detail.append(node('h5',section.label));appendLines(detail,rows);}
+          }
+          if(terms.sections.length>1)appendLines(detail,shared);
+        }else appendLines(block,['制度の補助額：'+amountSummary(p)]);
+        if(!terms?.conditionDisplayComplete){
+          const sections=conditionSections([p]);
+          if(official[group.indexOf(p)].length){const section=sections.find(s=>s.label==='補助条件');if(section)section.lines=official[group.indexOf(p)].filter(text=>!common.includes(text));}
+          appendConditions(detail,sections.filter(section=>section.lines.length));
+        }
+        if(detail.children.length>1)block.append(detail);amount.append(block);
       }
-      tr.append(title,amount,target,state,dates);tbody.append(tr);
+      if(commonDisplay.length){const detail=disclosure('共通の適用条件');appendLines(detail,commonDisplay);amount.append(detail);}
+      else if(!complete&&common.length){const detail=disclosure('共通の補助条件');appendConditions(detail,[{label:'共通の補助条件',lines:common}]);amount.append(detail);}
+      const state=node('td');state.dataset.label='受付状況';for(const text of groupedEquipmentSummary(group,statusLabel))state.append(node('p',text,'data-badge'+(text.endsWith('受付中')||text.endsWith('キャンセル待ち')?' data-badge--open':'')));
+      appendLines(state,groupedEquipmentSummary(group,applicationPeriod));
+      const confirmed=node('div',null,'data-confirmed');appendLines(confirmed,groupedEquipmentSummary(group,p=>'確認日：'+(p.confirmed_at||'未確認')));state.append(confirmed);
+      tr.append(title,amount,state);tbody.append(tr);
     }
     table.append(tbody);section.append(table);container.append(section);
   }

@@ -1,3 +1,4 @@
+import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/diagnostic-display-pilot.js';
 import { QUOTE_ACTION } from "../../shared/fixed-quote-bar.js";
 import { bindArticleBibliography } from "./article-bibliography.js";
 import { replacesLegacyPrefecture } from '../../simulator/src/diagnostic-subsidy.js';
@@ -111,9 +112,11 @@ async function initialize() {
         const scopeClarification = program.machine_rule === 'ishikawa_residential_solar_battery_non_fit'
           ? '非FITの条件は，今回の新設太陽光を含む申請経路についてのものです．既設太陽光への蓄電池追加は別の申請枠であり，今回の新設診断では評価していません．'
           : null;
-        const notes = [formula,scopeClarification,program.diagnostic_scope?.basis, program.note, ...(program.calculation_assumptions ?? []), ...(program.required_confirmations ?? [])].filter(Boolean);
+        const sourceNotes = diagnosticTrialSourceTexts(publicData, program.id).map(text => '制度額の詳細：' + text);
+        const notes = diagnosticDetailNotes(publicData, program, [...sourceNotes,formula,scopeClarification,program.diagnostic_scope?.basis, program.note, ...(program.calculation_assumptions ?? []), ...(program.required_confirmations ?? [])].filter(Boolean));
         for (const text of [...new Set(notes)]) {
           const paragraph = document.createElement('p');
+          paragraph.style.whiteSpace = 'pre-line';
           paragraph.textContent = program.id === 'miyagi-smart-energy-2026'
             ? text.replace('公式の受付開始前をscheduledで保持し，', '受付開始前の制度について，').replace('金額・設備・費用上限・募集別基準日は2026-09-27に公式手引を限定再確認．confirmed_at=2026-09-18は前回の公式受付確認日として保持し，受付中へ変更しない．', '金額・設備・費用上限・募集別基準日は2026年9月27日に公式手引を再確認しました．受付状態は2026年9月18日時点で確認した「受付開始前」を表示しています．')
             : text;

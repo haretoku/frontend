@@ -1,5 +1,6 @@
 import {selectSchemeGroups} from '../../data/src/scheme-model.js';
 import {amountSummary, equipmentLabel} from '../../data/src/model.js';
+import {diagnosticPilotTerms, diagnosticAmountPolicy} from './diagnostic-display-pilot.js';
 
 const cachedTerms = new WeakMap();
 
@@ -13,7 +14,11 @@ export function subsidyTermsIndex(data, input) {
   const index = new Map();
   for (const program of selectSchemeGroups(data, input.prefecture_code, input.municipality_code || '').flat()) {
     const ids = program._catalog?.diagnostic_rule_ids || program._catalog?.diagnostic_program_ids || [program.id];
-    const terms = {branchId:program.id, label:equipmentLabel(program), text:amountSummary(program), evidenceStatus:program._catalog?.amount?.evidence_status};
+    const policy = diagnosticAmountPolicy(data, program);
+    const pilot = policy ? null : diagnosticPilotTerms(data, program);
+    const terms = {branchId:program.id, label:equipmentLabel(program), text:policy ? '' : pilot?.text || amountSummary(program), evidenceStatus:program._catalog?.amount?.evidence_status};
+    if (policy) terms.displayPolicy = policy;
+    if (pilot) { terms.pilotEquipment = pilot.equipment; terms.pilotSupplement = pilot.supplement; terms.pilotSections = pilot.sections; terms.pilotCommonSupplement = pilot.commonSupplement; }
     for (const id of ids) {
       const entries = index.get(id) || [];
       if (!entries.some(entry => entry.branchId === terms.branchId)) entries.push(terms);
@@ -31,9 +36,15 @@ export function subsidyAmountFields(row, index) {
     : '表示内容を整理中';
   return {
     institutionText,
-    institutionStatus: terms.length ? terms.every(term => term.evidenceStatus === 'unconfirmed') ? 'unconfirmed' : institutionText.includes('表示内容を整理中') ? 'preparing' : 'available' : 'preparing',
+    institutionStatus: terms.length && terms.every(term => term.displayPolicy) ? 'not_displayed' : terms.length ? terms.every(term => term.evidenceStatus === 'unconfirmed') ? 'unconfirmed' : institutionText.includes('表示内容を整理中') ? 'preparing' : 'available' : 'preparing',
     includedAmountYen: row.included ? Number.isFinite(row.amount_yen) ? row.amount_yen : null : 0,
     referenceAmountYen: !row.included && Number.isFinite(row.amount_yen) && row.amount_yen > 0 ? row.amount_yen : null,
     inputAmountPending: !row.included && !Number.isFinite(row.amount_yen) && /unconfirmed|unresolved|unavailable|missing|not_verified|not_found/.test(row.reason_code || '')
   };
+}
+
+export function subsidyAmountPolicy(row, index) {
+  if (row.included) return null;
+  const terms = index.get(row.id) || [];
+  return terms.length === 1 ? terms[0].displayPolicy || null : null;
 }
