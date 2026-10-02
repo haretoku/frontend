@@ -1,4 +1,4 @@
-import { quoteBarVisible, mobileKeyboardLikely, QUOTE_ACTION, mountFixedQuoteBar } from "../../site/shared/fixed-quote-bar.js";
+import { QUOTE_ACTION, mountFixedQuoteBar } from "../../site/shared/fixed-quote-bar.js";
 import { cashflowMarkers, groupMarkerTargets } from "../../site/simulator/src/chart-markers.js";
 import { subsidyGroups, nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
 import assert from "node:assert/strict";
@@ -899,23 +899,6 @@ test('スマホ終点の正負・ゼロ・未確定・長額は線と軸の外�
     }
   }
 });
-
-test('共通見積もりバーは内容到達後だけ表示し入力と操作領域を保護する', () => {
- const ready = {eligible:true,reached:true,blocked:false,keyboard:false,focusCovered:false};
- assert.equal(quoteBarVisible(ready),true);
- for(const key of ['eligible','reached']) assert.equal(quoteBarVisible({...ready,[key]:false}),false);
- for(const key of ['blocked','keyboard','focusCovered']) assert.equal(quoteBarVisible({...ready,[key]:true}),false);
- assert.equal(QUOTE_ACTION.disabled,true);
- assert.equal(QUOTE_ACTION.label,'無料見積もり（準備中）');
- assert.equal('url' in QUOTE_ACTION,false);
-});
-test('キーボードの代替検出は入力フォーカスと可視領域縮小を併用する', () => {
- assert.equal(mobileKeyboardLikely(true,600,600),true);
- assert.equal(mobileKeyboardLikely(false,900,540),true);
- assert.equal(mobileKeyboardLikely(false,900,860),false);
- assert.equal(mobileKeyboardLikely(false,600,600),false);
-});
-
 
 test('非FIT必須制度の理由を受付終了や設備不一致と混同しない', () => {
  assert.match(nonInclusionReason({reason_code:'sale_path_not_applicable',calculation_status:'excluded_incompatible',application_status:'accepting'}),/非FIT・非FIPが必須/);

@@ -1,8 +1,7 @@
 import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/diagnostic-display-pilot.js';
-import { QUOTE_ACTION } from "../../shared/fixed-quote-bar.js";
+import { QUOTE_ACTION, setupInlineQuoteActions } from "../../shared/fixed-quote-bar.js";
 import { bindArticleBibliography } from "./article-bibliography.js";
 import { replacesLegacyPrefecture } from '../../simulator/src/diagnostic-subsidy.js';
-import { setupArticleQuoteBar } from "./article-quote-bar.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
 function setText(selector, value) {
@@ -195,7 +194,7 @@ async function initialize() {
 initializeTableOfContents();
 initialize();
 
-setupArticleQuoteBar();
+
 
 for (const button of document.querySelectorAll("[data-inline-quote-action]")) {
   button.textContent = QUOTE_ACTION.label;
@@ -203,3 +202,4 @@ for (const button of document.querySelectorAll("[data-inline-quote-action]")) {
   const promotion = button.closest("[data-quote-promotion]");
   if (promotion) promotion.hidden = QUOTE_ACTION.disabled;
 }
+setupInlineQuoteActions();

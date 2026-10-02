@@ -19,6 +19,25 @@ function fixture(href, config = configured, productionBuild = true, referrer = "
 }
 const events = f => f.commands().filter(c => c[0] === "event");
 
+test('見積もりクリックは固定配置とページだけを送り，入力・任意リンクは送らない', () => {
+  const url = 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E';
+  for (const [path, placement] of [['/', 'fixed_bar'], ['/guides/subsidies/', 'article_body'], ['/simulator/', 'diagnosis_result']]) {
+    const f = fixture('https://haretoku.jp' + path + '?private=CANARY');
+    const click = (href, position, extra = {}) => f.handlers.click({ button: 0, target: { closest: () => ({ href, textContent: 'CANARY', hasAttribute: () => false, getAttribute: name => name === 'data-quote-placement' ? position : null }) }, ...extra });
+    click(url, 'CANARY');
+    click(url + '&private=CANARY', placement);
+    click(url, placement, { defaultPrevented: true });
+    click(url, placement, { button: 2 });
+    assert.equal(events(f).filter(c => c[1] === 'quote_click').length, 0);
+    click(url, placement);
+    const recorded = events(f).filter(c => c[1] === 'quote_click');
+    assert.equal(recorded.length, 1);
+    assert.equal(recorded[0][2].quote_placement, placement);
+    assert.deepEqual(Object.keys(recorded[0][2]).sort(), ['page_id', 'page_location', 'page_referrer', 'page_title', 'send_to', 'quote_placement'].sort());
+    assert(!JSON.stringify(f.commands()).includes('CANARY'));
+  }
+});
+
 test("未設定ID・無効設定・拡張計測未確認はGoogle読込・キュー・イベントを作らない", () => {
   for (const config of [ { ...configured, measurementId: "" }, { ...configured, measurementId: "G-INVALID?x=1" }, { ...configured, enabled: false }, { ...configured, enhancedMeasurementDisabled: false }]) {
     const f = fixture("https://haretoku.jp/simulator/?private=CANARY", config);

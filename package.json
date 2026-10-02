@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "test": "pnpm run test:public && pnpm run test:data && pnpm run test:local-review",
     "test:data": "node --test qa/tests/listing-municipalities.test.js qa/tests/catalog-amount.test.js qa/tests/catalog-connection.test.js qa/tests/data-prototype.test.js",
-    "test:public": "node --test qa/tests/analytics.test.js qa/tests/calculator.test.js qa/tests/detail-pages.test.js qa/tests/site-integrity.test.js qa/tests/top-input.test.js",
+    "test:public": "node --test qa/tests/analytics.test.js qa/tests/calculator.test.js qa/tests/detail-pages.test.js qa/tests/site-integrity.test.js qa/tests/top-input.test.js qa/tests/quote-preview.test.js",
     "test:local-review": "node --test qa/tests/local-municipal-review.test.js qa/tests/local-prefecture-review.test.js"
   },
   "devDependencies": {

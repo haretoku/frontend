@@ -1,18 +1,9 @@
-import { mountFixedQuoteBar, QUOTE_ACTION } from "../../shared/fixed-quote-bar.js";
 import { CALCULATION_IMPLEMENTED } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
 import { validateLocation, populateMunicipalitySelect } from "./location-input.js";
 
 
-mountFixedQuoteBar({
-  content: document.querySelector('main'),
-  alwaysVisible: true,
-  action: { ...QUOTE_ACTION, label: '無料見積もり', description: '導入費用を具体的に知りたい方へ', status: '準備中' },
-  readState() {
-    return { eligible: window.matchMedia('(min-width: 52.001rem)').matches };
-  }
-});
 
 const form = document.querySelector("#estimate-form");
 const prefecture = document.querySelector("#prefecture");

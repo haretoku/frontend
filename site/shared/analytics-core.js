@@ -1,4 +1,6 @@
+import { quoteMaterial } from './quote-config.js';
 const ORIGIN = "https://haretoku.jp";
+const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result']);
 const PAGES = Object.freeze({
   "/": { id: "home", title: "はれトク", article: false },
   "/guides/": { id: "guides", title: "はれトクガイド", article: false },
@@ -64,19 +66,25 @@ export function createAnalytics({ config, productionBuild, window: win, document
     gtag("set", { ...flags, ...context });
     gtag("js", new Date());
     gtag("config", config.measurementId, { ...flags, ...context });
-    function event(name) {
-      // 呼出元から値を受け取らない．入力・金額・URL・リンク文字列を渡す経路を作らない．
-      gtag("event", name, { ...context, send_to: config.measurementId });
+    function event(name, placement) {
+      // 配置は固定列挙値だけ．入力・金額・リンク文字列は送信しない．
+      gtag("event", name, { ...context, send_to: config.measurementId, ...(QUOTE_PLACEMENTS.has(placement) ? { quote_placement: placement } : {}) });
     }
     event("page_view");
     if (page.article) event("article_view");
     let started = false, completed = false;
-    if (page.article || page.data) doc.addEventListener("click", e => {
-      if (e.defaultPrevented || (e.button !== undefined && e.button !== 0) || started) return;
+    doc.addEventListener("click", e => {
+      if (e.defaultPrevented || (e.button !== undefined && e.button !== 0)) return;
       const link = e.target?.closest?.("a[href]");
       if (!link || link.hasAttribute("download") || link.getAttribute("aria-disabled") === "true") return;
       try {
         const target = new URL(link.href, win.location.href);
+        const placement = link.getAttribute('data-quote-placement');
+        if (target.href === quoteMaterial.url && QUOTE_PLACEMENTS.has(placement)) {
+          event('quote_click', placement);
+          return;
+        }
+        if (!(page.article || page.data) || started) return;
         if (target.origin !== ORIGIN || canonicalPath(target.pathname) !== "/simulator/") return;
         started = true;
         event(page.data ? "data_diagnosis_click" : "article_diagnosis_click");
