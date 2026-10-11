@@ -3,24 +3,24 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import { quoteActionFor, quoteMaterial } from '../../site/shared/quote-config.js';
 
-test('確認済み固定文言の素材は公開ビルド・localhostでも同じ導線になる', () => {
+test('提供された自由テキスト素材は公開ビルド・localhostでも同じ導線になる', () => {
   for (const [development, hostname] of [[false, 'haretoku.jp'], [false, '127.0.0.1'], [true, 'localhost']]) {
     const action = quoteActionFor(development, hostname);
     assert.equal(action.disabled, false);
-    assert.equal(action.label, '【住宅用太陽光発電】ソーラーパートナーズ');
-    assert.equal(action.url, 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM');
+    assert.equal(action.label, '無料見積もり');
+    assert.equal(action.url, 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E');
     assert.equal('preview' in action, false);
   }
 });
 
 test('提供コードのリンクと計測画像を同じ素材で保持し，利用者条件を追加しない', () => {
-  assert.equal(quoteMaterial.materialId, '001');
+  assert.equal(quoteMaterial.materialId, '038');
   assert.equal(quoteMaterial.materialVerified, true);
-  assert.equal(quoteMaterial.impressionUrl, 'https://www17.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM');
+  assert.equal(quoteMaterial.impressionUrl, 'https://www11.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+66H9E');
   for (const source of [quoteMaterial.url, quoteMaterial.impressionUrl]) {
     const url = new URL(source);
     assert.deepEqual([...url.searchParams.keys()], ['a8mat']);
-    assert.equal(url.search, '?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM');
+    assert.equal(url.search, '?a8mat=4BCKBS+DN6MUQ+3LME+66H9E');
   }
 });
 

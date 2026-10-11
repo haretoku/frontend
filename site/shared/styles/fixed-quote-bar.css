@@ -23,7 +23,7 @@ html:has(.has-quote-space) { scroll-padding-bottom: var(--quote-space, calc(60px
  .quote-bar:not([hidden]) { gap: .6rem; padding-inline: max(12px, env(safe-area-inset-left, 0px)) max(12px, env(safe-area-inset-right, 0px)); }
  .quote-bar__copy { flex: 1; min-width: 0; }
  .quote-bar__copy p { font-size: .75rem; }
- .quote-bar__button { flex: 0 0 50%; min-width: 0; padding-inline: .35rem; font-size: .82rem; }
+ .quote-bar__button { flex: 0 0 38%; min-width: 0; padding-inline: .5rem; font-size: .82rem; }
 }
 
 .quote-bar__button:hover:not(:disabled) { background: var(--color-action-hover); }

@@ -4,13 +4,13 @@ export const QUOTE_ACTION = quoteActionFor();
 export function createQuoteLink(className, placement) {
   const link = document.createElement('a');
   link.className = className;
-  link.textContent = QUOTE_ACTION.label;
+  link.textContent = QUOTE_ACTION.label + ' ↗';
   link.href = QUOTE_ACTION.url;
   link.target = '_blank';
   link.rel = 'sponsored nofollow noopener';
   link.referrerPolicy = 'no-referrer';
   link.dataset.quotePlacement = placement;
-  link.setAttribute('aria-label', quoteMaterial.linkText + '（新しいタブで開きます）');
+  link.setAttribute('aria-label', quoteMaterial.linkText + '（' + quoteMaterial.provider + '，新しいタブで開きます）');
   return link;
 }
 

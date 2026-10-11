@@ -1,10 +1,10 @@
-// 2026年10月11日，ユーザー提供の通常広告用素材001を採用．
-// 提供された固定文言・リンク・計測画像を保持する．
+// 2026年10月11日，ユーザー提供の通常広告用素材038「自由テキスト」を採用．
+// 提供された自由テキスト素材のリンク・計測画像を組で保持する．
 export const quoteMaterial = Object.freeze({
-  materialId: '001',
-  url: 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM',
-  impressionUrl: 'https://www17.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM',
-  linkText: '【住宅用太陽光発電】ソーラーパートナーズ',
+  materialId: '038',
+  url: 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E',
+  impressionUrl: 'https://www11.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+66H9E',
+  linkText: '無料見積もり',
   provider: 'ソーラーパートナーズ',
   materialVerified: true
 });
