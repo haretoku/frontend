@@ -60,3 +60,58 @@ test('設備別の条件はラベルで区別し，同一条件だけ共通化�
  group[0]._catalog.amount.display_text='上限3万円．';group[0]._catalog.amount.evidence_status='partial';
  assert.doesNotMatch(amountSummary(group[0]),/．．/);
 });
+
+// 国県公開候補の受領契約と既存診断の保持を，実ファイルで確認する．
+const protectedOriginalSections = {
+  "calculation": "f290a2daffed1e0b79ba19039cd6776a8329b23f896bd1da39077513f5096972",
+  "scenarios": "0f0fa0a86e7c61eea2691f8c0bd2d0ca5f9c72c7c00c19e303d761def9374914",
+  "prefectures": "cf428763d22620b6b81b00bf3927e443c5b404d663729cc3e28f8dc54b55a5c5",
+  "municipalities": "102f2ae64f703b303bd7b5849d2e18393646e962484c642132ae8a4bc10fc487",
+  "municipal_subsidy_programs": "6162fe5405e4648acb5cb473b5feb0e1d9d611c9d31f73303d3c1e8ababe01e9",
+  "diagnostic_subsidy_programs": "8360fbc2d4dc75d6052ca713a1ee8f8d81ecd6384a30fff8fb9115287e28ebca",
+  "municipality_subsidy_exploration": "a1ff15acfa8d72ca0f66a669acc612c1388a40e97be78c39b696112ef881a484",
+  "listing_municipalities": "a4d0940cd2989b07fe7ac691898fa2ff9b70a1c85850e08b7abd51d62009aece"
+};
+const canonicalReleaseValue = value => Array.isArray(value) ? '[' + value.map(canonicalReleaseValue).join(',') + ']' : value && typeof value === 'object' ? '{' + Object.keys(value).sort().map(key => JSON.stringify(key) + ':' + canonicalReleaseValue(value[key])).join(',') + '}' : JSON.stringify(value);
+const readReleaseJson = async name => JSON.parse(await (await import('node:fs/promises')).readFile(new URL('../../data/input/' + name + '.json', import.meta.url), 'utf8'));
+test('国県受領後も非補助金計算・既存市町村保存契約は受領前と同値', async () => {
+ const {createHash} = await import('node:crypto');
+ const data = await readReleaseJson('public-data');
+ for (const [key, expected] of Object.entries(protectedOriginalSections)) assert.equal(createHash('sha256').update(canonicalReleaseValue(data[key])).digest('hex'), expected, key);
+ const metadata = await readReleaseJson('metadata');
+ assert.equal(data.schema_version, metadata.schema_version);assert.equal(data.data_version, metadata.data_version);
+});
+test('実frontendで同版の国県60区分を両表示consumerが受領する', async () => {
+ const {prepareSubsidyData} = await import('../../data/src/scheme-adapter.js');
+ const {receiveHareDisplayRecords} = await import('../../site/shared/hare-display-record.js');
+ const {receiveDiagnosticDisplayRecords} = await import('../../site/simulator/src/diagnostic-display-record.js');
+ const data = prepareSubsidyData(await readReleaseJson('public-data'));
+ const [hare, hareBinding, diagnostic, diagnosticBinding] = await Promise.all(['hare-display-table','hare-display-binding','diagnostic-display-table','diagnostic-display-binding'].map(readReleaseJson));
+ assert.equal(receiveHareDisplayRecords(data, hare, hareBinding).size, 60);
+ assert.equal((await receiveDiagnosticDisplayRecords(data, diagnostic, diagnosticBinding, hare)).size, 60);
+ assert.throws(() => receiveHareDisplayRecords(data, hare, {...hareBinding, public_data_version:'wrong-version'}));
+ await assert.rejects(receiveDiagnosticDisplayRecords(data, diagnostic, {...diagnosticBinding, hare_payload_sha256:'0'.repeat(64)}, hare));
+});
+
+test('新東京県契約の接続でも既存市の算入・開始前候補・非算入・未知額を保持する', async () => {
+ const {prepareSubsidyData} = await import('../../data/src/scheme-adapter.js');
+ const {connectDiagnosticSubsidy} = await import('../../site/simulator/src/diagnostic-subsidy.js');
+ const {calculateEstimate} = await import('../../site/simulator/src/calculator.js');
+ const data = prepareSubsidyData(await readReleaseJson('public-data'));
+ for (const [code,id] of [['13207','akishima-energy-2026'],['13214','kokubunji-energy-2026']]) {
+  const input = {prefectureCode:'13',municipalityCode:code,housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',capacityKw:4,batteryCapacityKwh:9.5,solarCost:1324400,batteryCost:1149500,batteryEquipmentCost:1054500};
+  const included={id:'retained-known',government_level:'municipality',amount_yen:53000};
+  const candidate={id,government_level:'municipality',amount_yen:null,application_status:'scheduled'};
+  const excluded={id:'retained-excluded',government_level:'municipality',amount_yen:null,application_status:'closed'};
+  const legacy={municipality_amount_yen:53000,total_amount_yen:53000,included_programs:[included],candidate_programs:[candidate],excluded_programs:[excluded]};
+  const result=connectDiagnosticSubsidy(legacy,data,input,true,[]).breakdown;
+  assert.equal(result.municipality_amount_yen,53000);
+  assert.equal(result.total_amount_yen,result.national_amount_yen+result.prefecture_amount_yen+53000);
+  assert.deepEqual(result.included_programs.find(row=>row.id===included.id),included);
+  assert.deepEqual(result.candidate_programs.find(row=>row.id===id),candidate);
+  assert.deepEqual(result.excluded_programs.find(row=>row.id===excluded.id),excluded);
+  assert.equal(connectDiagnosticSubsidy({...legacy,municipality_amount_yen:null,total_amount_yen:null},data,input,true,[]).breakdown.total_amount_yen,null);
+  const actual=calculateEstimate({...input,systemCapacityKw:4,monthlyElectricityBillYen:12000},data).scenarios.find(row=>row.scenario==='standard').subsidy_breakdown;
+  assert.equal(actual.candidate_programs.find(row=>row.id===id)?.application_status,'scheduled');
+ }
+});

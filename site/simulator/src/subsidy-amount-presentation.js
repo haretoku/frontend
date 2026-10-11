@@ -18,7 +18,7 @@ export function subsidyTermsIndex(data, input) {
     const pilot = policy ? null : diagnosticPilotTerms(data, program);
     const terms = {branchId:program.id, label:equipmentLabel(program), text:policy ? '' : pilot?.text || amountSummary(program), evidenceStatus:program._catalog?.amount?.evidence_status};
     if (policy) terms.displayPolicy = policy;
-    if (pilot) { terms.pilotEquipment = pilot.equipment; terms.pilotSupplement = pilot.supplement; terms.pilotSections = pilot.sections; terms.pilotCommonSupplement = pilot.commonSupplement; }
+    if (pilot) { terms.pilotNoticePolicy = pilot.noticePolicy; terms.pilotEquipment = pilot.equipment; terms.pilotSupplement = pilot.supplement; terms.pilotSections = pilot.sections; terms.pilotCommonSupplement = pilot.commonSupplement; }
     for (const id of ids) {
       const entries = index.get(id) || [];
       if (!entries.some(entry => entry.branchId === terms.branchId)) entries.push(terms);
@@ -47,4 +47,21 @@ export function subsidyAmountPolicy(row, index) {
   if (row.included) return null;
   const terms = index.get(row.id) || [];
   return terms.length === 1 ? terms[0].displayPolicy || null : null;
+}
+
+// Presentation provenance is transient: a URL value is not evidence of a form selection.
+// Eligibility and calculator rows remain unchanged.
+export function subsidyNonInclusionText(row, context = {}) {
+  if (row.included) return null;
+  const labels = {existing:'既存住宅', new:'新築住宅'};
+  const label = labels[context.housingAge];
+  const eligible = context.eligibleHousingAges;
+  if (row.reason_code === 'housing_age_not_applicable' && label && Array.isArray(eligible) && eligible.length && !eligible.includes(context.housingAge)) {
+    const premise = context.housingAgeOrigin === 'form_selection'
+      ? label + 'を選択しているため，今回の試算には算入していません．'
+      : '今回は' + label + 'を前提に試算しているため，算入していません．';
+    const targets = eligible.map(value => labels[value]).filter(Boolean);
+    return premise + (targets.length === eligible.length ? 'この制度の対象住宅区分は' + targets.join('又は') + 'です．' : '');
+  }
+  return row.reason || '適用条件又は算定に必要な情報を確認できていないため，今回の試算には算入していません．';
 }

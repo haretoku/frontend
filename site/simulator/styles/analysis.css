@@ -1559,3 +1559,26 @@ body[data-page="analysis"] .breakdown-card > summary::before { font-size: 0.75em
 .subsidy-branch-detail > p { margin-left: .5rem; }
 [data-subsidy-record] > [data-subsidy-included-amount] { margin-top: 1rem; margin-bottom: .25rem; }
 [data-subsidy-record] > [data-subsidy-exclusion-reason] { margin-top: .25rem; }
+
+.common-item-group { margin-block: .75rem; overflow-wrap: anywhere; }
+.common-item-group > :not(summary) { margin-inline: .8rem; }
+.common-item-group h4 { margin: 1rem 0 .6rem; }
+.common-item-group h5 { margin: .8rem 0 .5rem; }
+.common-item h6 { margin: 0 0 .35rem; font: inherit; font-weight: 600; }
+.common-item { margin-block: .8rem; }
+.common-value { margin: 0; white-space: pre-line; line-height: 1.7; }
+.common-value-list { margin: .35rem 0; padding-inline-start: 1.3rem; }
+.common-value-list > li + li { margin-top: .65rem; }
+.common-value-fields { margin: .3rem 0; }
+.common-value-field { display: grid; grid-template-columns: minmax(8rem, 30%) minmax(0, 1fr); gap: .35rem .8rem; padding-block: .35rem; }
+.common-value-field > dt { font-weight: 500; }
+.common-value-field > dd { margin: 0; min-width: 0; }
+.common-value-field .common-value-field { display: block; padding-block: .3rem; }
+.common-value-field .common-value-field > dd { margin-top: .15rem; }
+.common-step-title { margin: .5rem 0; font-weight: 600; }
+.common-additions > .common-item-group { margin-block: .5rem; }
+@media (max-width: 600px) {
+  .common-value-field { grid-template-columns: minmax(0, 1fr); gap: .15rem; }
+  .common-value-field > dt { font-weight: 600; }
+  .common-item-group > :not(summary) { margin-inline: .45rem; }
+}

@@ -1,3 +1,4 @@
+import {commonBranchComponents,sourceMunicipalityReception} from './common-branch-runtime.js';
 import { kansaiSolarAboveMaximum, subsidyCostPrerequisiteFailure, kansaiBelowMinimumCost, kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './kansai-formula.js';
 import { preprocessCapacity } from './capacity-preprocessing.js';
 const floor10000 = value => Math.floor(value / 10000) * 10000;
@@ -30,6 +31,7 @@ export function diagnosticComponents(program, input) {
  if(!program.housing_ages.includes(h)||!program.equipment_packages.includes(e))return null;
  const battery=e==='solar_plus_standard_battery', components={}, details={};
  switch(program.machine_rule){
+ case 'common_equipment_branch_ast/1': return commonBranchComponents(program,input);
  case 'kansai_municipal_formula': {
    const result=kansaiFormulaComponents(program,input);
    if(!result||result.details.formula_exclusion_reason)return result;
@@ -235,7 +237,10 @@ export function allocateDiagnosticScope(options,limit,scope=null,detailsById={},
 export function diagnosticSubsidy(programs,input,included){
  const relevant=programs.filter(p=>p.government_level==='national'||p.government_level==='prefecture'&&input.prefectureCode===p.prefecture_code||p.government_level==='municipality'&&p.municipality_code===input.municipalityCode);
  const excluded=[],candidates=[],calculable=[];
- for(const p of relevant){
+ for(const originalProgram of relevant){
+ const municipal=sourceMunicipalityReception(originalProgram,input);
+ const p=municipal?{...originalProgram,application_status:['regional_eligibility_input_unavailable','municipality_not_applicable'].includes(municipal.reason) ? originalProgram.application_status : municipal.state,diagnostic_scope:{...originalProgram.diagnostic_scope,status:'branch_filtered',in_scope_housing_ages:originalProgram.housing_ages}}:originalProgram;
+ if(municipal?.reason){const closed=municipal.reason==='application_closed',outside=municipal.reason==='municipality_not_applicable';(closed||outside?excluded:candidates).push(evaluation(p,closed?'excluded_closed':outside?'excluded_incompatible':'candidate_missing_conditions',municipal.reason,null));continue;}
  if((p.excluded_municipality_codes??[]).includes(input.municipalityCode)){excluded.push(evaluation(p,'excluded_incompatible','municipality_not_applicable',null));continue;}
  if(!p.housing_ages.includes(input.housingAge)){excluded.push(evaluation(p,'excluded_incompatible','housing_age_not_applicable',null));continue;}
  if(!p.equipment_packages.includes(input.equipmentPackage)){excluded.push(evaluation(p,'excluded_incompatible','equipment_package_not_applicable',null));continue;}
@@ -273,6 +278,7 @@ export function diagnosticSubsidy(programs,input,included){
  if(costFailure){const [status,reason]=costFailure;(status==='candidate_missing_conditions'?candidates:excluded).push(evaluation(p,status,reason,null));continue;}
  const c=diagnosticComponents(p,input);
  if(c?.details?.formula_exclusion_reason){excluded.push(evaluation(p,'excluded_incompatible',c.details.formula_exclusion_reason,null,c.components,c.details));continue;}
+ if(c?.details?.formula_candidate_reason){candidates.push(evaluation(p,'candidate_missing_conditions',c.details.formula_candidate_reason,null,null,c.details));continue;}
  if(!c){candidates.push(evaluation(p,'candidate_missing_conditions',p.machine_rule==='kansai_municipal_unresolved'?'capacity_definition_input_unavailable':'calculation_detail_unconfirmed',null,null,p.machine_rule==='kansai_municipal_unresolved'?{branch_statuses:p.branch_statuses??[]}:null));continue;}
  if(p.application_status==='accepting_with_waitlist_branch'){
  const branchStatus=c.details.branches?.find(branch=>branch.id===c.details.selected_branch)?.application_status??'unknown';
@@ -326,7 +332,18 @@ export function connectDiagnosticSubsidy(legacy,data,input,included,municipalInc
  const diagnostic=diagnosticSubsidy(data.diagnostic_subsidy_programs??[],input,included);
  const enabled=!!data.diagnostic_subsidy_programs?.length;
  const result={national_amount_yen:0,...legacy};const previous=legacy.total_amount_yen??0;
- if(enabled&&((input.prefectureCode==='13'&&[null,'13104','13201','13308'].includes(input.municipalityCode))||replacesLegacyPrefecture(data.diagnostic_subsidy_programs,input.prefectureCode))){
+ const retainTokyoMunicipal=input.prefectureCode==='13'&&data.common_branch_trial?.prefecture_codes?.includes('13')&&![null,'13104','13201','13308'].includes(input.municipalityCode);
+ if(enabled&&retainTokyoMunicipal){
+ const represented=new Set([...diagnostic.included_programs,...diagnostic.candidate_programs,...diagnostic.excluded_programs].filter(row=>row.government_level==='municipality').map(row=>row.id));
+ const retained=kind=>(legacy[kind]??[]).filter(row=>row.government_level==='municipality'&&!represented.has(row.id));
+ const municipalAmount=legacy.municipality_amount_yen===null?null:diagnostic.municipality_amount_yen+sum(retained('included_programs').map(row=>row.amount_yen));
+ Object.assign(result,diagnostic);
+ result.municipality_amount_yen=municipalAmount;
+ result.total_amount_yen=municipalAmount===null?null:diagnostic.national_amount_yen+diagnostic.prefecture_amount_yen+municipalAmount;
+ result.included_programs=[...diagnostic.included_programs,...retained('included_programs')];
+ result.candidate_programs=[...diagnostic.candidate_programs,...retained('candidate_programs')];
+ result.excluded_programs=[...diagnostic.excluded_programs,...(legacy.excluded_programs??[]).filter(row=>!represented.has(row.id))];
+ }else if(enabled&&((input.prefectureCode==='13'&&[null,'13104','13201','13308'].includes(input.municipalityCode))||replacesLegacyPrefecture(data.diagnostic_subsidy_programs,input.prefectureCode))){
  Object.assign(result,diagnostic);result.excluded_programs=[...diagnostic.excluded_programs,...legacy.excluded_programs];
  }else if(enabled&&input.prefectureCode==='13'){
  if(diagnostic.total_amount_yen>previous){Object.assign(result,diagnostic);result.candidate_programs=[...legacy.candidate_programs,...diagnostic.candidate_programs];result.excluded_programs=[...legacy.excluded_programs,...diagnostic.excluded_programs];}

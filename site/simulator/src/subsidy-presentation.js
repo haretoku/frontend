@@ -1,6 +1,12 @@
 const unconfirmedReason = "はれトク側で適用可能か確認できていないため，今回の概算に含めていません．";
 
 export function nonInclusionReason(item, downside = false) {
+  if (!downside && item.reason_code === 'source_model_reference_unavailable') {
+    if (item.id === 'national-mirai-eco-renovation-2026-battery') return 'この制度は住宅改修全体で補助額を計算します．この診断では改修工事の内容・数量や既交付額を扱っていないため，今回の試算には含めていません．';
+    if (item.held_common_branches?.length && item.held_common_branches.every(branch => branch.reason === 'outside_existing_investment_scope'))
+      return '住宅全体の補助額を，太陽光・蓄電池の投資費用へ切り分ける算定には対応していないため，含めていません．住宅本体額や未接続の額を0円として確定したものではありません．';
+    return '原算式と，この診断で用いる数量・費用との対応が揃っていないため，補助額を確定せず含めていません．';
+  }
   if(item.id==='hokkaido-sapporo-general-solar'&&item.reason_code==='equipment_package_not_applicable')return '太陽光には対象の蓄電池，又はV2Hを備えた電気自動車との接続が必要です．この診断では既設機器の所有を仮定せず，太陽光と蓄電池を同時に設置する場合に計算します．';
   if(item.id?.startsWith('hokkaido-ebetsu-')&&item.reason_code==='application_closed')return '予算に達したため，受付は終了しています．当初予定の締切前でも申請できるとは限りません．';
   if(item.reason_code==='eligible_cost_not_above_grant')return '制度で定める税込・税抜の区分で計算した対象費用が，補助額を上回る必要があります．今回は同額以下のため，含めていません．';
@@ -150,6 +156,7 @@ export function nonInclusionReason(item, downside = false) {
   if (item.application_status === 'closed' || ['not_adopted_closed', 'excluded_closed'].includes(item.calculation_status)) return "受付が終了しているため，含めていません．";
   if (item.application_status === 'suspended' || item.calculation_status === 'not_adopted_suspended') return "受付が停止しているため，含めていません．";
   if (['business_only', 'not_direct_grant', 'required_external_work'].includes(item.reason_code)) return diagnosticReasons[item.reason_code];
+  if (item.reason_code === 'regional_eligibility_input_unavailable') return diagnosticReasons[item.reason_code];
   if (['unknown', 'unconfirmed'].includes(item.application_status)) return '受付状況を確認できていません．';
   if (diagnosticReasons[item.reason_code]) return diagnosticReasons[item.reason_code];
   if (item.calculation_status === 'not_adopted_model_outside') return "この診断の計算で扱う範囲に対応していないため，含めていません．";

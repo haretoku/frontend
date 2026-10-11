@@ -15,8 +15,8 @@ export function selectSchemeGroups(data, prefecture, municipality = '') {
     legacy.forEach(rule=>covered.add(rule.id));
     const scope=new Set();
     for(const equipment of branch.target_equipment||[]){if(equipment.includes('太陽光'))scope.add('solar');if(equipment.includes('蓄電池'))scope.add('battery');}
-    const coarse={受付中:'accepting',受付対象外:'not_open',不明:'unknown'}[branch.application_status]||'unknown';
-    const compatible={accepting:['accepting','waitlist','accepting_with_waitlist_branch'],not_open:['closed','suspended','not_open','not_applicable'],unknown:['unknown','unconfirmed']}[coarse];
+    const coarse={受付中:'accepting',受付対象外:'not_open',受付開始前:'scheduled',scheduled:'scheduled',不明:'unknown'}[branch.application_status]||'unknown';
+    const compatible={accepting:['accepting','waitlist','accepting_with_waitlist_branch'],not_open:['closed','suspended','not_open','not_applicable'],unknown:['unknown','unconfirmed'],scheduled:['scheduled']}[coarse];
     const statuses=[...new Set(legacy.map(p=>p.application_status))];
     const catalog={...branch,record_id:parent.record_id,target_year:parent.target_year,conditions:{official:branch.official_conditions||branch.conditions?.official||[],model_assumptions:branch.model_assumptions??branch.conditions?.model_assumptions??[]}};
     return {id:branch.branch_id,record_id:parent.record_id,government_level:parent.government_level,prefecture_code:parent.prefecture_code,municipality_code:parent.municipality_code,program_name:parent.scheme_name,official_urls:branch.evidence_urls||[],confirmed_at:branch.checked_at,expense_scopes:[...scope],application_status:statuses.length===1&&compatible.includes(statuses[0])?statuses[0]:coarse,_catalog:catalog,_legacy:legacy};

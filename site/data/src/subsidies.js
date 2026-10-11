@@ -1,3 +1,7 @@
+import {receiveHareDisplayRecords, appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
+import hareTableUrl from '../../../data/input/hare-display-table.json?url';
+import hareBindingUrl from '../../../data/input/hare-display-binding.json?url';
+import {appendCommonItemGroups} from '../../shared/common-item-groups.js';
 import dataUrl from '../../../data/input/public-data.json?url';
 import {usesSchemeContract} from '../../../data/src/scheme-adapter.js';
 import {selectSchemeGroups} from './scheme-model.js';
@@ -29,6 +33,7 @@ function appendLines(cell,texts) {
   }
 }
 let data;
+let hareDisplayRecords;
 function disclosure(label) {
   const details=node('details',null,'data-branch-detail');const summary=node('summary',label+'を開く');details.append(summary);
   details.addEventListener('toggle',()=>{summary.textContent=label+(details.open?'を閉じる':'を開く');});
@@ -48,6 +53,10 @@ function populateCities(value='') {
   for(const m of cities)city.append(option(m.municipality_code,m.municipality_name));
   city.disabled=!pref.value;
   city.value=cities.some(m=>m.municipality_code===value)?value:'';
+}
+function listingTable(label){
+const table=node('table',null,'data-table data-table--comparison');table.setAttribute('aria-label',label+'の補助制度');const thead=node('thead');const hr=node('tr');for(const t of ['制度名・年度','補助内容','受付状況']){const th=node('th',t);th.scope='col';hr.append(th);}thead.append(hr);table.append(thead);const tbody=node('tbody');
+return {table,tbody};
 }
 function render(updateUrl=true) {
   const params=new URLSearchParams();if(pref.value)params.set('prefecture',pref.value);if(city.value)params.set('municipality_code',city.value);
@@ -69,7 +78,7 @@ function render(updateUrl=true) {
     const rows=groups.filter(g=>g[0].government_level===level);
     const section=node('section');const sectionHeading=node('div',null,'data-section-heading');sectionHeading.append(node('h3',label),node('span',rows.length+'件','data-section-count'));section.append(sectionHeading);
     if(!rows.length){section.append(node('p','掲載制度なし','data-muted'));container.append(section);continue;}
-    const table=node('table',null,'data-table data-table--comparison');table.setAttribute('aria-label',label+'の補助制度 '+rows.length+'件');const thead=node('thead');const hr=node('tr');for(const t of ['制度名・年度','補助内容','受付状況']){const th=node('th',t);th.scope='col';hr.append(th);}thead.append(hr);table.append(thead);const tbody=node('tbody');
+    let {table,tbody}=listingTable(label);
     for(const group of rows){
       const tr=node('tr');const title=node('th');title.scope='row';const heading=node('h4');
       const url=group[0].official_urls?.find(url=>/^https?:\/\//.test(url));
@@ -80,6 +89,8 @@ function render(updateUrl=true) {
       for(const note of [...new Set(group.flatMap(listingNotes))])title.append(node('p',note));
       if(level==='municipality'&&!data.municipalities.some(m=>m.prefecture_code===pref.value&&m.municipality_code===city.value))title.append(node('p','この自治体の補助制度は診断に未反映です．'));
       const amount=node('td');amount.dataset.label='補助内容';
+      const hareRecord=hareDisplayRecords.get(group[0].record_id);
+      if(!hareRecord){
       const official=group.map(p=>p._catalog?.conditions?.official||[]);
       const common=group.length>1&&group.every(p=>p._catalog)?[...new Set(official[0].filter(text=>official.every(parts=>parts.includes(text))))]:[];
       const termsByBranch=group.map(p=>diagnosticPilotTerms(data,p));
@@ -88,6 +99,13 @@ function render(updateUrl=true) {
       for(const p of group){
         const block=node('section',null,'data-amount-summary');block.append(node('h5',equipmentLabel(p)));
         const terms=termsByBranch[group.indexOf(p)];
+        const commonGroups=p._catalog?.common_item_groups;
+        if(commonGroups?.length && p._catalog.common_source_sha256===data.common_branch_trial?.source_sha256){
+          appendLines(block,['制度の基本額：'+amountSummary(p)]);
+          appendCommonItemGroups(document,block,commonGroups);
+          amount.append(block);continue;
+        }
+
         const detail=disclosure('補足・適用条件');
         if(terms?.sections?.length){
           const shared=(terms.commonSupplement||[]).filter(text=>!commonDisplay.includes(text));
@@ -108,12 +126,30 @@ function render(updateUrl=true) {
       }
       if(commonDisplay.length){const detail=disclosure('共通の適用条件');appendLines(detail,commonDisplay);amount.append(detail);}
       else if(!complete&&common.length){const detail=disclosure('共通の補助条件');appendConditions(detail,[{label:'共通の補助条件',lines:common}]);amount.append(detail);}
+      }
       const state=node('td');state.dataset.label='受付状況';for(const text of groupedEquipmentSummary(group,statusLabel))state.append(node('p',text,'data-badge'+(text.endsWith('受付中')||text.endsWith('キャンセル待ち')?' data-badge--open':'')));
       appendLines(state,groupedEquipmentSummary(group,applicationPeriod));
       const confirmed=node('div',null,'data-confirmed');appendLines(confirmed,groupedEquipmentSummary(group,p=>'確認日：'+(p.confirmed_at||'未確認')));state.append(confirmed);
-      tr.append(title,amount,state);tbody.append(tr);
+      if(hareRecord){
+        if(tbody.children.length){table.append(tbody);section.append(table);}
+        const card=node('article',null,'hare-display-scheme');
+        card.setAttribute('aria-label',hareRecord.scheme_name);
+        const header=node('div',null,'hare-display-scheme-header');
+        const institution=node('div',null,'hare-display-scheme-title');institution.append(...title.children);
+        const reception=node('div',null,'hare-display-scheme-reception');
+        reception.setAttribute('aria-label','受付状況');reception.append(...state.children);
+        header.append(institution,reception);card.append(header);
+        const common=node('div',null,'hare-display-scheme-common');
+        appendHareDisplayCommon(document,common,hareRecord.common);card.append(common);
+        const equipment=node('div',null,'hare-display-scheme-equipment');
+        for(const branch of hareRecord.branches)appendHareDisplayBranch(document,equipment,branch,{foldHousing:true});
+        card.append(equipment);section.append(card);
+        ({table,tbody}=listingTable(label));
+      }else{tr.append(title,amount,state);tbody.append(tr);}
+
     }
-    table.append(tbody);section.append(table);container.append(section);
+    if(tbody.children.length){table.append(tbody);section.append(table);}
+    container.append(section);
   }
   document.querySelector('#diagnosis-description').textContent=diagnosisDescription(data,pref.value,city.value);
   document.querySelector('#diagnosis-link').href=diagnosisUrl(data,pref.value,city.value);
@@ -123,4 +159,9 @@ function restore(){const p=new URLSearchParams(location.search);pref.value=data.
 document.querySelector('#region-form').addEventListener('submit',e=>e.preventDefault());
 pref.addEventListener('change',()=>{populateCities();render();});city.addEventListener('change',()=>render());window.addEventListener('popstate',restore);
 reception.addEventListener('change',()=>render());
-try {const response=await fetch(dataUrl);if(!response.ok)throw new Error('load');data=await response.json();pref.replaceChildren(option('','都道府県を選択'));for(const p of data.prefectures)pref.append(option(p.code,p.name));pref.disabled=false;document.querySelector('#data-date').textContent='データ更新日：'+data.data_version ;restore();}catch{status.textContent='データを読み込めませんでした．ページを再読み込みしてください．';}
+try {const response=await fetch(dataUrl);if(!response.ok)throw new Error('load');data=await response.json();
+const displayResponses=await Promise.all([fetch(hareTableUrl),fetch(hareBindingUrl)]);
+if(displayResponses.some(response=>!response.ok))throw new Error('display load');
+const [hareTable,hareBinding]=await Promise.all(displayResponses.map(response=>response.json()));
+hareDisplayRecords=receiveHareDisplayRecords(data,hareTable,hareBinding);
+pref.replaceChildren(option('','都道府県を選択'));for(const p of data.prefectures)pref.append(option(p.code,p.name));pref.disabled=false;document.querySelector('#data-date').textContent='データ更新日：'+data.data_version ;restore();}catch{status.textContent='データを読み込めませんでした．ページを再読み込みしてください．';}

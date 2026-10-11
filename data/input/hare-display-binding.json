@@ -1,0 +1,247 @@
+{
+  "version": "hare-display-binding-trial/1",
+  "source_sha256": "00bc74d9d9474e217eaead621ff246ce180377bde8349061547fbdcc23b31ff8",
+  "public_data_version": "20261010-tokyo-equipment-base-trial.3",
+  "records": [
+    {
+      "source_record_id": "normal-2026-pref13-residential-solar",
+      "frontend_record_id": "scheme-91b82ebf6d8ec513b145"
+    },
+    {
+      "source_record_id": "tokyo-residential-battery-2026",
+      "frontend_record_id": "scheme-efb8e0f496ffde22cd1f"
+    },
+    {
+      "source_record_id": "tokyo-zero-emission-house-2026",
+      "frontend_record_id": "scheme-f719340379c94e05830ec641b7beadde"
+    },
+    {
+      "source_record_id": "national-dr-battery-r7-supplement-2026",
+      "frontend_record_id": "scheme-5d94adfe2c1d5424a905"
+    },
+    {
+      "source_record_id": "national-zeh-new-detached-2026-battery",
+      "frontend_record_id": "scheme-b67a2f41f02d4a0faaebbdce955640dc"
+    },
+    {
+      "source_record_id": "national-mirai-eco-renovation-2026-battery",
+      "frontend_record_id": "scheme-76d58301474b4d0e861b630f46845fbb"
+    },
+    {
+      "source_record_id": "native-2026-pref02-residential-self-consumption-PV-B",
+      "frontend_record_id": "native-2026-pref02-residential-self-consumption-PV-B"
+    },
+    {
+      "source_record_id": "iwate-energy-new-housing-r8",
+      "frontend_record_id": "iwate-energy-new-housing-r8"
+    },
+    {
+      "source_record_id": "scheme-2368ea1aaaa32d38f6f0",
+      "frontend_record_id": "scheme-2368ea1aaaa32d38f6f0"
+    },
+    {
+      "source_record_id": "native-2026-pref06-residential-self-consumption-PV",
+      "frontend_record_id": "scheme-0d3a6b36a56f95a7ced5"
+    },
+    {
+      "source_record_id": "native-2026-pref06-healthy-housing-renewable-package",
+      "frontend_record_id": "native-2026-pref06-healthy-housing-renewable-package"
+    },
+    {
+      "source_record_id": "native-2026-pref06-miraikuru-residential-battery",
+      "frontend_record_id": "scheme-b95b3af9447484775578"
+    },
+    {
+      "source_record_id": "native-2026-pref07-residential-PV-B-V2H",
+      "frontend_record_id": "scheme-ad4cd7fec6451932014b"
+    },
+    {
+      "source_record_id": "tochigi-residential-solar-battery-2026",
+      "frontend_record_id": "scheme-0e83c53ffc528f295b27"
+    },
+    {
+      "source_record_id": "gunma-solar-new-2026",
+      "frontend_record_id": "scheme-26e930801ef18d98c73b"
+    },
+    {
+      "source_record_id": "gunma-battery-existing-pv-2026",
+      "frontend_record_id": "scheme-9d512712ff8020fd9738"
+    },
+    {
+      "source_record_id": "saitama-residential-solar-thermal-2026",
+      "frontend_record_id": "saitama-residential-solar-thermal-2026"
+    },
+    {
+      "source_record_id": "saitama-residential-battery-2026",
+      "frontend_record_id": "scheme-78e4680994394fe19aae"
+    },
+    {
+      "source_record_id": "chiba-zeh-house-joint-contractor-2026",
+      "frontend_record_id": "chiba-zeh-house-joint-contractor-2026"
+    },
+    {
+      "source_record_id": "chiba-residential-solar-battery-lease-ppa-2026",
+      "frontend_record_id": "chiba-residential-solar-battery-lease-ppa-2026"
+    },
+    {
+      "source_record_id": "kanagawa-residential-solar-battery-joint-2026",
+      "frontend_record_id": "scheme-c5a92d798bd1a5a62640"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-equipment-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-equipment-2026"
+    },
+    {
+      "source_record_id": "toyama-energy-saving-appliance-solar-2026",
+      "frontend_record_id": "scheme-f69ec74f60f3bb8199ec"
+    },
+    {
+      "source_record_id": "ishikawa-residential-solar-battery-v2h-2026",
+      "frontend_record_id": "scheme-4dcb15faeed847ae5d65"
+    },
+    {
+      "source_record_id": "yamanashi-residential-renewable-equipment-2026",
+      "frontend_record_id": "scheme-7f9548ccec6027045f42"
+    },
+    {
+      "source_record_id": "nagano-roof-solar-linked-equipment-2026",
+      "frontend_record_id": "nagano-roof-solar-linked-equipment-2026"
+    },
+    {
+      "source_record_id": "shiga-basic-fit-solar-battery-2026",
+      "frontend_record_id": "shiga-basic-fit-solar-battery-2026"
+    },
+    {
+      "source_record_id": "hyogo-awaji-household-battery-2026",
+      "frontend_record_id": "scheme-d66659688cb7d8be08ab"
+    },
+    {
+      "source_record_id": "nara-smart-house-residential-battery-2026",
+      "frontend_record_id": "scheme-6b4a3b442b2537de97a3"
+    },
+    {
+      "source_record_id": "shiga-priority-non-fit-2026",
+      "frontend_record_id": "shiga-priority-non-fit-2026"
+    },
+    {
+      "source_record_id": "shimane-new-zeh-renewable-package-2026",
+      "frontend_record_id": "shimane-new-zeh-renewable-package-2026"
+    },
+    {
+      "source_record_id": "hiroshima-existing-home-eco-window-2026",
+      "frontend_record_id": "hiroshima-existing-home-eco-window-2026"
+    },
+    {
+      "source_record_id": "yamaguchi-zeh-new-home-open-house-2026",
+      "frontend_record_id": "yamaguchi-zeh-new-home-open-house-2026"
+    },
+    {
+      "source_record_id": "tokushima-residential-solar-battery-non-fit-2026",
+      "frontend_record_id": "scheme-2ebe6e27d4d1ef1920e8"
+    },
+    {
+      "source_record_id": "kagawa-existing-home-battery-non-fit-2026",
+      "frontend_record_id": "scheme-84630a161f2db9e7af2c"
+    },
+    {
+      "source_record_id": "kagawa-priority-solar-battery-non-fit-2026",
+      "frontend_record_id": "scheme-c86dd489915edeb6bc5b"
+    },
+    {
+      "source_record_id": "oita-self-consumption-solar-battery-closed-2026",
+      "frontend_record_id": "scheme-37ec351316a307f16344"
+    },
+    {
+      "source_record_id": "miyazaki-solar-battery-non-fit-2026",
+      "frontend_record_id": "scheme-8c27f208dc783f6202c3"
+    },
+    {
+      "source_record_id": "miyazaki-battery-existing-pv-2026",
+      "frontend_record_id": "scheme-e817b514b3baacbc5654"
+    },
+    {
+      "source_record_id": "okinawa-island-depop-individual-ev-charge-v2h-2026",
+      "frontend_record_id": "okinawa-island-depop-individual-ev-charge-v2h-2026"
+    },
+    {
+      "source_record_id": "nagano-existing-pv-battery-2026",
+      "frontend_record_id": "nagano-existing-pv-battery-2026"
+    },
+    {
+      "source_record_id": "nagano-solar-v2h-simultaneous-2026",
+      "frontend_record_id": "nagano-solar-v2h-simultaneous-2026"
+    },
+    {
+      "source_record_id": "nagano-solar-battery-v2h-simultaneous-2026",
+      "frontend_record_id": "nagano-solar-battery-v2h-simultaneous-2026"
+    },
+    {
+      "source_record_id": "nagano-existing-pv-v2h-2026",
+      "frontend_record_id": "nagano-existing-pv-v2h-2026"
+    },
+    {
+      "source_record_id": "nagano-existing-pv-battery-v2h-2026",
+      "frontend_record_id": "nagano-existing-pv-battery-v2h-2026"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-new-housing-solar-battery-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-new-housing-solar-battery-2026"
+    },
+    {
+      "source_record_id": "kanagawa-small-contractor-zeh-housing-2026",
+      "frontend_record_id": "kanagawa-small-contractor-zeh-housing-2026"
+    },
+    {
+      "source_record_id": "kanagawa-existing-home-energy-renovation-2026",
+      "frontend_record_id": "kanagawa-existing-home-energy-renovation-2026"
+    },
+    {
+      "source_record_id": "kagawa-single-programme-v2h-2026",
+      "frontend_record_id": "kagawa-single-programme-v2h-2026"
+    },
+    {
+      "source_record_id": "kagawa-single-programme-new-zeh-2026",
+      "frontend_record_id": "kagawa-single-programme-new-zeh-2026"
+    },
+    {
+      "source_record_id": "kagawa-single-programme-existing-insulation-2026",
+      "frontend_record_id": "kagawa-single-programme-existing-insulation-2026"
+    },
+    {
+      "source_record_id": "miyazaki-personal-cogeneration-insulation-2026",
+      "frontend_record_id": "miyazaki-personal-cogeneration-insulation-2026"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-housing-only-d-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-housing-only-d-2026"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-c-housing-geothermal-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-c-housing-geothermal-2026"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-g-geothermal-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-g-geothermal-2026"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-h-solar-vehicle-v2h-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-h-solar-vehicle-v2h-2026"
+    },
+    {
+      "source_record_id": "niigata-yukiguni-zeh-i-solar-vehicle-v2h-2026",
+      "frontend_record_id": "niigata-yukiguni-zeh-i-solar-vehicle-v2h-2026"
+    },
+    {
+      "source_record_id": "nagano-item2-new-pv-ev-2026",
+      "frontend_record_id": "nagano-item2-new-pv-ev-2026"
+    },
+    {
+      "source_record_id": "nagano-item2-existing-pv-ev-2026",
+      "frontend_record_id": "nagano-item2-existing-pv-ev-2026"
+    },
+    {
+      "source_record_id": "fukushima-self-consumption-solar-model-2026",
+      "frontend_record_id": "scheme-a43ec21edee8bda21877"
+    }
+  ]
+}

@@ -21,7 +21,7 @@ function boundExpected(data, program, collection) {
 
 export function diagnosticPilotTerms(data, program) {
   const expected = boundExpected(data, program, diagnosticDisplayPilot.entries);
-  return expected ? {text:expected.text, supplement:expected.supplement, equipment:expected.equipment, sections:expected.sections, commonSupplement:expected.commonSupplement, conditionDisplayComplete:expected.conditionDisplayComplete === true} : null;
+  return expected ? {noticePolicy:expected.noticePolicy, text:expected.text, supplement:expected.supplement, equipment:expected.equipment, sections:expected.sections, commonSupplement:expected.commonSupplement, conditionDisplayComplete:expected.conditionDisplayComplete === true} : null;
 }
 
 export function diagnosticAmountPolicy(data, program) {
@@ -33,7 +33,7 @@ export function diagnosticAmountPolicy(data, program) {
 export function diagnosticPilotNotice(row, index) {
   if (!row.included) return '';
   const terms = index.get(row.id) || [];
-  if (!terms.length || !terms.every(term => term.pilotEquipment)) return '';
+  if (!terms.length || !terms.every(term => term.pilotEquipment) || terms.every(term=>term.pilotNoticePolicy==='common_notice_only')) return '';
   return '※適用条件を満たすと仮定した概算です．申請前に，公式窓口または施工業者を通じて適用可否をご確認ください．';
 }
 

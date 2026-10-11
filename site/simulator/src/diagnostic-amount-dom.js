@@ -1,3 +1,4 @@
+import {appendCommonItemGroups} from '../../shared/common-item-groups.js';
 // Render institutional terms only. The actual included amount is rendered once by the caller.
 export function orderedSupplementRows(rows) {
   const order = ['算定対象','出力基準','容量基準','対象出力範囲','対象容量範囲','適用条件','加算','上限','共通上限','端数処理','未確認事項'];
@@ -14,6 +15,10 @@ export function appendInstitutionalAmount(document, item, amounts, sections = []
     parent.append(node);
   }
   if (policy) { paragraph(policy.notice, 'subsidyDisplayPolicy'); return; }
+  if (sections.length && sections.every(section=>section.kind==='common_item_group/1')) {
+    appendCommonItemGroups(document,item,sections,'municipal-information subsidy-common-item-group');
+    return;
+  }
   if (!sections.length) {
     paragraph('制度の補助額：' + amounts.institutionText, 'subsidyInstitutionAmount');
     return;

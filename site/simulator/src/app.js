@@ -1,5 +1,6 @@
+import {loadDiagnosticDisplayRecords, appendDiagnosticDisplay, appendDiagnosticReceptionNote} from './diagnostic-display-record.js';
 import {appendInstitutionalAmount} from './diagnostic-amount-dom.js';
-import {subsidyTermsIndex, subsidyAmountFields, subsidyAmountPolicy} from './subsidy-amount-presentation.js';
+import {subsidyTermsIndex, subsidyAmountFields, subsidyAmountPolicy, subsidyNonInclusionText} from './subsidy-amount-presentation.js';
 import {diagnosticPilotNotice, diagnosticPilotSections, diagnosticPilotCommonSupplement, diagnosticTrialSourceTexts} from './diagnostic-display-pilot.js';
 import { recordDiagnosisComplete } from "../../shared/analytics.js";
 import { setupMobileActions } from "./mobile-actions.js";
@@ -14,6 +15,7 @@ import { degradationLabel, degradationDescription, outageReferencePresentation, 
 import { applicationStatusLabel } from "./municipal-information.js";
 
 let housingAgeSelection;
+let housingAgePresentationOrigin = 'initial_assumption';
 function housingDisplayContract() {
   const contract = housingContract(frontendData.publicData.calculation.housing_age_input);
   const labels = { existing: 'すでに建っている家に設置', new: '新築する家に設置' };
@@ -95,6 +97,7 @@ const elements = {
 };
 
 let frontendData = null;
+let diagnosticDisplayRecords = new Map();
 let latestResult = null;
 let selectedScenarioId = "standard";
 let batteryDegradationSelection = null;
@@ -571,6 +574,24 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
     heading.textContent = mode === 'branches' ? branchLabel || receivedBranchLabel || equipment || scopeLabel || '対象設備・条件' : `${subsidyGovernmentLabel(row.government_level)}${equipment ? equipment + '：' : ''}${row.program_name}`;
     const status = document.createElement('p');
     status.textContent = `受付状態：${applicationStatusLabel(row)}`;
+    if (!row.included) {
+      item.append(heading, status);
+      const reason = document.createElement('p');
+      reason.dataset.subsidyExclusionReason = '';
+      const eligibility = frontendData.publicData.diagnostic_subsidy_programs.find(program => program.id === row.id);
+      reason.textContent = subsidyNonInclusionText(row, {housingAge: latestResult?.input?.housing_age, housingAgeOrigin: housingAgePresentationOrigin, eligibleHousingAges: eligibility?.housing_ages});
+      item.append(reason);
+      if (appendDiagnosticReceptionNote(document, item, row, diagnosticDisplayRecords) && ['unknown', 'unconfirmed'].includes(row.application_status) && row.reason_code === 'application_status_unconfirmed') {
+        reason.textContent = '制度全体の受付を一律には判定できないため，今回の試算には算入していません．確認済みの受付範囲は次のとおりです．';
+      }
+      if (row.official_url) {
+        const link = document.createElement('a');
+        link.href = row.official_url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        link.textContent = '公式の適用条件を確認する ↗'; item.append(link);
+      }
+      list.append(item);
+      continue;
+    }
     const amounts = subsidyAmountFields(row, termsIndex);
     const amountPolicy = subsidyAmountPolicy(row, termsIndex);
     const calculation = document.createElement('p');
@@ -579,6 +600,15 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
     const noncash = noncashBenefitDescription(row);
     if (row.included && noncash) calculation.textContent = '今回の試算に算入した額：' + (Number.isFinite(amounts.includedAmountYen) ? formatYen(amounts.includedAmountYen, false) + '相当' : '未確認') + '（非現金）';
     item.append(heading, status);
+    if (appendDiagnosticDisplay(document, item, row, diagnosticDisplayRecords, calculation)) {
+      if (row.official_url && mode !== 'branches') {
+        const link = document.createElement('a');
+        link.href = row.official_url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        link.textContent = heading.textContent + ' ↗'; heading.replaceChildren(link);
+      }
+      list.append(item);
+      continue;
+    }
     appendInstitutionalAmount(document, item, amounts, diagnosticPilotSections(row, termsIndex), diagnosticPilotCommonSupplement(row, termsIndex), amountPolicy);
     const supplementDisclosure = item.querySelector(':scope > .subsidy-branch-detail');
     supplementDisclosure?.remove();
@@ -611,7 +641,7 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
     }
     const eligibilityPremises = (row.required_confirmations ?? []).filter(text => /充足.*仮定|申請前確認条件/.test(text));
     const pilotNotice = diagnosticPilotNotice(row, termsIndex);
-    if (row.included && (pilotNotice || conciseAssumption || contractAssumption || row.calculation_assumptions?.some(text => /入力(?:項目)?にない|入力外|仮定|概算前提|解釈|半額上限|設置後/.test(text)) || eligibilityPremises.length)) {
+    if (!(termsIndex.get(row.id)||[]).some(term=>term.pilotNoticePolicy==='common_notice_only') && row.included && (pilotNotice || conciseAssumption || contractAssumption || row.calculation_assumptions?.some(text => /入力(?:項目)?にない|入力外|仮定|概算前提|解釈|半額上限|設置後/.test(text)) || eligibilityPremises.length)) {
       const premise = document.createElement('p');
       const tokyo = row.id === 'tokyo-residential-solar-2026-audit';
       const readable = readableSubsidyAssumption;
@@ -1216,6 +1246,7 @@ function renderResult(result, options = {}) {
 async function initialize() {
   try {
     frontendData = await loadFrontendData();
+    diagnosticDisplayRecords = await loadDiagnosticDisplayRecords(frontendData.publicData);
     configureHousingInput(elements.housingAge, housingDisplayContract());
     populatePrefectures(frontendData.publicData.prefectures);
     populateRoofOrientations(frontendData.publicData.calculation.detail_inputs ?? []);
@@ -1230,6 +1261,7 @@ async function initialize() {
     const initialInput = inputFromLocation();
     elements.monthlyElectricityBill.value = initialInput.monthlyElectricityBillYen ?? "";
     housingAgeSelection = initialInput.housingAge;
+    housingAgePresentationOrigin = initialInput.housingAge == null ? 'initial_assumption' : 'url_unverified';
     elements.housingAge.value = housingInput(housingAgeSelection).value;
     batteryDegradationSelection = initialInput.batteryDegradationScenario;
     const defaultCapacity = frontendData.publicData.calculation.system_capacity_kw;
@@ -1357,7 +1389,7 @@ elements.monthlyElectricityBill.addEventListener('change', () => scheduleLiveCon
 elements.monthlyElectricityBill.addEventListener('keydown', event => {
   if (event.key === 'Enter') { event.preventDefault(); applyLiveConditions(); }
 });
-elements.housingAge.addEventListener('change', () => { housingAgeSelection = elements.housingAge.value; scheduleLiveConditions(); });
+elements.housingAge.addEventListener('change', event => { housingAgeSelection = elements.housingAge.value; housingAgePresentationOrigin = event.isTrusted ? 'form_selection' : 'unverified_change'; scheduleLiveConditions(); });
 elements.roofOrientation.addEventListener('change', () => scheduleLiveConditions());
 elements.daytimeOccupancyOptions.addEventListener('change', () => scheduleLiveConditions());
 elements.equipmentOptions.addEventListener('change', () => { selectEquipmentPackage(elements.equipmentOptions.value); scheduleLiveConditions(); });
