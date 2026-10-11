@@ -250,6 +250,9 @@ export function commonBranchComponents(program,input){
   return {...ownerResults.get(shared.owner_id),selected:c.selected_component_ids};
  };
  const active=contract.branch_contracts.filter(c=>c.input_scope?.housing_ages.includes(input.housingAge)&&c.input_scope?.equipment_packages.includes(input.equipmentPackage));
+ const investmentBranches=contract.branch_contracts.filter(c=>['solar','battery'].includes(c.expense_scope));
+ const matchedInvestment=active.some(c=>['solar','battery'].includes(c.expense_scope));
+ const sharedInvestmentDependency=active.some(c=>c.source_owner_shared_formula?.component_branch_ids?.some(id=>investmentBranches.some(x=>x.branch.branch_id===id)));
  const duplicates=new Set(active.filter(c=>active.filter(x=>x.expense_scope===c.expense_scope).length>1).map(c=>c.expense_scope));
  if(!Array.isArray(contract.branch_contracts)||!contract.branch_contracts.length)throw Error('複数設備契約が空です．');
  for(const c of contract.branch_contracts){
@@ -274,6 +277,6 @@ export function commonBranchComponents(program,input){
   components[c.expense_scope]=r.amount;used.push({branch_id:c.branch.branch_id,selected_component_ids:r.selected,used_refs:r.used_refs});
  }
  const details={common_branch_source_sha256:contract.source_sha256,selected_common_components:used.flatMap(c=>c.selected_component_ids),used_common_branches:used,held_common_branches:held,calculation_assumptions:contract.assumptions};
- if(!used.length)details.formula_candidate_reason='source_model_reference_unavailable';
+ if(!used.length)details.formula_candidate_reason=investmentBranches.length>0&&!matchedInvestment&&!sharedInvestmentDependency?'equipment_package_not_applicable':'source_model_reference_unavailable';
  return {components,details};
 }

@@ -24,6 +24,7 @@ import './kumamoto-subsidy.test.js';
 import './scheduled-subsidy.test.js';
 import './nagasaki-subsidy.test.js';
 import assert from "node:assert/strict";
+import {loadNationalPrefectureExpectations, legacyFinancialProjection, nationalReferenceProjection} from './national-prefecture-reference.js';
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -117,6 +118,18 @@ const publicData = JSON.parse(
 const calculationCases = JSON.parse(
   await readFile(new URL("../fixtures/calculation-cases.json", import.meta.url), "utf8")
 );
+const nationalPrefectureExpected = await loadNationalPrefectureExpectations({
+  legacyBytes: await readFile(new URL('../fixtures/calculation-cases.json', import.meta.url)),
+  publicBytes: await readFile(new URL('../../data/input/public-data.json', import.meta.url)),
+  referenceURL: new URL('../fixtures/calculation-national-prefecture-reference.json.gz', import.meta.url)
+});
+
+const scopedReference = JSON.parse(await readFile(new URL('../fixtures/calculation-national-prefecture-scoped-reference.json', import.meta.url), 'utf8'));
+assert.equal(scopedReference.expected_generated_from_frontend, false);
+assert.equal(createHash('sha256').update(await readFile(new URL('../../data/input/public-data.json', import.meta.url))).digest('hex'), scopedReference.source_public_sha256);
+const scopedExpected = new Map(scopedReference.cases.map(row => [row.id, row.expected]));
+const verifyScopedReference = (id, actual) => assert.deepEqual(nationalReferenceProjection(actual), nationalReferenceProjection(scopedExpected.get(id)), `原scope・独立backend期待値に一致する：${id}`);
+
 const capacityPreprocessingCases = JSON.parse(
   await readFile(new URL("../fixtures/capacity-preprocessing.json", import.meta.url), "utf8")
 );
@@ -286,15 +299,16 @@ for (const calculationCase of calculationCases.cases) {
     );
     // Decimal evidence strings may differ only in exponent/trailing-zero notation.
     const canonical = result => JSON.parse(JSON.stringify(result, (key,value) => ['eligible_cost_yen_unrounded','capacity_amount_yen_unrounded','amount_yen_before_deferred_rounding'].includes(key) && value !== null ? Number(value) : value));
-    assert.deepEqual(canonical(actual), canonical(calculationCase.expected));
+    assert.deepEqual(legacyFinancialProjection(canonical(actual)), legacyFinancialProjection(canonical(calculationCase.expected)), '補助金非依存の旧金融・物理計算を保持する');
+    assert.deepEqual(nationalReferenceProjection(canonical(actual)), nationalPrefectureExpected.get(calculationCase.id).expected, '国県更新後の原AST独立基準額・採否・全年累積を確認する');
   });
 }
 
 test("採用済み公開ペアと既存計算fixtureのSHA-256が承認値と一致する", async () => {
   const expectedHashes = new Map([
-    ["../../data/input/public-data.json", "E791078BCABC5A46C4A8ADF48E310C535ADB9E6D0527476421BD8EE40F1E081A"],
+    ["../../data/input/public-data.json", "D759E6368B982A7E19F4BBE44FB7CB5F7673E151E0AA60898F347A0404D2C3E7"],
     ["../fixtures/calculation-cases.json", "E3171DCD87C1384364EC91713E4DC7213062EAD5C0CC1FF722B83D5A513A6582"],
-    ["../../data/input/metadata.json", "9F5D4934567D277A8F821A2F1A6D5213DE8A9BB6594B9A1402F5E55E37F120DB"]
+    ["../../data/input/metadata.json", "8D9735595588EB15531FFA8945D71BD85BB3B2877E5F3D6709C6DF20272BE15B"]
   ]);
   for (const [path, expectedHash] of expectedHashes) {
     const contents = await readFile(new URL(path, import.meta.url));
@@ -384,19 +398,21 @@ test("容量変更は契約単価，30年電力保存，補助金および利益
   const nikkoStandard = nikko.scenarios.find((scenario) => scenario.scenario === "standard");
   assert.equal(nikkoStandard.subsidy_breakdown.municipality_amount_yen, 0);
   assert.equal(nikkoStandard.subsidy_breakdown.national_amount_yen, 0);
-  assert.ok(nikkoStandard.subsidy_breakdown.excluded_programs.some(program => program.reason_code === 'required_external_structure_or_housing_work'));
+  verifyScopedReference('nikko-owner-scope', nikko);
+  assert.ok(!nikkoStandard.subsidy_breakdown.excluded_programs.some(program => program.reason_code === 'required_external_structure_or_housing_work'));
   assert.ok(nikkoStandard.subsidy_breakdown.candidate_programs.length > 0);
   assert.ok(nikkoStandard.subsidy_breakdown.candidate_programs.every((program) => program.amount_yen === null));
 });
 
 test("回収年は未入力時の地域平均と後年の維持・交換費を反映した最終回収年を返す", () => {
-  const expectedByCapacity = new Map([[1, 3], [3, 3], [4, 4], [5, 4], [6, 4]]);
+  const expectedByCapacity = new Map([1,3,4,5,6].map(capacity => [capacity, scopedExpected.get(`tokyo-payback-${capacity}`).scenarios.find(row => row.scenario === 'standard').payback_year]));
   for (const [systemCapacityKw, expectedPaybackYear] of expectedByCapacity) {
     const tokyo = calculateEstimate(
       { prefectureCode: "13", monthlyElectricityBillYen: null, systemCapacityKw },
       publicData
     );
     const standard = tokyo.scenarios.find((scenario) => scenario.scenario === "standard");
+    verifyScopedReference(`tokyo-payback-${systemCapacityKw}`, tokyo);
     assert.equal(standard.payback_year, expectedPaybackYear);
   }
 });
@@ -798,39 +814,48 @@ test('住宅区分は容量・発電を変えず住宅別PV費用と補助適格
 test('埼玉県の蓄電池補助は購入費だけを上限とし旧PVの非FIT条件を転用しない', () => {
  const result=calculateEstimate({prefectureCode:'11',monthlyElectricityBillYen:null,equipmentPackage:'solar_plus_standard_battery',housingAge:'existing'},publicData);
  const standard=result.scenarios.find(x=>x.scenario==='standard');
- const program=standard.subsidy_breakdown.included_programs.find(x=>x.id==='saitama-residential-battery-2026');
- assert.equal(standard.subsidy_yen,100000);
- assert.deepEqual(program.component_amounts_yen,{battery:100000});
- assert.equal(program.battery_purchase_cost_limit_yen,1054500);
- assert.match(program.expense_mapping_assumption,/工事費10,000円／kWhを除外/);
+ const program=standard.subsidy_breakdown.candidate_programs.find(x=>x.id==='saitama-residential-battery-2026');
+ verifyScopedReference('saitama-cost-unbound', result);
+ assert.equal(program.amount_yen,null);
+ assert.equal(program.reason_code,'source_model_reference_unavailable');
+ const source=receiveSchemeRules(publicData).diagnostic.find(row=>row.id===program.id);
+ const battery=source.common_branch_calculation.branch_contracts.find(row=>row.expense_scope==='battery');
+ assert.deepEqual(battery.quantity_cost_bindings,{});
+ assert.notEqual(program.reason_code,'sale_path_not_applicable');
  assert.equal(result.scenarios[0].subsidy_yen,0);
 });
 
 test('埼玉県は住宅・設備適格性を先に判定し他県の制度を混入しない', () => {
  for(const [housingAge,equipmentPackage,reason] of [['new','solar_plus_standard_battery','housing_age_not_applicable'],['existing','solar_only','equipment_package_not_applicable']]){
- const b=calculateEstimate({prefectureCode:'11',monthlyElectricityBillYen:null,housingAge,equipmentPackage},publicData).scenarios[1].subsidy_breakdown;
+ const result=calculateEstimate({prefectureCode:'11',monthlyElectricityBillYen:null,housingAge,equipmentPackage},publicData);
+ verifyScopedReference(housingAge==='new'?'saitama-new-not-applicable':'saitama-solar-only-not-applicable', result);
+ const b=result.scenarios[1].subsidy_breakdown;
  assert.equal(b.excluded_programs.find(x=>x.id==='saitama-residential-battery-2026').reason_code,reason);
  assert.ok([...b.included_programs,...b.excluded_programs].every(x=>!x.id.startsWith('kanagawa-residential-')&&!x.id.startsWith('tokyo-')));
  }
 });
 
 test('埼玉県の購入費残額は市区町村の蓄電池成分のみ控除し万円未満を切り捨てる', () => {
- for(const [equipmentCost,expected] of [[20000,30000],[19999,20000],[14999,0]]){
+ for(const equipmentCost of [20000,19999,14999]){
  const data=structuredClone(publicData);data.calculation.battery_system.equipment_cost_yen_per_kwh=equipmentCost;
- const b=calculateEstimate({prefectureCode:'11',municipalityCode:'11221',monthlyElectricityBillYen:null,equipmentPackage:'solar_plus_standard_battery',batteryCapacityKwh:4,housingAge:'existing'},data).scenarios[1].subsidy_breakdown;
- assert.equal(b.municipality_amount_yen,100000);assert.equal(b.prefecture_amount_yen,expected);assert.equal(b.total_amount_yen,100000+expected);
+ const result=calculateEstimate({prefectureCode:'11',municipalityCode:'11221',monthlyElectricityBillYen:null,equipmentPackage:'solar_plus_standard_battery',batteryCapacityKwh:4,housingAge:'existing'},data);
+ verifyScopedReference(`saitama-cost-mutation-${equipmentCost}`, result);
+ const b=result.scenarios[1].subsidy_breakdown;
+ assert.equal(b.municipality_amount_yen,100000);assert.equal(b.prefecture_amount_yen,scopedExpected.get(`saitama-cost-mutation-${equipmentCost}`).scenarios[1].subsidy_breakdown.prefecture_amount_yen);assert.equal(b.total_amount_yen,100000);
  assert.deepEqual(b.included_programs.find(x=>x.id==='saitama-11221-climate-action-2026').component_amounts_yen,{solar:50000,battery:50000});
- if(!expected)assert.equal(b.excluded_programs.find(x=>x.id==='saitama-residential-battery-2026').reason_code,'expense_scope_exhausted_by_maximum_combination');
+ const held=b.candidate_programs.find(x=>x.id==='saitama-residential-battery-2026');assert.equal(held.amount_yen,null);assert.equal(held.reason_code,'source_model_reference_unavailable');
  }
 });
 
 test('神奈川県の終了制度は容量から台数を推定せず県額へ算入しない', () => {
  for(const batteryCapacityKwh of [4,9.5,16]){
- const b=calculateEstimate({prefectureCode:'14',monthlyElectricityBillYen:null,equipmentPackage:'solar_plus_standard_battery',batteryCapacityKwh,housingAge:'existing'},publicData).scenarios[1].subsidy_breakdown;
+ const result=calculateEstimate({prefectureCode:'14',monthlyElectricityBillYen:null,equipmentPackage:'solar_plus_standard_battery',batteryCapacityKwh,housingAge:'existing'},publicData);
+ verifyScopedReference(`kanagawa-closed-${batteryCapacityKwh}`, result);
+ const b=result.scenarios[1].subsidy_breakdown;
  const program=b.excluded_programs.find(x=>x.id==='kanagawa-residential-solar-battery-2026');
  assert.equal(b.prefecture_amount_yen,0);assert.equal(program.calculation_status,'excluded_closed');assert.equal(program.amount_yen,null);
  assert.ok(!b.included_programs.some(x=>x.id==='saitama-residential-battery-2026'));
- assert.ok(program.calculation_assumptions.some(x=>x.includes('入力容量から推定しない')));
+ assert.equal(program.application_status,'closed');assert.ok(program.component_amounts_yen==null);
  }
 });
 
@@ -915,8 +940,11 @@ test('資料不足8件とB2の理由は診断接続後も重複せず受付と�
   const b=r.scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
   const rows=[...b.included_programs,...b.candidate_programs,...b.excluded_programs].filter(x=>x.id===p.id);
   assert.equal(rows.length,1,p.id);assert.equal(rows[0].amount_yen,null);assert.equal(rows[0].application_status,p.application_status);
-  const expected=p.machine_rule==='municipal_unconfirmed_not_included'?'investigation_closed_insufficient_information':p.prefecture_code==='05'?'calculation_detail_unconfirmed':'sale_path_not_applicable';
+  verifyScopedReference(`insufficient-${p.id}`, r);
+  const reference=scopedExpected.get(`insufficient-${p.id}`).scenarios.find(row=>row.scenario==='standard').subsidy_breakdown;
+  const expected=[...reference.included_programs,...reference.candidate_programs,...reference.excluded_programs].find(row=>row.id===p.id).reason_code;
   assert.equal(rows[0].reason_code,expected,p.id);
+  if(p.prefecture_code==='06'){const solarOnly=calculateEstimate({prefectureCode:p.prefecture_code,municipalityCode:p.municipality_code??null,housingAge:'existing',equipmentPackage:'solar_only',monthlyElectricityBillYen:null},publicData);verifyScopedReference(`insufficient-solar-only-${p.id}`,solarOnly);}
  }
 });
 

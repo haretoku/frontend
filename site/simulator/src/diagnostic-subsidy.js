@@ -278,7 +278,7 @@ export function diagnosticSubsidy(programs,input,included){
  if(costFailure){const [status,reason]=costFailure;(status==='candidate_missing_conditions'?candidates:excluded).push(evaluation(p,status,reason,null));continue;}
  const c=diagnosticComponents(p,input);
  if(c?.details?.formula_exclusion_reason){excluded.push(evaluation(p,'excluded_incompatible',c.details.formula_exclusion_reason,null,c.components,c.details));continue;}
- if(c?.details?.formula_candidate_reason){candidates.push(evaluation(p,'candidate_missing_conditions',c.details.formula_candidate_reason,null,null,c.details));continue;}
+ if(c?.details?.formula_candidate_reason){const reason=c.details.formula_candidate_reason;if(reason==='equipment_package_not_applicable')excluded.push(evaluation(p,'excluded_incompatible',reason,null,null,c.details));else candidates.push(evaluation(p,'candidate_missing_conditions',reason,null,null,c.details));continue;}
  if(!c){candidates.push(evaluation(p,'candidate_missing_conditions',p.machine_rule==='kansai_municipal_unresolved'?'capacity_definition_input_unavailable':'calculation_detail_unconfirmed',null,null,p.machine_rule==='kansai_municipal_unresolved'?{branch_statuses:p.branch_statuses??[]}:null));continue;}
  if(p.application_status==='accepting_with_waitlist_branch'){
  const branchStatus=c.details.branches?.find(branch=>branch.id===c.details.selected_branch)?.application_status??'unknown';
