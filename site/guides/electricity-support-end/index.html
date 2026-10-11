@@ -9,16 +9,22 @@
     <meta property="og:title" content="2026年11月分から電気代支援終了，太陽光・蓄電池の有無で年間の負担増に約3.3倍の差｜はれトク">
     <meta property="og:description" content="支援3.5円/kWhが1年間続く場合と終了する場合を比較．公的データから，太陽光・蓄電池が年間の負担増を抑える効果を試算しました．">
     <meta property="og:type" content="article">
+    <meta property="og:url" content="https://haretoku.jp/guides/electricity-support-end/">
     <meta property="og:site_name" content="はれトク">
     <meta property="og:locale" content="ja_JP">
-    <meta property="og:image" content="https://haretoku.jp/shared/assets/support-shock-burden.png">
+    <meta property="og:image" content="https://haretoku.jp/og-support-shock-burden.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1320">
+    <meta property="og:image:height" content="585">
     <meta name="twitter:card" content="summary_large_image">
     <title>2026年11月分から電気代支援終了，太陽光・蓄電池の有無で年間の負担増に約3.3倍の差｜はれトク</title>
+    <link rel="canonical" href="https://haretoku.jp/guides/electricity-support-end/">
     <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="/shared/styles/main.css">
     <link rel="stylesheet" href="/articles/styles/research-release.css">
     <script type="module" src="/shared/analytics.js"></script>
     <script type="module" src="/articles/src/release-model-details.js"></script>
+    <script type="module" src="/shared/table-scroll-hint.js"></script>
   </head>
   <body class="release-page">
     <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><nav class="site-nav" aria-label="主要メニュー"><a href="/">トップ</a><a href="/simulator/">はれトク診断</a><a href="/guides/" aria-current="page">はれトクガイド</a><a href="/data/">はれトクデータ</a></nav></div></header>
@@ -53,7 +59,7 @@
           <p>国の「電気・ガス料金支援」が2026年11月分料金から終了し，購入した電気1 kWh当たり3.5円の値引きがなくなります．本試算では，この値引きが1年間続く場合と，支援がない場合を比較し，年間の負担増を求めました．</p>
           </div>
           <figure class="release-figure" id="burden-chart">
-            <img src="/shared/assets/support-shock-burden.svg" width="1320" height="585" alt="支援3.5円/kWhが1年間続く場合と終了する場合の比較．年間追加負担は設備なし17,442円，太陽光のみ12,131円，蓄電池5kWh併用7,538円，9.5kWh併用5,213円．設備なしと9.5kWh併用の比は約3.3倍．">
+            <picture><source media="(max-width: 44rem)" srcset="/shared/assets/support-shock-burden-compact.svg"><img src="/shared/assets/support-shock-burden.svg" width="1320" height="585" alt="支援3.5円/kWhが1年間続く場合と終了する場合の比較．年間追加負担は設備なし17,442円，太陽光のみ12,131円，蓄電池5kWh併用7,538円，9.5kWh併用5,213円．設備なしと9.5kWh併用の比は約3.3倍．"></picture>
             <figcaption>図1　太陽光・蓄電池の有無による，支援終了時の年間追加負担の比較</figcaption>
             <p class="release-download"><a href="/shared/assets/support-shock-burden.png" download>図1をダウンロード（PNG）</a><a href="/shared/assets/support-shock-burden.svg" download>SVG</a><a href="#model-details">元データ・条件・計算方法を見る</a></p>
           </figure>
@@ -75,7 +81,7 @@
             <p>太陽光は昼の購入電力を減らし，蓄電池は余った電気を夜にも使えるようにします．図2では，家庭で使う電気を，太陽光の直接利用，蓄電池からの供給，電力会社からの購入に分けました．太陽光のみの場合と蓄電池9.5 kWhを併用した場合を，同じ時間軸で比較しています．</p>
           </div>
           <figure class="release-figure" id="daily-chart">
-            <img src="/shared/assets/support-shock-daily.svg" width="1360" height="535" loading="lazy" decoding="async" alt="モデル家庭の年間平均の1日の電力利用．365日分の計算結果を時刻別に平均．太陽光のみでは夕方から夜に購入電力が増える．蓄電池9.5kWh併用では余った発電をためて夜にも使い，購入量が減る．">
+            <picture><source media="(max-width: 44rem)" srcset="/shared/assets/support-shock-daily-compact.svg"><img src="/shared/assets/support-shock-daily.svg" width="1360" height="535" loading="lazy" decoding="async" alt="モデル家庭の年間平均の1日の電力利用．365日分の計算結果を時刻別に平均．太陽光のみでは夕方から夜に購入電力が増える．蓄電池9.5kWh併用では余った発電をためて夜にも使い，購入量が減る．"></picture>
             <figcaption>図2　モデル家庭の年間平均の1日の電力供給内訳（365日分を時刻別に平均）</figcaption>
             <p class="release-download"><a href="/shared/assets/support-shock-daily.png" download>図2をダウンロード（PNG）</a><a href="/shared/assets/support-shock-daily.svg" download>SVG</a><a href="#model-details">元データ・条件・計算方法を見る</a></p>
           </figure>

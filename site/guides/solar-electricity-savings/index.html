@@ -77,7 +77,7 @@
               </div>
             </div>
             <figcaption id="savings-equation-caption">図1　自家消費と売電による，収入・節約の関係（式 (1)）</figcaption>
-            <p class="economics-figure-note">単価は税込．従量電灯Bの電力量料金は29.80〜40.49円／kWh<span data-cite-sources="article-source-5">（東京電力エナジーパートナー，2026a）</span>．2026年度認定の住宅用10 kW未満のFITは最初の4年間24円，5～10年目8.3円（経済産業省，2026），東京電力のFIT終了後の再エネ買取標準プランは8.50円です（東京電力エナジーパートナー，2026b）．</p>
+            <p class="economics-figure-note">単価は税込．従量電灯Bの電力量料金は29.80〜<span data-guide-number="tariff.thirdPrice" data-guide-format="yen:2">40.49円</span>／kWh<span data-cite-sources="article-source-5">（東京電力エナジーパートナー，2026a）</span>．2026年度認定の住宅用10 kW未満のFITは最初の4年間<span data-guide-number="fit.firstPrice" data-guide-format="yen">24円</span>，5～10年目<span data-guide-number="fit.secondPrice" data-guide-format="yen:1">8.3円</span>（経済産業省，2026），東京電力のFIT終了後の再エネ買取標準プランは<span data-guide-number="fit.postPrice" data-guide-format="yen:2">8.50円</span>です（東京電力エナジーパートナー，2026b）．</p>
           </figure>
           <p class="economics-intro__answer"><strong>買わずに済む単価が売電単価より高ければ，同じ電気は売るより自宅で使う方がトクになります．</strong>ここからは，自宅で使う量と買わずに済む単価を確認し，電気代削減と売電収入を合わせた月々・長期間の効果を求める方法を見ていきます．</p>
           <section id="overview-quantity">
@@ -90,7 +90,7 @@
           </section>
           <section id="overview-period">
             <h3>月々・長期間の収入・節約の求め方</h3>
-            <p>当サイトの代表例では，<strong>初年度の電気代削減は月平均約4,700円，30年間では約209万円の試算です．</strong>東京都の既存住宅に南向き4 kWを設置し，平日昼間はほぼ毎日在宅，蓄電池なし，初期電気代月15,467円とする条件です．月平均は初年度の年間節約額を12で割り，30年合計は年0.3％の発電量低下・年1.5％の買電料金上昇を見込んで求めています．<a href="/pages/calculation-method.html#electricity-sales-example">代表試算の条件・計算根拠</a></p>
+            <p>当サイトの代表例では，<strong>初年度の電気代削減は月平均<span data-guide-number="economics.firstYearMonthlySavings" data-guide-format="approx-yen100">約4,700円</span>，30年間では約209万円の試算です．</strong>東京都の既存住宅に南向き4 kWを設置し，平日昼間はほぼ毎日在宅，蓄電池なし，初期電気代月15,467円とする条件です．月平均は初年度の年間節約額を12で割り，30年合計は年<span data-guide-number="model.degradationPercent" data-guide-format="number:1">0.3</span>％の発電量低下・年<span data-guide-number="model.growthPercent" data-guide-format="number:1">1.5</span>％の買電料金上昇を見込んで求めています．<a href="/pages/calculation-method.html#electricity-sales-example">代表試算の条件・計算根拠</a></p>
             <p><strong>図1の合計を求めるには，電気代削減に売電収入を加えます．</strong>売電収入は，余って売った電力量に売電単価を掛けた金額です．月々は両者を足し，長期間は発電量・電気料金・売電単価の変化を反映して，年ごとの金額を合計します．後の計算の章で，この関係を説明します．</p>
           </section>
           <section id="overview-home">
@@ -111,7 +111,7 @@
           <section id="daytime-overlap">
             <h3>発電と使用の時間が重なる分を，自宅で使える</h3>
             <p><strong>太陽光だけの場合，自家消費できるのは，発電しているときに家庭で必要とする電気です．</strong>その時点の発電が使用を上回れば余りを売り，不足すれば電力会社から買います．昼間の余りを，蓄電池なしで夜の使用に回すことはできません．住宅用の余剰売電も，この電気の流れを前提としています（太陽光発電協会，2026e）．</p>
-            <p>図2は，昼間に4 kWh発電し，1日に6 kWh使う，蓄電池なしの2家庭の計算例です．昼間の使用分は発電と重なると仮定します．家庭Aは昼間に3 kWh使い，家庭Bは昼間に1 kWh使うため，自家消費量はそれぞれ3 kWh，1 kWhになります．発電量と1日の使用量が同じでも，買う電気は家庭Aが3 kWh，家庭Bが5 kWhとなります．</p>
+            <p>図2は，昼間に4 kWh発電し，1日に6 kWh使う，蓄電池なしの2家庭の計算例です．昼間の使用分は発電と重なると仮定します．家庭Aは昼間に<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>使い，家庭Bは昼間に1 kWh使うため，自家消費量はそれぞれ<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>，1 kWhになります．発電量と1日の使用量が同じでも，買う電気は家庭Aが<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>，家庭Bが5 kWhとなります．</p>
             <figure class="economics-fit-chart" aria-labelledby="daytime-example-caption" aria-describedby="daytime-example-note">
               <svg viewBox="0 0 360 470" role="img" aria-labelledby="daytime-example-title daytime-example-description">
                 <title id="daytime-example-title">使う時間の違いによる自家消費量の計算例</title>
@@ -160,7 +160,7 @@
           <p><strong>自家消費の節約単価は，購入を減らす電気に適用される料金から考えます．</strong>まず請求書で契約名と使用量を確認し，その契約の料金表から適用される単価を調べます．</p>
           <section id="bill-components">
             <h3>請求書で，契約名と使用量を確認する</h3>
-            <p>請求書で確認するのは，<strong>①の契約名と②の使用量</strong>です．①で使う料金表を選び，②をその表に当てはめて料金を計算します．図3の見本なら，従量電灯Bの料金表を使い，123 kWhの購入量から考えます．</p>
+            <p>請求書で確認するのは，<strong>①の契約名と②の使用量</strong>です．①で使う料金表を選び，②をその表に当てはめて料金を計算します．図3の見本なら，従量電灯Bの料金表を使い，<span data-guide-number="savings.before" data-guide-format="kwh">123 kWh</span>の購入量から考えます．</p>
             <figure class="savings-bill" id="bill-reading-example" aria-labelledby="bill-reading-caption">
               <a class="savings-bill__zoom" href="https://www.tepco.co.jp/ep/support/kenshin-web/images/kenshin_receipt_tab1_step03.png" target="_blank" rel="noopener" aria-label="東京電力公式の請求書見本を原寸で開く（新しいタブ）">
                 <img src="/shared/assets/tepco-bill-sample.png" width="711" height="697" alt="東京電力の電気料金・ご使用量照会の公式見本．契約は従量電灯B・30 A，使用量123 kWh．下に基本料金，段階別電力量料金，燃料費調整額，再エネ賦課金と単価の欄がある" loading="lazy" decoding="async">
@@ -172,7 +172,7 @@
             </figure>
             <table class="article-table savings-reference-table"><caption>表1　請求書で確認する2つの項目</caption><tbody>
               <tr><th scope="row">① 契約名</th><td>対応する料金表を選ぶ．見本は従量電灯B・30 A．</td></tr>
-              <tr><th scope="row">② 使用量</th><td>電力会社から買った量．見本の123 kWhを，次の計算の出発点にする．</td></tr>
+              <tr><th scope="row">② 使用量</th><td>電力会社から買った量．見本の<span data-guide-number="savings.before" data-guide-format="kwh">123 kWh</span>を，次の計算の出発点にする．</td></tr>
             </tbody></table>
             <p>確認した契約名と使用量を使って，次節では料金表のどの単価が適用されるかを調べます．</p>
           </section>
@@ -181,23 +181,23 @@
             <p><strong>契約名で，使う料金表が決まります．</strong>図3の①は従量電灯Bなので，表2の単価を使います<span data-cite-sources="article-source-5">（東京電力エナジーパートナー，2026a）</span>．従量電灯Bは段階料金で，月の購入量によって適用される単価が変わります．購入量の全量に，一番高い単価を掛ける仕組みではありません．</p>
             <p>購入する電気が減ると，その量に応じた電力量料金や再エネ賦課金が減り，燃料費調整額も購入量に応じて変わります．一方，契約容量に応じて基本料金が決まるプランでは，容量を変えずに使用量だけ減らしても，基本料金は通常変わりません．例えば東京電力の従量電灯Bは，契約電流別の基本料金と，使用量別の電力量料金などを合算する仕組みです（東京電力エナジーパートナー，2026c）．</p>
             <table class="article-table savings-rate-table" id="tariff-reading-example"><caption>表2　①従量電灯Bの契約に対応する，電力量料金の単価</caption><thead><tr><th scope="col">使用量の段階</th><th scope="col">単価（税込）</th></tr></thead><tbody>
-              <tr><th scope="row">最初の120 kWhまで</th><td><strong>29.80円／kWh</strong></td></tr>
-              <tr><th scope="row">120 kWh超300 kWhまで</th><td><strong>36.40円／kWh</strong></td></tr>
-              <tr><th scope="row">300 kWhを超える部分</th><td><strong>40.49円／kWh</strong></td></tr>
+              <tr><th scope="row">最初の120 kWhまで</th><td><strong><span data-guide-number="tariff.firstPrice" data-guide-format="yen:2">29.80円</span>／kWh</strong></td></tr>
+              <tr><th scope="row">120 kWh超300 kWhまで</th><td><strong><span data-guide-number="tariff.secondPrice" data-guide-format="yen:2">36.40円</span>／kWh</strong></td></tr>
+              <tr><th scope="row">300 kWhを超える部分</th><td><strong><span data-guide-number="tariff.thirdPrice" data-guide-format="yen:2">40.49円</span>／kWh</strong></td></tr>
             </tbody></table>
             <p class="economics-figure-note"><a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html">東京電力「料金単価表‐電灯」</a>の従量電灯Bから，計算に使う段階と単価を抜粋．2026年10月9日確認．</p>
-            <p>図3の②は123 kWhなので，最初の120 kWhには29.80円／kWh，残り3 kWhには36.40円／kWhが適用されます．ここから自家消費で購入量を減らすと，まず120 kWhを超える3 kWh分，次に120 kWh以下の部分が減ります．<strong>減らした電気すべてに，最高単価を掛けるわけではありません．</strong>次章では，この数字を使って月々の節約額を求めます．</p>
+            <p>図3の②は<span data-guide-number="savings.before" data-guide-format="kwh">123 kWh</span>なので，最初の120 kWhには<span data-guide-number="tariff.firstPrice" data-guide-format="yen:2">29.80円</span>／kWh，残り<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>には<span data-guide-number="tariff.secondPrice" data-guide-format="yen:2">36.40円</span>／kWhが適用されます．ここから自家消費で購入量を減らすと，まず120 kWhを超える<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>分，次に120 kWh以下の部分が減ります．<strong>減らした電気すべてに，最高単価を掛けるわけではありません．</strong>次章では，この数字を使って月々の節約額を求めます．</p>
             <p>明細の総額を使用量で割った「1 kWh当たりの平均額」には，基本料金も含まれます．その平均額を自家消費量に掛けるだけでは，実際に減る支払いと一致しない場合があります．<strong>正確に比べるには，同じ契約・同じ月の料金条件で，自家消費による購入量の違いを料金計算へ反映します．</strong></p>
             <p><strong>従量電灯Bの電力量料金の単価は，使う時刻では変わりません．</strong>一方，スマートライフS・Lなどの時間帯別料金では，何時に使うかで単価が変わります（東京電力エナジーパートナー，2026d）．この契約の場合は，太陽光で購入量が減る昼間の単価を確認します．</p>
             <details class="savings-supplement"><summary>購入量が減ったときの計算例を見る</summary>
             <div class="savings-worked-example" id="monthly-worked-example">
               <p class="savings-worked-example__label">資料の数字を使って計算する</p>
               <ol class="savings-worked-example__steps">
-                <li><strong>② 123 kWhから，減る50 kWhを分ける</strong><br>120 kWhを超える3 kWhと，120 kWh以下の47 kWhが減ります．</li>
-                <li><strong>①の料金表から，それぞれの段階の単価を掛ける</strong><br>3 kWh × 36.40円／kWh ＋ 47 kWh × 29.80円／kWh ＝ 1,509.80円．</li>
-                <li><strong>燃料費調整額・再エネ賦課金の変化を加える</strong><br>1,509.80円 ＋ 50 kWh × 当月の燃料費調整単価 ＋ 50 kWh × 再エネ賦課金単価．</li>
+                <li><strong>② <span data-guide-number="savings.before" data-guide-format="kwh">123 kWh</span>から，減る<span data-guide-number="savings.self" data-guide-format="kwh">50 kWh</span>を分ける</strong><br>120 kWhを超える<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>と，120 kWh以下の<span data-guide-number="savings.firstReduced" data-guide-format="kwh">47 kWh</span>が減ります．</li>
+                <li><strong>①の料金表から，それぞれの段階の単価を掛ける</strong><br><span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span> × <span data-guide-number="tariff.secondPrice" data-guide-format="yen:2">36.40円</span>／kWh ＋ <span data-guide-number="savings.firstReduced" data-guide-format="kwh">47 kWh</span> × <span data-guide-number="tariff.firstPrice" data-guide-format="yen:2">29.80円</span>／kWh ＝ <span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span>．</li>
+                <li><strong>燃料費調整額・再エネ賦課金の変化を加える</strong><br><span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span> ＋ <span data-guide-number="savings.self" data-guide-format="kwh">50 kWh</span> × 当月の燃料費調整単価 ＋ <span data-guide-number="savings.self" data-guide-format="kwh">50 kWh</span> × 再エネ賦課金単価．</li>
               </ol>
-              <p class="savings-worked-example__result">電力量料金の削減は，月約1,510円</p>
+              <p class="savings-worked-example__result">電力量料金の削減は，月<span data-guide-number="savings.monthly" data-guide-format="approx-yen10">約1,510円</span></p>
               <p class="economics-figure-note">この数値例は電力量料金の部分を計算しています．自宅の総節約額を求めるときは，対象月の調整単価・賦課金単価も加えます．</p>
             </div>
             <p><strong>電気代削減額は，太陽光がある場合とない場合の請求額の差です．</strong>同じ暮らし方・同じ月の料金条件で，それぞれの購入量に段階料金や時間帯料金を適用します．</p>
@@ -222,36 +222,36 @@
           <p><strong>月々の効果は，買わずに済んだ電気代と，余った電気を売った収入を足して求めます．</strong>まずひと月の計算を押さえ，長期間では発電量・電気料金・売電単価の変化を反映して，年ごとの収入・節約を合計します．</p>
           <section id="monthly-savings">
             <h3>電気代削減と売電収入から，月々の効果を求める</h3>
-            <p><strong>月150 kWh発電し，昼間に50 kWhを自宅で使う家庭を例に計算します．</strong>蓄電池はなく，昼間に使い切れない残り100 kWhを売ります．買電は従量電灯Bで，太陽光がない場合の月の購入量を図3と同じ123 kWhとします．売電はFIT終了後の東京電力「再エネ買取標準プラン」の8.50円／kWhを使います（東京電力エナジーパートナー，2026b）．</p>
-            <p><strong>自家消費による電力量料金の削減は，月約1,510円です．</strong>自宅で50 kWh使うことで，購入量は123−50＝73 kWhに減ります．前節の表2に当てはめると，120 kWhを超える3 kWhと，120 kWh以下の47 kWhの料金が減ります．</p>
-            <p class="article-formula"><span class="formula-term">月の電力量料金の削減額</span><span class="formula-operator">＝</span><span class="formula-term">3 kWh × 36.40円／kWh</span><span class="formula-operator">＋</span><span class="formula-term">47 kWh × 29.80円／kWh</span><span class="formula-term">＝ 1,509.80円（式 (3)）</span></p>
-            <p><strong>余った100 kWhの売電収入は，月850円です．</strong>売った電力量に契約の単価を掛け，100×8.50＝850円と求めます．自宅の場合は，売電先の明細で売った量を，契約で単価を確認します．FIT終了後の契約の選び方は，<a href="/guides/solar-fit/#post-fit-conditions">FIT制度の記事</a>で説明します．</p>
-            <p class="article-formula"><span class="formula-term">月の売電収入</span><span class="formula-operator">＝</span><span class="formula-term">100 kWh</span><span class="formula-operator">×</span><span class="formula-term">8.50円／kWh</span><span class="formula-term">＝ 850円（式 (4)）</span></p>
-            <p><strong>電気代削減と売電収入を合わせると，月約2,360円です．</strong>電力量料金の削減1,509.80円と売電収入850円を足すと，2,359.80円になります．支払いが減る効果と入金を合わせた「収入・節約の合計」で，図1の式に対応します．</p>
-            <p class="article-formula"><span class="formula-term">月の収入・節約の合計</span><span class="formula-operator">＝</span><span class="formula-term">1,509.80円</span><span class="formula-operator">＋</span><span class="formula-term">850円</span><span class="formula-term">＝ 約2,360円（式 (5)）</span></p>
+            <p><strong>月<span data-guide-number="savings.generation" data-guide-format="kwh">150 kWh</span>発電し，昼間に<span data-guide-number="savings.self" data-guide-format="kwh">50 kWh</span>を自宅で使う家庭を例に計算します．</strong>蓄電池はなく，昼間に使い切れない残り<span data-guide-number="savings.sold" data-guide-format="kwh">100 kWh</span>を売ります．買電は従量電灯Bで，太陽光がない場合の月の購入量を図3と同じ<span data-guide-number="savings.before" data-guide-format="kwh">123 kWh</span>とします．売電はFIT終了後の東京電力「再エネ買取標準プラン」の<span data-guide-number="fit.postPrice" data-guide-format="yen:2">8.50円</span>／kWhを使います（東京電力エナジーパートナー，2026b）．</p>
+            <p><strong>自家消費による電力量料金の削減は，月<span data-guide-number="savings.monthly" data-guide-format="approx-yen10">約1,510円</span>です．</strong>自宅で<span data-guide-number="savings.self" data-guide-format="kwh">50 kWh</span>使うことで，購入量は<span data-guide-number="savings.before">123</span>−<span data-guide-number="savings.self">50</span>＝<span data-guide-number="savings.after" data-guide-format="kwh">73 kWh</span>に減ります．前節の表2に当てはめると，120 kWhを超える<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>と，120 kWh以下の<span data-guide-number="savings.firstReduced" data-guide-format="kwh">47 kWh</span>の料金が減ります．</p>
+            <p class="article-formula"><span class="formula-term">月の電力量料金の削減額</span><span class="formula-operator">＝</span><span class="formula-term"><span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span> × <span data-guide-number="tariff.secondPrice" data-guide-format="yen:2">36.40円</span>／kWh</span><span class="formula-operator">＋</span><span class="formula-term"><span data-guide-number="savings.firstReduced" data-guide-format="kwh">47 kWh</span> × <span data-guide-number="tariff.firstPrice" data-guide-format="yen:2">29.80円</span>／kWh</span><span class="formula-term">＝ <span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span>（式 (3)）</span></p>
+            <p><strong>余った<span data-guide-number="savings.sold" data-guide-format="kwh">100 kWh</span>の売電収入は，月<span data-guide-number="savings.sales" data-guide-format="yen">850円</span>です．</strong>売った電力量に契約の単価を掛け，100×8.50＝<span data-guide-number="savings.sales" data-guide-format="yen">850円</span>と求めます．自宅の場合は，売電先の明細で売った量を，契約で単価を確認します．FIT終了後の契約の選び方は，<a href="/guides/solar-fit/#post-fit-conditions">FIT制度の記事</a>で説明します．</p>
+            <p class="article-formula"><span class="formula-term">月の売電収入</span><span class="formula-operator">＝</span><span class="formula-term"><span data-guide-number="savings.sold" data-guide-format="kwh">100 kWh</span></span><span class="formula-operator">×</span><span class="formula-term"><span data-guide-number="fit.postPrice" data-guide-format="yen:2">8.50円</span>／kWh</span><span class="formula-term">＝ <span data-guide-number="savings.sales" data-guide-format="yen">850円</span>（式 (4)）</span></p>
+            <p><strong>電気代削減と売電収入を合わせると，月<span data-guide-number="savings.total" data-guide-format="approx-yen10">約2,360円</span>です．</strong>電力量料金の削減<span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span>と売電収入<span data-guide-number="savings.sales" data-guide-format="yen">850円</span>を足すと，<span data-guide-number="savings.total" data-guide-format="yen:2">2,359.80円</span>になります．支払いが減る効果と入金を合わせた「収入・節約の合計」で，図1の式に対応します．</p>
+            <p class="article-formula"><span class="formula-term">月の収入・節約の合計</span><span class="formula-operator">＝</span><span class="formula-term"><span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span></span><span class="formula-operator">＋</span><span class="formula-term"><span data-guide-number="savings.sales" data-guide-format="yen">850円</span></span><span class="formula-term">＝ <span data-guide-number="savings.total" data-guide-format="approx-yen10">約2,360円</span>（式 (5)）</span></p>
             <p class="economics-figure-note">上の合計は電力量料金の削減と売電収入です．自宅の電気代削減を求めるときは，前節で示した燃料費調整額・再エネ賦課金の変化も加えます．</p>
-            <p><strong>年間の効果は，各月の収入・節約を合計して求めます．</strong>上の条件が12か月続く場合，電力量料金の削減は1,509.80円×12＝約1.81万円，売電収入は850円×12＝1.02万円で，合計は約2.83万円です．実際には天候や冷暖房の使用で月ごとの量が変わるため，各月を計算して合計し，12で割ると月平均が求められます．</p>
+            <p><strong>年間の効果は，各月の収入・節約を合計して求めます．</strong>上の条件が12か月続く場合，電力量料金の削減は<span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span>×12＝<span data-guide-number="savings.year1" data-guide-format="approx-man-decimal:2">約1.81万円</span>，売電収入は<span data-guide-number="savings.sales" data-guide-format="yen">850円</span>×12＝1.02万円で，合計は約2.83万円です．実際には天候や冷暖房の使用で月ごとの量が変わるため，各月を計算して合計し，12で割ると月平均が求められます．</p>
           </section>
           <section id="long-term-savings">
             <h3>発電量・買電と売電の単価の変化を見込み，長期間の効果を求める</h3>
-            <p><strong>長期間の効果は，年ごとの電気代削減と売電収入を計算して合計します．</strong>当サイトでは，初年度を基準に，翌年以降の発電量を年0.3％ずつ低下させる設定です．発電量が変わると，自宅で使う量と余って売る量も変わるため，毎年計算し直します．<a href="/pages/calculation-method.html#calculation-formulas">発電量の劣化と年ごとの計算方法</a></p>
-            <p>電気料金についても，利用中の変化を想定します．同じ量を自家消費しても，買う電気が値上がりすれば節約額は大きくなり，値下がりすれば小さくなります．診断の標準シナリオは，買電料金が年1.5％上昇する比較仮定です．将来の値上がりを予測したものではないため，シナリオを変えて，料金の想定にどの程度左右されるかも見ましょう．<a href="/pages/calculation-method.html#scenarios">シナリオの設定を確認する</a></p>
-            <p><strong>売電収入は，その年に適用される売電単価で求めます．</strong>2026年度認定の10 kW未満の住宅用太陽光では，FITの単価は最初の4年間が24円／kWh，5～10年目が8.3円／kWhです（経済産業省，2026）．FIT終了後は売電先の契約単価を使います．初年度の売電収入を30年分に延ばすのではなく，売電量と単価を年ごとに掛け合わせます．<a href="/guides/solar-fit/#post-fit-conditions">FIT終了後の売電</a></p>
+            <p><strong>長期間の効果は，年ごとの電気代削減と売電収入を計算して合計します．</strong>当サイトでは，初年度を基準に，翌年以降の発電量を年<span data-guide-number="model.degradationPercent" data-guide-format="number:1">0.3</span>％ずつ低下させる設定です．発電量が変わると，自宅で使う量と余って売る量も変わるため，毎年計算し直します．<a href="/pages/calculation-method.html#calculation-formulas">発電量の劣化と年ごとの計算方法</a></p>
+            <p>電気料金についても，利用中の変化を想定します．同じ量を自家消費しても，買う電気が値上がりすれば節約額は大きくなり，値下がりすれば小さくなります．診断の標準シナリオは，買電料金が年<span data-guide-number="model.growthPercent" data-guide-format="number:1">1.5</span>％上昇する比較仮定です．将来の値上がりを予測したものではないため，シナリオを変えて，料金の想定にどの程度左右されるかも見ましょう．<a href="/pages/calculation-method.html#scenarios">シナリオの設定を確認する</a></p>
+            <p><strong>売電収入は，その年に適用される売電単価で求めます．</strong>2026年度認定の10 kW未満の住宅用太陽光では，FITの単価は最初の4年間が<span data-guide-number="fit.firstPrice" data-guide-format="yen">24円</span>／kWh，5～10年目が<span data-guide-number="fit.secondPrice" data-guide-format="yen:1">8.3円</span>／kWhです（経済産業省，2026）．FIT終了後は売電先の契約単価を使います．初年度の売電収入を30年分に延ばすのではなく，売電量と単価を年ごとに掛け合わせます．<a href="/guides/solar-fit/#post-fit-conditions">FIT終了後の売電</a></p>
             <p class="article-formula"><span class="formula-term">長期間の収入・節約の合計</span><span class="formula-operator">＝</span><span class="formula-term">各年の電気代削減額と売電収入を</span><span class="formula-term">利用期間分合計</span><span class="formula-term">（式 (6)）</span></p>
-            <p>表3は，前節の計算例のうち，<a href="#monthly-savings">電力量料金の削減（月1,509.80円・初年度約1.81万円）</a>を長期間へ延ばしたものです．毎月の太陽光なしの購入量123 kWhを保ち，自家消費量50 kWhを翌年から年0.3％ずつ減らし，表2の単価を年1.5％ずつ上げます．各年の減る購入量を段階料金へ当てはめて計算し直し，12か月分を合計します．</p>
+            <p>表3は，前節の計算例のうち，<a href="#monthly-savings">電力量料金の削減（月<span data-guide-number="savings.monthly" data-guide-format="yen:2">1,509.80円</span>・初年度<span data-guide-number="savings.year1" data-guide-format="approx-man-decimal:2">約1.81万円</span>）</a>を長期間へ延ばしたものです．毎月の太陽光なしの購入量<span data-guide-number="savings.before" data-guide-format="kwh">123 kWh</span>を保ち，自家消費量<span data-guide-number="savings.self" data-guide-format="kwh">50 kWh</span>を翌年から年<span data-guide-number="model.degradationPercent" data-guide-format="number:1">0.3</span>％ずつ減らし，表2の単価を年<span data-guide-number="model.growthPercent" data-guide-format="number:1">1.5</span>％ずつ上げます．各年の減る購入量を段階料金へ当てはめて計算し直し，12か月分を合計します．</p>
             <table class="article-table savings-period-table"><caption>表3　前節の計算例から求めた，電力量料金の削減額</caption><thead><tr><th scope="col">利用年</th><th scope="col">年額</th></tr></thead><tbody>
-              <tr><th scope="row">初年度</th><td>約1.81万円</td></tr>
-              <tr><th scope="row">2年目</th><td>約1.83万円</td></tr>
-              <tr><th scope="row">10年目</th><td>約2.02万円</td></tr>
-              <tr><th scope="row">30年目</th><td>約2.56万円</td></tr>
-              <tr class="savings-period-table__total"><th scope="row">1～30年目の合計</th><td>約65万円</td></tr>
+              <tr><th scope="row">初年度</th><td><span data-guide-number="savings.year1" data-guide-format="approx-man-decimal:2">約1.81万円</span></td></tr>
+              <tr><th scope="row">2年目</th><td><span data-guide-number="savings.year2" data-guide-format="approx-man-decimal:2">約1.83万円</span></td></tr>
+              <tr><th scope="row">10年目</th><td><span data-guide-number="savings.year10" data-guide-format="approx-man-decimal:2">約2.02万円</span></td></tr>
+              <tr><th scope="row">30年目</th><td><span data-guide-number="savings.year30" data-guide-format="approx-man-decimal:2">約2.56万円</span></td></tr>
+              <tr class="savings-period-table__total"><th scope="row">1～30年目の合計</th><td><span data-guide-number="savings.longTerm" data-guide-format="approx-man">約65万円</span></td></tr>
             </tbody></table>
             <p class="economics-figure-note">表3も電力量料金のみの説明用計算で，燃料費調整額・再エネ賦課金は含みません．丸め前の各年の金額を合計し，現在価値への割引は行っていません．</p>
-            <details class="savings-supplement"><summary>表3の計算方法を見る</summary><p>2年目の月の自家消費量は50×0.997＝49.85 kWhです．減る量を，120 kWhを超える3 kWhと，120 kWh以下の46.85 kWhへ分け，それぞれの単価を1.015倍にします．年額は［3×36.40＋46.85×29.80］×1.015×12＝18,334.9194円です．3年目以降も，前年の自家消費量を0.997倍，単価を1.015倍にして同じ順序で計算します．</p></details>
-            <p><strong>導入で紹介した住宅の代表試算は，季節ごとの発電・使用の違いも見込んだ診断の結果です．</strong>こちらは初年度の電気代削減が年約5.7万円（月平均約4,700円），売電収入が年約6.9万円で，収入・節約の合計は初年度年約12.6万円です．上の説明用計算とは住宅条件や料金の設定が異なります．<a href="/pages/calculation-method.html#electricity-sales-example">代表試算の条件・計算根拠</a></p>
-            <p><strong>住宅の代表試算では，電気代削減と売電収入を合わせると，30年間で約296万円です．</strong>導入と同じ住宅条件で，毎年の発電・自家消費・売電を計算し，電気代削減2,094,799円と売電収入861,588円を合計すると，2,956,387円になります．設置費や維持費を差し引く前の金額で，各年の金額を足した名目合計です．<a href="/pages/calculation-method.html#electricity-sales-example">長期試算の条件・計算根拠</a></p>
+            <details class="savings-supplement"><summary>表3の計算方法を見る</summary><p>2年目の月の自家消費量は50×0.997＝49.85 kWhです．減る量を，120 kWhを超える<span data-guide-number="savings.secondReduced" data-guide-format="kwh">3 kWh</span>と，120 kWh以下の46.85 kWhへ分け，それぞれの単価を1.015倍にします．年額は［3×36.40＋46.85×29.80］×1.015×12＝18,334.9194円です．3年目以降も，前年の自家消費量を0.997倍，単価を1.015倍にして同じ順序で計算します．</p></details>
+            <p><strong>導入で紹介した住宅の代表試算は，季節ごとの発電・使用の違いも見込んだ診断の結果です．</strong>こちらは初年度の電気代削減が年<span data-guide-number="economics.firstYearSavings" data-guide-format="approx-man-decimal:1">約5.7万円</span>（月平均<span data-guide-number="economics.firstYearMonthlySavings" data-guide-format="approx-yen100">約4,700円</span>），売電収入が年<span data-guide-number="economics.firstYearSales" data-guide-format="approx-man-decimal:1">約6.9万円</span>で，収入・節約の合計は初年度年<span data-guide-number="economics.firstYearBenefit" data-guide-format="approx-man-decimal:1">約12.6万円</span>です．上の説明用計算とは住宅条件や料金の設定が異なります．<a href="/pages/calculation-method.html#electricity-sales-example">代表試算の条件・計算根拠</a></p>
+            <p><strong>住宅の代表試算では，電気代削減と売電収入を合わせると，30年間で<span data-guide-number="economics.benefit" data-guide-format="approx-man">約296万円</span>です．</strong>導入と同じ住宅条件で，毎年の発電・自家消費・売電を計算し，電気代削減<span data-guide-number="economics.savings" data-guide-format="yen">2,094,799円</span>と売電収入<span data-guide-number="economics.sales" data-guide-format="yen">861,588円</span>を合計すると，<span data-guide-number="economics.benefit" data-guide-format="yen">2,956,387円</span>になります．設置費や維持費を差し引く前の金額で，各年の金額を足した名目合計です．<a href="/pages/calculation-method.html#electricity-sales-example">長期試算の条件・計算根拠</a></p>
           </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の計算根拠</p><ul class="source-list"><li>はれトク．<a href="/pages/calculation-method.html#electricity-sales-example">収支記事の代表試算</a>（公開データ2026-09-28版の標準シナリオ）．</li><li>はれトク．<a href="/pages/calculation-method.html#calculation-formulas">発電・需要・自家消費と長期評価の計算式</a>．</li><li>経済産業省（2026）．<a href="https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html">2026年度以降の買取価格等と2026年度の賦課金単価の設定</a>（2026年3月19日）．</li><li>東京電力エナジーパートナー（2026年アクセスb）．<a href="https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html">再エネ買取標準プラン</a>（FIT終了後の買取単価8.50円／kWh，東京電力の対象エリアの契約例）．</li></ul></footer>
+          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の計算根拠</p><ul class="source-list"><li>はれトク．<a href="/pages/calculation-method.html#electricity-sales-example">収支記事の代表試算</a>（公開データ<span data-guide-version>20261010-tokyo-equipment-base-trial.3</span>版の標準シナリオ）．</li><li>はれトク．<a href="/pages/calculation-method.html#calculation-formulas">発電・需要・自家消費と長期評価の計算式</a>．</li><li>経済産業省（2026）．<a href="https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html">2026年度以降の買取価格等と2026年度の賦課金単価の設定</a>（2026年3月19日）．</li><li>東京電力エナジーパートナー（2026年アクセスb）．<a href="https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html">再エネ買取標準プラン</a>（FIT終了後の買取単価<span data-guide-number="fit.postPrice" data-guide-format="yen:2">8.50円</span>／kWh，東京電力の対象エリアの契約例）．</li></ul></footer>
         </section>
 
         <section id="home-check">

@@ -77,7 +77,7 @@
           </section>
           <section id="overview-funds"><h3>受給後の自己負担と，入金前に必要な資金</h3>
             <p><strong>受給後の自己負担は，導入の総費用から受給額を引いた金額です．</strong>一方，工事代金を先に支払い，後で補助金を受け取る場合は，入金までの支払を賄う資金が必要になります．最終的に減る負担と，一時的に用意する資金を分けることが重要です．</p>
-            <p>例えば，税込の総費用150万円，受給額40万円なら，自己負担は110万円です．ただし全額を補助金の入金前に支払うなら，先に150万円を用意します．これは支払と入金の関係を示す仮例です．後の章では，同じ総費用で減額・不交付になった場合も比べます．</p>
+            <p>例えば，税込の総費用<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span>，受給額<span data-guide-number="subsidy.grant" data-guide-format="man">40万円</span>なら，自己負担は<span data-guide-number="subsidy.burden" data-guide-format="man">110万円</span>です．ただし全額を補助金の入金前に支払うなら，先に<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span>を用意します．これは支払と入金の関係を示す仮例です．後の章では，同じ総費用で減額・不交付になった場合も比べます．</p>
           </section>
           <section id="overview-check"><h3>自宅の見込額の確かめ方</h3>
             <p>まず，はれトクデータで地域の候補制度を探し，公式サイトで補助額と対象条件を確認します．次に，施工会社へ自宅の住宅・設備・工事条件を見てもらい，見積もりで補助額の見込みと自己負担を具体化します．最後の章では，この2つの調べ方を説明します．</p>
@@ -90,8 +90,8 @@
           <section id="calculation-methods"><h3>制度の計算方式に沿って，対象容量・経費から補助額を求める</h3>
             <p>補助額を求めるには，<strong>公式資料から単価・補助率を，見積書から対象容量・経費を拾います．</strong>容量単価方式は容量と単価，補助率方式は対象経費と割合，定額方式は対象件数と一定額を組み合わせます．表1は，計算方式を比べるための仮例です．</p>
             <div class="subsidy-table-scroll" role="region" aria-label="補助額の計算方式の比較" tabindex="0"><table class="article-table subsidy-price-table"><caption>表1　補助額の計算方式と算定額の仮例</caption><thead><tr><th scope="col">計算方式</th><th scope="col">計算</th><th scope="col">算定額</th></tr></thead><tbody>
-              <tr><th scope="row">容量単価方式</th><td>4 kW × 5万円／kW</td><td>20万円</td></tr>
-              <tr><th scope="row">補助率方式</th><td>90万円 × 1／3</td><td>30万円</td></tr>
+              <tr><th scope="row">容量単価方式</th><td>4 kW × 5万円／kW</td><td><span data-guide-number="subsidy.reducedGrant" data-guide-format="man">20万円</span></td></tr>
+              <tr><th scope="row">補助率方式</th><td>90万円 × 1／3</td><td><span data-guide-number="subsidy.rateExampleGrant" data-guide-format="man">30万円</span></td></tr>
               <tr><th scope="row">定額方式</th><td>1件 × 10万円／件</td><td>10万円</td></tr>
             </tbody></table></div>
             <p class="subsidy-source-note">表1は上限・端数処理・併用控除を反映する前の説明用計算．以下は，東京都の2026年度制度を使い，既存住宅に対象出力4.00 kWの太陽光を設置し，対象経費90万円，他制度の利用・上乗せ助成なしとする例で計算します．</p>
@@ -109,18 +109,18 @@
             <p>東京都の同年度制度では，パネルの公称最大出力の合計と，パワーコンディショナの定格出力（力率0.95）のうち小さい値を基に対象出力を求めます．複数系列の場合は系列ごとに求めて合計します（東京都環境公社，2026，手引き28ページ）．パワーコンディショナは，発電した直流を家庭で使う交流へ変換する機器です．</p>
             <p class="article-formula">算定額 ＝ 対象出力 × ①適用単価　（式 (1)）</p>
             <p>式 (1) に対象出力4.00 kWと図2の①の単価を入れ，次の節で②の上限を反映します．表2は，資料の条件と計算結果の対応です．</p>
-            <div class="subsidy-table-scroll" role="region" aria-label="公式資料の条件と補助額計算の対応" tabindex="0"><table class="article-table subsidy-price-table"><caption>表2　東京都の補助額の計算例</caption><thead><tr><th scope="col">確認する項目</th><th scope="col">資料・計算</th><th scope="col">結果</th></tr></thead><tbody><tr><th scope="row">対象出力</th><td>今回の例の設定</td><td>4.00 kW</td></tr><tr><th scope="row">① 適用単価</th><td>図2の既存住宅・3.75 kW超</td><td>12万円／kW</td></tr><tr><th scope="row">上限反映前の算定額</th><td>4.00 kW × 12万円／kW</td><td>48万円</td></tr><tr><th scope="row">② 上限を反映した見込額</th><td>算定額と対象経費90万円を比較</td><td>48万円</td></tr></tbody></table></div>
+            <div class="subsidy-table-scroll" role="region" aria-label="公式資料の条件と補助額計算の対応" tabindex="0"><table class="article-table subsidy-price-table"><caption>表2　東京都の補助額の計算例</caption><thead><tr><th scope="col">確認する項目</th><th scope="col">資料・計算</th><th scope="col">結果</th></tr></thead><tbody><tr><th scope="row">対象出力</th><td>今回の例の設定</td><td>4.00 kW</td></tr><tr><th scope="row">① 適用単価</th><td>図2の既存住宅・3.75 kW超</td><td><span data-guide-number="subsidy.tokyoRate" data-guide-format="man">12万円</span>／kW</td></tr><tr><th scope="row">上限反映前の算定額</th><td>4.00 kW × <span data-guide-number="subsidy.tokyoRate" data-guide-format="man">12万円</span>／kW</td><td><span data-guide-number="subsidy.tokyoGrant" data-guide-format="man">48万円</span></td></tr><tr><th scope="row">② 上限を反映した見込額</th><td>算定額と対象経費90万円を比較</td><td><span data-guide-number="subsidy.tokyoGrant" data-guide-format="man">48万円</span></td></tr></tbody></table></div>
           </section>
           <section id="eligible-cost-cap"><h3>対象経費と上限を反映する</h3>
             <p>補助対象経費は，見積書の総額のうち制度が認める費用です．設備・工事のすべてが対象になるとは限らず，対象外の費用を除いてから補助率や経費上限を反映します．金額の上限や端数処理がある場合も，募集要領で指定された順番で計算します．</p>
-            <p>図2の②は，助成額を対象経費の合計までに制限します．表2では算定額48万円が対象経費90万円を下回るため，この上限による減額はありません．<strong>総費用ではなく，制度が認める対象経費と比べる</strong>ことがポイントです．</p>
+            <p>図2の②は，助成額を対象経費の合計までに制限します．表2では算定額<span data-guide-number="subsidy.tokyoGrant" data-guide-format="man">48万円</span>が対象経費90万円を下回るため，この上限による減額はありません．<strong>総費用ではなく，制度が認める対象経費と比べる</strong>ことがポイントです．</p>
             <p>東京都の同年度制度では，既存住宅の足場代は対象に含まれる一方，建物の補修補強・撤去・修繕費用は対象外です（東京都環境公社，2026，手引き25ページ）．</p>
           </section>
           <section id="combination-deduction"><h3>併用条件と控除を反映する</h3>
             <p><strong>複数制度の見込額は，併用可否と同じ経費への補助の扱いを確認してから合計します．</strong>国・都道府県・市区町村という区分だけで，一律に併用できるとは判断できません．両方の制度について，同じ設備・経費への重複が認められるか，他制度の受給額を対象経費から引くか，合計上限があるかを確かめます．</p>
             <p>東京都の2026年度太陽光助成では，国や区市町村等の補助金を受けた場合，その受給額を都の助成対象経費から除きます．他制度の受給額が分かる通知書等が必要で，それらの受給後に都へ交付申請兼実績報告を行う扱いです．都・公社の他の同種の助成金との重複受給もできません（東京都環境公社，2026，手引き26ページ・事業ページ）．</p>
             <p>表2の条件で他制度も使う場合は，対象経費90万円からその受給額を除いて，②の上限を見直します．表3は，両制度の併用条件を満たし，他制度の補助も同じ対象経費に充てる場合の仮例です．実際の控除額は，両制度の対象経費と受給額から確認します．</p>
-            <div class="subsidy-table-scroll" role="region" aria-label="他制度の受給額を控除する計算例" tabindex="0"><table class="article-table subsidy-price-table"><caption>表3　表2の条件で，他制度も使う場合の仮例</caption><thead><tr><th scope="col">項目</th><th scope="col">計算・条件</th><th scope="col">金額</th></tr></thead><tbody><tr><th scope="row">他制度の受給額</th><td>同じ対象経費への補助と仮定</td><td>60万円</td></tr><tr><th scope="row">控除後の②上限</th><td>90万円 − 60万円</td><td>30万円</td></tr><tr><th scope="row">東京都の見込額</th><td>算定額と控除後の上限を比較</td><td>30万円</td></tr><tr><th scope="row">両制度の合計</th><td>60万円 ＋ 30万円</td><td>90万円</td></tr></tbody></table></div>
+            <div class="subsidy-table-scroll" role="region" aria-label="他制度の受給額を控除する計算例" tabindex="0"><table class="article-table subsidy-price-table"><caption>表3　表2の条件で，他制度も使う場合の仮例</caption><thead><tr><th scope="col">項目</th><th scope="col">計算・条件</th><th scope="col">金額</th></tr></thead><tbody><tr><th scope="row">他制度の受給額</th><td>同じ対象経費への補助と仮定</td><td>60万円</td></tr><tr><th scope="row">控除後の②上限</th><td>90万円 − 60万円</td><td><span data-guide-number="subsidy.tokyoCombinedGrant" data-guide-format="man">30万円</span></td></tr><tr><th scope="row">東京都の見込額</th><td>算定額と控除後の上限を比較</td><td><span data-guide-number="subsidy.tokyoCombinedGrant" data-guide-format="man">30万円</span></td></tr><tr><th scope="row">両制度の合計</th><td>60万円 ＋ <span data-guide-number="subsidy.tokyoCombinedGrant" data-guide-format="man">30万円</span></td><td>90万円</td></tr></tbody></table></div>
           </section>
           <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料</p><ul class="source-list"><li>東京都環境公社（2026）．<a href="https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/">令和8年度 家庭における太陽光発電導入促進事業</a>．</li><li>東京都環境公社（2026）．<a href="https://tokyo-co2down.g.kuroco-img.app/files/user/files/subsidy/fam_solar/r8/r8taiyouko_tebiki_20260630.pdf">助成金の手引き（2026年6月30日版）</a>，25・26・28ページ．</li></ul></footer>
         </section>
@@ -131,24 +131,24 @@
           <section id="net-burden"><h3>総費用から受給額を引いて，自己負担を求める</h3>
             <p>導入時の総費用には，設備・工事費と，別途支払う必要な費用を含めます．申請支援を頼む場合はその費用も確認し，補助対象外でも自分が払う費用なら総費用に入れます．受給前に式 (2) を使う場合は，受給額を見込額に置き換えた「自己負担の見込み」として扱います．</p>
             <p class="article-formula"><span class="formula-term">導入時の自己負担</span><span class="formula-operator">＝</span><span class="formula-term">導入時の総費用</span><span class="formula-operator">−</span><span class="formula-term">補助金の受給額</span><span class="formula-term">（式 (2)）</span></p>
-            <p>税込総費用150万円，受給額40万円の仮例では，150万円 − 40万円 ＝ 110万円です．見積書の「実質負担」が既に補助金控除後なら，そこから同じ補助金を再び引かないようにします．<strong>補助金控除前の総額と，控除に使った見込額を両方残す</strong>と，減額された場合も計算を直せます．</p>
+            <p>税込総費用<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span>，受給額<span data-guide-number="subsidy.grant" data-guide-format="man">40万円</span>の仮例では，<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span> − <span data-guide-number="subsidy.grant" data-guide-format="man">40万円</span> ＝ <span data-guide-number="subsidy.burden" data-guide-format="man">110万円</span>です．見積書の「実質負担」が既に補助金控除後なら，そこから同じ補助金を再び引かないようにします．<strong>補助金控除前の総額と，控除に使った見込額を両方残す</strong>と，減額された場合も計算を直せます．</p>
             <p>ローンを使う場合，借入れは補助金ではなく返済する資金です．設備・工事の総額とは別に，金利・手数料を含む返済総額を確認します．補助金の入金後に繰上返済する予定なら，返済条件と手数料も確認しておきましょう．</p>
           </section>
           <section id="payment-timing"><h3>支払と入金の時間差から，必要な資金を考える</h3>
-            <p>入金前の必要資金は，補助金を受け取るまでに支払う額で考えます．同じ110万円の最終負担でも，150万円を先に払う契約と，支払を分ける契約では用意する時期が違います．着手金・中間金・残金がある場合は各支払日を，補助金は制度が示す入金までの手順と時期を確認します．</p>
+            <p>入金前の必要資金は，補助金を受け取るまでに支払う額で考えます．同じ<span data-guide-number="subsidy.burden" data-guide-format="man">110万円</span>の最終負担でも，<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span>を先に払う契約と，支払を分ける契約では用意する時期が違います．着手金・中間金・残金がある場合は各支払日を，補助金は制度が示す入金までの手順と時期を確認します．</p>
             <figure class="economics-fit-chart" aria-labelledby="funds-caption">
               <svg viewBox="0 0 520 440" role="img" aria-labelledby="funds-title funds-desc"><title id="funds-title">全額先払いの場合の支払と補助金入金の仮例</title><desc id="funds-desc">総費用150万円を先に支払い，審査と額の確定後に40万円を受給すると，最終的な自己負担は110万円となる．入金前に用意する資金は150万円．</desc>
                 <g fill="#fff" stroke="#DBE1DD"><rect x="36" y="14" width="448" height="106" rx="8"/><rect x="36" y="158" width="448" height="106" rx="8"/><rect x="36" y="302" width="448" height="116" rx="8"/></g>
                 <g stroke="#70857a" stroke-width="2" fill="none"><path d="M260 120v29m-6-7 6 7 6-7M260 264v29m-6-7 6 7 6-7"/></g>
-                <g text-anchor="middle" fill="#334b3d" font-size="22"><text x="260" y="46">入金前に工事代金を支払う</text><text x="260" y="78" fill="#007447" font-size="28" font-weight="700">必要資金 150万円</text><text x="260" y="108" font-size="20">手元資金・借入れ等で賄う</text><text x="260" y="190">審査・額の確定後に入金</text><text x="260" y="228" fill="#007447" font-size="28" font-weight="700">補助金 40万円</text><text x="260" y="340">受給後の導入費用の負担</text><text x="260" y="378" fill="#007447" font-size="28" font-weight="700">自己負担 110万円</text><text x="260" y="407" font-size="20">150万円 − 40万円</text></g>
-              </svg><figcaption id="funds-caption">図3　先に用意する資金と，受給後の負担を分ける</figcaption><p class="economics-figure-note">税込総費用150万円，入金前に全額支払，受給額40万円を仮定．表2・表3とは別の支払時期の説明例で，ローンの金利・手数料は含みません．</p>
+                <g text-anchor="middle" fill="#334b3d" font-size="22"><text x="260" y="46">入金前に工事代金を支払う</text><text x="260" y="78" fill="#007447" font-size="28" font-weight="700" data-guide-number="subsidy.total" data-guide-format="man" data-guide-prefix="必要資金 ">必要資金 150万円</text><text x="260" y="108" font-size="20">手元資金・借入れ等で賄う</text><text x="260" y="190">審査・額の確定後に入金</text><text x="260" y="228" fill="#007447" font-size="28" font-weight="700" data-guide-number="subsidy.grant" data-guide-format="man" data-guide-prefix="補助金 ">補助金 40万円</text><text x="260" y="340">受給後の導入費用の負担</text><text x="260" y="378" fill="#007447" font-size="28" font-weight="700" data-guide-number="subsidy.burden" data-guide-format="man" data-guide-prefix="自己負担 ">自己負担 110万円</text><text x="260" y="407" font-size="20">150万円 − 40万円</text></g>
+              </svg><figcaption id="funds-caption">図3　先に用意する資金と，受給後の負担を分ける</figcaption><p class="economics-figure-note">税込総費用<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span>，入金前に全額支払，受給額<span data-guide-number="subsidy.grant" data-guide-format="man">40万円</span>を仮定．表2・表3とは別の支払時期の説明例で，ローンの金利・手数料は含みません．</p>
             </figure>
             <p>実制度の例では，東京都の2026年度太陽光助成は，設置・工事代金支払後に審査を行い，交付決定通知から約1か月程度で振り込む流れです（東京都環境公社，2026，手引き4・5ページ）．<strong>契約時の見込額，審査後の確定額，実際の入金は別の段階です．</strong>事前申込の受付通知を，補助額の確定通知と取り違えないようにします．</p>
           </section>
           <section id="reduced-grant"><h3>減額・不交付の場合の負担も比べる</h3>
             <p>受給前の資金計画では，見込額どおり受け取れる場合に加え，減額や不交付の場合を比べます．総費用が変わらないなら，補助金の減額分だけ自己負担が増えます．表4は図3と同じ総費用を固定した仮例です．</p>
-            <div class="subsidy-table-scroll" role="region" aria-label="受給額による自己負担の比較" tabindex="0"><table class="article-table subsidy-price-table"><caption>表4　受給額による自己負担の違い（仮例）</caption><thead><tr><th scope="col">受給状況</th><th scope="col">受給額</th><th scope="col">自己負担</th></tr></thead><tbody><tr><th scope="row">見込額どおり</th><td>40万円</td><td>110万円</td></tr><tr><th scope="row">減額</th><td>20万円</td><td>130万円</td></tr><tr><th scope="row">不交付</th><td>0円</td><td>150万円</td></tr></tbody></table></div>
-            <p>全額先払いの条件では，どの場合も入金前の支払は150万円です．変わるのは後で戻る額と，最終的な自己負担です．不交付時にも支払えるか，設備や工事を変更できるか，変更・解約の条件はどうなるかを契約前に施工会社と確認し，書面へ残しましょう．工事の変更で総費用自体が変わる場合は，補助金だけでなく総費用も計算し直します．</p>
+            <div class="subsidy-table-scroll" role="region" aria-label="受給額による自己負担の比較" tabindex="0"><table class="article-table subsidy-price-table"><caption>表4　受給額による自己負担の違い（仮例）</caption><thead><tr><th scope="col">受給状況</th><th scope="col">受給額</th><th scope="col">自己負担</th></tr></thead><tbody><tr><th scope="row">見込額どおり</th><td><span data-guide-number="subsidy.grant" data-guide-format="man">40万円</span></td><td><span data-guide-number="subsidy.burden" data-guide-format="man">110万円</span></td></tr><tr><th scope="row">減額</th><td><span data-guide-number="subsidy.reducedGrant" data-guide-format="man">20万円</span></td><td><span data-guide-number="subsidy.reducedBurden" data-guide-format="man">130万円</span></td></tr><tr><th scope="row">不交付</th><td>0円</td><td><span data-guide-number="subsidy.total" data-guide-format="man">150万円</span></td></tr></tbody></table></div>
+            <p>全額先払いの条件では，どの場合も入金前の支払は<span data-guide-number="subsidy.total" data-guide-format="man">150万円</span>です．変わるのは後で戻る額と，最終的な自己負担です．不交付時にも支払えるか，設備や工事を変更できるか，変更・解約の条件はどうなるかを契約前に施工会社と確認し，書面へ残しましょう．工事の変更で総費用自体が変わる場合は，補助金だけでなく総費用も計算し直します．</p>
           </section>
           <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料</p><ul class="source-list"><li>東京都環境公社（2026）．<a href="https://tokyo-co2down.g.kuroco-img.app/files/user/files/subsidy/fam_solar/r8/r8taiyouko_tebiki_20260630.pdf">助成金の手引き（2026年6月30日版）</a>，4・5・34ページ．</li></ul></footer>
         </section>

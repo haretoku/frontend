@@ -9,7 +9,7 @@ export function groupedArticles(articles) {
     ...group,
     articles: articles.filter(article => article.articleType === group.id).sort((a, b) =>
       group.id === 'news'
-        ? b.publishedAt.localeCompare(a.publishedAt)
+        ? (b.publishedAt ?? b.createdAt).localeCompare(a.publishedAt ?? a.createdAt)
         : (a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity)
     )
   }));

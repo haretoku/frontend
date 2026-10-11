@@ -138,7 +138,7 @@
           <section id="price-schedule">
             <h3>適用される制度区分と経過年数で，売電単価を読む</h3>
             <p>現在の新規認定では，設備が国の認定を受ける時点で，適用する価格区分が決まります．設備を注文した日，工事が終わった日，申請を送った日だけで，適用価格を決めることはできません．資源エネルギー庁の価格適用表では，2017年度以降の価格決定時期を原則として認定日としています（資源エネルギー庁，2026d）．</p>
-            <p>2026年度に新規認定を受ける10 kW未満の住宅用太陽光では，<strong>運転開始から最初の4年間が24円／kWh，5〜10年目が8.3円／kWhです．</strong>経済産業省が2026年3月に設定した価格で，2025年度下半期の新規認定にも同じ価格体系が適用されています（経済産業省，2026）．初めの4年間の単価を高くする「初期投資支援スキーム」により，初期の売電収入を厚くして設備投資の回収を支える考え方です．</p>
+            <p>2026年度に新規認定を受ける10 kW未満の住宅用太陽光では，<strong>運転開始から最初の4年間が<span data-guide-number="fit.firstPrice" data-guide-format="yen">24円</span>／kWh，5〜10年目が<span data-guide-number="fit.secondPrice" data-guide-format="yen:1">8.3円</span>／kWhです．</strong>経済産業省が2026年3月に設定した価格で，2025年度下半期の新規認定にも同じ価格体系が適用されています（経済産業省，2026）．初めの4年間の単価を高くする「初期投資支援スキーム」により，初期の売電収入を厚くして設備投資の回収を支える考え方です．</p>
             <figure class="economics-fit-chart" aria-labelledby="fit-price-caption" aria-describedby="fit-price-note">
               <svg viewBox="0 0 360 350" role="img" aria-labelledby="fit-price-title fit-price-description">
                 <title id="fit-price-title">2026年度新規認定の住宅用FITの売電単価</title>
@@ -185,8 +185,8 @@
             <h3>売電量と単価から，売電収入を求める</h3>
             <p>売電収入は，電力会社に売った電気の量と，その期間に適用される単価から求めます．単価が同じ期間の関係は式 (1) です．電力量の単位はkWh，単価の単位は円／kWhです．</p>
             <p class="article-formula"><span class="formula-term">売電収入（円）</span><span class="formula-operator">＝</span><span class="formula-term">売電量（kWh）</span><span class="formula-operator">×</span><span class="formula-term">適用単価（円／kWh）</span><span class="formula-term">（式 (1)）</span></p>
-            <p>例えば，ひと月に100 kWhを売ると仮定すれば，24円／kWhの期間は100×24＝2,400円，8.3円／kWhの期間は100×8.3＝830円です．<strong>同じ売電量でも，単価が変わると受け取る金額は変わります．</strong>100 kWhは計算を説明するための設定であり，特定の家庭の発電量や診断結果ではありません．</p>
-            <p>年間の収入は月ごとの金額を合計し，長期間の収入は単価が変わる各期間に分けて合計します．実際の売電量は，季節の発電量や家庭内の使用で変わります．10年間を通じて毎月同じ量を売るとは限らないため，24円の収入をそのまま10年分に延ばすことはできません．電気代の節約や設置・維持費を含めた判断は，<a href="/guides/solar-economics/">太陽光の収支の基礎記事</a>で確認できます．</p>
+            <p>例えば，ひと月に100 kWhを売ると仮定すれば，<span data-guide-number="fit.firstPrice" data-guide-format="yen">24円</span>／kWhの期間は100×24＝<span data-guide-number="fit.firstMonthlySales" data-guide-format="yen">2,400円</span>，<span data-guide-number="fit.secondPrice" data-guide-format="yen:1">8.3円</span>／kWhの期間は100×8.3＝<span data-guide-number="fit.secondMonthlySales" data-guide-format="yen">830円</span>です．<strong>同じ売電量でも，単価が変わると受け取る金額は変わります．</strong>100 kWhは計算を説明するための設定であり，特定の家庭の発電量や診断結果ではありません．</p>
+            <p>年間の収入は月ごとの金額を合計し，長期間の収入は単価が変わる各期間に分けて合計します．実際の売電量は，季節の発電量や家庭内の使用で変わります．10年間を通じて毎月同じ量を売るとは限らないため，<span data-guide-number="fit.firstPrice" data-guide-format="yen">24円</span>の収入をそのまま10年分に延ばすことはできません．電気代の節約や設置・維持費を含めた判断は，<a href="/guides/solar-economics/">太陽光の収支の基礎記事</a>で確認できます．</p>
             <p>具体的な計算方法は，<a href="/guides/solar-electricity-savings/#monthly-savings">電気代削減と売電収入の計算例</a>で紹介しています．</p>
           </section>
           <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料</p><ul class="source-list">

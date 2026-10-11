@@ -1,20 +1,16 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { runInNewContext } from 'node:vm';
-import { calculateEstimate } from '../site/simulator/src/calculator.js';
+import { economicsExample, economicsExampleInput } from '../site/articles/src/guide-numbers.js';
 import { cashflowMarkers, groupMarkerTargets } from '../site/simulator/src/chart-markers.js';
 import { cashflowChartLayout, endpointResult } from '../site/simulator/src/result-presentation.js';
 
 // Export the actual diagnosis chart renderer as a static article image.
 // Remove subsidies from every scenario's initial outlay and annual cumulative flow.
-const input = { prefectureCode: '13', housingAge: 'existing', systemCapacityKw: 4, monthlyElectricityBillYen: null, detailConditions: { roof_orientation: 'south' }, daytimeOccupancy: 'almost_every_weekday', equipmentPackage: 'solar_only' };
+const input = economicsExampleInput;
 const data = JSON.parse(await readFile(new URL('../data/input/public-data.json', import.meta.url), 'utf8'));
-const scenarios = calculateEstimate(input, data).scenarios.map(s => {
-  const annual = s.annual_cash_flows.map(r => ({ ...r, cumulative_cash_flow_yen: r.cumulative_cash_flow_yen - s.subsidy_yen }));
-  const recovery = annual.findIndex((r, i) => r.cumulative_cash_flow_yen >= 0 && annual.slice(i).every(later => later.cumulative_cash_flow_yen >= 0));
-  return { ...s, subsidy_yen: 0, net_initial_outlay_yen: s.gross_installation_cost_yen, profit_yen: s.profit_yen - s.subsidy_yen, annual_cash_flows: annual, payback_year: recovery < 0 ? null : recovery + 1 };
-});
+const scenarios = economicsExample(data);
 const selected = scenarios.find(s => s.scenario === 'standard');
-const app = await readFile(new URL('../site/simulator/src/app.js', import.meta.url), 'utf8');
+const app = (await readFile(new URL('../site/simulator/src/app.js', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
 function extract(name) {
   const start = app.indexOf(`function ${name}(`);
   const end = app.indexOf('\n}\n', start);

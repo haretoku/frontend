@@ -10,9 +10,10 @@ const retiredUrl = '/guides/solar-profit-conditions/';
 
 test('廃止した条件別記事は一覧・現行記事・sitemapから外れ，詳細5記事を保持する',async()=>{
   const catalog=JSON.parse(await read('solar/data/articles.json'));
-  assert.equal(catalog.length,9);
+  assert.equal(catalog.length,10);
   assert.equal(catalog.filter(x=>x.articleType==='core').length,4);
   assert.equal(catalog.filter(x=>x.articleType==='detail').length,5);
+  assert.equal(catalog.filter(x=>x.articleType==='news').length,1);
   assert(!catalog.some(x=>x.href===retiredUrl));
   for(const entry of await readdir(new URL('guides/',site),{withFileTypes:true})){
     if(!entry.isDirectory()||entry.name==='solar-profit-conditions')continue;

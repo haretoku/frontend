@@ -160,5 +160,22 @@
       "alt": "住宅の図面と設備の仕様書を広げ，補助金の対象条件を確認する手元"
     },
     "featuredOrder": null
+  },
+  {
+    "id": "electricity-support-end",
+    "href": "/guides/electricity-support-end/",
+    "articleType": "news",
+    "categoryId": "economics",
+    "category": "電気代支援",
+    "title": "2026年11月分から電気代支援終了，太陽光・蓄電池の有無で年間の負担増に約3.3倍の差",
+    "summary": "公的データから，太陽光・蓄電池が年間の負担増を抑える効果と，昼・夜の仕組みを試算しました．",
+    "createdAt": "2026-10-11",
+    "image": {
+      "src": "../shared/assets/support-shock-burden.png",
+      "width": 1320,
+      "height": 585,
+      "alt": "設備別の電気代支援終了による年間負担増を比較した棒グラフ"
+    },
+    "featuredOrder": null
   }
 ]

@@ -1,0 +1,50 @@
+{
+  "version": "2026-10-11.1",
+  "tepcoB": {
+    "sourceUrl": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+    "confirmedAt": "2026-10-09",
+    "thresholdsKwh": [120, 300],
+    "ratesYenPerKwh": [29.8, 36.4, 40.49],
+    "billSampleKwh": 123,
+    "monthlyGenerationKwh": 150,
+    "monthlySelfConsumptionKwh": 50
+  },
+  "tokyoSubsidyReference": {
+    "sourceUrl": "https://tokyo-co2down.g.kuroco-img.app/files/user/files/subsidy/fam_solar/r8/r8taiyouko_tebiki_20260630.pdf",
+    "interpretation": "東京都2026年度の既存住宅・3.75 kW超の資料例．上乗せなし．現行診断の算入額とは別に資料時点を固定する．",
+    "capacityKw": 4,
+    "rateYenPerKw": 120000,
+    "eligibleCostYen": 900000,
+    "otherSameCostGrantYen": 600000
+  },
+  "outageComparison": {
+    "interpretation": "設備から取り出せる5 kWhを仮定し，太陽光の補充なしで使用時間を比較する．全国平均と用途を絞った仕様例を区別する．",
+    "availableDcKwh": 5,
+    "annualMeanHouseholdKwh": 3911,
+    "surveyYearDays": 366
+  },
+  "quoteComparison": {
+    "interpretation": "工事範囲をそろえるための説明用設定．実際の見積額ではない．",
+    "aYen": 1300000,
+    "bYen": 1150000,
+    "bScaffoldingYen": 200000
+  },
+  "subsidyPayment": {
+    "interpretation": "支払と受給の時期を説明する仮例．制度額・診断の算入額ではない．",
+    "totalYen": 1500000,
+    "grantYen": 400000,
+    "reducedGrantYen": 200000
+  },
+  "subsidyRateExample": {
+    "interpretation": "計算方式の説明用設定．特定制度の算定額ではない．",
+    "eligibleCostYen": 900000,
+    "grantRate": 0.3333333333333333
+  },
+  "installationReferences": {
+    "interpretation": "記事が引用する資料の固定値．診断の税込採用値と混合しない．原資料の更新時に出典と一緒に更新する．",
+    "qCellsYenPerKw": 220000,
+    "leaptonYenPerKw": 209000,
+    "newHousing2025YenPerKw": 289000,
+    "existingHousing2025YenPerKw": 301000
+  }
+}

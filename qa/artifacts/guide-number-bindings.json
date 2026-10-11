@@ -1,0 +1,1667 @@
+{
+  "dataVersion": "20261010-tokyo-equipment-base-trial.3",
+  "schemaVersion": "12.0.0-review.1",
+  "publicDataSha256": "d759e6368b982a7e19f4bbe44fb7cb5f7673e151e0aa60898f347a0404d2c3e7",
+  "metadataSha256": "8d9735595588eb15531ffa8945d71bd85bb3b2877e5f3d6709c6df20272be15b",
+  "referenceSha256": "b97c139afeae7d5d8a1461732889dfc7297cb8f90cba995106c5230ca2a8adab",
+  "modelSha256": "5fb25ead34f9bb2e487862419b669971569981c3df296c3240cc0eb6be7a1eec",
+  "representativeInput": {
+    "prefectureCode": "13",
+    "housingAge": "existing",
+    "systemCapacityKw": 4,
+    "monthlyElectricityBillYen": null,
+    "detailConditions": {
+      "roof_orientation": "south"
+    },
+    "daytimeOccupancy": "almost_every_weekday",
+    "equipmentPackage": "solar_only"
+  },
+  "subsidyPolicy": "excluded_from_representative_economics",
+  "frozenResearch": {
+    "route": "/guides/electricity-support-end/",
+    "evidence": "qa/artifacts/support-shock-calculation.json",
+    "policy": "調査時点のモデル・入力SHAと結果を固定し，現行データへの自動同期から除外する．"
+  },
+  "inventory": [
+    {
+      "route": "/guides/disaster/",
+      "bindings": [
+        {
+          "key": "outage.meanDaily",
+          "format": "number:1",
+          "value": 10.685792349726777,
+          "text": "10.7"
+        },
+        {
+          "key": "outage.limitedDaily",
+          "format": "number:1",
+          "value": 0.9043979452054796,
+          "text": "0.9"
+        },
+        {
+          "key": "outage.meanTotalDaily",
+          "format": "number:1",
+          "value": 11.405792349726777,
+          "text": "11.4"
+        },
+        {
+          "key": "outage.limitedTotalDaily",
+          "format": "number:1",
+          "value": 1.6243979452054795,
+          "text": "1.6"
+        },
+        {
+          "key": "outage.meanDaily",
+          "format": "number:1",
+          "value": 10.685792349726777,
+          "text": "10.7"
+        },
+        {
+          "key": "outage.limitedDaily",
+          "format": "number:1",
+          "value": 0.9043979452054796,
+          "text": "0.9"
+        }
+      ]
+    },
+    {
+      "route": "/guides/quotes-contractors/",
+      "bindings": [
+        {
+          "key": "quote.a",
+          "format": "man",
+          "value": 1300000,
+          "text": "130万円"
+        },
+        {
+          "key": "quote.b",
+          "format": "man",
+          "value": 1150000,
+          "text": "115万円"
+        },
+        {
+          "key": "quote.scaffolding",
+          "format": "man",
+          "value": 200000,
+          "text": "20万円"
+        },
+        {
+          "key": "quote.a",
+          "format": "man",
+          "value": 1300000,
+          "text": "130万円"
+        },
+        {
+          "key": "quote.bTotal",
+          "format": "man",
+          "value": 1350000,
+          "text": "135万円"
+        },
+        {
+          "key": "quote.difference",
+          "format": "man",
+          "value": 50000,
+          "text": "5万円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/solar-economics/",
+      "bindings": [
+        {
+          "key": "economics.installation",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "approx-man",
+          "value": 1149500,
+          "text": "約115万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        },
+        {
+          "key": "economics.profit",
+          "format": "approx-man",
+          "value": 1019987,
+          "text": "約102万円"
+        },
+        {
+          "key": "economics.monthlyBill",
+          "format": "yen",
+          "value": 15467,
+          "text": "15,467円"
+        },
+        {
+          "key": "model.growthPercent",
+          "format": "number:1",
+          "value": 1.5,
+          "text": "1.5"
+        },
+        {
+          "key": "economics.benefit",
+          "format": "approx-man",
+          "value": 2956387,
+          "text": "約296万円"
+        },
+        {
+          "key": "economics.savings",
+          "format": "approx-man",
+          "value": 2094799,
+          "text": "約209万円"
+        },
+        {
+          "key": "economics.sales",
+          "format": "approx-man",
+          "value": 861588,
+          "text": "約86万円"
+        },
+        {
+          "key": "economics.expenses",
+          "format": "approx-man",
+          "value": 1936400,
+          "text": "約194万円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        },
+        {
+          "key": "economics.profit",
+          "format": "approx-man",
+          "value": 1019987,
+          "text": "約102万円"
+        },
+        {
+          "key": "economics.payback",
+          "format": "number",
+          "value": 15,
+          "text": "15"
+        },
+        {
+          "key": "economics.monthlyBill",
+          "format": "yen",
+          "value": 15467,
+          "text": "15,467円"
+        },
+        {
+          "key": "model.growthPercent",
+          "format": "number:1",
+          "value": 1.5,
+          "text": "1.5"
+        },
+        {
+          "key": "economics.buyPrice",
+          "format": "approx-yen",
+          "value": 31.21,
+          "text": "約31円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "economics.firstPriceDifference",
+          "format": "approx-yen",
+          "value": 7.210000000000001,
+          "text": "約7円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "economics.secondPriceDifference",
+          "format": "approx-yen",
+          "value": 22.91,
+          "text": "約23円"
+        },
+        {
+          "key": "economics.buyPrice",
+          "format": "approx-yen",
+          "value": 31.21,
+          "text": "約31円"
+        },
+        {
+          "key": "economics.buyPrice",
+          "format": "approx-yen",
+          "value": 31.21,
+          "text": "約31円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "economics.buyPrice",
+          "format": "approx-yen",
+          "value": 31.21,
+          "text": "約31円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "approx-man",
+          "value": 1149500,
+          "text": "約115万円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "approx-man",
+          "value": 1149500,
+          "text": "約115万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "approx-man",
+          "value": 612000,
+          "text": "約61万円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/solar-electricity-savings/",
+      "bindings": [
+        {
+          "key": "tariff.thirdPrice",
+          "format": "yen:2",
+          "value": 40.49,
+          "text": "40.49円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "fit.postPrice",
+          "format": "yen:2",
+          "value": 8.5,
+          "text": "8.50円"
+        },
+        {
+          "key": "economics.firstYearMonthlySavings",
+          "format": "approx-yen100",
+          "value": 4716.083333333333,
+          "text": "約4,700円"
+        },
+        {
+          "key": "model.degradationPercent",
+          "format": "number:1",
+          "value": 0.30000000000000027,
+          "text": "0.3"
+        },
+        {
+          "key": "model.growthPercent",
+          "format": "number:1",
+          "value": 1.5,
+          "text": "1.5"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "savings.before",
+          "format": "kwh",
+          "value": 123,
+          "text": "123 kWh"
+        },
+        {
+          "key": "savings.before",
+          "format": "kwh",
+          "value": 123,
+          "text": "123 kWh"
+        },
+        {
+          "key": "tariff.firstPrice",
+          "format": "yen:2",
+          "value": 29.8,
+          "text": "29.80円"
+        },
+        {
+          "key": "tariff.secondPrice",
+          "format": "yen:2",
+          "value": 36.4,
+          "text": "36.40円"
+        },
+        {
+          "key": "tariff.thirdPrice",
+          "format": "yen:2",
+          "value": 40.49,
+          "text": "40.49円"
+        },
+        {
+          "key": "savings.before",
+          "format": "kwh",
+          "value": 123,
+          "text": "123 kWh"
+        },
+        {
+          "key": "tariff.firstPrice",
+          "format": "yen:2",
+          "value": 29.8,
+          "text": "29.80円"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "tariff.secondPrice",
+          "format": "yen:2",
+          "value": 36.4,
+          "text": "36.40円"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "savings.before",
+          "format": "kwh",
+          "value": 123,
+          "text": "123 kWh"
+        },
+        {
+          "key": "savings.self",
+          "format": "kwh",
+          "value": 50,
+          "text": "50 kWh"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "savings.firstReduced",
+          "format": "kwh",
+          "value": 47,
+          "text": "47 kWh"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "tariff.secondPrice",
+          "format": "yen:2",
+          "value": 36.4,
+          "text": "36.40円"
+        },
+        {
+          "key": "savings.firstReduced",
+          "format": "kwh",
+          "value": 47,
+          "text": "47 kWh"
+        },
+        {
+          "key": "tariff.firstPrice",
+          "format": "yen:2",
+          "value": 29.8,
+          "text": "29.80円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.self",
+          "format": "kwh",
+          "value": 50,
+          "text": "50 kWh"
+        },
+        {
+          "key": "savings.self",
+          "format": "kwh",
+          "value": 50,
+          "text": "50 kWh"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "approx-yen10",
+          "value": 1509.7999999999997,
+          "text": "約1,510円"
+        },
+        {
+          "key": "savings.generation",
+          "format": "kwh",
+          "value": 150,
+          "text": "150 kWh"
+        },
+        {
+          "key": "savings.self",
+          "format": "kwh",
+          "value": 50,
+          "text": "50 kWh"
+        },
+        {
+          "key": "savings.sold",
+          "format": "kwh",
+          "value": 100,
+          "text": "100 kWh"
+        },
+        {
+          "key": "savings.before",
+          "format": "kwh",
+          "value": 123,
+          "text": "123 kWh"
+        },
+        {
+          "key": "fit.postPrice",
+          "format": "yen:2",
+          "value": 8.5,
+          "text": "8.50円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "approx-yen10",
+          "value": 1509.7999999999997,
+          "text": "約1,510円"
+        },
+        {
+          "key": "savings.self",
+          "format": "kwh",
+          "value": 50,
+          "text": "50 kWh"
+        },
+        {
+          "key": "savings.before",
+          "format": "number",
+          "value": 123,
+          "text": "123"
+        },
+        {
+          "key": "savings.self",
+          "format": "number",
+          "value": 50,
+          "text": "50"
+        },
+        {
+          "key": "savings.after",
+          "format": "kwh",
+          "value": 73,
+          "text": "73 kWh"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "savings.firstReduced",
+          "format": "kwh",
+          "value": 47,
+          "text": "47 kWh"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "tariff.secondPrice",
+          "format": "yen:2",
+          "value": 36.4,
+          "text": "36.40円"
+        },
+        {
+          "key": "savings.firstReduced",
+          "format": "kwh",
+          "value": 47,
+          "text": "47 kWh"
+        },
+        {
+          "key": "tariff.firstPrice",
+          "format": "yen:2",
+          "value": 29.8,
+          "text": "29.80円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.sold",
+          "format": "kwh",
+          "value": 100,
+          "text": "100 kWh"
+        },
+        {
+          "key": "savings.sales",
+          "format": "yen",
+          "value": 850,
+          "text": "850円"
+        },
+        {
+          "key": "savings.sales",
+          "format": "yen",
+          "value": 850,
+          "text": "850円"
+        },
+        {
+          "key": "savings.sold",
+          "format": "kwh",
+          "value": 100,
+          "text": "100 kWh"
+        },
+        {
+          "key": "fit.postPrice",
+          "format": "yen:2",
+          "value": 8.5,
+          "text": "8.50円"
+        },
+        {
+          "key": "savings.sales",
+          "format": "yen",
+          "value": 850,
+          "text": "850円"
+        },
+        {
+          "key": "savings.total",
+          "format": "approx-yen10",
+          "value": 2359.7999999999997,
+          "text": "約2,360円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.sales",
+          "format": "yen",
+          "value": 850,
+          "text": "850円"
+        },
+        {
+          "key": "savings.total",
+          "format": "yen:2",
+          "value": 2359.7999999999997,
+          "text": "2,359.80円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.sales",
+          "format": "yen",
+          "value": 850,
+          "text": "850円"
+        },
+        {
+          "key": "savings.total",
+          "format": "approx-yen10",
+          "value": 2359.7999999999997,
+          "text": "約2,360円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.year1",
+          "format": "approx-man-decimal:2",
+          "value": 18117.6,
+          "text": "約1.81万円"
+        },
+        {
+          "key": "savings.sales",
+          "format": "yen",
+          "value": 850,
+          "text": "850円"
+        },
+        {
+          "key": "model.degradationPercent",
+          "format": "number:1",
+          "value": 0.30000000000000027,
+          "text": "0.3"
+        },
+        {
+          "key": "model.growthPercent",
+          "format": "number:1",
+          "value": 1.5,
+          "text": "1.5"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "savings.monthly",
+          "format": "yen:2",
+          "value": 1509.7999999999997,
+          "text": "1,509.80円"
+        },
+        {
+          "key": "savings.year1",
+          "format": "approx-man-decimal:2",
+          "value": 18117.6,
+          "text": "約1.81万円"
+        },
+        {
+          "key": "savings.before",
+          "format": "kwh",
+          "value": 123,
+          "text": "123 kWh"
+        },
+        {
+          "key": "savings.self",
+          "format": "kwh",
+          "value": 50,
+          "text": "50 kWh"
+        },
+        {
+          "key": "model.degradationPercent",
+          "format": "number:1",
+          "value": 0.30000000000000027,
+          "text": "0.3"
+        },
+        {
+          "key": "model.growthPercent",
+          "format": "number:1",
+          "value": 1.5,
+          "text": "1.5"
+        },
+        {
+          "key": "savings.year1",
+          "format": "approx-man-decimal:2",
+          "value": 18117.6,
+          "text": "約1.81万円"
+        },
+        {
+          "key": "savings.year2",
+          "format": "approx-man-decimal:2",
+          "value": 18334.91939999999,
+          "text": "約1.83万円"
+        },
+        {
+          "key": "savings.year10",
+          "format": "approx-man-decimal:2",
+          "value": 20170.076910473046,
+          "text": "約2.02万円"
+        },
+        {
+          "key": "savings.year30",
+          "format": "approx-man-decimal:2",
+          "value": 25603.16685369866,
+          "text": "約2.56万円"
+        },
+        {
+          "key": "savings.longTerm",
+          "format": "approx-man",
+          "value": 649569.8821712235,
+          "text": "約65万円"
+        },
+        {
+          "key": "savings.secondReduced",
+          "format": "kwh",
+          "value": 3,
+          "text": "3 kWh"
+        },
+        {
+          "key": "economics.firstYearSavings",
+          "format": "approx-man-decimal:1",
+          "value": 56593,
+          "text": "約5.7万円"
+        },
+        {
+          "key": "economics.firstYearMonthlySavings",
+          "format": "approx-yen100",
+          "value": 4716.083333333333,
+          "text": "約4,700円"
+        },
+        {
+          "key": "economics.firstYearSales",
+          "format": "approx-man-decimal:1",
+          "value": 68946,
+          "text": "約6.9万円"
+        },
+        {
+          "key": "economics.firstYearBenefit",
+          "format": "approx-man-decimal:1",
+          "value": 125539,
+          "text": "約12.6万円"
+        },
+        {
+          "key": "economics.benefit",
+          "format": "approx-man",
+          "value": 2956387,
+          "text": "約296万円"
+        },
+        {
+          "key": "economics.savings",
+          "format": "yen",
+          "value": 2094799,
+          "text": "2,094,799円"
+        },
+        {
+          "key": "economics.sales",
+          "format": "yen",
+          "value": 861588,
+          "text": "861,588円"
+        },
+        {
+          "key": "economics.benefit",
+          "format": "yen",
+          "value": 2956387,
+          "text": "2,956,387円"
+        },
+        {
+          "key": "fit.postPrice",
+          "format": "yen:2",
+          "value": 8.5,
+          "text": "8.50円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/solar-fit/",
+      "bindings": [
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.firstMonthlySales",
+          "format": "yen",
+          "value": 2400,
+          "text": "2,400円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "fit.secondMonthlySales",
+          "format": "yen",
+          "value": 830.0000000000001,
+          "text": "830円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/solar-installation-cost/",
+      "bindings": [
+        {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "cost.existing4",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "cost.existing4",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "cost.existing6",
+          "format": "approx-man",
+          "value": 1986600,
+          "text": "約199万円"
+        },
+        {
+          "key": "cost.existingCapacityDifference",
+          "format": "approx-man",
+          "value": 662200,
+          "text": "約66万円"
+        },
+        {
+          "key": "cost.newPerKw",
+          "format": "yen",
+          "value": 317900,
+          "text": "317,900円"
+        },
+        {
+          "key": "cost.new4",
+          "format": "approx-man",
+          "value": 1271600,
+          "text": "約127万円"
+        },
+        {
+          "key": "cost.newPerKw",
+          "format": "yen",
+          "value": 317900,
+          "text": "317,900円"
+        },
+        {
+          "key": "cost.new6",
+          "format": "approx-man",
+          "value": 1907400,
+          "text": "約191万円"
+        },
+        {
+          "key": "cost.newCapacityDifference",
+          "format": "approx-man",
+          "value": 635800,
+          "text": "約64万円"
+        },
+        {
+          "key": "reference.qCells",
+          "format": "man",
+          "value": 220000,
+          "text": "22万円"
+        },
+        {
+          "key": "reference.qCells4",
+          "format": "approx-man",
+          "value": 880000,
+          "text": "約88万円"
+        },
+        {
+          "key": "reference.productDifference",
+          "format": "approx-man-decimal:1",
+          "value": 44000,
+          "text": "約4.4万円"
+        },
+        {
+          "key": "reference.leapton",
+          "format": "man:1",
+          "value": 209000,
+          "text": "20.9万円"
+        },
+        {
+          "key": "reference.leapton4",
+          "format": "approx-man",
+          "value": 836000,
+          "text": "約84万円"
+        },
+        {
+          "key": "cost.existing4",
+          "format": "approx-man",
+          "value": 1324400,
+          "text": "約132万円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "approx-man",
+          "value": 1149500,
+          "text": "約115万円"
+        },
+        {
+          "key": "cost.withBattery",
+          "format": "approx-man",
+          "value": 2473900,
+          "text": "約247万円"
+        },
+        {
+          "key": "reference.new2025",
+          "format": "man:1",
+          "value": 289000,
+          "text": "28.9万円"
+        },
+        {
+          "key": "reference.new2025Four",
+          "format": "approx-man",
+          "value": 1156000,
+          "text": "約116万円"
+        },
+        {
+          "key": "reference.existing2025",
+          "format": "man:1",
+          "value": 301000,
+          "text": "30.1万円"
+        },
+        {
+          "key": "reference.existing2025Four",
+          "format": "approx-man",
+          "value": 1204000,
+          "text": "約120万円"
+        },
+        {
+          "key": "reference.housingDifferencePerKw",
+          "format": "man:1",
+          "value": 12000,
+          "text": "1.2万円"
+        },
+        {
+          "key": "reference.housingDifferenceFour",
+          "format": "approx-man-decimal:1",
+          "value": 48000,
+          "text": "約4.8万円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/solar-maintenance-cost/",
+      "bindings": [
+        {
+          "key": "reference.inspection",
+          "format": "approx-man-decimal:1",
+          "value": 38000,
+          "text": "約3.8万円"
+        },
+        {
+          "key": "reference.inspectionTotal",
+          "format": "approx-man-decimal:1",
+          "value": 228000,
+          "text": "約22.8万円"
+        },
+        {
+          "key": "reference.replacement",
+          "format": "approx-man-decimal:1",
+          "value": 384000,
+          "text": "約38.4万円"
+        },
+        {
+          "key": "reference.replacement",
+          "format": "approx-man-decimal:1",
+          "value": 384000,
+          "text": "約38.4万円"
+        },
+        {
+          "key": "reference.maintenanceTotal",
+          "format": "approx-man-decimal:1",
+          "value": 612000,
+          "text": "約61.2万円"
+        },
+        {
+          "key": "reference.inspection",
+          "format": "approx-man-decimal:1",
+          "value": 38000,
+          "text": "約3.8万円"
+        },
+        {
+          "key": "reference.inspectionTotal",
+          "format": "approx-man-decimal:1",
+          "value": 228000,
+          "text": "約22.8万円"
+        },
+        {
+          "key": "reference.inspection",
+          "format": "approx-man-decimal:1",
+          "value": 38000,
+          "text": "約3.8万円"
+        },
+        {
+          "key": "reference.inspectionAndReplacement",
+          "format": "approx-man-decimal:1",
+          "value": 422000,
+          "text": "約42.2万円"
+        },
+        {
+          "key": "reference.replacement",
+          "format": "approx-man-decimal:1",
+          "value": 384000,
+          "text": "約38.4万円"
+        },
+        {
+          "key": "reference.replacement",
+          "format": "approx-man-decimal:1",
+          "value": 384000,
+          "text": "約38.4万円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/subsidies/",
+      "bindings": [
+        {
+          "key": "subsidy.tokyoRate",
+          "format": "man",
+          "value": 120000,
+          "text": "12万円"
+        },
+        {
+          "key": "subsidy.tokyoRate",
+          "format": "man",
+          "value": 120000,
+          "text": "12万円"
+        },
+        {
+          "key": "subsidy.tokyoGrant",
+          "format": "man",
+          "value": 480000,
+          "text": "48万円"
+        }
+      ]
+    },
+    {
+      "route": "/guides/subsidy-amount/",
+      "bindings": [
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.grant",
+          "format": "man",
+          "value": 400000,
+          "text": "40万円"
+        },
+        {
+          "key": "subsidy.burden",
+          "format": "man",
+          "value": 1100000,
+          "text": "110万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.reducedGrant",
+          "format": "man",
+          "value": 200000,
+          "text": "20万円"
+        },
+        {
+          "key": "subsidy.rateExampleGrant",
+          "format": "man",
+          "value": 300000,
+          "text": "30万円"
+        },
+        {
+          "key": "subsidy.tokyoRate",
+          "format": "man",
+          "value": 120000,
+          "text": "12万円"
+        },
+        {
+          "key": "subsidy.tokyoRate",
+          "format": "man",
+          "value": 120000,
+          "text": "12万円"
+        },
+        {
+          "key": "subsidy.tokyoGrant",
+          "format": "man",
+          "value": 480000,
+          "text": "48万円"
+        },
+        {
+          "key": "subsidy.tokyoGrant",
+          "format": "man",
+          "value": 480000,
+          "text": "48万円"
+        },
+        {
+          "key": "subsidy.tokyoGrant",
+          "format": "man",
+          "value": 480000,
+          "text": "48万円"
+        },
+        {
+          "key": "subsidy.tokyoCombinedGrant",
+          "format": "man",
+          "value": 300000,
+          "text": "30万円"
+        },
+        {
+          "key": "subsidy.tokyoCombinedGrant",
+          "format": "man",
+          "value": 300000,
+          "text": "30万円"
+        },
+        {
+          "key": "subsidy.tokyoCombinedGrant",
+          "format": "man",
+          "value": 300000,
+          "text": "30万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.grant",
+          "format": "man",
+          "value": 400000,
+          "text": "40万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.grant",
+          "format": "man",
+          "value": 400000,
+          "text": "40万円"
+        },
+        {
+          "key": "subsidy.burden",
+          "format": "man",
+          "value": 1100000,
+          "text": "110万円"
+        },
+        {
+          "key": "subsidy.burden",
+          "format": "man",
+          "value": 1100000,
+          "text": "110万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.grant",
+          "format": "man",
+          "value": 400000,
+          "text": "40万円"
+        },
+        {
+          "key": "subsidy.burden",
+          "format": "man",
+          "value": 1100000,
+          "text": "110万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.grant",
+          "format": "man",
+          "value": 400000,
+          "text": "40万円"
+        },
+        {
+          "key": "subsidy.grant",
+          "format": "man",
+          "value": 400000,
+          "text": "40万円"
+        },
+        {
+          "key": "subsidy.burden",
+          "format": "man",
+          "value": 1100000,
+          "text": "110万円"
+        },
+        {
+          "key": "subsidy.reducedGrant",
+          "format": "man",
+          "value": 200000,
+          "text": "20万円"
+        },
+        {
+          "key": "subsidy.reducedBurden",
+          "format": "man",
+          "value": 1300000,
+          "text": "130万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        },
+        {
+          "key": "subsidy.total",
+          "format": "man",
+          "value": 1500000,
+          "text": "150万円"
+        }
+      ]
+    },
+    {
+      "route": "/pages/calculation-method.html",
+      "bindings": [
+        {
+          "key": "economics.monthlyBill",
+          "format": "yen",
+          "value": 15467,
+          "text": "15,467円"
+        },
+        {
+          "key": "economics.monthlyBill",
+          "format": "yen",
+          "value": 15467,
+          "text": "15,467円"
+        },
+        {
+          "key": "tariff.firstPrice",
+          "format": "yen:2",
+          "value": 29.8,
+          "text": "29.80円"
+        },
+        {
+          "key": "tariff.secondPrice",
+          "format": "yen:2",
+          "value": 36.4,
+          "text": "36.40円"
+        },
+        {
+          "key": "tariff.thirdPrice",
+          "format": "yen:2",
+          "value": 40.49,
+          "text": "40.49円"
+        },
+        {
+          "key": "tariff.thirdPrice",
+          "format": "yen:2",
+          "value": 40.49,
+          "text": "40.49円"
+        },
+        {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "yen",
+          "value": 1149500,
+          "text": "1,149,500円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "fit.postPrice",
+          "format": "yen:2",
+          "value": 8.5,
+          "text": "8.50円"
+        },
+        {
+          "key": "cost.inspection",
+          "format": "yen",
+          "value": 38000,
+          "text": "38,000円"
+        },
+        {
+          "key": "cost.replacement",
+          "format": "yen",
+          "value": 384000,
+          "text": "384,000円"
+        },
+        {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "economics.monthlyBill",
+          "format": "yen",
+          "value": 15467,
+          "text": "15,467円"
+        },
+        {
+          "key": "economics.firstYearSavings",
+          "format": "yen",
+          "value": 56593,
+          "text": "56,593円"
+        },
+        {
+          "key": "economics.firstYearSales",
+          "format": "yen",
+          "value": 68946,
+          "text": "68,946円"
+        },
+        {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "yen",
+          "value": 1324400,
+          "text": "1,324,400円"
+        },
+        {
+          "key": "cost.inspection",
+          "format": "yen",
+          "value": 38000,
+          "text": "38,000円"
+        },
+        {
+          "key": "cost.replacement",
+          "format": "yen",
+          "value": 384000,
+          "text": "384,000円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "yen",
+          "value": 612000,
+          "text": "612,000円"
+        },
+        {
+          "key": "economics.savings",
+          "format": "yen",
+          "value": 2094799,
+          "text": "2,094,799円"
+        },
+        {
+          "key": "economics.sales",
+          "format": "yen",
+          "value": 861588,
+          "text": "861,588円"
+        },
+        {
+          "key": "economics.installation",
+          "format": "yen",
+          "value": 1324400,
+          "text": "1,324,400円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "yen",
+          "value": 612000,
+          "text": "612,000円"
+        },
+        {
+          "key": "economics.profit",
+          "format": "yen",
+          "value": 1019987,
+          "text": "1,019,987円"
+        },
+        {
+          "key": "economics.profit",
+          "format": "approx-man",
+          "value": 1019987,
+          "text": "約102万円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "yen",
+          "value": 1149500,
+          "text": "1,149,500円"
+        },
+        {
+          "key": "cost.withBattery",
+          "format": "yen",
+          "value": 2473900,
+          "text": "2,473,900円"
+        },
+        {
+          "key": "economics.batteryBenefit",
+          "format": "yen",
+          "value": 4045091,
+          "text": "4,045,091円"
+        },
+        {
+          "key": "economics.maintenance",
+          "format": "yen",
+          "value": 612000,
+          "text": "612,000円"
+        },
+        {
+          "key": "economics.batteryProfit",
+          "format": "yen",
+          "value": 959191,
+          "text": "959,191円"
+        },
+        {
+          "key": "economics.batteryProfit",
+          "format": "approx-man",
+          "value": 959191,
+          "text": "約96万円"
+        },
+        {
+          "key": "economics.buyPrice",
+          "format": "yen:2",
+          "value": 31.21,
+          "text": "31.21円"
+        },
+        {
+          "key": "fit.firstPrice",
+          "format": "yen",
+          "value": 24,
+          "text": "24円"
+        },
+        {
+          "key": "fit.secondPrice",
+          "format": "yen:1",
+          "value": 8.3,
+          "text": "8.3円"
+        },
+        {
+          "key": "tariff.firstPrice",
+          "format": "yen:2",
+          "value": 29.8,
+          "text": "29.80円"
+        },
+        {
+          "key": "tariff.secondPrice",
+          "format": "yen:2",
+          "value": 36.4,
+          "text": "36.40円"
+        },
+        {
+          "key": "tariff.thirdPrice",
+          "format": "yen:2",
+          "value": 40.49,
+          "text": "40.49円"
+        },
+        {
+          "key": "tariff.thirdPrice",
+          "format": "yen:2",
+          "value": 40.49,
+          "text": "40.49円"
+        },
+        {
+          "key": "fit.postPrice",
+          "format": "yen:2",
+          "value": 8.5,
+          "text": "8.50円"
+        }
+      ]
+    }
+  ]
+}

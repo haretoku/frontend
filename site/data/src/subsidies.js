@@ -164,4 +164,4 @@ const displayResponses=await Promise.all([fetch(hareTableUrl),fetch(hareBindingU
 if(displayResponses.some(response=>!response.ok))throw new Error('display load');
 const [hareTable,hareBinding]=await Promise.all(displayResponses.map(response=>response.json()));
 hareDisplayRecords=receiveHareDisplayRecords(data,hareTable,hareBinding);
-pref.replaceChildren(option('','都道府県を選択'));for(const p of data.prefectures)pref.append(option(p.code,p.name));pref.disabled=false;document.querySelector('#data-date').textContent='データ更新日：'+data.data_version ;restore();}catch{status.textContent='データを読み込めませんでした．ページを再読み込みしてください．';}
+pref.replaceChildren(option('','都道府県を選択'));for(const p of data.prefectures)pref.append(option(p.code,p.name));pref.disabled=false;document.querySelector('#data-date').textContent='データ版：'+data.data_version ;restore();}catch{status.textContent='データを読み込めませんでした．ページを再読み込みしてください．';}

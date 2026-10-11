@@ -1,3 +1,4 @@
+import {prepareSubsidyData} from '../../data/src/scheme-adapter.js';
 import { QUOTE_ACTION, mountFixedQuoteBar } from "../../site/shared/fixed-quote-bar.js";
 import { cashflowMarkers, groupMarkerTargets } from "../../site/simulator/src/chart-markers.js";
 import { subsidyGroups, nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
@@ -15,15 +16,14 @@ import { cashflowChartLayout, formatEnergyRate, subsidyReasonPresentation, energ
 
 const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
 test('公開受付ラベルは開始前を区別し，混在制度は採用枝を参照し内部値を変更しない', () => {
-  for(const status of ['accepting','waitlist']) assert.equal(applicationStatusLabel({application_status:status}),'受付中');
-  for(const status of ['closed','suspended','not_open','not_applicable']) assert.equal(applicationStatusLabel({application_status:status}),'受付対象外');
+  for(const [status,label] of Object.entries({accepting:'受付中',waitlist:'キャンセル待ち受付中',closed:'受付終了',suspended:'受付停止',not_open:'受付未開始',not_applicable:'受付対象外'})) assert.equal(applicationStatusLabel({application_status:status}),label);
   for(const status of ['unknown','unconfirmed','accepting_with_waitlist_branch']) assert.equal(applicationStatusLabel({application_status:status}),'不明');
   assert.equal(applicationStatusLabel({application_status:'scheduled'}),'受付開始前');
   const record={application_status:'accepting_with_waitlist_branch',selected_branch:'a',branches:[{id:'a',application_status:'waitlist'},{id:'b',application_status:'closed'}]};
   const before=structuredClone(record);
-  assert.equal(applicationStatusLabel(record),'受付中');
+  assert.equal(applicationStatusLabel(record),'キャンセル待ち受付中');
   assert.deepEqual(record,before);
-  assert.equal(applicationStatusLabel({...record,selected_branch:'b'}),'受付対象外');
+  assert.equal(applicationStatusLabel({...record,selected_branch:'b'}),'受付終了');
   assert.equal(applicationStatusLabel({...record,selected_branch:'missing'}),'不明');
 });
 test('公開データと計算結果の全受付状態に表示ラベルがあり，採用枠の状態を表示する', async () => {
@@ -36,11 +36,12 @@ test('公開データと計算結果の全受付状態に表示ラベルがあ�
   };
   // Catalog raw_text and municipality exploration preserve official Japanese labels.
   // Only normalized diagnostic contracts and calculation fixtures use these enums.
-  for (const key of ['municipal_subsidy_programs','diagnostic_subsidy_programs']) inspect(data[key]);
+  for (const key of ['municipal_subsidy_programs','diagnostic_subsidy_programs']) inspect(prepareSubsidyData(data)[key]);
   inspect(fixtures);
   inspect(calculateEstimate({prefectureCode:'13',municipalityCode:'13201',housingAge:'existing',equipmentPackage:'solar_only',monthlyElectricityBillYen:null},data));
   assert.notEqual(applicationStatusLabels.accepting_with_waitlist_branch,applicationStatusLabels.accepting);
-  assert.equal(applicationStatusLabels.waitlist,applicationStatusLabels.accepting);
+  assert.match(applicationStatusLabels.waitlist,/受付中$/);
+  assert.notEqual(applicationStatusLabels.waitlist,applicationStatusLabels.accepting);
   const result=calculateEstimate({prefectureCode:'13',municipalityCode:'13201',housingAge:'existing',equipmentPackage:'solar_only',monthlyElectricityBillYen:null},data);
   const record=result.scenarios.find(item=>item.scenario==='standard').subsidy_breakdown.included_programs.find(item=>item.selected_branch);
   assert.ok(record);
@@ -63,16 +64,32 @@ test('診断範囲外の工事枝は除外し，既存の一般枠は補欠と�
       assert.equal(municipality,undefined);
       assert.equal(breakdown.excluded_programs.find(item=>item.id==='hachioji-renewable-energy-2026').reason_code,'required_external_structure_or_housing_work');
     }
-    assert.ok(breakdown.included_programs.every(item=>data.diagnostic_subsidy_programs.find(program=>program.id===item.id)?.diagnostic_scope.status!=='excluded_required_external_work'));
-    assert.ok(breakdown.included_programs.some(item=>item.id==='tokyo-residential-solar-2026-audit'));
+    const received=prepareSubsidyData(data);
+    for(const item of breakdown.included_programs){
+      const program=received.diagnostic_subsidy_programs.find(p=>p.id===item.id);
+      if(program?.machine_rule==='common_equipment_branch_ast/1'){
+        const contract=program.common_branch_calculation;
+        assert.equal(item.common_branch_source_sha256,contract.source_sha256);
+        assert.ok(item.selected_common_components.length);
+        for(const selected of item.selected_common_components)assert.ok(contract.selected_component_ids.includes(selected));
+        const usedBranches=item.used_common_branches??[{branch_id:contract.branch.branch_id}];
+        for(const used of usedBranches){
+          const child=(contract.branch_contracts??[contract]).find(c=>(c.branch_id??c.branch.branch_id)===used.branch_id);
+          assert.ok(child);assert.ok(['solar','battery'].includes(child.expense_scope),'原住宅ownerを含めず設備成分だけ算入');
+        }
+      }else assert.notEqual(program?.diagnostic_scope?.status,'excluded_required_external_work');
+    }
+    assert.ok(breakdown.included_programs.some(item=>item.id===(housingAge==='new'?'tokyo-zero-emi-2026':'tokyo-residential-solar-2026-audit')));
   }
   assert.match(nonInclusionReason({reason_code:'required_external_structure_or_housing_work',application_status:'unknown'}),/この診断の対象外/);
   assert.match(nonInclusionReason({reason_code:'expense_scope_limit_in_maximum_combination',application_status:'waitlist'}),/対象費用の上限/);
 });
 test("制度情報は受付状態・非算入理由と確認済み金額を区別する", () => {
-  assert.equal(new Set(Object.values(applicationStatusLabels)).size, 4);
+  assert.equal(new Set(Object.values(applicationStatusLabels)).size, 8);
+  assert.notEqual(applicationStatusLabels.closed,applicationStatusLabels.suspended);
+  assert.notEqual(applicationStatusLabels.scheduled,applicationStatusLabels.unknown);
   assert.equal(new Set(Object.values(componentStatusLabels)).size, 6);
-  assert.match(municipalInformationSummary({ application_status: "suspended", amount_status: "partially_confirmed" }), /受付対象外.*一部の金額/);
+  assert.match(municipalInformationSummary({ application_status: "suspended", amount_status: "partially_confirmed" }), /受付停止.*一部の金額/);
   assert.match(municipalInformationSummary({ application_status: "not_applicable", amount_status: "not_applicable" }), /受付対象外/);
   assert.match(componentStatusLabels.included, /条件が合えば/);
   const base = { scenario: "standard", subsidy_yen: 0, subsidy_breakdown: { municipality_program_status: "candidate" } };
@@ -258,7 +275,7 @@ test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重
   assert.doesNotMatch(main, /data-featured-guides/);
   assert.doesNotMatch(main, /data-safety-guides/);
   assert.match(main, /<h1 id="guide-library-title"[^>]*>/);
-  assert.equal(articles.length, 9);
+  assert.equal(articles.length, 10);
   assert.equal(articles.filter(article => article.articleType === "core").length, 4);
   assert.equal(articles.filter((article) => Number.isInteger(article.featuredOrder)).length, 3);
   for (const [title, target, articleTitle = title] of [
@@ -289,7 +306,7 @@ test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重
   const { groupedArticles } = await import("../../site/solar/src/guide-groups.js");
   const groups = groupedArticles(articles);
   assert.deepEqual(groups.map((group) => group.id), ["core", "detail", "news"]);
-  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5, 0]);
+  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5, 1]);
   assert.deepEqual(groups[0].articles.map((article) => article.categoryId), ["economics", "subsidies", "quotes", "safety"]);
   assert.match(main, /data-guide-groups/);
   assert.doesNotMatch(main, /data-guide-filters/);
@@ -397,8 +414,8 @@ test("フォーム部品にラベルと入力制約がある", async () => {
   assert.match(analysisScript, /batteryCapacityKwh:/);
   assert.match(analysisScript, /elements\.batteryCapacitySlider\.disabled = !batteryApplicable/);
   assert.match(analysisScript, /target\.searchParams\.set\("municipality_code"/);
-  assert.match(analysisHtml, /利用を想定する制度/);
-  assert.match(analysisHtml, /今回選ばなかった制度/);
+  assert.match(analysisHtml, /補助金の内訳/);
+  assert.doesNotMatch(analysisHtml, /補助金の確認フォーム/);
   assert.doesNotMatch(analysisHtml, /他の設備の制度・理由|data-other-equipment/);
   assert.match(analysisScript, /subsidyGroups/);
   assert.doesNotMatch(analysisScript, /制度の条件・注意事項|案内単価・上限/);

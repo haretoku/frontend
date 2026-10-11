@@ -1,3 +1,7 @@
+import '../../simulator/styles/diagnostic-display-record.css';
+import '../../shared/table-scroll-hint.js';
+import {loadDiagnosticDisplayRecords} from '../../simulator/src/diagnostic-display-record.js';
+import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
 import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/diagnostic-display-pilot.js';
 import { QUOTE_ACTION, setupInlineQuoteActions } from "../../shared/fixed-quote-bar.js";
 import { bindArticleBibliography } from "./article-bibliography.js";
@@ -84,6 +88,7 @@ async function initialize() {
 
     const subsidyAssumptions = document.querySelector('[data-subsidy-assumptions]');
     if (subsidyAssumptions) {
+      const displayRecords = publicData.diagnostic_subsidy_programs?.some(program => program.machine_rule === 'common_equipment_branch_ast/1') ? await loadDiagnosticDisplayRecords(publicData) : new Map();
       const diagnosticPrograms = publicData.diagnostic_subsidy_programs ?? [];
       const diagnosticIds = new Set(diagnosticPrograms.map(program => program.id));
       const programs = [...diagnosticPrograms, ...(publicData.municipal_subsidy_programs ?? []), ...publicData.prefectures.flatMap(region => [...(region.subsidy_programs ?? []), ...(replacesLegacyPrefecture(diagnosticPrograms,region.code)?[]:(region.candidate_subsidy_programs ?? []).filter(program => !diagnosticIds.has(program.id)))])];
@@ -100,6 +105,15 @@ async function initialize() {
           scopeNote.textContent = '以下は対象外の制度要件と確認事項です．今回の計算で採用する仮定ではありません．';
           details.append(scopeNote);
         }
+        if (program.machine_rule === 'common_equipment_branch_ast/1') {
+          const entry = displayRecords.get(program.id);
+          if (!entry) throw new Error('制度説明と診断表示表の対応がありません．');
+          const wrapper = document.createElement('div');
+          wrapper.className = 'hare-display-scheme diagnostic-display-record';
+          appendHareDisplayCommon(document, wrapper, entry.record.common);
+          for (const branch of entry.record.branches) appendHareDisplayBranch(document, wrapper, branch);
+          details.append(wrapper);
+        } else {
         const formula = {
           toyama_noncash_solar:'ポイント等10万円分を額面100％の現金相当の経済便益として算入します．給付形態は非現金です．地域協力店等の2倍条件と税抜・値引後の製品本体価格10万円超を満たす適格製品の採用を仮定し，工事込総額から本体価格を逆算したものではありません．',
           nagano_roof_solar_battery:'既存住宅で太陽光10kW未満・蓄電池4kWh以上の場合に，太陽光上限5万円，蓄電池上限15万円を算入します．税込モデル費用を1.1で除した設備別の対象費用から同費目の他補助を控除し，各設備の算入額を千円未満切捨てします．入力蓄電池容量を制度対象容量へ対応させる採用仮定です．',
@@ -120,6 +134,7 @@ async function initialize() {
             ? text.replace('公式の受付開始前をscheduledで保持し，', '受付開始前の制度について，').replace('金額・設備・費用上限・募集別基準日は2026-09-27に公式手引を限定再確認．confirmed_at=2026-09-18は前回の公式受付確認日として保持し，受付中へ変更しない．', '金額・設備・費用上限・募集別基準日は2026年9月27日に公式手引を再確認しました．受付状態は2026年9月18日時点で確認した「受付開始前」を表示しています．')
             : text;
           details.append(paragraph);
+        }
         }
         for (const url of [...new Set([program.official_url, ...(program.official_urls ?? []), ...(program.benefit_components ?? []).map(component => component.official_url)].filter(Boolean))]) {
           const paragraph = document.createElement('p');

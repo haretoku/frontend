@@ -92,8 +92,9 @@ test('一覧は診断の非算入理由を出さず，共通条件だけを集�
   const target=groupedTargetSummary(group);
   assert.equal(target.filter(t=>t.startsWith('共通：')).length,1);
   assert.match(target.join(' '),/太陽光：.*蓄電池：/);
-  assert.match(amountSummary(group[0]),/5万円\/kW.*上限25万円/);
-  assert.match(amountSummary(group[1]),/1\/3.*上限35万円.*14.1万円/);
+  assert.match(amountSummary(group[0]),/税抜対象経費の実支出額.*1kW当たり5万円.*25万円.*最も低い額.*千円未満/);
+  assert.match(amountSummary(group[1]),/税抜蓄電池対象経費の実支出額の3分の1.*1kWh当たり14.1万円.*3分の1.*35万円.*最も低い額/);
+  assert.match(amountSummary(group[1]),/14.1万円は対象経費の上限単価で，補助単価ではありません/);
   assert.match(target.join(' '),/計算例に金額の不一致/);
   assert.doesNotMatch(group.map(amountSummary).join(' '),/202000|202,000|20.2万円/);
   assert.doesNotMatch(target.join(' '),/含めていません|診断|未整理/);

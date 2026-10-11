@@ -29,13 +29,14 @@ test('ローカル接続には保存広告URLを使い，利用者条件を追�
   assert.equal(quoteMaterial.materialVerified, false);
 });
 
-test('全HTMLの共通固定バー入口は1個だけで，表示条件をページ別に持たない', async () => {
+test('通常ページの共通固定バー入口は1個で，プレス記事には設置しない', async () => {
   const root = new URL('../../site/', import.meta.url);
   const paths = (await readdir(root, { recursive: true })).filter(path => path.endsWith('.html'));
   assert(paths.length >= 12);
   for (const path of paths) {
     const html = await readFile(new URL(path.replaceAll('\\', '/'), root), 'utf8');
-    assert.equal((html.match(/src="\/shared\/quote-entry\.js"/g) || []).length, 1, path);
+    const releaseArticle = path.replaceAll('\\', '/') === 'guides/electricity-support-end/index.html';
+    assert.equal((html.match(/src="\/shared\/quote-entry\.js"/g) || []).length, releaseArticle ? 0 : 1, path);
   }
   const bar = await readFile(new URL('../../site/shared/fixed-quote-bar.js', import.meta.url), 'utf8');
   assert(!bar.includes('bar.hidden'));

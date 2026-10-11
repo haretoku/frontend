@@ -3,15 +3,26 @@ import { resolve } from "node:path";
 
 const root = resolve(import.meta.dirname, "../..");
 const output = resolve(root, "dist-pages");
-const paths = ["/", "/guides/", "/simulator/", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount"].map(name => `/guides/${name}/`), ...["policy", "calculation-method"].map(name => `/pages/${name}.html`)];
+const paths = ["/", "/guides/", "/simulator/", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(name => `/guides/${name}/`), ...["policy", "calculation-method"].map(name => `/pages/${name}.html`)];
 await writeFile(resolve(output, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${paths.map(path => `  <url><loc>https://haretoku.jp${path}</loc></url>`).join("\n")}\n</urlset>\n`);
 await writeFile(resolve(output, "robots.txt"), "User-agent: *\nAllow: /\n\nSitemap: https://haretoku.jp/sitemap.xml\n");
 await writeFile(resolve(output, ".nojekyll"), "");
 await writeFile(resolve(output, "CNAME"), "haretoku.jp\n");
 // TOPの既存写真とSVGグラフをHTML/CSSで描画してJPEG化した共有画像．画像変更時はURLも更新し旧キャッシュと区別する．
 await copyFile(resolve(root, "site/shared/assets/og-home-photo-20260926.jpg"), resolve(output, "og-home-photo-20260926.jpg"));
+await copyFile(resolve(root, "site/shared/assets/support-shock-burden.png"), resolve(output, "og-support-shock-burden.png"));
 // 旧メタを保持する共有サービス向けに，旧URLにも同じ表示のPNGを配信する．
 await copyFile(resolve(root, "site/hosting/assets/og-home-photo-20260926.png"), resolve(output, "og-image.png"));
+
+// 調査の配布用PNG・SVG・CSVは，図の表示用ハッシュ資産とは別に固定名で同梱する．
+const releasePath = resolve(output, 'guides/electricity-support-end/index.html');
+let releaseHtml = await readFile(releasePath, 'utf8');
+const downloads = [...releaseHtml.matchAll(/<a\b[^>]*href="\/shared\/assets\/(support-shock-[a-z0-9-]+\.(?:png|svg|csv))"[^>]*download[^>]*>/g)];
+for (const name of new Set(downloads.map(match => match[1]))) {
+  await copyFile(resolve(root, 'site/shared/assets', name), resolve(output, 'assets', name));
+  releaseHtml = releaseHtml.replaceAll(`/shared/assets/${name}`, `/assets/${name}`);
+}
+await writeFile(releasePath, releaseHtml);
 
 // Viteの共有CSS分割で順序が変わっても，共通ベース→記事ベース→ページ固有を維持する．
 async function restoreStyleOrder(dir) {

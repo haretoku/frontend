@@ -1,4 +1,9 @@
+import {prepareSubsidyData} from '../../data/src/scheme-adapter.js';
+import {receiveDiagnosticDisplayRecords} from '../../site/simulator/src/diagnostic-display-record.js';
+import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../site/shared/hare-display-record.js';
 import { replacesLegacyPrefecture } from '../../site/simulator/src/diagnostic-subsidy.js';
+import { diagnosticTrialSourceTexts, diagnosticDetailNotes } from '../../site/simulator/src/diagnostic-display-pilot.js';
+import { QUOTE_ACTION } from '../../site/shared/fixed-quote-bar.js';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -13,6 +18,7 @@ const publicData = JSON.parse(
 const guideSlugs = {"electricity-sales": "solar-economics", "subsidies": "subsidies", "disaster": "disaster", "quotes-contractors": "quotes-contractors"};
 const readPage = name => readFile(new URL(`../../site/${guideSlugs[name] ? `guides/${guideSlugs[name]}/index.html` : `pages/${name}.html`}`, import.meta.url), "utf8");
 const prose = html => html.replace(/<[^>]+>/g, "");
+const numberText = html => html.replace(/<span\b[^>]*data-guide-number[^>]*>([^<]*)<\/span>/g, '$1');
 
 test("公開4記事は章ごとの問い・結論・参考文献・関連記事と診断導線を持つ", async () => {
   const metadata = JSON.parse(await readFile(new URL("../../data/input/metadata.json", import.meta.url), "utf8"));
@@ -100,11 +106,14 @@ test("収支の導入カードと診断グラフは代表条件・丸め前の�
     ["maintenance", solar.total_maintenance_and_replacement_cost_yen], ["profit", solar.profit_yen - solar.subsidy_yen],
     ["expenses", solar.gross_installation_cost_yen + solar.total_maintenance_and_replacement_cost_yen],
     ["savings", solar.total_electricity_savings_yen], ["sales", solar.total_sales_income_yen]
-  ]) assert(html.includes(`data-economics-example="${key}">${manYen(value)}</strong>`), key);
+  ]) {
+    const valueMarkup = html.match(new RegExp(`<strong[^>]*data-economics-example="${key}"[^>]*>([\\s\\S]*?)</strong>`))?.[1];
+    assert.equal(prose(valueMarkup ?? ''), manYen(value), key);
+  }
   const annual = solar.annual_cash_flows.map(row => [row.year, row.cumulative_cash_flow_yen - solar.subsidy_yen]);
   const recovery = annual.findIndex((row, index) => row[1] >= 0 && annual.slice(index).every(later => later[1] >= 0)) + 1;
-  assert(html.includes(`data-economics-example="payback">約${recovery}年</span>`));
-  assert(html.includes(`data-economics-example="profit-conclusion">${manYen(solar.profit_yen - solar.subsidy_yen)}</span>`));
+  assert.equal(prose(html.match(/<span[^>]*data-economics-example="payback"[^>]*>([^<]*)<\/span>/)?.[1] ?? ''), `約${recovery}年`);
+  assert.equal(prose(html.match(/<span[^>]*data-economics-example="profit-conclusion"[^>]*>([^<]*)<\/span>/)?.[1] ?? ''), manYen(solar.profit_yen - solar.subsidy_yen));
   const chart = await readFile(new URL('../../site/shared/assets/article-solar-cashflow.svg', import.meta.url), 'utf8');
   const metadata = JSON.parse(chart.match(/<metadata>(.*?)<\/metadata>/s)[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&'));
   assert.equal(metadata.initial, solar.gross_installation_cost_yen);
@@ -139,7 +148,7 @@ test("30年評価の本文は発電劣化と20年終点の蓄電池比較を区�
   assert.match(method, /原典の税区分は未確認/);
   assert.match(method, /消費税10％を仮置きして317,900円／kW/);
   assert.match(method, /30年間の収支は，各年に想定する名目額を単純に合計し，現在価値へ割り引きません/);
-  for (const html of [method]) {
+  for (const html of [numberText(method)]) {
     assert.match(html, /data-installation-cost-new-per-kw>317,900円/);
     assert.match(html, /data-installation-cost-existing-per-kw>331,100円/);
     assert.match(html, /data-maintenance-years>5，10，15，20，25，30年目/);
@@ -149,45 +158,60 @@ test("30年評価の本文は発電劣化と20年終点の蓄電池比較を区�
   assert.match(method, /20年間に1回|20年目/);
 });
 
-test('制度条件の説明一覧はB2の診断用制度を一度だけ描画し，旧県候補の説明を混ぜない', async () => {
+test('制度条件の説明一覧は実受取規則と診断表示表を描画し，市区町村の説明を保持する', async () => {
   const source=await readFile(new URL('../../site/articles/src/article-data.js',import.meta.url),'utf8');
-  const node=tag=>({tag,textContent:'',children:[],append(...children){this.children.push(...children);}});
+  const received=prepareSubsidyData(publicData);
+  const readInput=async name=>JSON.parse(await readFile(new URL('../../data/input/'+name+'.json',import.meta.url),'utf8'));
+  const [table,binding,hare]=await Promise.all(['diagnostic-display-table','diagnostic-display-binding','hare-display-table'].map(readInput));
+  const records=await receiveDiagnosticDisplayRecords(received,table,binding,hare);
+  assert.equal(records.size,60,'検収済み国県60契約');
+  const node=tag=>({tag,textContent:'',style:{},children:[],classList:{add(){}},append(...children){this.children.push(...children);}});
   const container=node('div'),status=node('p');
   const document={querySelector:selector=>selector==='[data-subsidy-assumptions]'?container:selector==='[data-article-data-status]'?status:null,querySelectorAll:()=>[],createElement:node};
-  await runInNewContext(source.replace(/^import .*;\r?\n/gm,'').replace(/^initialize\(\);\r?$/m,'')+'\ninitialize();',{document,loadFrontendData:async()=>({publicData,metadata:{sources:[]}}),bindArticleBibliography:()=>{},setupArticleQuoteBar:()=>{},replacesLegacyPrefecture});
+  // 実loaderと同じ制度年度受取規則を渡す．見積もり導線だけは専用検査へ委ねる．
+  const context={document,loadFrontendData:async()=>({publicData:received,metadata:{sources:[]}}),loadDiagnosticDisplayRecords:async()=>records,bindArticleBibliography:()=>{},setupInlineQuoteActions:()=>{},QUOTE_ACTION,replacesLegacyPrefecture,diagnosticTrialSourceTexts,diagnosticDetailNotes,appendHareDisplayCommon,appendHareDisplayBranch};
+  const executable=source.replace(/^import .*;\r?\n/gm,'').replace(/^initialize\(\);\r?$/m,'')+'\ninitialize();';
+  await runInNewContext(executable,context);
   assert.match(status.textContent,/公開データ版/);
-  const diagnostic=publicData.diagnostic_subsidy_programs;
-  const b2=diagnostic.filter(program=>['04','05','06','07'].includes(program.prefecture_code));
-  assert.equal(b2.length,158);
-  for(const program of b2){
-    const rows=container.children.filter(detail=>detail.id==='subsidy-program-'+program.id);
-    assert.equal(rows.length,1,program.id);
-    assert.equal(rows[0].children[0].textContent,program.program_name+(program.diagnostic_scope?.status==='excluded_required_external_work'?'（診断対象外）':''));
-    const notes=rows[0].children.filter(child=>child.tag==='p').map(child=>child.textContent);
-    for(const assumption of program.calculation_assumptions){
-      if(program.id==='miyagi-smart-energy-2026' && assumption.includes('scheduled')){
-        assert.match(notes.join(' '), /受付開始前.*所定の契約・設置・申請期間/);
-        assert.doesNotMatch(notes.join(' '), /scheduled|confirmed_at/);
-      }else assert.ok(notes.includes(assumption),program.id);
+  const allText=n=>[n.textContent,...n.children.map(allText)].join('\n');
+  const rowFor=id=>{
+    const rows=container.children.filter(detail=>detail.id==='subsidy-program-'+id);
+    assert.equal(rows.length,1,id);return rows[0];
+  };
+  const contentStrings=item=>item.content.flatMap(c=>typeof c==='string'?[c]:c.type==='list'?c.items:[c.text]).filter(Boolean);
+  for(const program of received.diagnostic_subsidy_programs){
+    const row=rowFor(program.id),text=allText(row);
+    if(program.machine_rule==='common_equipment_branch_ast/1'){
+      const record=records.get(program.id).record;
+      assert.equal(row.children[0].textContent,program.program_name);
+      for(const item of [...record.common.items,...record.branches.flatMap(b=>[b.base_amount,...b.items,...b.subbranches.flatMap(a=>a.items)].filter(Boolean))])
+        for(const line of contentStrings(item))assert.ok(text.includes(line),program.id+' / '+line);
+      for(const branch of record.branches)assert.ok(text.includes(branch.heading),program.id);
+      assert.doesNotMatch(text,/\[object Object\]/,program.id);
+      assert.ok(row.children.some(p=>p.children.some(a=>a.href===program.official_url)),program.id+' / 公式URL');
     }
   }
-  for(const code of ['16','20','28','45']){const program=diagnostic.find(p=>p.prefecture_code===code&&p.fit_compatible!==false);const row=container.children.find(detail=>detail.children[0].textContent===program.program_name);const text=row.children.map(node=>node.textContent).join(' ');assert.doesNotMatch(text,/金額は未確定|容量の種類が未確認/);for(const assumption of program.calculation_assumptions)assert.ok(text.includes(assumption));}
-  for(const [rule,patterns] of [['fukushima_residential_solar_fit',[/0\.01kW未満切捨て.*4万円.*16万円/,/千円未満/,/10kW未満/]],['yamanashi_renewable_energy',[/整数kW.*3万円.*27万円/,/整数kWh.*4kWh以上.*25万円/]]]) {
-    const program=diagnostic.find(program=>program.machine_rule===rule),row=container.children.find(detail=>detail.children[0].textContent===program.program_name);
-    const text=row.children.map(node=>node.textContent).join(' ');for(const pattern of patterns)assert.match(text,pattern);
+  const notices={
+    'aomori-02411-prefecture-linked-prelaunch-2026':'市区町村の制度・補助額は未確認です．公式窓口でご確認ください．',
+    'aomori-02424-prefecture-linked-prelaunch-2026':'村の制度・補助額は未確認です．公式窓口でご確認ください．',
+    'fukushima-yabuki-solar':'今年度は実施していません．',
+    'mie-kawagoe-abolished-2026':'この旧制度は廃止されています．',
+    'ehime-38214-energy_old_year-2026':'現年度の制度・補助額は未確認です．公式窓口でご確認ください．'
+  };
+  for(const program of [...received.diagnostic_subsidy_programs.filter(p=>p.municipality_code),...received.municipal_subsidy_programs]){
+    const text=allText(rowFor(program.id));
+    if(notices[program.id])assert.ok(text.includes(notices[program.id]),program.id);
+    else for(const assumption of program.calculation_assumptions??[])assert.ok(text.includes(assumption),program.id);
   }
-  for(const [rule,label] of [['shiga_basic_fit_solar_battery','基本枠（FIT）'],['shiga_priority_non_fit','重点枠（非FIT）']]) {
-    const program=diagnostic.find(program=>program.machine_rule===rule);assert.equal(container.children.filter(detail=>detail.children[0].textContent===program.program_name+' — '+label).length,1);
-  }
-  const diagnosticIds=new Set(diagnostic.map(program=>program.id));
-  const retainedLegacy=publicData.prefectures.filter(region=>!replacesLegacyPrefecture(diagnostic,region.code)).flatMap(region=>region.candidate_subsidy_programs??[]).filter(program=>!diagnosticIds.has(program.id));
-  for(const program of retainedLegacy)assert.ok(container.children.some(detail=>detail.children[0].textContent===program.program_name),program.id);
-  const ishikawa=diagnostic.find(program=>program.prefecture_code==='17');
-  if(ishikawa){assert.equal(container.children.filter(detail=>detail.children[0].textContent===ishikawa.program_name).length,1);const legacy=publicData.prefectures.find(region=>region.code==='17').candidate_subsidy_programs??[];for(const item of legacy)assert.ok(!container.children.some(detail=>detail.children.slice(1).some(node=>node.textContent===item.non_inclusion_reason)));}
-  for(const id of ['daigo-zero-carbon-solar-battery-2026','ranzan-residential-solar-2026']){
-    const program=diagnostic.find(program=>program.id===id);
-    assert.equal(container.children.filter(detail=>detail.children[0].textContent===program.program_name).length,1);
-  }
+  const diagnosticIds=new Set(received.diagnostic_subsidy_programs.map(p=>p.id));
+  for(const region of received.prefectures.filter(r=>!replacesLegacyPrefecture(received.diagnostic_subsidy_programs,r.code)))
+    for(const program of (region.candidate_subsidy_programs??[]).filter(p=>!diagnosticIds.has(p.id)))assert.ok(container.children.some(d=>d.children[0].textContent===program.program_name),program.id);
+  // 同制度の表示対応が欠けた場合に，空説明を成功として扱わない．
+  const missing=new Map(records);missing.delete(received.diagnostic_subsidy_programs.find(p=>p.machine_rule==='common_equipment_branch_ast/1').id);
+  status.textContent='';container.children=[];
+  await runInNewContext(executable,{...context,loadDiagnosticDisplayRecords:async()=>missing});
+  assert.doesNotMatch(status.textContent,/公開データ版/);
+  assert.match(status.textContent,/制度説明と診断表示表の対応がありません/);
 });
 
 function formatArticleQuantity(value, unit) {
@@ -337,14 +361,14 @@ test("計算根拠の式番号・依存関係・採用値・出典と目次操�
   assert.match(html, /出力は同時に供給できる電力の大きさで，容量とは別/);
   assert.match(html, /容量保証の下限，保証期間，想定使用期間およびサイクル期待寿命も同一視しません/);
   assert.match(html, /参考：従量電灯B/);
-  assert.match(html, /40\.49円は300 kWh超過分だけに適用し，診断の全使用量へ一律に掛けない/);
+  assert.match(numberText(html), /40\.49円は300 kWh超過分だけに適用し，診断の全使用量へ一律に掛けない/);
   assert.match(html, /2026年度再エネ賦課金/);
   assert.match(html, /2026年5月検針分～2027年4月検針分/);
   assert.match(html, /2025年度下半期・2026年度認定，住宅用10 kW未満，調達期間10年間/);
   assert.match(html, /地域・契約条件付き例．全国共通価格ではない/);
   assert.match(html, /30年間の収入総額は計算結果として返された値を表示し，四捨五入後の内訳から足し直しません/);
   assert.match(html, /戸建て・4人以上世帯の地域平均（令和5年度）/);
-  assert.match(html, /関東甲信15,467円／月/);
+  assert.match(numberText(html), /関東甲信15,467円／月/);
   assert.match(html, /手入力した値またはURLの<code>monthlyElectricityBill<\/code>がある場合は，その値を優先します/);
   assert.match(html, /点検3\.8万円／回とパワーコンディショナ交換38\.4万円／回は，経済産業省の2026年資料にある住宅用5 kW設備の業界ヒアリング値/);
   assert.match(html, /税区分は未確認/);

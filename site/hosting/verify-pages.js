@@ -12,7 +12,7 @@ async function walk(dir) {
 }
 const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png)$/.test(path)), "未承認の配信ファイルがあります");
+assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png|og-support-shock-burden\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
 for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ["guides/solar-profit-conditions/index.html", "/guides/solar-economics/"], ...Object.entries({"electricity-sales":"solar-economics", "subsidies":"subsidies", "disaster":"disaster", "quotes-contractors":"quotes-contractors"}).map(([old, slug]) => [`pages/${old}.html`, `/guides/${slug}/`])]) {
   const html = await readFile(resolve(output, oldPath), "utf8");
@@ -22,19 +22,20 @@ for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ["guides/sol
 }
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-assert.equal(urls.length, 14);
+assert.equal(urls.length, 15);
 for (const url of urls) {
   const path = new URL(url).pathname;
   assert.equal(new URL(url).origin, "https://haretoku.jp");
   const html = await readFile(resolve(output, `.${path}${path.endsWith("/") ? "index.html" : ""}`), "utf8");
   assert(html.includes(`rel="canonical" href="${url}"`), `canonical: ${path}`);
   assert(html.includes('name="viewport" content="width=device-width, initial-scale=1"'), `viewport: ${path}`);
-  assert(html.includes('property="og:type" content="website"'), `og:type: ${path}`);
+  const news = path === '/guides/electricity-support-end/';
+  assert(html.includes('property="og:type" content="' + (news ? 'article' : 'website') + '"'), `og:type: ${path}`);
   assert(html.includes(`property="og:url" content="${url}"`), `og:url: ${path}`);
-  assert(html.includes('content="https://haretoku.jp/og-home-photo-20260926.jpg"'));
-  assert(html.includes('property="og:image:type" content="image/jpeg"'));
-  assert(html.includes('property="og:image:width" content="1536"'));
-  assert(html.includes('property="og:image:height" content="1024"'));
+  assert(html.includes('content="https://haretoku.jp/' + (news ? 'og-support-shock-burden.png' : 'og-home-photo-20260926.jpg') + '"'));
+  assert(html.includes('property="og:image:type" content="image/' + (news ? 'png' : 'jpeg') + '"'));
+  assert(html.includes('property="og:image:width" content="' + (news ? '1320' : '1536') + '"'));
+  assert(html.includes('property="og:image:height" content="' + (news ? '585' : '1024') + '"'));
 }
 for (const file of files.filter(file => extname(file) === ".html")) {
   const html = await readFile(file, "utf8");
@@ -55,12 +56,12 @@ for (const file of files.filter(file => extname(file) === ".html")) {
   }
 }
 const jsonFiles = files.filter(file => extname(file) === ".json");
-for (const sourceName of ["public-data", "metadata"]) {
+for (const sourceName of ["public-data", "metadata", "hare-display-table", "hare-display-binding", "diagnostic-display-table", "diagnostic-display-binding"]) {
   const source = await readFile(resolve(root, `data/input/${sourceName}.json`));
   const deployed = jsonFiles.filter(file => file.split(/[\\/]/).at(-1).startsWith(`${sourceName}-`));
   assert.equal(deployed.length, 1, `${sourceName}の同梱`);
   assert(source.equals(await readFile(deployed[0])), `${sourceName}が受領版と不一致`);
-  assert.equal(JSON.parse(source).schema_version, "12.0.0-review.1", "公開データ版が変更されています");
+  if (['public-data', 'metadata'].includes(sourceName)) assert.equal(JSON.parse(source).schema_version, "12.0.0-review.1", "公開データ版が変更されています");
 }
 assert.equal((await readFile(resolve(output, "CNAME"), "utf8")).trim(), "haretoku.jp");
 assert((await readFile(resolve(output, "robots.txt"), "utf8")).includes("Sitemap: https://haretoku.jp/sitemap.xml"));
@@ -88,4 +89,6 @@ assert(legacyShareOutput.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13,
 assert.equal(legacyShareOutput.readUInt32BE(16), 1536);
 assert.equal(legacyShareOutput.readUInt32BE(20), 1024);
 
-console.log(`Pages検証PASS: ${files.length}ファイル，正規14URL，公開データ12.0.0-review.1同一，ローカル参照・QA非混入`);
+console.log(`Pages検証PASS: ${files.length}ファイル，正規15URL，公開データ12.0.0-review.1同一，ローカル参照・QA非混入`);
+
+assert((await readFile(resolve(output, 'og-support-shock-burden.png'))).equals(await readFile(resolve(root, 'site/shared/assets/support-shock-burden.png'))), '調査記事の共有画像が不一致');

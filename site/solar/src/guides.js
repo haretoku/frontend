@@ -46,7 +46,7 @@ function cardFor(article) {
   const meta = document.createElement("span");
   meta.className = "guide-article-card__meta";
   meta.textContent = article.articleType === 'news'
-    ? `公開日：${article.publishedAt}${article.updatedAt && article.updatedAt !== article.publishedAt ? ` ／ 更新日：${article.updatedAt}` : ''}`
+    ? `${article.publishedAt ? '公開日' : '作成日'}：${article.publishedAt ?? article.createdAt}${article.updatedAt && article.updatedAt !== (article.publishedAt ?? article.createdAt) ? ` ／ 更新日：${article.updatedAt}` : ''}`
     : `${article.metaLabel}：${article.metaValue}`;
   body.append(category, title, summary, meta);
   link.append(visual, body);

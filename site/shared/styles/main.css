@@ -473,3 +473,6 @@ input::placeholder { color: #606a64; }
 .top-data-card__arrow{flex:none;font-size:1.5rem;color:var(--color-primary)}
 .top-data-card:focus-visible{outline:2px solid var(--color-focus);outline-offset:4px}
 @media(max-width:36rem){.top-data-card{padding:1.25rem;gap:1rem;align-items:flex-start}.top-data-card__icon{width:36px;height:36px}.top-data-card h3{font-size:1.1rem}.top-data-card p{font-size:.9rem}.top-data-card__arrow{font-size:1.25rem}}
+/* 表の全列を読める操作を，必要な幅でだけ案内する． */
+[data-table-scroll-hint]::before { content: '表は左右にスクロールできます'; display: block; position: sticky; left: 0; width: max-content; max-width: 100%; margin-block: .5rem; color: var(--color-muted); font-size: .8rem; font-weight: 400; }
+[data-table-scroll-hint]:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
