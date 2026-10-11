@@ -956,9 +956,15 @@ test('富山・長野の旧未確定理由を残さず，別の不適合理由�
 });
 
 
-test("未接続の固定見積もりバーはDOMも下部余白も作らない", () => {
-  assert.equal(QUOTE_ACTION.disabled, true);
-  assert.doesNotThrow(() => mountFixedQuoteBar({readState: () => {throw new Error("非表示時は参照しない");}}));
+test("接続済みの固定見積もりバーを再初期化しても重複しない", () => {
+  assert.equal(QUOTE_ACTION.disabled, false);
+  const previous=globalThis.document;
+  try {
+    globalThis.document={querySelector:selector=>selector==='[data-quote-bar]'?{}:null,createElement(){throw new Error('既設バーの広告画像・リンクを増やさない');}};
+    assert.doesNotThrow(()=>mountFixedQuoteBar());
+  } finally {
+    if(previous===undefined)delete globalThis.document;else globalThis.document=previous;
+  }
 });
 
 

@@ -200,4 +200,10 @@
   .savings-equation__operator {
     line-height: 1;
   }
+
+  .savings-equation__operator--equals {
+    justify-self: center;
+    width: 1em;
+    transform: rotate(90deg);
+  }
 }

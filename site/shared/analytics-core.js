@@ -10,6 +10,9 @@ const PAGES = Object.freeze({
   ...Object.fromEntries([
     ["electricity-sales", "太陽光の収支"], ["subsidies", "補助金"],
     ["disaster", "停電への備え"], ["quotes-contractors", "見積もり"],
+    ["solar-electricity-savings", "太陽光による電気代の削減"], ["solar-fit", "FIT制度"],
+    ["solar-installation-cost", "太陽光の設置費"], ["solar-maintenance-cost", "太陽光の維持費"],
+    ["subsidy-amount", "自宅の補助額"], ["electricity-support-end", "電気代支援終了による負担増"],
     ["policy", "はれトクの方針"], ["calculation-method", "計算方法・使用データ"]
   ].map(([id, title]) => [["policy", "calculation-method"].includes(id) ? `/pages/${id}.html` : `/guides/${id === "electricity-sales" ? "solar-economics" : id}/`, { id, title, article: !["policy", "calculation-method"].includes(id) }]))
 });

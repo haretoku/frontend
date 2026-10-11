@@ -1,32 +1,27 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
-import { quoteActionFor, quotePreviewEnabled, quoteMaterial } from '../../site/shared/quote-config.js';
+import { quoteActionFor, quoteMaterial } from '../../site/shared/quote-config.js';
 
-test('ASP仮表示は開発実行かつloopbackだけで有効になる', () => {
-  for (const host of ['localhost', '127.0.0.1', '[::1]']) {
-    assert.equal(quotePreviewEnabled(true, host), true);
-    assert.equal(quotePreviewEnabled(false, host), false);
-  }
-  for (const host of ['haretoku.jp', 'localhost.example.com', '127.0.0.1.example.com', '192.168.1.1', '']) {
-    assert.equal(quotePreviewEnabled(true, host), false);
+test('確認済み固定文言の素材は公開ビルド・localhostでも同じ導線になる', () => {
+  for (const [development, hostname] of [[false, 'haretoku.jp'], [false, '127.0.0.1'], [true, 'localhost']]) {
+    const action = quoteActionFor(development, hostname);
+    assert.equal(action.disabled, false);
+    assert.equal(action.label, '【住宅用太陽光発電】ソーラーパートナーズ');
+    assert.equal(action.url, 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM');
+    assert.equal('preview' in action, false);
   }
 });
 
-test('本番やプレビューのビルドではASP接続を有効化しない', () => {
-  const action = quoteActionFor(false, '127.0.0.1');
-  assert.equal(action.disabled, true);
-  assert.equal('url' in action, false);
-  assert.equal('preview' in action, false);
-});
-
-test('ローカル接続には保存広告URLを使い，利用者条件を追加しない', () => {
-  const action = quoteActionFor(true, '127.0.0.1');
-  assert.equal(action.url, quoteMaterial.url);
-  const url = new URL(action.url);
-  assert.equal(url.hostname, 'px.a8.net');
-  assert.deepEqual([...url.searchParams.keys()], ['a8mat']);
-  assert.equal(quoteMaterial.materialVerified, false);
+test('提供コードのリンクと計測画像を同じ素材で保持し，利用者条件を追加しない', () => {
+  assert.equal(quoteMaterial.materialId, '001');
+  assert.equal(quoteMaterial.materialVerified, true);
+  assert.equal(quoteMaterial.impressionUrl, 'https://www17.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM');
+  for (const source of [quoteMaterial.url, quoteMaterial.impressionUrl]) {
+    const url = new URL(source);
+    assert.deepEqual([...url.searchParams.keys()], ['a8mat']);
+    assert.equal(url.search, '?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM');
+  }
 });
 
 test('通常ページの共通固定バー入口は1個で，プレス記事には設置しない', async () => {

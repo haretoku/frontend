@@ -1,37 +1,39 @@
 import { quoteActionFor, quoteMaterial } from './quote-config.js';
-export const QUOTE_ACTION = quoteActionFor(import.meta.env?.DEV === true, typeof window === 'undefined' ? '' : window.location.hostname);
+export const QUOTE_ACTION = quoteActionFor();
 
 export function createQuoteLink(className, placement) {
   const link = document.createElement('a');
   link.className = className;
-  link.textContent = QUOTE_ACTION.label + ' ↗';
+  link.textContent = QUOTE_ACTION.label;
   link.href = QUOTE_ACTION.url;
   link.target = '_blank';
   link.rel = 'sponsored nofollow noopener';
   link.referrerPolicy = 'no-referrer';
   link.dataset.quotePlacement = placement;
-  link.setAttribute('aria-label', '無料見積もり（' + quoteMaterial.provider + '，新しいタブで開きます）');
+  link.setAttribute('aria-label', quoteMaterial.linkText + '（新しいタブで開きます）');
   return link;
 }
 
-function showAdvertisingNotice() {
-  if (document.querySelector('[data-quote-advertising-notice]')) return;
-  const main = document.querySelector('main');
-  if (!main) return;
-  const notice = document.createElement('p');
-  notice.className = 'quote-advertising-notice';
-  notice.dataset.quoteAdvertisingNotice = '';
-  notice.textContent = '広告・アフィリエイトを含みます．リンク先：' + quoteMaterial.provider + '（太陽光発電・蓄電池同時導入も対象）．';
-  main.prepend(notice);
+export function createQuoteImpression(placement) {
+  const image = document.createElement('img');
+  image.src = quoteMaterial.impressionUrl;
+  image.width = 1;
+  image.height = 1;
+  image.alt = '';
+  image.referrerPolicy = 'no-referrer';
+  image.setAttribute('border', '0');
+  image.setAttribute('aria-hidden', 'true');
+  image.className = 'quote-impression';
+  image.dataset.quoteImpression = placement;
+  return image;
 }
 
 export function setupInlineQuoteActions() {
   if (QUOTE_ACTION.disabled) return;
-  showAdvertisingNotice();
   for (const button of document.querySelectorAll('[data-inline-quote-action]')) {
     const link = createQuoteLink(button.className, 'article_body');
     link.dataset.inlineQuoteAction = '';
-    button.replaceWith(link);
+    button.replaceWith(link, createQuoteImpression('article_body'));
     const promotion = link.closest('[data-quote-promotion]');
     if (promotion) promotion.hidden = false;
   }
@@ -48,13 +50,12 @@ export function setupQuoteResultCard(result) {
   const notice = document.createElement('p');
   notice.className = 'quote-result-card__notice';
   notice.textContent = '広告・アフィリエイト ／ ' + quoteMaterial.provider;
-  card.append(heading, copy, notice, createQuoteLink('quote-bar__button', 'diagnosis_result'));
+  card.append(heading, copy, notice, createQuoteLink('quote-bar__button', 'diagnosis_result'), createQuoteImpression('diagnosis_result'));
   result.append(card);
   return card;
 }
 export function mountFixedQuoteBar({ action = QUOTE_ACTION } = {}) {
   if (QUOTE_ACTION.disabled || document.querySelector('[data-quote-bar]')) return;
-  showAdvertisingNotice();
   const bar = document.createElement('aside');
   bar.className = 'quote-bar mobile-quote-bar';
   bar.dataset.quoteBar = '';
@@ -63,8 +64,7 @@ export function mountFixedQuoteBar({ action = QUOTE_ACTION } = {}) {
   const description = document.createElement('p'); description.textContent = action.description;
   const advertising = document.createElement('small'); advertising.textContent = '広告・アフィリエイト ／ ' + quoteMaterial.provider;
   const button = createQuoteLink('quote-bar__button mobile-quote-button', 'fixed_bar');
-  button.textContent = action.label + ' ↗';
-  copy.append(description, advertising); bar.append(copy, button); document.body.append(bar);
+  copy.append(description, advertising); bar.append(copy, button, createQuoteImpression('fixed_bar')); document.body.append(bar);
   document.body.classList.add('has-quote-space');
   function measure() {
     // 実高にはpadding内のsafe-areaも含まれる．二重加算しない．

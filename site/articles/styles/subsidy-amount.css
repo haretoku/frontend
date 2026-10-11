@@ -112,6 +112,31 @@
     justify-self: center;
   }
 
+  .subsidy-overview-diagram__equation {
+    grid-template-columns: 1.5rem minmax(0, 1fr) 1.5rem;
+    column-gap: 0.4rem;
+  }
+
+  .subsidy-overview-diagram__equation > .subsidy-overview-diagram__card {
+    grid-column: 2;
+  }
+
+  .subsidy-overview-diagram__card--grant {
+    grid-row: 2;
+  }
+
+  .subsidy-overview-diagram__operator--minus {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .subsidy-overview-diagram__operator--equals {
+    grid-column: 2;
+    grid-row: 3;
+    width: 1em;
+    transform: rotate(90deg);
+  }
+
   .subsidy-overview-diagram__arrow {
     transform: rotate(90deg);
   }

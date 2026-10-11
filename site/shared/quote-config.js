@@ -1,22 +1,19 @@
-// 2026年10月2日，A8素材038と提携情報を確認済み．自由文言の例外許可と本番コードの扱いは未確定．
-// 仮表示はViteの開発実行かつloopbackに限定し，ビルドでは有効にしない．
+// 2026年10月11日，ユーザー提供の通常広告用素材001を採用．
+// 提供された固定文言・リンク・計測画像を保持する．
 export const quoteMaterial = Object.freeze({
-  url: 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E',
-  impressionUrl: 'https://www12.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+66H9E',
+  materialId: '001',
+  url: 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM',
+  impressionUrl: 'https://www17.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+5YJRM',
+  linkText: '【住宅用太陽光発電】ソーラーパートナーズ',
   provider: 'ソーラーパートナーズ',
-  materialVerified: false
+  materialVerified: true
 });
 
-export function quotePreviewEnabled(development, hostname) {
-  return development === true && ['localhost', '127.0.0.1', '[::1]'].includes(hostname);
-}
-
-export function quoteActionFor(development, hostname) {
-  const enabled = quotePreviewEnabled(development, hostname);
+export function quoteActionFor() {
   return Object.freeze({
-    label: enabled ? '無料見積もり' : '無料見積もり（準備中）',
-    disabled: !enabled,
+    label: quoteMaterial.materialVerified ? quoteMaterial.linkText : '無料見積もり（準備中）',
+    disabled: !quoteMaterial.materialVerified,
     description: '屋根や工事条件に合わせて，設置できる設備と導入費用を確認します．',
-    ...(enabled ? { url: quoteMaterial.url, preview: true } : {})
+    ...(quoteMaterial.materialVerified ? { url: quoteMaterial.url } : {})
   });
 }

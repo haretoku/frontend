@@ -54,7 +54,11 @@ context.compactViewport.matches = true;
 // Give the static compact image enough left margin for −132万円 at its font size.
 context.cashflowChartLayout = (width, labelWidth, compact) => {
   const layout = cashflowChartLayout(width, labelWidth, compact);
-  if (compact) layout.padding.left = 72;
+  if (compact) {
+    layout.padding.left = 72;
+    // Keep the caption baseline (labelTop - 19) inside the static SVG viewport.
+    layout.labelTop = 34;
+  }
   return layout;
 };
 runInNewContext(['createSvgElement', 'zeroIntersections', 'paybackIntersection', 'annualCashflowSeries', 'chartCashflowSeries', 'renderCashflow'].map(extract).join('\n') + '\nrenderCashflow(scenarios, selected, "solar_only");', context);

@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { analyticsAllowed, cleanReferrer, createAnalytics } from "../../site/shared/analytics-core.js";
+import { quoteMaterial } from '../../site/shared/quote-config.js';
 import { analyticsConfig } from "../../site/shared/analytics-config.js";
 
 const configured = { enabled: true, enhancedMeasurementDisabled: true, measurementId: "G-TEST123456" };
@@ -20,7 +21,7 @@ function fixture(href, config = configured, productionBuild = true, referrer = "
 const events = f => f.commands().filter(c => c[0] === "event");
 
 test('見積もりクリックは固定配置とページだけを送り，入力・任意リンクは送らない', () => {
-  const url = 'https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E';
+  const url = quoteMaterial.url;
   for (const [path, placement] of [['/', 'fixed_bar'], ['/guides/subsidies/', 'article_body'], ['/simulator/', 'diagnosis_result']]) {
     const f = fixture('https://haretoku.jp' + path + '?private=CANARY');
     const click = (href, position, extra = {}) => f.handlers.click({ button: 0, target: { closest: () => ({ href, textContent: 'CANARY', hasAttribute: () => false, getAttribute: name => name === 'data-quote-placement' ? position : null }) }, ...extra });
@@ -119,8 +120,8 @@ test("最初の有効結果だけを記録し再計算・履歴変更で完了�
   assert(!JSON.stringify(f.commands()).includes("CHANGED"));
 });
 
-test("既存9ページとデータ2ページに入口があり結果描画成功後にだけ完了を通知する", async () => {
-  const pages = ["index.html", "guides/index.html", "simulator/index.html", "data/index.html", "data/subsidies/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
+test("基礎・詳細・時事・データページに入口があり結果描画成功後にだけ完了を通知する", async () => {
+  const pages = ["index.html", "guides/index.html", "simulator/index.html", "data/index.html", "data/subsidies/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
   for (const page of pages) {
     const html = await readFile(new URL(`../../site/${page}`, import.meta.url), "utf8");
     assert.equal((html.match(/src="(?:\.\.\/|\/)?shared\/analytics\.js"/g) ?? []).length, 1, page);
@@ -158,4 +159,22 @@ test('データページは地域・受付・金額を送らず，診断遷移�
   assert.equal(fixture('http://localhost:5173'+path).analytics.active,false);
   assert.equal(fixture('https://haretoku.jp'+path,configured,false).analytics.active,false);
  }
+});
+
+
+test('詳細5記事と時事記事は閲覧と見積もりを計測し，入力URLを送らない', () => {
+  for (const slug of ['solar-electricity-savings', 'solar-fit', 'solar-installation-cost', 'solar-maintenance-cost', 'subsidy-amount', 'electricity-support-end']) {
+    const path='/guides/'+slug+'/';
+    const f=fixture('https://haretoku.jp'+path+'?private=CANARY#CANARY');
+    assert.equal(f.analytics.active,true,slug);
+    assert.equal(analyticsAllowed(configured,'https://haretoku.jp'+path+'index.html',true),true);
+    assert.deepEqual(events(f).map(c=>c[1]),['page_view','article_view']);
+    for(const placement of ['fixed_bar','article_body']) {
+      f.handlers.click({button:0,target:{closest:()=>({href:quoteMaterial.url,hasAttribute:()=>false,getAttribute:name=>name==='data-quote-placement'?placement:null})}});
+    }
+    const quotes=events(f).filter(c=>c[1]==='quote_click');
+    assert.deepEqual(quotes.map(c=>c[2].quote_placement),['fixed_bar','article_body']);
+    assert(quotes.every(c=>c[2].page_location==='https://haretoku.jp'+path));
+    assert(!JSON.stringify(f.commands()).includes('CANARY'));
+  }
 });
