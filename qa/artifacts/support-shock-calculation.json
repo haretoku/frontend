@@ -1,0 +1,1913 @@
+{
+  "config": {
+    "region": "東京都",
+    "annualConsumptionKwh": 4983.922223378252,
+    "solarCapacityKw": 4,
+    "orientation": "south",
+    "occupancy": "official_standard_calendar",
+    "period": "standard_year",
+    "loadInterpretation": "pyhees 3.10.0の公式計算例・地域区分6・標準生活日程の8760時間需要をそのまま使用．在宅日程の混合・年間使用量の調整なし．",
+    "supportYenPerKwh": 3.5,
+    "batteryCapacitiesKwh": [
+      0,
+      5,
+      9.5
+    ],
+    "periodInterpretation": "標準年の1〜12月（初年度）を集計．最後の支援単価3.5円/kWhが1年間続く場合と，支援がない場合を比較．実際の政策延長や将来料金を予測しない．",
+    "dayInterpretation": "365日分の充放電計算結果を時刻別に平均．平均波形から充放電を再計算しない．昼6〜18時，夜18〜翌6時の削減率は年間電力量の合計で比較．",
+    "sensitivity": {
+      "annualConsumptionKwh": [
+        3600,
+        6000
+      ],
+      "occupancy": [
+        "almost_never",
+        "almost_every_weekday"
+      ]
+    },
+    "tariff": {
+      "contract": "東京電力EP・従量電灯B・30A",
+      "basic": 935.25,
+      "rates": [
+        29.8,
+        36.4,
+        40.49
+      ],
+      "supportedFuelAdjustment": -9.3,
+      "levy": 4.18,
+      "interpretation": "2026年10月分料金を12か月固定し，支援3.5円/kWhの継続と終了を比較．各月の購入量に段階料金と円未満切り捨てを適用して合計．実際の年間請求額ではない．"
+    }
+  },
+  "dataVersion": "20261010-tokyo-equipment-base-trial.3",
+  "sha256": {
+    "data": "d759e6368b982a7e19f4bbe44fb7cb5f7673e151e0aa60898f347a0404d2c3e7",
+    "calculator": "b55fd7459057135c7dbf196d124c1d992787e21b11c0dff6adcafc92cfaf9291"
+  },
+  "sources": {
+    "load": {
+      "repository_url": "https://github.com/BRI-EES-House/pyhees",
+      "commit": "d5224c4a01def00a8421bcd2fcc0d4b4a5b88644",
+      "version": "3.10.0",
+      "sample_sha256": "c3c7800e157294853c50f1b6096fc4b76712a2a5151632b15ca80425d7f2364e",
+      "schedule_sha256": "07160c407464e440062d66b59e63964ae5a7ef53577b1f4ed3a4b10cd4e32081",
+      "calculation_sha256": "f58283245ce73864ee6d63ecd0814c896d04b8c2b72e101b40d41fa9358d6fe2"
+    },
+    "generation": [
+      {
+        "role": "metpv_mean_year",
+        "url": "https://appww2.infoc.nedo.go.jp/appww/metpv_map.html",
+        "sha256": "702e7f3edce8f681735ce2869f317302aa9a2342eeae81ddd144d2d87f4f13af"
+      },
+      {
+        "role": "sunrise",
+        "url": "https://appww2.infoc.nedo.go.jp/appww/metpv_map.html",
+        "sha256": "f36afa8fa23abe40edb8d8fae709bbaf1b1c5ad2e7734ea2a9bc180b955cd196"
+      },
+      {
+        "role": "official_common_js",
+        "url": "https://appww2.infoc.nedo.go.jp/appww/js/common.js",
+        "sha256": "430e40fb28052d43eca7aad31d61395ab2718430765b153c27d297e1fb41d5bf"
+      },
+      {
+        "role": "official_solar_lib_js",
+        "url": "https://appww2.infoc.nedo.go.jp/appww/js/solar_lib.js",
+        "sha256": "e93620c981338c96bec7e208ac545f2f2db167cc3c90886914cc2a3158dfe86c"
+      }
+    ],
+    "tariffs": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+    "supportAndRounding": "https://www.tepco.co.jp/ep/private/fuelcost2/backnumber/2610.html"
+  },
+  "assumptions": {
+    "initialSocKwh": 0,
+    "gridCharging": false,
+    "powerLimitKw": null,
+    "chargeEfficiency": 0.9486832980505138,
+    "dischargeEfficiency": 0.9486832980505138,
+    "firstYearCapacityFactor": 0.9665183044745802,
+    "load": {
+      "region": 6,
+      "type": "一般住宅",
+      "evaluation_method": "住戸全体を対象に評価する",
+      "tatekata": "戸建住宅",
+      "sol_region": null,
+      "A_A": 120.08,
+      "A_MR": 29.81,
+      "A_OR": 51.34,
+      "NV_MR": 0,
+      "NV_OR": 0,
+      "TS": false,
+      "r_A_ufvnt": null,
+      "underfloor_insulation": null,
+      "mode_H": "居室のみを暖房する方式でかつ主たる居室とその他の居室ともに温水暖房を設置する場合に該当しない場合",
+      "mode_C": "居室のみを冷房する方式",
+      "H_A": null,
+      "H_MR": {
+        "type": "ルームエアコンディショナー",
+        "e_class": null,
+        "dualcompressor": false
+      },
+      "H_OR": {
+        "type": "ルームエアコンディショナー",
+        "e_class": null,
+        "dualcompressor": false
+      },
+      "H_HS": null,
+      "C_A": null,
+      "C_MR": {
+        "type": "ルームエアコンディショナー",
+        "e_class": null,
+        "dualcompressor": false
+      },
+      "C_OR": {
+        "type": "ルームエアコンディショナー",
+        "e_class": null,
+        "dualcompressor": false
+      },
+      "HW": {
+        "has_bath": true,
+        "hw_type": "ガス従来型給湯機",
+        "hybrid_category": null,
+        "e_rtd": null,
+        "e_dash_rtd": null,
+        "kitchen_watersaving_A": false,
+        "kitchen_watersaving_C": false,
+        "shower_watersaving_A": false,
+        "shower_watersaving_B": false,
+        "washbowl_watersaving_C": false,
+        "bath_insulation": false,
+        "bath_function": "ふろ給湯機(追焚あり)",
+        "pipe_diameter": "上記以外"
+      },
+      "V": {
+        "type": "ダクト式第二種換気設備又はダクト式第三種換気設備",
+        "input": "評価しない",
+        "N": 0.5
+      },
+      "HEX": null,
+      "L": {
+        "has_OR": true,
+        "has_NO": true,
+        "A_OR": 51.34,
+        "MR_installed": "設置しない",
+        "OR_installed": "設置しない",
+        "NO_installed": "設置しない"
+      },
+      "SHC": null,
+      "PV": null,
+      "CG": null,
+      "ENV": {
+        "method": "当該住宅の外皮面積の合計を用いて評価する",
+        "A_env": 307.51,
+        "A_A": 120.08,
+        "U_A": 0.87,
+        "eta_A_H": 4.3,
+        "eta_A_C": 2.8
+      }
+    },
+    "annualGenerationKwh": 4686.0452,
+    "annualGenerationBasis": "MONSOLA-20の2010～2018年平均について，都道府県庁舎所在3次メッシュの真南（方位角0度）・傾斜角30度の月平均日積算斜面日射量を平年の月日数で加重し，総合係数0.73を乗じて標準日射強度1 kW／m²で除した1 kW当たり年間予想発電量．0.73は全国一律のサービス評価仮定であり，現代住宅の実測代表値ではない．"
+  },
+  "checks": {
+    "hourlyEnergyBalance": "PASS",
+    "capacityBounds": "PASS",
+    "annualProductionParity": "PASS",
+    "annualAggregation": "PASS",
+    "meanDayAggregation": "PASS"
+  },
+  "cases": [
+    {
+      "capacity": 0,
+      "solar": 0,
+      "annualConsumption": 4983.922223378252,
+      "occupancy": "official_standard_calendar",
+      "occupancyRate": 0,
+      "annual": {
+        "year": 1,
+        "pv_generation_factor": 1,
+        "annual_consumption_kwh": 4983.922223378252,
+        "annual_generation_kwh": 0,
+        "battery_service_age_year": 1,
+        "battery_usable_capacity_kwh": 0,
+        "opening_state_of_charge_before_adjustment_kwh": 0,
+        "opening_state_of_charge_kwh": 0,
+        "closing_state_of_charge_kwh": 0,
+        "capacity_fade_spillage_kwh": 0,
+        "replacement_disposal_spillage_kwh": 0,
+        "annual_direct_self_consumed_kwh": 0,
+        "annual_battery_charge_input_kwh": 0,
+        "annual_battery_delivered_kwh": 0,
+        "annual_battery_conversion_loss_kwh": 0,
+        "annual_economic_self_consumed_kwh": 0,
+        "annual_exported_kwh": 0,
+        "annual_purchased_kwh": 4983.9222233782675,
+        "self_consumption_rate": 0,
+        "self_sufficiency_rate": 0
+      },
+      "quantities": {
+        "load": 4983.9222233782675,
+        "generation": 0,
+        "direct": 0,
+        "chargeInput": 0,
+        "delivered": 0,
+        "purchased": 4983.9222233782675,
+        "exported": 0
+      },
+      "supportedBill": 163685,
+      "unsupportedBill": 181127,
+      "additionalBurden": 17442,
+      "unroundedSupportEffect": 17443.727781823938,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 614.76378594509,
+          "supportedBill": 20660,
+          "unsupportedBill": 22812
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 556.7104357513255,
+          "supportedBill": 18607,
+          "unsupportedBill": 20555
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 521.856695827495,
+          "supportedBill": 17374,
+          "unsupportedBill": 19200
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 295.0796800067143,
+          "supportedBill": 9373,
+          "unsupportedBill": 10406
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 251.8611677656738,
+          "supportedBill": 8021,
+          "unsupportedBill": 8902
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 310.73849701317374,
+          "supportedBill": 9907,
+          "unsupportedBill": 10994
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 475.3116897385045,
+          "supportedBill": 15728,
+          "unsupportedBill": 17391
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 493.18717651793156,
+          "supportedBill": 16360,
+          "unsupportedBill": 18086
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 334.46634908989654,
+          "supportedBill": 10746,
+          "unsupportedBill": 11916
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 252.09661759349888,
+          "supportedBill": 8028,
+          "unsupportedBill": 8911
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 336.1723926702713,
+          "supportedBill": 10806,
+          "unsupportedBill": 11983
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 541.6777354586768,
+          "supportedBill": 18075,
+          "unsupportedBill": 19971
+        }
+      ],
+      "periods": {
+        "day": {
+          "load": 2515.555596138386,
+          "direct": 0,
+          "delivered": 0,
+          "purchased": 2515.555596138386,
+          "reductionPercent": 0
+        },
+        "night": {
+          "load": 2468.3666272398564,
+          "direct": 0,
+          "delivered": 0,
+          "purchased": 2468.3666272398564,
+          "reductionPercent": 0
+        }
+      },
+      "openingYearStateOfCharge": 0,
+      "closingYearStateOfCharge": 0,
+      "mean": [
+        {
+          "hour": 0,
+          "load": 0.3177158778947296,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.3177158778947296,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 1,
+          "load": 0.17172275767914144,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.17172275767914144,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 2,
+          "load": 0.17582243874615291,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.17582243874615291,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 3,
+          "load": 0.17215602265306654,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.17215602265306654,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 4,
+          "load": 0.1595654232982373,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.1595654232982373,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 5,
+          "load": 0.9737652970599345,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.9737652970599345,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 6,
+          "load": 0.6467354681740425,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.6467354681740425,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 7,
+          "load": 1.118358225724098,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 1.118358225724098,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 8,
+          "load": 0.7205823922459673,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.7205823922459673,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 9,
+          "load": 0.6718206442649125,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.6718206442649125,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 10,
+          "load": 0.3467163548126317,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.3467163548126317,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 11,
+          "load": 0.5439722437070412,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.5439722437070412,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 12,
+          "load": 0.6153107468988525,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.6153107468988525,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 13,
+          "load": 0.19011017113123244,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.19011017113123244,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 14,
+          "load": 0.16599814546820954,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.16599814546820954,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 15,
+          "load": 0.5038649877293947,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.5038649877293947,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 16,
+          "load": 0.4904901850115589,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.4904901850115589,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 17,
+          "load": 0.8779735749372399,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.8779735749372399,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 18,
+          "load": 0.8735712467993371,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.8735712467993371,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 19,
+          "load": 0.7989030988212612,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.7989030988212612,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 20,
+          "load": 0.7557670550030546,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.7557670550030546,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 21,
+          "load": 0.9883948288392128,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.9883948288392128,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 22,
+          "load": 0.8311079727337907,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.8311079727337907,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 23,
+          "load": 0.544156274279918,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.544156274279918,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        }
+      ],
+      "ratio": 1,
+      "annualBillSavings": 0
+    },
+    {
+      "capacity": 0,
+      "solar": 4,
+      "annualConsumption": 4983.922223378252,
+      "occupancy": "official_standard_calendar",
+      "occupancyRate": 0,
+      "annual": {
+        "year": 1,
+        "pv_generation_factor": 1,
+        "annual_consumption_kwh": 4983.922223378252,
+        "annual_generation_kwh": 4686.0452,
+        "battery_service_age_year": 1,
+        "battery_usable_capacity_kwh": 0,
+        "opening_state_of_charge_before_adjustment_kwh": 0,
+        "opening_state_of_charge_kwh": 0,
+        "closing_state_of_charge_kwh": 0,
+        "capacity_fade_spillage_kwh": 0,
+        "replacement_disposal_spillage_kwh": 0,
+        "annual_direct_self_consumed_kwh": 1518.057955469221,
+        "annual_battery_charge_input_kwh": 0,
+        "annual_battery_delivered_kwh": 0,
+        "annual_battery_conversion_loss_kwh": 0,
+        "annual_economic_self_consumed_kwh": 1518.057955469221,
+        "annual_exported_kwh": 3167.987244530777,
+        "annual_purchased_kwh": 3465.8642679090262,
+        "self_consumption_rate": 0.3239529049931531,
+        "self_sufficiency_rate": 0.3045910203711477
+      },
+      "quantities": {
+        "load": 4983.9222233782675,
+        "generation": 4686.0451999999705,
+        "direct": 1518.057955469221,
+        "chargeInput": 0,
+        "delivered": 0,
+        "purchased": 3465.8642679090262,
+        "exported": 3167.987244530777
+      },
+      "supportedBill": 112404,
+      "unsupportedBill": 124535,
+      "additionalBurden": 12131,
+      "unroundedSupportEffect": 12130.524937681592,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 484.3263889896614,
+          "supportedBill": 16046,
+          "unsupportedBill": 17742
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 439.6922634546988,
+          "supportedBill": 14468,
+          "unsupportedBill": 16007
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 390.9088140410181,
+          "supportedBill": 12742,
+          "unsupportedBill": 14110
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 183.29613349453416,
+          "supportedBill": 5876,
+          "unsupportedBill": 6518
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 136.90610956074093,
+          "supportedBill": 4425,
+          "unsupportedBill": 4904
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 173.29137259197762,
+          "supportedBill": 5563,
+          "unsupportedBill": 6170
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 288.0312262055451,
+          "supportedBill": 9152,
+          "unsupportedBill": 10160
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 310.4277808027344,
+          "supportedBill": 9896,
+          "unsupportedBill": 10982
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 213.20281428233255,
+          "supportedBill": 6812,
+          "unsupportedBill": 7558
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 167.07476064921374,
+          "supportedBill": 5369,
+          "unsupportedBill": 5954
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 246.89289794048486,
+          "supportedBill": 7866,
+          "unsupportedBill": 8730
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 431.8137058960849,
+          "supportedBill": 14189,
+          "unsupportedBill": 15700
+        }
+      ],
+      "periods": {
+        "day": {
+          "load": 2515.555596138386,
+          "direct": 1498.5209816480299,
+          "delivered": 0,
+          "purchased": 1017.0346144903577,
+          "reductionPercent": 59.570179404836
+        },
+        "night": {
+          "load": 2468.3666272398564,
+          "direct": 19.536973821191587,
+          "delivered": 0,
+          "purchased": 2448.8296534186643,
+          "reductionPercent": 0.7914940027786033
+        }
+      },
+      "openingYearStateOfCharge": 0,
+      "closingYearStateOfCharge": 0,
+      "mean": [
+        {
+          "hour": 0,
+          "load": 0.3177158778947296,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.3177158778947296,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 1,
+          "load": 0.17172275767914144,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.17172275767914144,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 2,
+          "load": 0.17582243874615291,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.17582243874615291,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 3,
+          "load": 0.17215602265306654,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.17215602265306654,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 4,
+          "load": 0.1595654232982373,
+          "generation": 0.002994335316354367,
+          "direct": 0.002994335316354367,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.15657108798188296,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 5,
+          "load": 0.9737652970599345,
+          "generation": 0.040381644574206274,
+          "direct": 0.038823992037441316,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.9349413050224941,
+          "exported": 0.0015576525367649672,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 6,
+          "load": 0.6467354681740425,
+          "generation": 0.20650587129771447,
+          "direct": 0.16855057117323496,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.4781848970008077,
+          "exported": 0.0379553001244796,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 7,
+          "load": 1.118358225724098,
+          "generation": 0.607473389205284,
+          "direct": 0.45583487571629444,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.6625233500078029,
+          "exported": 0.15163851348898946,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 8,
+          "load": 0.7205823922459673,
+          "generation": 1.099976200452286,
+          "direct": 0.5553510155236056,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.16523137672236154,
+          "exported": 0.54462518492868,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 9,
+          "load": 0.6718206442649125,
+          "generation": 1.4929112462139393,
+          "direct": 0.5879367048641482,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.08388393940076458,
+          "exported": 0.9049745413497899,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 10,
+          "load": 0.3467163548126317,
+          "generation": 1.7362689589577809,
+          "direct": 0.31044233515220065,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.03627401966043107,
+          "exported": 1.4258266238055795,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 11,
+          "load": 0.5439722437070412,
+          "generation": 1.8724370159658703,
+          "direct": 0.46279626870555735,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.08117597500148377,
+          "exported": 1.4096407472603105,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 12,
+          "load": 0.6153107468988525,
+          "generation": 1.825388162107243,
+          "direct": 0.55074040423195,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.06457034266690222,
+          "exported": 1.2746477578752933,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 13,
+          "load": 0.19011017113123244,
+          "generation": 1.5710573101497296,
+          "direct": 0.18687027374678478,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.003239897384447671,
+          "exported": 1.3841870364029427,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 14,
+          "load": 0.16599814546820954,
+          "generation": 1.2087767434109993,
+          "direct": 0.16133136912437424,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.004666776343835324,
+          "exported": 1.0474453742866248,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 15,
+          "load": 0.5038649877293947,
+          "generation": 0.7563922360446509,
+          "direct": 0.3525987164935532,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.15126627123584158,
+          "exported": 0.40379351955109816,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 16,
+          "load": 0.4904901850115589,
+          "generation": 0.3262296021026841,
+          "direct": 0.23379528086268525,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.256694904148874,
+          "exported": 0.0924343212399987,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 17,
+          "load": 0.8779735749372399,
+          "generation": 0.07997965588055851,
+          "direct": 0.07928912042762193,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.7986844545096181,
+          "exported": 0.0006905354529365798,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 18,
+          "load": 0.8735712467993371,
+          "generation": 0.011698311307380587,
+          "direct": 0.011698311307380587,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.8618729354919562,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 19,
+          "load": 0.7989030988212612,
+          "generation": 0.00000931701332118199,
+          "direct": 0.00000931701332118199,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.7988937818079399,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 20,
+          "load": 0.7557670550030546,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.7557670550030546,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 21,
+          "load": 0.9883948288392128,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.9883948288392128,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 22,
+          "load": 0.8311079727337907,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.8311079727337907,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        },
+        {
+          "hour": 23,
+          "load": 0.544156274279918,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0,
+          "purchased": 0.544156274279918,
+          "exported": 0,
+          "stateOfCharge": 0,
+          "openingStateOfCharge": 0
+        }
+      ],
+      "ratio": 1.437803973291567,
+      "annualBillSavings": 56592
+    },
+    {
+      "capacity": 5,
+      "solar": 4,
+      "annualConsumption": 4983.922223378252,
+      "occupancy": "official_standard_calendar",
+      "occupancyRate": 0,
+      "annual": {
+        "year": 1,
+        "pv_generation_factor": 1,
+        "annual_consumption_kwh": 4983.922223378252,
+        "annual_generation_kwh": 4686.0452,
+        "battery_service_age_year": 1,
+        "battery_usable_capacity_kwh": 4.832591522372901,
+        "opening_state_of_charge_before_adjustment_kwh": 0,
+        "opening_state_of_charge_kwh": 0,
+        "closing_state_of_charge_kwh": 0,
+        "capacity_fade_spillage_kwh": 0,
+        "replacement_disposal_spillage_kwh": 0,
+        "annual_direct_self_consumed_kwh": 1518.057955469221,
+        "annual_battery_charge_input_kwh": 1458.8211427320907,
+        "annual_battery_delivered_kwh": 1312.939028458881,
+        "annual_battery_conversion_loss_kwh": 145.88211427320897,
+        "annual_economic_self_consumed_kwh": 2830.996983928102,
+        "annual_exported_kwh": 1709.1661017986846,
+        "annual_purchased_kwh": 2152.925239450141,
+        "self_consumption_rate": 0.6041335205063968,
+        "self_sufficiency_rate": 0.5680259155427123
+      },
+      "quantities": {
+        "load": 4983.9222233782675,
+        "generation": 4686.0451999999705,
+        "direct": 1518.057955469221,
+        "chargeInput": 1458.8211427320907,
+        "delivered": 1312.939028458881,
+        "purchased": 2152.925239450141,
+        "exported": 1709.1661017986846
+      },
+      "supportedBill": 71357,
+      "unsupportedBill": 78895,
+      "additionalBurden": 7538,
+      "unroundedSupportEffect": 7535.238338075493,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 363.70541687324936,
+          "supportedBill": 11780,
+          "unsupportedBill": 13053
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 343.86643588210865,
+          "supportedBill": 11078,
+          "unsupportedBill": 12282
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 281.8295129743784,
+          "supportedBill": 8958,
+          "unsupportedBill": 9945
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 72.53165254602237,
+          "supportedBill": 2725,
+          "unsupportedBill": 2979
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 19.998671835956472,
+          "supportedBill": 1428,
+          "unsupportedBill": 1498
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 62.62489066377862,
+          "supportedBill": 2480,
+          "unsupportedBill": 2700
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 166.9132065280684,
+          "supportedBill": 5364,
+          "unsupportedBill": 5948
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 208.42054739480847,
+          "supportedBill": 6662,
+          "unsupportedBill": 7392
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 116.61190415634529,
+          "supportedBill": 3813,
+          "unsupportedBill": 4221
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 58.961195883808,
+          "supportedBill": 2390,
+          "unsupportedBill": 2596
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 136.7205724422771,
+          "supportedBill": 4419,
+          "unsupportedBill": 4898
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 320.7412322693438,
+          "supportedBill": 10260,
+          "unsupportedBill": 11383
+        }
+      ],
+      "periods": {
+        "day": {
+          "load": 2515.555596138386,
+          "direct": 1498.5209816480299,
+          "delivered": 356.8260524350003,
+          "purchased": 660.2085620553569,
+          "reductionPercent": 73.75496041237017
+        },
+        "night": {
+          "load": 2468.3666272398564,
+          "direct": 19.536973821191587,
+          "delivered": 956.1129760238821,
+          "purchased": 1492.7166773947858,
+          "reductionPercent": 39.526135991234355
+        }
+      },
+      "openingYearStateOfCharge": 0,
+      "closingYearStateOfCharge": 0,
+      "mean": [
+        {
+          "hour": 0,
+          "load": 0.3177158778947296,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.07298626779562374,
+          "purchased": 0.24472961009910585,
+          "exported": 0,
+          "stateOfCharge": 0.19041309399147485,
+          "openingStateOfCharge": 0.26734737537453074
+        },
+        {
+          "hour": 1,
+          "load": 0.17172275767914144,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.031103093924795426,
+          "purchased": 0.14061966375434592,
+          "exported": 0,
+          "stateOfCharge": 0.15762755429797504,
+          "openingStateOfCharge": 0.19041309399147485
+        },
+        {
+          "hour": 2,
+          "load": 0.17582243874615291,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.03113155752393879,
+          "purchased": 0.1446908812222141,
+          "exported": 0,
+          "stateOfCharge": 0.12481201133657553,
+          "openingStateOfCharge": 0.15762755429797504
+        },
+        {
+          "hour": 3,
+          "load": 0.17215602265306654,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.028425696815007288,
+          "purchased": 0.14373032583805925,
+          "exported": 0,
+          "stateOfCharge": 0.09484869599896988,
+          "openingStateOfCharge": 0.12481201133657553
+        },
+        {
+          "hour": 4,
+          "load": 0.1595654232982373,
+          "generation": 0.002994335316354367,
+          "direct": 0.002994335316354367,
+          "chargeInput": 0,
+          "delivered": 0.023943109116059236,
+          "purchased": 0.13262797886582367,
+          "exported": 0,
+          "stateOfCharge": 0.06961044297474056,
+          "openingStateOfCharge": 0.09484869599896988
+        },
+        {
+          "hour": 5,
+          "load": 0.9737652970599345,
+          "generation": 0.040381644574206274,
+          "direct": 0.038823992037441316,
+          "chargeInput": 0.0015576525367649672,
+          "delivered": 0.017865594787168943,
+          "purchased": 0.9170757102353253,
+          "exported": 0,
+          "stateOfCharge": 0.05225617149350715,
+          "openingStateOfCharge": 0.06961044297474056
+        },
+        {
+          "hour": 6,
+          "load": 0.6467354681740425,
+          "generation": 0.20650587129771447,
+          "direct": 0.16855057117323496,
+          "chargeInput": 0.0379553001244796,
+          "delivered": 0.00804364588038486,
+          "purchased": 0.470141251120423,
+          "exported": 0,
+          "stateOfCharge": 0.07978498356948004,
+          "openingStateOfCharge": 0.05225617149350715
+        },
+        {
+          "hour": 7,
+          "load": 1.118358225724098,
+          "generation": 0.607473389205284,
+          "direct": 0.45583487571629444,
+          "chargeInput": 0.15163851348898946,
+          "delivered": 0.006012677521202994,
+          "purchased": 0.6565106724866002,
+          "exported": 0,
+          "stateOfCharge": 0.21730399005665943,
+          "openingStateOfCharge": 0.07978498356948004
+        },
+        {
+          "hour": 8,
+          "load": 0.7205823922459673,
+          "generation": 1.099976200452286,
+          "direct": 0.5553510155236056,
+          "chargeInput": 0.54462518492868,
+          "delivered": 0.0027101912301991165,
+          "purchased": 0.1625211854921624,
+          "exported": 0,
+          "stateOfCharge": 0.7311240143021559,
+          "openingStateOfCharge": 0.21730399005665943
+        },
+        {
+          "hour": 9,
+          "load": 0.6718206442649125,
+          "generation": 1.4929112462139393,
+          "direct": 0.5879367048641482,
+          "chargeInput": 0.8946495658788131,
+          "delivered": 0.003086979562883263,
+          "purchased": 0.08079695983788131,
+          "exported": 0.010324975470976893,
+          "stateOfCharge": 1.5766091528898296,
+          "openingStateOfCharge": 0.7311240143021559
+        },
+        {
+          "hour": 10,
+          "load": 0.3467163548126317,
+          "generation": 1.7362689589577809,
+          "direct": 0.31044233515220065,
+          "chargeInput": 1.2051098600633046,
+          "delivered": 0.0003447618448855297,
+          "purchased": 0.03592925781554554,
+          "exported": 0.22071676374227556,
+          "stateOfCharge": 2.7195133385544947,
+          "openingStateOfCharge": 1.5766091528898296
+        },
+        {
+          "hour": 11,
+          "load": 0.5439722437070412,
+          "generation": 1.8724370159658703,
+          "direct": 0.46279626870555735,
+          "chargeInput": 0.563940042266087,
+          "delivered": 0.022749872825711535,
+          "purchased": 0.05842610217577226,
+          "exported": 0.8457007049942233,
+          "stateOfCharge": 3.2305333662180975,
+          "openingStateOfCharge": 2.7195133385544947
+        },
+        {
+          "hour": 12,
+          "load": 0.6153107468988525,
+          "generation": 1.825388162107243,
+          "direct": 0.55074040423195,
+          "chargeInput": 0.22235804559374764,
+          "delivered": 0.01450185135159527,
+          "purchased": 0.05006849131530696,
+          "exported": 1.052289712281545,
+          "stateOfCharge": 3.4261944367399644,
+          "openingStateOfCharge": 3.2305333662180975
+        },
+        {
+          "hour": 13,
+          "load": 0.19011017113123244,
+          "generation": 1.5710573101497296,
+          "direct": 0.18687027374678478,
+          "chargeInput": 0.21072410658401391,
+          "delivered": 0.00043964948915963073,
+          "purchased": 0.0028002478952880395,
+          "exported": 1.1734629298189296,
+          "stateOfCharge": 3.6256414459002073,
+          "openingStateOfCharge": 3.4261944367399644
+        },
+        {
+          "hour": 14,
+          "load": 0.16599814546820954,
+          "generation": 1.2087767434109993,
+          "direct": 0.16133136912437424,
+          "chargeInput": 0.1291864680429605,
+          "delivered": 0.0020243404267749174,
+          "purchased": 0.0026424359170604057,
+          "exported": 0.9182589062436642,
+          "stateOfCharge": 3.746064648297315,
+          "openingStateOfCharge": 3.6256414459002073
+        },
+        {
+          "hour": 15,
+          "load": 0.5038649877293947,
+          "generation": 0.7563922360446509,
+          "direct": 0.3525987164935532,
+          "chargeInput": 0.02534010218184302,
+          "delivered": 0.1005981989206495,
+          "purchased": 0.05066807231519217,
+          "exported": 0.37845341736925503,
+          "stateOfCharge": 3.6640645676414727,
+          "openingStateOfCharge": 3.746064648297315
+        },
+        {
+          "hour": 16,
+          "load": 0.4904901850115589,
+          "generation": 0.3262296021026841,
+          "direct": 0.23379528086268525,
+          "chargeInput": 0.009685412370836125,
+          "delivered": 0.18901673266880745,
+          "purchased": 0.06767817148006677,
+          "exported": 0.08274890886916252,
+          "stateOfCharge": 3.474011826220216,
+          "openingStateOfCharge": 3.6640645676414727
+        },
+        {
+          "hour": 17,
+          "load": 0.8779735749372399,
+          "generation": 0.07997965588055851,
+          "direct": 0.07928912042762193,
+          "chargeInput": 0,
+          "delivered": 0.6280767213873355,
+          "purchased": 0.17060773312228222,
+          "exported": 0.0006905354529365798,
+          "stateOfCharge": 2.811960831248556,
+          "openingStateOfCharge": 3.474011826220216
+        },
+        {
+          "hour": 18,
+          "load": 0.8735712467993371,
+          "generation": 0.011698311307380587,
+          "direct": 0.011698311307380587,
+          "chargeInput": 0,
+          "delivered": 0.6663217822940809,
+          "purchased": 0.1955511531978754,
+          "exported": 0,
+          "stateOfCharge": 2.1095960023711715,
+          "openingStateOfCharge": 2.811960831248556
+        },
+        {
+          "hour": 19,
+          "load": 0.7989030988212612,
+          "generation": 0.00000931701332118199,
+          "direct": 0.00000931701332118199,
+          "chargeInput": 0,
+          "delivered": 0.5346194557005949,
+          "purchased": 0.2642743261073451,
+          "exported": 0,
+          "stateOfCharge": 1.5460576152200483,
+          "openingStateOfCharge": 2.1095960023711715
+        },
+        {
+          "hour": 20,
+          "load": 0.7557670550030546,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.4075235901938138,
+          "purchased": 0.3482434648092406,
+          "exported": 0,
+          "stateOfCharge": 1.1164900334662116,
+          "openingStateOfCharge": 1.5460576152200483
+        },
+        {
+          "hour": 21,
+          "load": 0.9883948288392128,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.40234756163018714,
+          "purchased": 0.5860472672090248,
+          "exported": 0,
+          "stateOfCharge": 0.692378464877424,
+          "openingStateOfCharge": 1.1164900334662116
+        },
+        {
+          "hour": 22,
+          "load": 0.8311079727337907,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.24415805415243347,
+          "purchased": 0.5869499185813569,
+          "exported": 0,
+          "stateOfCharge": 0.4350132781452831,
+          "openingStateOfCharge": 0.692378464877424
+        },
+        {
+          "hour": 23,
+          "load": 0.544156274279918,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.1590618416111741,
+          "purchased": 0.38509443266874416,
+          "exported": 0,
+          "stateOfCharge": 0.26734737537453074,
+          "openingStateOfCharge": 0.4350132781452831
+        }
+      ],
+      "ratio": 2.313876359777129,
+      "annualBillSavings": 102232
+    },
+    {
+      "capacity": 9.5,
+      "solar": 4,
+      "annualConsumption": 4983.922223378252,
+      "occupancy": "official_standard_calendar",
+      "occupancyRate": 0,
+      "annual": {
+        "year": 1,
+        "pv_generation_factor": 1,
+        "annual_consumption_kwh": 4983.922223378252,
+        "annual_generation_kwh": 4686.0452,
+        "battery_service_age_year": 1,
+        "battery_usable_capacity_kwh": 9.181923892508513,
+        "opening_state_of_charge_before_adjustment_kwh": 0,
+        "opening_state_of_charge_kwh": 0,
+        "closing_state_of_charge_kwh": 0.395056098392603,
+        "capacity_fade_spillage_kwh": 0,
+        "replacement_disposal_spillage_kwh": 0,
+        "annual_direct_self_consumed_kwh": 1518.057955469221,
+        "annual_battery_charge_input_kwh": 2196.0388483152483,
+        "annual_battery_delivered_kwh": 1976.0601803613783,
+        "annual_battery_conversion_loss_kwh": 219.58361185546917,
+        "annual_economic_self_consumed_kwh": 3494.1181358305994,
+        "annual_exported_kwh": 971.9483962155298,
+        "annual_purchased_kwh": 1489.8040875476438,
+        "self_consumption_rate": 0.745643284838695,
+        "self_sufficiency_rate": 0.7010779822045821
+      },
+      "quantities": {
+        "load": 4983.9222233782675,
+        "generation": 4686.0451999999705,
+        "direct": 1518.057955469221,
+        "chargeInput": 2196.0388483152483,
+        "delivered": 1976.0601803613783,
+        "purchased": 1489.8040875476438,
+        "exported": 971.9483962155298
+      },
+      "supportedBill": 51443,
+      "unsupportedBill": 56656,
+      "additionalBurden": 5213,
+      "unroundedSupportEffect": 5214.314306416753,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 272.2989117934811,
+          "supportedBill": 8660,
+          "unsupportedBill": 9613
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 269.0628424156919,
+          "supportedBill": 8559,
+          "unsupportedBill": 9501
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 204.1612502779921,
+          "supportedBill": 6529,
+          "unsupportedBill": 7243
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 34.6248374279395,
+          "supportedBill": 1789,
+          "unsupportedBill": 1910
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 1.7553714207600541,
+          "supportedBill": 978,
+          "unsupportedBill": 984
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 25.04492049496301,
+          "supportedBill": 1553,
+          "unsupportedBill": 1641
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 109.55911001834056,
+          "supportedBill": 3639,
+          "unsupportedBill": 4022
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 144.88248198840415,
+          "supportedBill": 4675,
+          "unsupportedBill": 5182
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 82.74266745447105,
+          "supportedBill": 2977,
+          "unsupportedBill": 3266
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 29.488795950400746,
+          "supportedBill": 1663,
+          "unsupportedBill": 1766
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 82.85478284131054,
+          "supportedBill": 2980,
+          "unsupportedBill": 3270
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 233.32811546388908,
+          "supportedBill": 7441,
+          "unsupportedBill": 8258
+        }
+      ],
+      "periods": {
+        "day": {
+          "load": 2515.555596138386,
+          "direct": 1498.5209816480299,
+          "delivered": 439.7503855548382,
+          "purchased": 577.2842289355183,
+          "reductionPercent": 77.05142236483647
+        },
+        "night": {
+          "load": 2468.3666272398564,
+          "direct": 19.536973821191587,
+          "delivered": 1536.3097948065429,
+          "purchased": 912.5198586121277,
+          "reductionPercent": 63.031429426166184
+        }
+      },
+      "openingYearStateOfCharge": 0,
+      "closingYearStateOfCharge": 0.395056098392603,
+      "mean": [
+        {
+          "hour": 0,
+          "load": 0.3177158778947296,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.19291618381769757,
+          "purchased": 0.12479969407703205,
+          "exported": 0,
+          "stateOfCharge": 1.986778790180212,
+          "openingStateOfCharge": 2.1901303029707595
+        },
+        {
+          "hour": 1,
+          "load": 0.17172275767914144,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.09726387228002108,
+          "purchased": 0.07445888539912038,
+          "exported": 0,
+          "stateOfCharge": 1.884253666696018,
+          "openingStateOfCharge": 1.986778790180212
+        },
+        {
+          "hour": 2,
+          "load": 0.17582243874615291,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.09831794986736425,
+          "purchased": 0.07750448887878862,
+          "exported": 0,
+          "stateOfCharge": 1.7806174478763106,
+          "openingStateOfCharge": 1.884253666696018
+        },
+        {
+          "hour": 3,
+          "load": 0.17215602265306654,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.09272122093850788,
+          "purchased": 0.07943480171455869,
+          "exported": 0,
+          "stateOfCharge": 1.6828806993438514,
+          "openingStateOfCharge": 1.7806174478763106
+        },
+        {
+          "hour": 4,
+          "load": 0.1595654232982373,
+          "generation": 0.002994335316354367,
+          "direct": 0.002994335316354367,
+          "chargeInput": 0,
+          "delivered": 0.07693441774029951,
+          "purchased": 0.07963667024158352,
+          "exported": 0,
+          "stateOfCharge": 1.6017847025044474,
+          "openingStateOfCharge": 1.6828806993438514
+        },
+        {
+          "hour": 5,
+          "load": 0.9737652970599345,
+          "generation": 0.040381644574206274,
+          "direct": 0.038823992037441316,
+          "chargeInput": 0.0015576525367649672,
+          "delivered": 0.2083212263215478,
+          "purchased": 0.7266200787009464,
+          "exported": 0,
+          "stateOfCharge": 1.3836725680717392,
+          "openingStateOfCharge": 1.6017847025044474
+        },
+        {
+          "hour": 6,
+          "load": 0.6467354681740425,
+          "generation": 0.20650587129771447,
+          "direct": 0.16855057117323496,
+          "chargeInput": 0.0379553001244796,
+          "delivered": 0.08868171393690431,
+          "purchased": 0.3895031830639032,
+          "exported": 0,
+          "stateOfCharge": 1.3262013930896233,
+          "openingStateOfCharge": 1.3836725680717392
+        },
+        {
+          "hour": 7,
+          "load": 1.118358225724098,
+          "generation": 0.607473389205284,
+          "direct": 0.45583487571629444,
+          "chargeInput": 0.15163851348898946,
+          "delivered": 0.08110166100145896,
+          "purchased": 0.5814216890063443,
+          "exported": 0,
+          "stateOfCharge": 1.3845696612486802,
+          "openingStateOfCharge": 1.3262013930896233
+        },
+        {
+          "hour": 8,
+          "load": 0.7205823922459673,
+          "generation": 1.099976200452286,
+          "direct": 0.5553510155236056,
+          "chargeInput": 0.54462518492868,
+          "delivered": 0.02236674294384607,
+          "purchased": 0.1428646337785155,
+          "exported": 0,
+          "stateOfCharge": 1.8776698607075062,
+          "openingStateOfCharge": 1.3845696612486802
+        },
+        {
+          "hour": 9,
+          "load": 0.6718206442649125,
+          "generation": 1.4929112462139393,
+          "direct": 0.5879367048641482,
+          "chargeInput": 0.8961689928977905,
+          "delivered": 0.021850339782421093,
+          "purchased": 0.062033599618343475,
+          "exported": 0.008805548451999485,
+          "stateOfCharge": 2.704818136046711,
+          "openingStateOfCharge": 1.8776698607075062
+        },
+        {
+          "hour": 10,
+          "load": 0.3467163548126317,
+          "generation": 1.7362689589577809,
+          "direct": 0.31044233515220065,
+          "chargeInput": 1.3306257128376655,
+          "delivered": 0.00657216692209919,
+          "purchased": 0.029701852738331865,
+          "exported": 0.09520091096791382,
+          "stateOfCharge": 3.960232853560145,
+          "openingStateOfCharge": 2.704818136046711
+        },
+        {
+          "hour": 11,
+          "load": 0.5439722437070412,
+          "generation": 1.8724370159658703,
+          "direct": 0.46279626870555735,
+          "chargeInput": 1.1341121598355783,
+          "delivered": 0.027593633615395154,
+          "purchased": 0.053582341386088625,
+          "exported": 0.27552858742473185,
+          "stateOfCharge": 5.007059873997215,
+          "openingStateOfCharge": 3.960232853560145
+        },
+        {
+          "hour": 12,
+          "load": 0.6153107468988525,
+          "generation": 1.825388162107243,
+          "direct": 0.55074040423195,
+          "chargeInput": 0.8726211410632474,
+          "delivered": 0.01905510317868387,
+          "purchased": 0.045515239488218374,
+          "exported": 0.4020266168120452,
+          "stateOfCharge": 5.814815133684988,
+          "openingStateOfCharge": 5.007059873997215
+        },
+        {
+          "hour": 13,
+          "load": 0.19011017113123244,
+          "generation": 1.5710573101497296,
+          "direct": 0.18687027374678478,
+          "chargeInput": 0.6699885208948796,
+          "delivered": 0.0004712745348522633,
+          "purchased": 0.0027686228495954067,
+          "exported": 0.7141985155080647,
+          "stateOfCharge": 6.44992528636575,
+          "openingStateOfCharge": 5.814815133684988
+        },
+        {
+          "hour": 14,
+          "load": 0.16599814546820954,
+          "generation": 1.2087767434109993,
+          "direct": 0.16133136912437424,
+          "chargeInput": 0.30215496330948033,
+          "delivered": 0.0020723283778579745,
+          "purchased": 0.0025944479659773495,
+          "exported": 0.7452904109771448,
+          "stateOfCharge": 6.734390227569243,
+          "openingStateOfCharge": 6.44992528636575
+        },
+        {
+          "hour": 15,
+          "load": 0.5038649877293947,
+          "generation": 0.7563922360446509,
+          "direct": 0.3525987164935532,
+          "chargeInput": 0.06115057550370179,
+          "delivered": 0.10226303230292441,
+          "purchased": 0.04900323893291727,
+          "exported": 0.3426429440473962,
+          "stateOfCharge": 6.684608056378245,
+          "openingStateOfCharge": 6.734390227569243
+        },
+        {
+          "hour": 16,
+          "load": 0.4904901850115589,
+          "generation": 0.3262296021026841,
+          "direct": 0.23379528086268525,
+          "chargeInput": 0.013864188377654997,
+          "delivered": 0.192811780162104,
+          "purchased": 0.06388312398677015,
+          "exported": 0.07857013286234364,
+          "stateOfCharge": 6.494519318658498,
+          "openingStateOfCharge": 6.684608056378245
+        },
+        {
+          "hour": 17,
+          "load": 0.8779735749372399,
+          "generation": 0.07997965588055851,
+          "direct": 0.07928912042762193,
+          "chargeInput": 0.0000818841058656182,
+          "delivered": 0.6399558001040235,
+          "purchased": 0.15872865440559406,
+          "exported": 0.0006086513470709616,
+          "stateOfCharge": 5.82002435735405,
+          "openingStateOfCharge": 6.494519318658498
+        },
+        {
+          "hour": 18,
+          "load": 0.8735712467993371,
+          "generation": 0.011698311307380587,
+          "direct": 0.011698311307380587,
+          "chargeInput": 0,
+          "delivered": 0.6956851014729766,
+          "purchased": 0.1661878340189796,
+          "exported": 0,
+          "stateOfCharge": 5.086707872387397,
+          "openingStateOfCharge": 5.82002435735405
+        },
+        {
+          "hour": 19,
+          "load": 0.7989030988212612,
+          "generation": 0.00000931701332118199,
+          "direct": 0.00000931701332118199,
+          "chargeInput": 0,
+          "delivered": 0.6080986063678273,
+          "purchased": 0.19079517544011257,
+          "exported": 0,
+          "stateOfCharge": 4.4457156596885605,
+          "openingStateOfCharge": 5.086707872387397
+        },
+        {
+          "hour": 20,
+          "load": 0.7557670550030546,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.5565784169061748,
+          "purchased": 0.19918863809687953,
+          "exported": 0,
+          "stateOfCharge": 3.8590304950504652,
+          "openingStateOfCharge": 4.4457156596885605
+        },
+        {
+          "hour": 21,
+          "load": 0.9883948288392128,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.6981455568274995,
+          "purchased": 0.2902492720117133,
+          "exported": 0,
+          "stateOfCharge": 3.12312046241666,
+          "openingStateOfCharge": 3.8590304950504652
+        },
+        {
+          "hour": 22,
+          "load": 0.8311079727337907,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.5294160480910042,
+          "purchased": 0.3016919246427862,
+          "exported": 0,
+          "stateOfCharge": 2.565066948479059,
+          "openingStateOfCharge": 3.12312046241666
+        },
+        {
+          "hour": 23,
+          "load": 0.544156274279918,
+          "generation": 0,
+          "direct": 0,
+          "chargeInput": 0,
+          "delivered": 0.35466933034591136,
+          "purchased": 0.18948694393400717,
+          "exported": 0,
+          "stateOfCharge": 2.1912126484458074,
+          "openingStateOfCharge": 2.565066948479059
+        }
+      ],
+      "ratio": 3.345866103970842,
+      "annualBillSavings": 124471
+    }
+  ],
+  "sensitivity": [
+    {
+      "annualConsumption": 3600,
+      "occupancy": "official_standard_calendar",
+      "none": 12599,
+      "battery": 2301,
+      "ratio": 5.475445458496306
+    },
+    {
+      "annualConsumption": 6000,
+      "occupancy": "official_standard_calendar",
+      "none": 21000,
+      "battery": 7885,
+      "ratio": 2.663284717818643
+    },
+    {
+      "annualConsumption": 4983.922223378252,
+      "occupancy": "almost_never",
+      "none": 17442,
+      "battery": 5213,
+      "ratio": 3.345866103970842
+    },
+    {
+      "annualConsumption": 4983.922223378252,
+      "occupancy": "almost_every_weekday",
+      "none": 17442,
+      "battery": 5057,
+      "ratio": 3.4490804824995056
+    }
+  ]
+}

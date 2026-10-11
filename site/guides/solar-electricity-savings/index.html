@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="太陽光による電気代削減と売電収入を，自家消費量，買わずに済む単価，月々・長期間の計算に分けて説明します．昼間の使い方と料金明細から，自宅の効果を確かめましょう．">
+    <link rel="canonical" href="https://haretoku.jp/guides/solar-electricity-savings/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="太陽光で，電気代はどれくらい減る？｜はれトク">
+    <meta property="og:description" content="太陽光による電気代削減と売電収入を，自家消費量，買わずに済む単価，月々・長期間の計算に分けて説明します．昼間の使い方と料金明細から，自宅の効果を確かめましょう．">
+    <meta property="og:url" content="https://haretoku.jp/guides/solar-electricity-savings/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="はれトク">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://haretoku.jp/og-home-photo-20260926.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="青空と太陽光パネルのある住宅，テラスのノートPC">
+    <meta name="twitter:card" content="summary_large_image">
+    <title>太陽光で，電気代はどれくらい減る？｜はれトク</title>
+    <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/shared/styles/main.css">
+    <link rel="stylesheet" href="/articles/styles/article.css">
+    <link rel="stylesheet" href="/articles/styles/electricity-sales-hero.css">
+    <link rel="stylesheet" href="/articles/styles/electricity-savings.css">
+    <link rel="stylesheet" href="/shared/styles/fixed-quote-bar.css">
+    <script type="module" src="/articles/src/article-data.js"></script>
+    <script type="module" src="/shared/analytics.js"></script>
+    <script type="module" src="/shared/quote-entry.js"></script>
+  </head>
+  <body class="guide-benchmark-page economics-page">
+    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span><nav class="site-nav" aria-label="主要メニュー"><a href="/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"></path></svg><span>トップ</span></a><a href="/simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"></path></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/" aria-current="page"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a><a class="site-data-link" href="/data/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"></rect><path d="M3 8h18M3 14h18M10 8v12"></path></svg><span>はれ<span class="brand-term">トク</span>データ</span></a></nav></div></header>
+    <main>
+      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a> ／ <a href="/guides/">はれ<span class="brand-term">トク</span>ガイド</a> ／ 電気代の節約</nav>
+      <header class="economics-hero">
+        <div class="economics-hero__inner">
+          <div class="economics-hero__copy">
+            <div class="economics-hero__meta"><span class="economics-hero__category">収支</span><span>更新日 <time datetime="2026-10-09">2026.10.09</time></span></div>
+            <h1><span>太陽光で，電気代は</span><span>どれくらい減る？</span></h1>
+            <p class="economics-hero__lead">発電した電気を自宅で使えば，電力会社から買う電気を減らせます．節約額は，発電量だけでなく，昼間の電気の使い方や契約料金によって変わります．自宅で使える量と買わずに済む単価を確認し，余った電気の売電収入も含めて，月々・長期間の効果を見ていきましょう．</p>
+            <p class="economics-hero__scope">全国の住宅用太陽光 ／ 電気代の節約の仕組み</p>
+          </div>
+          <figure class="economics-hero__visual"><img src="/shared/assets/article-electricity-budget-photo.webp" width="1536" height="1024" alt="電気料金の明細を横に置き，家計ノートに書き込む人" decoding="async" fetchpriority="high"></figure>
+        </div>
+      </header>
+      <article data-guide-presentation id="economics-article" data-quote-description="自宅の導入費用を，見積もりで確認しましょう．" class="article-width article article--continuous article--guide">
+        <details class="article-toc"><summary><span class="article-toc__title">目次</span><span class="article-toc__state" aria-hidden="true"></span></summary><ol>
+          <li><a href="#savings-overview">太陽光で，電気代はどれくらい減る？</a><ol><li><a href="#overview-quantity">自宅で使う電気の量</a></li><li><a href="#overview-price">買わずに済む電気の単価</a></li><li><a href="#overview-period">月々・長期間の収入・節約の求め方</a></li><li><a href="#overview-home">自宅の節約額の確かめ方</a></li></ol></li>
+          <li><a href="#self-consumption">発電した電気は，どれくらい自宅で使える？</a><ol><li><a href="#generation-conditions">発電量は，地域・屋根・パネル容量で変わる</a></li><li><a href="#daytime-overlap">発電と使用の時間が重なる分を，自宅で使える</a></li><li><a href="#battery-shift">蓄電池があれば，昼間の余りを夜にも使える</a></li></ol></li>
+          <li><a href="#avoided-price">買わずに済む電気の単価は，どう決まる？</a><ol><li><a href="#bill-components">請求書で，契約名と使用量を確認する</a></li><li><a href="#tariff-and-time">買わずに済む単価は，契約と使用量で変わる</a></li></ol></li>
+          <li><a href="#savings-calculation">電気代削減と売電収入は，どう求める？</a><ol><li><a href="#monthly-savings">電気代削減と売電収入から，月々の効果を求める</a></li><li><a href="#long-term-savings">発電量・買電と売電の単価の変化を見込み，長期間の効果を求める</a></li></ol></li>
+          <li><a href="#home-check">自宅の節約額は，どう確かめる？</a><ol><li><a href="#bill-and-lifestyle">料金明細と昼間の使い方を確認する</a></li><li><a href="#diagnostic-check">自力での計算が大変なら，はれトク診断を使う</a></li></ol></li>
+        </ol></details>
+
+        <section id="savings-overview" class="economics-intro">
+          <h2>太陽光で，電気代はどれくらい減る？</h2>
+          <figure class="economics-chapter-photo"><img src="/shared/assets/article-solar-economics-photo.webp" width="1536" height="1024" alt="太陽光パネルの上に並べた，高さの異なる3つの硬貨の山" loading="lazy" decoding="async"></figure>
+          <figure class="savings-equation" aria-labelledby="savings-equation-caption">
+            <div class="savings-equation__cards" role="group" aria-label="電気代削減と売電収入を足すと，収入・節約の合計になります">
+              <div class="savings-equation__card">
+                <p class="savings-equation__title">電気代削減</p>
+                <p class="savings-equation__price"><span class="savings-equation__price-label">従量電灯B</span><strong>約30〜40<span>円／kWh</span></strong></p>
+                <p class="savings-equation__calculation">自宅で使った量<br>× 買わずに済む単価</p>
+              </div>
+              <span class="savings-equation__operator" aria-hidden="true">＋</span>
+              <div class="savings-equation__card">
+                <p class="savings-equation__title">売電収入</p>
+                <p class="savings-equation__price"><span class="savings-equation__price-label">FIT・FIT終了後</span><strong>約8〜24<span>円／kWh</span></strong></p>
+                <p class="savings-equation__calculation">余って売った量<br>× 売電単価</p>
+              </div>
+              <span class="savings-equation__operator" aria-hidden="true">＝</span>
+              <div class="savings-equation__card savings-equation__card--result">
+                <p class="savings-equation__title">収入・節約</p>
+                <p class="savings-equation__result">金額の合計</p>
+                <p class="savings-equation__calculation">電気代削減<br>＋ 売電収入</p>
+              </div>
+            </div>
+            <figcaption id="savings-equation-caption">図1　自家消費と売電による，収入・節約の関係（式 (1)）</figcaption>
+            <p class="economics-figure-note">単価は税込．従量電灯Bの電力量料金は29.80〜40.49円／kWh<span data-cite-sources="article-source-5">（東京電力エナジーパートナー，2026a）</span>．2026年度認定の住宅用10 kW未満のFITは最初の4年間24円，5～10年目8.3円（経済産業省，2026），東京電力のFIT終了後の再エネ買取標準プランは8.50円です（東京電力エナジーパートナー，2026b）．</p>
+          </figure>
+          <p class="economics-intro__answer"><strong>買わずに済む単価が売電単価より高ければ，同じ電気は売るより自宅で使う方がトクになります．</strong>ここからは，自宅で使う量と買わずに済む単価を確認し，電気代削減と売電収入を合わせた月々・長期間の効果を求める方法を見ていきます．</p>
+          <section id="overview-quantity">
+            <h3>自宅で使う電気の量</h3>
+            <p>発電した電気を自宅で使うことを「自家消費」といいます．地域や屋根，パネル容量で発電量が変わり，そのうち家庭の使用と時間が重なる分を使えます．蓄電池があれば，昼間の余りを夜へ回すこともできます．<strong>発電量の全量が，そのまま電気代の節約につながるわけではありません．</strong></p>
+          </section>
+          <section id="overview-price">
+            <h3>買わずに済む電気の単価</h3>
+            <p>電気代削減の概算は，自宅で使った電気の量に，買わずに済む部分の単価を掛けて求めます．同じ量を使っても，単価が高いほど節約額は大きくなります．基本料金など購入量を減らしても変わらない部分を分け，どの料金が減るかを確認します．</p>
+          </section>
+          <section id="overview-period">
+            <h3>月々・長期間の収入・節約の求め方</h3>
+            <p>当サイトの代表例では，<strong>初年度の電気代削減は月平均約4,700円，30年間では約209万円の試算です．</strong>東京都の既存住宅に南向き4 kWを設置し，平日昼間はほぼ毎日在宅，蓄電池なし，初期電気代月15,467円とする条件です．月平均は初年度の年間節約額を12で割り，30年合計は年0.3％の発電量低下・年1.5％の買電料金上昇を見込んで求めています．<a href="/pages/calculation-method.html#electricity-sales-example">代表試算の条件・計算根拠</a></p>
+            <p><strong>図1の合計を求めるには，電気代削減に売電収入を加えます．</strong>売電収入は，余って売った電力量に売電単価を掛けた金額です．月々は両者を足し，長期間は発電量・電気料金・売電単価の変化を反映して，年ごとの金額を合計します．後の計算の章で，この関係を説明します．</p>
+          </section>
+          <section id="overview-home">
+            <h3>自宅の節約額の確かめ方</h3>
+            <p>自宅の場合は，料金明細で使用量と契約を，暮らしの中で昼間の使い方を確認します．はれトク診断では地域・電気代・屋根や設備・在宅状況を入力し，節約効果の目安を調べられます．診断が置く条件と自宅の違いまで確認すると，結果を判断材料にできます．</p>
+          </section>
+        </section>
+
+        <section id="self-consumption">
+          <h2>発電した電気は，どれくらい自宅で使える？</h2>
+          <figure class="economics-chapter-photo"><img src="/shared/assets/article-daytime-self-consumption-photo.png" width="1536" height="1024" alt="日中の明るい住宅でノートPCを使う人と，壁に設置されたエアコン" loading="lazy" decoding="async"></figure>
+          <p><strong>自宅で使える量は，発電量と，発電している時間の使用量で決まります．</strong>まず地域・屋根・容量から発電量を考え，昼間にどれだけ使えるかを確認します．蓄電池を加える場合は，余りをためて後から使える量も見ます．</p>
+          <section id="generation-conditions">
+            <h3>発電量は，地域・屋根・パネル容量で変わる</h3>
+            <p>太陽光は，パネルに当たる日射を使って発電します．地域の気象条件に加え，屋根の方角・傾斜や影のかかり方で，パネルに届く日射が変わります．太陽光発電協会も，設置方位と角度によって発電量が変わることを説明しています<span data-cite-sources="jpea-residential-orientation-angle-impact">（太陽光発電協会，2026c）</span>．同じ容量でも，自宅の屋根条件を含めて考える必要があります．</p>
+            <p>パネル容量は発電設備の大きさを表し，単位はkWです．これに対し，実際に発電したり使ったりする電気の量はkWhで表します．同じ日射や設置条件なら，容量を増やすことで発電量を増やせますが，増えた分を自宅で使えるかは昼間の使用量次第です．</p>
+          </section>
+          <section id="daytime-overlap">
+            <h3>発電と使用の時間が重なる分を，自宅で使える</h3>
+            <p><strong>太陽光だけの場合，自家消費できるのは，発電しているときに家庭で必要とする電気です．</strong>その時点の発電が使用を上回れば余りを売り，不足すれば電力会社から買います．昼間の余りを，蓄電池なしで夜の使用に回すことはできません．住宅用の余剰売電も，この電気の流れを前提としています（太陽光発電協会，2026e）．</p>
+            <p>図2は，昼間に4 kWh発電し，1日に6 kWh使う，蓄電池なしの2家庭の計算例です．昼間の使用分は発電と重なると仮定します．家庭Aは昼間に3 kWh使い，家庭Bは昼間に1 kWh使うため，自家消費量はそれぞれ3 kWh，1 kWhになります．発電量と1日の使用量が同じでも，買う電気は家庭Aが3 kWh，家庭Bが5 kWhとなります．</p>
+            <figure class="economics-fit-chart" aria-labelledby="daytime-example-caption" aria-describedby="daytime-example-note">
+              <svg viewBox="0 0 360 470" role="img" aria-labelledby="daytime-example-title daytime-example-description">
+                <title id="daytime-example-title">使う時間の違いによる自家消費量の計算例</title>
+                <desc id="daytime-example-description">蓄電池なしで，両家庭とも昼間に4キロワット時発電し，1日に6キロワット時使う仮例．昼間の使用分は発電と重なると仮定する．家庭Aは昼間に3，それ以外に3キロワット時使い，自家消費3，購入3，余剰1キロワット時．家庭Bは昼間に1，それ以外に5キロワット時使い，自家消費1，購入5，余剰3キロワット時．</desc>
+                <g font-family="sans-serif" fill="#202824" font-size="20">
+                  <text x="180" y="26" text-anchor="middle" font-weight="700">同じ発電量・同じ1日の使用量</text>
+                  <text x="180" y="56" text-anchor="middle" fill="#526158" font-size="18">発電4 kWh ／ 使用6 kWh ／ 蓄電池なし</text>
+                  <rect x="12" y="80" width="336" height="172" rx="6" fill="#f0f7f3" stroke="#DBE1DD"/>
+                  <text x="30" y="111" font-weight="700">家庭A：昼間にも使う</text>
+                  <text x="30" y="148">昼間3 kWh ＋ それ以外3 kWh</text>
+                  <path d="M30 166H330" stroke="#DBE1DD"/>
+                  <text x="30" y="199" fill="#007447" font-weight="700">自家消費 3 kWh</text>
+                  <text x="30" y="232" font-size="18">購入3 kWh ／ 余りを売る1 kWh</text>
+                  <rect x="12" y="272" width="336" height="172" rx="6" fill="#fff" stroke="#DBE1DD"/>
+                  <text x="30" y="303" font-weight="700">家庭B：昼間の使用が少ない</text>
+                  <text x="30" y="340">昼間1 kWh ＋ それ以外5 kWh</text>
+                  <path d="M30 358H330" stroke="#DBE1DD"/>
+                  <text x="30" y="391" fill="#007447" font-weight="700">自家消費 1 kWh</text>
+                  <text x="30" y="424" font-size="18">購入5 kWh ／ 余りを売る3 kWh</text>
+                </g>
+              </svg>
+              <figcaption id="daytime-example-caption">図2　使う時間が違うと，自家消費できる量が変わる</figcaption>
+              <p class="economics-figure-note" id="daytime-example-note">時間の重なりを説明する1日の計算例です．</p>
+            </figure>
+            <p>昼間に在宅する家庭では，エアコンや調理などに発電した電気を使う機会があります．外出が多い家庭でも，洗濯や食器洗いなど，もともと必要な家電の使用を昼へ移せるかを考えられます．<strong>自家消費を増やすために，不要な電気まで使う必要はありません．</strong>移せる家電と使用時間を，無理のない範囲で確認しましょう．</p>
+          </section>
+          <section id="battery-shift">
+            <h3>蓄電池があれば，昼間の余りを夜にも使える</h3>
+            <p>蓄電池は，昼間に使い切れなかった電気をため，夕方や夜に使うための設備です．太陽光発電協会も，昼の余剰電力を蓄えて夜に自家消費する方法を示しています（太陽光発電協会，2017）．直接使う分に，蓄電池から家庭へ供給する分が加わり，電力会社から買う量をさらに減らせます．</p>
+            <p>追加で使える量は，昼間の余り，蓄電池にためられる量，夕方や夜に必要な量によって限られます．充電・放電では電気の一部が失われるため，充電した量のすべてが購入量の削減になるわけではありません．診断も，損失後に家庭へ供給した量を自家消費へ加えます．<a href="/pages/calculation-method.html#calculation-formulas">蓄電池を含む自家消費量の計算方法</a></p>
+          </section>
+          <footer class="economics-chapter-footer" aria-label="この章の補足">
+            <p class="economics-resource-label">この章の参考資料</p>
+            <ul class="source-list">
+              <li data-bibliography-source="jpea-residential-orientation-angle-impact">太陽光発電協会（2026年アクセスc）．<a href="https://www.jpea.gr.jp/faq/590/">設置方位や設置角度の影響はありますか？</a></li>
+              <li>太陽光発電協会（2026年アクセスe）．<a href="https://www.jpea.gr.jp/faq/571/">発電した電気を売ることができますか？</a></li>
+              <li>太陽光発電協会（2017）．<a href="https://www.jpea.gr.jp/wp-content/themes/jpea/pdf/pvoutlook2050_2017.pdf">JPEA PV OUTLOOK 2017</a>，5.3.2，24〜25頁．</li>
+            </ul>
+            <p><a href="/pages/calculation-method.html#calculation-formulas">発電・需要・自家消費の計算方法を確認する</a></p>
+          </footer>
+        </section>
+
+        <section id="avoided-price">
+          <h2>買わずに済む電気の単価は，どう決まる？</h2>
+          <figure class="economics-chapter-photo"><img src="/shared/assets/article-subsidy-search-photo.webp" width="1536" height="1024" alt="住宅と太陽光の資料を机に置き，ノートPCで情報を調べる人" loading="lazy" decoding="async"></figure>
+          <p><strong>自家消費の節約単価は，購入を減らす電気に適用される料金から考えます．</strong>まず請求書で契約名と使用量を確認し，その契約の料金表から適用される単価を調べます．</p>
+          <section id="bill-components">
+            <h3>請求書で，契約名と使用量を確認する</h3>
+            <p>請求書で確認するのは，<strong>①の契約名と②の使用量</strong>です．①で使う料金表を選び，②をその表に当てはめて料金を計算します．図3の見本なら，従量電灯Bの料金表を使い，123 kWhの購入量から考えます．</p>
+            <figure class="savings-bill" id="bill-reading-example" aria-labelledby="bill-reading-caption">
+              <a class="savings-bill__zoom" href="https://www.tepco.co.jp/ep/support/kenshin-web/images/kenshin_receipt_tab1_step03.png" target="_blank" rel="noopener" aria-label="東京電力公式の請求書見本を原寸で開く（新しいタブ）">
+                <img src="/shared/assets/tepco-bill-sample.png" width="711" height="697" alt="東京電力の電気料金・ご使用量照会の公式見本．契約は従量電灯B・30 A，使用量123 kWh．下に基本料金，段階別電力量料金，燃料費調整額，再エネ賦課金と単価の欄がある" loading="lazy" decoding="async">
+                <span class="savings-bill__marker savings-bill__marker--contract" aria-hidden="true">①</span>
+                <span class="savings-bill__marker savings-bill__marker--usage" aria-hidden="true">②</span>
+              </a>
+              <figcaption id="bill-reading-caption">図3　請求書のどの数字を見るか．<a href="https://www.tepco.co.jp/ep/support/kenshin-web/receipt/index-j.html">東京電力の公式見本</a>に当サイトが番号を重ねています．画像を押すと原寸表示．</figcaption>
+              <p class="economics-figure-note">2022年4月のレイアウト見本です．単価は次節の料金表で確認します．</p>
+            </figure>
+            <table class="article-table savings-reference-table"><caption>表1　請求書で確認する2つの項目</caption><tbody>
+              <tr><th scope="row">① 契約名</th><td>対応する料金表を選ぶ．見本は従量電灯B・30 A．</td></tr>
+              <tr><th scope="row">② 使用量</th><td>電力会社から買った量．見本の123 kWhを，次の計算の出発点にする．</td></tr>
+            </tbody></table>
+            <p>確認した契約名と使用量を使って，次節では料金表のどの単価が適用されるかを調べます．</p>
+          </section>
+          <section id="tariff-and-time">
+            <h3>買わずに済む単価は，契約と使用量で変わる</h3>
+            <p><strong>契約名で，使う料金表が決まります．</strong>図3の①は従量電灯Bなので，表2の単価を使います<span data-cite-sources="article-source-5">（東京電力エナジーパートナー，2026a）</span>．従量電灯Bは段階料金で，月の購入量によって適用される単価が変わります．購入量の全量に，一番高い単価を掛ける仕組みではありません．</p>
+            <p>購入する電気が減ると，その量に応じた電力量料金や再エネ賦課金が減り，燃料費調整額も購入量に応じて変わります．一方，契約容量に応じて基本料金が決まるプランでは，容量を変えずに使用量だけ減らしても，基本料金は通常変わりません．例えば東京電力の従量電灯Bは，契約電流別の基本料金と，使用量別の電力量料金などを合算する仕組みです（東京電力エナジーパートナー，2026c）．</p>
+            <table class="article-table savings-rate-table" id="tariff-reading-example"><caption>表2　①従量電灯Bの契約に対応する，電力量料金の単価</caption><thead><tr><th scope="col">使用量の段階</th><th scope="col">単価（税込）</th></tr></thead><tbody>
+              <tr><th scope="row">最初の120 kWhまで</th><td><strong>29.80円／kWh</strong></td></tr>
+              <tr><th scope="row">120 kWh超300 kWhまで</th><td><strong>36.40円／kWh</strong></td></tr>
+              <tr><th scope="row">300 kWhを超える部分</th><td><strong>40.49円／kWh</strong></td></tr>
+            </tbody></table>
+            <p class="economics-figure-note"><a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html">東京電力「料金単価表‐電灯」</a>の従量電灯Bから，計算に使う段階と単価を抜粋．2026年10月9日確認．</p>
+            <p>図3の②は123 kWhなので，最初の120 kWhには29.80円／kWh，残り3 kWhには36.40円／kWhが適用されます．ここから自家消費で購入量を減らすと，まず120 kWhを超える3 kWh分，次に120 kWh以下の部分が減ります．<strong>減らした電気すべてに，最高単価を掛けるわけではありません．</strong>次章では，この数字を使って月々の節約額を求めます．</p>
+            <p>明細の総額を使用量で割った「1 kWh当たりの平均額」には，基本料金も含まれます．その平均額を自家消費量に掛けるだけでは，実際に減る支払いと一致しない場合があります．<strong>正確に比べるには，同じ契約・同じ月の料金条件で，自家消費による購入量の違いを料金計算へ反映します．</strong></p>
+            <p><strong>従量電灯Bの電力量料金の単価は，使う時刻では変わりません．</strong>一方，スマートライフS・Lなどの時間帯別料金では，何時に使うかで単価が変わります（東京電力エナジーパートナー，2026d）．この契約の場合は，太陽光で購入量が減る昼間の単価を確認します．</p>
+            <details class="savings-supplement"><summary>購入量が減ったときの計算例を見る</summary>
+            <div class="savings-worked-example" id="monthly-worked-example">
+              <p class="savings-worked-example__label">資料の数字を使って計算する</p>
+              <ol class="savings-worked-example__steps">
+                <li><strong>② 123 kWhから，減る50 kWhを分ける</strong><br>120 kWhを超える3 kWhと，120 kWh以下の47 kWhが減ります．</li>
+                <li><strong>①の料金表から，それぞれの段階の単価を掛ける</strong><br>3 kWh × 36.40円／kWh ＋ 47 kWh × 29.80円／kWh ＝ 1,509.80円．</li>
+                <li><strong>燃料費調整額・再エネ賦課金の変化を加える</strong><br>1,509.80円 ＋ 50 kWh × 当月の燃料費調整単価 ＋ 50 kWh × 再エネ賦課金単価．</li>
+              </ol>
+              <p class="savings-worked-example__result">電力量料金の削減は，月約1,510円</p>
+              <p class="economics-figure-note">この数値例は電力量料金の部分を計算しています．自宅の総節約額を求めるときは，対象月の調整単価・賦課金単価も加えます．</p>
+            </div>
+            <p><strong>電気代削減額は，太陽光がある場合とない場合の請求額の差です．</strong>同じ暮らし方・同じ月の料金条件で，それぞれの購入量に段階料金や時間帯料金を適用します．</p>
+            <p class="article-formula"><span class="formula-term">月の電気代削減額</span><span class="formula-operator">＝</span><span class="formula-term">太陽光がない場合の電気料金</span><span class="formula-operator">−</span><span class="formula-term">太陽光がある場合の電気料金</span><span class="formula-term">（式 (2)）</span></p>
+            </details>
+          </section>
+          <footer class="economics-chapter-footer" aria-label="この章の補足">
+            <p class="economics-resource-label">この章の参考資料</p>
+            <ul class="source-list">
+              <li data-bibliography-source="article-source-5">東京電力エナジーパートナー（2026年アクセスa）．<a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html">料金単価表‐電灯</a></li>
+              <li>東京電力エナジーパートナー（2026年アクセスc）．<a href="https://www.tepco.co.jp/ep/private/plan2/chargelist04.html">主な契約種別の料金計算式</a></li>
+              <li>東京電力エナジーパートナー（2026年アクセスd）．<a href="https://www.tepco.co.jp/ep/private/plan/smartlife/index-j.html">スマートライフ（オール電化）</a></li>
+            </ul>
+            <p>従量電灯Bの料金表と請求書見本は2026年10月9日に確認しました．自宅の契約料金と，明細の対象月の調整額・賦課金を確認しましょう．</p>
+            <nav class="article-related-card" aria-label="売電の関連情報"><p class="article-related-card__label">あわせて読みたい</p><div class="article-related-card__item"><a href="/guides/solar-fit/"><span>自家消費と比べる売電単価を，FIT制度の解説で確認する</span><span aria-hidden="true">→</span></a></div></nav>
+          </footer>
+        </section>
+
+        <section id="savings-calculation">
+          <h2>電気代削減と売電収入は，どう求める？</h2>
+          <figure class="economics-chapter-photo"><img src="/shared/assets/article-quotes-explanation-photo.webp" width="1536" height="1024" alt="書類の表に並ぶ金額をペンで示し，内容を確認する手元" loading="lazy" decoding="async"></figure>
+          <p><strong>月々の効果は，買わずに済んだ電気代と，余った電気を売った収入を足して求めます．</strong>まずひと月の計算を押さえ，長期間では発電量・電気料金・売電単価の変化を反映して，年ごとの収入・節約を合計します．</p>
+          <section id="monthly-savings">
+            <h3>電気代削減と売電収入から，月々の効果を求める</h3>
+            <p><strong>月150 kWh発電し，昼間に50 kWhを自宅で使う家庭を例に計算します．</strong>蓄電池はなく，昼間に使い切れない残り100 kWhを売ります．買電は従量電灯Bで，太陽光がない場合の月の購入量を図3と同じ123 kWhとします．売電はFIT終了後の東京電力「再エネ買取標準プラン」の8.50円／kWhを使います（東京電力エナジーパートナー，2026b）．</p>
+            <p><strong>自家消費による電力量料金の削減は，月約1,510円です．</strong>自宅で50 kWh使うことで，購入量は123−50＝73 kWhに減ります．前節の表2に当てはめると，120 kWhを超える3 kWhと，120 kWh以下の47 kWhの料金が減ります．</p>
+            <p class="article-formula"><span class="formula-term">月の電力量料金の削減額</span><span class="formula-operator">＝</span><span class="formula-term">3 kWh × 36.40円／kWh</span><span class="formula-operator">＋</span><span class="formula-term">47 kWh × 29.80円／kWh</span><span class="formula-term">＝ 1,509.80円（式 (3)）</span></p>
+            <p><strong>余った100 kWhの売電収入は，月850円です．</strong>売った電力量に契約の単価を掛け，100×8.50＝850円と求めます．自宅の場合は，売電先の明細で売った量を，契約で単価を確認します．FIT終了後の契約の選び方は，<a href="/guides/solar-fit/#post-fit-conditions">FIT制度の記事</a>で説明します．</p>
+            <p class="article-formula"><span class="formula-term">月の売電収入</span><span class="formula-operator">＝</span><span class="formula-term">100 kWh</span><span class="formula-operator">×</span><span class="formula-term">8.50円／kWh</span><span class="formula-term">＝ 850円（式 (4)）</span></p>
+            <p><strong>電気代削減と売電収入を合わせると，月約2,360円です．</strong>電力量料金の削減1,509.80円と売電収入850円を足すと，2,359.80円になります．支払いが減る効果と入金を合わせた「収入・節約の合計」で，図1の式に対応します．</p>
+            <p class="article-formula"><span class="formula-term">月の収入・節約の合計</span><span class="formula-operator">＝</span><span class="formula-term">1,509.80円</span><span class="formula-operator">＋</span><span class="formula-term">850円</span><span class="formula-term">＝ 約2,360円（式 (5)）</span></p>
+            <p class="economics-figure-note">上の合計は電力量料金の削減と売電収入です．自宅の電気代削減を求めるときは，前節で示した燃料費調整額・再エネ賦課金の変化も加えます．</p>
+            <p><strong>年間の効果は，各月の収入・節約を合計して求めます．</strong>上の条件が12か月続く場合，電力量料金の削減は1,509.80円×12＝約1.81万円，売電収入は850円×12＝1.02万円で，合計は約2.83万円です．実際には天候や冷暖房の使用で月ごとの量が変わるため，各月を計算して合計し，12で割ると月平均が求められます．</p>
+          </section>
+          <section id="long-term-savings">
+            <h3>発電量・買電と売電の単価の変化を見込み，長期間の効果を求める</h3>
+            <p><strong>長期間の効果は，年ごとの電気代削減と売電収入を計算して合計します．</strong>当サイトでは，初年度を基準に，翌年以降の発電量を年0.3％ずつ低下させる設定です．発電量が変わると，自宅で使う量と余って売る量も変わるため，毎年計算し直します．<a href="/pages/calculation-method.html#calculation-formulas">発電量の劣化と年ごとの計算方法</a></p>
+            <p>電気料金についても，利用中の変化を想定します．同じ量を自家消費しても，買う電気が値上がりすれば節約額は大きくなり，値下がりすれば小さくなります．診断の標準シナリオは，買電料金が年1.5％上昇する比較仮定です．将来の値上がりを予測したものではないため，シナリオを変えて，料金の想定にどの程度左右されるかも見ましょう．<a href="/pages/calculation-method.html#scenarios">シナリオの設定を確認する</a></p>
+            <p><strong>売電収入は，その年に適用される売電単価で求めます．</strong>2026年度認定の10 kW未満の住宅用太陽光では，FITの単価は最初の4年間が24円／kWh，5～10年目が8.3円／kWhです（経済産業省，2026）．FIT終了後は売電先の契約単価を使います．初年度の売電収入を30年分に延ばすのではなく，売電量と単価を年ごとに掛け合わせます．<a href="/guides/solar-fit/#post-fit-conditions">FIT終了後の売電</a></p>
+            <p class="article-formula"><span class="formula-term">長期間の収入・節約の合計</span><span class="formula-operator">＝</span><span class="formula-term">各年の電気代削減額と売電収入を</span><span class="formula-term">利用期間分合計</span><span class="formula-term">（式 (6)）</span></p>
+            <p>表3は，前節の計算例のうち，<a href="#monthly-savings">電力量料金の削減（月1,509.80円・初年度約1.81万円）</a>を長期間へ延ばしたものです．毎月の太陽光なしの購入量123 kWhを保ち，自家消費量50 kWhを翌年から年0.3％ずつ減らし，表2の単価を年1.5％ずつ上げます．各年の減る購入量を段階料金へ当てはめて計算し直し，12か月分を合計します．</p>
+            <table class="article-table savings-period-table"><caption>表3　前節の計算例から求めた，電力量料金の削減額</caption><thead><tr><th scope="col">利用年</th><th scope="col">年額</th></tr></thead><tbody>
+              <tr><th scope="row">初年度</th><td>約1.81万円</td></tr>
+              <tr><th scope="row">2年目</th><td>約1.83万円</td></tr>
+              <tr><th scope="row">10年目</th><td>約2.02万円</td></tr>
+              <tr><th scope="row">30年目</th><td>約2.56万円</td></tr>
+              <tr class="savings-period-table__total"><th scope="row">1～30年目の合計</th><td>約65万円</td></tr>
+            </tbody></table>
+            <p class="economics-figure-note">表3も電力量料金のみの説明用計算で，燃料費調整額・再エネ賦課金は含みません．丸め前の各年の金額を合計し，現在価値への割引は行っていません．</p>
+            <details class="savings-supplement"><summary>表3の計算方法を見る</summary><p>2年目の月の自家消費量は50×0.997＝49.85 kWhです．減る量を，120 kWhを超える3 kWhと，120 kWh以下の46.85 kWhへ分け，それぞれの単価を1.015倍にします．年額は［3×36.40＋46.85×29.80］×1.015×12＝18,334.9194円です．3年目以降も，前年の自家消費量を0.997倍，単価を1.015倍にして同じ順序で計算します．</p></details>
+            <p><strong>導入で紹介した住宅の代表試算は，季節ごとの発電・使用の違いも見込んだ診断の結果です．</strong>こちらは初年度の電気代削減が年約5.7万円（月平均約4,700円），売電収入が年約6.9万円で，収入・節約の合計は初年度年約12.6万円です．上の説明用計算とは住宅条件や料金の設定が異なります．<a href="/pages/calculation-method.html#electricity-sales-example">代表試算の条件・計算根拠</a></p>
+            <p><strong>住宅の代表試算では，電気代削減と売電収入を合わせると，30年間で約296万円です．</strong>導入と同じ住宅条件で，毎年の発電・自家消費・売電を計算し，電気代削減2,094,799円と売電収入861,588円を合計すると，2,956,387円になります．設置費や維持費を差し引く前の金額で，各年の金額を足した名目合計です．<a href="/pages/calculation-method.html#electricity-sales-example">長期試算の条件・計算根拠</a></p>
+          </section>
+          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の計算根拠</p><ul class="source-list"><li>はれトク．<a href="/pages/calculation-method.html#electricity-sales-example">収支記事の代表試算</a>（公開データ2026-09-28版の標準シナリオ）．</li><li>はれトク．<a href="/pages/calculation-method.html#calculation-formulas">発電・需要・自家消費と長期評価の計算式</a>．</li><li>経済産業省（2026）．<a href="https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html">2026年度以降の買取価格等と2026年度の賦課金単価の設定</a>（2026年3月19日）．</li><li>東京電力エナジーパートナー（2026年アクセスb）．<a href="https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html">再エネ買取標準プラン</a>（FIT終了後の買取単価8.50円／kWh，東京電力の対象エリアの契約例）．</li></ul></footer>
+        </section>
+
+        <section id="home-check">
+          <h2>自宅の節約額は，どう確かめる？</h2>
+          <figure class="economics-chapter-photo"><img src="/shared/assets/hero-solar-low-plants.webp" width="1536" height="1024" alt="太陽光パネルのある住宅を望むテラスに置かれたノートPC" loading="lazy" decoding="async"></figure>
+          <p><strong>料金明細と昼間の電気の使い方を確認し，自宅の節約額を調べましょう．</strong>自力で発電量や長期間の節約額まで計算するのが大変な場合は，はれトク診断を使えます．</p>
+          <section id="bill-and-lifestyle">
+            <h3>料金明細と昼間の使い方を確認する</h3>
+            <p>料金明細や電力会社の会員画面では，月々の請求額に加え，使用量，契約名・契約容量，対象月を確認します．夏・冬とそれ以外で使い方が違う場合は，1か月だけを年間の代表にせず，過去1年の明細を見ると違いを把握しやすくなります．使用量と料金を分けて見ることで，請求額が高い理由が多く使うためか，単価が高いためかを整理できます．</p>
+            <p>昼間の使い方は，誰が在宅しているかに加え，エアコン，調理，洗濯など，どの家電をいつ使うかを確認します．同じ在宅時間でも電気の使用量は家庭によって異なります．時間別の使用量を会員画面で確認できる場合は，発電している時間にどれだけ使っているかを見る材料になります．将来の在宅勤務や家族構成の変化も，昼間の使用が変わる理由として考えましょう．</p>
+          </section>
+          <section id="diagnostic-check">
+            <h3>自力での計算が大変なら，はれトク診断を使う</h3>
+            <p><strong>自力での計算が大変な場合は，はれトク診断で節約額の目安を調べましょう．</strong>地域・月々の電気代・屋根の方角・平日昼間の在宅状況・パネルや蓄電池の容量などを入力すると，自宅の条件に応じた試算ができます．</p>
+            <p>診断では，これらの条件から発電量と自宅で使う電力量を見込み，発電量の低下や電気料金の変化も考慮して，長期間の節約額をシミュレーションします．設置費や維持費も含めた太陽光全体の収支を，一緒に確認できます．</p>
+            <aside class="economics-inline-quote article-action-stack" aria-label="はれトク診断の案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4><svg class="content-route-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"></path></svg>自宅の電気代削減の目安を調べる</h4><p>地域・暮らし・設備の条件を入力し，節約効果を確認しましょう．</p></div><a class="article-action__link" href="/simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a></div></aside>
+            <nav class="article-related-card" aria-label="収支の関連情報"><p class="article-related-card__label"><svg class="content-route-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1-10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path></svg>あわせて読みたい</p><div class="article-related-card__item"><a href="/guides/solar-economics/"><span>太陽光の収支は，何で決まる？</span><span aria-hidden="true">→</span></a></div></nav>
+          </section>
+          <footer class="economics-chapter-footer" aria-label="この章の補足"><p><a href="/pages/calculation-method.html#adopted-parameters">診断の採用値・根拠を確認する</a></p><p><a href="/pages/calculation-method.html#limitations">診断の前提・個別確認が必要な条件</a></p></footer>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a><a href="/pages/policy.html#advertising">広告方針</a><a href="/pages/policy.html#data">データ方針</a><a href="/pages/policy.html#privacy">プライバシー</a><a href="/pages/policy.html#disclaimer">免責事項</a></nav><p>売電単価と電気料金は，実際の契約条件によって異なります．</p></div></div></footer>
+  </body>
+</html>

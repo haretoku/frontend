@@ -46,12 +46,11 @@ test("公開4記事は章ごとの問い・結論・参考文献・関連記事�
 test("収支記事に統合した設置・維持費は出典と計算根拠へ接続する", async () => {
   const html = await readPage("electricity-sales");
   const text = prose(html);
-  for (const id of ["costs", "maintenance-baseline", "inspection-conditions", "removal-cost", "profit-baseline", "battery-profit", "decision-path"]) assert(html.includes(`id="${id}"`), id);
+  for (const id of ["costs", "maintenance-baseline", "inspection-conditions", "removal-cost", "decision-path"]) assert(html.includes(`id="${id}"`), id);
   assert.match(text, /30年間で約61万円/);
   assert.match(text, /5年|5，10/);
   assert.match(text, /20年/);
   assert.match(text, /補助金を利用しない|補助金なし/);
-  assert.match(text, /交換費を含めない試算/);
   assert.match(text, /30年間使っても費用を回収できない場合/);
   assert.match(html, /calculation-method\.html#electricity-sales-example/);
   assert.match(html, /calculation-method\.html#cost-maintenance-notes/);
@@ -91,26 +90,29 @@ test("見積もり記事は総額だけでなく範囲・保証・個人情報�
   assert.match(html, /data-inline-quote-action disabled/);
 });
 
-test("現行家庭比較表は補助金を除いた30年収支と丸め前の計算に一致する", async () => {
+test("収支の導入カードと診断グラフは代表条件・丸め前の計算に一致する", async () => {
   const html = await readPage("electricity-sales");
-  const values = ["almost_every_weekday", "almost_never"].map(daytimeOccupancy => {
-    const estimate = calculateEstimate({ prefectureCode: "13", housingAge: "existing", equipmentPackage: "solar_only", systemCapacityKw: 4, monthlyElectricityBillYen: null, detailConditions: { roof_orientation: "south" }, daytimeOccupancy }, publicData);
-    return estimate.scenarios.find(scenario => scenario.scenario === "standard");
-  });
-  const display = value => `約${Math.round(value / 10000)}万円`;
-  for (const [label, select] of [
-    ["30年間の電気代削減", s => s.total_electricity_savings_yen],
-    ["30年間の売電収入", s => s.total_sales_income_yen],
-    ["30年間の収支", s => s.profit_yen - s.subsidy_yen]
-  ]) {
-    assert(html.includes(`<tr><th>${label}</th><td data-label="家庭A">${display(select(values[0]))}</td><td data-label="家庭B">${display(select(values[1]))}</td></tr>`), label);
-  }
-  assert.equal(display(values[0].profit_yen - values[0].subsidy_yen), "約102万円");
-  const battery = calculateEstimate({ prefectureCode: "13", housingAge: "existing", equipmentPackage: "solar_plus_standard_battery", systemCapacityKw: 4, monthlyElectricityBillYen: null, detailConditions: { roof_orientation: "south" }, daytimeOccupancy: "almost_every_weekday" }, publicData).scenarios.find(s => s.scenario === "standard");
-  assert.equal(display(battery.profit_yen - battery.subsidy_yen), "約96万円");
+  const input = { prefectureCode: "13", housingAge: "existing", equipmentPackage: "solar_only", systemCapacityKw: 4, monthlyElectricityBillYen: null, detailConditions: { roof_orientation: "south" }, daytimeOccupancy: "almost_every_weekday" };
+  const solar = calculateEstimate(input, publicData).scenarios.find(s => s.scenario === "standard");
+  const manYen = value => `約${Math.round(value / 10000)}万円`;
+  for (const [key, value] of [
+    ["total-benefit", solar.total_revenue_yen], ["installation", solar.gross_installation_cost_yen],
+    ["maintenance", solar.total_maintenance_and_replacement_cost_yen], ["profit", solar.profit_yen - solar.subsidy_yen],
+    ["expenses", solar.gross_installation_cost_yen + solar.total_maintenance_and_replacement_cost_yen],
+    ["savings", solar.total_electricity_savings_yen], ["sales", solar.total_sales_income_yen]
+  ]) assert(html.includes(`data-economics-example="${key}">${manYen(value)}</strong>`), key);
+  const annual = solar.annual_cash_flows.map(row => [row.year, row.cumulative_cash_flow_yen - solar.subsidy_yen]);
+  const recovery = annual.findIndex((row, index) => row[1] >= 0 && annual.slice(index).every(later => later[1] >= 0)) + 1;
+  assert(html.includes(`data-economics-example="payback">約${recovery}年</span>`));
+  assert(html.includes(`data-economics-example="profit-conclusion">${manYen(solar.profit_yen - solar.subsidy_yen)}</span>`));
+  const chart = await readFile(new URL('../../site/shared/assets/article-solar-cashflow.svg', import.meta.url), 'utf8');
+  const metadata = JSON.parse(chart.match(/<metadata>(.*?)<\/metadata>/s)[1].replace(/&quot;/g, '"').replace(/&amp;/g, '&'));
+  assert.equal(metadata.initial, solar.gross_installation_cost_yen);
+  assert.equal(metadata.payback, recovery);
+  assert.deepEqual(metadata.annual, annual);
 });
 
-test("4記事の本文引用・章末参考文献は同じ文献辞書で解決する", async () => {
+test("基礎4記事の本文引用・章末参考文献は同じ文献辞書で解決する", async () => {
   const { sources } = JSON.parse(await readFile(new URL("../../site/articles/src/article-bibliography.json", import.meta.url), "utf8"));
   for (const name of ["electricity-sales", "subsidies", "disaster", "quotes-contractors"]) {
     const html = await readPage(name);

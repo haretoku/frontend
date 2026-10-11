@@ -2,12 +2,13 @@
   {
     "id": "electricity-sales",
     "href": "/guides/solar-economics/",
+    "articleType": "core",
     "categoryId": "economics",
     "category": "収支",
     "title": "太陽光の収支は，何で決まる？",
     "summary": "電気代削減，売電収入，設置費と維持費に分けて，30年間の収支の見方を確認します．",
-    "metaLabel": "対象年度",
-    "metaValue": "2026年度",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-08",
     "image": {
       "src": "../shared/assets/article-solar-economics-photo.webp",
       "width": 1536,
@@ -19,6 +20,7 @@
   {
     "id": "subsidies",
     "href": "/guides/subsidies/",
+    "articleType": "core",
     "categoryId": "subsidies",
     "category": "補助金",
     "title": "補助金は，どう探してどう申請する？",
@@ -36,12 +38,13 @@
   {
     "id": "quotes-contractors",
     "href": "/guides/quotes-contractors/",
+    "articleType": "core",
     "categoryId": "quotes",
     "category": "見積もり",
     "title": "太陽光の見積もりは，何を比べる？",
     "summary": "総額だけで決めないために，設備，発電試算，工事範囲と保証の比べ方を確認します．",
     "metaLabel": "更新日",
-    "metaValue": "2026-09-22",
+    "metaValue": "2026-10-08",
     "image": {
       "src": "../shared/assets/article-quotes-explanation-photo.webp",
       "width": 1536,
@@ -53,17 +56,108 @@
   {
     "id": "disaster",
     "href": "/guides/disaster/",
+    "articleType": "core",
     "categoryId": "safety",
     "category": "災害への備え",
     "title": "停電時，太陽光・蓄電池で何ができる？",
     "summary": "太陽光単独の昼間利用と蓄電池の夜間給電を分け，出力・残量・回路と安全上の制約を確認します．",
     "metaLabel": "更新日",
-    "metaValue": "2026-09-22",
+    "metaValue": "2026-10-08",
     "image": {
       "src": "../shared/assets/article-disaster-battery-photo.webp",
       "width": 1536,
       "height": 1024,
       "alt": "夜間の停電時に，蓄電池からの給電を想定した停電用コンセントでスマートフォンを充電する写真"
+    },
+    "featuredOrder": null
+  },
+  {
+    "id": "solar-electricity-savings",
+    "href": "/guides/solar-electricity-savings/",
+    "articleType": "detail",
+    "categoryId": "economics",
+    "category": "収支",
+    "title": "太陽光で，電気代はどれくらい減る？",
+    "summary": "自家消費する量と買わずに済む単価を分け，月々・長期間の電気代削減を確かめます．",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-09",
+    "image": {
+      "src": "../shared/assets/article-electricity-budget-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "電気料金の明細を横に置き，家計ノートに書き込む人"
+    },
+    "featuredOrder": null
+  },
+  {
+    "id": "solar-fit",
+    "href": "/guides/solar-fit/",
+    "articleType": "detail",
+    "categoryId": "economics",
+    "category": "収支",
+    "title": "FIT制度とは？住宅用太陽光の売電価格・手続き・終了後",
+    "summary": "住宅用FITの仕組みと価格・期間，開始手続きと満了後の選択を説明します．",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-08",
+    "image": {
+      "src": "../shared/assets/article-fit-meter-photo.png",
+      "width": 1536,
+      "height": 1024,
+      "alt": "太陽光パネルのある住宅と，外壁に取り付けた電力量計"
+    },
+    "featuredOrder": null
+  },
+  {
+    "id": "solar-installation-cost",
+    "href": "/guides/solar-installation-cost/",
+    "articleType": "detail",
+    "categoryId": "economics",
+    "category": "収支",
+    "title": "太陽光の設置費は，何にいくらかかる？",
+    "summary": "機器・工事の内訳と，設備・住宅条件による違いを分けて，設置費と見積もりの比較方法を確認します．",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-08",
+    "image": {
+      "src": "../shared/assets/article-solar-estimate-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "太陽光設備の見積書と電卓を並べ，設置費を確認する手元"
+    },
+    "featuredOrder": null
+  },
+  {
+    "id": "solar-maintenance-cost",
+    "href": "/guides/solar-maintenance-cost/",
+    "articleType": "detail",
+    "categoryId": "economics",
+    "category": "収支",
+    "title": "太陽光の維持費は，何にいくらかかる？",
+    "summary": "点検・修理交換・屋根工事・撤去処分に分け，診断に含む費用と自宅で確認する支出を照合します．",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-08",
+    "image": {
+      "src": "../shared/assets/article-solar-inspection-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "太陽光発電の機器を点検する作業員"
+    },
+    "featuredOrder": null
+  },
+  {
+    "id": "subsidy-amount",
+    "href": "/guides/subsidy-amount/",
+    "articleType": "detail",
+    "categoryId": "subsidies",
+    "category": "補助金",
+    "title": "補助金で，自己負担はどれくらい減る？",
+    "summary": "制度の計算方式・上限・併用条件から補助額を求め，自己負担と入金前に必要な資金を確かめます．",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-08",
+    "image": {
+      "src": "../shared/assets/article-subsidy-documents-photo.webp",
+      "width": 1536,
+      "height": 1024,
+      "alt": "住宅の図面と設備の仕様書を広げ，補助金の対象条件を確認する手元"
     },
     "featuredOrder": null
   }

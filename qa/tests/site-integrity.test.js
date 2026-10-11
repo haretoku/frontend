@@ -97,6 +97,7 @@ test("劣化比較の説明は選択した仮定を使い，停電線はDC容量
   assert.equal(outageReferencePresentation({ ...reference, required_dc_capacity_reference_kwh: NaN }), null);
 });
 const siteRoot = resolve(repositoryRoot, "site");
+const newDetailSlugs = ["solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount"];
 const htmlPaths = [
   resolve(siteRoot, "index.html"),
   resolve(siteRoot, "guides/index.html"),
@@ -104,6 +105,7 @@ const htmlPaths = [
   resolve(siteRoot, "pages/calculation-method.html"),
   resolve(siteRoot, "pages/costs-maintenance.html"),
   resolve(siteRoot, "guides/solar-economics/index.html"),
+  ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
   resolve(siteRoot, "guides/subsidies/index.html"),
   resolve(siteRoot, "guides/disaster/index.html"),
   resolve(siteRoot, "guides/quotes-contractors/index.html"),
@@ -220,6 +222,7 @@ test("全ページの共通フッターが方針の対応見出しへ接続す�
 
 test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在地を示す", async () => {
   const guideCurrentPaths = new Set([
+    ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
     resolve(siteRoot, "guides/index.html"),
     resolve(siteRoot, "pages/costs-maintenance.html"),
     resolve(siteRoot, "guides/solar-economics/index.html"),
@@ -242,7 +245,7 @@ test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在�
   }
 });
 
-test("はれトクガイド一覧がメタデータから一般記事4件を4分類の主一覧に重複なく掲載する", async () => {
+test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重複なく掲載する", async () => {
   const html = await readFile(resolve(siteRoot, "guides/index.html"), "utf8");
   const articles = JSON.parse(await readFile(resolve(siteRoot, "solar/data/articles.json"), "utf8"));
   const script = await readFile(resolve(siteRoot, "solar/src/guides.js"), "utf8");
@@ -255,13 +258,14 @@ test("はれトクガイド一覧がメタデータから一般記事4件を4分
   assert.doesNotMatch(main, /data-featured-guides/);
   assert.doesNotMatch(main, /data-safety-guides/);
   assert.match(main, /<h1 id="guide-library-title"[^>]*>/);
-  assert.equal(articles.length, 4);
+  assert.equal(articles.length, 9);
+  assert.equal(articles.filter(article => article.articleType === "core").length, 4);
   assert.equal(articles.filter((article) => Number.isInteger(article.featuredOrder)).length, 3);
   for (const [title, target, articleTitle = title] of [
     ["太陽光の収支は，何で決まる？", "/guides/solar-economics/"],
     ["補助金は，どう探してどう申請する？", "/guides/subsidies/"],
     ["太陽光の見積もりは，何を比べる？", "/guides/quotes-contractors/"],
-    ["停電時，太陽光・蓄電池で何ができる？", "/guides/disaster/"]
+    ["停電時，太陽光・蓄電池で何ができる？", "/guides/disaster/"],
   ]) {
     const article = articles.find((candidate) => candidate.title === title);
     assert.equal(article?.href, target, `ガイド記事がありません：${title}`);
@@ -282,11 +286,25 @@ test("はれトクガイド一覧がメタデータから一般記事4件を4分
   );
   assert.doesNotMatch(JSON.stringify(articles), /calculation-method\.html|policy\.html/);
   assert.match(main, /article-action__link[\s\S]*診断を始める/);
-  assert.match(script, /const categoryOrder = \["economics", "subsidies", "quotes", "safety"\]/);
-  assert.match(script, /button\.setAttribute\("aria-pressed"/);
+  const { groupedArticles } = await import("../../site/solar/src/guide-groups.js");
+  const groups = groupedArticles(articles);
+  assert.deepEqual(groups.map((group) => group.id), ["core", "detail", "news"]);
+  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5, 0]);
+  assert.deepEqual(groups[0].articles.map((article) => article.categoryId), ["economics", "subsidies", "quotes", "safety"]);
+  assert.match(main, /data-guide-groups/);
+  assert.doesNotMatch(main, /data-guide-filters/);
+  const futureGroups = groupedArticles([
+    { articleType: "news", id: "updated", publishedAt: "2026-09-01", updatedAt: "2026-10-02" },
+    { articleType: "detail", id: "regional" },
+    { articleType: "news", id: "recent", publishedAt: "2026-10-01" },
+    articles[0]
+  ]);
+  assert.deepEqual(futureGroups.map((group) => group.id), ["core", "detail", "news"]);
+  assert.deepEqual(futureGroups[2].articles.map((article) => article.id), ["recent", "updated"]);
   assert.match(script, /link\.className = "guide-article-card"/);
   assert.match(script, /import\.meta\.glob\("\.\.\/\.\.\/shared\/assets\/\*\.\{png,webp\}"/);
-  assert.match(css, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(min-width: 40\.001rem\)[\s\S]*grid-auto-flow: column/);
+  assert.match(css, /grid-auto-columns: calc\(\(100% - var\(--guide-card-gap\) \* 2\) \/ 3\)/);
   assert.match(css, /@media \(max-width: 62rem\)[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/);
   assert.match(css, /@media \(max-width: 40rem\)[\s\S]*grid-template-columns: minmax\(0, 1fr\)/);
   assert.match(css, /\.guide-article-card:focus-visible/);
@@ -928,7 +946,7 @@ test("未接続の固定見積もりバーはDOMも下部余白も作らない",
 
 
 test("移転先ページのメタ情報はURL以外をパス化しない", async () => {
-  for (const path of ["guides/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors"].map(slug => `guides/${slug}/index.html`)]) {
+  for (const path of ["guides/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", ...newDetailSlugs].map(slug => `guides/${slug}/index.html`)]) {
     const html = await readFile(resolve(siteRoot, path), "utf8");
     assert.match(html, /name="viewport" content="width=device-width, initial-scale=1"/);
     assert.match(html, /name="referrer" content="strict-origin-when-cross-origin"/);

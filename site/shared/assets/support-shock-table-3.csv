@@ -1,0 +1,18 @@
+﻿"表題","表3　元データと入力条件"
+"出典","はれトク試算"
+"記事URL","https://haretoku.jp/guides/electricity-support-end/"
+"条件","公開資料と本試算の入力条件．詳細な仮定は記事の「モデルの詳細」を参照．"
+
+"計算要素","元資料","採用した値・条件"
+"電力需要","建築研究所のpyhees","3.10.0，公式計算例の住宅・標準生活日程"
+"日射量","NEDO MONSOLA-20／METPV-20","東京・真南・傾斜30度，2010〜2018年"
+"発電量への換算","京都市の算定資料，p.1","当試算の容量4 kW・資料の総合係数0.73"
+"蓄電池","経済産業省の検討資料（参考）","容量5／9.5 kWh・往復効率90％（仮定）"
+"料金","東京電力EPの単価表・10月分料金","従量電灯B・30A，2026年10月分"
+
+"元資料URL","https://github.com/BRI-EES-House/pyhees"
+"元資料URL","https://www.nedo.go.jp/seika_hyoka/shiryou_database.html"
+"元資料URL","https://www.city.kyoto.lg.jp/tokei/cmsfiles/contents/0000172/172305/dounyuuryou.pdf#page=1"
+"元資料URL","https://www.meti.go.jp/shingikai/energy_environment/storage_system/pdf/004_04_00.pdf"
+"元資料URL","https://www.tepco.co.jp/ep/private/plan/chargelist01.html"
+"元資料URL","https://www.tepco.co.jp/ep/private/fuelcost2/backnumber/2610.html"

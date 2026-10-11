@@ -1,4 +1,44 @@
 /* Single-article hero prototype for the electricity-sales guide. */
+#economics-article .economics-intro__answer { margin: 0 0 1rem; font-size: 1.1rem; }
+#economics-article .economics-balance { margin: 1.25rem 0; }
+#economics-article .economics-balance__rows { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: .65rem; align-items: stretch; }
+#economics-article .economics-balance__operator { display: flex; align-items: center; justify-content: center; align-self: center; width: 24px; height: 24px; color: #515D56; }
+#economics-article .economics-balance__operator > svg { display: block; width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; }
+#economics-article .economics-balance__card { padding: 1.1rem; border: 1px solid #DBE1DD; border-radius: .4rem; background: #fff; }
+#economics-article .economics-balance__heading { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; }
+#economics-article .economics-balance__heading > span { color: #515D56; font-size: 1rem; font-weight: 600; }
+#economics-article .economics-balance__heading > strong { font-size: 1.65rem; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+#economics-article .economics-balance__breakdown { display: grid; grid-template-columns: 1fr; gap: .55rem; margin: .8rem 0 0; padding-top: .8rem; border-top: 1px solid #EEF1EF; }
+#economics-article .economics-balance__breakdown > div { display: flex; justify-content: space-between; align-items: baseline; gap: .4rem; }
+#economics-article .economics-balance__breakdown dt { color: #515D56; font-size: .9rem; }
+#economics-article .economics-balance__breakdown dd { margin: 0; font-size: 1.1rem; white-space: nowrap; }
+#economics-article .economics-balance__breakdown dd > strong { font-weight: 600; }
+#economics-article .economics-balance__card--result { align-self: center; }
+#economics-article .economics-balance__card--result .economics-balance__heading > strong { color: #007447; }
+#economics-article .economics-balance figcaption { margin-top: 1rem; color: #515D56; font-size: .85rem; }
+#economics-article .economics-intro > .economics-figure-note { margin: 1rem 0; }
+#economics-article #battery-economics-comparison { margin-block: 1.5rem; }
+#economics-article #battery-economics-comparison caption { margin-bottom: .75rem; text-align: left; font-weight: 700; }
+#economics-article #battery-economics-comparison tbody tr:last-child :is(th, td) { border-top: 1px solid #CBD1CE; }
+#economics-article .economics-recovery { margin: 1.5rem 0 1rem; }
+#economics-article .economics-recovery img { display: block; width: 100%; height: auto; }
+#economics-article .economics-recovery figcaption { margin-top: .8rem; color: #515D56; font-size: .85rem; }
+#economics-article .economics-intro__diagnosis { margin-block: 1.5rem; }
+@media (max-width: 48rem) {
+  #economics-article .economics-balance__rows { grid-template-columns: 1fr; gap: .5rem; }
+  #economics-article .economics-balance__operator { justify-self: center; line-height: 1; }
+  #economics-article .economics-balance__heading { flex-direction: row; justify-content: space-between; align-items: baseline; }
+}
+@media (max-width: 36rem) {
+  #economics-article .economics-balance__card { padding: 1rem; }
+  #economics-article #battery-economics-comparison thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  #economics-article #battery-economics-comparison tbody tr { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem 1rem; padding-block: .9rem; border-bottom: 1px solid #CBD1CE; }
+  #economics-article #battery-economics-comparison tbody th { grid-column: 1 / -1; padding: 0 0 .35rem; border: 0; }
+  #economics-article #battery-economics-comparison tbody td { padding: 0; border: 0; }
+  #economics-article #battery-economics-comparison tbody td::before { display: block; content: attr(data-label); color: #515D56; font-size: .8rem; }
+  #economics-article #battery-economics-comparison tbody tr:last-child :is(th, td) { border-top: 0; }
+}
+
 .economics-hero {
   margin-block: 1.5rem 2.5rem;
   padding-block: clamp(3rem, 5vw, 4.5rem);
@@ -144,6 +184,7 @@
 /* Approved entrance photos; TOP projection classes are reused without changes. */
 #economics-article .economics-chapter-photo { width: 100%; overflow: hidden; border-radius: .4rem; }
 #economics-article .economics-chapter-photo > img { display: block; width: 100%; height: auto; }
+#economics-article .economics-chapter-photo--diagnosis { position: relative; }
 
 /* The two retained body diagrams share typography, color and spacing. */
 #economics-article .economics-explainer { margin: 2rem 0; padding: 1.5rem; background: #f0f7f3; border: 0; border-radius: .5rem; font: inherit; }
@@ -303,6 +344,8 @@
 @media (max-width: 40rem) {
   .economics-hero__visual img,
   #economics-article .economics-chapter-photo > img { aspect-ratio: 5 / 2; height: auto; object-fit: cover; }
+  #economics-article .economics-chapter-photo--diagnosis { aspect-ratio: 5 / 2; }
+  #economics-article .economics-chapter-photo--diagnosis .hero__photo { position: absolute; top: 50%; transform: translateY(-50%); }
   .economics-page .quote-bar:not([hidden]) { display: grid; grid-template-columns: minmax(0, 1fr) 38%; gap: .3rem .75rem; }
   .economics-page .quote-bar__copy { display: contents; }
   .economics-page .quote-bar__copy p { display: block; grid-column: 1; font-size: .75rem; }

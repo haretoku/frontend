@@ -9,6 +9,9 @@ const siteRoot = resolve(import.meta.dirname, "site");
 
 export default defineConfig({
   root: siteRoot,
+  server: {
+    forwardConsole: false
+  },
   plugins: [
     localMunicipalReview(),
     localPrefectureReview(),
@@ -30,6 +33,9 @@ export default defineConfig({
             calculationMethod: resolve(siteRoot, "pages/calculation-method.html"),
             costsMaintenance: resolve(siteRoot, "pages/costs-maintenance.html"),
             electricitySales: resolve(siteRoot, "guides/solar-economics/index.html"),
+            electricitySupportEnd: resolve(siteRoot, "guides/electricity-support-end/index.html"),
+            solarProfitConditions: resolve(siteRoot, "guides/solar-profit-conditions/index.html"),
+            ...Object.fromEntries(["solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount"].map(name => [name, resolve(siteRoot, `guides/${name}/index.html`)])),
             subsidies: resolve(siteRoot, "guides/subsidies/index.html"),
             disaster: resolve(siteRoot, "guides/disaster/index.html"),
             quotesContractors: resolve(siteRoot, "guides/quotes-contractors/index.html"),

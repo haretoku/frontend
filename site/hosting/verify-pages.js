@@ -14,7 +14,7 @@ const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
 assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
-for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ...Object.entries({"electricity-sales":"solar-economics", "subsidies":"subsidies", "disaster":"disaster", "quotes-contractors":"quotes-contractors"}).map(([old, slug]) => [`pages/${old}.html`, `/guides/${slug}/`])]) {
+for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ["guides/solar-profit-conditions/index.html", "/guides/solar-economics/"], ...Object.entries({"electricity-sales":"solar-economics", "subsidies":"subsidies", "disaster":"disaster", "quotes-contractors":"quotes-contractors"}).map(([old, slug]) => [`pages/${old}.html`, `/guides/${slug}/`])]) {
   const html = await readFile(resolve(output, oldPath), "utf8");
   assert(html.includes(`rel="canonical" href="https://haretoku.jp${newPath}"`));
   assert(html.includes(`data-redirect-target href="${newPath}"`));
@@ -22,7 +22,7 @@ for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ...Object.en
 }
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-assert.equal(urls.length, 9);
+assert.equal(urls.length, 14);
 for (const url of urls) {
   const path = new URL(url).pathname;
   assert.equal(new URL(url).origin, "https://haretoku.jp");
@@ -88,4 +88,4 @@ assert(legacyShareOutput.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13,
 assert.equal(legacyShareOutput.readUInt32BE(16), 1536);
 assert.equal(legacyShareOutput.readUInt32BE(20), 1024);
 
-console.log(`Pages検証PASS: ${files.length}ファイル，正規9URL，公開データ12.0.0-review.1同一，ローカル参照・QA非混入`);
+console.log(`Pages検証PASS: ${files.length}ファイル，正規14URL，公開データ12.0.0-review.1同一，ローカル参照・QA非混入`);

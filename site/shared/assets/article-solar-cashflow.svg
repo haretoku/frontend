@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg" width="720" height="280" role="img" aria-labelledby="chart-title chart-description"><title id="chart-title">はれトク診断の累積収支グラフ：太陽光のみ・補助金なし</title><desc id="chart-description">東京都の既存住宅，南向き4 kW，平日昼間ほぼ毎日在宅の代表例．標準シナリオは初期費用約132万円から始まり，元手回収の目安は約15年，30年後の収支は約102万円．点検・20年目の機器交換費を含む．破線は下振れ・上振れの試算．</desc><metadata>{&quot;input&quot;:{&quot;prefectureCode&quot;:&quot;13&quot;,&quot;housingAge&quot;:&quot;existing&quot;,&quot;systemCapacityKw&quot;:4,&quot;monthlyElectricityBillYen&quot;:null,&quot;detailConditions&quot;:{&quot;roof_orientation&quot;:&quot;south&quot;},&quot;daytimeOccupancy&quot;:&quot;almost_every_weekday&quot;,&quot;equipmentPackage&quot;:&quot;solar_only&quot;},&quot;subsidy&quot;:&quot;excluded&quot;,&quot;dataVersion&quot;:&quot;2026-09-28&quot;,&quot;initial&quot;:1324400,&quot;payback&quot;:15,&quot;annual&quot;:[[1,-1198861],[2,-1072823],[3,-946273],[4,-819200],[5,-773914],[6,-689886],[7,-605105],[8,-519557],[9,-433231],[10,-384114],[11,-295644],[12,-206359],[13,-116246],[14,-25292],[15,28516],[16,121193],[17,214752],[18,309208],[19,404574],[20,78865],[21,176097],[22,274283],[23,373439],[24,473581],[25,536723],[26,638880],[27,742069],[28,846306],[29,951606],[30,1019987]]}</metadata><style>svg { background:#fff; --color-primary:#1f684d; --color-primary-dark:#164e3a; --color-primary-pale:#dcebe3; --color-surface:#fff; --color-accent:#f2b500; --color-muted:#515d56; --font-sans:&quot;Noto Sans JP&quot;,&quot;Yu Gothic&quot;,Meiryo,sans-serif; font-family:var(--font-sans); }
+
+
+.cashflow-chart__grid {
+  stroke: #dce3df;
+  stroke-width: 1;
+}
+
+
+.cashflow-chart__zero {
+  stroke: #aeb9b3;
+  stroke-dasharray: 7 6;
+  stroke-width: 2;
+}
+
+
+.cashflow-chart__line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 160ms ease, stroke-width 160ms ease;
+}
+
+
+.cashflow-chart__line--downside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__line--standard {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__line--upside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__line.is-muted {
+  opacity: 0.18;
+  stroke-width: 2;
+}
+
+
+.cashflow-chart__line.is-selected {
+  opacity: 1;
+  stroke-width: 5;
+}
+
+
+.cashflow-chart__area {
+  fill: rgb(31 104 77 / 10%);
+}
+
+
+.cashflow-chart__area--downside {
+  fill: rgb(31 104 77 / 8%);
+}
+
+
+.cashflow-chart__area--upside {
+  fill: rgb(31 104 77 / 8%);
+}
+
+
+.cashflow-chart__dot {
+  fill: var(--color-surface);
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+
+.cashflow-chart__lifecycle-cost {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+
+.cashflow-chart__label {
+  fill: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+
+.cashflow-chart__payback {
+  fill: var(--color-surface);
+  opacity: 0.2;
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+
+.cashflow-chart__payback--downside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__payback--standard {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__payback--upside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__payback.is-selected {
+  opacity: 1;
+  fill: var(--color-primary-pale);
+  stroke-width: 4;
+  filter: drop-shadow(0 0 5px rgb(31 104 77 / 42%));
+}
+
+
+.cashflow-chart__payback.is-secondary {
+  opacity: 0.32;
+  fill: var(--color-surface);
+  stroke-width: 2;
+}
+
+.cashflow-chart__line.is-muted { opacity: 0.48; stroke-width: 2.5; }
+
+.cashflow-chart__line--downside { stroke-dasharray: 8 5; }
+
+.cashflow-chart__line--upside { stroke-dasharray: 2 5; }
+
+.cashflow-chart__replacement-label { fill: var(--color-ink-soft); font-size: 13px; font-weight: 700; }
+
+.cashflow-chart__replacement-leader { stroke: var(--color-muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.65; }
+
+
+.cashflow-endpoint-label { font-size: 14px; font-weight: 700; fill: var(--color-primary-dark); pointer-events: none; }
+
+.cashflow-endpoint-label.is-negative { fill: #9c2929; }
+
+.cashflow-endpoint-label.is-neutral { fill: var(--color-ink); }
+
+.cashflow-endpoint-caption { font-size: 11px; fill: var(--color-primary-dark); }</style><line x1="82" x2="628" y1="18" y2="18" class="cashflow-chart__grid"></line><text x="70" y="22" text-anchor="end" class="cashflow-chart__label">162万円</text><line x1="82" x2="628" y1="138.8911591259368" y2="138.8911591259368" class="cashflow-chart__zero"></line><text x="70" y="142.8911591259368" text-anchor="end" class="cashflow-chart__label">0万円</text><line x1="82" x2="628" y1="238" y2="238" class="cashflow-chart__grid"></line><text x="70" y="242" text-anchor="end" class="cashflow-chart__label">−132万円</text><polygon points="82,138.8911591259368 82,238 100.2,228.6055385272659 118.4,219.17373538162627 136.6,209.70361773392713 154.8,200.19436242103842 170.81599999999997,193.96182019736187 173,196.80547464708582 191.2,190.5174063286278 209.4,184.17298875225816 227.6,177.77117425581122 245.79999999999998,171.31113967615676 261.81600000000003,164.7919121841409 264,167.63556663386487 282.2,161.0150900768365 300.4,154.33362461516273 318.6,147.5901974196897 336.8,140.7838356612636 352.81600000000003,133.91356651073053 355,136.7572209604545 373.2,129.82192192263696 391.4,122.82062016838108 409.59999999999997,115.75219320250935 427.8,108.61566819586793 443.816,101.40984782026743 446,132.98945364758208 464.2,125.71329024085685 482.4,118.36573614084116 500.6,110.94559401934569 518.8,103.45166654818105 534.816,95.88290606518159 537,98.72656051490554 555.2,91.08184452489371 573.4000000000001,83.35990086666831 591.6,75.55953221204001 609.8,67.67961606583128 625.816,59.71880543382908 628,62.56245988355303 628,138.8911591259368" class="cashflow-chart__area cashflow-chart__area--standard"></polygon><polyline points="82,238 100.2,228.6055385272659 118.4,219.23719377566218 136.6,209.894890912177 154.8,200.5785551037985 170.81599999999997,194.60500993408232 173,197.44858955079442 191.2,191.48641899887718 209.4,185.53554823174696 227.6,179.59612691542748 245.79999999999998,173.66800538389506 261.81600000000003,167.7511836371497 264,170.59483808687364 282.2,164.64815796840617 300.4,158.71292730074944 318.6,152.78907125089162 336.8,146.87666465184452 352.81600000000003,140.97563267059633 355,143.81928712032027 373.2,137.9295549238591 391.4,132.05112251218503 409.59999999999997,126.183989885298 427.8,120.32815704319803 443.816,114.4835491528733 446,146.0630053141643 464.2,140.22962237561478 482.4,134.4073147228168 500.6,128.5962320217941 518.8,122.79629943953476 534.816,117.00744214302698 537,119.85109659275092 555.2,114.07338941500653 573.4000000000001,108.30683235602554 591.6,102.55127574978427 609.8,96.80679442929454 625.816,91.07331356154454 628,93.9169680112685" class="cashflow-chart__line cashflow-chart__line--downside is-muted"></polyline><polyline points="82,238 100.2,228.6055385272659 118.4,219.1102769875903 136.6,209.51047373038142 154.8,199.80246193805937 170.81599999999997,193.2992487105762 173,196.14290316030014 191.2,189.50918116017698 209.4,182.740834571763 227.6,175.83389724543085 245.79999999999998,168.78402886649417 261.81600000000003,161.5868142872547 264,164.43046873697864 282.2,157.0402598202171 300.4,149.49372474173256 318.6,141.78607418876763 336.8,133.9123691825412 352.81600000000003,125.8675959112603 355,128.71125036098425 373.2,120.49017051382047 391.4,112.0873961139217 409.59999999999997,103.49738951841215 427.8,94.71453825140422 443.816,85.73293050496297 446,117.3124614992658 464.2,108.1261106324444 482.4,98.72888033827242 500.6,89.11433497773209 518.8,79.27596407879372 534.816,69.20710750340405 537,72.050761953128 555.2,61.74446023118639 573.4000000000001,51.19367905958034 591.6,40.391084803150065 609.8,29.32911932770022 625.816,18 628,20.84365444972395" class="cashflow-chart__line cashflow-chart__line--upside is-muted"></polyline><polyline points="82,238 100.2,228.6055385272659 118.4,219.17373538162627 136.6,209.70361773392713 154.8,200.19436242103842 170.81599999999997,193.96182019736187 173,196.80547464708582 191.2,190.5174063286278 209.4,184.17298875225816 227.6,177.77117425581122 245.79999999999998,171.31113967615676 261.81600000000003,164.7919121841409 264,167.63556663386487 282.2,161.0150900768365 300.4,154.33362461516273 318.6,147.5901974196897 336.8,140.7838356612636 352.81600000000003,133.91356651073053 355,136.7572209604545 373.2,129.82192192263696 391.4,122.82062016838108 409.59999999999997,115.75219320250935 427.8,108.61566819586793 443.816,101.40984782026743 446,132.98945364758208 464.2,125.71329024085685 482.4,118.36573614084116 500.6,110.94559401934569 518.8,103.45166654818105 534.816,95.88290606518159 537,98.72656051490554 555.2,91.08184452489371 573.4000000000001,83.35990086666831 591.6,75.55953221204001 609.8,67.67961606583128 625.816,59.71880543382908 628,62.56245988355303" class="cashflow-chart__line cashflow-chart__line--standard is-selected"></polyline><text x="82" y="268" text-anchor="middle" class="cashflow-chart__label">0年</text><text x="264" y="268" text-anchor="middle" class="cashflow-chart__label">10年</text><text x="446" y="268" text-anchor="middle" class="cashflow-chart__label">20年</text><text x="628" y="268" text-anchor="middle" class="cashflow-chart__label">30年</text><circle cx="173" cy="196.80547464708582" r="4" class="cashflow-chart__lifecycle-cost"></circle><circle cx="264" cy="167.63556663386487" r="4" class="cashflow-chart__lifecycle-cost"></circle><circle cx="355" cy="136.7572209604545" r="4" class="cashflow-chart__lifecycle-cost"></circle><circle cx="446" cy="132.98945364758208" r="4" class="cashflow-chart__lifecycle-cost"></circle><circle cx="537" cy="98.72656051490554" r="4" class="cashflow-chart__lifecycle-cost"></circle><circle cx="628" cy="62.56245988355303" r="4" class="cashflow-chart__lifecycle-cost"></circle><circle cx="468.3839134234744" cy="138.8911591259368" r="5" class="cashflow-chart__payback cashflow-chart__payback--downside is-secondary"></circle><circle cx="341.21221540606484" cy="138.8911591259368" r="9" class="cashflow-chart__payback cashflow-chart__payback--standard is-selected"></circle><circle cx="325.29157075377555" cy="138.8911591259368" r="5" class="cashflow-chart__payback cashflow-chart__payback--upside is-secondary"></circle><text x="644" y="48.56245988355303" class="cashflow-endpoint-caption" text-anchor="start">30年間の収支</text><text class="cashflow-endpoint-label" data-endpoint-value="1019987" x="644" y="67.56245988355303">＋102万円</text></svg>

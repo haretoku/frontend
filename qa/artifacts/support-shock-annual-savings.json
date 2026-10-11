@@ -1,0 +1,311 @@
+{
+  "period": "標準年の1〜12月（初年度）",
+  "interpretation": "2026年10月分料金から支援3.5円/kWhを除いた単価を12か月固定．毎月の購入量に段階料金を適用し，月ごとの請求額を合計．売電収入，設備費，維持費は含めない．",
+  "config": {
+    "region": "東京都",
+    "annualConsumptionKwh": 4983.922223378252,
+    "orientation": "south",
+    "occupancy": "official_standard_calendar",
+    "tariff": {
+      "contract": "東京電力EP・従量電灯B・30A",
+      "basic": 935.25,
+      "rates": [
+        29.8,
+        36.4,
+        40.49
+      ],
+      "supportedFuelAdjustment": -9.3,
+      "levy": 4.18,
+      "interpretation": "2026年10月分料金を12か月固定し，支援3.5円/kWhの継続と終了を比較．各月の購入量に段階料金と円未満切り捨てを適用して合計．実際の年間請求額ではない．",
+      "fuelAdjustmentWithoutSupport": -5.800000000000001
+    }
+  },
+  "sha256": {
+    "data": "5e700c3652e793b8c49e4e21328b8ee51b30a764eaee70b04ae77b6d9777c89f",
+    "calculator": "b55fd7459057135c7dbf196d124c1d992787e21b11c0dff6adcafc92cfaf9291"
+  },
+  "checks": {
+    "hourlyEnergyBalance": "PASS",
+    "capacityBounds": "PASS",
+    "annualProductionParity": "PASS",
+    "monthlyAnnualAggregation": "PASS"
+  },
+  "cases": [
+    {
+      "solarKw": 0,
+      "batteryKwh": 0,
+      "purchasedKwh": 4983.922223378252,
+      "billYen": 181127,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 614.76378594509,
+          "billYen": 22812
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 556.7104357513255,
+          "billYen": 20555
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 521.856695827495,
+          "billYen": 19200
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 295.0796800067143,
+          "billYen": 10406
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 251.8611677656738,
+          "billYen": 8902
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 310.73849701317374,
+          "billYen": 10994
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 475.3116897385045,
+          "billYen": 17391
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 493.18717651793156,
+          "billYen": 18086
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 334.46634908989654,
+          "billYen": 11916
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 252.09661759349888,
+          "billYen": 8911
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 336.1723926702713,
+          "billYen": 11983
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 541.6777354586768,
+          "billYen": 19971
+        }
+      ],
+      "savingsYen": 0
+    },
+    {
+      "solarKw": 4,
+      "batteryKwh": 0,
+      "purchasedKwh": 3465.8642679090262,
+      "billYen": 124535,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 484.3263889896614,
+          "billYen": 17742
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 439.6922634546988,
+          "billYen": 16007
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 390.9088140410181,
+          "billYen": 14110
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 183.29613349453416,
+          "billYen": 6518
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 136.90610956074093,
+          "billYen": 4904
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 173.29137259197762,
+          "billYen": 6170
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 288.0312262055451,
+          "billYen": 10160
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 310.4277808027344,
+          "billYen": 10982
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 213.20281428233255,
+          "billYen": 7558
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 167.07476064921374,
+          "billYen": 5954
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 246.89289794048486,
+          "billYen": 8730
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 431.8137058960849,
+          "billYen": 15700
+        }
+      ],
+      "savingsYen": 56592
+    },
+    {
+      "solarKw": 4,
+      "batteryKwh": 5,
+      "purchasedKwh": 2152.925239450145,
+      "billYen": 78895,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 363.70541687324936,
+          "billYen": 13053
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 343.86643588210865,
+          "billYen": 12282
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 281.8295129743784,
+          "billYen": 9945
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 72.53165254602237,
+          "billYen": 2979
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 19.998671835956472,
+          "billYen": 1498
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 62.62489066377862,
+          "billYen": 2700
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 166.9132065280684,
+          "billYen": 5948
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 208.42054739480847,
+          "billYen": 7392
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 116.61190415634529,
+          "billYen": 4221
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 58.961195883808,
+          "billYen": 2596
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 136.7205724422771,
+          "billYen": 4898
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 320.7412322693438,
+          "billYen": 11383
+        }
+      ],
+      "savingsYen": 102232
+    },
+    {
+      "solarKw": 4,
+      "batteryKwh": 9.5,
+      "purchasedKwh": 1489.8040875476438,
+      "billYen": 56656,
+      "monthly": [
+        {
+          "month": 1,
+          "purchasedKwh": 272.2989117934811,
+          "billYen": 9613
+        },
+        {
+          "month": 2,
+          "purchasedKwh": 269.0628424156919,
+          "billYen": 9501
+        },
+        {
+          "month": 3,
+          "purchasedKwh": 204.1612502779921,
+          "billYen": 7243
+        },
+        {
+          "month": 4,
+          "purchasedKwh": 34.6248374279395,
+          "billYen": 1910
+        },
+        {
+          "month": 5,
+          "purchasedKwh": 1.7553714207600541,
+          "billYen": 984
+        },
+        {
+          "month": 6,
+          "purchasedKwh": 25.04492049496301,
+          "billYen": 1641
+        },
+        {
+          "month": 7,
+          "purchasedKwh": 109.55911001834056,
+          "billYen": 4022
+        },
+        {
+          "month": 8,
+          "purchasedKwh": 144.88248198840415,
+          "billYen": 5182
+        },
+        {
+          "month": 9,
+          "purchasedKwh": 82.74266745447105,
+          "billYen": 3266
+        },
+        {
+          "month": 10,
+          "purchasedKwh": 29.488795950400746,
+          "billYen": 1766
+        },
+        {
+          "month": 11,
+          "purchasedKwh": 82.85478284131054,
+          "billYen": 3270
+        },
+        {
+          "month": 12,
+          "purchasedKwh": 233.32811546388908,
+          "billYen": 8258
+        }
+      ],
+      "savingsYen": 124471
+    }
+  ]
+}

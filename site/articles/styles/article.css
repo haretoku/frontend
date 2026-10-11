@@ -1155,7 +1155,13 @@
     display: block;
   }
 
-  .article-table th {
+  .article-table caption {
+    display: block;
+    width: 100%;
+  }
+
+  .article-table th,
+  .article-table:not(.article-table--multi-column) th {
     width: auto;
     padding-bottom: 0.2rem;
     border-bottom: 0;
