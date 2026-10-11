@@ -67,7 +67,10 @@ test('調査記事は日常更新と分離し，ガイド一覧・静的ビル�
   const news = catalog.filter(a => a.articleType === 'news');
   assert.equal(news.length, 1);
   assert.equal(news[0].href, '/guides/electricity-support-end/');
-  assert.equal(news[0].publishedAt, undefined);
+  assert.equal(news[0].publishedAt, '2026-10-11');
+  const html = await readFile(new URL('../../site/guides/electricity-support-end/index.html', import.meta.url), 'utf8');
+  assert(html.includes('公開日 <time datetime="' + news[0].publishedAt + '">'));
+  assert(html.includes('<meta name="robots" content="index,follow">'));
   const manifest = JSON.parse(await readFile(new URL('../artifacts/guide-number-bindings.json', import.meta.url)));
   assert(!manifest.inventory.some(p => p.route === news[0].href));
   const build = await readFile(new URL('../../vite.pages.config.js', import.meta.url), 'utf8');
