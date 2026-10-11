@@ -35,17 +35,19 @@ test('北海道11.43：江別3枝は受付終了とし予定期限を受付中�
  for(const x of closed){assert.equal(x.application_status,'closed');assert.equal(x.reason_code,'application_closed');assert.match(nonInclusionReason(x),/予算に達した/);}
 });
 
-test('北海道11.45：北斗と森の端数・上限・10kW境界，B未採用',()=>{
+test('北海道11.45：北斗PVと森PV・同時蓄電池の原端数・上限・10kW境界',()=>{
  for(const [municipalityCode,id,expected] of [['01236','hokkaido-hokuto-solar',80000],['01345','hokkaido-mori-solar',150000]]){
   for(const equipmentPackage of ['solar_only','solar_plus_standard_battery']){
-   const r=run({municipalityCode,equipmentPackage});assert.equal(r.municipality_amount_yen,expected);
-   assert.deepEqual(r.included_programs.filter(x=>x.government_level==='municipality').map(x=>x.id),[id]);
+   const r=run({municipalityCode,equipmentPackage});const moriBattery=municipalityCode==='01345'&&equipmentPackage==='solar_plus_standard_battery';assert.equal(r.municipality_amount_yen,expected+(moriBattery?50000:0));
+   assert.deepEqual(r.included_programs.filter(x=>x.government_level==='municipality').map(x=>x.id),moriBattery?[id,'hokkaido-next-mori-battery']:[id]);
+    assert.equal(r.included_programs.find(x=>x.id===id).component_amounts_yen.solar,expected);
+    if(moriBattery)assert.equal(r.included_programs.find(x=>x.id==='hokkaido-next-mori-battery').component_amounts_yen.battery,50000);
   }
   for(const capacityKw of [10,10.001])assert.equal(run({municipalityCode,capacityKw}).municipality_amount_yen,0);
-  assert.match(conciseHokkaidoAssumption({id,included:true}),/蓄電池分は今回の試算に含めていません/);
+  if(municipalityCode==='01236')assert.match(conciseHokkaidoAssumption({id,included:true}),/蓄電池分は今回の試算に含めていません/);
  }
  for(const [capacityKw,expected] of [[4.049,80000],[4.05,81000],[5,100000],[9.999,100000]])assert.equal(run({municipalityCode:'01236',capacityKw}).municipality_amount_yen,expected);
- for(const [capacityKw,expected] of [[2.019,100000],[2.02,101000],[3,150000],[9.999,150000]])assert.equal(run({municipalityCode:'01345',capacityKw}).municipality_amount_yen,expected);
+ for(const [capacityKw,expected] of [[2.019,100000],[2.02,101000],[3,150000],[9.999,150000]]){assert.equal(run({municipalityCode:'01345',capacityKw,equipmentPackage:'solar_only'}).municipality_amount_yen,expected);assert.equal(run({municipalityCode:'01345',capacityKw}).municipality_amount_yen,expected+50000);}
 });
 test('北海道11.45：北広島は算式留保より受付終了を表示',()=>{
  const r=run({municipalityCode:'01234'});assert.equal(r.municipality_amount_yen,0);

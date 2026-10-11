@@ -1,3 +1,4 @@
+import {assertUpdatedCombined,assertUpdatedLiteral} from './combined-national-reference.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
@@ -11,7 +12,7 @@ const canonical=x=>JSON.parse(JSON.stringify(x,(k,v)=>['eligible_cost_yen_unroun
 test('combined v5の216期待値：合算後丸め・費用・控除・排他・両日高',()=>{
   for(const [index,{input:p,expected}] of vectors.cases.entries()){
     const actual=diagnosticSubsidy(rules,{prefectureCode:p.prefecture_code,municipalityCode:p.municipality_code,housingAge:p.housing_age,equipmentPackage:p.equipment_package,capacityKw:p.pv_kw,batteryCapacityKwh:p.battery_kwh,solarCost:p.solar_cost_yen,batteryCost:p.battery_cost_yen,batteryEquipmentCost:p.battery_equipment_cost_yen},p.municipal_program_enabled);
-    assert.deepEqual(canonical(actual),canonical(expected),`case ${index} / ${p.municipality_code}`);
+    assertUpdatedCombined(actual,expected,p);
   }
 });
 test('保持10規則を掲載枝へ結合し，診断専用行を重複表示しない',()=>{
