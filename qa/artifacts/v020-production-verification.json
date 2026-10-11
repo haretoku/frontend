@@ -1,0 +1,284 @@
+{
+  "version": "v0.2.0",
+  "checkedAt": "2026-10-11",
+  "publishedCommit": "b3ae098f27f3a6059399d4dae8741119a59b9444",
+  "publicationRun": 38135442127,
+  "publicationBranch": "main",
+  "publicationResult": "success",
+  "firstAttempt": {
+    "run": 38134958065,
+    "result": "failure",
+    "reason": "working branch excluded by github-pages environment policy; no deploy started"
+  },
+  "artifactSha256": "074bfb3c36c3e6d418a45d1cb5bd7d9c11fd3a35e37ef5a10d319451861ef4b0",
+  "tag": {
+    "name": "v0.2.0",
+    "type": "annotated",
+    "object": "5b20b4595824df32067572ebb710cc5bf4303e0b",
+    "commit": "b3ae098f27f3a6059399d4dae8741119a59b9444"
+  },
+  "http": {
+    "pages": [
+      "/",
+      "/guides/",
+      "/simulator/",
+      "/guides/solar-economics/",
+      "/guides/subsidies/",
+      "/guides/disaster/",
+      "/guides/quotes-contractors/",
+      "/guides/solar-electricity-savings/",
+      "/guides/solar-fit/",
+      "/guides/solar-installation-cost/",
+      "/guides/solar-maintenance-cost/",
+      "/guides/subsidy-amount/",
+      "/guides/electricity-support-end/",
+      "/pages/policy.html",
+      "/pages/calculation-method.html",
+      "/data/",
+      "/data/subsidies/"
+    ],
+    "data": [
+      {
+        "name": "public-data",
+        "bytes": 41246367,
+        "sha256": "d759e6368b982a7e19f4bbe44fb7cb5f7673e151e0aa60898f347a0404d2c3e7"
+      },
+      {
+        "name": "metadata",
+        "bytes": 26153,
+        "sha256": "8d9735595588eb15531ffa8945d71bd85bb3b2877e5f3d6709c6df20272be15b"
+      },
+      {
+        "name": "hare-display-table",
+        "bytes": 1434508,
+        "sha256": "ff3e7b9aa271190e660b815a3bf928284d636dcc34ec3e0f5c858c34266820a7"
+      },
+      {
+        "name": "hare-display-binding",
+        "bytes": 9297,
+        "sha256": "448842a1bd11692a9371246a58d4ef8dc781e99bc472e6f2de412e95c8d1ff50"
+      },
+      {
+        "name": "diagnostic-display-table",
+        "bytes": 770738,
+        "sha256": "38ff204b343ba4edc9358d83728a3743005c8e396df6a88747abce79d801802f"
+      },
+      {
+        "name": "diagnostic-display-binding",
+        "bytes": 33675,
+        "sha256": "360626b45c3a8bd875edb10e0bb4686c7bddbbdd8fefa31dda01c9b920ed7f3b"
+      }
+    ],
+    "downloads": [
+      {
+        "path": "/assets/support-shock-burden.png",
+        "bytes": 39885
+      },
+      {
+        "path": "/assets/support-shock-burden.svg",
+        "bytes": 2672
+      },
+      {
+        "path": "/assets/support-shock-table-1.csv",
+        "bytes": 703
+      },
+      {
+        "path": "/assets/support-shock-table-1.png",
+        "bytes": 94898
+      },
+      {
+        "path": "/assets/support-shock-daily.png",
+        "bytes": 39192
+      },
+      {
+        "path": "/assets/support-shock-daily.svg",
+        "bytes": 12518
+      },
+      {
+        "path": "/assets/support-shock-table-2.csv",
+        "bytes": 729
+      },
+      {
+        "path": "/assets/support-shock-table-2.png",
+        "bytes": 93193
+      },
+      {
+        "path": "/assets/support-shock-table-3.csv",
+        "bytes": 1320
+      },
+      {
+        "path": "/assets/support-shock-table-3.png",
+        "bytes": 108329
+      },
+      {
+        "path": "/assets/support-shock-table-4.csv",
+        "bytes": 633
+      },
+      {
+        "path": "/assets/support-shock-table-4.png",
+        "bytes": 92109
+      }
+    ],
+    "infrastructure": [
+      {
+        "route": "/robots.txt",
+        "bytes": 65
+      },
+      {
+        "route": "/og-home-photo-20260926.jpg",
+        "bytes": 192132
+      },
+      {
+        "route": "/og-support-shock-burden.png",
+        "bytes": 39885
+      },
+      {
+        "from": "http://haretoku.jp/",
+        "to": "https://haretoku.jp/"
+      },
+      {
+        "from": "https://www.haretoku.jp/",
+        "to": "https://haretoku.jp/"
+      }
+    ]
+  },
+  "browser": {
+    "viewCount": 24,
+    "actualWidths": {
+      "360": 17,
+      "1280": 7
+    },
+    "horizontalOverflow": 0,
+    "missingLoadedImages": 0,
+    "quoteLinkPixelCountMismatch": 0,
+    "redirects": [
+      {
+        "from": "/solar/",
+        "to": "/guides/"
+      },
+      {
+        "from": "/pages/electricity-sales.html",
+        "to": "/guides/solar-economics/"
+      },
+      {
+        "from": "/pages/subsidies.html",
+        "to": "/guides/subsidies/"
+      },
+      {
+        "from": "/pages/disaster.html",
+        "to": "/guides/disaster/"
+      },
+      {
+        "from": "/pages/quotes-contractors.html",
+        "to": "/guides/quotes-contractors/"
+      },
+      {
+        "from": "/pages/costs-maintenance.html",
+        "to": "/guides/solar-economics/"
+      },
+      {
+        "from": "/guides/solar-profit-conditions/",
+        "to": "/guides/solar-economics/"
+      }
+    ],
+    "diagnosis": {
+      "prefecture": "13",
+      "solarResult": "＋1,486,000円",
+      "batteryResult": "＋2,474,000円",
+      "batteryCapacityKwh": 9.5
+    },
+    "downloads": [
+      {
+        "name": "support-shock-burden.png",
+        "bytes": 39885,
+        "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+        "reference": "public build asset"
+      },
+      {
+        "name": "support-shock-table-1.csv",
+        "bytes": 703,
+        "sha256": "3cd59ba40672c241a4df274e103e140bce6b0512ca97634d58a1579d7608f452",
+        "reference": "Git blob b3ae098"
+      }
+    ],
+    "landing": {
+      "urlOrigin": "https://www.solar-partners.jp",
+      "path": "/lp_pt02",
+      "title": "地元で最も評判の太陽光業者を紹介 NHK出演の見積サイト"
+    },
+    "officialLinks": [
+      {
+        "href": "https://dr-battery.sii.or.jp/r7h/about/",
+        "label": "令和7年度補正 DR家庭用蓄電システム導入支援事業 ↗",
+        "target": "_blank"
+      },
+      {
+        "href": "https://zehweb.jp/house/",
+        "label": "令和8年度ZEH普及促進に向けた省エネルギー・省CO2促進事業（個人の新築戸建住宅） ↗",
+        "target": "_blank"
+      },
+      {
+        "href": "https://mirai-eco2026.mlit.go.jp/about/",
+        "label": "みらいエコ住宅2026事業（住宅改修） ↗",
+        "target": "_blank"
+      },
+      {
+        "href": "https://www.tokyo-co2down.jp/subsidy/fam_solar/r8/",
+        "label": "家庭における太陽光発電導入促進事業 ↗",
+        "target": "_blank"
+      },
+      {
+        "href": "https://www.tokyo-co2down.jp/subsidy/family_tikudenchi/r8/",
+        "label": "家庭における蓄電池導入促進事業 ↗",
+        "target": "_blank"
+      },
+      {
+        "href": "https://www.tokyo-co2down.jp/subsidy/tokyo_zero_emission_house/tokyo_zero_emission_house_r08_fukyu/",
+        "label": "東京ゼロエミ住宅普及促進事業 ↗",
+        "target": "_blank"
+      },
+      {
+        "href": "https://haretoku.jp/simulator/?prefecture=13&from=data",
+        "label": "はれトク診断を始める→",
+        "target": ""
+      }
+    ]
+  },
+  "a8": {
+    "programId": "s00000016799001",
+    "submittedAt": "2026-10-11 20:29:39 JST",
+    "result": "広告掲載URLの提出が完了しました。",
+    "urls": [
+      "https://haretoku.jp/",
+      "https://haretoku.jp/guides/",
+      "https://haretoku.jp/simulator/",
+      "https://haretoku.jp/guides/solar-economics/",
+      "https://haretoku.jp/guides/subsidies/",
+      "https://haretoku.jp/guides/disaster/",
+      "https://haretoku.jp/guides/quotes-contractors/",
+      "https://haretoku.jp/guides/solar-electricity-savings/",
+      "https://haretoku.jp/guides/solar-fit/",
+      "https://haretoku.jp/guides/solar-installation-cost/",
+      "https://haretoku.jp/guides/solar-maintenance-cost/",
+      "https://haretoku.jp/guides/subsidy-amount/",
+      "https://haretoku.jp/pages/policy.html",
+      "https://haretoku.jp/pages/calculation-method.html",
+      "https://haretoku.jp/data/",
+      "https://haretoku.jp/data/subsidies/"
+    ]
+  },
+  "independentReview": {
+    "result": "PASS",
+    "remainingMust": 0,
+    "scope": "commit and annotated tag; publication proof; browser evidence; A8 exact URL equality; independently fetched news and table CSV"
+  },
+  "limits": [
+    "No application or conversion test",
+    "No new exhaustive calculation run; unchanged prepublication PASS reused",
+    "NEDO attribution adopted by user decision; no direct inquiry sent"
+  ],
+  "retainedProcess": {
+    "port": 5173,
+    "purpose": "user shared development server"
+  }
+}
