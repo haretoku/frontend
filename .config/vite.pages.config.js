@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import { resolve } from "node:path";
 
 // 本番は静的ファイルだけを生成する．開発用QA・Sites・Workerは読み込まない．
-const root = resolve(import.meta.dirname, "site");
+const root = resolve(import.meta.dirname, "../site");
 export default defineConfig({
   root,
   define: { "import.meta.env.VITE_HARETOKU_PAGES_BUILD": true },
@@ -10,7 +10,7 @@ export default defineConfig({
   appType: "mpa",
   base: "/",
   build: {
-    outDir: resolve(import.meta.dirname, "dist-pages"),
+    outDir: resolve(import.meta.dirname, "../dist-pages"),
     emptyOutDir: true,
     sourcemap: false,
     rollupOptions: {

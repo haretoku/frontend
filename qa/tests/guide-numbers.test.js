@@ -73,6 +73,6 @@ test('調査記事は日常更新と分離し，ガイド一覧・静的ビル�
   assert(html.includes('<meta name="robots" content="index,follow">'));
   const manifest = JSON.parse(await readFile(new URL('../artifacts/guide-number-bindings.json', import.meta.url)));
   assert(!manifest.inventory.some(p => p.route === news[0].href));
-  const build = await readFile(new URL('../../vite.pages.config.js', import.meta.url), 'utf8');
+  const build = await readFile(new URL('../../.config/vite.pages.config.js', import.meta.url), 'utf8');
   assert(build.includes('"electricity-support-end"'));
 });
