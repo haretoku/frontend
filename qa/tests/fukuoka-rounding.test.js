@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {kansaiFormulaComponents} from '../../site/simulator/src/kansai-formula.js';
+import {kansaiFormulaComponents} from '../../site/simulator/src/municipal-formula.js';
 
 const input={housingAge:'existing',equipmentPackage:'solar_only',capacityKw:3.12347,solarCost:2000000,batteryCost:0};
 const component={scope:'solar',equipment_packages:['solar_only'],formula_type:'capacity_rate',capacity_source:'solar_kw',capacity_preprocessing:'none',unit_amount_yen:25000,rounding_unit_yen:1};

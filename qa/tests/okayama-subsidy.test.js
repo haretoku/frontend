@@ -1,10 +1,9 @@
+import {loadPublicData, municipalSubsidy, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {subsidyGroups,conciseOkayamaAssumption,nonInclusionReason,readableSubsidyAssumption} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'33',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'33',municipalityCode,...extra});
 test('岡山27自治体36規則・代表額と端数を保持する',()=>{
  assert.equal(data.municipalities.filter(p=>p.prefecture_code==='33').length,27);
  assert.equal(data.diagnostic_subsidy_programs.filter(p=>p.id.startsWith('okayama-')).length,36);
@@ -12,7 +11,7 @@ test('岡山27自治体36規則・代表額と端数を保持する',()=>{
  for(const [capacity,amount] of [[3.149,77000],[3.15,80000],[3.249,80000],[3.25,82000]])assert.equal(standard('33210',{equipmentPackage:'solar_only',systemCapacityKw:capacity}).municipality_amount_yen,amount);
 });
 test('住宅区分指定なしは新築と既存の両方を仮定して算入する',()=>{
- for(const code of ['33210', '33214', '33606', '33623', '33666']){const existing=standard(code).municipality_amount_yen;assert.ok(existing>0);assert.equal(standard(code,{housingAge:'new'}).municipality_amount_yen,existing);}
+ for(const code of ['33210', '33214', '33606', '33623', '33666']){const existing=municipalSubsidy(data,{prefectureCode:'33',municipalityCode:code}).municipality_amount_yen;assert.ok(existing>0);assert.equal(municipalSubsidy(data,{prefectureCode:'33',municipalityCode:code,housingAge:'new'}).municipality_amount_yen,existing);}
  assert.equal(standard('33209',{housingAge:'new'}).municipality_amount_yen,0);
 });test('倉敷例外・高梁属性・和気B単独・丸め留保を短文で保持する',()=>{
  for(const [code,pattern] of [['33202',/一般の新築住宅は対象外/],['33209',/市内業者.*対象児童3人/],['33346',/蓄電池だけ.*上限12万円/],['33207',/端数処理の順序は未確認/],['33214',/他の補助金は0円/]]){

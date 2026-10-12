@@ -1,3 +1,4 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -5,7 +6,7 @@ import { execFileSync } from 'node:child_process';
 import { calculateEstimate } from '../../site/simulator/src/calculator.js';
 import { economicsExample, economicsExampleInput, guideNumberValues, tieredEnergyCharge } from '../../site/articles/src/guide-numbers.js';
 
-const data = JSON.parse(await readFile(new URL('../../data/input/public-data.json', import.meta.url)));
+const data = loadPublicData();
 const refs = JSON.parse(await readFile(new URL('../../site/articles/data/guide-reference-examples.json', import.meta.url)));
 
 test('記事の補助金なし代表例は実計算の運用収入・費用を保持し，補助額だけを除く', () => {

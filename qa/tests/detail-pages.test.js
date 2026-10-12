@@ -1,13 +1,13 @@
+import {runInNewContext} from 'node:vm';
 import {prepareSubsidyData} from '../../data/src/scheme-adapter.js';
 import {receiveDiagnosticDisplayRecords} from '../../site/simulator/src/diagnostic-display-record.js';
 import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../site/shared/hare-display-record.js';
 import { replacesLegacyPrefecture } from '../../site/simulator/src/diagnostic-subsidy.js';
-import { diagnosticTrialSourceTexts, diagnosticDetailNotes } from '../../site/simulator/src/diagnostic-display-pilot.js';
+import { diagnosticTrialSourceTexts, diagnosticDetailNotes } from '../../site/simulator/src/retained-diagnostic-display.js';
 import { QUOTE_ACTION } from '../../site/shared/fixed-quote-bar.js';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { runInNewContext } from 'node:vm';
 
 import { calculateEstimate } from "../../site/simulator/src/calculator.js";
 
@@ -61,10 +61,6 @@ test("収支記事に統合した設置・維持費は出典と計算根拠へ�
   assert.match(html, /calculation-method\.html#electricity-sales-example/);
   assert.match(html, /calculation-method\.html#cost-maintenance-notes/);
   assert.match(html, /meti\.go\.jp/);
-  const redirect = await readPage("costs-maintenance");
-  assert.match(redirect, /noindex,follow/);
-  assert.match(redirect, /costs-maintenance-redirect\.js/);
-  assert.match(redirect, /guides\/solar-economics\/#inspection-conditions/);
 });
 
 test("補助金記事は地域別条件・早期終了・契約前手続と公式根拠を示す", async () => {
@@ -138,7 +134,6 @@ test("基礎4記事の本文引用・章末参考文献は同じ文献辞書で�
 
 test("30年評価の本文は発電劣化と20年終点の蓄電池比較を区別する", async () => {
   const method = await readFile(new URL("../../site/pages/calculation-method.html", import.meta.url), "utf8");
-  const costs = await readFile(new URL("../../site/pages/costs-maintenance.html", import.meta.url), "utf8");
   assert.match(method, /0\.997<sup><em>y<\/em>−1<\/sup>（式 \(1a\)）/);
   assert.match(method, /初年度は係数1で追加の初年度補正を行わず/);
   assert.match(method, /直接自家消費，売電および蓄電池充電を毎年再計算/);
@@ -238,7 +233,6 @@ test("ガイド記事のパンくずはガイド一覧へ戻り，現在地を�
 
 test("蓄電池記事は選択容量・条件付き劣化比較と年次適用を説明する", async () => {
   const calculation = await readFile(new URL("../../site/pages/calculation-method.html", import.meta.url), "utf8");
-  const costs = await readFile(new URL("../../site/pages/costs-maintenance.html", import.meta.url), "utf8");
   const formula = calculation.match(/<p class="article-formula"><span class="formula-term">使用可能容量（式 \(5\)）[\s\S]*?<\/p>/)?.[0];
   assert.ok(formula);
   assert.match(formula, /選択した初期容量（kWh）/);
@@ -385,20 +379,6 @@ test("診断の内訳末尾と末尾から使用データへ接続する", async
 });
 
 
-test("旧ガイドURLはクエリとハッシュを保持し，JSなしでも新URLへ進める", async () => {
-  const script = await readFile(new URL("../../site/shared/legacy-redirect.js", import.meta.url), "utf8");
-  for (const [oldPath, destination] of [["solar/index.html", "/guides/"], ...Object.entries(guideSlugs).map(([id, slug]) => [`pages/${id}.html`, `/guides/${slug}/`])]) {
-    const html = await readFile(new URL(`../../site/${oldPath}`, import.meta.url), "utf8");
-    assert(html.includes(`data-redirect-target href="${destination}"`));
-    assert(html.includes(`rel="canonical" href="https://haretoku.jp${destination}"`));
-    assert(!html.includes("analytics.js"));
-    assert.match(html, /<body><noscript><p><a data-redirect-target/);
-    assert(!html.includes("移転のお知らせ"));
-    let actual;
-    runInNewContext(script, { URL, document: { querySelector: () => ({getAttribute: () => destination}) }, location: {origin: "https://haretoku.jp", search: "?from=old", hash: "#summary", replace: value => {actual = value;}} });
-    assert.equal(actual, `https://haretoku.jp${destination}?from=old#summary`);
-  }
-});
 
 test("未接続の見積もり本文カードは初期HTMLから非表示にする", async () => {
   for (const name of Object.keys(guideSlugs)) {

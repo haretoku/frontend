@@ -1,11 +1,10 @@
+import {loadPublicData, standardSubsidy, municipalSubsidy, positivePrefectureRule} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {readableSubsidyAssumption,nonInclusionReason,noncashBenefitDescription} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={},source=data)=>calculateEstimate({prefectureCode:'20',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},source).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={},source=data)=>standardSubsidy(source,{prefectureCode:'20',municipalityCode,...extra});
 const pref='nagano-roof-solar-battery-unresolved-2026';
 test('長野77自治体69制度・方針適用後の未確定0非採用11を保持する',()=>{
   assert.equal(data.municipalities.filter(m=>m.prefecture_code==='20').length,77);
@@ -16,10 +15,13 @@ test('長野77自治体69制度・方針適用後の未確定0非採用11を保�
   for(const item of p.filter(p=>p.machine_rule!=='kansai_municipal_formula')) assert.ok(!standard(item.municipality_code).included_programs.some(p=>p.id===item.id),item.id);
 });
 test('長野上乗せ3自治体は県正額採用を必要とし富士見PV単独は非算入',()=>{
-  const missing=structuredClone(data);missing.diagnostic_subsidy_programs=missing.diagnostic_subsidy_programs.filter(p=>p.id!==pref);
   for(const code of ['20214','20362','20363']) {
-    const r=standard(code); assert.equal(r.municipality_amount_yen,100000);assert.equal(r.prefecture_amount_yen,200000);
-    const absent=standard(code,{},missing);assert.equal(absent.municipality_amount_yen,0);
+    const r=standard(code); assert.equal(r.municipality_amount_yen,0);assert.equal(r.prefecture_amount_yen,0);
+    assert.equal(r.candidate_programs.find(p=>p.id===pref).amount_yen,null);
+    const input={prefectureCode:'20',municipalityCode:code};
+    const present=municipalSubsidy(data,input,[positivePrefectureRule(pref,'20',200000)]);
+    assert.equal(present.municipality_amount_yen,100000);assert.equal(present.prefecture_amount_yen,200000);
+    const absent=municipalSubsidy(data,input);assert.equal(absent.municipality_amount_yen,0);
     assert.ok(absent.excluded_programs.some(p=>p.reason_code==='dependent_program_unavailable'&&p.unavailable_required_program_ids.includes(pref)));
   }
   const solar=standard('20362',{equipmentPackage:'solar_only'});assert.equal(solar.municipality_amount_yen,0);assert.equal(solar.prefecture_amount_yen,0);
@@ -35,19 +37,25 @@ test('長野依存制度が同じ組合せにあっても配分0円なら上乗�
 test('長野住宅別枝・10kWh境界・控除前費用・排他・非現金を保持する',()=>{
   for(const code of ['20217','20220']) {assert.equal(standard(code).municipality_amount_yen,220000);assert.equal(standard(code,{housingAge:'new'}).municipality_amount_yen,140000);}
   assert.equal(standard('20425').municipality_amount_yen,100000);assert.equal(standard('20425',{batteryCapacityKwh:10}).municipality_amount_yen,0);
-  const i=standard('20205');assert.equal(i.municipality_amount_yen,866000);assert.equal(i.prefecture_amount_yen,200000);
-  for(const code of ['20206','20207','20429']) {const r=standard(code);assert.equal(r.municipality_amount_yen,0);assert.equal(r.prefecture_amount_yen,200000);assert.ok(r.excluded_programs.some(p=>p.government_level==='municipality'&&p.reason_code==='explicit_combination_prohibition'));}
+  const i=standard('20205');assert.equal(i.municipality_amount_yen,866000);assert.equal(i.prefecture_amount_yen,0);
+  for(const [code,amount] of [['20206',100000],['20207',80000],['20429',170000]]) {
+    const r=standard(code);assert.equal(r.municipality_amount_yen,amount);assert.equal(r.prefecture_amount_yen,0);
+    const withPref=municipalSubsidy(data,{prefectureCode:'20',municipalityCode:code},[positivePrefectureRule(pref,'20',200000)]);
+    assert.equal(withPref.municipality_amount_yen,0);assert.equal(withPref.prefecture_amount_yen,200000);
+    assert.ok(withPref.excluded_programs.some(p=>p.government_level==='municipality'&&p.reason_code==='explicit_combination_prohibition'));
+  }
   const k=standard('20210').included_programs.find(p=>p.government_level==='municipality');assert.equal(k.amount_yen,50000);assert.match(noncashBenefitDescription(k),/現金の給付ではありません/);
 });
 
-test('富士見の県制度注記は内部承認表現を表示せず容量種別未確認と申請時確認を保つ',()=>{
- const row=standard('20362').included_programs.find(p=>p.id===pref);
- const source=row.calculation_assumptions.find(text=>text.includes('入力蓄電池容量'));
+test('県制度の元モデル未確定を保ち，保存された容量注記の内部承認表現を表示しない',()=>{
+ const row=standard('20362').candidate_programs.find(p=>p.id===pref);
+ assert.equal(row.amount_yen,null);assert.equal(row.reason_code,'source_model_reference_unavailable');
+ const source='入力蓄電池容量を制度対象容量へ対応させるユーザー承認済み仮定で4kWh以上を判定する．公式資料の容量種別が確認済みとは扱わない．申請時に確認する．';
  const rendered=readableSubsidyAssumption(source);
  assert.match(rendered,/入力した蓄電池容量を制度の対象容量とみなす仮定で4kWh以上を判定する/);
  assert.doesNotMatch(rendered,/ユーザー承認/);
  assert.match(rendered,/公式資料の容量種別が確認済みとは扱わない/);
- assert.match(row.required_confirmations.map(readableSubsidyAssumption).join(' '),/申請時/);
+ assert.match(rendered,/申請時/);
  assert.ok(source.includes('ユーザー承認済み仮定'));
 });
 

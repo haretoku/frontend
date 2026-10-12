@@ -1,3 +1,4 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -38,7 +39,7 @@ test('親重複・区分参照不整合・順序欠損を拒否し旧flatへ戻�
 });
 test('隔離出力の親規則展開は現行の全規則・順序と一致する',{skip:!process.env.HARETOKU_SCHEME_REVIEW_FILE},async()=>{
   const draft=JSON.parse(await readFile(process.env.HARETOKU_SCHEME_REVIEW_FILE,'utf8'));
-  const current=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+  const current=loadPublicData();
   const result=receiveSchemeRules(draft);
   assert.deepEqual(result.diagnostic,current.diagnostic_subsidy_programs);
   assert.deepEqual(result.municipal,current.municipal_subsidy_programs);

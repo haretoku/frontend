@@ -1,11 +1,12 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import fs from 'node:fs';
 import {subsidyTermsIndex, subsidyAmountFields} from '../../site/simulator/src/subsidy-amount-presentation.js';
 import {selectSchemeGroups} from '../../site/data/src/scheme-model.js';
 import {amountSummary} from '../../site/data/src/model.js';
-import {diagnosticPilotTerms, diagnosticPilotNotice, diagnosticPilotSupplement} from '../../site/simulator/src/diagnostic-display-pilot.js';
-const data = JSON.parse(fs.readFileSync(new URL('../../data/input/public-data.json', import.meta.url), 'utf8'));
+import {diagnosticPilotTerms, diagnosticPilotNotice, diagnosticPilotSupplement} from '../../site/simulator/src/retained-diagnostic-display.js';
+const data = loadPublicData();
 
 test('診断IDと掲載枝IDが異なっても，同じ正本の制度額を非算入額と分ける', () => {
   const input={prefecture_code:'01',municipality_code:'01429'};
@@ -112,8 +113,8 @@ test('保存された額不足の茨城35枝は表示未整理と分け，額を
  }
 });
 
-test('診断の試行は3自治体5枝だけに適用し，非算入に算入済み案内を付けない', () => {
- const cases=[['01429','hokkaido-next-kuriyama-solar','太陽光のみ'],['01202','hokkaido-hakodate-solar','太陽光のみ'],['01202','hokkaido-hakodate-battery','蓄電池のみ'],['01345','hokkaido-mori-solar','太陽光のみ'],['01345','hokkaido-next-mori-battery','蓄電池のみ']];
+test('保存済み表示の代表3自治体5枝で，非算入に算入済み案内を付けない', () => {
+ const cases=[['01429','hokkaido-next-kuriyama-solar','太陽光のみ'],['01202','hokkaido-hakodate-solar','太陽光のみ'],['01202','hokkaido-hakodate-battery','蓄電池のみ'],['01345','hokkaido-mori-solar','太陽光'],['01345','hokkaido-next-mori-battery','蓄電池']];
  for(const [city,id,equipment] of cases) {
   const index=subsidyTermsIndex(data,{prefecture_code:'01',municipality_code:city});
   const terms=index.get(id);
@@ -149,9 +150,9 @@ test('森町の主文は出力の固定語とし，基準・数量・適用条�
  const solar={id:'hokkaido-mori-solar',included:true};
  const battery={id:'hokkaido-next-mori-battery',included:true};
  assert.equal(mori.get(solar.id)[0].text,'太陽光の出力1kWあたり5万円です．');
- assert.equal(diagnosticPilotSupplement(solar,mori),'（算定対象）出力の基準：モジュール公称最大出力\n（算定対象）出力：最大3kW\n（上限）15万円\n（端数処理）1,000円未満切り捨て');
+ assert.equal(diagnosticPilotSupplement(solar,mori),'（出力基準）適用条件・補助額の算定に使用：モジュール公称最大出力\n（対象出力範囲）適用条件・補助額の算定に使用：10kW未満\n（算定対象）出力：最大3kW\n（適用条件）導入方法：新設\n（上限）15万円\n（端数処理）最終補助額：1,000円未満切り捨て\n（未確認事項）太陽光の対象費用の税込・税抜の区分');
  assert.equal(mori.get(battery.id)[0].text,'5万円です．');
- assert.equal(diagnosticPilotSupplement(battery,mori),'（適用条件）対象設備：定置用蓄電池\n（適用条件）導入方法：太陽光・蓄電池の同時設置');
+ assert.equal(diagnosticPilotSupplement(battery,mori),'（容量基準）適用条件・補助額の算定に使用：蓄電容量の合計\n（対象容量範囲）適用条件・補助額の算定に使用：1kWh以上\n（適用条件）導入方法：蓄電池・太陽光の同時設置\n（未確認事項）蓄電池の対象費用の税込・税抜の区分');
  assert.equal(diagnosticPilotSupplement({...solar,included:false},mori),diagnosticPilotSupplement(solar,mori));
  assert.equal(diagnosticPilotSupplement({id:'other'},mori),'');
  assert.equal(diagnosticPilotSupplement(solar,new Map([[solar.id,[{pilotEquipment:'太陽光',pilotSupplement:[]}]]])), '');
@@ -161,7 +162,7 @@ test('森町の主文は出力の固定語とし，基準・数量・適用条�
 });
 
 test('主文は1文，補足は定義済み項目順，注記は定型の1段落とする', () => {
- const patterns=[/^（算定対象）出力の基準：[^．\n]+$/, /^（算定対象）出力：最大3kW$/, /^（適用条件）対象設備：[^．\n]+$/, /^（適用条件）導入方法：太陽光・蓄電池の同時設置$/, /^（上限）\d+万円$/, /^（端数処理）1,000円未満切り捨て$/, /^（未確認事項）対象経費の税込・税抜の区分$/];
+ const patterns=[/^（(?:出力基準|容量基準)）.+$/, /^（(?:対象出力範囲|対象容量範囲)）.+$/, /^（算定対象）出力：最大3kW$/, /^（適用条件）対象設備：[^．\n]+$/, /^（適用条件）導入方法：(?:新設|蓄電池・太陽光の同時設置)$/, /^（上限）\d+万円$/, /^（端数処理）(?:最終補助額：)?1,000円未満切り捨て$/, /^（未確認事項）(?:対象経費|太陽光の対象費用|蓄電池の対象費用)の税込・税抜の区分$/];
  let count=0;
  for(const city of ['01429','01202','01345']) {
   const index=subsidyTermsIndex(data,{prefecture_code:'01',municipality_code:city});

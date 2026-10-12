@@ -1,15 +1,20 @@
+import {loadPublicData, standardSubsidy, municipalSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {calculateEstimate,roundAnnualGenerationKwh} from '../../site/simulator/src/calculator.js';
 import {subsidyGroups,conciseTokushimaAssumption,nonInclusionReason,subsidyResearchMessage} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'36',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'36',municipalityCode,...extra});
 test('徳島24自治体23枝・8採用の代表額と鳴門同時加算を保持する',()=>{
  assert.equal(data.municipalities.filter(p=>p.prefecture_code==='36').length,24);assert.equal(data.diagnostic_subsidy_programs.filter(p=>p.prefecture_code==='36'&&p.government_level==='municipality').length,23);
- for(const [code,amount] of [['36202',200000],['36204',170000],['36206',50000],['36207',400000],['36302',200000],['36387',280000],['36388',160000],['36401',100000]])assert.equal(standard(code).municipality_amount_yen,amount,code);
- assert.equal(standard('36202',{equipmentPackage:'solar_only'}).municipality_amount_yen,50000);
- assert.match(conciseTokushimaAssumption({...standard('36202').included_programs.find(p=>p.government_level==='municipality'),included:true}),/給付総額.*同時申請加算5万円/);
+ for(const [code,amount] of [['36204',170000],['36206',50000],['36207',400000],['36302',200000],['36387',280000],['36388',160000],['36401',100000]])assert.equal(municipalSubsidy(data,{prefectureCode:'36',municipalityCode:code}).municipality_amount_yen,amount,code);
+ const current=standard('36202');assert.equal(current.prefecture_amount_yen,280000);assert.equal(current.municipality_amount_yen,0);
+ assert.ok(current.excluded_programs.some(p=>p.government_level==='municipality'&&p.reason_code==='explicit_combination_prohibition'&&p.amount_yen===200000));
+ for(const code of ['36204','36387']) {const allocated=standard(code);assert.equal(allocated.prefecture_amount_yen,280000);assert.equal(allocated.municipality_amount_yen,0);assert.ok(allocated.excluded_programs.some(p=>p.government_level==='municipality'&&p.reason_code==='explicit_combination_prohibition'));}
+ assert.equal(municipalSubsidy(data,{prefectureCode:'36',municipalityCode:'36202',equipmentPackage:'solar_only'}).municipality_amount_yen,50000);
+ const solarAllocated=standard('36202',{equipmentPackage:'solar_only'});assert.equal(solarAllocated.municipality_amount_yen,0);assert.equal(solarAllocated.prefecture_amount_yen,280000);
+ const municipal=municipalSubsidy(data,{prefectureCode:'36',municipalityCode:'36202'});assert.equal(municipal.municipality_amount_yen,200000);
+ assert.match(conciseTokushimaAssumption({...municipal.included_programs.find(p=>p.government_level==='municipality'),included:true}),/給付総額.*同時申請加算5万円/);
 });
 test('美馬既存40万円と新築非算入，移住仮定・PV一方選択・別B費区別',()=>{
  assert.equal(standard('36207',{housingAge:'new'}).municipality_amount_yen,0);

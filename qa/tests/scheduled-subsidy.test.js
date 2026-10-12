@@ -1,3 +1,4 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -6,7 +7,7 @@ import { calculateEstimate } from '../../site/simulator/src/calculator.js';
 import { applicationStatusLabel } from '../../site/simulator/src/municipal-information.js';
 import { nonInclusionReason } from '../../site/simulator/src/subsidy-presentation.js';
 
-const data = JSON.parse(await readFile(new URL('../../data/input/public-data.json', import.meta.url), 'utf8'));
+const data = loadPublicData();
 const miyagi = data.diagnostic_subsidy_programs.find(p => p.id === 'miyagi-smart-energy-2026');
 const input = { prefectureCode: '04', municipalityCode: null, housingAge: 'existing',
   equipmentPackage: 'solar_plus_standard_battery', capacityKw: 4, batteryCapacityKwh: 9.5,

@@ -1,10 +1,11 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {selectSchemeGroups} from '../../site/data/src/scheme-model.js';
-import {diagnosticPilotTerms} from '../../site/simulator/src/diagnostic-display-pilot.js';
+import {diagnosticPilotTerms} from '../../site/simulator/src/retained-diagnostic-display.js';
 import {subsidyTermsIndex} from '../../site/simulator/src/subsidy-amount-presentation.js';
-const data=JSON.parse(fs.readFileSync(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 
 test('森町の対象可否・未確認事項を一覧と診断の同じ文型へ保持する',()=>{
   const programs=selectSchemeGroups(data,'01','01345').flat().filter(p=>p.id.startsWith('hokkaido-mori-'));

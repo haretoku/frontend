@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {kansaiFormulaComponents,kansaiSolarAboveMaximum} from '../../site/simulator/src/kansai-formula.js';
+import {kansaiFormulaComponents,kansaiSolarAboveMaximum} from '../../site/simulator/src/municipal-formula.js';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 
 // Synthetic contract only: no Tenei adoption record is added to the fixed public data.

@@ -1,10 +1,11 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { diagnosticSubsidy, diagnosticComponents } from '../../site/simulator/src/diagnostic-subsidy.js';
 import { nonInclusionReason, conciseKumamotoAssumption, noncashBenefitDescription } from '../../site/simulator/src/subsidy-presentation.js';
 import { applicationStatusLabel } from '../../site/simulator/src/municipal-information.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 const programs=data.diagnostic_subsidy_programs.filter(p=>p.prefecture_code==='43'&&p.government_level==='municipality');
 const input={prefectureCode:'43',municipalityCode:'43100',housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',capacityKw:4,batteryCapacityKwh:9.5,solarCost:1324400,batteryCost:1149500,batteryEquipmentCost:1054500};
 const evaluate=(code,values={})=>diagnosticSubsidy(programs,{...input,municipalityCode:code,...values},true);

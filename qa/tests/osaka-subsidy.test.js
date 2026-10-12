@@ -1,13 +1,12 @@
+import {loadPublicData, standardScenario} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {diagnosticComponents, diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {nonInclusionReason} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 const input={prefectureCode:'27',monthlyElectricityBillYen:12000,systemCapacityKw:4,housingAge:'existing'};
-const standard=(code, equipmentPackage='solar_plus_standard_battery',extra={})=>calculateEstimate({...input,municipalityCode:code,equipmentPackage,batteryCapacityKwh:9.5,...extra},data).scenarios.find(s=>s.scenario==='standard');
-test('大阪43自治体を他府県698自治体と重複なく受け入れる',()=>{const osaka=data.municipalities.filter(m=>m.prefecture_code==='27');assert.equal(osaka.length,43);assert.equal(new Set(osaka.map(m=>m.municipality_code)).size,43);assert.equal(data.municipalities.filter(m=>m.prefecture_code!=='27').length,698);});
+const standard=(code, equipmentPackage='solar_plus_standard_battery',extra={})=>standardScenario(data,{...input,municipalityCode:code,equipmentPackage,...extra});
+test('大阪43自治体を他府県の自治体と重複なく受け入れる',()=>{const osaka=data.municipalities.filter(m=>m.prefecture_code==='27');assert.equal(osaka.length,43);assert.equal(new Set(osaka.map(m=>m.municipality_code)).size,43);});
 test('大阪の採用制度の標準額をbackendの府別受入値と照合する',()=>{for(const [code,amount,packageName='solar_plus_standard_battery'] of [['27140',40000],['27202',50000],['27204',150000],['27206',110000],['27207',100000],['27208',40000],['27211',90000],['27214',60000],['27215',120000,'solar_only'],['27224',130000],['27227',130000],['27382',105000,'solar_only']])assert.equal(standard(code,packageName).subsidy_breakdown.municipality_amount_yen,amount,code);});
 test('大阪の容量切捨てと四捨五入は十進境界を維持する',()=>{for(const [code,k,expected] of [['27204',1.239,24000],['27211',3.994,49800],['27211',3.995,50000],['27224',4.09,80000],['27224',4.10,82000],['27382',3.49,102000],['27382',3.50,105000]]){const p=data.diagnostic_subsidy_programs.find(p=>p.municipality_code===code&&p.formula_components?.some(c=>c.scope==='solar'));const value=diagnosticComponents(p,{housingAge:'existing',equipmentPackage:'solar_only',capacityKw:k,batteryCapacityKwh:0,solarCost:2000000,batteryCost:0,batteryEquipmentCost:0});assert.equal(value.components.solar,expected,code+' '+k);}});
 test('豊中は承認済み容量対応仮定で6万円を算入する',()=>{const s=standard('27203');assert.equal(s.subsidy_breakdown.municipality_amount_yen,60000);const p=s.subsidy_breakdown.included_programs.find(p=>p.id==='toyonaka-smarthouse-2026');assert.match(p.calculation_assumptions.join(' '),/入力定格容量を初期実効容量.*モデル仮定/);});

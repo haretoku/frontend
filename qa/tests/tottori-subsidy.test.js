@@ -1,11 +1,10 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {diagnosticSubsidy,diagnosticComponents} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {nonInclusionReason,readableSubsidyAssumption} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'31',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'31',municipalityCode,...extra});
 const program=(code,suffix='solar_battery')=>data.diagnostic_subsidy_programs.find(p=>p.id===`tottori-${code}-${suffix}-2026`);
 test('鳥取19自治体16採用・8除外規則を保持する',()=>{
  assert.equal(data.municipalities.filter(p=>p.prefecture_code==='31').length,19);

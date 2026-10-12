@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {kansaiFormulaComponents} from '../../site/simulator/src/kansai-formula.js';
+import {kansaiFormulaComponents} from '../../site/simulator/src/municipal-formula.js';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {nonInclusionReason} from '../../site/simulator/src/subsidy-presentation.js';
 

@@ -1,10 +1,9 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {conciseKochiAssumption} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,equipmentPackage='solar_plus_standard_battery')=>calculateEstimate({prefectureCode:'39',municipalityCode,equipmentPackage,systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,equipmentPackage='solar_plus_standard_battery')=>standardSubsidy(data,{prefectureCode:'39',municipalityCode,equipmentPackage,monthlyElectricityBillYen:12000});
 const note=code=>conciseKochiAssumption({...standard(code).included_programs.find(p=>p.id.startsWith('kochi-')),included:true});
 test('高知34市町村52枝25採用と安田・田野の金額を保持する',()=>{
  assert.equal(data.municipalities.filter(p=>p.prefecture_code==='39').length,34);

@@ -1,6 +1,6 @@
 {
   "version": "diagnostic-display-binding/2",
-  "source_sha256": "00bc74d9d9474e217eaead621ff246ce180377bde8349061547fbdcc23b31ff8",
+  "source_sha256": "22cfd6497d3597efb6ae692d5b5d955d0cb66e94e75618146b50efc17d78b6cf",
   "public_data_version": "20261010-tokyo-equipment-base-trial.3",
   "records": [
     {
@@ -11,7 +11,7 @@
       "selected_component_ids": [
         "equipment-001"
       ],
-      "calculation_sha256": "e51ede72b69196c70eb425a3d34d5b67d230cbfa2c4efd6a4bf91191cab8c326"
+      "calculation_sha256": "edf0dab450b5cfb65af42741b3be38969f6e6d21f0eb721657b72ccdfe4f9cb5"
     },
     {
       "source_record_id": "tokyo-residential-battery-2026",
@@ -22,7 +22,7 @@
         "battery-new",
         "battery-new-dr"
       ],
-      "calculation_sha256": "5bb3baf0227534a631e55ba1f7e23a61c2dc17338a1daab9a4032df6f6e8931b"
+      "calculation_sha256": "1939de7f2af11f54003be4f43a38ee6c54f793aa738bb5e05436b8bb7a581830"
     },
     {
       "source_record_id": "tokyo-zero-emission-house-2026",
@@ -33,7 +33,7 @@
         "solar",
         "battery"
       ],
-      "calculation_sha256": "186e37d6273fd6923e9583f10ea7ddf69d3938ac4daba5e6a398e69cb659bf92"
+      "calculation_sha256": "5836da36716a285b629c6b7985425b15bffc79291022791eba3148e53735277d"
     },
     {
       "source_record_id": "national-dr-battery-r7-supplement-2026",
@@ -43,7 +43,7 @@
       "selected_component_ids": [
         "battery"
       ],
-      "calculation_sha256": "b8cea89827b111106439c581989424774e3e383ec8219cec5101edc91fa7d5ff"
+      "calculation_sha256": "09dc4196ec953353028828f51f1c26b27c5b17fd625d82a4e4b4a4cd7f283b57"
     },
     {
       "source_record_id": "national-zeh-new-detached-2026-battery",
@@ -53,7 +53,7 @@
       "selected_component_ids": [
         "zeh-addition-0"
       ],
-      "calculation_sha256": "0180590234a9c35004336848b288f346938288b44e3cbc9d087467c1caee29b7"
+      "calculation_sha256": "d0d944bf37ec7b6f59bdb06cc37f5ce0ffed516f48c7d058ca969966e9f94f07"
     },
     {
       "source_record_id": "national-mirai-eco-renovation-2026-battery",
@@ -63,7 +63,7 @@
       "selected_component_ids": [
         "dwelling-renovation-battery"
       ],
-      "calculation_sha256": "11bba13857d84aae808ae285f2763cf27fe7ba7fab3ce5907019175155444fa7"
+      "calculation_sha256": "57fe1a72f22f7f470087172aaddb569214dd20f6aa04bb2ba46bf6cd9313202b"
     },
     {
       "source_record_id": "native-2026-pref02-residential-self-consumption-PV-B",
@@ -74,7 +74,7 @@
         "native-2026-pref02-residential-self-consumption-PV-B-solar",
         "native-2026-pref02-residential-self-consumption-PV-B-battery"
       ],
-      "calculation_sha256": "823201e55668f110e895192e02a14d3806125963132f2e8d0d5ca787fe42b78e"
+      "calculation_sha256": "62fa64195e714dbb009a6fbeb25e426931e3e2ff5c04fbbb24641ab7d2157fb2"
     },
     {
       "source_record_id": "iwate-energy-new-housing-r8",
@@ -87,7 +87,7 @@
         "iwate-energy-new-housing-r8-hems",
         "iwate-energy-new-housing-r8-battery"
       ],
-      "calculation_sha256": "7d68f463d8c7b583c5c22d69eb3ffab51382b9278feb220649022910ce68e233"
+      "calculation_sha256": "2aebe2fe12844386c6a0856e2b755a3310a6be412a5e70014ccdc05cb08909c4"
     },
     {
       "source_record_id": "scheme-2368ea1aaaa32d38f6f0",
@@ -98,7 +98,7 @@
         "miyagi2368-solar",
         "miyagi2368-battery"
       ],
-      "calculation_sha256": "28676f6b6376614255cd12e08dfb4a83183b9f0f5b84cab2169975025f22b437"
+      "calculation_sha256": "ee8c8c0cc7b39f0e4d4f1522d51ab98efc468449b261aa7d90431ea6b0d656c4"
     },
     {
       "source_record_id": "native-2026-pref06-residential-self-consumption-PV",
@@ -108,7 +108,7 @@
       "selected_component_ids": [
         "native-2026-pref06-residential-self-consumption-PV-solar"
       ],
-      "calculation_sha256": "1539e54bf1cd75fd064f3c874f94d0bc5cef17b86e65318d09664d83d97f4022"
+      "calculation_sha256": "bd4a250710d80a39517b570e029ae6a0a03ed4c9268716e66cac93201b8f738a"
     },
     {
       "source_record_id": "native-2026-pref06-healthy-housing-renewable-package",
@@ -121,7 +121,7 @@
         "native-2026-pref06-healthy-housing-renewable-package-battery",
         "native-2026-pref06-healthy-housing-renewable-package-hems"
       ],
-      "calculation_sha256": "7beeb1ab8035e74dc98864d8cc9911f590f0dd58feb02e2069da0e5a21fe57c7"
+      "calculation_sha256": "059cd3aeecf3cbcb50258c6eaff0dfa68f61c104a83431f38aa7bef84d260e29"
     },
     {
       "source_record_id": "native-2026-pref06-miraikuru-residential-battery",
@@ -131,7 +131,7 @@
       "selected_component_ids": [
         "native-2026-pref06-miraikuru-residential-battery-B"
       ],
-      "calculation_sha256": "5db6f792ed45b9b84040b876f6f3aed99b7b349c632eeb91ad2f509dd7203808"
+      "calculation_sha256": "1406eee7071a4481bbb8275d6eb1787d01f0bf98adbc387ecfa1061a3b70625b"
     },
     {
       "source_record_id": "native-2026-pref07-residential-PV-B-V2H",
@@ -143,7 +143,7 @@
         "native-2026-pref07-residential-PV-B-V2H-battery",
         "native-2026-pref07-residential-PV-B-V2H-v2h"
       ],
-      "calculation_sha256": "9b699be9359c46bfb84bfeba3cd467060f9f4346fd450ddaa12c03a65843ceec"
+      "calculation_sha256": "cce97dd8a47457232cc3de80a2215028d0a4441a0e039505a9c046f9d9c3d924"
     },
     {
       "source_record_id": "tochigi-residential-solar-battery-2026",
@@ -154,7 +154,7 @@
         "tochigi-residential-solar-battery-2026-solar",
         "tochigi-residential-solar-battery-2026-battery"
       ],
-      "calculation_sha256": "32129e29a73d9d81183bfaf0012eace03a63c9b1793440d4026f7f9df9853f45"
+      "calculation_sha256": "c883390d084589af77fe9020bf1c0a7e57276acf1212c158a53e554972cfaee0"
     },
     {
       "source_record_id": "gunma-solar-new-2026",
@@ -165,7 +165,7 @@
         "gunma-solar-new-2026-solar",
         "gunma-solar-new-2026-battery"
       ],
-      "calculation_sha256": "46fc15d89914a6c72f394eb7154a613ef2f39b4b35d21b4cb4f80aea08130609"
+      "calculation_sha256": "409c5cf28a129191e97965fe4a9eea1ab8a49d06d692c51ef98e4934f4cb56c6"
     },
     {
       "source_record_id": "gunma-battery-existing-pv-2026",
@@ -175,7 +175,7 @@
       "selected_component_ids": [
         "gunma-battery-existing-pv-2026-battery"
       ],
-      "calculation_sha256": "d1d278791d450858afae02e113528db5195149fee79a414b72b13a63c49ee141"
+      "calculation_sha256": "879d126df8f696097b46faa1602ebb59bcbc1c4a82874669e8742cccd0da1163"
     },
     {
       "source_record_id": "saitama-residential-solar-thermal-2026",
@@ -186,7 +186,7 @@
         "saitama-residential-solar-thermal-2026-solar",
         "saitama-residential-solar-thermal-2026-solar_thermal"
       ],
-      "calculation_sha256": "9a7c73dbf2a06d773feea8cdb454972874d363e05b987bf9139ce5418beeb1d1"
+      "calculation_sha256": "8810732b3f49217cfda13157f6ef463cad5d669d03c8283ecafb1449b96633ad"
     },
     {
       "source_record_id": "saitama-residential-battery-2026",
@@ -197,7 +197,7 @@
         "saitama-residential-battery-2026-battery",
         "saitama-residential-battery-2026-fuel_cell"
       ],
-      "calculation_sha256": "b1f9aa9a2e4338f2d2e68cef8fd2a4f0b7393cb33bd97ef6644b856f594ff1b2"
+      "calculation_sha256": "2c4afcbae5f8c3980d5ccac5c5262928fd35056cc052c0bbcfa09f04c7956de4"
     },
     {
       "source_record_id": "chiba-zeh-house-joint-contractor-2026",
@@ -210,7 +210,7 @@
         "chiba-zeh-house-joint-contractor-2026-2",
         "chiba-zeh-house-joint-contractor-2026-3"
       ],
-      "calculation_sha256": "7663bd0fac11bc2bb568bd08e355608e4b9c9778557df744b30934060d930824"
+      "calculation_sha256": "85e7c0aaa72d9cac93aa9c1863d2049f2617b5e62ff5aed0aead61a4e5b2c199"
     },
     {
       "source_record_id": "chiba-residential-solar-battery-lease-ppa-2026",
@@ -221,7 +221,7 @@
         "chiba-residential-solar-battery-lease-ppa-2026-solar",
         "chiba-residential-solar-battery-lease-ppa-2026-battery"
       ],
-      "calculation_sha256": "b71f4118f279dd2ff2d3774d5b01b9f2dcfae151f3eec1db002753ccf2798eef"
+      "calculation_sha256": "098c8c4b13fc44ae81302e6e01dc9a940f68ee87282ba1012d086612711874e0"
     },
     {
       "source_record_id": "kanagawa-residential-solar-battery-joint-2026",
@@ -232,7 +232,7 @@
         "kanagawa-residential-solar-battery-joint-2026-solar",
         "kanagawa-residential-solar-battery-joint-2026-battery"
       ],
-      "calculation_sha256": "319db50c28b1c76c67e12d643751b57aaa8ff9a498ccf84dce25075b1feba8a6"
+      "calculation_sha256": "eae8402d5c210400330ecede708ac4af0c30fd461451b99919f88e0a625fbc37"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-equipment-2026",
@@ -243,7 +243,7 @@
         "niigata-yukiguni-zeh-equipment-2026-solar",
         "niigata-yukiguni-zeh-equipment-2026-battery"
       ],
-      "calculation_sha256": "0074d7e1d1f23492526d58b6366569593e1a56afd5880b28fe74ca475d759a0e"
+      "calculation_sha256": "8cbc474c037ce8245ef07fa5f159410050348d35606fd6f54382300a1dfd1173"
     },
     {
       "source_record_id": "toyama-energy-saving-appliance-solar-2026",
@@ -254,7 +254,7 @@
         "toyama-energy-saving-appliance-solar-2026-normal",
         "toyama-energy-saving-appliance-solar-2026-regional"
       ],
-      "calculation_sha256": "9b7f370de43dbe28e1c3416d669a48f8eb52505ea678f75ce5e1de78529949f2"
+      "calculation_sha256": "ae6cf0aa8cbc66fde7575fc42f400c671d67fede4632fa2f8f9c20832955ac49"
     },
     {
       "source_record_id": "ishikawa-residential-solar-battery-v2h-2026",
@@ -267,7 +267,7 @@
         "ishikawa-residential-solar-battery-v2h-2026-battery-existing",
         "ishikawa-residential-solar-battery-v2h-2026-v2h"
       ],
-      "calculation_sha256": "7e123ffa5d22f3141cc6368ba177d64411fd82ad10b7d62b8a43d72fb8b5f0a7"
+      "calculation_sha256": "2a56f2d7dfdb210e56d9fe48027a1a988f4d739cafb9ec230dc8dd9dfe1ce750"
     },
     {
       "source_record_id": "yamanashi-residential-renewable-equipment-2026",
@@ -278,7 +278,7 @@
         "yamanashi-residential-renewable-equipment-2026-solar",
         "yamanashi-residential-renewable-equipment-2026-battery"
       ],
-      "calculation_sha256": "edb070d5f93ef91cd5868e07c6d9ae8cf0f91f55bbbf376a03d1610751a8153f"
+      "calculation_sha256": "2e207b1dcf35e7d64eefd1f5e81bbf6163d7d3e7606b847b7f3fb88f79a92928"
     },
     {
       "source_record_id": "nagano-roof-solar-linked-equipment-2026",
@@ -289,7 +289,7 @@
         "nagano-roof-solar-linked-equipment-2026-solar",
         "nagano-roof-solar-linked-equipment-2026-battery"
       ],
-      "calculation_sha256": "1f42c784265a5ca28837c79e0c8c7588abea09944daeea4a2abe654c9ae23a54"
+      "calculation_sha256": "eac4d76d36424ffda1980e803075f7ec984746c88ce540f38b4009d61fb56060"
     },
     {
       "source_record_id": "shiga-basic-fit-solar-battery-2026",
@@ -300,7 +300,7 @@
         "shiga-basic-fit-solar-battery-2026-solar",
         "shiga-basic-fit-solar-battery-2026-battery"
       ],
-      "calculation_sha256": "f9c3a47c4c532dff0713ecfae4472de05e7bbcb38f44edccff7b2839dcca701d"
+      "calculation_sha256": "191cd272a6be85324c355b15ec7b2a2b6e36fd2bf9d5309c1d05a35895471953"
     },
     {
       "source_record_id": "hyogo-awaji-household-battery-2026",
@@ -310,7 +310,7 @@
       "selected_component_ids": [
         "hyogo-awaji-household-battery-2026-battery"
       ],
-      "calculation_sha256": "383a2b49caa81ed760671fa6b6e1f59eed72a14c2a4bb774e306ea399e868002"
+      "calculation_sha256": "8a92a02a99107ef1c3e8805856489c4b9c0063b8b70c6455f607f85aa4b204a0"
     },
     {
       "source_record_id": "nara-smart-house-residential-battery-2026",
@@ -320,7 +320,7 @@
       "selected_component_ids": [
         "nara-smart-house-residential-battery-2026-battery"
       ],
-      "calculation_sha256": "c424fc4c05552e334ed2f4e8942c8eddca63e84beeea350ff08a5504ede04c6c"
+      "calculation_sha256": "d6df1cf5f6c0dff04d5c0bdcf4cbae0bee0e401ea85f217831472e961aa6e076"
     },
     {
       "source_record_id": "shiga-priority-non-fit-2026",
@@ -331,7 +331,7 @@
         "shiga-priority-non-fit-2026-solar",
         "shiga-priority-non-fit-2026-battery"
       ],
-      "calculation_sha256": "1ce18a2082e7ff3d42ebe302de2be49d451b3a7dceb92a1f03c4b075f821ec86"
+      "calculation_sha256": "e6afa0a95bf1ce8ff37a6d3782e61e5a354f8787ecb6b1c2b67864fe37682855"
     },
     {
       "source_record_id": "shimane-new-zeh-renewable-package-2026",
@@ -344,7 +344,7 @@
         "shimane-new-zeh-renewable-package-2026-solar",
         "shimane-new-zeh-renewable-package-2026-battery"
       ],
-      "calculation_sha256": "9e6f052955c3101dc90fa9ce1011b7cb013b3ce577d5a30817dabb9255c0af01"
+      "calculation_sha256": "1fe134952af91768476d034b256bba1ad6ffeece0f73fbdf48080037e7458cf5"
     },
     {
       "source_record_id": "hiroshima-existing-home-eco-window-2026",
@@ -354,7 +354,7 @@
       "selected_component_ids": [
         "hiroshima-existing-home-eco-window-2026-housing-window"
       ],
-      "calculation_sha256": "e575818886f9f68d3fa7d9e0baf366f48acbb48510c5f741449108eb263eb291"
+      "calculation_sha256": "34b2510a62d48b8bdb6426c4542c6b348b68e8fbaf2e502a488788833e7f7201"
     },
     {
       "source_record_id": "yamaguchi-zeh-new-home-open-house-2026",
@@ -364,7 +364,7 @@
       "selected_component_ids": [
         "yamaguchi-zeh-new-home-open-house-2026-housing"
       ],
-      "calculation_sha256": "f2c50f9c1bee3407fa68e5816a7832f0061c33b233ec6174dc3549df3e727893"
+      "calculation_sha256": "7d14d3a3da2aceb217c83ca14c0eac6ee76953c855c8fea4679baf0322f1ee60"
     },
     {
       "source_record_id": "tokushima-residential-solar-battery-non-fit-2026",
@@ -375,7 +375,7 @@
         "tokushima-residential-solar-battery-non-fit-2026-solar",
         "tokushima-residential-solar-battery-non-fit-2026-battery"
       ],
-      "calculation_sha256": "39b24c2c301995945fad85265ff34d816f042b27a1721b08549a20ac29e0a4c1"
+      "calculation_sha256": "b20d6f732aef3e20ce31055b0b16793f2b11d9940bfe0b5ef7e9d8129a1ca581"
     },
     {
       "source_record_id": "kagawa-existing-home-battery-non-fit-2026",
@@ -385,7 +385,7 @@
       "selected_component_ids": [
         "kagawa-existing-home-battery-non-fit-2026-battery"
       ],
-      "calculation_sha256": "3d6a6f251b6705ab43cf8bb3f0bf66c01c47af37852b59616ad6654f879f8f7d"
+      "calculation_sha256": "747274e819e74316bb1a2bfd299a95a4dfe4c1dfa6c73d92fae9992a0ea282ac"
     },
     {
       "source_record_id": "kagawa-priority-solar-battery-non-fit-2026",
@@ -396,7 +396,7 @@
         "kagawa-priority-solar-battery-non-fit-2026-solar",
         "kagawa-priority-solar-battery-non-fit-2026-battery"
       ],
-      "calculation_sha256": "78e34a169b6146c0556383e40dea447f59eb5e4604edf821da54a8602c031cec"
+      "calculation_sha256": "a0d29f5c1916e9c0bf2d38e8a45e7e0337b672696a1598bc10fd6d37cf6ad0f7"
     },
     {
       "source_record_id": "oita-self-consumption-solar-battery-closed-2026",
@@ -407,7 +407,7 @@
         "oita-self-consumption-solar-battery-closed-2026-solar",
         "oita-self-consumption-solar-battery-closed-2026-battery"
       ],
-      "calculation_sha256": "747357d8ecfe14a00b7474bf3d638bd4de0a922a096cdf53d8993972a5d261f4"
+      "calculation_sha256": "905264cfb07c09ecb4d37eae6b8b5bbe24e70f214b719114408dc094e21fbf8e"
     },
     {
       "source_record_id": "miyazaki-solar-battery-non-fit-2026",
@@ -418,7 +418,7 @@
         "miyazaki-solar-battery-non-fit-2026-solar",
         "miyazaki-solar-battery-non-fit-2026-battery"
       ],
-      "calculation_sha256": "18e620f59afc23bd4e48b21fd7a07a70ad2d11cdf10d29d6a8cf72dd451e6c0e"
+      "calculation_sha256": "275ca9a9ad230ccd34b4fe48e2e381d116d65e5ad4777df0ca52b74b7e279730"
     },
     {
       "source_record_id": "miyazaki-battery-existing-pv-2026",
@@ -428,7 +428,7 @@
       "selected_component_ids": [
         "miyazaki-battery-existing-pv-2026-battery"
       ],
-      "calculation_sha256": "cd693b5b1d246264b6ba49a29bc8008e6295f4d87b9bc33c7887907920e183ef"
+      "calculation_sha256": "6dc0a05ba3201a0b31e32b961bc51b731b4aa88831ea85ef549a8809b54b989f"
     },
     {
       "source_record_id": "okinawa-island-depop-individual-ev-charge-v2h-2026",
@@ -440,7 +440,7 @@
         "okinawa-island-depop-individual-ev-charge-v2h-2026-charger",
         "okinawa-island-depop-individual-ev-charge-v2h-2026-v2h"
       ],
-      "calculation_sha256": "8ab3abef2355a25358dcaf5941810f0da3bfa4ecb0f10be55c64d41aced4f500"
+      "calculation_sha256": "2f64227081759a2d8ce699b52fc3d4321d792d52539410c7fdddb606b16b6960"
     },
     {
       "source_record_id": "nagano-existing-pv-battery-2026",
@@ -450,7 +450,7 @@
       "selected_component_ids": [
         "nagano-existing-pv-battery-2026-battery"
       ],
-      "calculation_sha256": "71432398e5e7fbb354587907d337a43a38d1d55ce37dc64ec2558cc49b7df3c3"
+      "calculation_sha256": "dfe4b60c78ccb1d1e2eed11e261cae7f601cf9297eadf53d018564adb90f432c"
     },
     {
       "source_record_id": "nagano-solar-v2h-simultaneous-2026",
@@ -461,7 +461,7 @@
         "nagano-solar-v2h-simultaneous-2026-solar",
         "nagano-solar-v2h-simultaneous-2026-v2h"
       ],
-      "calculation_sha256": "9bf2c1c777a5b34c820d1802ddfaaacf60f8b0b4ed1563c93dfb7a1cbfe13450"
+      "calculation_sha256": "cbbc30252b3debf4e756c88cf4305268bcd6a5386315e08f257ad4e93967165b"
     },
     {
       "source_record_id": "nagano-solar-battery-v2h-simultaneous-2026",
@@ -473,7 +473,7 @@
         "nagano-solar-battery-v2h-simultaneous-2026-battery",
         "nagano-solar-battery-v2h-simultaneous-2026-v2h"
       ],
-      "calculation_sha256": "ea7e8f6af57bfa99470d5599ac1a48a6e21ec1b5d8adb9cb5625f0dc15f29512"
+      "calculation_sha256": "5651e16756a509314ec2a87def9fe5b3ca764e94285d3fc87f49e359648f3d66"
     },
     {
       "source_record_id": "nagano-existing-pv-v2h-2026",
@@ -483,7 +483,7 @@
       "selected_component_ids": [
         "nagano-existing-pv-v2h-2026-v2h"
       ],
-      "calculation_sha256": "00981ca8977e12c6991fb7bb1a42ce4be11f19e94c9934b53e47acdfea9d9b56"
+      "calculation_sha256": "92882998aa4d16aa91850a548f0bef6f0e52fcb97d8800e9994fbcbc176d6141"
     },
     {
       "source_record_id": "nagano-existing-pv-battery-v2h-2026",
@@ -494,7 +494,7 @@
         "nagano-existing-pv-battery-v2h-2026-battery",
         "nagano-existing-pv-battery-v2h-2026-v2h"
       ],
-      "calculation_sha256": "5804806f5b3c6095c1c9e652f20225e7d574d2bdbd846100628fcc7d1f632406"
+      "calculation_sha256": "fa29a9a91a6adb2c1ab8f0bd42294584bcc7d284bd2cd1aa22b7331a9f1efaf6"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-new-housing-solar-battery-2026",
@@ -506,7 +506,7 @@
         "niigata-yukiguni-zeh-new-housing-solar-battery-2026-solar",
         "niigata-yukiguni-zeh-new-housing-solar-battery-2026-battery"
       ],
-      "calculation_sha256": "256be88e7512fb5717de062a169585ea39ed999a137aa86e7d327b6a06db9805"
+      "calculation_sha256": "b20ebadb13f2a16e66510918e08cb5596a5dd9a956fefe1dcf8231a0092c663b"
     },
     {
       "source_record_id": "kanagawa-small-contractor-zeh-housing-2026",
@@ -516,7 +516,7 @@
       "selected_component_ids": [
         "ka-zeh-housing"
       ],
-      "calculation_sha256": "49164be8cd0df6a21a71292415a86bb1b42789e213b52b218878ccb311d7ce08"
+      "calculation_sha256": "13b2c485dbf8dca4a8d6d9cabcc560dd821ebbe9eff0c0710020f5880c8b3262"
     },
     {
       "source_record_id": "kanagawa-existing-home-energy-renovation-2026",
@@ -526,7 +526,7 @@
       "selected_component_ids": [
         "ka-existing-home-insulation-renovation"
       ],
-      "calculation_sha256": "c09199196b106e91688b273a7bf7cdff6680b34eeef2d3383ae6b07e440b529b"
+      "calculation_sha256": "2c6d7562c28fc24938e9992b9307eccd24613bf03e28d6d5fd4f1a1e6c112d7d"
     },
     {
       "source_record_id": "kagawa-single-programme-v2h-2026",
@@ -536,7 +536,7 @@
       "selected_component_ids": [
         "kagawa-single-V2H"
       ],
-      "calculation_sha256": "ee7c6e50962e30600d0ee37859940cc410f853fd29d4ec3e4934589c501d9c2d"
+      "calculation_sha256": "9b9c2cdb3156605e6969f2f334821c565d2b58d6a1ba921ce4a4e9dceede1c0e"
     },
     {
       "source_record_id": "kagawa-single-programme-new-zeh-2026",
@@ -546,7 +546,7 @@
       "selected_component_ids": [
         "kagawa-single-new-ZEH"
       ],
-      "calculation_sha256": "de34660d02d8fd2978528c5375e49040647b071e1d1940202a839b21b3e6e25c"
+      "calculation_sha256": "830249e453fc6c17f96539517b2f7ed79eaf9d6948dbb43bf96cf8ffa085eb36"
     },
     {
       "source_record_id": "kagawa-single-programme-existing-insulation-2026",
@@ -557,7 +557,7 @@
         "kagawa-single-insulation-whole",
         "kagawa-single-insulation-partial"
       ],
-      "calculation_sha256": "c55076e4ebef3edbe7d0117162d51ecf44d7f17bd102af17eb680ecc0235e1e4"
+      "calculation_sha256": "20ad01136add54a911881f109b44371164948340fd9935dd57dbde807d98c3d7"
     },
     {
       "source_record_id": "miyazaki-personal-cogeneration-insulation-2026",
@@ -568,7 +568,7 @@
         "miyazaki-personal-cogeneration-insulation-2026-hotwater",
         "miyazaki-personal-cogeneration-insulation-2026-window"
       ],
-      "calculation_sha256": "9a1a03c50106714cee80561aa391951ba10673e74103e1bae40b488084ec85c2"
+      "calculation_sha256": "1a78f3fed5b4fba5c733c341276b3db2b035291f4318939b6e52a74198bd92ac"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-housing-only-d-2026",
@@ -578,7 +578,7 @@
       "selected_component_ids": [
         "niigata-yukiguni-zeh-housing-only-d-2026-housing"
       ],
-      "calculation_sha256": "a770291f0d905c126bb7f2aa63a313338bb6114507bcab4d50255be08df79dbb"
+      "calculation_sha256": "85cdb188fa3d5f09d200cb13a77be2f8f9e9a48206b559d6dd97f49137dfc1e5"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-c-housing-geothermal-2026",
@@ -589,7 +589,7 @@
         "niigata-yukiguni-zeh-c-housing-geothermal-2026-housing",
         "niigata-yukiguni-zeh-c-housing-geothermal-2026-geothermal"
       ],
-      "calculation_sha256": "f0bd754a2318d9dd6315fc204cff2f98968a3c8174cd2770d6d44c5d135d1257"
+      "calculation_sha256": "1d0dc1b3e32acbf8e8effd71a116b95091a8f447d2b9a54aa51e2187ee0cda76"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-g-geothermal-2026",
@@ -599,7 +599,7 @@
       "selected_component_ids": [
         "niigata-yukiguni-zeh-g-geothermal-2026-geothermal"
       ],
-      "calculation_sha256": "32c72799dc87ae6fadec78ee62349832fc9cfd18359ec4627748582d55178a22"
+      "calculation_sha256": "97e19d93a9c9976404b853dcedf95348bedcc7e1e31fc32450273e1cbd56d68c"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-h-solar-vehicle-v2h-2026",
@@ -612,7 +612,7 @@
         "niigata-yukiguni-zeh-h-solar-vehicle-v2h-2026-vehicle",
         "niigata-yukiguni-zeh-h-solar-vehicle-v2h-2026-v2h"
       ],
-      "calculation_sha256": "168d26799b0e37ada2625cc3cca8487624acb37df623481df39358e5014597e2"
+      "calculation_sha256": "e6153093af4e6e1202cb927d9b24c426e82e847d353b662bb2484606c409e008"
     },
     {
       "source_record_id": "niigata-yukiguni-zeh-i-solar-vehicle-v2h-2026",
@@ -624,7 +624,7 @@
         "niigata-yukiguni-zeh-i-solar-vehicle-v2h-2026-vehicle",
         "niigata-yukiguni-zeh-i-solar-vehicle-v2h-2026-v2h"
       ],
-      "calculation_sha256": "be51bbcb3b5b1011e807fb281fa25bc93f23f9b9b388b62d601302f1c4afc403"
+      "calculation_sha256": "7736114fc2c8b3166b826df6c22f2718ff98aa8a0c93593028f5a6580bfda2ce"
     },
     {
       "source_record_id": "nagano-item2-new-pv-ev-2026",
@@ -635,7 +635,7 @@
         "nagano-item2-new-pv-ev-2026-solar",
         "nagano-item2-new-pv-ev-2026-vehicle"
       ],
-      "calculation_sha256": "fbd306ff684e8b0827699a1ce7fd14ed4cc3284acf47d826cd1fddaeaf664c09"
+      "calculation_sha256": "53dcb1278f1fc0df367a33e0679334f3346d4ab7c27e3a85d72fdcc5315362a3"
     },
     {
       "source_record_id": "nagano-item2-existing-pv-ev-2026",
@@ -645,7 +645,7 @@
       "selected_component_ids": [
         "nagano-item2-existing-pv-ev-2026-vehicle"
       ],
-      "calculation_sha256": "288dfdf938f800c1c2077078f92a580bd1709aac890de9d3fb8a44d530e4e89e"
+      "calculation_sha256": "8e4cf2466b722738c04fc3e57992100f11078f15ac8fd49c08b99b768bcf2901"
     },
     {
       "source_record_id": "fukushima-self-consumption-solar-model-2026",
@@ -655,9 +655,9 @@
       "selected_component_ids": [
         "fukushima-self-consumption-solar-model-2026-solar"
       ],
-      "calculation_sha256": "5fedbe95a26c48939a1281328a5bd8eb0bfea9e3698c376c27dd1e00ca2a1b94"
+      "calculation_sha256": "4f62ccdf7e597e61070e2475be713cbbc3827a09f479bf0be41d9628d06f9b7d"
     }
   ],
-  "hare_payload_sha256": "e810a67c5827dc388665a181dd0b71f748954426aa6db1a076a93e2563a834ed",
-  "diagnostic_payload_sha256": "4a346f743be10cfd05b4a5dd2fc79020aed909d0b4b37ed834c327f01a6c1171"
+  "hare_payload_sha256": "0918706039606a35c7f33e297e6733097f430c15904086c737ad4dba914cb5ac",
+  "diagnostic_payload_sha256": "ffd79873ab0552b60a058503511d1e90c896e4f88a57467ebfa96947e1c81b14"
 }

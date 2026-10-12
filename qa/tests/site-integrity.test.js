@@ -120,7 +120,6 @@ const htmlPaths = [
   resolve(siteRoot, "guides/index.html"),
   resolve(siteRoot, "simulator/index.html"),
   resolve(siteRoot, "pages/calculation-method.html"),
-  resolve(siteRoot, "pages/costs-maintenance.html"),
   resolve(siteRoot, "guides/solar-economics/index.html"),
   ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
   resolve(siteRoot, "guides/subsidies/index.html"),
@@ -241,7 +240,6 @@ test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在�
   const guideCurrentPaths = new Set([
     ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
     resolve(siteRoot, "guides/index.html"),
-    resolve(siteRoot, "pages/costs-maintenance.html"),
     resolve(siteRoot, "guides/solar-economics/index.html"),
     resolve(siteRoot, "guides/subsidies/index.html"),
     resolve(siteRoot, "guides/disaster/index.html"),

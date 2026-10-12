@@ -1,10 +1,10 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {diagnosticComponents} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {nonInclusionReason,noncashBenefitDescription} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 const standard=(prefectureCode,municipalityCode,extra={})=>calculateEstimate({prefectureCode,municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard');
 test('共通方針11.8の8市町採用額と福知山・韮崎非算入を保持する',()=>{
  for(const [pref,code,amount] of [['26','26211',100000],['26','26212',130000],['26','26214',300000],['26','26366',135000],['27','27203',60000],['19','19213',90000],['21','21506',200000],['20','20402',172000]]) assert.equal(standard(pref,code).subsidy_breakdown.municipality_amount_yen,amount,code);

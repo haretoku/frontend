@@ -1,4 +1,4 @@
-import {diagnosticDisplayPilot} from './diagnostic-display-pilot.generated.js';
+import {diagnosticDisplayPilot} from './retained-diagnostic-display.generated.js';
 
 function canonical(value) {
   if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';

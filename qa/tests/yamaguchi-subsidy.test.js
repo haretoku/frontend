@@ -1,11 +1,10 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {subsidyGroups,conciseYamaguchiAssumption,nonInclusionReason,noncashBenefitDescription} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'35',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
-import {kansaiFormulaComponents} from '../../site/simulator/src/kansai-formula.js';
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'35',municipalityCode,...extra});
+import {kansaiFormulaComponents} from '../../site/simulator/src/municipal-formula.js';
 test('山口19自治体20規則・採用6規則の代表額と排他を保持する',()=>{
  assert.equal(data.municipalities.filter(p=>p.prefecture_code==='35').length,19);assert.equal(data.diagnostic_subsidy_programs.filter(p=>p.id.startsWith('yamaguchi-')).length,20);
  for(const [code,amount] of [['35201',696000],['35202',300000],['35206',100000],['35216',70000]])assert.equal(standard(code).municipality_amount_yen,amount);

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {kansaiFormulaComponents} from '../../site/simulator/src/kansai-formula.js';
+import {kansaiFormulaComponents} from '../../site/simulator/src/municipal-formula.js';
 // Backend's 2026-09-20 Aichi draft: evaluator contract only, pending independent stage 2.
 const rules = [
   {
@@ -106,5 +106,5 @@ test('最低経費は選択した費目の税変換後に評価し費目未指�
  const rule=structuredClone(source);rule.formula_components[0].cost_scope='solar';
  assert.equal(evaluate(rule,1).components.battery,150000);
  delete rule.formula_components[0].cost_scope;
- assert.throws(()=>evaluate(rule,1149500),/cost_scope/);
+ assert.throws(()=>evaluate(rule,1149500),/対象経費最低額の判定に必要な費用/);
 });

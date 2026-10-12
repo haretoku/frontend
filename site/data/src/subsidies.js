@@ -3,9 +3,11 @@ import hareTableUrl from '../../../data/input/hare-display-table.json?url';
 import hareBindingUrl from '../../../data/input/hare-display-binding.json?url';
 import {appendCommonItemGroups} from '../../shared/common-item-groups.js';
 import dataUrl from '../../../data/input/public-data.json?url';
+import metadataUrl from '../../../data/input/metadata.json?url';
+import {loadFrontendData, loadJson} from '../../../data/src/data-loader.js';
 import {usesSchemeContract} from '../../../data/src/scheme-adapter.js';
 import {selectSchemeGroups} from './scheme-model.js';
-import {diagnosticPilotTerms} from '../../simulator/src/diagnostic-display-pilot.js';
+import {diagnosticPilotTerms} from '../../simulator/src/retained-diagnostic-display.js';
 import {orderedSupplementRows} from '../../simulator/src/diagnostic-amount-dom.js';
 import {listingMunicipalities,listingNotes,diagnosisDescription,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
 // The import path is relative to site/data/src; only the received public dataset is used.
@@ -159,9 +161,11 @@ function restore(){const p=new URLSearchParams(location.search);pref.value=data.
 document.querySelector('#region-form').addEventListener('submit',e=>e.preventDefault());
 pref.addEventListener('change',()=>{populateCities();render();});city.addEventListener('change',()=>render());window.addEventListener('popstate',restore);
 reception.addEventListener('change',()=>render());
-try {const response=await fetch(dataUrl);if(!response.ok)throw new Error('load');data=await response.json();
-const displayResponses=await Promise.all([fetch(hareTableUrl),fetch(hareBindingUrl)]);
-if(displayResponses.some(response=>!response.ok))throw new Error('display load');
-const [hareTable,hareBinding]=await Promise.all(displayResponses.map(response=>response.json()));
+try {
+const [{publicData},hareTable,hareBinding]=await Promise.all([
+  loadFrontendData({publicDataUrl:dataUrl,metadataUrl}),
+  loadJson(hareTableUrl),loadJson(hareBindingUrl),
+]);
+data=publicData;
 hareDisplayRecords=receiveHareDisplayRecords(data,hareTable,hareBinding);
 pref.replaceChildren(option('','都道府県を選択'));for(const p of data.prefectures)pref.append(option(p.code,p.name));pref.disabled=false;restore();}catch{status.textContent='データを読み込めませんでした．ページを再読み込みしてください．';}

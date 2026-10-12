@@ -1,30 +1,6 @@
-import './hokkaido-subsidy.test.js';
 import {receiveSchemeRules} from '../../data/src/scheme-adapter.js';
-import './hokkaido-combined-v5.test.js';
-import './hokkaido-combined-v7.test.js';
-import './hokkaido-combined-v8.test.js';
-import './hokkaido-combined-v9.test.js';
-import './hokkaido-combined-v10.test.js';
-import './abashiri-cost.test.js';
-import './sapporo-cost.test.js';
-import './tenei-capacity.test.js';
-import './fukushima-subsidy.test.js';
-import './yamagata-subsidy.test.js';
-import './akita-subsidy.test.js';
-import './subsidy-display-groups.test.js';
-import './iwate-subsidy.test.js';
-import './miyagi-subsidy.test.js';
-import './aomori-subsidy.test.js';
-import './okinawa-subsidy.test.js';
-import './kagoshima-subsidy.test.js';
-import './miyazaki-subsidy.test.js';
-import './oita-subsidy.test.js';
-import './mie-subsidy.test.js';
-import './kumamoto-subsidy.test.js';
-import './scheduled-subsidy.test.js';
-import './nagasaki-subsidy.test.js';
 import assert from "node:assert/strict";
-import {loadNationalPrefectureExpectations, legacyFinancialProjection, nationalReferenceProjection} from './national-prefecture-reference.js';
+import {loadNationalPrefectureExpectations, legacyFinancialProjection, nationalReferenceProjection} from '../helpers/national-prefecture-reference.js';
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -306,7 +282,7 @@ for (const calculationCase of calculationCases.cases) {
 
 test("採用済み公開ペアと既存計算fixtureのSHA-256が承認値と一致する", async () => {
   const expectedHashes = new Map([
-    ["../../data/input/public-data.json", "D759E6368B982A7E19F4BBE44FB7CB5F7673E151E0AA60898F347A0404D2C3E7"],
+    ["../../data/input/public-data.json", "792A0A26E905BB955528879C3D4CE7CB147BB0F0133880247FFBCE41A0E31C50"],
     ["../fixtures/calculation-cases.json", "E3171DCD87C1384364EC91713E4DC7213062EAD5C0CC1FF722B83D5A513A6582"],
     ["../../data/input/metadata.json", "8D9735595588EB15531FFA8945D71BD85BB3B2877E5F3D6709C6DF20272BE15B"]
   ]);

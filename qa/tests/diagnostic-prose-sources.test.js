@@ -1,12 +1,13 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {diagnosticDisplayPilot as pilot} from '../../site/simulator/src/diagnostic-display-pilot.generated.js';
-import {diagnosticPilotTerms,diagnosticPilotSections,diagnosticPilotNotice,diagnosticTrialSourceTexts,diagnosticAmountPolicy,diagnosticDetailNotes} from '../../site/simulator/src/diagnostic-display-pilot.js';
+import {diagnosticDisplayPilot as pilot} from '../../site/simulator/src/retained-diagnostic-display.generated.js';
+import {diagnosticPilotTerms,diagnosticPilotSections,diagnosticPilotNotice,diagnosticTrialSourceTexts,diagnosticAmountPolicy,diagnosticDetailNotes} from '../../site/simulator/src/retained-diagnostic-display.js';
 import {subsidyTermsIndex,subsidyAmountFields,subsidyAmountPolicy} from '../../site/simulator/src/subsidy-amount-presentation.js';
 import {selectSchemeGroups} from '../../site/data/src/scheme-model.js';
 import {appendInstitutionalAmount} from '../../site/simulator/src/diagnostic-amount-dom.js';
-const data=JSON.parse(fs.readFileSync(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 const randomCities=new Set(['03210','04215','04606','07212','07422','19365','07541','06210','02207','07466','02361','02426','33423','21217','01484','18206','02301','01228','02424','06381']);
 test('fixed20 has23 normalized branches,2 status-only and3 preserved holds',()=>{
  assert.equal(Object.values(pilot.entries).filter(e=>randomCities.has(e.municipality)).length,23);
@@ -15,6 +16,7 @@ test('fixed20 has23 normalized branches,2 status-only and3 preserved holds',()=>
  for(const entry of Object.values(pilot.entries)) {
   const groups=selectSchemeGroups(data,entry.prefecture,entry.municipality).flat();
   const program=groups.find(p=>p.id===entry.branch.branch_id);
+  if(entry.branch.branch_id==='source-290ef2b54f9853') {assert.equal(diagnosticPilotTerms(data,program),null);continue;}
   assert.ok(diagnosticPilotTerms(data,program),program.id);
   const index=subsidyTermsIndex(data,{prefecture_code:entry.prefecture,municipality_code:entry.municipality});
   for(const id of entry.branch.diagnostic_rule_ids){

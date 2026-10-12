@@ -1,10 +1,9 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {subsidyResearchMessage,nonInclusionReason} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'21',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'21',municipalityCode,...extra});
 test('岐阜42自治体20制度と10採用額・多治見設備分岐・白川単位解釈を保持する',()=>{
   assert.equal(data.municipalities.filter(m=>m.prefecture_code==='21').length,42);
   assert.equal(data.diagnostic_subsidy_programs.filter(p=>p.prefecture_code==='21'&&p.government_level==='municipality').length,20);

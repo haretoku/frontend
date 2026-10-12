@@ -1,5 +1,6 @@
 import {calculationContext, calculationContexts, extractDiagnosticDisplay} from './common-diagnostic-extract.js';
 import {receiveHareDisplayRecords, appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
+import {loadJson} from '../../../data/src/data-loader.js';
 
 function canonical(value) {
   if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';
@@ -33,9 +34,7 @@ export async function loadDiagnosticDisplayRecords(data) {
     new URL('../../../data/input/diagnostic-display-binding.json', import.meta.url),
     new URL('../../../data/input/hare-display-table.json', import.meta.url),
   ];
-  const responses = await Promise.all(urls.map(url => fetch(url)));
-  if (responses.some(response => !response.ok)) throw Error('診断表示表を取得できません．');
-  const [table, binding, hare] = await Promise.all(responses.map(response => response.json()));
+  const [table, binding, hare] = await Promise.all(urls.map(loadJson));
   return receiveDiagnosticDisplayRecords(data, table, binding, hare);
 }
 

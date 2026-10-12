@@ -1,9 +1,9 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {conciseAkitaAssumption} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 const input={prefectureCode:'05',municipalityCode:'05212',housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',capacityKw:4,batteryCapacityKwh:9.5,solarCost:1324400,batteryCost:1149500,batteryEquipmentCost:1054500};
 const evaluate=(extra={})=>diagnosticSubsidy(data.diagnostic_subsidy_programs,{...input,...extra},true);
 test('大仙はPV単独非算入，同時設置は新築既存とも30万円，整数容量と上限を維持',()=>{

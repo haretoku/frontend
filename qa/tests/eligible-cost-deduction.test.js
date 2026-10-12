@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {kansaiFormulaComponents,kansaiResidualItem,kansaiResidualAmount,kansaiBelowMinimumCost} from '../../site/simulator/src/kansai-formula.js';
+import {kansaiFormulaComponents,kansaiResidualItem,kansaiResidualAmount,kansaiBelowMinimumCost} from '../../site/simulator/src/municipal-formula.js';
 const program=(extra={})=>({machine_rule:'kansai_municipal_formula',formula_components:[{scope:'battery',equipment_packages:['solar_plus_standard_battery'],formula_type:'cost_fraction',cost_scope:'battery',cost_tax:'approved_assumption_inclusive',eligible_cost_deduction_yen:200000,fraction_numerator:1,fraction_denominator:5,cap_yen:200000,rounding_unit_yen:1000,...extra}]});
 const input={housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',capacityKw:4,batteryCapacityKwh:9.5,solarCost:1000000,batteryCost:1140000};
 test('定額20万円控除は費用確定後に一度だけ適用し率・上限・千円境界を守る',()=>{

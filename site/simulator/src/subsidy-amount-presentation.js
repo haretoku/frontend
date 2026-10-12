@@ -1,6 +1,6 @@
 import {selectSchemeGroups} from '../../data/src/scheme-model.js';
 import {amountSummary, equipmentLabel} from '../../data/src/model.js';
-import {diagnosticPilotTerms, diagnosticAmountPolicy} from './diagnostic-display-pilot.js';
+import {diagnosticPilotTerms, diagnosticAmountPolicy} from './retained-diagnostic-display.js';
 
 const cachedTerms = new WeakMap();
 

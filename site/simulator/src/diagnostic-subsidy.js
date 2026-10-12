@@ -1,5 +1,5 @@
 import {commonBranchComponents,sourceMunicipalityReception} from './common-branch-runtime.js';
-import { kansaiSolarAboveMaximum, subsidyCostPrerequisiteFailure, kansaiBelowMinimumCost, kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './kansai-formula.js';
+import { kansaiSolarAboveMaximum, subsidyCostPrerequisiteFailure, kansaiBelowMinimumCost, kansaiFormulaComponents, kansaiResidualItem, kansaiResidualAmount } from './municipal-formula.js';
 import { preprocessCapacity } from './capacity-preprocessing.js';
 const floor10000 = value => Math.floor(value / 10000) * 10000;
 const floor1000 = value => Math.floor(value / 1000) * 1000;

@@ -1,12 +1,12 @@
+import {loadPublicData, municipalSubsidy, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {designatedContractAssumption,nonInclusionReason,readableSubsidyAssumption} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 // Approved formal_release expectations; this fixture is QA-only.
 const approved=JSON.parse(await readFile(new URL('../fixtures/aichi-approved-amounts.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'23',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'23',municipalityCode,...extra});
 test('愛知正式54自治体96枝と45算式・51非算入・未確定0を保持する',()=>{
  assert.equal(data.municipalities.filter(p=>p.prefecture_code==='23').length,54);
  const rules=data.diagnostic_subsidy_programs.filter(p=>p.prefecture_code==='23'&&p.government_level==='municipality');assert.equal(rules.length,96);
@@ -19,7 +19,7 @@ test('田原・みよしの太陽光単独額を保持する',()=>{
  assert.equal(standard('23236',{equipmentPackage:'solar_only'}).municipality_amount_yen,160000);
 });
 test('住宅区分指定なしは新築と既存の両方を仮定して算入する',()=>{
- for(const code of ['23211', '23221', '23231', '23236', '23342', '23561', '23562', '23563']){const existing=standard(code).municipality_amount_yen;assert.ok(existing>0);assert.equal(standard(code,{housingAge:'new'}).municipality_amount_yen,existing);}
+ for(const code of ['23211', '23221', '23231', '23236', '23342', '23561', '23562', '23563']){const existing=municipalSubsidy(data,{prefectureCode:'23',municipalityCode:code}).municipality_amount_yen;assert.ok(existing>0);assert.equal(municipalSubsidy(data,{prefectureCode:'23',municipalityCode:code,housingAge:'new'}).municipality_amount_yen,existing);}
 });test('岡崎の指定契約注記は正額算入時だけ示し未確定額を強制しない',()=>{
  const id='aichi-23202-local_renewable_battery-2026';
  for(const row of [{id,amount_yen:null,included:false},{id,amount_yen:0,included:true},{id,amount_yen:150000,included:false}])assert.equal(designatedContractAssumption(row),'');

@@ -16,6 +16,8 @@
 |---|---|
 | `tests/` | 計算，HTML，リンク，出典IDおよび詳細ページの自動検査 |
 | `fixtures/` | backendが生成した固定計算ケース |
+| `helpers/` | 共通入力・読取り・独立期待値との比較 |
+| `run-tests.mjs` | 全自動検査の列挙と実行入口 |
 
 `pnpm run test:public`は公開計算・記事・サイト・入力・ガイド・GA4，`pnpm run test:data`は補助金一覧とデータ接続を検査する．`pnpm test`は両方を実行し，失敗を無視しない．公開用fixtureはGit LFSで本体を取得する．QA用ファイルは公開サイトの実行時処理から参照しない．
 

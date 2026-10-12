@@ -17,3 +17,9 @@ srcのadapterで公開成果物を計算・表示へ渡す．掲載と診断の�
 > **結論：固定ケースと受領検査はqaに置き，公開サイトから実行時に読み込まない．**
 
 公開計算の基準入力はqa/fixtures，機械検査はqa/testsを使う．受領版・ハッシュと本番配信はリリースごとに照合し，公開履歴は[リリースノート](../CHANGELOG.md)の公開commit・tag・Actions実行先を参照する．新しい版は同じ範囲のPASSを無条件で継承しない．
+
+## 公開データの共通取得
+
+> **結論：一覧と診断の接続は共通loaderでHTTP・版を検証し，受領JSONは原バイトのまま保持する．**
+
+`src/data-loader.js`の`loadJson`はHTTP失敗を伝え，`loadFrontendData`は公開データとmetadataのschema_version・data_versionを照合して制度年度契約を受け取る．一覧と診断はこの入口を使い，表示表のID・SHA・計算規則との結合検査も保持する．frontendで受領値を補完・手修正しない．

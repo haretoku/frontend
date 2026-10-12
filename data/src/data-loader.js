@@ -2,7 +2,7 @@ import {prepareSubsidyData} from './scheme-adapter.js';
 const PUBLIC_DATA_URL = new URL("../input/public-data.json", import.meta.url);
 const METADATA_URL = new URL("../input/metadata.json", import.meta.url);
 
-async function loadJson(url) {
+export async function loadJson(url) {
   const response = await fetch(url);
 
   if (!response.ok) {

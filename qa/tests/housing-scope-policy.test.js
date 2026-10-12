@@ -1,8 +1,8 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {housingScopeAssumption} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 test('住宅区分仮定19制度は公式確認と区別し，削除した7候補を残さない',()=>{
  const rows=data.diagnostic_subsidy_programs.filter(p=>(p.calculation_assumptions??[]).some(t=>t.includes('住宅区分指定がないため，新築・既存住宅の両方を対象と仮定')));
  assert.equal(rows.length,19);

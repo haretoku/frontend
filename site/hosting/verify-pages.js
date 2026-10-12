@@ -12,13 +12,10 @@ async function walk(dir) {
 }
 const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|solar|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png|og-support-shock-burden\.png)$/.test(path)), "未承認の配信ファイルがあります");
+assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png|og-support-shock-burden\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
-for (const [oldPath, newPath] of [["solar/index.html", "/guides/"], ["guides/solar-profit-conditions/index.html", "/guides/solar-economics/"], ...Object.entries({"electricity-sales":"solar-economics", "subsidies":"subsidies", "disaster":"disaster", "quotes-contractors":"quotes-contractors"}).map(([old, slug]) => [`pages/${old}.html`, `/guides/${slug}/`])]) {
-  const html = await readFile(resolve(output, oldPath), "utf8");
-  assert(html.includes(`rel="canonical" href="https://haretoku.jp${newPath}"`));
-  assert(html.includes(`data-redirect-target href="${newPath}"`));
-  assert(html.includes('content="noindex,follow"'));
+for (const retired of ['solar/index.html', 'guides/solar-profit-conditions/index.html', ...['electricity-sales','costs-maintenance','subsidies','disaster','quotes-contractors'].map(name => `pages/${name}.html`)]) {
+  assert(!relative.includes(retired), `廃止URLが配信されています: ${retired}`);
 }
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);

@@ -1,9 +1,10 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {conciseHokkaidoAssumption,nonInclusionReason} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(fs.readFileSync(new URL('../../data/input/public-data.json',import.meta.url)));
+const data=loadPublicData();
 const input={prefectureCode:'01',municipalityCode:'01100',housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',capacityKw:4,batteryCapacityKwh:9.5,solarCost:1324400,batteryCost:1149500,batteryEquipmentCost:1054500};
 const run=(extra={},rules=data.diagnostic_subsidy_programs)=>diagnosticSubsidy(rules,{...input,...extra},true);
 test('北海道11.43：札幌正式枝の設備条件・税抜費超過・本体費を維持',()=>{

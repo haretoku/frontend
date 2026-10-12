@@ -1,11 +1,10 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {conciseKagawaAssumption,nonInclusionReason,noncashBenefitDescription} from '../../site/simulator/src/subsidy-presentation.js';
 import {applicationStatusLabel} from '../../site/simulator/src/municipal-information.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'37',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'37',municipalityCode,...extra});
 test('香川17自治体30規則16採用を同期する',()=>{assert.equal(data.municipalities.filter(p=>p.prefecture_code==='37').length,17);const rows=data.diagnostic_subsidy_programs.filter(p=>/^kagawa-\d{5}-/.test(p.id));assert.equal(rows.length,30);assert.equal(rows.filter(p=>p.machine_rule==='kansai_municipal_formula').length,16);});
 test('丸亀5kWの住宅別上限と別B8万円を維持する',()=>{for(const [housingAge,pv] of [['new',80000],['existing',100000]]){assert.equal(standard('37202',{housingAge,systemCapacityKw:5,equipmentPackage:'solar_only'}).municipality_amount_yen,pv);assert.equal(standard('37202',{housingAge,systemCapacityKw:5}).municipality_amount_yen,pv+80000);}});
 test('善通寺はPV10kWで蓄電池も非算入とし，税抜機器費を表示する',()=>{for(const housingAge of ['existing','new']){assert.ok(standard('37204',{housingAge,systemCapacityKw:9.995}).municipality_amount_yen>0);assert.equal(standard('37204',{housingAge,systemCapacityKw:10}).municipality_amount_yen,0);}for(const code of ['37204','37406'])assert.match(conciseKagawaAssumption({id:`kagawa-${code}-solar_battery-2026`,included:true}),/税抜機器費/);});

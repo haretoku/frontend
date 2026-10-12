@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {kansaiFormulaComponents,kansaiBelowMinimumCost} from '../../site/simulator/src/kansai-formula.js';
+import {kansaiFormulaComponents,kansaiBelowMinimumCost} from '../../site/simulator/src/municipal-formula.js';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 
 const part={scope:'solar',cost_scope:'solar',equipment_packages:['solar_only'],formula_type:'cost_fraction',fraction_numerator:1,fraction_denominator:10,cap_yen:100000,cost_tax:'inclusive',rounding_unit_yen:1000,eligible_cost_min_yen:100000,eligible_cost_min_scope:'solar'};

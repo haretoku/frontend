@@ -1,9 +1,8 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,equipmentPackage='solar_plus_standard_battery')=>calculateEstimate({prefectureCode:'19',municipalityCode,equipmentPackage,systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,equipmentPackage='solar_plus_standard_battery')=>standardSubsidy(data,{prefectureCode:'19',municipalityCode,equipmentPackage,monthlyElectricityBillYen:12000});
 test('山梨27自治体21制度と代表額・同時設置分岐を保持する',()=>{
   assert.equal(data.municipalities.filter(m=>m.prefecture_code==='19').length,27);
   assert.equal(data.diagnostic_subsidy_programs.filter(p=>p.prefecture_code==='19'&&p.government_level==='municipality').length,21);

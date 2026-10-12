@@ -1,11 +1,12 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import {diagnosticDisplayPilot as generated} from '../../site/simulator/src/diagnostic-display-pilot.generated.js';
-import {diagnosticPilotTerms,diagnosticAmountPolicy,diagnosticTrialSourceTexts,diagnosticPilotSections,diagnosticPilotCommonSupplement,diagnosticPilotNotice} from '../../site/simulator/src/diagnostic-display-pilot.js';
+import {diagnosticDisplayPilot as generated} from '../../site/simulator/src/retained-diagnostic-display.generated.js';
+import {diagnosticPilotTerms,diagnosticAmountPolicy,diagnosticTrialSourceTexts,diagnosticPilotSections,diagnosticPilotCommonSupplement,diagnosticPilotNotice} from '../../site/simulator/src/retained-diagnostic-display.js';
 import {selectSchemeGroups} from '../../site/data/src/scheme-model.js';
 import {subsidyTermsIndex,subsidyAmountFields} from '../../site/simulator/src/subsidy-amount-presentation.js';
-const data=JSON.parse(fs.readFileSync(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 
 test('Oumu combined diagnosis keeps two institutional sections and one shared cap without changing included amount',()=>{
  const entry=generated.entries['hokkaido-additional-oumu-solar'];
@@ -24,12 +25,17 @@ test('Oumu combined diagnosis keeps two institutional sections and one shared ca
 });
 test('all adopted branches match native institutional source;held count does not imply missing money',()=>{
  assert.equal(generated.normalizationVersion,'diagnostic-common-sentences-v10-all');
- assert.equal(Object.keys(generated.entries).length,126);
+ assert.equal(Object.keys(generated.entries).length,130);
+ for(const id of ['hokkaido-ebetsu-package','hokkaido-ebetsu-solar-addition','hokkaido-ebetsu-battery-addition','source-290ef2b54f9853']) assert.ok(generated.entries[id],id);
+ // 旧126枝に明示4枝が追加されている．heldは排他的な集合ではない．
  assert.equal(Object.keys(generated.held).length,1134);
  assert.equal(Object.keys(generated.displayPolicies).length,5);
  for(const [id,entry] of Object.entries(generated.entries)){
   const program=selectSchemeGroups(data,entry.prefecture,entry.municipality).flat().find(p=>p.id===id);
-  assert.ok(program,id);assert.ok(diagnosticPilotTerms(data,program),id);
+  assert.ok(program,id);
+  // 東京はcommon_branch_calculationが更新され，保存済み旧文型を拒否する．
+  if(id==='source-290ef2b54f9853') {assert.equal(diagnosticPilotTerms(data,program),null,id);continue;}
+  assert.ok(diagnosticPilotTerms(data,program),id);
   const index=subsidyTermsIndex(data,{prefecture_code:entry.prefecture,municipality_code:entry.municipality});
   for(const ruleId of entry.branch.diagnostic_rule_ids){
    const fields=subsidyAmountFields({id:ruleId,included:false,amount_yen:12345,reason_code:'not_adopted'},index);

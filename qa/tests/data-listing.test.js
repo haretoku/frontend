@@ -1,8 +1,8 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {selectPrograms,groupPrograms,amountSummary,statusLabel,applicability,confirmationNotes,targetSummary,groupedTargetSummary,groupedEquipmentSummary,applicationPeriod,matchesReception} from '../../site/data/src/model.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 
 test('久万高原の既知額は他補助控除・税未確認を残し，旧年度候補へ転用しない',()=>{
   const p=data.diagnostic_subsidy_programs.find(p=>p.id==='ehime-38386-energy-2026');

@@ -1,11 +1,12 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { calculateEstimate } from '../../site/simulator/src/calculator.js';
-import { kansaiFormulaComponents } from '../../site/simulator/src/kansai-formula.js';
+import { kansaiFormulaComponents } from '../../site/simulator/src/municipal-formula.js';
 import { nonInclusionReason } from '../../site/simulator/src/subsidy-presentation.js';
 
-const data = JSON.parse(await readFile(new URL('../../data/input/public-data.json', import.meta.url), 'utf8'));
+const data = loadPublicData();
 const rows = data.diagnostic_subsidy_programs.filter(p => p.id.startsWith('nagasaki-'));
 const estimate = (extra = {}) => calculateEstimate({
   prefectureCode: '42', municipalityCode: '42207', housingAge: 'existing',

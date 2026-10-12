@@ -1,9 +1,10 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {listingMunicipalities,listingNotes,diagnosisDescription,diagnosisUrl,conditionSections} from '../../site/data/src/model.js';
 import {selectSchemeGroups} from '../../site/data/src/scheme-model.js';
-const data=JSON.parse(readFileSync(new URL('../../data/input/public-data.json',import.meta.url)));
+const data=loadPublicData();
 const fixture=JSON.parse(readFileSync(new URL('../fixtures/six-town-display-conditions.json',import.meta.url)));
 test('隔離6町11枝の公式条件・留保・仮定を分類どおり保持し，rawを表示しない',()=>{
   let count=0;

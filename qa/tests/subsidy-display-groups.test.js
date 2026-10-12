@@ -1,3 +1,4 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -5,7 +6,7 @@ import { diagnosticSubsidy } from '../../site/simulator/src/diagnostic-subsidy.j
 import { groupSubsidyDisplayRows, subsidyGroups } from '../../site/simulator/src/subsidy-presentation.js';
 
 test('六戸の同名制度をまとめても設備別の非算入理由と未確定額を保持する', async () => {
-  const data = JSON.parse(await readFile(new URL('../../data/input/public-data.json', import.meta.url), 'utf8'));
+  const data = loadPublicData();
   const programs = data.diagnostic_subsidy_programs.filter(p => p.municipality_code === '02405');
   for (const equipmentPackage of ['solar_only', 'solar_plus_standard_battery']) {
     const breakdown = diagnosticSubsidy(programs, {prefectureCode:'02',municipalityCode:'02405',housingAge:'existing',equipmentPackage,capacityKw:4,batteryCapacityKwh:9.5,solarCost:1324400,batteryCost:1149500}, true);

@@ -1,7 +1,7 @@
 import {loadDiagnosticDisplayRecords, appendDiagnosticDisplay, appendDiagnosticReceptionNote} from './diagnostic-display-record.js';
 import {appendInstitutionalAmount} from './diagnostic-amount-dom.js';
 import {subsidyTermsIndex, subsidyAmountFields, subsidyAmountPolicy, subsidyNonInclusionText} from './subsidy-amount-presentation.js';
-import {diagnosticPilotNotice, diagnosticPilotSections, diagnosticPilotCommonSupplement, diagnosticTrialSourceTexts} from './diagnostic-display-pilot.js';
+import {diagnosticPilotNotice, diagnosticPilotSections, diagnosticPilotCommonSupplement, diagnosticTrialSourceTexts} from './retained-diagnostic-display.js';
 import { recordDiagnosisComplete } from "../../shared/analytics.js";
 import { setupMobileActions } from "./mobile-actions.js";
 import { housingInput, housingLabel, housingContract, configureHousingInput } from "./housing-input.js";

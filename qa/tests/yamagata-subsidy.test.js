@@ -1,9 +1,9 @@
+import {loadPublicData} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
 import {diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {conciseYamagataAssumption,nonInclusionReason} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
+const data=loadPublicData();
 const input={prefectureCode:'06',municipalityCode:'06321',housingAge:'existing',equipmentPackage:'solar_plus_standard_battery',capacityKw:4,batteryCapacityKwh:9.5,solarCost:1324400,batteryCost:1149500,batteryEquipmentCost:1054500};
 const evaluate=(extra={})=>diagnosticSubsidy(data.diagnostic_subsidy_programs,{...input,...extra},true);
 test('河北は単独16万円・併設31万円，3.5kW+B4.5kWhは27.5万円',()=>{

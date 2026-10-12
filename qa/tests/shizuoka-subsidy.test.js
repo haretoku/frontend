@@ -1,11 +1,10 @@
+import {loadPublicData, standardSubsidy} from '../helpers/subsidy-fixture.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {readFile} from 'node:fs/promises';
-import {calculateEstimate} from '../../site/simulator/src/calculator.js';
 import {diagnosticComponents,diagnosticSubsidy} from '../../site/simulator/src/diagnostic-subsidy.js';
 import {subsidyResearchMessage,nonInclusionReason} from '../../site/simulator/src/subsidy-presentation.js';
-const data=JSON.parse(await readFile(new URL('../../data/input/public-data.json',import.meta.url),'utf8'));
-const standard=(municipalityCode,extra={})=>calculateEstimate({prefectureCode:'22',municipalityCode,equipmentPackage:'solar_plus_standard_battery',systemCapacityKw:4,batteryCapacityKwh:9.5,housingAge:'existing',monthlyElectricityBillYen:12000,...extra},data).scenarios.find(s=>s.scenario==='standard').subsidy_breakdown;
+const data=loadPublicData();
+const standard=(municipalityCode,extra={})=>standardSubsidy(data,{prefectureCode:'22',municipalityCode,...extra});
 const program=code=>data.diagnostic_subsidy_programs.find(p=>p.id===`shizuoka-${code}-1-2026`);
 test('静岡35自治体34制度の分類と30自治体採用額を保持する',()=>{
  assert.equal(data.municipalities.filter(m=>m.prefecture_code==='22').length,35);

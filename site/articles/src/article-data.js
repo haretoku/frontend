@@ -2,7 +2,7 @@ import '../../simulator/styles/diagnostic-display-record.css';
 import '../../shared/table-scroll-hint.js';
 import {loadDiagnosticDisplayRecords} from '../../simulator/src/diagnostic-display-record.js';
 import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
-import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/diagnostic-display-pilot.js';
+import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/retained-diagnostic-display.js';
 import { QUOTE_ACTION, setupInlineQuoteActions } from "../../shared/fixed-quote-bar.js";
 import { bindArticleBibliography } from "./article-bibliography.js";
 import { replacesLegacyPrefecture } from '../../simulator/src/diagnostic-subsidy.js';
