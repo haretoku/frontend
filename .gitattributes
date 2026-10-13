@@ -1,3 +1,2 @@
 data/input/*.json -text
 qa/fixtures/*.json -text
-/qa/fixtures/calculation-cases.json filter=lfs diff=lfs merge=lfs -text

@@ -13,7 +13,6 @@
 <body>
   <svg class="icon-library" aria-hidden="true"><defs>
     <symbol id="i-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 3v6m0 30v6M3 24h6m30 0h6M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4"/></symbol>
-    <symbol id="i-house" viewBox="0 0 48 48"><path d="m5 22 19-16 19 16M10 19v24h28V19M20 43V30h8v13"/><path d="m17 15 8-6 9 8-8 6Z M21 12l8 8m-9-2 10-7"/></symbol>
     <symbol id="i-calc" viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="5"/><path d="M16 12h16v7H16ZM16 27h3m10 0h3m-16 8h3m10 0h3"/></symbol>
     <symbol id="i-route" viewBox="0 0 48 48"><path d="M8 40h21a7 7 0 0 0 0-14H19a7 7 0 0 1 0-14h17M8 35v10m24-39 7 6-7 6"/></symbol>
     <symbol id="i-people" viewBox="0 0 48 48"><circle cx="18" cy="15" r="7"/><path d="M5 40v-5a13 13 0 0 1 26 0v5M32 8a7 7 0 0 1 0 14m4 6a11 11 0 0 1 7 10v2"/></symbol>
@@ -53,10 +52,6 @@
           <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="./assets/title-art.svg#solar-house"/></svg>
         </div>
       </div>
-      <div class="map-intro">
-        <p class="map-intro-bubble">あなたの家に合うか，一つずつ確かめよう．</p>
-        <div class="map-intro-professor"><img src="./assets/professor.png" alt="博士"></div>
-      </div>
       <div class="map-landscape" aria-label="太陽光を検討する道のり">
         <svg class="landscape desktop-landscape" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">
           <path class="field" d="M-20 100Q190-10 390 110T810 60T1160 180V-20H-20Z"/>
@@ -94,7 +89,7 @@
           <path class="road-dashes" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910S320 1005 320 1090Q320 1190 190 1260"/>
           <g class="trees"><path d="m310 385-12 24h24Z M310 409v12m-267 205-10 20h20Z M43 646v12"/></g>
         </svg>
-        <div class="stop stop-start is-current" data-stop="0"><span class="here">いまここ</span><button type="button" data-step="0" aria-current="step" aria-label="START はじめに：太陽光えらびを始める"><span class="station"><svg class="start-house-icon" aria-hidden="true"><use href="#i-house"/></svg><span class="step-number start-badge">START</span><span class="start-story"><strong>はじめに</strong><span class="start-greeting"><span class="start-professor"><img src="./assets/professor-chibi.png" alt="博士"></span><span class="start-bubble">あなたの家に合うか，一つずつ確かめよう．</span></span><span class="start-action">ここから始めよう →</span></span></span><span class="stop-label">はじめに</span><span class="stop-detail">どこから始める？</span></button></div>
+        <div class="stop stop-start is-current" data-stop="0"><span class="here">いまここ</span><button type="button" data-step="0" aria-current="step" aria-label="START はじめに：太陽光えらびを始める"><span class="station"><span class="step-number start-badge">START</span><span class="start-story"><strong>はじめに</strong><span class="start-greeting"><span class="start-professor"><img src="./assets/professor-chibi.png" alt="博士"></span><span class="start-bubble">あなたの家に合うか，一つずつ確かめよう．</span></span><span class="start-action">ここから始めよう →</span></span></span></button></div>
         <ol class="stops">
           <li class="stop stop-1" data-stop="1"><span class="here" hidden>いまここ</span><button type="button" data-step="1"><span class="station"><svg aria-hidden="true"><use href="#i-calc"/></svg><span class="step-number">1</span></span><span class="stop-label">わが家はいくら<br>得になる？</span><span class="stop-detail">費用とお得を見てみよう</span></button></li>
           <li class="stop stop-2" data-stop="2"><span class="here" hidden>いまここ</span><button type="button" data-step="2"><span class="station"><svg aria-hidden="true"><use href="#i-sun"/></svg><span class="step-number">2</span></span><span class="stop-label">しくみと不安を知ろう</span><span class="stop-detail">気になることを，一つずつ</span></button></li>

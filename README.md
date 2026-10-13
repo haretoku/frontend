@@ -94,4 +94,4 @@
 
 初回・依存関係更新時は`pnpm install`を実行する．日常の確認・ビルド手順は[ローカル開発](site/docs/実装方針.md#ローカル開発)，公開データの受領は[data](data/README.md)，検査範囲は[QA](qa/README.md#必須ケースと検査範囲)，公開処理は[site](site/README.md)を参照する．公開の承認・完了条件は[運営方針](../business-research/運営/運営方針.md#検収代理承認完了条件)に従う．開発・整理作業では，本番の`haretoku.jp`のDNSを変更しない．
 
-Git LFSを導入した環境でcloneし，既存の作業コピーでは検査前に`git lfs install`と`git lfs pull`を実行する．LFS対象は`qa/fixtures/calculation-cases.json`のみで，ポインタではなくJSON本体を取得してから検査する．Pagesのcheckoutも`lfs: true`で取得する．
+現行の独立期待値はqa/fixtures/national-prefecture-reference.json.gzを使用する．廃止したcalculation-cases.jsonのGit LFS取得は必要ない．過去の公開版を再現する際のLFS設定は当該版のGit履歴を参照する．
