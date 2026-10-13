@@ -26,7 +26,7 @@ test('提供コードのリンクと計測画像を同じ素材で保持し，�
 
 test('通常ページの共通固定バー入口は1個で，プレス記事には設置しない', async () => {
   const root = new URL('../../site/', import.meta.url);
-  const paths = (await readdir(root, { recursive: true })).filter(path => path.endsWith('.html'));
+  const paths = (await readdir(root, { recursive: true })).filter(path => path.endsWith('.html') && !path.replaceAll('\\','/').startsWith('prototypes/'));
   assert(paths.length >= 12);
   for (const path of paths) {
     const html = await readFile(new URL(path.replaceAll('\\', '/'), root), 'utf8');

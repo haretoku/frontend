@@ -2,11 +2,7 @@ import { readdirSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
-const dataTests = new Set([
-  'listing-municipalities.test.js', 'catalog-amount.test.js',
-  'catalog-connection.test.js', 'data-listing.test.js',
-  'scheme-adapter.test.js', 'scheme-integration.test.js', 'data-loader.test.js',
-]);
+const dataTests = new Set(['catalog-amount.test.js','data-loader.test.js','frontend-release-connection.test.js','prefecture-scope.test.js','prefecture-subsidy-policy.test.js']);
 const scope = process.argv[2] ?? 'all';
 if (!['all', 'public', 'data'].includes(scope)) throw new Error(`Unknown test scope: ${scope}`);
 const root = fileURLToPath(new URL('../', import.meta.url));

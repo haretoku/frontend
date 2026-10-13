@@ -304,31 +304,6 @@ function subsidyForCapacity(prefecture, capacityKw, subsidyIncluded, activeSaleP
   return { amount: roundYen(total), status: "applied", sourceIds: [...new Set(sourceIds)], note: notes.join(" ") };
 }
 
-function municipalityEvaluation(publicData, prefectureCode, municipalityCode) {
-  if (municipalityCode === null || municipalityCode === undefined || municipalityCode === "") {
-    return { municipality: null, programs: [] };
-  }
-  if (typeof municipalityCode !== "string" || !/^\d{5}$/.test(municipalityCode)) {
-    throw new Error("市区町村コードは先頭ゼロを保持した5桁文字列で指定してください．");
-  }
-  if (!municipalityCode.startsWith(prefectureCode)) {
-    throw new Error("市区町村コードと都道府県コードが一致しません．");
-  }
-  const municipality = (publicData.municipalities ?? []).find(
-    (item) => item.municipality_code === municipalityCode
-  );
-  if (!municipality) {
-    throw new Error("指定された市区町村コードは公開自治体マスターにありません．");
-  }
-  const programsById = new Map(
-    (publicData.municipal_subsidy_programs ?? []).map((item) => [item.id, item])
-  );
-  return {
-    municipality,
-    programs: municipality.program_ids.map((id) => programsById.get(id)).filter(Boolean)
-  };
-}
-
 function candidatePrefecturePrograms(prefecture) {
   const incompatibleIds = new Set(
     (prefecture.subsidy_programs ?? [])
@@ -381,293 +356,6 @@ function excludedPrefecturePrograms(prefecture, activeSalePath) {
         source_id: item.source_id
       };
     });
-}
-
-function requiredBenefitComponentTypes(program, equipmentPackage) {
-  if (equipmentPackage === "solar_only") {
-    return ["solar", "solar_and_battery_independent"].includes(program.target_equipment)
-      ? new Set(["solar"])
-      : new Set();
-  }
-  return new Set({
-    solar: ["solar"],
-    battery: ["battery"],
-    solar_and_battery_independent: ["solar", "battery"],
-    solar_and_battery_required: ["package_bonus"]
-  }[program.target_equipment]);
-}
-
-function resolvedProgramComponents(program, equipmentPackage) {
-  const requiredTypes = requiredBenefitComponentTypes(program, equipmentPackage);
-  if (requiredTypes.size === 0) return null;
-  const availableTypes = new Set(program.benefit_components.map((item) => item.component_type));
-  const selectedTypes = new Set(requiredTypes);
-  if (equipmentPackage === "solar_plus_standard_battery"
-    && program.target_equipment === "solar_and_battery_independent"
-    && availableTypes.has("package_bonus")) {
-    selectedTypes.add("package_bonus");
-  }
-  const byType = new Map(
-    program.benefit_components
-      .filter((item) => selectedTypes.has(item.component_type))
-      .map((item) => [item.component_type, item])
-  );
-  if (byType.size !== selectedTypes.size) return null;
-  const components = [...byType.values()];
-  return components.some((item) => item.amount_rule.calculation_type === "unresolved")
-    ? null
-    : components;
-}
-
-function municipalityStatusForEquipment(municipality, programs, equipmentPackage) {
-  if (!municipality) return "not_requested";
-  if (["no_program", "unconfirmed", "searched_not_found"].includes(municipality.program_status)) {
-    return municipality.program_status;
-  }
-  if (municipality.program_status === 'included' && programs.length === 0) return 'included';
-  const eligibleEquipment = equipmentPackage === "solar_only"
-    ? new Set(["solar", "solar_and_battery_independent"])
-    : new Set(["solar", "battery", "solar_and_battery_independent", "solar_and_battery_required"]);
-  return programs.some((program) => (
-    ["accepting", "scheduled"].includes(program.application_status)
-    && eligibleEquipment.has(program.target_equipment)
-    && resolvedProgramComponents(program, equipmentPackage) !== null
-  )) ? "included" : "candidate";
-}
-
-function amountFromRule(rule, capacityKw, batteryCapacityKwh) {
-  if (rule.minimum_capacity_kw != null && capacityKw < rule.minimum_capacity_kw) return null;
-  let amount = null;
-  if (rule.calculation_type === "fixed") {
-    amount = rule.fixed_amount_yen;
-  } else if (rule.calculation_type === "per_kw") {
-    amount = preprocessCapacity(capacityKw, rule.capacity_preprocessing_rule) * rule.amount_yen_per_kw;
-    if (rule.rounding_rule === "floor_1000_yen") amount = Math.floor(amount / 1000) * 1000;
-    if (rule.cap_yen !== null) amount = Math.min(amount, rule.cap_yen);
-  } else if (rule.calculation_type === "per_kwh") {
-    amount = batteryCapacityKwh * rule.amount_yen_per_kwh;
-    if (rule.rounding_rule === "floor_1000_yen") amount = Math.floor(amount / 1000) * 1000;
-    if (rule.cap_yen !== null) amount = Math.min(amount, rule.cap_yen);
-  }
-  return amount === null ? null : roundYen(amount);
-}
-
-function confirmedComponentPairs(program) {
-  return new Set((program.component_combination_evidence ?? [])
-    .filter((item) => item.source_id && item.official_url?.startsWith("https://") && item.confirmed_at)
-    .map((item) => [...item.benefit_component_ids].sort().join("\u0000")));
-}
-
-function maximumCompatibleComponentSubset(program, components) {
-  const confirmedPairs = confirmedComponentPairs(program);
-  let best = [];
-  let bestTotal = -1;
-  for (let mask = 1; mask < 2 ** components.length; mask += 1) {
-    const subset = components.filter((_, index) => mask & (1 << index));
-    const types = new Set(subset.map(([component]) => component.component_type));
-    if (types.has("package_bonus")
-      && program.target_equipment !== "solar_and_battery_required"
-      && !["solar", "battery", "package_bonus"].every((type) => types.has(type))) continue;
-    let compatible = true;
-    for (let left = 0; left < subset.length; left += 1) {
-      for (let right = left + 1; right < subset.length; right += 1) {
-        const key = [subset[left][0].id, subset[right][0].id].sort().join("\u0000");
-        if (!confirmedPairs.has(key)) compatible = false;
-      }
-    }
-    if (!compatible) continue;
-    const total = subset.reduce((sum, [, amount]) => sum + amount, 0);
-    if (total > bestTotal) {
-      best = subset;
-      bestTotal = total;
-    }
-  }
-  return best;
-}
-
-function municipalProgramComponentAmounts(program, capacityKw, batteryCapacityKwh, equipmentPackage) {
-  const components = resolvedProgramComponents(program, equipmentPackage);
-  if (!components) return null;
-  const componentAmounts = components.map((component) => [
-    component,
-    amountFromRule(component.amount_rule, capacityKw, batteryCapacityKwh)
-  ]);
-  if (componentAmounts.some(([, amount]) => amount === null)) return null;
-  return Object.fromEntries(maximumCompatibleComponentSubset(program, componentAmounts)
-    .map(([component, amount]) => [component.component_type, amount]));
-}
-
-function municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipmentPackage) {
-  const amounts = municipalProgramComponentAmounts(program, capacityKw, batteryCapacityKwh, equipmentPackage);
-  return amounts === null ? null : Object.values(amounts).reduce((total, amount) => total + amount, 0);
-}
-
-function confirmedCombinationTargets(program) {
-  return new Set((program.combination_evidence ?? [])
-    .filter((item) => item.source_id && item.official_url?.startsWith("https://") && item.confirmed_at)
-    .map((item) => item.other_program_id));
-}
-
-function programsMutuallyCombinable(left, right) {
-  return confirmedCombinationTargets(left).has(right.id)
-    && confirmedCombinationTargets(right).has(left.id);
-}
-
-function maximumCompatibleSubset(options) {
-  let best = [];
-  let bestTotal = -1;
-  for (let mask = 1; mask < 2 ** options.length; mask += 1) {
-    const subset = options.filter((_, index) => mask & (1 << index));
-    let compatible = true;
-    for (let left = 0; left < subset.length; left += 1) {
-      for (let right = left + 1; right < subset.length; right += 1) {
-        if (!programsMutuallyCombinable(subset[left][0], subset[right][0])) compatible = false;
-      }
-    }
-    if (!compatible) continue;
-    const total = subset.reduce((sum, [, amount]) => sum + amount, 0);
-    if (total > bestTotal) {
-      best = subset;
-      bestTotal = total;
-    }
-  }
-  return best;
-}
-
-function municipalProgramEvaluation(
-  program,
-  calculationStatus,
-  reasonCode,
-  amountYen = null,
-  equipmentPackage = "solar_only"
-) {
-  const confirmations = [
-    "居住，所有，所得，納税，施工会社，申請時期および住宅区分等は，公式サイトまたは施工会社で確認する．"
-  ];
-  const primary = {
- equipment_package_not_applicable:'入力した設備構成と制度の対象設備が一致しないため算入しない．',
- capacity_below_minimum:'入力容量が制度の最低容量を下回るため算入しない．',
- application_closed:'受付終了を確認しているため，現在は算入しない．',
- application_status_unconfirmed:'現在の受付状況を確認できないため，算入可否を確定しない．',
- required_benefit_component_missing:'対象設備の補助内訳が不足しているため，補助額を確定しない．',
- benefit_amount_rule_unresolved:'金額算定ルールを一意に確定できないため，補助額を確定しない．',
- combination_status_unconfirmed:'他制度との併用可否を公式資料で確認できないため，単独候補として保持する．'
-  }[reasonCode];
-  if (primary) confirmations.unshift(primary);
-  if (program.application_status === 'scheduled') confirmations.push('受付開始前であり，所定の契約・設置・申請期間を満たす仮定で評価する．現在受付中又は受給確定を意味しない．');
-  return {
-    ...program,
-    government_level: "municipality",
-    calculation_status: calculationStatus,
-    amount_yen: amountYen,
-    reason_code: reasonCode,
-    required_confirmations: confirmations
-  };
-}
-
-function municipalSubsidyForCapacity(
-  programs,
-  capacityKw,
-  subsidyIncluded,
-  prefectureSubsidyYen,
-  prefecturePrograms,
-  equipmentPackage,
-  batteryCapacityKwh
-) {
-  const eligibleEquipment = equipmentPackage === "solar_only"
-    ? new Set(["solar", "solar_and_battery_independent"])
-    : new Set(["solar", "battery", "solar_and_battery_independent", "solar_and_battery_required"]);
-  const candidateReason = (program) => {
-    if (!eligibleEquipment.has(program.target_equipment)) return "equipment_package_not_applicable";
-    const requiredTypes = requiredBenefitComponentTypes(program, equipmentPackage);
-    const presentTypes = new Set(program.benefit_components.map((item) => item.component_type));
-    if (![...requiredTypes].every((type) => presentTypes.has(type))) return "required_benefit_component_missing";
-    if (resolvedProgramComponents(program, equipmentPackage) !== null && !meetsMinimumCapacity(program)) return "capacity_below_minimum";
-    return "benefit_amount_rule_unresolved";
-  };
-  const meetsMinimumCapacity = (program) => {
-    const components = resolvedProgramComponents(program, equipmentPackage);
-    return components !== null && components.every((component) => component.amount_rule.minimum_capacity_kw == null
-      || capacityKw >= component.amount_rule.minimum_capacity_kw);
-  };
-  const nonCalculableEvaluation = program => {
-    let status, reason;
-    if (!eligibleEquipment.has(program.target_equipment)) { status='excluded_incompatible'; reason='equipment_package_not_applicable'; }
-    else if (resolvedProgramComponents(program,equipmentPackage)!==null && !meetsMinimumCapacity(program)) { status='excluded_incompatible'; reason='capacity_below_minimum'; }
-    else if (!['accepting','scheduled'].includes(program.application_status)) {
-      [status,reason]=({closed:['excluded_closed','application_closed']}[program.application_status]??['candidate_missing_conditions','application_status_unconfirmed']);
-    } else if (resolvedProgramComponents(program,equipmentPackage)===null) {status='candidate_missing_conditions';reason=candidateReason(program);}
-    else return null;
-    return municipalProgramEvaluation(program,status,reason,null,equipmentPackage);
-  };
-  const classified=programs.map(nonCalculableEvaluation).filter(Boolean);
-  const candidates=classified.filter(item=>item.calculation_status==='candidate_missing_conditions');
-  const excluded=classified.filter(item=>item.calculation_status!=='candidate_missing_conditions');
-  if (!subsidyIncluded) {
-    return {
-      prefectureAmount: prefectureSubsidyYen || 0,
-      amount: 0,
-      included: [],
-      candidates,
-      excluded,
-      prefectureSuppressed: false
-    };
-  }
-
-  const calculable = programs
-    .filter(program => nonCalculableEvaluation(program) === null)
-    .map((program) => [
-      program,
-      municipalProgramAmount(program, capacityKw, batteryCapacityKwh, equipmentPackage)
-    ])
-    .filter(([, amount]) => amount !== null);
-  const prefectureAmount = prefectureSubsidyYen || 0;
-  const applicablePrefecturePrograms = prefecturePrograms.filter(
-    (program) => program.status === "verified" && program.fit_compatible !== false
-  );
-  const options = [...calculable];
-  const prefectureOption = prefectureAmount > 0 && applicablePrefecturePrograms.length === 1
-    ? [applicablePrefecturePrograms[0], prefectureAmount]
-    : null;
-  if (prefectureOption) options.unshift(prefectureOption);
-  const selectedSubset = maximumCompatibleSubset(options);
-  const selectedIds = new Set(selectedSubset.map(([program]) => program.id));
-  const selectedPrefecture = prefectureOption && selectedIds.has(prefectureOption[0].id)
-    ? prefectureAmount
-    : 0;
-  const selectedMunicipalPrograms = calculable
-    .filter(([program]) => selectedIds.has(program.id))
-    .map(([program]) => program);
-  const amountById = new Map(calculable.map(([program, amount]) => [program.id, amount]));
-  const selectedMunicipality = selectedMunicipalPrograms
-    .reduce((sum, program) => sum + amountById.get(program.id), 0);
-  const included = selectedMunicipalPrograms.map((program) => ({
-    ...municipalProgramEvaluation(
-      program,
-      "included",
-      "official_amount_rule_applied",
-      amountById.get(program.id),
-      equipmentPackage
-    ),
-    component_amounts_yen: municipalProgramComponentAmounts(program, capacityKw, batteryCapacityKwh, equipmentPackage),
-    display_note: `${program.municipality_name}の補助制度を利用できた場合`
-  }));
-  const combinationNote = '他制度との併用可否は公式資料上未確認';
-  for (const [program, amount] of calculable) {
-    if (selectedIds.has(program.id)) continue;
-    candidates.push({...municipalProgramEvaluation(program,'candidate_missing_conditions','combination_status_unconfirmed',amount,equipmentPackage),display_note:combinationNote});
-  }
-  const prefectureSuppressed = prefectureAmount > 0 && selectedPrefecture === 0;
-  return {
-    prefectureAmount: prefectureSubsidyYen === null && selectedMunicipalPrograms.length === 0
-      ? null
-      : selectedPrefecture,
-    amount: selectedMunicipality,
-    included,
-    candidates,
-    excluded,
-    prefectureSuppressed
-  };
 }
 
 function appliedDetailConditions(input, calculation) {
@@ -726,12 +414,6 @@ export function calculateEstimate(input, publicData) {
   const housing = housingInput(input.housingAge, publicData.calculation.housing_age_input);
   const prefecture = publicData.prefectures.find((item) => item.code === input.prefectureCode);
   if (!prefecture) throw new Error("指定された都道府県のデータがありません．");
-  const { municipality, programs: municipalityPrograms } = municipalityEvaluation(
-    publicData,
-    input.prefectureCode,
-    input.municipalityCode
-  );
-
   const suppliedBill = input.monthlyElectricityBillYen;
   if (suppliedBill !== null && (typeof suppliedBill !== "number" || !Number.isFinite(suppliedBill) || suppliedBill < 0)) {
     throw new Error("月間電気料金は0以上の数値で入力してください．");
@@ -788,11 +470,6 @@ export function calculateEstimate(input, publicData) {
     annual_capacity_retention_factor: selectedDegradationScenario?.annual_capacity_retention_factor
       ?? batterySystem.annual_capacity_retention_factor
   };
-  const selectedMunicipalityProgramStatus = municipalityStatusForEquipment(
-    municipality,
-    municipalityPrograms,
-    selectedEquipmentPackage
-  );
   const systemCapacity = input.systemCapacityKw ?? calculation.system_capacity_kw;
   if (typeof systemCapacity !== "number" || !Number.isFinite(systemCapacity) || systemCapacity <= 0) {
     throw new Error("設置容量は0より大きい数値で入力してください．");
@@ -876,87 +553,19 @@ export function calculateEstimate(input, publicData) {
       scenario.subsidy_included,
       calculation.active_sale_path
     );
-    const municipalSubsidy = municipalSubsidyForCapacity(
-      municipalityPrograms,
-      systemCapacity,
-      scenario.subsidy_included,
-      prefectureSubsidy.amount,
-      prefecture.subsidy_programs ?? [],
-      selectedEquipmentPackage,
-      batteryCapacityKwh
-    );
-    const originalPrefectureSubsidy = prefectureSubsidy.amount;
-    const selectedPrefectureSubsidy = municipalSubsidy.prefectureAmount;
-    let totalSubsidy = selectedPrefectureSubsidy === null
-      ? null
-      : selectedPrefectureSubsidy + municipalSubsidy.amount;
-    let sourceIds = municipalSubsidy.prefectureSuppressed ? [] : prefectureSubsidy.sourceIds;
+    let totalSubsidy = prefectureSubsidy.amount;
+    let sourceIds = prefectureSubsidy.sourceIds;
     let subsidyStatus = prefectureSubsidy.status;
     let subsidyNote = prefectureSubsidy.note;
-    if (totalSubsidy !== null && totalSubsidy > 0) {
-      subsidyStatus = "applied";
-      if (municipalSubsidy.included.length > 0) {
-        const municipalNote = municipalSubsidy.included
-          .map((item) => `${item.program_name}（${item.municipality_name}の補助制度）を利用できた場合，${item.amount_yen}円を適用．`)
-          .join(" ");
-        subsidyNote = `${subsidyNote} ${municipalNote}`.trim();
-      }
-    }
     const legacyBreakdown = {
-        prefecture_program_status: prefecture.prefecture_program_status,
-        prefecture_amount_yen: selectedPrefectureSubsidy,
-        municipality_amount_yen: municipalSubsidy.amount,
-        total_amount_yen: totalSubsidy,
-        municipality_program_status: selectedMunicipalityProgramStatus,
-        included_programs: [
-          ...(selectedPrefectureSubsidy !== null && selectedPrefectureSubsidy > 0
-            ? (prefecture.subsidy_programs ?? [])
-              .filter((program) => program.status === "verified")
-              .filter((program) => !(
-                calculation.active_sale_path === "fit_then_post_fit"
-                && program.fit_compatible === false
-              ))
-              .map((program) => ({
-                id: program.id,
-                government_level: program.government_level,
-                program_name: program.program_name,
-                calculation_status: "included",
-                application_status: "accepting",
-                amount_yen: selectedPrefectureSubsidy,
-                official_url: program.official_url ?? null,
-                reason_code: "verified_prefectural_program_applied",
-                required_confirmations: []
-              }))
-            : []),
-          ...municipalSubsidy.included
-        ],
-        candidate_programs: [
-          ...candidatePrefecturePrograms(prefecture).filter(program=>!(publicData.diagnostic_subsidy_programs??[]).some(diagnostic=>diagnostic.id===program.id)),
-          ...municipalSubsidy.candidates,
-          ...(municipalSubsidy.prefectureSuppressed
-            ? (prefecture.subsidy_programs ?? [])
-              .filter((program) => program.status === "verified")
-              .map((program) => ({
-                id: program.id,
-                government_level: program.government_level,
-                program_name: program.program_name,
-                calculation_status: "candidate_missing_conditions",
-                application_status: "accepting",
-                amount_yen: originalPrefectureSubsidy,
-                official_url: program.official_url ?? null,
-                reason_code: "combination_status_unconfirmed",
-                required_confirmations: ["市区町村制度との併用可否は公式資料上未確認"],
-                display_note: "市区町村制度との併用可否は公式資料上未確認"
-              }))
-            : [])
-        ],
-        excluded_programs: [
-          ...excludedPrefecturePrograms(prefecture, calculation.active_sale_path),
-          ...municipalSubsidy.excluded,
-
-        ]
-      };
-    const connected=connectDiagnosticSubsidy(legacyBreakdown,publicData,{prefectureCode:input.prefectureCode,municipalityCode:input.municipalityCode??null,housingAge:housing.value,equipmentPackage:selectedEquipmentPackage,capacityKw:systemCapacity,batteryCapacityKwh,solarCost:roundYen(solarInstallationCost),batteryCost:batteryInstallationCost,batteryEquipmentCost:roundYen(batteryCapacityKwh*batterySystem.equipment_cost_yen_per_kwh)},scenario.subsidy_included,municipalSubsidy.included);
+      prefecture_program_status: prefecture.prefecture_program_status,
+      prefecture_amount_yen: totalSubsidy,
+      total_amount_yen: totalSubsidy,
+      included_programs: [],
+      candidate_programs: candidatePrefecturePrograms(prefecture).filter(p => !(publicData.diagnostic_subsidy_programs??[]).some(q=>q.id===p.id)),
+      excluded_programs: excludedPrefecturePrograms(prefecture, calculation.active_sale_path)
+    };
+    const connected=connectDiagnosticSubsidy(legacyBreakdown,publicData,{prefectureCode:input.prefectureCode,housingAge:housing.value,equipmentPackage:selectedEquipmentPackage,capacityKw:systemCapacity,batteryCapacityKwh,solarCost:roundYen(solarInstallationCost),batteryCost:batteryInstallationCost,batteryEquipmentCost:roundYen(batteryCapacityKwh*batterySystem.equipment_cost_yen_per_kwh)},scenario.subsidy_included);
     totalSubsidy=connected.breakdown.total_amount_yen;
     if(connected.enabled&&totalSubsidy!==null&&totalSubsidy>0){subsidyStatus='applied';sourceIds=[...new Set([...sourceIds,...connected.diagnostic.included_programs.flatMap(x=>x.source_ids??[])])];subsidyNote='監査済み制度について，開示した固定仮定の下で費目別上限を同時に満たす最大組合せを適用．';}
     const netInitialOutlay = totalSubsidy === null ? null : grossInstallationCost - totalSubsidy;
@@ -1056,9 +665,6 @@ export function calculateEstimate(input, publicData) {
       prefecture_code: input.prefectureCode,
       prefecture_name: prefecture.name,
       prefecture_program_status: prefecture.prefecture_program_status,
-      municipality_code: municipality?.municipality_code ?? null,
-      municipality_name: municipality?.municipality_name ?? null,
-      municipality_program_status: selectedMunicipalityProgramStatus,
       system_capacity_kw: systemCapacity,
       equipment_package: selectedEquipmentPackage,
       battery_capacity_kwh: batteryCapacityKwh,

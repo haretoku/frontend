@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="solar-house" viewBox="0 0 120 120">
+    <ellipse cx="61" cy="107" rx="52" ry="9" fill="#dbe6ce"/>
+    <path d="M13 46 40 35 60 61v46L13 83Z" fill="#fffdf3" stroke="#638b72" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="m60 61 46-22v46l-46 22Z" fill="#eeeedd" stroke="#638b72" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="m13 46 46-22 27-11-46 22Z" fill="#eee4bf" stroke="#bda05e" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="m40 35 46-22 20 26-46 22Z" fill="#f6e9c8" stroke="#bda05e" stroke-width="2.5" stroke-linejoin="round"/>
+    <g transform="matrix(1 -.47 .75 1 47 36)">
+      <rect width="36" height="20" rx="1" fill="#a9caca" stroke="#638b72" stroke-width="1.5"/>
+      <path d="M12 0v20M24 0v20M0 10h36" fill="none" stroke="#eaf4ef" stroke-width="1.5"/>
+    </g>
+    <path d="m20 61 12 6v11l-12-6Zm21 19 10 5v17l-10-5Zm37-16 13-6v14l-13 6Z" fill="#dce8dc" stroke="#638b72" stroke-width="2" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="storage-battery" viewBox="0 0 64 64">
+    <ellipse cx="32" cy="60" rx="30" ry="4" fill="#dbe6ce"/>
+    <path d="M8 13 19 7h38l-11 6Z" fill="#e8eddb" stroke="#638b72" stroke-width="2" stroke-linejoin="round"/>
+    <path d="m46 13 11-6v44l-11 6Z" fill="#cadac9" stroke="#638b72" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="8" y="13" width="38" height="44" rx="2" fill="#fffdf3" stroke="#638b72" stroke-width="2"/>
+    <path d="M12 57h38v4H12Z" fill="#b4c8b6" stroke="#638b72" stroke-width="1.5"/>
+    <circle cx="15" cy="21" r="1.5" fill="#008653"/>
+    <path d="m29 27-8 11h6l-1 8 8-12h-6Z" fill="#efc969" stroke="#bda05e" stroke-width="1" stroke-linejoin="round"/>
+    <path d="M16 50h22m13-32v29" fill="none" stroke="#9dbba9" stroke-width="1.5" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="solar-panel" viewBox="0 0 120 120">
+    <ellipse cx="63" cy="106" rx="50" ry="9" fill="#dbe6ce"/>
+    <circle cx="92" cy="21" r="12" fill="#f5d776"/>
+    <path d="M92 3v-1m0 39v-1M74 21h-3m42 0h-3M80 9l-3-3m30 30-3-3m0-24 3-3M77 36l3-3" stroke="#dfb648" stroke-width="3" stroke-linecap="round"/>
+    <path d="M23 33h58l16 50H9Z" fill="#b0cecc" stroke="#638b72" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M19 48h66M14 65h77M42 33l-3 50m23-50 6 50M43 85v20m21-20v20M29 106h48" fill="none" stroke="#638b72" stroke-width="2"/>
+  </symbol>
+</svg>

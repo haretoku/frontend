@@ -1,15 +1,12 @@
 import { CALCULATION_IMPLEMENTED } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
-import { validateLocation, populateMunicipalitySelect } from "./location-input.js";
+import { validateLocation } from "./location-input.js";
 
 
 
 const form = document.querySelector("#estimate-form");
 const prefecture = document.querySelector("#prefecture");
-const municipalityField = document.querySelector("[data-municipality-field]");
-const municipality = document.querySelector("#municipality");
-const municipalityHelp = document.querySelector("#municipality-help");
 const monthlyElectricityBill = document.querySelector("#monthly-electricity-bill");
 const calculateButton = document.querySelector("#calculate-button");
 const formMessage = document.querySelector("#form-message");
@@ -28,21 +25,11 @@ function populatePrefectures(prefectures) {
   prefecture.append(fragment);
 }
 
-function updateMunicipalities() {
-  populateMunicipalitySelect({ prefecture, municipality, municipalityField, municipalityHelp, showUnselected: true }, frontendData?.publicData);
-  municipalityHelp.hidden = !prefecture.value || !municipality.disabled;
-  updateAvailability();
-  updateSubsidyDataLink();
-}
-
 function updateSubsidyDataLink() {
   const params = new URLSearchParams();
   const data = frontendData?.publicData;
   if (data?.prefectures.some(p => p.code === prefecture.value)) {
     params.set('prefecture', prefecture.value);
-    if (!municipality.disabled && data.municipalities.some(m => m.prefecture_code === prefecture.value && m.municipality_code === municipality.value)) {
-      params.set('municipality_code', municipality.value);
-    }
   }
   subsidyDataLink.href = '/data/subsidies/' + (params.size ? '?' + params : '');
 }
@@ -59,7 +46,7 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (calculateButton.disabled || !form.reportValidity()) return;
   try {
-    validateLocation({ prefectureCode: prefecture.value, municipalityCode: municipality.value }, frontendData.publicData);
+    validateLocation({ prefectureCode: prefecture.value }, frontendData.publicData);
   } catch (error) {
     formMessage.hidden = false;
     formMessage.textContent = error.message;
@@ -67,20 +54,18 @@ form.addEventListener("submit", (event) => {
   }
   const target = new URL("simulator/", window.location.href);
   target.searchParams.set("prefecture", prefecture.value);
-  if (!municipality.disabled && municipality.value) target.searchParams.set("municipality_code", municipality.value);
   if (monthlyElectricityBill.value !== "") target.searchParams.set("monthlyElectricityBill", monthlyElectricityBill.value);
   target.searchParams.set("from", "top");
   window.location.assign(target);
 });
 
-prefecture.addEventListener("change", updateMunicipalities);
-municipality.addEventListener("change", updateSubsidyDataLink);
+prefecture.addEventListener("change", () => {updateAvailability();updateSubsidyDataLink();});
 window.addEventListener("pageshow", updateSubsidyDataLink);
 
 try {
   frontendData = await loadFrontendData();
   populatePrefectures(frontendData.publicData.prefectures);
-  updateMunicipalities();
+  updateSubsidyDataLink();
 } catch {
   dataLoadFailed = true;
 }

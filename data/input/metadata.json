@@ -1,6 +1,6 @@
 {
-  "schema_version": "12.0.0-review.1",
-  "data_version": "20261010-tokyo-equipment-base-trial.3",
+  "schema_version": "13.0.0",
+  "data_version": "20261013-national-prefectures.1",
   "generated_at": "2026-09-30T21:13:59.108641Z",
   "sources": [
     {

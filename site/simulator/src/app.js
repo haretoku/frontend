@@ -6,13 +6,13 @@ import { recordDiagnosisComplete } from "../../shared/analytics.js";
 import { setupMobileActions } from "./mobile-actions.js";
 import { housingInput, housingLabel, housingContract, configureHousingInput } from "./housing-input.js";
 import { cashflowMarkers, groupMarkerTargets } from "./chart-markers.js";
-import { groupSubsidyDisplayRows, conciseHokkaidoAssumption, conciseFukushimaAssumption, conciseYamagataAssumption, conciseAkitaAssumption, conciseMiyagiAssumption, conciseIwateAssumption, conciseAomoriAssumption, conciseOkinawaAssumption, conciseKagoshimaAssumption, conciseOitaAssumption, conciseMieAssumption, conciseKumamotoAssumption, conciseFukuokaAssumption, conciseKochiAssumption, conciseEhimeAssumption, conciseKagawaAssumption, housingScopeAssumption, conciseTokushimaAssumption, conciseYamaguchiAssumption, conciseHiroshimaAssumption, conciseOkayamaAssumption, conciseShimaneAssumption, designatedContractAssumption, readableSubsidyAssumption, noncashBenefitDescription, subsidyGroups, subsidyLevelAmounts, subsidyGovernmentLabel, subsidyResearchMessage, prefectureResearchMessage } from "./subsidy-presentation.js";
+import { groupSubsidyDisplayRows, housingScopeAssumption, conciseYamaguchiAssumption, conciseHiroshimaAssumption, conciseShimaneAssumption, readableSubsidyAssumption, noncashBenefitDescription, subsidyGroups, subsidyLevelAmounts, subsidyGovernmentLabel, prefectureResearchMessage } from "./subsidy-presentation.js";
 import { CALCULATION_IMPLEMENTED, calculateEstimate } from "./calculator.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
-import { validateLocation, populateMunicipalitySelect } from "./location-input.js";
+import { validateLocation } from "./location-input.js";
 import { cashflowChartLayout, formatEnergyRate, subsidyReasonPresentation, energyRoutes, financialTotals, endpointResult, conclusionBreakdown, compactYen, scenarioSubsidyCondition, hasUnconfirmedSubsidy, mainSubsidyPresentation, subsidyBreakdownReason, scenarioRecoveryPresentation, energyBreakdownPresentation } from "./result-presentation.js";
 import { degradationLabel, degradationDescription, outageReferencePresentation, formatBatteryCapacity } from "./battery-presentation.js";
-import { applicationStatusLabel } from "./municipal-information.js";
+import { applicationStatusLabel } from "./subsidy-information.js";
 
 let housingAgeSelection;
 let housingAgePresentationOrigin = 'initial_assumption';
@@ -25,9 +25,6 @@ const elements = {
   housingAge: document.querySelector("#housing-age"),
   form: document.querySelector("#estimate-form"),
   prefecture: document.querySelector("#prefecture"),
-  municipalityField: document.querySelector("[data-municipality-field]"),
-  municipality: document.querySelector("#municipality"),
-  municipalityHelp: document.querySelector("#municipality-help"),
   monthlyElectricityBill: document.querySelector("#monthly-electricity-bill"),
   formMessage: document.querySelector("#form-message"),
   calculator: document.querySelector(".calculator"),
@@ -123,13 +120,6 @@ function populatePrefectures(prefectures) {
 
   elements.prefecture.append(fragment);
 }
-
-function updateMunicipalities(preferredCode = null) {
-  const selected = populateMunicipalitySelect({ ...elements, unselectedLabel: "市区町村を選択（任意）" }, frontendData?.publicData, preferredCode);
-  elements.municipalityHelp.hidden = !elements.prefecture.value || !elements.municipality.disabled;
-  return selected;
-}
-
 
 const equipmentEditor = document.querySelector('#equipment-editor');
 const equipmentEditButton = document.querySelector('[data-edit-equipment]');
@@ -267,7 +257,7 @@ function updateAvailability() {
 
 function readInput() {
   housingInput(housingAgeSelection, frontendData.publicData.calculation.housing_age_input);
-  validateLocation({ prefectureCode: elements.prefecture.value, municipalityCode: elements.municipality.value }, frontendData.publicData);
+  validateLocation({ prefectureCode: elements.prefecture.value }, frontendData.publicData);
   const billControl = elements.monthlyElectricityBill;
   if (!billControl.validity.valid) {
     const error = new Error('電気代は0以上の整数で入力してください．空欄なら地域標準値を使います．');
@@ -279,9 +269,6 @@ function readInput() {
   return {
     housingAge: housingAgeSelection,
     prefectureCode: elements.prefecture.value,
-    municipalityCode: elements.municipality.disabled || !elements.municipality.value
-      ? null
-      : elements.municipality.value,
     monthlyElectricityBillYen: monthlyElectricityBill === "" ? null : Number(monthlyElectricityBill),
     systemCapacityKw: Number(elements.capacitySlider.value),
     equipmentPackage: selectedEquipmentPackage(),
@@ -299,7 +286,6 @@ function readInput() {
 function inputFromLocation() {
   const params = new URLSearchParams(window.location.search);
   const prefectureCode = params.get("prefecture") ?? "";
-  const municipalityCode = params.get("municipality_code");
   const monthlyBill = params.get("monthlyElectricityBill");
   const capacity = params.get("systemCapacityKw");
   const roofOrientation = params.get("roofOrientation");
@@ -310,7 +296,6 @@ function inputFromLocation() {
   return {
     housingAge: params.get(housingContract(frontendData.publicData.calculation.housing_age_input).url_parameter_name) ?? undefined,
     prefectureCode,
-    municipalityCode,
     monthlyElectricityBillYen: monthlyBill === null || monthlyBill === "" ? null : Number(monthlyBill),
     systemCapacityKw: capacity === null || capacity === "" ? null : Number(capacity),
     equipmentPackage,
@@ -327,9 +312,6 @@ function writeInputToLocation(input) {
   target.search = "";
   if (input.housingAge != null) target.searchParams.set(housingContract(frontendData.publicData.calculation.housing_age_input).url_parameter_name, housingInput(input.housingAge, frontendData.publicData.calculation.housing_age_input).value);
   target.searchParams.set("prefecture", input.prefectureCode);
-  if (input.municipalityCode) {
-    target.searchParams.set("municipality_code", input.municipalityCode);
-  }
   if (input.monthlyElectricityBillYen !== null) {
     target.searchParams.set("monthlyElectricityBill", String(input.monthlyElectricityBillYen));
   }
@@ -433,9 +415,7 @@ function formatCompactYen(value) {
 
 function formatBasicConditions(result) {
   const bill = `電気代：${formatYen(result.input.monthly_electricity_bill_yen, false)}／月`;
-  const location = result.input.municipality_name
-    ? `${result.input.prefecture_name}${result.input.municipality_name}`
-    : result.input.prefecture_name;
+  const location = result.input.prefecture_name;
   const solarCapacity = result.input.system_capacity_kw === undefined
     ? "4.0 kW"
     : formatCapacity(result.input.system_capacity_kw);
@@ -623,8 +603,8 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
       period.textContent = '所定の契約・設置・申請期間を満たす想定で，補助金の利用を想定しています．現在は受付開始前で，受給を保証するものではありません．';
       item.append(period);
     }
-    const contractAssumption = designatedContractAssumption(row);
-    const regionalAssumption = conciseHokkaidoAssumption(row) || conciseFukushimaAssumption(row) || conciseYamagataAssumption(row) || conciseAkitaAssumption(row) || conciseMiyagiAssumption(row) || conciseIwateAssumption(row) || conciseAomoriAssumption(row) || conciseOkinawaAssumption(row) || conciseKagoshimaAssumption(row) || conciseOitaAssumption(row) || conciseMieAssumption(row) || conciseKumamotoAssumption(row) || conciseFukuokaAssumption(row) || conciseKochiAssumption(row) || conciseEhimeAssumption(row) || conciseKagawaAssumption(row) || conciseTokushimaAssumption(row) || conciseYamaguchiAssumption(row) || conciseHiroshimaAssumption(row) || conciseOkayamaAssumption(row) || conciseShimaneAssumption(row);
+    const contractAssumption = '';
+    const regionalAssumption = conciseHiroshimaAssumption(row) || conciseShimaneAssumption(row) || conciseYamaguchiAssumption(row);
     const housingAssumption = housingScopeAssumption(row);
     const conciseAssumption = row.id === 'miyagi-smart-energy-2026' ? '10kW未満の太陽光と蓄電池を同時に新設する想定です．太陽光3万円・蓄電池4万円を，各設備の税抜費用と他の補助金を踏まえて計算します．募集期間・予算・抽選・過去の受給条件を公式情報で確認してください．' : [housingAssumption, regionalAssumption || (housingAssumption ? '住宅・設備・申請などの条件を満たす想定です．適用条件と補助額は，自治体へ確認してください．' : '')].filter(Boolean).join(' ');
     if(noncash && (row.included || amounts.referenceAmountYen !== null)){const benefit=document.createElement('p');benefit.textContent=noncash;item.append(benefit);}
@@ -694,8 +674,8 @@ function renderSubsidyRows(list, rows, mode = 'group', termsIndex = new Map()) {
 }
 
 function renderMunicipalSubsidy(result, scenario, selectedScenario = scenario) {
-  const municipality = frontendData.publicData.municipalities.find(item => item.municipality_code === result.input.municipality_code);
-  const exploration = frontendData.publicData.municipality_subsidy_exploration?.find(item => item.municipality_code === result.input.municipality_code);
+  const municipality = null;
+
   const groups = subsidyGroups(result, scenario, municipality);
   // Eligibility uses the standard reference; actual inclusion follows the selected scenario.
   if (selectedScenario.scenario === 'downside') {
@@ -706,7 +686,6 @@ function renderMunicipalSubsidy(result, scenario, selectedScenario = scenario) {
   const summaryCovered = names.length > 0 && names.every(name => [...groups.included, ...groups.excluded].some(row => row.program_name === name));
   elements.municipalSubsidySummary.textContent = [
     prefectureResearchMessage(scenario.subsidy_breakdown?.prefecture_program_status ?? result.input.prefecture_program_status),
-    subsidyResearchMessage(scenario.subsidy_breakdown?.municipality_program_status ?? result.input.municipality_program_status, exploration),
     typeof municipality?.candidate_summary === 'string' && !summaryCovered ? municipality.candidate_summary : ''
   ].filter(Boolean).join(' ');
   const termsIndex = subsidyTermsIndex(frontendData.publicData, result.input);
@@ -945,7 +924,7 @@ mobileConditionsToggle.addEventListener('click', () => {
   elements.calculator.classList.toggle('mobile-conditions-open', open);
 });
 function updateMobileConditionsSummary(result) {
-  const location = result.input.prefecture_name + (result.input.municipality_name || '');
+  const location = result.input.prefecture_name;
   const battery = result.input.equipment_package === 'solar_plus_standard_battery'
     ? '・蓄電池' + Number(result.input.battery_capacity_kwh).toFixed(1) + 'kWh' : '';
   const equipmentLine = location + '・太陽光' + Number(result.input.system_capacity_kw).toFixed(1) + 'kW' + battery;
@@ -1291,7 +1270,6 @@ async function initialize() {
     updateCurrentHousingSummary();
     if (initialInput.prefectureCode) {
       elements.prefecture.value = initialInput.prefectureCode;
-      updateMunicipalities(initialInput.municipalityCode);
       elements.monthlyElectricityBill.value = initialInput.monthlyElectricityBillYen ?? "";
       validateLocation(initialInput, frontendData.publicData);
       renderResult(calculateEstimate(initialInput, frontendData.publicData), { focus: false, scroll: false });
@@ -1382,8 +1360,7 @@ elements.changeConditionsButton.addEventListener('click', () => {
   else if (!latestResult) return;
   else if (applyLiveConditions()) collapseCalculator(latestResult);
 });
-elements.prefecture.addEventListener('change', () => { stopPrefectureIntro(); syncInitialPrefectureHint(); updateMunicipalities(); scheduleLiveConditions(); });
-elements.municipality.addEventListener('change', () => { elements.municipalityHelp.hidden = true; scheduleLiveConditions(); });
+elements.prefecture.addEventListener('change', () => { stopPrefectureIntro(); syncInitialPrefectureHint(); scheduleLiveConditions(); });
 elements.monthlyElectricityBill.addEventListener('input', () => scheduleLiveConditions(350));
 elements.monthlyElectricityBill.addEventListener('change', () => scheduleLiveConditions());
 elements.monthlyElectricityBill.addEventListener('keydown', event => {

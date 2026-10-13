@@ -18,7 +18,7 @@ export function prepareSubsidyData(data) {
   if (!usesSchemeContract(data)) return data;
   if (received.has(data)) return received.get(data);
   const rules=receiveSchemeRules(data);
-  const prepared={...data,diagnostic_subsidy_programs:rules.diagnostic,municipal_subsidy_programs:rules.municipal};
+  const prepared={...data,diagnostic_subsidy_programs:rules.diagnostic,};
   received.set(data,prepared);received.set(prepared,prepared);
   return prepared;
 }
@@ -72,8 +72,7 @@ export function receiveSchemeRules(data) {
     });
   }
   return {
-    diagnostic: receive('diagnostic', 'diagnostic_rules', 'diagnostic_rule_order', links.unassigned_diagnostic_rules || []),
-    municipal: receive('legacy_municipal', 'legacy_municipal_rules', 'legacy_municipal_rule_order')
+    diagnostic: receive('diagnostic', 'diagnostic_rules', 'diagnostic_rule_order', links.unassigned_diagnostic_rules || [])
   };
 }
 

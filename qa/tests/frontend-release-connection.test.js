@@ -29,11 +29,10 @@ test('異なる表・binding・版を受領した場合は表示を継続しな�
   assert.throws(() => receiveHareDisplayRecords(prepared, hare, {...hareBinding,public_data_version:'other'}), /データ版/);
 });
 
-test('新国県規則の受領は既存市区町村の制度・計算契約を削除しない', () => {
-  for (const program of raw.diagnostic_subsidy_programs.filter(p => p.government_level === 'municipality')) {
-    const actual = prepared.diagnostic_subsidy_programs.find(p => p.id === program.id);
-    assert(actual, program.id);
-    assert.deepEqual(actual, program, program.id);
-  }
+test('受領は国県だけとし，市区町村の制度を除外する', () => {
   assert.equal(prepared.prefectures.length, 47);
+  assert.equal(raw.service_scope.municipal_subsidies_included, false);
+  assert(!raw.subsidy_schemes.some(p => p.government_level === 'municipality'));
+  assert(!prepared.diagnostic_subsidy_programs.some(p => p.government_level === 'municipality'));
+  assert(!('municipalities' in raw));
 });

@@ -1,0 +1,277 @@
+import {prepareSubsidyData} from '../../data/src/scheme-adapter.js';
+import { QUOTE_ACTION, mountFixedQuoteBar } from "../../site/shared/fixed-quote-bar.js";
+import { cashflowMarkers, groupMarkerTargets } from "../../site/simulator/src/chart-markers.js";
+import { subsidyGroups, nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import { dirname, resolve } from "node:path";
+import test from "node:test";
+import { fileURLToPath } from "node:url";
+import { validateLocation } from "../../site/simulator/src/location-input.js";
+import { calculateEstimate } from "../../site/simulator/src/calculator.js";
+import { degradationLabel, degradationDescription, outageReferencePresentation, formatBatteryCapacity } from "../../site/simulator/src/battery-presentation.js";
+import { cashflowChartLayout, formatEnergyRate, subsidyReasonPresentation, energyRoutes, financialTotals, endpointResult, conclusionBreakdown, compactYen, decisionAmountParts, hasUnconfirmedSubsidy, scenarioSubsidyCondition, resultConditionHeadline, mainSubsidyPresentation, subsidyBreakdownReason, scenarioRecoveryPresentation, energyBreakdownPresentation } from "../../site/simulator/src/result-presentation.js";
+const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
+const siteRoot=resolve(repositoryRoot,"site");
+const newDetailSlugs = ["solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount"];
+const htmlPaths = [
+  resolve(siteRoot, "index.html"),
+  resolve(siteRoot, "guides/index.html"),
+  resolve(siteRoot, "simulator/index.html"),
+  resolve(siteRoot, "pages/calculation-method.html"),
+  resolve(siteRoot, "guides/solar-economics/index.html"),
+  ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
+  resolve(siteRoot, "guides/subsidies/index.html"),
+  resolve(siteRoot, "guides/disaster/index.html"),
+  resolve(siteRoot, "guides/quotes-contractors/index.html"),
+  resolve(siteRoot, "pages/policy.html")
+];
+
+function attributeValues(html, attribute) {
+  return [...html.matchAll(new RegExp(`(?:^|\\s)${attribute}="([^"]+)"`, "g"))].map((match) => match[1]);
+}
+
+async function localTarget(pagePath, reference) {
+  const pathPart = reference.split("#", 1)[0].split("?", 1)[0];
+  if (!pathPart || /^(?:https?:|mailto:|tel:|data:)/.test(pathPart)) {
+    return null;
+  }
+  let target = pathPart.startsWith("/")
+    ? resolve(siteRoot, pathPart.slice(1))
+    : resolve(dirname(pagePath), pathPart);
+  if (pathPart.endsWith("/") || target === siteRoot) {
+    target = resolve(target, "index.html");
+  }
+  return target;
+}
+
+test("劣化比較の説明は選択した仮定を使い，停電線はDC容量の精度を保つ", () => {
+  assert.equal(formatBatteryCapacity(8.075), "8.08");
+  for (const [id, retention] of [["conditional_70", 0.7], ["optimistic_85", 0.85]]) {
+    const scenario = { id, scenario_id: id, capacity_retention_at_year_20: retention };
+    assert.match(degradationLabel(scenario), /条件付き比較/);
+    assert.match(degradationDescription(scenario), new RegExp(`20年後${retention * 100}％`));
+    assert.doesNotMatch(degradationDescription(scenario), /15年目末60％/);
+    assert.match(degradationDescription(scenario), /平均や保証値ではありません/);
+  }
+  assert.match(degradationLabel({ id: "conservative", capacity_retention_at_year_20: 0.5060595991810496 }), /約50.6％/);
+  const reference = { required_dc_capacity_reference_kwh: 1.7122657777822357, household_appliance_ac_load_kwh: 0.9043979452054796, auxiliary_ac_load_kwh: 0.72, discharge_efficiency: Math.sqrt(0.9) };
+  const presentation = outageReferencePresentation(reference);
+  assert.equal(presentation.capacity, reference.required_dc_capacity_reference_kwh);
+  assert.equal(presentation.label, "約1.7 kWh");
+  assert.match(presentation.energy, /家電.*0.90 kWh.*自身.*0.72 kWh.*94.9％/);
+  assert.equal(outageReferencePresentation(undefined), null);
+  assert.equal(outageReferencePresentation({ ...reference, required_dc_capacity_reference_kwh: NaN }), null);
+});
+test("主結果は1万円未満を千円単位の概算とし，0円と1万円境界を区別する", () => {
+  assert.deepEqual(decisionAmountParts(1_086), { amount: "1,000円", outcome: "トク" });
+  assert.deepEqual(decisionAmountParts(-1_086), { amount: "1,000円", outcome: "損" });
+  assert.deepEqual(decisionAmountParts(9_999), { amount: "10,000円", outcome: "トク" });
+  assert.deepEqual(decisionAmountParts(-9_999), { amount: "10,000円", outcome: "損" });
+  assert.deepEqual(decisionAmountParts(0), { amount: "0円", outcome: "" });
+  assert.deepEqual(decisionAmountParts(10_000), { amount: "1万円", outcome: "トク" });
+  assert.deepEqual(decisionAmountParts(-10_000), { amount: "1万円", outcome: "損" });
+});
+test("全HTMLが基本的な意味構造と固有IDを持つ", async () => {
+  for (const pagePath of htmlPaths) {
+    const html = await readFile(pagePath, "utf8");
+    assert.match(html, /<html lang="ja">/);
+    assert.match(html, /<meta\s+[\s\S]*?name="description"/);
+    assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
+    assert.equal((html.match(/<main(?:\s|>)/g) ?? []).length, 1);
+    assert.match(html, /<title>[^<]+<\/title>/);
+    assert.match(html, /rel="icon" href="[^"]+favicon\.svg"/);
+    const ids = attributeValues(html, "id");
+    assert.equal(ids.length, new Set(ids).size, `IDが重複しています：${pagePath}`);
+  }
+});
+test("ローカルリンク，CSSおよびJavaScriptの参照先が存在する", async () => {
+  for (const pagePath of htmlPaths) {
+    const html = await readFile(pagePath, "utf8");
+    const references = [...attributeValues(html, "href"), ...attributeValues(html, "src")];
+    for (const reference of references) {
+      const target = await localTarget(pagePath, reference);
+      if (target) {
+        await assert.doesNotReject(access(target), `${pagePath} → ${reference}`);
+      }
+    }
+  }
+});
+test("同一ページ内のアンカー参照先が存在する", async () => {
+  for (const pagePath of htmlPaths) {
+    const html = await readFile(pagePath, "utf8");
+    const ids = new Set(attributeValues(html, "id"));
+    for (const href of attributeValues(html, "href")) {
+      if (href.startsWith("#")) {
+        assert.ok(ids.has(href.slice(1)), `アンカーがありません：${pagePath} → ${href}`);
+      }
+    }
+  }
+});
+test("別ページを指すアンカー参照先が存在する", async () => {
+  for (const pagePath of htmlPaths) {
+    const html = await readFile(pagePath, "utf8");
+    for (const href of attributeValues(html, "href")) {
+      const [pathPart, fragment] = href.split("#", 2);
+      if (!pathPart || !fragment || /^(?:https?:|mailto:|tel:|data:)/.test(pathPart)) {
+        continue;
+      }
+      const target = await localTarget(pagePath, pathPart);
+      const targetHtml = await readFile(target, "utf8");
+      const targetIds = new Set(attributeValues(targetHtml, "id"));
+      assert.ok(targetIds.has(fragment), `アンカーがありません：${pagePath} → ${href}`);
+    }
+  }
+});
+test("全ページの共通フッターが方針の対応見出しへ接続する", async () => {
+  const policyHtml = await readFile(resolve(siteRoot, "pages/policy.html"), "utf8");
+  const footerItems = [
+    ["operation", "運営方針"],
+    ["advertising", "広告方針"],
+    ["data", "データ方針"],
+    ["privacy", "プライバシー"],
+    ["disclaimer", "免責事項"]
+  ];
+
+  for (const [id, label] of footerItems) {
+    assert.match(policyHtml, new RegExp(`<section id="${id}"><h2>${label}<\\/h2>`));
+  }
+
+  for (const pagePath of htmlPaths) {
+    const html = await readFile(pagePath, "utf8");
+    const footerNav = html.match(/<nav class="site-footer__links"[\s\S]*?<\/nav>/)?.[0];
+    assert.ok(footerNav, `共通フッターの方針リンクがありません：${pagePath}`);
+    const prefix = pagePath.includes(resolve(siteRoot, "guides")) ? "/pages/policy.html#" : pagePath === resolve(siteRoot, "index.html") ? "pages/policy.html#" : pagePath === resolve(siteRoot, "pages/policy.html") ? "#" : pagePath === resolve(siteRoot, "simulator/index.html") ? "../pages/policy.html#" : "policy.html#";
+    for (const [id, label] of footerItems) {
+      assert.match(footerNav, new RegExp(`<a href="${prefix}${id}">${label}<\\/a>`));
+    }
+  }
+});
+test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在地を示す", async () => {
+  const guideCurrentPaths = new Set([
+    ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
+    resolve(siteRoot, "guides/index.html"),
+    resolve(siteRoot, "guides/solar-economics/index.html"),
+    resolve(siteRoot, "guides/subsidies/index.html"),
+    resolve(siteRoot, "guides/disaster/index.html"),
+    resolve(siteRoot, "guides/quotes-contractors/index.html")
+  ]);
+
+  for (const pagePath of htmlPaths) {
+    const html = await readFile(pagePath, "utf8");
+    const siteNav = html.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0];
+    assert.ok(siteNav, `共通ヘッダーがありません：${pagePath}`);
+    const href = "/guides/";
+    const guideLinks = [...siteNav.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].filter(([,attrs]) => attrs.includes('href="' + href + '"'));
+    assert.equal(guideLinks.length, 1, 'ガイド導線を重複させない');
+    const [,attrs,body] = guideLinks[0];
+    assert.equal(attrs.includes('aria-current="page"'), guideCurrentPaths.has(pagePath));
+    assert.ok(body.replace(/<[^>]*>/g,'').includes('はれトクガイド'));
+
+  }
+});
+test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重複なく掲載する", async () => {
+  const html = await readFile(resolve(siteRoot, "guides/index.html"), "utf8");
+  const articles = JSON.parse(await readFile(resolve(siteRoot, "solar/data/articles.json"), "utf8"));
+  const script = await readFile(resolve(siteRoot, "solar/src/guides.js"), "utf8");
+  const css = await readFile(resolve(siteRoot, "solar/styles/guides.css"), "utf8");
+  const main = html.match(/<main>[\s\S]*?<\/main>/)?.[0];
+  assert.ok(main);
+  assert.match(html, /<title>はれトクガイド｜住宅用太陽光の記事一覧<\/title>/);
+  assert.match(html, /meta name="description" content="[^"]+"/);
+  assert.match(html, /src="\/solar\/src\/guides\.js"/);
+  assert.doesNotMatch(main, /data-featured-guides/);
+  assert.doesNotMatch(main, /data-safety-guides/);
+  assert.match(main, /<h1 id="guide-library-title"[^>]*>/);
+  assert.equal(articles.length, 10);
+  assert.equal(articles.filter(article => article.articleType === "core").length, 4);
+  assert.equal(articles.filter((article) => Number.isInteger(article.featuredOrder)).length, 3);
+  for (const [title, target, articleTitle = title] of [
+    ["太陽光の収支は，何で決まる？", "/guides/solar-economics/"],
+    ["補助金は，どう探してどう申請する？", "/guides/subsidies/"],
+    ["太陽光の見積もりは，何を比べる？", "/guides/quotes-contractors/"],
+    ["停電時，太陽光・蓄電池で何ができる？", "/guides/disaster/"],
+  ]) {
+    const article = articles.find((candidate) => candidate.title === title);
+    assert.equal(article?.href, target, `ガイド記事がありません：${title}`);
+    const targetPath = await localTarget(resolve(siteRoot, "guides/index.html"), target);
+    await assert.doesNotReject(access(targetPath));
+    const targetHtml = await readFile(targetPath, "utf8");
+    assert.ok(targetHtml.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, "") === articleTitle, `記事タイトルが一致しません：${title}`);
+    await assert.doesNotReject(access(await localTarget(resolve(siteRoot, "guides/index.html"), article.image.src)));
+    assert.ok(article.image.width > 0 && article.image.height > 0);
+    assert.ok(article.image.alt.length > 0);
+  }
+  for (const category of ["収支", "補助金", "見積もり", "災害への備え"]) {
+    assert.ok(articles.some((article) => article.category === category), `空の分類です：${category}`);
+  }
+  assert.deepEqual(
+    articles.filter((article) => Number.isInteger(article.featuredOrder)).map((article) => article.id),
+    ["electricity-sales", "subsidies", "quotes-contractors"]
+  );
+  assert.doesNotMatch(JSON.stringify(articles), /calculation-method\.html|policy\.html/);
+  assert.match(main, /article-action__link[\s\S]*診断を始める/);
+  const { groupedArticles } = await import("../../site/solar/src/guide-groups.js");
+  const groups = groupedArticles(articles);
+  assert.deepEqual(groups.map((group) => group.id), ["core", "detail", "news"]);
+  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5, 1]);
+  assert.deepEqual(groups[0].articles.map((article) => article.categoryId), ["economics", "subsidies", "quotes", "safety"]);
+  assert.match(main, /data-guide-groups/);
+  assert.doesNotMatch(main, /data-guide-filters/);
+  const futureGroups = groupedArticles([
+    { articleType: "news", id: "updated", publishedAt: "2026-09-01", updatedAt: "2026-10-02" },
+    { articleType: "detail", id: "regional" },
+    { articleType: "news", id: "recent", publishedAt: "2026-10-01" },
+    articles[0]
+  ]);
+  assert.deepEqual(futureGroups.map((group) => group.id), ["core", "detail", "news"]);
+  assert.deepEqual(futureGroups[2].articles.map((article) => article.id), ["recent", "updated"]);
+  assert.match(script, /link\.className = "guide-article-card"/);
+  assert.match(script, /import\.meta\.glob\("\.\.\/\.\.\/shared\/assets\/\*\.\{png,webp\}"/);
+  assert.match(css, /@media \(min-width: 40\.001rem\)[\s\S]*grid-auto-flow: column/);
+  assert.match(css, /grid-auto-columns: calc\(\(100% - var\(--guide-card-gap\) \* 2\) \/ 3\)/);
+  assert.match(css, /@media \(max-width: 62rem\)[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/);
+  assert.match(css, /@media \(max-width: 40rem\)[\s\S]*grid-template-columns: minmax\(0, 1fr\)/);
+  assert.match(css, /\.guide-article-card:focus-visible/);
+  assert.match(html, /articles\/styles\/article\.css/);
+  assert.match(main, /article-action-stack__row--internal/);
+  assert.match(css, /\.guide-title-term \{ white-space: nowrap;/);
+});
+test("主結果の短い見出しは金額の正負・ゼロと重複せず，未確定を区別する", () => {
+  for (const value of [1, -1, 0]) assert.equal(resultConditionHeadline(value), "今回の条件での概算");
+  assert.match(resultConditionHeadline(null), /確認待ち/);
+  assert.equal(decisionAmountParts(0).outcome, "");
+  assert.equal(decisionAmountParts(1).outcome, "トク");
+  assert.equal(decisionAmountParts(-1).outcome, "損");
+});
+test("未算入理由はサイト確認不足・終了・停止・モデル外・シナリオ仮定を区別する", () => {
+  assert.match(nonInclusionReason({calculation_status:'not_adopted_missing_conditions'}), /はれトク側/);
+  assert.match(nonInclusionReason({application_status:'closed'}), /受付が終了/);
+  assert.match(nonInclusionReason({application_status:'suspended'}), /受付が停止/);
+  assert.match(nonInclusionReason({calculation_status:'not_adopted_model_outside'}), /計算で扱う範囲/);
+  assert.match(nonInclusionReason({}, true), /下振れシナリオ/);
+  assert.match(nonInclusionReason({}), /理由は確認できていません/);
+});
+test("電力量内訳の適用範囲と関係式は設備で決まり，ゼロ値では決まらない", () => {
+  const solar=energyBreakdownPresentation('solar_only');
+  const battery=energyBreakdownPresentation('solar_plus_standard_battery');
+  assert.equal(solar.battery,false);
+  assert.equal(battery.battery,true);
+  assert.doesNotMatch(solar.equation,/蓄電池|充放電/);
+  assert.match(battery.equation,/充電は発電量の内訳.*直接使用と蓄電池/);
+  assert.doesNotMatch(solar.sufficiency,/蓄電池/);
+  assert.match(battery.sufficiency,/蓄電池/);
+});
+test("パワコン注記は実交換費がある年だけを使い，蓄電池交換と混同しない", () => {
+  assert.deepEqual(replacementEvents({annual_cash_flows:[{year:15,replacement_cost_yen:100,cumulative_cash_flow_yen:-20},{year:10,replacement_cost_yen:0,battery_replacement_cost_yen:500}]}),[{year:15,value:-20}]);
+  assert.deepEqual(replacementEvents({annual_cash_flows:[{year:15,replacement_cost_yen:0}]}),[]);
+});
+test("短い回収表示は回収なし・即時・未確定を保持しシナリオ名を重複しない", () => {
+ assert.equal(scenarioRecoveryPresentation({scenario:'standard',profit_yen:-10,payback_year:null}),'30年以内の回収なし');
+ assert.match(scenarioRecoveryPresentation({scenario:'upside',profit_yen:20,payback_year:8}),/約8年/);
+ assert.match(scenarioRecoveryPresentation({scenario:'standard',profit_yen:20,payback_year:0}),/初期費用を補助金で充当/);
+ assert.match(scenarioRecoveryPresentation({scenario:'downside',profit_yen:null,payback_year:null}),/確認待ち/);
+ assert.doesNotMatch(scenarioRecoveryPresentation({scenario:'standard',profit_yen:0,payback_year:null}), /シナリオ|標準/);
+ assert.equal(mainSubsidyPresentation({subsidy_yen:100},true).text,'補助金を一部算入');
+ assert.match(mainSubsidyPresentation({subsidy_yen:0,scenario:'downside'}).text,/想定/);
+});

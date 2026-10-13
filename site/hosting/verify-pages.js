@@ -58,7 +58,7 @@ for (const sourceName of ["public-data", "metadata", "hare-display-table", "hare
   const deployed = jsonFiles.filter(file => file.split(/[\\/]/).at(-1).startsWith(`${sourceName}-`));
   assert.equal(deployed.length, 1, `${sourceName}の同梱`);
   assert(source.equals(await readFile(deployed[0])), `${sourceName}が受領版と不一致`);
-  if (['public-data', 'metadata'].includes(sourceName)) assert.equal(JSON.parse(source).schema_version, "12.0.0-review.1", "公開データ版が変更されています");
+  if (['public-data', 'metadata'].includes(sourceName)) assert.equal(JSON.parse(source).schema_version, "13.0.0", "公開データ版が変更されています");
 }
 assert.equal((await readFile(resolve(output, "CNAME"), "utf8")).trim(), "haretoku.jp");
 assert((await readFile(resolve(output, "robots.txt"), "utf8")).includes("Sitemap: https://haretoku.jp/sitemap.xml"));
@@ -86,6 +86,6 @@ assert(legacyShareOutput.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13,
 assert.equal(legacyShareOutput.readUInt32BE(16), 1536);
 assert.equal(legacyShareOutput.readUInt32BE(20), 1024);
 
-console.log(`Pages検証PASS: ${files.length}ファイル，正規15URL，公開データ12.0.0-review.1同一，ローカル参照・QA非混入`);
+console.log(`Pages検証PASS: ${files.length}ファイル，正規15URL，公開データ13.0.0同一，ローカル参照・QA非混入`);
 
 assert((await readFile(resolve(output, 'og-support-shock-burden.png'))).equals(await readFile(resolve(root, 'site/shared/assets/support-shock-burden.png'))), '調査記事の共有画像が不一致');

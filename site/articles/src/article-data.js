@@ -5,7 +5,6 @@ import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/har
 import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/retained-diagnostic-display.js';
 import { QUOTE_ACTION, setupInlineQuoteActions } from "../../shared/fixed-quote-bar.js";
 import { bindArticleBibliography } from "./article-bibliography.js";
-import { replacesLegacyPrefecture } from '../../simulator/src/diagnostic-subsidy.js';
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
 function setText(selector, value) {
@@ -91,7 +90,7 @@ async function initialize() {
       const displayRecords = publicData.diagnostic_subsidy_programs?.some(program => program.machine_rule === 'common_equipment_branch_ast/1') ? await loadDiagnosticDisplayRecords(publicData) : new Map();
       const diagnosticPrograms = publicData.diagnostic_subsidy_programs ?? [];
       const diagnosticIds = new Set(diagnosticPrograms.map(program => program.id));
-      const programs = [...diagnosticPrograms, ...(publicData.municipal_subsidy_programs ?? []), ...publicData.prefectures.flatMap(region => [...(region.subsidy_programs ?? []), ...(replacesLegacyPrefecture(diagnosticPrograms,region.code)?[]:(region.candidate_subsidy_programs ?? []).filter(program => !diagnosticIds.has(program.id)))])];
+      const programs = [...diagnosticPrograms, ...publicData.prefectures.flatMap(region => [...(region.subsidy_programs ?? []), ...(diagnosticPrograms.some(p=>p.prefecture_code===region.code&&p.machine_rule==='common_equipment_branch_ast/1')?[]:(region.candidate_subsidy_programs ?? []).filter(program => !diagnosticIds.has(program.id)))])];
       for (const program of programs) {
         const details = document.createElement('details');
         details.id = 'subsidy-program-' + program.id;

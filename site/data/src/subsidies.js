@@ -9,10 +9,9 @@ import {usesSchemeContract} from '../../../data/src/scheme-adapter.js';
 import {selectSchemeGroups} from './scheme-model.js';
 import {diagnosticPilotTerms} from '../../simulator/src/retained-diagnostic-display.js';
 import {orderedSupplementRows} from '../../simulator/src/diagnostic-amount-dom.js';
-import {listingMunicipalities,listingNotes,diagnosisDescription,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
+import {listingNotes,diagnosisDescription,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
 // The import path is relative to site/data/src; only the received public dataset is used.
 const pref = document.querySelector('#prefecture');
-const city = document.querySelector('#municipality');
 const status = document.querySelector('#load-status');
 const results = document.querySelector('#results');
 const reception = document.querySelector('#reception');
@@ -49,19 +48,12 @@ function appendConditions(parent,sections) {
     for(const text of [...new Set(section.lines)]){const p=node('p');appendDatedText(p,text);parent.append(p);}
   }
 }
-function populateCities(value='') {
-  city.replaceChildren(option('','市区町村を選択（任意）'));
-  const cities=listingMunicipalities(data).filter(m=>m.prefecture_code===pref.value).sort((a,b)=>a.municipality_code.localeCompare(b.municipality_code));
-  for(const m of cities)city.append(option(m.municipality_code,m.municipality_name));
-  city.disabled=!pref.value;
-  city.value=cities.some(m=>m.municipality_code===value)?value:'';
-}
 function listingTable(label){
 const table=node('table',null,'data-table data-table--comparison');table.setAttribute('aria-label',label+'の補助制度');const thead=node('thead');const hr=node('tr');for(const t of ['制度名・年度','補助内容','受付状況']){const th=node('th',t);th.scope='col';hr.append(th);}thead.append(hr);table.append(thead);const tbody=node('tbody');
 return {table,tbody};
 }
 function render(updateUrl=true) {
-  const params=new URLSearchParams();if(pref.value)params.set('prefecture',pref.value);if(city.value)params.set('municipality_code',city.value);
+  const params=new URLSearchParams();if(pref.value)params.set('prefecture',pref.value);
   if(reception.value!=='all')params.set('reception',reception.value);
   if(updateUrl)history.replaceState(null,'',location.pathname+(params.size?'?'+params:''));
   results.hidden=!pref.value;
@@ -69,14 +61,12 @@ function render(updateUrl=true) {
   status.textContent=pref.value?'':'都道府県を選ぶと，国・都道府県の制度を表示します．';
   if(!pref.value)return;
   const province=data.prefectures.find(p=>p.code===pref.value);
-  const municipality=listingMunicipalities(data).find(m=>m.municipality_code===city.value);
-  const allGroups=usesSchemeContract(data)?selectSchemeGroups(data,pref.value,city.value):groupPrograms(selectPrograms(data,pref.value,city.value));
+  const allGroups=usesSchemeContract(data)?selectSchemeGroups(data,pref.value):groupPrograms(selectPrograms(data,pref.value));
   const groups=allGroups.filter(group=>matchesReception(group,reception.value));
-  document.querySelector('#results-title').textContent=province.name+(municipality?' '+municipality.municipality_name:'')+'の補助制度';
+  document.querySelector('#results-title').textContent=province.name+'の補助制度';
   document.querySelector('#result-count').textContent=groups.length+'件'+(reception.value==='all'?'':'／全'+allGroups.length+'件');
   const container=document.querySelector('#programs');container.replaceChildren();
-  for(const [level,label] of [['national','国'],['prefecture','都道府県'],['municipality','市区町村']]) {
-    if(level==='municipality'&&!city.value)continue;
+  for(const [level,label] of [['national','国'],['prefecture','都道府県']]) {
     const rows=groups.filter(g=>g[0].government_level===level);
     const section=node('section');const sectionHeading=node('div',null,'data-section-heading');sectionHeading.append(node('h3',label),node('span',rows.length+'件','data-section-count'));section.append(sectionHeading);
     if(!rows.length){section.append(node('p','掲載制度なし','data-muted'));container.append(section);continue;}
@@ -89,7 +79,6 @@ function render(updateUrl=true) {
       const year=group[0]._catalog?.target_year;
       if(group[0]._catalog)title.append(node('p','対象年度：'+(year||'未確認')));
       for(const note of [...new Set(group.flatMap(listingNotes))])title.append(node('p',note));
-      if(level==='municipality'&&!data.municipalities.some(m=>m.prefecture_code===pref.value&&m.municipality_code===city.value))title.append(node('p','この自治体の補助制度は診断に未反映です．'));
       const amount=node('td');amount.dataset.label='補助内容';
       const hareRecord=hareDisplayRecords.get(group[0].record_id);
       if(!hareRecord){
@@ -153,13 +142,13 @@ function render(updateUrl=true) {
     if(tbody.children.length){table.append(tbody);section.append(table);}
     container.append(section);
   }
-  document.querySelector('#diagnosis-description').textContent=diagnosisDescription(data,pref.value,city.value);
-  document.querySelector('#diagnosis-link').href=diagnosisUrl(data,pref.value,city.value);
+  document.querySelector('#diagnosis-description').textContent=diagnosisDescription(data,pref.value);
+  document.querySelector('#diagnosis-link').href=diagnosisUrl(data,pref.value);
   status.textContent='';
 }
-function restore(){const p=new URLSearchParams(location.search);pref.value=data.prefectures.some(x=>x.code===p.get('prefecture'))?p.get('prefecture'):'';populateCities(p.get('municipality_code'));reception.value=Object.hasOwn(receptionFilters,p.get('reception'))?p.get('reception'):'all';render();}
+function restore(){const p=new URLSearchParams(location.search);pref.value=data.prefectures.some(x=>x.code===p.get('prefecture'))?p.get('prefecture'):'';reception.value=Object.hasOwn(receptionFilters,p.get('reception'))?p.get('reception'):'all';render();}
 document.querySelector('#region-form').addEventListener('submit',e=>e.preventDefault());
-pref.addEventListener('change',()=>{populateCities();render();});city.addEventListener('change',()=>render());window.addEventListener('popstate',restore);
+pref.addEventListener('change',()=>render());window.addEventListener('popstate',restore);
 reception.addEventListener('change',()=>render());
 try {
 const [{publicData},hareTable,hareBinding]=await Promise.all([

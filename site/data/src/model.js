@@ -1,7 +1,6 @@
 import {nonInclusionReason} from '../../simulator/src/subsidy-presentation.js';
 import {mergeCatalogPrograms,catalogPeriod} from './catalog.js';
 import {catalogAmountPresentation} from './catalog-amount.js';
-export const listingMunicipalities = data => data.listing_municipalities ?? data.municipalities;
 export function listingNotes(program) {
   const historical=program._catalog?.historical_context;
   if (historical?.status === 'closed_legacy_scheme' && typeof historical.notice === 'string' && historical.notice.trim()) {
@@ -12,24 +11,15 @@ export function listingNotes(program) {
   }
   return [];
 }
-export function diagnosisDescription(data, prefecture, municipality = '') {
-  const listed = listingMunicipalities(data).find(m => m.prefecture_code === prefecture && m.municipality_code === municipality);
-  const supported = data.municipalities.some(m => m.prefecture_code === prefecture && m.municipality_code === municipality);
-  return listed && !supported
-    ? `${listed.municipality_name}の補助制度は診断に含まれません．都道府県の選択を引き継いで，30年間の収支を概算できます．`
-    : '設備や暮らしの条件から，30年間の収支を概算できます．掲載制度のすべてを計算に含むわけではありません．';
+export function diagnosisDescription() {
+ return '国・都道府県の補助金を対象に，30年間の収支を概算できます．市区町村の補助金は含みません．';
 }
-export function diagnosisUrl(data, prefecture, municipality = '') {
-  const params = new URLSearchParams();
-  if (prefecture) params.set('prefecture', prefecture);
-  if (data.municipalities.some(m => m.prefecture_code === prefecture && m.municipality_code === municipality)) params.set('municipality_code', municipality);
-  params.set('from', 'data');
-  return '/simulator/?' + params;
+export function diagnosisUrl(data, prefecture) {
+ const params=new URLSearchParams();if(prefecture)params.set('prefecture',prefecture);params.set('from','data');return '/simulator/?'+params;
 }
-export function selectPrograms(data, prefecture, municipality = '') {
-  if (!data.prefectures.some(p => p.code === prefecture)) return [];
-  const validCity = listingMunicipalities(data).some(m => m.prefecture_code === prefecture && m.municipality_code === municipality);
-  return mergeCatalogPrograms(data).filter(p => p.government_level === 'national' || (p.government_level === 'prefecture' && p.prefecture_code === prefecture) || (validCity && p.government_level === 'municipality' && p.prefecture_code === prefecture && p.municipality_code === municipality));
+export function selectPrograms(data,prefecture) {
+ if(!data.prefectures.some(p=>p.code===prefecture))return [];
+ return mergeCatalogPrograms(data).filter(p=>p.government_level==='national'||p.government_level==='prefecture'&&p.prefecture_code===prefecture);
 }
 export function groupPrograms(rows) {
   const groups = new Map();

@@ -1,7 +1,7 @@
 {
   "version": "hare-display-binding-trial/1",
   "source_sha256": "22cfd6497d3597efb6ae692d5b5d955d0cb66e94e75618146b50efc17d78b6cf",
-  "public_data_version": "20261010-tokyo-equipment-base-trial.3",
+  "public_data_version": "20261013-national-prefectures.1",
   "records": [
     {
       "source_record_id": "normal-2026-pref13-residential-solar",

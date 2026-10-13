@@ -1,14 +1,12 @@
 // Scheme view model. 11.x data continue through the existing catalog path.
 import {receiveSchemeRules,receiveSchemeListing} from '../../../data/src/scheme-adapter.js';
-import {listingMunicipalities} from './model.js';
 
 export function selectSchemeGroups(data, prefecture, municipality = '') {
   if (!data.prefectures.some(p=>p.code===prefecture)) return [];
-  const validCity=listingMunicipalities(data).some(m=>m.prefecture_code===prefecture&&m.municipality_code===municipality);
   const rules=receiveSchemeRules(data);
   const diagnostic=new Map(rules.diagnostic.map(rule=>[rule.id,rule]));
   const listing=receiveSchemeListing(data);
-  const visible=p=>p.government_level==='national'||p.government_level==='prefecture'&&p.prefecture_code===prefecture||validCity&&p.government_level==='municipality'&&p.prefecture_code===prefecture&&p.municipality_code===municipality;
+  const visible=p=>p.government_level==='national'||p.government_level==='prefecture'&&p.prefecture_code===prefecture;
   const covered=new Set();
   function row(parent,branch) {
     const legacy=(branch.diagnostic_rule_ids||[]).map(id=>diagnostic.get(id)).filter(Boolean);
