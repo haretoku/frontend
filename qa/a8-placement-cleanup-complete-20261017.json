@@ -1,0 +1,72 @@
+{
+  "date": "2026-10-17",
+  "keep": [
+    "https://haretoku.jp/",
+    "https://haretoku.jp/guides/quote-services/"
+  ],
+  "solarPartners": {
+    "before": 30,
+    "deleted": [
+      "https://haretoku.jp/guides/disaster-preparedness/",
+      "https://haretoku.jp/guides/welcome/",
+      "https://haretoku.jp/guides/solar-benefits/",
+      "https://haretoku.jp/guides/solar-costs/",
+      "https://haretoku.jp/guides/solar-living/",
+      "https://haretoku.jp/guides/home-battery/",
+      "https://haretoku.jp/guides/equipment-maintenance/",
+      "https://haretoku.jp/guides/power-outage/",
+      "https://haretoku.jp/guides/consultation-preparation/",
+      "https://haretoku.jp/guides/home-survey/",
+      "https://haretoku.jp/guides/installation-process/",
+      "https://haretoku.jp/guides/solar-consultation/",
+      "https://haretoku.jp/simulator/",
+      "https://haretoku.jp/guides/choosing-installer/",
+      "https://haretoku.jp/data/subsidies/",
+      "https://haretoku.jp/data/",
+      "https://haretoku.jp/pages/calculation-method.html",
+      "https://haretoku.jp/pages/policy.html",
+      "https://haretoku.jp/guides/subsidy-amount/",
+      "https://haretoku.jp/guides/solar-maintenance-cost/",
+      "https://haretoku.jp/guides/solar-installation-cost/",
+      "https://haretoku.jp/guides/solar-fit/",
+      "https://haretoku.jp/guides/solar-electricity-savings/",
+      "https://haretoku.jp/guides/quotes-contractors/",
+      "https://haretoku.jp/guides/disaster/",
+      "https://haretoku.jp/guides/subsidies/",
+      "https://haretoku.jp/guides/solar-economics/",
+      "https://haretoku.jp/guides/"
+    ],
+    "after": [
+      "https://haretoku.jp/",
+      "https://haretoku.jp/guides/quote-services/"
+    ]
+  },
+  "tainavi": {
+    "before": 16,
+    "deleted": [
+      "https://haretoku.jp/guides/welcome/",
+      "https://haretoku.jp/guides/solar-benefits/",
+      "https://haretoku.jp/guides/solar-costs/",
+      "https://haretoku.jp/simulator/",
+      "https://haretoku.jp/guides/solar-living/",
+      "https://haretoku.jp/guides/home-battery/",
+      "https://haretoku.jp/guides/equipment-maintenance/",
+      "https://haretoku.jp/guides/power-outage/",
+      "https://haretoku.jp/guides/disaster-preparedness/",
+      "https://haretoku.jp/guides/consultation-preparation/",
+      "https://haretoku.jp/guides/home-survey/",
+      "https://haretoku.jp/guides/installation-process/",
+      "https://haretoku.jp/guides/solar-consultation/",
+      "https://haretoku.jp/guides/choosing-installer/"
+    ],
+    "after": [
+      "https://haretoku.jp/",
+      "https://haretoku.jp/guides/quote-services/"
+    ]
+  },
+  "managementRows": [
+    "株式会社グッドフェローズ s00000010685001 太陽光発電の一括無料見積り【タイナビ】 2 提出・削除 ",
+    "株式会社ソーラーパートナーズ s00000016799001 【全国対応】住宅用太陽光発電のNo.1見積りサイト【ソーラーパートナーズ】 2 提出・削除 "
+  ],
+  "status": "deleted-and-retained-urls-verified"
+}

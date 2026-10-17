@@ -8,22 +8,23 @@
 *{box-sizing:border-box}html,body{margin:0;width:1200px;height:630px;overflow:hidden}body{display:block;background:#fafbf5;color:#123f31;font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif}
 .card{position:relative;width:1200px;height:630px;overflow:hidden;background:#fafbf5}
 .wash{position:absolute;border-radius:50%;background:#e7efdc;width:760px;height:820px;left:-460px;top:-210px}.wash.right{background:#e0ede4;width:680px;height:780px;left:820px;top:60px}
-.brand{position:absolute;left:68px;top:35px;color:#008653;font-size:38px;line-height:1;font-weight:900;letter-spacing:-.08em}.brand img{width:46px;height:46px;object-fit:contain;position:absolute;left:126px;top:-13px}
-h1{position:absolute;left:68px;top:180px;font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;font-size:88px;line-height:1.28;letter-spacing:.01em;font-weight:900;margin:0}
+.brand{position:absolute;left:475px;top:38px;color:#008653;font-size:56px;line-height:1;font-weight:900;letter-spacing:-.08em}.brand img{width:62px;height:62px;object-fit:contain;position:absolute;left:187px;top:-13px}
+/* 中央630px角の切抜きでも，タイトルと主要イラストを欠かさない． */
+h1{position:absolute;left:310px;top:120px;width:580px;text-align:center;font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif;font-size:80px;line-height:1.22;letter-spacing:0;font-weight:900;margin:0}
 .art{position:absolute;inset:0;width:1200px;height:630px}.road{fill:none;stroke-linecap:round;stroke-linejoin:round}.outer{stroke:#bdcfbf;stroke-width:55}.inner{stroke:#fffdf3;stroke-width:47}.yellow{stroke:#fff0c8;stroke-width:45;stroke-dasharray:30 115}.green{stroke:#d8eadd;stroke-width:45;stroke-dasharray:30 115;stroke-dashoffset:-72}.dividers{stroke:#bdcfbf;stroke-width:47;stroke-dasharray:2 34}
-.professor{position:absolute;width:310px;height:310px;object-fit:contain;left:565px;top:277px}.harena{position:absolute;width:265px;height:265px;object-fit:contain;left:880px;top:2px}
-.node{fill:#fffdf3;stroke:#b7cdbb;stroke-width:2}.house{position:absolute;left:886px;top:210px;width:175px;height:175px;filter:drop-shadow(0 5px 0 #dce7d8)}.battery{position:absolute;left:1053px;top:310px;width:77px;height:77px}
+.professor{position:absolute;width:225px;height:225px;object-fit:contain;left:345px;top:340px}.harena{position:absolute;width:125px;height:125px;object-fit:contain;left:760px;top:320px}
+.node{fill:#fffdf3;stroke:#b7cdbb;stroke-width:2}.house{position:absolute;left:565px;top:345px;width:220px;height:220px;filter:drop-shadow(0 5px 0 #dce7d8)}.battery{position:absolute;left:790px;top:458px;width:70px;height:70px}
 .yellow,.green,.dividers{stroke-linecap:butt}
 </style>
 <main class="card">
   <div class="wash"></div><div class="wash right"></div>
   <svg class="art" viewBox="0 0 1200 630" aria-hidden="true">
-    <defs><path id="route" d="M700 477C625 438 641 353 734 353S832 413 914 382S1065 343 1070 257"/></defs>
+    <defs><path id="route" d="M-30 398C100 300 190 340 268 440S395 585 585 586S843 579 953 469S1091 334 1230 408"/></defs>
     <use href="#route" class="road outer"/><use href="#route" class="road inner"/><use href="#route" class="road yellow"/><use href="#route" class="road green"/><use href="#route" class="road dividers"/>
-    <rect class="node" x="750" y="302" width="88" height="88" rx="21" transform="rotate(-6 794 346)"/>
-    <g transform="translate(770 323)" stroke="#267254" stroke-width="3" fill="none" stroke-linecap="round"><rect x="6" y="0" width="31" height="46" rx="4"/><path d="M13 9h17v8H13Zm0 18h3m9 0h3m-15 9h3m9 0h3"/></g>
+    <rect class="node" x="137" y="328" width="88" height="88" rx="21" transform="rotate(-6 181 372)"/>
+    <g transform="translate(157 349)" stroke="#267254" stroke-width="3" fill="none" stroke-linecap="round"><rect x="6" y="0" width="31" height="46" rx="4"/><path d="M13 9h17v8H13Zm0 18h3m9 0h3m-15 9h3m9 0h3"/></g>
     <g transform="translate(1133 449)" stroke="#8bae91" stroke-width="3"><path d="m0 0-15 37h30Z" fill="#dce9d3"/><path d="M0 37v23"/></g>
-    <g transform="translate(593 245)" stroke="#8bae91" stroke-width="3"><path d="m0 0-13 32h26Z" fill="#dce9d3"/><path d="M0 32v20"/></g>
+    <g transform="translate(244 220)" stroke="#8bae91" stroke-width="3"><path d="m0 0-13 32h26Z" fill="#dce9d3"/><path d="M0 32v20"/></g>
   </svg>
   <div class="brand">はれトク<img src="/map/assets/navigator.png" alt=""></div>
   <h1>わが家の<br>太陽光えらび</h1>

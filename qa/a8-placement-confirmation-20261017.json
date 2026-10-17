@@ -1,0 +1,72 @@
+{
+  "checkedAt": "2026-10-17",
+  "submittedAtAsDisplayed": "2026-10-17 19:14:06",
+  "expectedUrls": [
+    "https://haretoku.jp/",
+    "https://haretoku.jp/guides/welcome/",
+    "https://haretoku.jp/guides/solar-benefits/",
+    "https://haretoku.jp/guides/solar-costs/",
+    "https://haretoku.jp/simulator/",
+    "https://haretoku.jp/guides/solar-living/",
+    "https://haretoku.jp/guides/home-battery/",
+    "https://haretoku.jp/guides/equipment-maintenance/",
+    "https://haretoku.jp/guides/power-outage/",
+    "https://haretoku.jp/guides/disaster-preparedness/",
+    "https://haretoku.jp/guides/consultation-preparation/",
+    "https://haretoku.jp/guides/home-survey/",
+    "https://haretoku.jp/guides/installation-process/",
+    "https://haretoku.jp/guides/solar-consultation/",
+    "https://haretoku.jp/guides/quote-services/",
+    "https://haretoku.jp/guides/choosing-installer/"
+  ],
+  "solarPartners": {
+    "id": "s00000016799001",
+    "totalAfter": 30,
+    "rows": [
+      "  URL 更新日時",
+      "  https://haretoku.jp/guides/disaster-preparedness/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/welcome/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-benefits/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-costs/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-living/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/home-battery/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/equipment-maintenance/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/power-outage/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/consultation-preparation/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/home-survey/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/installation-process/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-consultation/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/quote-services/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/simulator/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/choosing-installer/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/data/subsidies/ 2026-10-11 20:29:39 ",
+      "  https://haretoku.jp/data/ 2026-10-11 20:29:39 ",
+      "  https://haretoku.jp/pages/calculation-method.html 2026-10-11 20:29:39 ",
+      "  https://haretoku.jp/pages/policy.html 2026-10-11 20:29:39 "
+    ]
+  },
+  "tainavi": {
+    "id": "s00000010685001",
+    "totalAfter": 16,
+    "rows": [
+      "  URL 更新日時",
+      "  https://haretoku.jp/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/welcome/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-benefits/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-costs/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/simulator/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-living/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/home-battery/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/equipment-maintenance/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/power-outage/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/disaster-preparedness/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/consultation-preparation/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/home-survey/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/installation-process/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/solar-consultation/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/quote-services/ 2026-10-17 19:14:06 ",
+      "  https://haretoku.jp/guides/choosing-installer/ 2026-10-17 19:14:06 "
+    ]
+  }
+}

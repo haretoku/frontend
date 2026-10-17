@@ -12,6 +12,7 @@ await writeFile(resolve(output, "CNAME"), "haretoku.jp\n");
 await copyFile(resolve(root, "site/shared/assets/favicon-96.png"), resolve(output, "favicon.png"));
 // マップの共有画像．旧写真URLもJPEG形式の同じ新イラストへそろえる．
 await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.png"), resolve(output, "og-step-map-20261017.png"));
+await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.png"), resolve(output, "og-step-map-20261017-v034.png"));
 await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.jpg"), resolve(output, "og-home-photo-20260926.jpg"));
 await copyFile(resolve(root, "site/shared/assets/support-shock-burden.png"), resolve(output, "og-support-shock-burden.png"));
 // 旧メタを保持する共有サービス向けに，旧URLにも同じ表示のPNGを配信する．
