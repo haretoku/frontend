@@ -4,7 +4,7 @@
 
 ## v0.3.1 2026年10月17日
 
-[GitHub Releases](https://github.com/haretoku/frontend/releases/tag/v0.3.1)にも同じ公開履歴を掲載します．
+[GitHub Releases](https://github.com/haretoku/frontend/releases/tag/v0.3.1)にも同じ公開履歴を掲載しています．
 
 - スマートフォンの比較表を3社の横並びへ変更し，会社名がスクロール中も表の上部に残るようにしました．
 - ソーラーパートナーズ・タイナビのロゴを復元し，タイナビの提携表記をそろえました．
@@ -13,6 +13,8 @@
 - スマートフォンのマップは経路を保ち，PCと同じ色付きのマス目と家・木を加えました．
 
 計算データ・比較評価・相談先は変更していません．
+
+公開コミットは`b7243e1438eead83f80052ad6826db31d469898e`です．[公開処理](https://github.com/haretoku/frontend/actions/runs/39014201601)は成功し，本番の対象3ページ・JS／CSS・2社ロゴと，スマホ表示・診断入力の再読込み保持を確認しました．
 
 ## v0.3.0 2026年10月17日
 
