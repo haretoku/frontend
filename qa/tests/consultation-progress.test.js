@@ -6,7 +6,7 @@ import {providers,comparisonRows,comparisonSources} from '../../site/map/provide
 import {renderProviderComparison} from '../../site/map/provider-comparison-view.js';
 import {pages} from '../../site/map/content.js';
 import {readProgress,writeProgress,clearProgress} from '../../site/map/progress-storage.js';
-import {quoteMaterial} from '../../site/shared/quote-config.js';
+import {quoteMaterial,tainaviMaterial} from '../../site/shared/quote-config.js';
 
 const initial=()=>({completed:[0,1,2,3,4],step:5,input:{prefectureCode:'08',monthlyElectricityBillYen:12000},goal:{equipment:'solar_only',input:{prefectureCode:'08',monthlyElectricityBillYen:12000}},last:{5:'quote'}});
 function storageHost(){const local=new Map(),session=new Map();return {localStorage:{getItem:key=>local.get(key),setItem:(key,value)=>local.set(key,value),removeItem:key=>local.delete(key)},sessionStorage:{getItem:key=>session.get(key),setItem:(key,value)=>session.set(key,value),removeItem:key=>session.delete(key)}};}
@@ -88,7 +88,7 @@ test('第4章は具体的な9支援の出典と未確認を保ち，GOALと同�
   }
 });
 
-test('広告素材038は対で維持し，通常リンクと区別し，入力を含む送信先を作らない',()=>{
+test('2社の広告素材と計測画像を対で維持し，非提携リンクと推薦を分ける',()=>{
   for(const compact of [false,true]){
     const html=renderConsultationProviders({compact});
     const destinations=[...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*data-consult-provider="([^"]+)"/g)];
@@ -96,18 +96,32 @@ test('広告素材038は対で維持し，通常リンクと区別し，入力�
     for(const [tag,href,id] of destinations){
       assert.equal(href,consultationProviders.find(p=>p.id===id).url);
       assert.match(tag,/noreferrer/);assert.match(tag,/referrerpolicy="no-referrer"/);
-      const url=new URL(href);assert.deepEqual([...url.searchParams.keys()],id==='solar-partners'?['a8mat']:[]);
+      const url=new URL(href);assert.deepEqual([...url.searchParams.keys()],id!=='griene'?['a8mat']:[]);
       assert.equal(url.hash,'');
     }
     assert(html.includes(`src="${quoteMaterial.impressionUrl}" width="1" height="1"`));
+    assert(html.includes(`src="${tainaviMaterial.impressionUrl}" width="1" height="1"`));
+    assert.equal((html.match(/はれトクのおすすめ/g)??[]).length,1);
     assert.match(html,/広告・アフィリエイト/);assert.match(html,/通常リンク ／ 広告リンクではありません/);
     assert.match(html,/無料見積もり ↗/);
     assert.equal([...html.matchAll(/class="consult-provider-logo"/g)].length,2);
     for(const [anchor] of html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g))assert(!anchor.includes('consult-provider-logo'));
     assert(!html.includes('local-preview'));
-    assert(html.includes('提携：タイナビ ／ 公式サイトへのリンク'));
+    assert(html.includes('広告・アフィリエイト ／ タイナビ'));
     for(const [,src] of html.matchAll(/class="consult-provider-logo" src="([^"]+)"/g))assert.match(src,/\/shared\/assets\/(solar-partners\.png|tainavi\.webp)$/);
   }
+});
+
+test('比較表の2社は相談カードと同じ正式広告URLで，参照元や入力を渡さない',()=>{
+  const table=renderProviderComparison();
+  for(const provider of consultationProviders){
+    const tag=[...table.matchAll(/<a class="provider-brand"[^>]*>/g)].map(m=>m[0]).find(t=>t.includes(`data-consult-provider="${provider.id}"`));
+    assert(tag.includes(`href="${provider.url}"`));assert(tag.includes('noreferrer'));assert(tag.includes('referrerpolicy="no-referrer"'));
+    assert.equal(tag.includes('sponsored nofollow'),provider.affiliate===true);
+    if(provider.material)assert(table.includes(`src="${provider.material.impressionUrl}"`));
+  }
+  assert.equal(consultationProviderForUrl('tainavi',tainaviMaterial.url)?.id,'tainavi');
+  assert.equal(consultationProviderForUrl('tainavi',tainaviMaterial.url+'&bill=CANARY'),null);
 });
 
 test('MAPと第4章に同じ比較表を置いても，見出し・セルの参照先が衝突しない',()=>{

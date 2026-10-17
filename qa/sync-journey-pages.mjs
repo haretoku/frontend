@@ -23,7 +23,7 @@ for(const page of pages){
   const target=resolve(root,'.'+route,'index.html'),relative=route.slice(1)+'index.html';
   const title=`${page.title}｜はれトク`,description=page.summary.join('');
   const siblings=pages.filter(item=>item.step===page.step),navigation=chapterNavigation(pages,page.id),index=pages.indexOf(page);
-  let html=template.replace('<body>',`<body data-journey-page="${page.id}">`)
+  let html=template.replace(/\s*<script type="application\/ld\+json" data-site-name>[\s\S]*?<\/script>/,'').replace('<body>',`<body data-journey-page="${page.id}">`)
     .replace(/<title>[\s\S]*?<\/title>/,`<title>${safe(title)}</title>`)
     .replace(/(<meta (?:name="description"|property="og:description") content=")[^"]*(")/g,`$1${safe(description)}$2`)
     .replace(/(<meta property="og:title" content=")[^"]*(")/,`$1${safe(title)}$2`)

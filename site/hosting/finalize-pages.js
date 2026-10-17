@@ -9,6 +9,7 @@ await writeFile(resolve(output, "sitemap.xml"), `<?xml version="1.0" encoding="U
 await writeFile(resolve(output, "robots.txt"), "User-agent: *\nAllow: /\n\nSitemap: https://haretoku.jp/sitemap.xml\n");
 await writeFile(resolve(output, ".nojekyll"), "");
 await writeFile(resolve(output, "CNAME"), "haretoku.jp\n");
+await copyFile(resolve(root, "site/shared/assets/favicon-96.png"), resolve(output, "favicon.png"));
 // マップの既存キャラクター・家・道を使う共有画像．旧写真URLは互換用に保持する．
 await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.png"), resolve(output, "og-step-map-20261017.png"));
 await copyFile(resolve(root, "site/shared/assets/og-home-photo-20260926.jpg"), resolve(output, "og-home-photo-20260926.jpg"));

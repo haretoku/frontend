@@ -50,7 +50,7 @@ test('相談先ID・配置・完全URLを照合し，任意値や取消し・右
   assert(!JSON.stringify(f.commands()).includes('CANARY'));
 });
 
-test('MAPと記事の比較表は公式リンク3社を記録し，SP通常リンクを広告クリックにしない',()=>{
+test('MAPと記事の比較表は広告2社と通常1社を記録し，SP広告の配置も区別する',()=>{
   for(const [path,placement] of [['/','map_comparison'],['/guides/quote-services/','article_comparison']]){
     const f=fixture('https://haretoku.jp'+path+'?bill=CANARY');
     const html=renderProviderComparison({placement});
@@ -63,7 +63,7 @@ test('MAPと記事の比較表は公式リンク3社を記録し，SP通常リ�
     const clicks=events(f).filter(event=>event[1]==='consultation_click');
     assert.deepEqual(clicks.map(event=>event[2].provider_id),['solar-partners','tainavi','griene']);
     assert(clicks.every(event=>event[2].consultation_placement===placement));
-    assert.equal(events(f).filter(event=>event[1]==='quote_click').length,0);
+    assert.deepEqual(events(f).filter(event=>event[1]==='quote_click').map(event=>event[2].quote_placement),[placement]);
     f.handlers.auxclick({type:'auxclick',button:1,target:{closest:()=>anchors[0]}});
     assert.equal(events(f).filter(event=>event[1]==='consultation_click').length,4);
     const payload=JSON.stringify(f.commands());

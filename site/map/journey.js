@@ -119,7 +119,7 @@ function renderPage(focus=true){
   $('#map').hidden=!!page;$('#reading').hidden=!page;
   $('#reading').classList.toggle('reading-provider-comparison',!!page?.providerComparison);
   $('.map-link').removeAttribute('aria-current');
-  if(!page){document.title='わが家の太陽光えらび｜はれトク';$('.map-link').setAttribute('aria-current','page');renderMap();if(focus)requestAnimationFrame(()=>{$('#map-title').focus({preventScroll:true});window.scrollTo(0,0);});return;}
+  if(!page){document.title='太陽光・蓄電池の費用と選び方｜はれトク';$('.map-link').setAttribute('aria-current','page');renderMap();if(focus)requestAnimationFrame(()=>{$('#map-title').focus({preventScroll:true});window.scrollTo(0,0);});return;}
   save(latest=>({...latest,step:page.step,last:{...latest.last,[page.step]:page.id}}));renderMap();
   const siblings=pages.filter(p=>p.step===page.step);
   $('#page-chapter').textContent=`${page.step===0?'':`${page.step}．`}${steps[page.step]}`;

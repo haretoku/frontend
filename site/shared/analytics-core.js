@@ -2,7 +2,7 @@ import {journeyRoutes,journeyPageId} from '../map/routes.js';
 import { quoteMaterial } from './quote-config.js';
 import {consultationProviderForUrl} from '../map/consultation-view.js';
 const ORIGIN = "https://haretoku.jp";
-const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result', 'map_consultation']);
+const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result', 'map_consultation', 'map_comparison', 'article_comparison']);
 const CONSULT_PLACEMENTS = new Set(['map', 'article', 'map_comparison', 'article_comparison']);
 const PAGES = Object.freeze({
   ...Object.fromEntries(Object.entries(journeyRoutes).filter(([id])=>!['map','estimate'].includes(id)).map(([id,path])=>[path,{id:`guide_${id.replaceAll('-','_')}`,title:"太陽光と蓄電池のガイド",article:true}])),
@@ -113,7 +113,7 @@ export function createAnalytics({ config, productionBuild, window: win, document
           && (consultPlacement === 'map' || consultPlacement === 'map_comparison' ? path === '/' : page.article || path === '/simulator/')) {
           event('consultation_click', undefined, {provider_id:provider.id, consultation_placement:consultPlacement});
           // 広告成果の既存イベントも維持する．相談全社のイベントとは別指標．
-          if (provider.affiliate && target.href === provider.url) event('quote_click', consultPlacement === 'map' ? 'map_consultation' : 'diagnosis_result');
+          if (provider.id === 'solar-partners' && target.href === provider.url) event('quote_click', consultPlacement.endsWith('_comparison') ? consultPlacement : consultPlacement === 'map' ? 'map_consultation' : 'diagnosis_result');
           return;
         }
         const placement = link.getAttribute('data-quote-placement');

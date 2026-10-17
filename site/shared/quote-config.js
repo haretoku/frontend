@@ -9,6 +9,16 @@ export const quoteMaterial = Object.freeze({
   materialVerified: true
 });
 
+// 2026年10月17日，提携済みタイナビの通常広告用素材027「自由テキスト」を管理画面で確認．
+export const tainaviMaterial = Object.freeze({
+  materialId: '027',
+  url: 'https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU',
+  impressionUrl: 'https://www14.a8.net/0.gif?a8mat=4BEH5B+8YOYNM+2AG2+644DU',
+  linkText: '無料見積もり',
+  provider: 'タイナビ',
+  materialVerified: true
+});
+
 export function quoteActionFor() {
   return Object.freeze({
     label: quoteMaterial.materialVerified ? quoteMaterial.linkText : '無料見積もり（準備中）',

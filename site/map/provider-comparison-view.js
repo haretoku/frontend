@@ -1,5 +1,5 @@
 import {comparisonDate,providers,statusLegend,comparisonRows,comparisonSources,comparisonScope} from './provider-comparison.js';
-import {consultationProviders,providerLogo} from './consultation-view.js';
+import {consultationProviders,providerLogo,providerImpression} from './consultation-view.js';
 
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -10,9 +10,10 @@ export function renderProviderComparison({idPrefix='',placement='article_compari
   const providerHeading=provider=>`${idPrefix}provider-heading-${provider.id}`;
   const rowHeading=row=>`${idPrefix}provider-row-${row.id}`;
   const brand=provider=>{
-    const logo=providerLogo(consultationProviders.find(item=>item.id===provider.id));
+    const consultation=consultationProviders.find(item=>item.id===provider.id);
+    const logo=providerLogo(consultation);
     const name=provider.id==='solar-partners'?'<span>ソーラー</span><span>パートナーズ</span>':safe(provider.name);
-    return `<a class="provider-brand" href="${safe(provider.url)}" target="_blank" rel="noopener" data-consult-provider="${safe(provider.id)}" data-consult-placement="${consultationPlacement}" aria-label="${safe(provider.name)}の公式サイト（別タブ）">${logo}<span class="provider-brand-name">${name}</span><span aria-hidden="true">↗</span></a>`;
+    return `<a class="provider-brand" href="${safe(consultation.url)}" target="_blank" rel="${consultation.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="${safe(provider.id)}" data-consult-placement="${consultationPlacement}" aria-label="${safe(provider.name)}の${consultation.affiliate?'無料見積もり':'公式サイト'}（別タブ）">${logo}<span class="provider-brand-name">${name}</span><span aria-hidden="true">↗</span></a>${providerImpression(consultation)}`;
   };
   return `<section class="provider-comparison" aria-labelledby="${safe(titleId)}">
     <h2 id="${safe(titleId)}">一括見積もりサイトを，同じ基準で比べよう</h2>
