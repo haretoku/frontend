@@ -106,7 +106,10 @@ assert(shareSource.equals(legacyShareOutput), "旧URLの互換共有画像が採
 assert(legacyShareOutput.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])), "互換画像のPNG形式が不正");
 assert.equal(legacyShareOutput.readUInt32BE(16), 1200);
 assert.equal(legacyShareOutput.readUInt32BE(20), 630);
-assert((await readFile(resolve(output, 'og-home-photo-20260926.jpg'))).equals(await readFile(resolve(root, 'site/shared/assets/og-home-photo-20260926.jpg'))), '旧写真URLの互換性を保持する');
+const legacyJpeg = await readFile(resolve(output, 'og-home-photo-20260926.jpg'));
+assert(legacyJpeg.equals(await readFile(resolve(root, 'site/shared/assets/og-step-map-20261017.jpg'))), '旧写真URLにも新イラストを配信する');
+assert.equal(legacyJpeg.readUInt16BE(0), 0xffd8, '互換JPEGの開始署名が不正');
+assert.equal(legacyJpeg.readUInt16BE(legacyJpeg.length - 2), 0xffd9, '互換JPEGの終端署名が不正');
 
 console.log(`Pages検証PASS: ${files.length}ファイル，正規${urls.length}URL，公開データ13.0.0同一，ローカル参照・QA非混入`);
 
