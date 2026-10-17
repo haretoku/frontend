@@ -8,6 +8,8 @@
 
 診断の計算・データ・広告リンク・共有画像は変更していません．公開前の123検査・標準ビルド・PC／スマホ幅の確認・独立レビューは合格済みです．
 
+公開コミットは`0ce5013deb020a449dc8f765ef519d880484a3e9`です．[公開処理](https://github.com/haretoku/frontend/actions/runs/39029420156)と本番の独立検収は成功し，同SHAへタグと[Release v0.3.5](https://github.com/haretoku/frontend/releases/tag/v0.3.5)を固定しました．
+
 ## v0.3.4 2026年10月17日
 
 [GitHub Releases](https://github.com/haretoku/frontend/releases/tag/v0.3.4)にも同じ公開履歴を掲載しています．
