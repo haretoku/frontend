@@ -9,11 +9,12 @@ await writeFile(resolve(output, "sitemap.xml"), `<?xml version="1.0" encoding="U
 await writeFile(resolve(output, "robots.txt"), "User-agent: *\nAllow: /\n\nSitemap: https://haretoku.jp/sitemap.xml\n");
 await writeFile(resolve(output, ".nojekyll"), "");
 await writeFile(resolve(output, "CNAME"), "haretoku.jp\n");
-// TOPの既存写真とSVGグラフをHTML/CSSで描画してJPEG化した共有画像．画像変更時はURLも更新し旧キャッシュと区別する．
+// マップの既存キャラクター・家・道を使う共有画像．旧写真URLは互換用に保持する．
+await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.png"), resolve(output, "og-step-map-20261017.png"));
 await copyFile(resolve(root, "site/shared/assets/og-home-photo-20260926.jpg"), resolve(output, "og-home-photo-20260926.jpg"));
 await copyFile(resolve(root, "site/shared/assets/support-shock-burden.png"), resolve(output, "og-support-shock-burden.png"));
 // 旧メタを保持する共有サービス向けに，旧URLにも同じ表示のPNGを配信する．
-await copyFile(resolve(root, "site/hosting/assets/og-home-photo-20260926.png"), resolve(output, "og-image.png"));
+await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.png"), resolve(output, "og-image.png"));
 
 // 調査の配布用PNG・SVG・CSVは，図の表示用ハッシュ資産とは別に固定名で同梱する．
 const releasePath = resolve(output, 'guides/electricity-support-end/index.html');
