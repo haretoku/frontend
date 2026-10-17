@@ -12,7 +12,11 @@ export const pages = [
   ],illustration:{src:assets.rooftops,alt:'空から屋根を見下ろすハレナ．並んだ3軒のうち，中央の家の屋根に太陽光パネルが載っている．'},summary:['太陽光は，電気代の節約や停電への備えにつながる．','あなたの家に合うか，費用や気になることを確かめよう．'],easyLabel:'まだ迷っていても大丈夫？',easyDialogue:[
     ['professor','もちろんです．今は，取り付けると決めなくて大丈夫ですよ．費用や気になることを確かめて，あなたの家に合いそうか考えていきましょう．見送るのも一つの選択です．'],
     ['navigator','私も，みんながあのパネルで何をしているのか知りたいな．博士，一緒に教えてもらってもいい？']
-  ],characters:true},
+  ],questions:[
+    {question:'賃貸やマンションにも，太陽光パネルを付けられる？',answerDialogue:[
+      ['professor','設置できる場合もあります．賃貸は大家さんや管理会社，分譲マンションは管理組合へ，まず相談しましょう．屋根や屋上などへの取り付けは，自分だけでは決められません．']
+    ]}
+  ],sources:[['太陽光発電協会：賃貸での契約はオーナーに相談','https://www.jpea.gr.jp/faq/7755/'],['東京都：マンション太陽光発電導入ガイド','https://www.mansion-tokyo.metro.tokyo.lg.jp/kankyo-support/mansion-pv/']],characters:true},
   {id:'basics',step:0,title:'太陽光で，電気代の節約と停電への備え．',dialogue:[
     ['navigator','屋根のパネルで作った電気は，みんなどうしているの？'],
     ['professor','家で使っています．その分，電力会社から買う電気が減るので，電気代の節約になります．余った電気は，売って収入にすることもできますよ．'],
