@@ -20,6 +20,23 @@ function fixture(href, config = configured, productionBuild = true, referrer = "
 }
 const events = f => f.commands().filter(c => c[0] === "event");
 
+test('マップ診断の完了と記事からの移動は一度だけ記録し，入力やハッシュを送らない',()=>{
+  const home=fixture('https://haretoku.jp/?prefecture=CANARY&monthlyElectricityBill=CANARY#estimate');
+  assert.equal(home.analytics.diagnosisComplete(),true);
+  assert.equal(home.analytics.diagnosisComplete(),false);
+  assert.deepEqual(events(home).map(e=>e[1]),['page_view','diagnosis_complete']);
+  assert(events(home).every(e=>e[2].page_location==='https://haretoku.jp/'));
+  assert(!JSON.stringify(home.commands()).includes('CANARY'));
+  const article=fixture('https://haretoku.jp/guides/subsidies/');
+  const click=href=>article.handlers.click({button:0,target:{closest:()=>({href,hasAttribute:()=>false,getAttribute:()=>null})}});
+  click('https://haretoku.jp/#map');
+  assert.equal(events(article).length,2);
+  click('https://haretoku.jp/?prefecture=CANARY#estimate');
+  click('https://haretoku.jp/#estimate');
+  assert.deepEqual(events(article).map(e=>e[1]),['page_view','article_view','article_diagnosis_click']);
+  assert(!JSON.stringify(article.commands()).includes('CANARY'));
+});
+
 test('見積もりクリックは固定配置とページだけを送り，入力・任意リンクは送らない', () => {
   const url = quoteMaterial.url;
   for (const [path, placement] of [['/', 'fixed_bar'], ['/guides/subsidies/', 'article_body'], ['/simulator/', 'diagnosis_result']]) {
@@ -121,14 +138,14 @@ test("最初の有効結果だけを記録し再計算・履歴変更で完了�
 });
 
 test("基礎・詳細・時事・データページに入口があり結果描画成功後にだけ完了を通知する", async () => {
-  const pages = ["index.html", "guides/index.html", "simulator/index.html", "data/index.html", "data/subsidies/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
+  const pages = ["index.html", "guides/index.html", "press/index.html", "data/index.html", "data/subsidies/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
   for (const page of pages) {
     const html = await readFile(new URL(`../../site/${page}`, import.meta.url), "utf8");
     assert.equal((html.match(/src="(?:\.\.\/|\/)?shared\/analytics\.js"/g) ?? []).length, 1, page);
   }
-  const app = await readFile(new URL("../../site/simulator/src/app.js", import.meta.url), "utf8");
-  assert.equal((app.match(/if \(profitConfirmed\) recordDiagnosisComplete\(\);/g) ?? []).length, 1);
-  assert(app.indexOf("elements.result.hidden = false;") < app.indexOf("if (profitConfirmed) recordDiagnosisComplete();"));
+  const app = await readFile(new URL("../../site/map/journey.js", import.meta.url), "utf8");
+  assert.equal((app.match(/recordDiagnosisComplete\(\);/g) ?? []).length, 1);
+  assert(app.indexOf("if(!ready)return;") < app.indexOf("recordDiagnosisComplete();"));
   const policy = await readFile(new URL("../../site/pages/policy.html", import.meta.url), "utf8");
   assert(policy.includes(`data-analytics-policy="${analyticsConfig.enabled ? "enabled" : "disabled"}"`));
 });

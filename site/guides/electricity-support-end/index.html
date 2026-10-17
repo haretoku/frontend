@@ -25,11 +25,39 @@
     <script type="module" src="/shared/analytics.js"></script>
     <script type="module" src="/articles/src/release-model-details.js"></script>
     <script type="module" src="/shared/table-scroll-hint.js"></script>
-  </head>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+  <script type="module" src="/shared/site-header-entry.js"></script>
+</head>
   <body class="release-page">
-    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><nav class="site-nav" aria-label="主要メニュー"><a href="/">トップ</a><a href="/simulator/">はれトク診断</a><a href="/guides/" aria-current="page">はれトクガイド</a><a href="/data/">はれトクデータ</a></nav></div></header>
+    <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/">詳しいガイド</a>
+              <a href="/press/" aria-current="page">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
     <main class="release-width">
-      <nav class="release-breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a> ／ <a href="/guides/">はれトクガイド</a> ／ 電気代支援終了の設備別試算</nav>
+      <nav class="release-breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a> ／ <a href="/press/">プレスリリース</a> ／ 電気代支援終了の設備別試算</nav>
       <article aria-labelledby="release-title">
         <header class="release-header">
           <p class="release-meta">データに基づくシミュレーション <span>公開日 <time datetime="2026-10-11">2026年10月11日</time></span></p>
@@ -163,6 +191,6 @@
         </section>
       </article>
     </main>
-    <footer class="site-footer"><div class="page-width site-footer__inner"><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a><a href="/pages/policy.html#data">データ方針</a><a href="/pages/policy.html#privacy">プライバシー</a></nav></div></footer>
+    <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
   </body>
 </html>

@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="紹介する会社の選び方，比較・苦情への支援，保証の対象と条件で選ぼう．サイトの特徴を見たうえで，紹介された会社の提案と契約条件も確かめよう．">
+    <link rel="canonical" href="https://haretoku.jp/guides/quote-services/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="一括見積もりサイトは，どう選ぶ？｜はれトク">
+    <meta property="og:description" content="紹介する会社の選び方，比較・苦情への支援，保証の対象と条件で選ぼう．サイトの特徴を見たうえで，紹介された会社の提案と契約条件も確かめよう．">
+    <meta property="og:url" content="https://haretoku.jp/guides/quote-services/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="はれトク">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://haretoku.jp/og-home-photo-20260926.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="青空と太陽光パネルのある住宅，テラスのノートPC">
+    <meta name="twitter:card" content="summary_large_image">
+
+  <title>一括見積もりサイトは，どう選ぶ？｜はれトク</title>
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="/map/map.css">
+  <script type="module" src="/map/journey.js"></script>
+  <script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+</head>
+<body data-journey-page="quote-sites">
+  <svg class="icon-library" aria-hidden="true"><defs>
+    <symbol id="i-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 3v6m0 30v6M3 24h6m30 0h6M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="5"/><path d="M16 12h16v7H16ZM16 27h3m10 0h3m-16 8h3m10 0h3"/></symbol>
+    <symbol id="i-route" viewBox="0 0 48 48"><path d="M8 40h21a7 7 0 0 0 0-14H19a7 7 0 0 1 0-14h17M8 35v10m24-39 7 6-7 6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 48 48"><circle cx="18" cy="15" r="7"/><path d="M5 40v-5a13 13 0 0 1 26 0v5M32 8a7 7 0 0 1 0 14m4 6a11 11 0 0 1 7 10v2"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 48 48"><path d="M7 7h34v25H22l-12 9v-9H7Z M15 17h18m-18 7h12"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 64 64"><path d="M27 16v35c0 3 7 6 16 6s16-3 16-6V16Z"/><path d="M27 24c0 3 7 6 16 6s16-3 16-6M27 33c0 3 7 6 16 6s16-3 16-6M27 42c0 3 7 6 16 6s16-3 16-6" fill="none"/><ellipse cx="43" cy="16" rx="16" ry="6"/><path d="M7 44v9c0 4 8 7 18 7s18-3 18-7v-9Z"/><ellipse cx="25" cy="44" rx="18" ry="7"/></symbol>
+  </defs></svg>
+  <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/" aria-current="page">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
+  <main class="map-width">
+    <section id="map" class="journey" aria-labelledby="map-title" hidden>
+      <div class="map-heading">
+        <div class="map-title-card">
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
+          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+        </div>
+      </div>
+      <div class="map-landscape" aria-label="太陽光を検討する道のり">
+        <svg class="landscape desktop-landscape" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M-20 100Q190-10 390 110T810 60T1160 180V-20H-20Z"/>
+          <path class="field field-second" d="M-20 480Q180 320 400 460T880 420T1150 520V600H-20Z"/>
+          <path class="road-border board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="road board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-tile-tint-second board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-spaces board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <g class="trees"><path d="m75 340-16 32h32Z M75 372v16m965 82-16 32h32Z M1040 502v16m-740-265-12 24h24Z M300 277v12"/></g>
+          <svg x="340" y="290" width="85" height="85" viewBox="0 0 120 120"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <g class="board-scene" transform="translate(370 510)">
+            <ellipse class="scene-ground" cx="35" cy="60" rx="66" ry="15"/>
+            <path class="scene-building" d="M-12 10h62v48h-62Z"/>
+            <path d="M-18 6h75M-18 30h75M-18 55h75M-18 0v65M57 0v65"/>
+            <circle class="scene-person" cx="79" cy="24" r="9"/>
+            <path class="scene-person" d="M67 60V43q12-14 24 0v17Z"/>
+            <path class="scene-roof" d="M67 20q12-19 24 0"/>
+          </g>
+          <g class="board-scene" transform="translate(590 310)">
+            <ellipse class="scene-ground" cx="40" cy="62" rx="69" ry="16"/>
+            <path class="scene-building" d="M-4 12h98v48H-4Z"/>
+            <circle class="scene-person" cx="17" cy="22" r="8"/>
+            <circle class="scene-person" cx="67" cy="22" r="8"/>
+            <path class="scene-person" d="M5 59V40q12-14 24 0v19M55 59V40q12-14 24 0v19"/>
+            <path class="scene-building" d="M30-12h44V9H46l-9 9V9h-7Z"/>
+            <path d="M38-4h27"/>
+          </g>
+        </svg>
+        <img class="board-guide board-navigator" src="/map/assets/navigator.png" alt="" hidden>
+        <svg class="landscape mobile-landscape" viewBox="0 0 380 1180" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M0 0H380V170Q220 40 0 250Z"/><path class="field field-second" d="M0 1010Q240 900 380 1010V1360H0Z"/>
+          <path class="road-border" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road-dashes" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <g class="trees"><path d="m310 385-12 24h24Z M310 409v12m-267 205-10 20h20Z M43 646v12"/></g>
+        </svg>
+        <div class="stop stop-start is-current" data-stop="0"><span class="here">いまここ</span><button type="button" data-step="0" aria-current="step" aria-label="START はじめに：太陽光えらびを始める"><span class="station"><span class="step-number start-badge">START</span><span class="start-story"><strong>はじめに</strong><span class="start-greeting"><span class="start-professor"><img src="/map/assets/professor-chibi.png" alt="博士"></span><span class="start-bubble">あなたの家に合うか，一つずつ確かめよう．</span></span><span class="start-action">ここから始めよう →</span></span></span></button></div>
+        <ol class="stops">
+          <li class="stop stop-1" data-stop="1"><span class="here" hidden>いまここ</span><button type="button" data-step="1"><span class="station"><svg aria-hidden="true"><use href="#i-calc"/></svg><span class="step-number">1</span></span><span class="stop-label">わが家はいくら<br>得になる？</span><span class="stop-detail">費用とお得を見てみよう</span></button></li>
+          <li class="stop stop-2" data-stop="2"><span class="here" hidden>いまここ</span><button type="button" data-step="2"><span class="station"><svg aria-hidden="true"><use href="#i-sun"/></svg><span class="step-number">2</span></span><span class="stop-label">太陽光と蓄電池を知ろう</span><span class="stop-detail">できることと，気をつけたいこと</span></button></li>
+          <li class="stop stop-3" data-stop="3"><span class="here" hidden>いまここ</span><button type="button" data-step="3"><span class="station"><svg aria-hidden="true"><use href="#i-route"/></svg><span class="step-number">3</span></span><span class="stop-label">つけるまでの流れ</span><span class="stop-detail">希望・見積もり・工事</span></button></li>
+          <li class="stop stop-4" data-stop="4"><span class="here" hidden>いまここ</span><button type="button" data-step="4"><span class="station"><svg aria-hidden="true"><use href="#i-people"/></svg><span class="step-number">4</span></span><span class="stop-label">どんな会社に頼む？</span><span class="stop-detail">頼み方・会社選び・紹介サイト</span></button></li>
+        </ol>
+        <div class="goal" aria-live="polite">
+          <span class="goal-flag">GOAL</span>
+          <p class="goal-title">わが家のプラン</p>
+          <p class="goal-consultation-status" id="goal-consultation-status" hidden>✓ 相談先を開いた</p>
+          <div id="goal-home" hidden>
+            <svg class="goal-house" viewBox="0 0 160 120" aria-hidden="true">
+              <use href="/map/assets/title-art.svg#solar-house" x="7" width="120" height="120"/>
+              <use id="goal-battery" href="/map/assets/title-art.svg#storage-battery" x="108" y="64" width="49" height="49" hidden/>
+            </svg>
+            <p class="goal-equipment" id="goal-equipment"></p>
+          </div>
+          <div class="goal-effects" id="goal-effects" hidden>
+            <div class="goal-effect">
+              <svg class="goal-money-icon" aria-hidden="true"><use href="#i-coins"/></svg>
+              <div><p class="goal-label">30年間の収支</p><p class="goal-amount" id="goal-amount"></p></div>
+            </div>
+            <div class="goal-effect">
+              <svg class="goal-backup-icon" viewBox="0 0 64 64" aria-hidden="true">
+                <use href="#i-sun" x="2" y="1" width="28" height="28"/>
+                <path id="goal-moon" d="M48 3a12 12 0 1 0 12 17A12 12 0 0 1 48 3Z" hidden/>
+                <path class="backup-bulb" d="M25 49c0-5-6-7-6-14a12 12 0 0 1 24 0c0 7-6 9-6 14Zm0 5h12m-10 5h8M31 48V37m-5-4 5 4 5-4"/>
+              </svg>
+              <div><p class="goal-label">停電への備え</p><p class="goal-backup" id="goal-backup"></p></div>
+            </div>
+          </div>
+          <p class="goal-note" id="goal-note">診断で設備を選んでみよう</p>
+          <a class="goal-review" id="goal-review" href="/simulator/">診断してプランを選ぶ →</a>
+          <button class="primary goal-consult" id="goal-consult" type="button">わが家のことを相談しよう ↓</button>
+        </div>
+      </div>
+      <div id="map-consultation" hidden></div>
+    </section>
+    <section id="reading" class="reading reading-provider-comparison" aria-labelledby="page-title">
+      <div class="reading-top"><span id="page-chapter">4．どんな会社に頼む？</span><span id="page-position">2／3</span></div>
+      <h1 id="page-title" tabindex="-1">一括見積もりサイトは，どう選ぶ？</h1>
+      <div id="page-body"><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>ここでは，一括見積もりサイトの支援内容や保証を比べていきましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>サイトごとに，手伝ってもらえることが違うんだね．</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>一括見積もりサイトを選ぶときは，どのように会社を選んで紹介するか，比較やお断りを手伝うか，苦情へどう対応するかを見ましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>保証があると書いてあれば，工事のトラブルも全部任せられる？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>保証するのは，工事が完成しない場合など，決められた対象だけです．サイトの保証と，施工会社やメーカーの保証を分けて確かめてください．</p></div></div><section class="provider-comparison" aria-labelledby="provider-comparison-title">
+    <h2 id="provider-comparison-title">一括見積もりサイトを，同じ基準で比べよう</h2>
+    <table role="table">
+      <caption class="visually-hidden">3つのサービスの比較</caption>
+      <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">手伝ってもらえること</th><th scope="col" role="columnheader" id="provider-heading-solar-partners"><a class="provider-brand" href="https://www.solar-partners.jp/" target="_blank" rel="noopener" aria-label="ソーラーパートナーズの公式サイト（別タブ）">ソーラーパートナーズ<span aria-hidden="true">↗</span></a></th><th scope="col" role="columnheader" id="provider-heading-tainavi"><a class="provider-brand" href="https://www.tainavi.com/" target="_blank" rel="noopener" aria-label="タイナビの公式サイト（別タブ）">タイナビ<span aria-hidden="true">↗</span></a></th><th scope="col" role="columnheader" id="provider-heading-griene"><a class="provider-brand" href="https://griene.jp/" target="_blank" rel="noopener" aria-label="グリエネの公式サイト（別タブ）">グリエネ<span aria-hidden="true">↗</span></a></th></tr></thead>
+      <tbody role="rowgroup"><tr role="row"><th scope="row" role="rowheader" id="provider-row-screening">加盟する会社の審査</th><td role="cell" headers="provider-row-screening provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>加盟時に審査</span></p></td><td role="cell" headers="provider-row-screening provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>加盟時に審査</span></p></td><td role="cell" headers="provider-row-screening provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>保険・財務などを審査</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-ongoing-screening">加盟後の継続審査</th><td role="cell" headers="provider-row-ongoing-screening provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>継続して審査</span></p></td><td role="cell" headers="provider-row-ongoing-screening provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="provider-row-ongoing-screening provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-contact">最初の連絡</th><td role="cell" headers="provider-row-contact provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>サイトの窓口が希望を確認</span></p></td><td role="cell" headers="provider-row-contact provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>サイトの窓口から確認連絡</span></p></td><td role="cell" headers="provider-row-contact provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>サイトの窓口が聞き取り</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-support">見積もりの相談</th><td role="cell" headers="provider-row-support provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>比較の相談</span></p></td><td role="cell" headers="provider-row-support provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>相談受付</span></p></td><td role="cell" headers="provider-row-support provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>相談受付</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-scheduling">日程の調整</th><td role="cell" headers="provider-row-scheduling provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>調整の支援</span></p></td><td role="cell" headers="provider-row-scheduling provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="provider-row-scheduling provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-declining">お断りの代行</th><td role="cell" headers="provider-row-declining provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>断りの連絡を代行</span></p></td><td role="cell" headers="provider-row-declining provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="provider-row-declining provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-trouble">営業への苦情対応</th><td role="cell" headers="provider-row-trouble provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>警告・紹介停止など</span></p></td><td role="cell" headers="provider-row-trouble provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>警告・登録解除</span></p></td><td role="cell" headers="provider-row-trouble provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-disputes">契約トラブルへの関与</th><td role="cell" headers="provider-row-disputes provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span><span>原則は当事者間で解決</span></p></td><td role="cell" headers="provider-row-disputes provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-no" role="img" aria-label="対応しないと明記">×</span><span>契約交渉への介入も対象外</span></p></td><td role="cell" headers="provider-row-disputes provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span><span>原則は利用者側で解決</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="provider-row-guarantee">工事が完成しない場合の保証</th><td role="cell" headers="provider-row-guarantee provider-heading-solar-partners"><strong class="provider-mobile-name" aria-hidden="true">ソーラーパートナーズ</strong><p class="provider-feature"><span class="provider-status status-partial" role="img" aria-label="条件・範囲あり">△</span><span>別途申込が必要・補償額に上限</span></p></td><td role="cell" headers="provider-row-guarantee provider-heading-tainavi"><strong class="provider-mobile-name" aria-hidden="true">タイナビ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="provider-row-guarantee provider-heading-griene"><strong class="provider-mobile-name" aria-hidden="true">グリエネ</strong><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr></tbody>
+    </table>
+    <ul class="provider-status-legend" aria-label="比較表の記号の意味"><li><span aria-hidden="true">○</span> あり</li><li><span aria-hidden="true">△</span> 条件・範囲あり</li><li><span aria-hidden="true">×</span> 対応しないと明記</li><li><span aria-hidden="true">—</span> 公式情報に明記なし</li></ul>
+    <p class="provider-comparison-ad">広告：ソーラーパートナーズ・タイナビと提携しています．</p>
+    <details class="provider-comparison-detail"><summary>参考資料・確認日</summary><p>比較対象：太陽光＋蓄電池の新設の場合．</p><p>公式情報の確認日：<time datetime="2026-10-15">2026-10-15</time>．</p><ul><li><a href="https://www.solar-partners.jp/" target="_blank" rel="noopener">ソーラーパートナーズ：サービス案内 ↗</a></li><li><a href="https://www.solar-partners.jp/contents/260287.html" target="_blank" rel="noopener">ソーラーパートナーズ：運営・支援と利用規約 ↗</a></li><li><a href="https://www.solar-partners.jp/guarantee-clause/" target="_blank" rel="noopener">ソーラーパートナーズ：あんしん完了保証約款 ↗</a></li><li><a href="https://www.solar-partners.jp/lp-manga-unneigaisha.html" target="_blank" rel="noopener">ソーラーパートナーズ：運営会社・サービス ↗</a></li><li><a href="https://www.tainavi.com/library/770/" target="_blank" rel="noopener">タイナビ：加盟企業の審査 ↗</a></li><li><a href="https://www.tainavi.com/library/610/" target="_blank" rel="noopener">タイナビ：相談窓口の案内 ↗</a></li><li><a href="https://www.tainavi.com/rules/" target="_blank" rel="noopener">タイナビ：利用規約 ↗</a></li><li><a href="https://www.tainavi.com/introduce/" target="_blank" rel="noopener">タイナビ：サービス紹介 ↗</a></li><li><a href="https://griene.jp/" target="_blank" rel="noopener">グリエネ：サービス案内 ↗</a></li><li><a href="https://griene.jp/area" target="_blank" rel="noopener">グリエネ：対応地域 ↗</a></li><li><a href="https://griene.jp/terms" target="_blank" rel="noopener">グリエネ：利用規約 ↗</a></li></ul></details>
+  </section></div>
+      <div id="estimate-slot" hidden>
+        <section id="diagnosis-entry" class="page-response" aria-labelledby="diagnosis-entry-label">
+          <div class="response-person"><span id="diagnosis-start-portrait" aria-hidden="true"></span><h2 id="diagnosis-entry-label">あなた</h2></div>
+          <div class="response-bubble"><button type="button" class="primary" id="start-diagnosis">わが家で調べてみる →</button></div>
+        </section>
+        <form id="diagnose" hidden>
+          <h2>住んでいる地域と電気代を教えてね．</h2>
+          <label for="prefecture">お住まいの都道府県</label><select id="prefecture" required><option value="">選んでください</option></select>
+          <label for="bill">月々の電気代 <span class="optional">分かれば入力</span></label><div class="bill-input"><input id="bill" type="number" min="0" max="1000000" step="1" inputmode="numeric" placeholder="例：12000"><span>円／月</span></div>
+          <p class="form-note">電気代は，分からなければ空欄で大丈夫．その地域の標準的な電気代で調べます．</p>
+          <p id="form-message" role="status">データを読み込んでいます．</p>
+        </form>
+        <div id="diagnosis-result" hidden>
+          <div id="result-cards" class="result-cards"></div>
+          <figure class="cash-chart"><figcaption>使い始めてから，お金はどう変わる？</figcaption><div id="chart"></div></figure>
+          <p id="result-condition" class="form-note"></p>
+        </div>
+      </div>
+      <div id="page-ending"><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>紹介する会社の選び方，比較・苦情への支援，保証の対象と条件で選ぼう．</li><li>サイトの特徴を見たうえで，紹介された会社の提案と契約条件も確かめよう．</li></ul></div></div></div>
+      <section id="page-response" class="page-response" aria-labelledby="response-label">
+        <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/guides/choosing-installer/">わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>どのサイトがおすすめ？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>自社施工の会社を探し，比較やお断りの支援も受けたい方には，ソーラーパートナーズをおすすめします．会社の倒産などで工事が完成しない場合の保証もあります．別途申込みが必要で，補償額には上限があります．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>紹介された会社の提案や条件も，あなたの希望に合うか確かめよう．</p></div></div></details><details class="response-choice response-dialogue"><summary>登録会社数や紹介社数が多いほど，良いの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>登録されている会社の数と，あなたの家に対応して紹介される会社の数は別です．数の多さだけで，提案や工事の質は判断できません．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>対応地域と紹介の条件も見て，実際の提案を確かめるんだね．</p></div></div></details><details class="response-choice response-dialogue"><summary>紹介されたら，契約しないといけない？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>紹介や見積もりを受けることと，設備の契約は別です．納得できなければ見送れます．利用前に，連絡方法や断るときの窓口も確認しましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>希望を伝えて比べてから，あなたのペースで決めよう．</p></div></div></details><details class="response-choice response-dialogue"><summary>契約後のトラブルも，サイトに任せられる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>相談や苦情を受け付けても，契約トラブルをすべて解決してくれるわけではありません．契約内容や保証を自分でも確かめ，問題があれば，まず契約した会社に対応を求めましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>紹介してもらった会社でも，何を約束して契約するのか，あなた自身が確認することが大切なんだね．</p></div></div></details></div></div>
+      </section>
+      <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/guides/solar-consultation/">← 前のページへ</a></nav>
+    </section>
+  </main>
+  <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
+</html>

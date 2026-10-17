@@ -1410,52 +1410,22 @@
       "route": "/pages/calculation-method.html",
       "bindings": [
         {
-          "key": "economics.monthlyBill",
-          "format": "yen",
-          "value": 15467,
-          "text": "15,467円"
+          "key": "cost.inspection",
+          "format": "man:1",
+          "value": 38000,
+          "text": "3.8万円"
+        },
+        {
+          "key": "cost.replacement",
+          "format": "man:1",
+          "value": 384000,
+          "text": "38.4万円"
         },
         {
           "key": "economics.monthlyBill",
           "format": "yen",
           "value": 15467,
           "text": "15,467円"
-        },
-        {
-          "key": "tariff.firstPrice",
-          "format": "yen:2",
-          "value": 29.8,
-          "text": "29.80円"
-        },
-        {
-          "key": "tariff.secondPrice",
-          "format": "yen:2",
-          "value": 36.4,
-          "text": "36.40円"
-        },
-        {
-          "key": "tariff.thirdPrice",
-          "format": "yen:2",
-          "value": 40.49,
-          "text": "40.49円"
-        },
-        {
-          "key": "tariff.thirdPrice",
-          "format": "yen:2",
-          "value": 40.49,
-          "text": "40.49円"
-        },
-        {
-          "key": "cost.existingPerKw",
-          "format": "yen",
-          "value": 331100,
-          "text": "331,100円"
-        },
-        {
-          "key": "cost.battery",
-          "format": "yen",
-          "value": 1149500,
-          "text": "1,149,500円"
         },
         {
           "key": "fit.firstPrice",
@@ -1476,6 +1446,18 @@
           "text": "8.50円"
         },
         {
+          "key": "cost.existingPerKw",
+          "format": "yen",
+          "value": 331100,
+          "text": "331,100円"
+        },
+        {
+          "key": "cost.battery",
+          "format": "yen",
+          "value": 1149500,
+          "text": "1,149,500円"
+        },
+        {
           "key": "cost.inspection",
           "format": "yen",
           "value": 38000,
@@ -1492,6 +1474,12 @@
           "format": "yen",
           "value": 331100,
           "text": "331,100円"
+        },
+        {
+          "key": "economics.monthlyBill",
+          "format": "yen",
+          "value": 15467,
+          "text": "15,467円"
         },
         {
           "key": "economics.monthlyBill",

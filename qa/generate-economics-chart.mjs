@@ -4,13 +4,13 @@ import { economicsExample, economicsExampleInput } from '../site/articles/src/gu
 import { cashflowMarkers, groupMarkerTargets } from '../site/simulator/src/chart-markers.js';
 import { cashflowChartLayout, endpointResult } from '../site/simulator/src/result-presentation.js';
 
-// Export the actual diagnosis chart renderer as a static article image.
+// Regenerate the fixed article image independently of the retired diagnosis screen.
 // Remove subsidies from every scenario's initial outlay and annual cumulative flow.
 const input = economicsExampleInput;
 const data = JSON.parse(await readFile(new URL('../data/input/public-data.json', import.meta.url), 'utf8'));
 const scenarios = economicsExample(data);
 const selected = scenarios.find(s => s.scenario === 'standard');
-const app = (await readFile(new URL('../site/simulator/src/app.js', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
+const app = (await readFile(new URL('./article-cashflow-renderer.js', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
 function extract(name) {
   const start = app.indexOf(`function ${name}(`);
   const end = app.indexOf('\n}\n', start);

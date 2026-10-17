@@ -25,15 +25,37 @@
     <link rel="stylesheet" href="/solar/styles/guides.css">
     <script type="module" src="/solar/src/guides.js"></script>
       <script type="module" src="/shared/analytics.js"></script>
-  <script type="module" src="/shared/quote-entry.js"></script></head>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+  <script type="module" src="/shared/site-header-entry.js"></script>
+</head>
   <body data-page="guides">
-    <header class="site-header">
-      <div class="page-width site-header__inner">
-        <a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a>
-        <span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span>
-        <nav class="site-nav" aria-label="主要メニュー"><a href="/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"/></svg><span>トップ</span></a><a href="/simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/" aria-current="page"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a><a class="site-data-link" href="/data/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8h18M3 14h18M10 8v12"/></svg><span>はれ<span class="brand-term">トク</span>データ</span></a></nav>
-      </div>
-    </header>
+    <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/" aria-current="page">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
 
     <main>
       <nav class="page-width guide-breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a> ／ はれ<span class="brand-term">トク</span>ガイド</nav>
@@ -45,14 +67,10 @@
         </section>
       </div>
 
-      <aside class="page-width guide-diagnosis-route article-action-stack" aria-labelledby="guide-diagnosis-title">
-        <div class="article-action-stack__row article-action-stack__row--internal">
-          <div class="article-action-stack__copy"><h2 id="guide-diagnosis-title"><svg class="content-route-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg>まず，自宅の収支の目安を知る</h2><p>自宅の条件で，太陽光のみ・蓄電池ありの30年間の収支を比較できます．</p></div>
-          <a class="article-action__link" href="/simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a>
-        </div>
-      </aside>
-    </main>
+      <span id="guide-diagnosis-title"></span>
+    <nav class="map-reading-route" aria-label="マップで検討を続ける"><a href="/">太陽光えらびのマップへ<span aria-hidden="true">→</span></a></nav>
+</main>
 
-    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a><a href="/pages/policy.html#advertising">広告方針</a><a href="/pages/policy.html#data">データ方針</a><a href="/pages/policy.html#privacy">プライバシー</a><a href="/pages/policy.html#disclaimer">免責事項</a></nav></div></div></footer>
+    <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
   </body>
 </html>

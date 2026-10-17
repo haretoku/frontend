@@ -1,5 +1,5 @@
+import {pages as mapPages} from '../../site/map/content.js';
 import {prepareSubsidyData} from '../../data/src/scheme-adapter.js';
-import { QUOTE_ACTION, mountFixedQuoteBar } from "../../site/shared/fixed-quote-bar.js";
 import { cashflowMarkers, groupMarkerTargets } from "../../site/simulator/src/chart-markers.js";
 import { subsidyGroups, nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
 import assert from "node:assert/strict";
@@ -17,7 +17,7 @@ const newDetailSlugs = ["solar-electricity-savings", "solar-fit", "solar-install
 const htmlPaths = [
   resolve(siteRoot, "index.html"),
   resolve(siteRoot, "guides/index.html"),
-  resolve(siteRoot, "simulator/index.html"),
+  resolve(siteRoot, "press/index.html"),
   resolve(siteRoot, "pages/calculation-method.html"),
   resolve(siteRoot, "guides/solar-economics/index.html"),
   ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
@@ -77,7 +77,9 @@ test("全HTMLが基本的な意味構造と固有IDを持つ", async () => {
     const html = await readFile(pagePath, "utf8");
     assert.match(html, /<html lang="ja">/);
     assert.match(html, /<meta\s+[\s\S]*?name="description"/);
-    assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, 1);
+    // TOPは排他的な2画面を持つ．表示中のh1は実ブラウザでも確認する．
+    assert.equal((html.match(/<h1(?:\s|>)/g) ?? []).length, pagePath===resolve(siteRoot,"index.html")?2:1);
+    if(pagePath===resolve(siteRoot,"index.html"))assert.match(html, /id="reading"[^>]*hidden/);
     assert.equal((html.match(/<main(?:\s|>)/g) ?? []).length, 1);
     assert.match(html, /<title>[^<]+<\/title>/);
     assert.match(html, /rel="icon" href="[^"]+favicon\.svg"/);
@@ -100,7 +102,7 @@ test("ローカルリンク，CSSおよびJavaScriptの参照先が存在する"
 test("同一ページ内のアンカー参照先が存在する", async () => {
   for (const pagePath of htmlPaths) {
     const html = await readFile(pagePath, "utf8");
-    const ids = new Set(attributeValues(html, "id"));
+    const ids = new Set([...attributeValues(html, "id"), ...(pagePath===resolve(siteRoot,"index.html")?mapPages.map(p=>p.id):[])]);
     for (const href of attributeValues(html, "href")) {
       if (href.startsWith("#")) {
         assert.ok(ids.has(href.slice(1)), `アンカーがありません：${pagePath} → ${href}`);
@@ -118,7 +120,7 @@ test("別ページを指すアンカー参照先が存在する", async () => {
       }
       const target = await localTarget(pagePath, pathPart);
       const targetHtml = await readFile(target, "utf8");
-      const targetIds = new Set(attributeValues(targetHtml, "id"));
+      const targetIds = new Set([...attributeValues(targetHtml, "id"), ...(target===resolve(siteRoot,"index.html")?mapPages.map(p=>p.id):[])]);
       assert.ok(targetIds.has(fragment), `アンカーがありません：${pagePath} → ${href}`);
     }
   }
@@ -141,13 +143,13 @@ test("全ページの共通フッターが方針の対応見出しへ接続す�
     const html = await readFile(pagePath, "utf8");
     const footerNav = html.match(/<nav class="site-footer__links"[\s\S]*?<\/nav>/)?.[0];
     assert.ok(footerNav, `共通フッターの方針リンクがありません：${pagePath}`);
-    const prefix = pagePath.includes(resolve(siteRoot, "guides")) ? "/pages/policy.html#" : pagePath === resolve(siteRoot, "index.html") ? "pages/policy.html#" : pagePath === resolve(siteRoot, "pages/policy.html") ? "#" : pagePath === resolve(siteRoot, "simulator/index.html") ? "../pages/policy.html#" : "policy.html#";
+    const prefix = "/pages/policy.html#";
     for (const [id, label] of footerItems) {
       assert.match(footerNav, new RegExp(`<a href="${prefix}${id}">${label}<\\/a>`));
     }
   }
 });
-test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在地を示す", async () => {
+test("共通メニューでガイドとプレスリリースを分け，現在地を示す", async () => {
   const guideCurrentPaths = new Set([
     ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
     resolve(siteRoot, "guides/index.html"),
@@ -159,18 +161,20 @@ test("共通ヘッダーのはれトクガイドが一覧へ接続し，現在�
 
   for (const pagePath of htmlPaths) {
     const html = await readFile(pagePath, "utf8");
-    const siteNav = html.match(/<nav class="site-nav"[\s\S]*?<\/nav>/)?.[0];
+    assert.match(html, /class="map-link" href="\/"/);
+    const siteNav = html.match(/<nav aria-label="主要メニュー" class="header-nav"[\s\S]*?<\/nav>/)?.[0];
     assert.ok(siteNav, `共通ヘッダーがありません：${pagePath}`);
     const href = "/guides/";
     const guideLinks = [...siteNav.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)].filter(([,attrs]) => attrs.includes('href="' + href + '"'));
     assert.equal(guideLinks.length, 1, 'ガイド導線を重複させない');
     const [,attrs,body] = guideLinks[0];
     assert.equal(attrs.includes('aria-current="page"'), guideCurrentPaths.has(pagePath));
-    assert.ok(body.replace(/<[^>]*>/g,'').includes('はれトクガイド'));
+    assert.ok(body.replace(/<[^>]*>/g,'').includes('詳しいガイド'));
+    assert.match(siteNav,/href="\/press\/"/);
 
   }
 });
-test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重複なく掲載する", async () => {
+test("ガイド2分類とプレスリリースが分離され，旧記事10件への入口を保つ", async () => {
   const html = await readFile(resolve(siteRoot, "guides/index.html"), "utf8");
   const articles = JSON.parse(await readFile(resolve(siteRoot, "solar/data/articles.json"), "utf8"));
   const script = await readFile(resolve(siteRoot, "solar/src/guides.js"), "utf8");
@@ -210,11 +214,15 @@ test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重
     ["electricity-sales", "subsidies", "quotes-contractors"]
   );
   assert.doesNotMatch(JSON.stringify(articles), /calculation-method\.html|policy\.html/);
-  assert.match(main, /article-action__link[\s\S]*診断を始める/);
+  assert.match(main, /map-reading-route[\s\S]*href="\/"/);
   const { groupedArticles } = await import("../../site/solar/src/guide-groups.js");
   const groups = groupedArticles(articles);
-  assert.deepEqual(groups.map((group) => group.id), ["core", "detail", "news"]);
-  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5, 1]);
+  assert.deepEqual(groups.map((group) => group.id), ["core", "detail"]);
+  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5]);
+  const releases=groupedArticles(articles,{press:true});
+  assert.deepEqual(releases.map(group=>group.id),['news']);
+  assert.equal(releases[0].articles.length,1);
+  assert.equal(new Set([...groups.flatMap(group=>group.articles),...releases[0].articles].map(article=>article.id)).size,articles.length);
   assert.deepEqual(groups[0].articles.map((article) => article.categoryId), ["economics", "subsidies", "quotes", "safety"]);
   assert.match(main, /data-guide-groups/);
   assert.doesNotMatch(main, /data-guide-filters/);
@@ -223,9 +231,9 @@ test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重
     { articleType: "detail", id: "regional" },
     { articleType: "news", id: "recent", publishedAt: "2026-10-01" },
     articles[0]
-  ]);
-  assert.deepEqual(futureGroups.map((group) => group.id), ["core", "detail", "news"]);
-  assert.deepEqual(futureGroups[2].articles.map((article) => article.id), ["recent", "updated"]);
+  ],{press:true});
+  assert.deepEqual(futureGroups.map((group) => group.id), ["news"]);
+  assert.deepEqual(futureGroups[0].articles.map((article) => article.id), ["recent", "updated"]);
   assert.match(script, /link\.className = "guide-article-card"/);
   assert.match(script, /import\.meta\.glob\("\.\.\/\.\.\/shared\/assets\/\*\.\{png,webp\}"/);
   assert.match(css, /@media \(min-width: 40\.001rem\)[\s\S]*grid-auto-flow: column/);
@@ -234,7 +242,7 @@ test("はれトクガイド一覧が3分類の順序を保ち中核4記事を重
   assert.match(css, /@media \(max-width: 40rem\)[\s\S]*grid-template-columns: minmax\(0, 1fr\)/);
   assert.match(css, /\.guide-article-card:focus-visible/);
   assert.match(html, /articles\/styles\/article\.css/);
-  assert.match(main, /article-action-stack__row--internal/);
+  assert.doesNotMatch(main, /article-action-stack|data-quote-promotion/);
   assert.match(css, /\.guide-title-term \{ white-space: nowrap;/);
 });
 test("主結果の短い見出しは金額の正負・ゼロと重複せず，未確定を区別する", () => {

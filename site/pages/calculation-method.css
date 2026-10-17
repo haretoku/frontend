@@ -1,0 +1,68 @@
+.method-page { color:#243c32; }
+.method-page section,.method-page [id] { scroll-margin-top:1.5rem; }
+.method-page .method-answer { margin-top:.75rem; font-weight:700; font-size:1.05rem; line-height:1.9; }
+.method-page h3 { margin-top:1.7rem; font-size:1.15rem; }
+.method-page .method-note,.method-page .method-source { font-size:.85rem; color:var(--color-muted); line-height:1.8; }
+.method-balance { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); align-items:center; gap:1rem; margin-block:1.5rem 1rem; }
+.method-balance>div { padding:1.25rem; border:1px solid #d8e5db; border-radius:.75rem; height:100%; background:#f3f8f2; }
+.method-balance>div:last-child { background:#faf6f1; border-color:#e7ddd3; }
+.method-balance .method-label { display:block; font-size:1rem; font-weight:700; }
+.method-balance p { margin:.65rem 0 0; font-size:.9rem; line-height:1.8; }
+.method-minus { font-size:1.8rem; color:#718176; }
+.method-page .method-result { padding:1rem 1.25rem; margin:0 0 1rem; border-radius:.6rem; background:#e7f1e7; color:#16523a; font-size:1.12rem; font-weight:700; }
+.method-result span { display:block; margin-top:.35rem; color:#617365; font-size:.8rem; font-weight:400; }
+.method-index { padding:1.25rem 1.5rem; margin:1.5rem 0 2rem; border:1px solid var(--color-border); border-radius:.75rem; }
+.method-index ol { display:grid; grid-template-columns:1fr 1fr; gap:.7rem 2rem; padding-left:1.2rem; margin:0; font-size:.9rem; }
+.method-table-wrap { max-width:100%; overflow-x:auto; margin-block:1.2rem; }
+.method-page .method-table { width:100%; margin:0; font-size:.9rem; line-height:1.85; }
+.method-table caption { padding:0 0 .65rem; text-align:left; color:#5b7162; font-size:.85rem; }
+.method-page .method-table th,.method-page .method-table td { overflow-wrap:anywhere; padding:.85rem .75rem; }
+.method-table th:first-child { width:24%; }
+.method-table th:nth-child(2):not(:last-child) { width:30%; }
+.method-table td>p { margin:.55rem 0 0; }
+.method-page .method-detail { border:1px solid #dce6dd; border-radius:.65rem; margin:1rem 0; background:white; }
+.method-detail>summary { padding:1rem 1.1rem; cursor:pointer; color:#285a40; font-weight:700; font-size:.95rem; }
+.method-detail>summary:hover { background:#f6f9f4; border-radius:.65rem; }
+.method-detail>summary:focus-visible { outline:3px solid #e4b54d; outline-offset:3px; }
+.method-detail[open]>summary { border-bottom:1px solid #e5ece5; }
+.method-detail__body { padding:1rem 1.2rem; }
+.method-detail__body>:first-child { margin-top:0; }
+.method-detail__body>:last-child { margin-bottom:0; }
+.method-detail .method-table-wrap { margin:0; }
+.method-detail .article-formula { font-size:.94rem; }
+.method-detail .formula-term { max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+.method-detail [data-subsidy-assumptions] { padding:0 1.2rem 1rem; }
+.method-detail [data-subsidy-assumptions]>details { margin-top:1rem; }
+.method-page .method-flow { list-style:none; padding:0; margin:1.5rem 0; counter-reset:method-step; }
+.method-flow li { position:relative; padding:0 0 1.5rem 3rem; counter-increment:method-step; }
+.method-flow li:before { content:counter(method-step); position:absolute; left:0; top:0; display:grid; place-items:center; width:2rem; height:2rem; border-radius:50%; background:#e8f0e4; color:#35624b; font-weight:700; }
+.method-flow li:not(:last-child):after { content:''; position:absolute; left:.95rem; top:2.2rem; bottom:.3rem; border-left:1px solid #d3dfd2; }
+.method-flow strong { display:block; padding-top:.15rem; }
+.method-flow p { margin:.5rem 0 0; font-size:.95rem; }
+.method-definitions { margin:1rem 0; }
+.method-definitions>div { display:grid; grid-template-columns:7rem 1fr; gap:1rem; padding:.85rem 0; border-bottom:1px solid #e3eae3; }
+.method-definitions dt { font-weight:700; }
+.method-definitions dd { margin:0; }
+.method-limit { margin-top:2rem; padding:1.1rem 1.4rem; background:#fbf8ef; border-radius:.65rem; }
+.method-limit h3 { margin-top:0; }
+.method-limit li { margin-block:.7rem; font-size:.92rem; }
+@media(max-width:40rem) {
+  .method-balance { grid-template-columns:1fr; gap:.65rem; }
+  .method-minus { justify-self:center; line-height:1; }
+  .method-index ol { grid-template-columns:1fr; }
+  .method-page .method-table { font-size:.82rem; }
+  .method-page .method-table th,.method-page .method-table td { padding:.7rem .4rem; }
+  .method-detail__body { padding:1rem .8rem; }
+  .method-definitions>div { grid-template-columns:1fr; gap:.35rem; }
+}
+
+/* 採用値と出典の列対応を保ち，必要な幅は表の中だけで横送りする． */
+@media(max-width:40rem) {
+  .method-page .method-table { display:table; min-width:34rem; table-layout:auto; }
+  .method-page .method-table thead { display:table-header-group; }
+  .method-page .method-table tbody { display:table-row-group; }
+  .method-page .method-table tr { display:table-row; }
+  .method-page .method-table th,.method-page .method-table td { display:table-cell; padding:.7rem; }
+  .method-page .method-table caption { display:table-caption; }
+  .method-table-wrap { overscroll-behavior-inline:contain; }
+}

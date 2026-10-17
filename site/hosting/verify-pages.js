@@ -1,3 +1,4 @@
+import {journeyRoutes} from '../map/routes.js';
 import { analyticsConfig } from "../shared/analytics-config.js";
 import { analyticsAllowed } from "../shared/analytics-core.js";
 import assert from "node:assert/strict";
@@ -12,14 +13,20 @@ async function walk(dir) {
 }
 const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png|og-support-shock-burden\.png)$/.test(path)), "未承認の配信ファイルがあります");
+assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|og-home-photo-20260926\.jpg|og-image\.png|og-support-shock-burden\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
 for (const retired of ['solar/index.html', 'guides/solar-profit-conditions/index.html', ...['electricity-sales','costs-maintenance','subsidies','disaster','quotes-contractors'].map(name => `pages/${name}.html`)]) {
   assert(!relative.includes(retired), `廃止URLが配信されています: ${retired}`);
 }
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-assert.equal(urls.length, 15);
+assert.equal(urls.length, 15+Object.keys(journeyRoutes).length-1);
+for(const route of Object.values(journeyRoutes)){
+  assert(urls.includes(`https://haretoku.jp${route}`));
+  const html=await readFile(resolve(output,'.'+route,'index.html'),'utf8');
+  assert(!html.includes('noindex,follow'),`正規ページをnoindexにしない：${route}`);
+  if(route!=='/')assert(/<h1 id="page-title"[^>]*>[^<]+<\/h1>/.test(html),`直接アクセスで本文を配信する：${route}`);
+}
 for (const url of urls) {
   const path = new URL(url).pathname;
   assert.equal(new URL(url).origin, "https://haretoku.jp");
@@ -27,7 +34,8 @@ for (const url of urls) {
   assert(html.includes(`rel="canonical" href="${url}"`), `canonical: ${path}`);
   assert(html.includes('name="viewport" content="width=device-width, initial-scale=1"'), `viewport: ${path}`);
   const news = path === '/guides/electricity-support-end/';
-  assert(html.includes('property="og:type" content="' + (news ? 'article' : 'website') + '"'), `og:type: ${path}`);
+  const journeyArticle=Object.entries(journeyRoutes).some(([id,route])=>!['map','estimate'].includes(id)&&route===path);
+  assert(html.includes('property="og:type" content="' + (news||journeyArticle ? 'article' : 'website') + '"'), `og:type: ${path}`);
   assert(html.includes(`property="og:url" content="${url}"`), `og:url: ${path}`);
   assert(html.includes('content="https://haretoku.jp/' + (news ? 'og-support-shock-burden.png' : 'og-home-photo-20260926.jpg') + '"'));
   assert(html.includes('property="og:image:type" content="image/' + (news ? 'png' : 'jpeg') + '"'));
@@ -86,6 +94,6 @@ assert(legacyShareOutput.subarray(0, 8).equals(Buffer.from([137, 80, 78, 71, 13,
 assert.equal(legacyShareOutput.readUInt32BE(16), 1536);
 assert.equal(legacyShareOutput.readUInt32BE(20), 1024);
 
-console.log(`Pages検証PASS: ${files.length}ファイル，正規15URL，公開データ13.0.0同一，ローカル参照・QA非混入`);
+console.log(`Pages検証PASS: ${files.length}ファイル，正規${urls.length}URL，公開データ13.0.0同一，ローカル参照・QA非混入`);
 
 assert((await readFile(resolve(output, 'og-support-shock-burden.png'))).equals(await readFile(resolve(root, 'site/shared/assets/support-shock-burden.png'))), '調査記事の共有画像が不一致');

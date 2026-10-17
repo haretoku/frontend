@@ -1,9 +1,12 @@
+import {journeyRoutes} from '../map/routes.js';
 import { quoteMaterial } from './quote-config.js';
 const ORIGIN = "https://haretoku.jp";
 const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result']);
 const PAGES = Object.freeze({
+  ...Object.fromEntries(Object.entries(journeyRoutes).filter(([id])=>!['map','estimate'].includes(id)).map(([id,path])=>[path,{id:`guide_${id.replaceAll('-','_')}`,title:"太陽光と蓄電池のガイド",article:true}])),
   "/": { id: "home", title: "はれトク", article: false },
   "/guides/": { id: "guides", title: "はれトクガイド", article: false },
+  "/press/": { id: "press", title: "プレスリリース", article: false },
   "/simulator/": { id: "diagnosis", title: "はれトク診断", article: false },
   "/data/": { id: "data", title: "はれトクデータ", article: false, data: true },
   "/data/subsidies/": { id: "data_subsidies", title: "太陽光・蓄電池の補助金", article: false, data: true },
@@ -88,7 +91,7 @@ export function createAnalytics({ config, productionBuild, window: win, document
           return;
         }
         if (!(page.article || page.data) || started) return;
-        if (target.origin !== ORIGIN || canonicalPath(target.pathname) !== "/simulator/") return;
+        if (target.origin !== ORIGIN || !(canonicalPath(target.pathname) === "/simulator/" || canonicalPath(target.pathname) === "/" && target.hash === "#estimate")) return;
         started = true;
         event(page.data ? "data_diagnosis_click" : "article_diagnosis_click");
       } catch { /* 不正なリンクは計測しない． */ }
@@ -101,7 +104,7 @@ export function createAnalytics({ config, productionBuild, window: win, document
     return Object.freeze({
       active: true,
       diagnosisComplete() {
-        if (path !== "/simulator/" || completed) return false;
+        if (!["/", "/simulator/"].includes(path) || completed) return false;
         completed = true;
         event("diagnosis_complete");
         return true;

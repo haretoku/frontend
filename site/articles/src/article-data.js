@@ -3,7 +3,6 @@ import '../../shared/table-scroll-hint.js';
 import {loadDiagnosticDisplayRecords} from '../../simulator/src/diagnostic-display-record.js';
 import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
 import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/retained-diagnostic-display.js';
-import { QUOTE_ACTION, setupInlineQuoteActions } from "../../shared/fixed-quote-bar.js";
 import { bindArticleBibliography } from "./article-bibliography.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
@@ -207,13 +206,3 @@ async function initialize() {
 
 initializeTableOfContents();
 initialize();
-
-
-
-for (const button of document.querySelectorAll("[data-inline-quote-action]")) {
-  button.textContent = QUOTE_ACTION.label;
-  button.disabled = QUOTE_ACTION.disabled;
-  const promotion = button.closest("[data-quote-promotion]");
-  if (promotion) promotion.hidden = QUOTE_ACTION.disabled;
-}
-setupInlineQuoteActions();

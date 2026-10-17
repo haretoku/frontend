@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="太陽光パネルだけなら昼間に，蓄電池付きなら夜にも電気を使える．冷蔵庫・照明・スマホを保ち，冷暖房は1部屋に絞る使い方を考えよう．使える時間は，蓄電池の残量や劣化，天気，使う家電で変わる．">
+    <link rel="canonical" href="https://haretoku.jp/guides/power-outage/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="停電したとき，どこまで使える？｜はれトク">
+    <meta property="og:description" content="太陽光パネルだけなら昼間に，蓄電池付きなら夜にも電気を使える．冷蔵庫・照明・スマホを保ち，冷暖房は1部屋に絞る使い方を考えよう．使える時間は，蓄電池の残量や劣化，天気，使う家電で変わる．">
+    <meta property="og:url" content="https://haretoku.jp/guides/power-outage/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="はれトク">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://haretoku.jp/og-home-photo-20260926.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="青空と太陽光パネルのある住宅，テラスのノートPC">
+    <meta name="twitter:card" content="summary_large_image">
+
+  <title>停電したとき，どこまで使える？｜はれトク</title>
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="/map/map.css">
+  <script type="module" src="/map/journey.js"></script>
+  <script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+</head>
+<body data-journey-page="backup">
+  <svg class="icon-library" aria-hidden="true"><defs>
+    <symbol id="i-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 3v6m0 30v6M3 24h6m30 0h6M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="5"/><path d="M16 12h16v7H16ZM16 27h3m10 0h3m-16 8h3m10 0h3"/></symbol>
+    <symbol id="i-route" viewBox="0 0 48 48"><path d="M8 40h21a7 7 0 0 0 0-14H19a7 7 0 0 1 0-14h17M8 35v10m24-39 7 6-7 6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 48 48"><circle cx="18" cy="15" r="7"/><path d="M5 40v-5a13 13 0 0 1 26 0v5M32 8a7 7 0 0 1 0 14m4 6a11 11 0 0 1 7 10v2"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 48 48"><path d="M7 7h34v25H22l-12 9v-9H7Z M15 17h18m-18 7h12"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 64 64"><path d="M27 16v35c0 3 7 6 16 6s16-3 16-6V16Z"/><path d="M27 24c0 3 7 6 16 6s16-3 16-6M27 33c0 3 7 6 16 6s16-3 16-6M27 42c0 3 7 6 16 6s16-3 16-6" fill="none"/><ellipse cx="43" cy="16" rx="16" ry="6"/><path d="M7 44v9c0 4 8 7 18 7s18-3 18-7v-9Z"/><ellipse cx="25" cy="44" rx="18" ry="7"/></symbol>
+  </defs></svg>
+  <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/" aria-current="page">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
+  <main class="map-width">
+    <section id="map" class="journey" aria-labelledby="map-title" hidden>
+      <div class="map-heading">
+        <div class="map-title-card">
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
+          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+        </div>
+      </div>
+      <div class="map-landscape" aria-label="太陽光を検討する道のり">
+        <svg class="landscape desktop-landscape" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M-20 100Q190-10 390 110T810 60T1160 180V-20H-20Z"/>
+          <path class="field field-second" d="M-20 480Q180 320 400 460T880 420T1150 520V600H-20Z"/>
+          <path class="road-border board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="road board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-tile-tint-second board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-spaces board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <g class="trees"><path d="m75 340-16 32h32Z M75 372v16m965 82-16 32h32Z M1040 502v16m-740-265-12 24h24Z M300 277v12"/></g>
+          <svg x="340" y="290" width="85" height="85" viewBox="0 0 120 120"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <g class="board-scene" transform="translate(370 510)">
+            <ellipse class="scene-ground" cx="35" cy="60" rx="66" ry="15"/>
+            <path class="scene-building" d="M-12 10h62v48h-62Z"/>
+            <path d="M-18 6h75M-18 30h75M-18 55h75M-18 0v65M57 0v65"/>
+            <circle class="scene-person" cx="79" cy="24" r="9"/>
+            <path class="scene-person" d="M67 60V43q12-14 24 0v17Z"/>
+            <path class="scene-roof" d="M67 20q12-19 24 0"/>
+          </g>
+          <g class="board-scene" transform="translate(590 310)">
+            <ellipse class="scene-ground" cx="40" cy="62" rx="69" ry="16"/>
+            <path class="scene-building" d="M-4 12h98v48H-4Z"/>
+            <circle class="scene-person" cx="17" cy="22" r="8"/>
+            <circle class="scene-person" cx="67" cy="22" r="8"/>
+            <path class="scene-person" d="M5 59V40q12-14 24 0v19M55 59V40q12-14 24 0v19"/>
+            <path class="scene-building" d="M30-12h44V9H46l-9 9V9h-7Z"/>
+            <path d="M38-4h27"/>
+          </g>
+        </svg>
+        <img class="board-guide board-navigator" src="/map/assets/navigator.png" alt="" hidden>
+        <svg class="landscape mobile-landscape" viewBox="0 0 380 1180" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M0 0H380V170Q220 40 0 250Z"/><path class="field field-second" d="M0 1010Q240 900 380 1010V1360H0Z"/>
+          <path class="road-border" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road-dashes" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <g class="trees"><path d="m310 385-12 24h24Z M310 409v12m-267 205-10 20h20Z M43 646v12"/></g>
+        </svg>
+        <div class="stop stop-start is-current" data-stop="0"><span class="here">いまここ</span><button type="button" data-step="0" aria-current="step" aria-label="START はじめに：太陽光えらびを始める"><span class="station"><span class="step-number start-badge">START</span><span class="start-story"><strong>はじめに</strong><span class="start-greeting"><span class="start-professor"><img src="/map/assets/professor-chibi.png" alt="博士"></span><span class="start-bubble">あなたの家に合うか，一つずつ確かめよう．</span></span><span class="start-action">ここから始めよう →</span></span></span></button></div>
+        <ol class="stops">
+          <li class="stop stop-1" data-stop="1"><span class="here" hidden>いまここ</span><button type="button" data-step="1"><span class="station"><svg aria-hidden="true"><use href="#i-calc"/></svg><span class="step-number">1</span></span><span class="stop-label">わが家はいくら<br>得になる？</span><span class="stop-detail">費用とお得を見てみよう</span></button></li>
+          <li class="stop stop-2" data-stop="2"><span class="here" hidden>いまここ</span><button type="button" data-step="2"><span class="station"><svg aria-hidden="true"><use href="#i-sun"/></svg><span class="step-number">2</span></span><span class="stop-label">太陽光と蓄電池を知ろう</span><span class="stop-detail">できることと，気をつけたいこと</span></button></li>
+          <li class="stop stop-3" data-stop="3"><span class="here" hidden>いまここ</span><button type="button" data-step="3"><span class="station"><svg aria-hidden="true"><use href="#i-route"/></svg><span class="step-number">3</span></span><span class="stop-label">つけるまでの流れ</span><span class="stop-detail">希望・見積もり・工事</span></button></li>
+          <li class="stop stop-4" data-stop="4"><span class="here" hidden>いまここ</span><button type="button" data-step="4"><span class="station"><svg aria-hidden="true"><use href="#i-people"/></svg><span class="step-number">4</span></span><span class="stop-label">どんな会社に頼む？</span><span class="stop-detail">頼み方・会社選び・紹介サイト</span></button></li>
+        </ol>
+        <div class="goal" aria-live="polite">
+          <span class="goal-flag">GOAL</span>
+          <p class="goal-title">わが家のプラン</p>
+          <p class="goal-consultation-status" id="goal-consultation-status" hidden>✓ 相談先を開いた</p>
+          <div id="goal-home" hidden>
+            <svg class="goal-house" viewBox="0 0 160 120" aria-hidden="true">
+              <use href="/map/assets/title-art.svg#solar-house" x="7" width="120" height="120"/>
+              <use id="goal-battery" href="/map/assets/title-art.svg#storage-battery" x="108" y="64" width="49" height="49" hidden/>
+            </svg>
+            <p class="goal-equipment" id="goal-equipment"></p>
+          </div>
+          <div class="goal-effects" id="goal-effects" hidden>
+            <div class="goal-effect">
+              <svg class="goal-money-icon" aria-hidden="true"><use href="#i-coins"/></svg>
+              <div><p class="goal-label">30年間の収支</p><p class="goal-amount" id="goal-amount"></p></div>
+            </div>
+            <div class="goal-effect">
+              <svg class="goal-backup-icon" viewBox="0 0 64 64" aria-hidden="true">
+                <use href="#i-sun" x="2" y="1" width="28" height="28"/>
+                <path id="goal-moon" d="M48 3a12 12 0 1 0 12 17A12 12 0 0 1 48 3Z" hidden/>
+                <path class="backup-bulb" d="M25 49c0-5-6-7-6-14a12 12 0 0 1 24 0c0 7-6 9-6 14Zm0 5h12m-10 5h8M31 48V37m-5-4 5 4 5-4"/>
+              </svg>
+              <div><p class="goal-label">停電への備え</p><p class="goal-backup" id="goal-backup"></p></div>
+            </div>
+          </div>
+          <p class="goal-note" id="goal-note">診断で設備を選んでみよう</p>
+          <a class="goal-review" id="goal-review" href="/simulator/">診断してプランを選ぶ →</a>
+          <button class="primary goal-consult" id="goal-consult" type="button">わが家のことを相談しよう ↓</button>
+        </div>
+      </div>
+      <div id="map-consultation" hidden></div>
+    </section>
+    <section id="reading" class="reading" aria-labelledby="page-title">
+      <div class="reading-top"><span id="page-chapter">2．太陽光と蓄電池を知ろう</span><span id="page-position">4／5</span></div>
+      <h1 id="page-title" tabindex="-1">停電したとき，どこまで使える？</h1>
+      <div id="page-body"><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>停電したら，どのくらいいつもの生活ができるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>太陽光パネルだけなら，昼に発電している間，冷蔵庫を動かしたり，スマホを充電したりできます．夜は使えません．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>蓄電池も付けたら，夜にも使えるんだよね？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．蓄電池付きなら，夜にも使えます．新しい蓄電池が満充電なら，ためた電気で冷蔵庫を24時間，照明2灯を6時間，スマホ4台を充電できます．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>エアコンも使えるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>家電メーカーの仕様を使った試算では，その1日分に加えて，6畳用の冷房を約8時間使えます．暖房で電気を多く使う場合は，約5時間です．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>じゃあ，家じゅうで普段どおり使うというより，1部屋に集まって過ごす感じかな？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>そうですね．冷暖房は1部屋に絞り，使わない家電は切ると，電気を長く残せます．この時間の試算には，調理やお湯を沸かす電気は含めていません．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>昼にまた発電できたら，もっと長く使える？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．今回の時間は，太陽光からの追加充電を数えていません．発電した電気で家電を動かしたり，蓄電池を充電したりできれば，その分だけ長く使えます．</p></div></div><div class="overview-cards" role="group" aria-label="このページの要点"><section class="overview-card"><h2>太陽光パネルだけなら</h2><ul><li>発電している昼間に，専用コンセントから使う</li><li>夜は使えない．使える時間は天気による</li></ul></section><section class="overview-card"><h2>新しい蓄電池が満充電なら</h2><ul><li>冷蔵庫24時間・照明2灯を6時間・スマホ4台を充電</li><li>さらに6畳用の冷房約8時間，または暖房約5時間</li><li>太陽光の追加充電・調理・給湯を含まない試算</li></ul></section></div></div>
+      <div id="estimate-slot" hidden>
+        <section id="diagnosis-entry" class="page-response" aria-labelledby="diagnosis-entry-label">
+          <div class="response-person"><span id="diagnosis-start-portrait" aria-hidden="true"></span><h2 id="diagnosis-entry-label">あなた</h2></div>
+          <div class="response-bubble"><button type="button" class="primary" id="start-diagnosis">わが家で調べてみる →</button></div>
+        </section>
+        <form id="diagnose" hidden>
+          <h2>住んでいる地域と電気代を教えてね．</h2>
+          <label for="prefecture">お住まいの都道府県</label><select id="prefecture" required><option value="">選んでください</option></select>
+          <label for="bill">月々の電気代 <span class="optional">分かれば入力</span></label><div class="bill-input"><input id="bill" type="number" min="0" max="1000000" step="1" inputmode="numeric" placeholder="例：12000"><span>円／月</span></div>
+          <p class="form-note">電気代は，分からなければ空欄で大丈夫．その地域の標準的な電気代で調べます．</p>
+          <p id="form-message" role="status">データを読み込んでいます．</p>
+        </form>
+        <div id="diagnosis-result" hidden>
+          <div id="result-cards" class="result-cards"></div>
+          <figure class="cash-chart"><figcaption>使い始めてから，お金はどう変わる？</figcaption><div id="chart"></div></figure>
+          <p id="result-condition" class="form-note"></p>
+        </div>
+      </div>
+      <div id="page-ending"><details class="sources"><summary>参考資料</summary><ul><li><a href="https://jp.sharp/sunvista/battery/partnumber/" target="_blank" rel="noopener">シャープ：9.5 kWh蓄電池の構成・実効容量 ↗</a></li><li><a href="https://jp.sharp/sunvista/solar/power_conditioner/55nf3/spec/" target="_blank" rel="noopener">シャープ：JH-55NF3の停電時出力 ↗</a></li><li><a href="https://jp.sharp/sunvista/solar/power_conditioner/55nf3/" target="_blank" rel="noopener">シャープ：家全体への給電と対応機器 ↗</a></li><li><a href="https://jp.sharp/sunvista/support/emergency/" target="_blank" rel="noopener">シャープ：太陽光のみの自立運転 ↗</a></li><li><a href="https://panasonic.jp/housing-aircon/products/CS-226DFL/spec.html" target="_blank" rel="noopener">パナソニック：6畳用エアコンCS-226DFLの消費電力 ↗</a></li><li><a href="https://panasonic.jp/reizo/products/NR-E457PX/spec.html" target="_blank" rel="noopener">パナソニック：冷蔵庫NR-E457PXの年間消費電力量 ↗</a></li></ul></details><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>太陽光パネルだけなら昼間に，蓄電池付きなら夜にも電気を使える．</li><li>冷蔵庫・照明・スマホを保ち，冷暖房は1部屋に絞る使い方を考えよう．</li><li>使える時間は，蓄電池の残量や劣化，天気，使う家電で変わる．</li></ul></div></div></div>
+      <section id="page-response" class="page-response" aria-labelledby="response-label">
+        <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/guides/disaster-preparedness/">わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>太陽光パネルだけだと，何が使えるの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>今回は100 V・最大1.5 kWの専用コンセントを使う想定です．発電した電気で，冷蔵庫を動かしたり，スマホを充電したりできます．200 Vの家電はつなげません．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>昼なら，ずっと使えるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>発電が足りる間だけです．雲や日陰で発電が減ると，途中で止まることもあります．使える家電や切り替え操作は，説明書や施工会社の案内で確認しましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>小さなエアコンなら，使えることもあるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>100 Vの小型エアコンなら使える場合もありますが，発電量や起動時の電力によって止まることがあります．接続できるかは，施工会社に確認しましょう．</p><p class="question-reference"><a href="/pages/calculation-method.html#map-outage-assumptions">太陽光のみの出力・配線の前提を見る ↗</a></p></div></div></details><details class="response-choice response-dialogue"><summary>家電をもっと絞ったら，何日くらい使える？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>新しい蓄電池が満充電なら，冷蔵庫1台・照明2灯・スマホ4台の充電だけで，約5日分になる試算です．太陽光の追加充電は数えていません．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>その間，どんな使い方をするの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>冷蔵庫はつけたまま，照明は1日6時間，スマホは毎日1回充電します．冷暖房・調理・給湯・テレビなどは含まず，家電の仕様値から求めた目安です．</p><p class="question-reference"><a href="/pages/calculation-method.html#map-outage-assumptions">家電と使用時間の計算条件を見る ↗</a></p></div></div></details><details class="response-choice response-dialogue"><summary>長く使って容量が減ると，どのくらい使える？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>診断と同じく，30年後の容量を最初の36％と置くと，冷蔵庫・照明・スマホだけで約2日分です．満充電で，太陽光から追加充電しない場合の試算です．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>そのときも，エアコンは使えるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>基本の家電を1日使う分に加え，6畳用の冷房は約1～2時間，電気を多く使う暖房は約1時間という目安です．冷房と暖房は，それぞれ別の例です．</p><p class="question-reference"><a href="/pages/calculation-method.html#map-outage-assumptions">容量が減った場合の参考計算を見る ↗</a></p></div></div></details><details class="response-choice response-dialogue"><summary>家じゅうの家電を，一緒に使える？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>今回は，家全体へ給電でき，蓄電池だけで最大3.0 kVAを出せる機器構成を参考にしています．ただし，家じゅうの家電を全部同時に使えるという意味ではありません．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>たくさん電気を使う家電は，どうすればいい？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>電子レンジやケトルなどは，同時に使わず時間をずらしましょう．起動時に大きな電流が流れる家電もあるため，使える組み合わせと配線は施工会社に確認してください．</p><p class="question-reference"><a href="/pages/calculation-method.html#map-outage-assumptions">停電時の出力・配線の前提を見る ↗</a></p></div></div></details><details class="response-choice response-dialogue"><summary>蓄電池が空になったら，どうなる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>ためた電気は使えなくなります．今回の構成では太陽光から再充電できますが，充電できる量は天気や家電の使用量によります．夜や雨の日も考え，残しておきたい電気の量を相談しましょう．</p></div></div></details></div></div>
+      </section>
+      <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/guides/equipment-maintenance/">← 前のページへ</a></nav>
+    </section>
+  </main>
+  <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
+</html>

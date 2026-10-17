@@ -1,17 +1,21 @@
 {
   "name": "haretoku-frontend",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "engines": {
     "node": ">=22.13.0"
   },
   "scripts": {
+    "sync:journey": "node qa/sync-journey-pages.mjs",
+    "check:journey": "node qa/sync-journey-pages.mjs --check",
+    "sync:header": "node qa/sync-site-header.mjs",
+    "check:header": "node qa/sync-site-header.mjs --check",
     "sync:guides": "node qa/sync-guide-numbers.mjs && node qa/generate-economics-chart.mjs && node qa/generate-responsive-release-charts.mjs",
     "check:guide-numbers": "node qa/sync-guide-numbers.mjs --check",
     "dev": "vite dev --config .config/vite.config.js",
     "build": "pnpm run build:pages",
-    "build:pages": "node qa/sync-guide-numbers.mjs && node qa/generate-economics-chart.mjs && node qa/generate-responsive-release-charts.mjs && vite build --config .config/vite.pages.config.js && node site/hosting/finalize-pages.js && node site/hosting/verify-pages.js",
+    "build:pages": "node qa/sync-site-header.mjs --check && node qa/sync-journey-pages.mjs --check && node qa/sync-guide-numbers.mjs && node qa/generate-economics-chart.mjs && node qa/generate-responsive-release-charts.mjs && vite build --config .config/vite.pages.config.js && node site/hosting/finalize-pages.js && node site/hosting/verify-pages.js",
     "preview:pages": "vite preview --config .config/vite.pages.config.js",
     "preview": "vite preview --config .config/vite.pages.config.js",
     "test": "node qa/run-tests.mjs",

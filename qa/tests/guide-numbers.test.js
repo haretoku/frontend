@@ -63,7 +63,7 @@ test('数値指定を生成漏れなく処理し，補足要素のタグを閉�
   }
 });
 
-test('調査記事は日常更新と分離し，ガイド一覧・静的ビルドに接続する', async () => {
+test('調査記事は日常更新と分離し，旧URLを保ってプレス一覧・静的ビルドに接続する', async () => {
   const catalog = JSON.parse(await readFile(new URL('../../site/solar/data/articles.json', import.meta.url)));
   const news = catalog.filter(a => a.articleType === 'news');
   assert.equal(news.length, 1);
@@ -76,4 +76,6 @@ test('調査記事は日常更新と分離し，ガイド一覧・静的ビル�
   assert(!manifest.inventory.some(p => p.route === news[0].href));
   const build = await readFile(new URL('../../.config/vite.pages.config.js', import.meta.url), 'utf8');
   assert(build.includes('"electricity-support-end"'));
+  assert(build.includes('"press/index.html"'));
+  assert(html.includes('<a href="/press/">プレスリリース</a>'));
 });

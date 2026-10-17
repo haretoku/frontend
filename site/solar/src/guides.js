@@ -107,7 +107,7 @@ function scrollControlsFor(cards, label) {
 function initializeGuideDirectory() {
   const container = document.querySelector('[data-guide-groups]');
   if (!container) return;
-  const sections = groupedArticles(guideArticles).map(group => {
+  const sections = groupedArticles(guideArticles,{press:container.dataset.guideGroups==='press'}).map(group => {
     const section = document.createElement('section');
     section.className = 'guide-group';
     section.dataset.guideGroup = group.id;

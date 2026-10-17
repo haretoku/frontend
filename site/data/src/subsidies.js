@@ -9,7 +9,7 @@ import {usesSchemeContract} from '../../../data/src/scheme-adapter.js';
 import {selectSchemeGroups} from './scheme-model.js';
 import {diagnosticPilotTerms} from '../../simulator/src/retained-diagnostic-display.js';
 import {orderedSupplementRows} from '../../simulator/src/diagnostic-amount-dom.js';
-import {listingNotes,diagnosisDescription,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
+import {listingNotes,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
 // The import path is relative to site/data/src; only the received public dataset is used.
 const pref = document.querySelector('#prefecture');
 const status = document.querySelector('#load-status');
@@ -142,7 +142,6 @@ function render(updateUrl=true) {
     if(tbody.children.length){table.append(tbody);section.append(table);}
     container.append(section);
   }
-  document.querySelector('#diagnosis-description').textContent=diagnosisDescription(data,pref.value);
   document.querySelector('#diagnosis-link').href=diagnosisUrl(data,pref.value);
   status.textContent='';
 }

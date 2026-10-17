@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="住宅用太陽光を導入した場合，自分の場合に結局いくらトクなのかを簡単に確認するための概算サービスです．">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="太陽光の仕組みから，わが家の収支と設備の比較，相談まで．マップを進みながら，わが家に合う選択を確かめます．">
     <link rel="canonical" href="https://haretoku.jp/">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta property="og:title" content="はれトク｜太陽光，結局いくらトク？">
-    <meta property="og:description" content="住宅用太陽光を導入した場合，自分の場合に結局いくらトクなのかを簡単に確認するための概算サービスです．">
+    <meta property="og:title" content="わが家の太陽光えらび｜はれトク">
+    <meta property="og:description" content="太陽光の仕組みから，わが家の収支と設備の比較，相談まで．マップを進みながら，わが家に合う選択を確かめます．">
     <meta property="og:url" content="https://haretoku.jp/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="はれトク">
@@ -18,116 +18,166 @@
     <meta property="og:image:height" content="1024">
     <meta property="og:image:alt" content="青空と太陽光パネルのある住宅，テラスのノートPC">
     <meta name="twitter:card" content="summary_large_image">
-    <title>はれトク｜太陽光，結局いくらトク？</title>
-    <link rel="icon" href="shared/assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="shared/styles/main.css">
-    <link rel="stylesheet" href="shared/styles/fixed-quote-bar.css">
-    <script type="module" src="simulator/src/top.js"></script>
-      <script type="module" src="shared/analytics.js"></script>
-  <script type="module" src="/shared/quote-entry.js"></script></head>
-  <body data-page="top">
-    <header class="site-header">
-      <div class="page-width site-header__inner">
-        <a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a>
-        <span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span>
-        <nav class="site-nav" aria-label="主要メニュー">
-          <a href="/" aria-current="page"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"/></svg><span>トップ</span></a><a href="simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a>
-        <a class="site-data-link" href="/data/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8h18M3 14h18M10 8v12"/></svg><span>はれ<span class="brand-term">トク</span>データ</span></a></nav>
-        <a class="mobile-guide-link" href="/guides/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a>
-      </div>
-    </header>
 
-    <main>
-      <section class="hero-shell">
-        <div class="hero page-width" aria-labelledby="hero-title">
-          <div class="hero__copy">
-            <p class="hero__audience">太陽光の設置をお考えの方へ</p>
-            <h1 id="hero-title"><span class="hero-title__chunk">太陽光，</span><span class="hero-title__chunk">結局いくら<span class="brand-word">トク</span>？</span></h1>
-            <p class="hero__lead">地域と電気代から，太陽光の導入費と<span class="text-chunk">30年間の収支をかんたんに概算できます．</span></p>
-            <ul class="hero__proof" aria-label="診断の特徴"><li><svg class="proof-check" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 12 13 4"/></svg>登録不要</li><li><svg class="proof-check" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 12 13 4"/></svg>氏名・番地の入力なし</li><li><svg class="proof-check" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8.5 6.5 12 13 4"/></svg>無料で概算</li></ul>
-
-          </div>
-
-            <figure class="hero__motif">
-              <div class="hero__photo">
-                <img src="shared/assets/hero-solar-low-plants.webp" width="1536" height="1024" alt="青空と太陽光パネルのある家，実際のはれトク累積収支グラフを表示したノートPC" fetchpriority="high">
-                <svg class="hero__graph-overlay" viewBox="0 0 1536 1024" aria-hidden="true">
-                  <foreignObject width="1536" height="1024">
-                    <div xmlns="http://www.w3.org/1999/xhtml" class="hero__screen"><img src="shared/assets/hero-haretoku-chart-selected.svg" alt="" width="597" height="280"></div>
-                  </foreignObject>
-                </svg>
-              </div>
-            </figure>
-
-          <section class="calculator" aria-label="計算条件">
-            <div class="panel calculator__panel">
-              <div class="section-heading"><h2 id="calculator-title"><svg class="site-nav__icon top-heading-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"/></svg>はれ<span class="brand-word">トク</span>診断</h2><p><span class="calculator-intro-prefix">お住まいの</span>地域を選んで，<span class="calculator-intro-action">診断を始めましょう．</span></p></div>
-              <form id="estimate-form" data-route-source="top-analysis">
-                <div class="form-field">
-                  <label for="prefecture">都道府県<span class="required-label">必須</span></label>
-                  <select id="prefecture" name="prefecture" required><option value="">選択してください</option></select>
-                </div>
-                <div class="form-field">
-                  <label for="monthly-electricity-bill">月々の電気代<span class="optional-label">任意</span></label>
-                  <div class="input-with-unit"><input id="monthly-electricity-bill" name="monthlyElectricityBill" type="number" inputmode="numeric" min="0" step="1" placeholder="例：12,000" aria-describedby="electricity-bill-help"><span aria-hidden="true">円／月</span></div>
-                  <p id="electricity-bill-help" class="field-help">未入力なら，地域の戸建て・4人以上世帯の平均を使用します．</p>
-                </div>
-                <button id="calculate-button" class="primary-button" type="submit" disabled>30年間の損得を診断する <span aria-hidden="true">→</span></button>
-                <p id="form-message" class="form-message" role="status" aria-live="polite">公開データを確認しています．</p>
-              </form>
-              <p class="calculator-summary">設置・維持費と補助金を含めて試算します．実際の費用は見積もりで確定します．</p>
-              <nav class="calculator-links" aria-label="診断の根拠と方針"><a href="pages/calculation-method.html">計算方法・使用データ</a><a href="pages/policy.html">はれ<span class="brand-term">トク</span>の方針</a></nav>
+  <title>わが家の太陽光えらび｜はれトク</title>
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="/map/map.css">
+  <script type="module" src="/map/journey.js"></script>
+  <script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+</head>
+<body>
+  <svg class="icon-library" aria-hidden="true"><defs>
+    <symbol id="i-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 3v6m0 30v6M3 24h6m30 0h6M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="5"/><path d="M16 12h16v7H16ZM16 27h3m10 0h3m-16 8h3m10 0h3"/></symbol>
+    <symbol id="i-route" viewBox="0 0 48 48"><path d="M8 40h21a7 7 0 0 0 0-14H19a7 7 0 0 1 0-14h17M8 35v10m24-39 7 6-7 6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 48 48"><circle cx="18" cy="15" r="7"/><path d="M5 40v-5a13 13 0 0 1 26 0v5M32 8a7 7 0 0 1 0 14m4 6a11 11 0 0 1 7 10v2"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 48 48"><path d="M7 7h34v25H22l-12 9v-9H7Z M15 17h18m-18 7h12"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 64 64"><path d="M27 16v35c0 3 7 6 16 6s16-3 16-6V16Z"/><path d="M27 24c0 3 7 6 16 6s16-3 16-6M27 33c0 3 7 6 16 6s16-3 16-6M27 42c0 3 7 6 16 6s16-3 16-6" fill="none"/><ellipse cx="43" cy="16" rx="16" ry="6"/><path d="M7 44v9c0 4 8 7 18 7s18-3 18-7v-9Z"/><ellipse cx="25" cy="44" rx="18" ry="7"/></symbol>
+  </defs></svg>
+  <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/" aria-current="page">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
             </div>
-          </section>
-
-        </div>
-
-      </section>
-
-      <section id="guides" class="guides-section">
-        <div class="page-width">
-          <div class="section-intro"><p class="eyebrow"><svg class="site-nav__icon top-heading-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"/></svg>はれ<span class="brand-term">トク</span>ガイド</p><h2>知って，なっ<span class="brand-word">トク</span>．</h2><p>収支・補助金・見積もり・災害への備え．設置前の疑問を解消しましょう．</p></div>
-          <div class="guide-grid" id="top-guide-cards" aria-label="代表記事">
-            <a class="guide-card" href="/guides/solar-economics/">
-              <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-solar-economics-photo.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"></span>
-              <span class="guide-card__category">収支｜全国</span>
-              <strong><span class="text-chunk">太陽光の収支は，</span><span class="text-chunk">何で決まる？</span></strong>
-              <p>収入と費用のしくみを知り，自宅の収支を概算する前の疑問を解消できます．</p>
-              <span>収支の決まり方を知る →</span>
-            </a>
-            <a class="guide-card" href="/guides/subsidies/">
-              <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-subsidies-application-photo.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"></span>
-              <span class="guide-card__category">補助金｜全国｜2026年度</span>
-              <strong><span class="text-chunk">補助金は，</span><span class="text-chunk">どう探して</span><span class="text-chunk">どう申請する？</span></strong>
-              <p>制度の探し方と申請の流れ，施工会社へ相談できる支援を確認できます．</p>
-              <span>補助金の確認方法を知る →</span>
-            </a>
-            <a class="guide-card" href="/guides/quotes-contractors/">
-              <span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-quotes-explanation-photo.webp" width="1536" height="1024" alt="" decoding="async" loading="lazy"></span>
-              <span class="guide-card__category">見積もり｜全国</span>
-              <strong><span class="text-chunk">太陽光の見積もりは，</span><span class="text-chunk">何を比べる？</span></strong>
-              <p>見積もりの頼み方と，費用・工事・保証を同じ条件で比べるポイントを確認できます．</p>
-              <span>見積もりの比べ方を知る →</span>
-            </a>
-            <a class="guide-card" href="/guides/disaster/"><span class="guide-card__visual" aria-hidden="true"><img src="shared/assets/article-disaster-battery-photo.webp" width="1536" height="1024" alt="" decoding="async" loading="lazy"></span><span class="guide-card__category">災害への備え｜全国</span><strong>停電時，太陽光・蓄電池で何ができる？</strong><p>太陽光単独の昼間利用と蓄電池の夜間給電，出力・残量・安全上の制約を確認できます．</p><span>災害への備えを読む →</span></a>
           </div>
-          <p class="guides-more"><a href="/guides/">すべての記事を見る <span aria-hidden="true">→</span></a></p>
-
         </div>
-      </section>
-      <section class="top-data-section" aria-labelledby="top-data-title">
-        <div class="page-width">
-          <div class="section-intro"><p class="eyebrow"><svg class="site-nav__icon top-heading-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 8h18M3 14h18M10 8v12"/></svg>はれ<span class="brand-term">トク</span>データ</p><h2 id="top-data-title">調べて，なっ<span class="brand-word">トク</span>．</h2><p>地域の制度や条件を調べて，自宅に合う選択に役立てましょう．</p></div>
-          <a class="top-data-card" id="top-subsidy-data-link" href="/data/subsidies/">
-            <svg class="top-data-card__icon" width="48" height="48" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><circle cx="20" cy="8" r="6.5"/><path d="m17 4.5 3 4 3-4M20 8.5v4M17.5 8.5h5M17.5 10.5h5M2 21l4-2 4 9-4 2M7 21l4-3h5l5 3c1.7 1 .7 3-1 2l-4-1M10 27l5 2 13-7c2-1.2.8-3.8-1-3l-6 2"/></svg>
-            <div><h3>補助金を調べる</h3><p>お住まいの地域の補助金額・補助条件・受付状況を確認できます．</p></div>
-            <span class="top-data-card__arrow" aria-hidden="true">→</span>
-          </a>
-          <p class="guides-more"><a href="/data/">すべてのデータを見る <span aria-hidden="true">→</span></a></p>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
+  <main class="map-width">
+    <section id="map" class="journey" aria-labelledby="map-title">
+      <div class="map-heading">
+        <div class="map-title-card">
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
+          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
         </div>
+      </div>
+      <div class="map-landscape" aria-label="太陽光を検討する道のり">
+        <svg class="landscape desktop-landscape" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M-20 100Q190-10 390 110T810 60T1160 180V-20H-20Z"/>
+          <path class="field field-second" d="M-20 480Q180 320 400 460T880 420T1150 520V600H-20Z"/>
+          <path class="road-border board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="road board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-tile-tint-second board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-spaces board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <g class="trees"><path d="m75 340-16 32h32Z M75 372v16m965 82-16 32h32Z M1040 502v16m-740-265-12 24h24Z M300 277v12"/></g>
+          <svg x="340" y="290" width="85" height="85" viewBox="0 0 120 120"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <g class="board-scene" transform="translate(370 510)">
+            <ellipse class="scene-ground" cx="35" cy="60" rx="66" ry="15"/>
+            <path class="scene-building" d="M-12 10h62v48h-62Z"/>
+            <path d="M-18 6h75M-18 30h75M-18 55h75M-18 0v65M57 0v65"/>
+            <circle class="scene-person" cx="79" cy="24" r="9"/>
+            <path class="scene-person" d="M67 60V43q12-14 24 0v17Z"/>
+            <path class="scene-roof" d="M67 20q12-19 24 0"/>
+          </g>
+          <g class="board-scene" transform="translate(590 310)">
+            <ellipse class="scene-ground" cx="40" cy="62" rx="69" ry="16"/>
+            <path class="scene-building" d="M-4 12h98v48H-4Z"/>
+            <circle class="scene-person" cx="17" cy="22" r="8"/>
+            <circle class="scene-person" cx="67" cy="22" r="8"/>
+            <path class="scene-person" d="M5 59V40q12-14 24 0v19M55 59V40q12-14 24 0v19"/>
+            <path class="scene-building" d="M30-12h44V9H46l-9 9V9h-7Z"/>
+            <path d="M38-4h27"/>
+          </g>
+        </svg>
+        <img class="board-guide board-navigator" src="/map/assets/navigator.png" alt="" hidden>
+        <svg class="landscape mobile-landscape" viewBox="0 0 380 1180" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M0 0H380V170Q220 40 0 250Z"/><path class="field field-second" d="M0 1010Q240 900 380 1010V1360H0Z"/>
+          <path class="road-border" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road-dashes" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <g class="trees"><path d="m310 385-12 24h24Z M310 409v12m-267 205-10 20h20Z M43 646v12"/></g>
+        </svg>
+        <div class="stop stop-start is-current" data-stop="0"><span class="here">いまここ</span><button type="button" data-step="0" aria-current="step" aria-label="START はじめに：太陽光えらびを始める"><span class="station"><span class="step-number start-badge">START</span><span class="start-story"><strong>はじめに</strong><span class="start-greeting"><span class="start-professor"><img src="/map/assets/professor-chibi.png" alt="博士"></span><span class="start-bubble">あなたの家に合うか，一つずつ確かめよう．</span></span><span class="start-action">ここから始めよう →</span></span></span></button></div>
+        <ol class="stops">
+          <li class="stop stop-1" data-stop="1"><span class="here" hidden>いまここ</span><button type="button" data-step="1"><span class="station"><svg aria-hidden="true"><use href="#i-calc"/></svg><span class="step-number">1</span></span><span class="stop-label">わが家はいくら<br>得になる？</span><span class="stop-detail">費用とお得を見てみよう</span></button></li>
+          <li class="stop stop-2" data-stop="2"><span class="here" hidden>いまここ</span><button type="button" data-step="2"><span class="station"><svg aria-hidden="true"><use href="#i-sun"/></svg><span class="step-number">2</span></span><span class="stop-label">太陽光と蓄電池を知ろう</span><span class="stop-detail">できることと，気をつけたいこと</span></button></li>
+          <li class="stop stop-3" data-stop="3"><span class="here" hidden>いまここ</span><button type="button" data-step="3"><span class="station"><svg aria-hidden="true"><use href="#i-route"/></svg><span class="step-number">3</span></span><span class="stop-label">つけるまでの流れ</span><span class="stop-detail">希望・見積もり・工事</span></button></li>
+          <li class="stop stop-4" data-stop="4"><span class="here" hidden>いまここ</span><button type="button" data-step="4"><span class="station"><svg aria-hidden="true"><use href="#i-people"/></svg><span class="step-number">4</span></span><span class="stop-label">どんな会社に頼む？</span><span class="stop-detail">頼み方・会社選び・紹介サイト</span></button></li>
+        </ol>
+        <div class="goal" aria-live="polite">
+          <span class="goal-flag">GOAL</span>
+          <p class="goal-title">わが家のプラン</p>
+          <p class="goal-consultation-status" id="goal-consultation-status" hidden>✓ 相談先を開いた</p>
+          <div id="goal-home" hidden>
+            <svg class="goal-house" viewBox="0 0 160 120" aria-hidden="true">
+              <use href="/map/assets/title-art.svg#solar-house" x="7" width="120" height="120"/>
+              <use id="goal-battery" href="/map/assets/title-art.svg#storage-battery" x="108" y="64" width="49" height="49" hidden/>
+            </svg>
+            <p class="goal-equipment" id="goal-equipment"></p>
+          </div>
+          <div class="goal-effects" id="goal-effects" hidden>
+            <div class="goal-effect">
+              <svg class="goal-money-icon" aria-hidden="true"><use href="#i-coins"/></svg>
+              <div><p class="goal-label">30年間の収支</p><p class="goal-amount" id="goal-amount"></p></div>
+            </div>
+            <div class="goal-effect">
+              <svg class="goal-backup-icon" viewBox="0 0 64 64" aria-hidden="true">
+                <use href="#i-sun" x="2" y="1" width="28" height="28"/>
+                <path id="goal-moon" d="M48 3a12 12 0 1 0 12 17A12 12 0 0 1 48 3Z" hidden/>
+                <path class="backup-bulb" d="M25 49c0-5-6-7-6-14a12 12 0 0 1 24 0c0 7-6 9-6 14Zm0 5h12m-10 5h8M31 48V37m-5-4 5 4 5-4"/>
+              </svg>
+              <div><p class="goal-label">停電への備え</p><p class="goal-backup" id="goal-backup"></p></div>
+            </div>
+          </div>
+          <p class="goal-note" id="goal-note">診断で設備を選んでみよう</p>
+          <a class="goal-review" id="goal-review" href="/simulator/">診断してプランを選ぶ →</a>
+          <button class="primary goal-consult" id="goal-consult" type="button">わが家のことを相談しよう ↓</button>
+        </div>
+      </div>
+      <div id="map-consultation" hidden></div>
+    </section>
+    <section id="reading" class="reading" aria-labelledby="page-title" hidden>
+      <div class="reading-top"><span id="page-chapter"></span><span id="page-position"></span></div>
+      <h1 id="page-title" tabindex="-1"></h1>
+      <div id="page-body"></div>
+      <div id="estimate-slot" hidden>
+        <section id="diagnosis-entry" class="page-response" aria-labelledby="diagnosis-entry-label">
+          <div class="response-person"><span id="diagnosis-start-portrait" aria-hidden="true"></span><h2 id="diagnosis-entry-label">あなた</h2></div>
+          <div class="response-bubble"><button type="button" class="primary" id="start-diagnosis">わが家で調べてみる →</button></div>
+        </section>
+        <form id="diagnose" hidden>
+          <h2>住んでいる地域と電気代を教えてね．</h2>
+          <label for="prefecture">お住まいの都道府県</label><select id="prefecture" required><option value="">選んでください</option></select>
+          <label for="bill">月々の電気代 <span class="optional">分かれば入力</span></label><div class="bill-input"><input id="bill" type="number" min="0" max="1000000" step="1" inputmode="numeric" placeholder="例：12000"><span>円／月</span></div>
+          <p class="form-note">電気代は，分からなければ空欄で大丈夫．その地域の標準的な電気代で調べます．</p>
+          <p id="form-message" role="status">データを読み込んでいます．</p>
+        </form>
+        <div id="diagnosis-result" hidden>
+          <div id="result-cards" class="result-cards"></div>
+          <figure class="cash-chart"><figcaption>使い始めてから，お金はどう変わる？</figcaption><div id="chart"></div></figure>
+          <p id="result-condition" class="form-note"></p>
+        </div>
+      </div>
+      <div id="page-ending"></div>
+      <section id="page-response" class="page-response" aria-labelledby="response-label">
+        <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
+        <div class="response-bubble"><a id="next" class="primary">わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"></div></div>
       </section>
-    </main>
-
-    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="pages/policy.html#operation">運営方針</a><a href="pages/policy.html#advertising">広告方針</a><a href="pages/policy.html#data">データ方針</a><a href="pages/policy.html#privacy">プライバシー</a><a href="pages/policy.html#disclaimer">免責事項</a></nav><p>結果は概算であり，長期利益または補助金の適用を保証するものではありません．</p></div></div></footer>
-  </body>
+      <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link">← 前のページへ</a></nav>
+    </section>
+  </main>
+  <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
 </html>

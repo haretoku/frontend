@@ -23,13 +23,39 @@
     <link rel="stylesheet" href="/shared/styles/main.css">
     <link rel="stylesheet" href="/articles/styles/article.css">
     <link rel="stylesheet" href="/articles/styles/electricity-sales-hero.css">
-    <link rel="stylesheet" href="/shared/styles/fixed-quote-bar.css">
     <script type="module" src="/articles/src/article-data.js"></script>
     <script type="module" src="/shared/analytics.js"></script>
-    <script type="module" src="/shared/quote-entry.js"></script>
-  </head>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+  <script type="module" src="/shared/site-header-entry.js"></script>
+</head>
   <body class="guide-benchmark-page economics-page">
-    <header class="site-header"><div class="page-width site-header__inner"><a class="brand" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><span class="site-header__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></span><nav class="site-nav" aria-label="主要メニュー"><a href="/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 10 12 3l9 7 M5 9v12h5v-7h4v7h5V9"></path></svg><span>トップ</span></a><a href="/simulator/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"></path></svg><span>はれ<span class="brand-term">トク</span>診断</span></a><a href="/guides/" aria-current="page"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path></svg><span>はれ<span class="brand-term">トク</span>ガイド</span></a><a class="site-data-link" href="/data/"><svg class="site-nav__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="16" rx="1.5"></rect><path d="M3 8h18M3 14h18M10 8v12"></path></svg><span>はれ<span class="brand-term">トク</span>データ</span></a></nav></div></header>
+    <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/" aria-current="page">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
     <main>
       <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="/">トップ</a> ／ <a href="/guides/">はれ<span class="brand-term">トク</span>ガイド</a> ／ FIT制度</nav>
       <header class="economics-hero">
@@ -256,18 +282,19 @@
           <section id="before-installation">
             <h3>FITも考慮した診断で，収支の目安を調べる</h3>
             <p><strong>FITによる売電単価の変化まで自分で計算するのは，手間がかかります．</strong>はれトク診断なら，こうした単価の変化に加え，電気代の節約や設置・維持費も考慮して，自宅の収支をかんたんに調べられます．住宅や暮らしの条件を選び，太陽光のみと蓄電池を組み合わせた場合を比較してみましょう．</p>
-            <aside class="economics-inline-quote article-action-stack" aria-label="はれトク診断の案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4><svg class="content-route-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v18h18 M6 15l4-5 4 3 6-6"></path></svg>売電と節約を合わせて，収支の目安を調べる</h4><p>これから導入する設備の費用・効果を，自宅の条件で比較できます．</p></div><a class="article-action__link" href="/simulator/"><span>はれ<span class="brand-term">トク</span>診断を始める</span></a></div></aside>
+
           </section>
           <section id="fit-quote">
             <h3>無料見積もりで，設置条件と費用を確かめる</h3>
             <p><strong>診断で収支の目安をつかんだら，施工会社の無料見積もりで，具体的な導入費用を確かめましょう．</strong>診断だけでは分からない屋根の状態や設備の配置，必要な工事を，自宅の条件に合わせて確認できます．</p>
             <p>施工会社には，FIT申請の担当と，適用予定の価格区分・申請日程も確認します．設備・工事の内容と費用，売電収入の前提をそろえ，設置を判断しましょう．</p>
-            <aside hidden data-quote-promotion class="economics-inline-quote article-action-stack" aria-label="無料見積もりの案内"><div class="article-action-stack__row article-action-stack__row--internal"><div class="article-action-stack__copy"><h4>自宅の設置条件と導入費用を確かめる</h4><p>屋根や工事の条件に合わせた見積もりで，実際にかかる費用を確認できます．</p><p class="advertising-label">広告・アフィリエイト</p></div><button type="button" class="article-action__link" data-inline-quote-action disabled>無料見積もり（準備中）</button></div></aside>
+
             <nav class="article-related-card" aria-label="見積もりの関連情報"><p class="article-related-card__label"><svg class="content-route-icon" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v16 M12 5C9 3 5 3 2 4v15c3-1 7-1-10 2 3-3 7-3 10-2V4c-3-1-7-1-10 1Z"></path></svg>あわせて読みたい</p><div class="article-related-card__item"><a href="/guides/quotes-contractors/"><span>太陽光の見積もりは，何を比べる？</span><span aria-hidden="true">→</span></a></div></nav>
           </section>
         </section>
       </article>
-    </main>
-    <footer class="site-footer"><div class="page-width site-footer__inner"><div><a class="brand brand--footer" href="/" aria-label="はれトクのトップページ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/shared/assets/yen-sun-mark.svg" alt=""></span></a><p class="site-footer__descriptor"><span>太陽光の設置をお考えの方へ</span><strong>かんたん採算診断</strong></p></div><div class="site-footer__notes"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a><a href="/pages/policy.html#advertising">広告方針</a><a href="/pages/policy.html#data">データ方針</a><a href="/pages/policy.html#privacy">プライバシー</a><a href="/pages/policy.html#disclaimer">免責事項</a></nav><p>売電単価と電気料金は，実際の契約条件によって異なります．</p></div></div></footer>
+    <nav class="map-reading-route" aria-label="マップで検討を続ける"><a href="/guides/solar-living/">マップで，電気代の節約と売電について知る<span aria-hidden="true">→</span></a></nav>
+</main>
+    <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
   </body>
 </html>

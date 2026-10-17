@@ -1,3 +1,4 @@
+import {journeyRoutes} from '../../site/map/routes.js';
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
@@ -60,10 +61,10 @@ test("詳細5記事の目次・本文階層・章頭写真・文献・内部導�
       assert(targetHtml.includes(`id="${m[2]}"`), `${slug}: 参照先の節 ${m[1]}#${m[2]}`);
     }
     assert(content.includes('class="source-list"'), `${slug}: 一次資料への文献`);
-    const researchRoute = slug === "subsidy-amount" ? "/data/subsidies/" : "/simulator/";
-    assert(content.includes(`href="${researchRoute}"`), `${slug}: 調べる導線 ${researchRoute}`);
-    for (const card of [...content.matchAll(/<aside\b[^>]*>[\s\S]*?<\/aside>/g)].map(m => m[0]).filter(s => s.includes("data-inline-quote-action"))) {
-      assert(/^<aside hidden data-quote-promotion/.test(card), `${slug}: 未接続見積もり初期非表示`);
-    }
+    const target = {"solar-electricity-savings":"electricity","solar-fit":"electricity","solar-maintenance-cost":"roof"}[slug] || "estimate";
+    assert(html.includes(`href="${journeyRoutes[target]}"`), `${slug}: MAPの対応ページ`);
+    if(slug === "subsidy-amount")assert(content.includes('href="/data/subsidies/"'));
+    assert.doesNotMatch(content,/data-inline-quote-action|data-quote-promotion/);
+
   }
 });

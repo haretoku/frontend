@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="家で使うと電気代の節約，余った分を売ると収入になる．停電に対応した設備なら昼に使え，蓄電池にためておけば夜にも使える．">
+    <link rel="canonical" href="https://haretoku.jp/guides/solar-benefits/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta property="og:title" content="太陽光で，電気代の節約と停電への備え．｜はれトク">
+    <meta property="og:description" content="家で使うと電気代の節約，余った分を売ると収入になる．停電に対応した設備なら昼に使え，蓄電池にためておけば夜にも使える．">
+    <meta property="og:url" content="https://haretoku.jp/guides/solar-benefits/">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="はれトク">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:image" content="https://haretoku.jp/og-home-photo-20260926.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1536">
+    <meta property="og:image:height" content="1024">
+    <meta property="og:image:alt" content="青空と太陽光パネルのある住宅，テラスのノートPC">
+    <meta name="twitter:card" content="summary_large_image">
+
+  <title>太陽光で，電気代の節約と停電への備え．｜はれトク</title>
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="/map/map.css">
+  <script type="module" src="/map/journey.js"></script>
+  <script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+</head>
+<body data-journey-page="basics">
+  <svg class="icon-library" aria-hidden="true"><defs>
+    <symbol id="i-sun" viewBox="0 0 48 48"><circle cx="24" cy="24" r="9"/><path d="M24 3v6m0 30v6M3 24h6m30 0h6M9 9l4 4m22 22 4 4M9 39l4-4m22-22 4-4"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 48 48"><rect x="10" y="4" width="28" height="40" rx="5"/><path d="M16 12h16v7H16ZM16 27h3m10 0h3m-16 8h3m10 0h3"/></symbol>
+    <symbol id="i-route" viewBox="0 0 48 48"><path d="M8 40h21a7 7 0 0 0 0-14H19a7 7 0 0 1 0-14h17M8 35v10m24-39 7 6-7 6"/></symbol>
+    <symbol id="i-people" viewBox="0 0 48 48"><circle cx="18" cy="15" r="7"/><path d="M5 40v-5a13 13 0 0 1 26 0v5M32 8a7 7 0 0 1 0 14m4 6a11 11 0 0 1 7 10v2"/></symbol>
+    <symbol id="i-talk" viewBox="0 0 48 48"><path d="M7 7h34v25H22l-12 9v-9H7Z M15 17h18m-18 7h12"/></symbol>
+    <symbol id="i-coins" viewBox="0 0 64 64"><path d="M27 16v35c0 3 7 6 16 6s16-3 16-6V16Z"/><path d="M27 24c0 3 7 6 16 6s16-3 16-6M27 33c0 3 7 6 16 6s16-3 16-6M27 42c0 3 7 6 16 6s16-3 16-6" fill="none"/><ellipse cx="43" cy="16" rx="16" ry="6"/><path d="M7 44v9c0 4 8 7 18 7s18-3 18-7v-9Z"/><ellipse cx="25" cy="44" rx="18" ry="7"/></symbol>
+  </defs></svg>
+  <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">設備・目標を選び直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/" aria-current="page">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">根拠データ</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
+  <main class="map-width">
+    <section id="map" class="journey" aria-labelledby="map-title" hidden>
+      <div class="map-heading">
+        <div class="map-title-card">
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
+          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+        </div>
+      </div>
+      <div class="map-landscape" aria-label="太陽光を検討する道のり">
+        <svg class="landscape desktop-landscape" viewBox="0 0 1120 700" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M-20 100Q190-10 390 110T810 60T1160 180V-20H-20Z"/>
+          <path class="field field-second" d="M-20 480Q180 320 400 460T880 420T1150 520V600H-20Z"/>
+          <path class="road-border board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="road board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-tile-tint board-tile-tint-second board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <path class="board-spaces board-route" d="M245 140C350 140 400 160 520 180S710 180 790 140S860 115 900 125C1100 175 1100 490 900 465C820 455 775 440 690 438S510 485 410 440S270 385 200 405C20 456 40 650 245 650C360 650 420 610 535 620S780 610 950 560"/>
+          <g class="trees"><path d="m75 340-16 32h32Z M75 372v16m965 82-16 32h32Z M1040 502v16m-740-265-12 24h24Z M300 277v12"/></g>
+          <svg x="340" y="290" width="85" height="85" viewBox="0 0 120 120"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <g class="board-scene" transform="translate(370 510)">
+            <ellipse class="scene-ground" cx="35" cy="60" rx="66" ry="15"/>
+            <path class="scene-building" d="M-12 10h62v48h-62Z"/>
+            <path d="M-18 6h75M-18 30h75M-18 55h75M-18 0v65M57 0v65"/>
+            <circle class="scene-person" cx="79" cy="24" r="9"/>
+            <path class="scene-person" d="M67 60V43q12-14 24 0v17Z"/>
+            <path class="scene-roof" d="M67 20q12-19 24 0"/>
+          </g>
+          <g class="board-scene" transform="translate(590 310)">
+            <ellipse class="scene-ground" cx="40" cy="62" rx="69" ry="16"/>
+            <path class="scene-building" d="M-4 12h98v48H-4Z"/>
+            <circle class="scene-person" cx="17" cy="22" r="8"/>
+            <circle class="scene-person" cx="67" cy="22" r="8"/>
+            <path class="scene-person" d="M5 59V40q12-14 24 0v19M55 59V40q12-14 24 0v19"/>
+            <path class="scene-building" d="M30-12h44V9H46l-9 9V9h-7Z"/>
+            <path d="M38-4h27"/>
+          </g>
+        </svg>
+        <img class="board-guide board-navigator" src="/map/assets/navigator.png" alt="" hidden>
+        <svg class="landscape mobile-landscape" viewBox="0 0 380 1180" preserveAspectRatio="none" aria-hidden="true">
+          <path class="field" d="M0 0H380V170Q220 40 0 250Z"/><path class="field field-second" d="M0 1010Q240 900 380 1010V1360H0Z"/>
+          <path class="road-border" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <path class="road-dashes" d="M190 225C190 290 320 290 320 370S60 465 60 550S320 645 320 730S60 825 60 910Q60 1020 190 1080"/>
+          <g class="trees"><path d="m310 385-12 24h24Z M310 409v12m-267 205-10 20h20Z M43 646v12"/></g>
+        </svg>
+        <div class="stop stop-start is-current" data-stop="0"><span class="here">いまここ</span><button type="button" data-step="0" aria-current="step" aria-label="START はじめに：太陽光えらびを始める"><span class="station"><span class="step-number start-badge">START</span><span class="start-story"><strong>はじめに</strong><span class="start-greeting"><span class="start-professor"><img src="/map/assets/professor-chibi.png" alt="博士"></span><span class="start-bubble">あなたの家に合うか，一つずつ確かめよう．</span></span><span class="start-action">ここから始めよう →</span></span></span></button></div>
+        <ol class="stops">
+          <li class="stop stop-1" data-stop="1"><span class="here" hidden>いまここ</span><button type="button" data-step="1"><span class="station"><svg aria-hidden="true"><use href="#i-calc"/></svg><span class="step-number">1</span></span><span class="stop-label">わが家はいくら<br>得になる？</span><span class="stop-detail">費用とお得を見てみよう</span></button></li>
+          <li class="stop stop-2" data-stop="2"><span class="here" hidden>いまここ</span><button type="button" data-step="2"><span class="station"><svg aria-hidden="true"><use href="#i-sun"/></svg><span class="step-number">2</span></span><span class="stop-label">太陽光と蓄電池を知ろう</span><span class="stop-detail">できることと，気をつけたいこと</span></button></li>
+          <li class="stop stop-3" data-stop="3"><span class="here" hidden>いまここ</span><button type="button" data-step="3"><span class="station"><svg aria-hidden="true"><use href="#i-route"/></svg><span class="step-number">3</span></span><span class="stop-label">つけるまでの流れ</span><span class="stop-detail">希望・見積もり・工事</span></button></li>
+          <li class="stop stop-4" data-stop="4"><span class="here" hidden>いまここ</span><button type="button" data-step="4"><span class="station"><svg aria-hidden="true"><use href="#i-people"/></svg><span class="step-number">4</span></span><span class="stop-label">どんな会社に頼む？</span><span class="stop-detail">頼み方・会社選び・紹介サイト</span></button></li>
+        </ol>
+        <div class="goal" aria-live="polite">
+          <span class="goal-flag">GOAL</span>
+          <p class="goal-title">わが家のプラン</p>
+          <p class="goal-consultation-status" id="goal-consultation-status" hidden>✓ 相談先を開いた</p>
+          <div id="goal-home" hidden>
+            <svg class="goal-house" viewBox="0 0 160 120" aria-hidden="true">
+              <use href="/map/assets/title-art.svg#solar-house" x="7" width="120" height="120"/>
+              <use id="goal-battery" href="/map/assets/title-art.svg#storage-battery" x="108" y="64" width="49" height="49" hidden/>
+            </svg>
+            <p class="goal-equipment" id="goal-equipment"></p>
+          </div>
+          <div class="goal-effects" id="goal-effects" hidden>
+            <div class="goal-effect">
+              <svg class="goal-money-icon" aria-hidden="true"><use href="#i-coins"/></svg>
+              <div><p class="goal-label">30年間の収支</p><p class="goal-amount" id="goal-amount"></p></div>
+            </div>
+            <div class="goal-effect">
+              <svg class="goal-backup-icon" viewBox="0 0 64 64" aria-hidden="true">
+                <use href="#i-sun" x="2" y="1" width="28" height="28"/>
+                <path id="goal-moon" d="M48 3a12 12 0 1 0 12 17A12 12 0 0 1 48 3Z" hidden/>
+                <path class="backup-bulb" d="M25 49c0-5-6-7-6-14a12 12 0 0 1 24 0c0 7-6 9-6 14Zm0 5h12m-10 5h8M31 48V37m-5-4 5 4 5-4"/>
+              </svg>
+              <div><p class="goal-label">停電への備え</p><p class="goal-backup" id="goal-backup"></p></div>
+            </div>
+          </div>
+          <p class="goal-note" id="goal-note">診断で設備を選んでみよう</p>
+          <a class="goal-review" id="goal-review" href="/simulator/">診断してプランを選ぶ →</a>
+          <button class="primary goal-consult" id="goal-consult" type="button">わが家のことを相談しよう ↓</button>
+        </div>
+      </div>
+      <div id="map-consultation" hidden></div>
+    </section>
+    <section id="reading" class="reading" aria-labelledby="page-title">
+      <div class="reading-top"><span id="page-chapter">はじめに</span><span id="page-position">2／3</span></div>
+      <h1 id="page-title" tabindex="-1">太陽光で，電気代の節約と停電への備え．</h1>
+      <div id="page-body"><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>屋根のパネルで作った電気は，みんなどうしているの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>家で使っています．その分，電力会社から買う電気が減るので，電気代の節約になります．余った電気は，売って収入にすることもできますよ．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>私たちの光が，家のお金の助けになるんだね！ 停電したときも使えるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>停電に対応した設備なら，日中に発電した電気を使えます．蓄電池があれば，ためておいた電気を夜にも使えますよ．ただし，使える家電や時間には限りがあるので，普段と同じように使えるとは限りません．</p></div></div><figure class="solar-use-diagram" aria-label="屋根で作った電気の使い道">
+  <div class="solar-use-source"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg?no-inline#solar-house"/></svg><strong>屋根で電気を作る</strong></div>
+  <div class="solar-use-branches">
+    <div class="solar-use-branch"><div class="solar-use-outcome"><span>家で使う</span><span class="solar-use-arrow" aria-hidden="true">→</span><strong>電気代を節約</strong></div>
+      <div class="solar-use-backup"><p>停電したときも</p><div class="solar-use-times">
+        <div><svg class="solar-use-sun" viewBox="0 0 48 48" aria-hidden="true"><use href="#i-sun"/></svg><strong>昼に使う</strong><span>発電した電気を</span></div>
+        <div><svg viewBox="0 0 96 64" aria-hidden="true"><use href="/map/assets/title-art.svg?no-inline#storage-battery" width="64" height="64"/><path d="M83 7a13 13 0 1 0 10 22A13 13 0 0 1 83 7Z" fill="#dec276"/></svg><strong>夜にも使う</strong><span>蓄電池にためた電気を</span></div>
+      </div><small>※停電対応の設備が必要です．<br>使える家電・時間には限りがあります．</small></div>
+    </div>
+    <div class="solar-use-branch solar-use-selling"><div class="solar-use-outcome"><span>余った分を売る</span><span class="solar-use-arrow" aria-hidden="true">→</span><strong>収入になる</strong></div><div class="solar-use-income"><svg class="solar-use-coins" viewBox="0 0 64 64" aria-hidden="true"><use href="#i-coins"/></svg><p>家で使い切れなかった電気を，電力会社に買い取ってもらえます．</p></div></div>
+  </div>
+</figure></div>
+      <div id="estimate-slot" hidden>
+        <section id="diagnosis-entry" class="page-response" aria-labelledby="diagnosis-entry-label">
+          <div class="response-person"><span id="diagnosis-start-portrait" aria-hidden="true"></span><h2 id="diagnosis-entry-label">あなた</h2></div>
+          <div class="response-bubble"><button type="button" class="primary" id="start-diagnosis">わが家で調べてみる →</button></div>
+        </section>
+        <form id="diagnose" hidden>
+          <h2>住んでいる地域と電気代を教えてね．</h2>
+          <label for="prefecture">お住まいの都道府県</label><select id="prefecture" required><option value="">選んでください</option></select>
+          <label for="bill">月々の電気代 <span class="optional">分かれば入力</span></label><div class="bill-input"><input id="bill" type="number" min="0" max="1000000" step="1" inputmode="numeric" placeholder="例：12000"><span>円／月</span></div>
+          <p class="form-note">電気代は，分からなければ空欄で大丈夫．その地域の標準的な電気代で調べます．</p>
+          <p id="form-message" role="status">データを読み込んでいます．</p>
+        </form>
+        <div id="diagnosis-result" hidden>
+          <div id="result-cards" class="result-cards"></div>
+          <figure class="cash-chart"><figcaption>使い始めてから，お金はどう変わる？</figcaption><div id="chart"></div></figure>
+          <p id="result-condition" class="form-note"></p>
+        </div>
+      </div>
+      <div id="page-ending"><details class="sources"><summary>参考資料</summary><ul><li><a href="https://ondankataisaku.env.go.jp/re-start/howto/07/" target="_blank" rel="noopener">環境省：太陽光発電の導入 ↗</a></li><li><a href="https://www.jpea.gr.jp/house/poweroutage/" target="_blank" rel="noopener">太陽光発電協会：停電時でも電気が使えます ↗</a></li><li><a href="https://sumai.panasonic.jp/chikuden/sochiku/failure/" target="_blank" rel="noopener">パナソニック：停電時の蓄電システム ↗</a></li></ul></details><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>家で使うと電気代の節約，余った分を売ると収入になる．</li><li>停電に対応した設備なら昼に使え，蓄電池にためておけば夜にも使える．</li></ul></div></div></div>
+      <section id="page-response" class="page-response" aria-labelledby="response-label">
+        <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/guides/solar-costs/">わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>身近な例で説明して</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>例えば，家で作った電気で冷蔵庫を動かすと，その分は電力会社から買わずに済みます．使い切れずに余った電気は売ることもできるので，「買う電気を減らす」と「余りを売る」の二つが家のお金の助けになります．</p></div></div></details><details class="response-choice response-dialogue"><summary>停電したら，何が使える？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>停電に対応した設備には，照明や冷蔵庫を使えるものがあります．どの家電を使えるかは，設備や配線によって変わります．昼は太陽光で発電した電気を，夜は蓄電池にためておいた電気を使います．同時に動かせる家電にも限りがあります．また，蓄電池の電気を使い切ると，蓄電池からの給電は止まります．停電のときに使いたい家電を考えておくと，設備を選ぶときに相談しやすくなります．</p></div></div></details></div></div>
+      </section>
+      <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/guides/welcome/">← 前のページへ</a></nav>
+    </section>
+  </main>
+  <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
+</html>
