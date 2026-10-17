@@ -1,9 +1,9 @@
 import {journeyRoutes,journeyPageId} from '../map/routes.js';
 import { quoteMaterial } from './quote-config.js';
-import {consultationProviders} from '../map/consultation-view.js';
+import {consultationProviderForUrl} from '../map/consultation-view.js';
 const ORIGIN = "https://haretoku.jp";
 const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result', 'map_consultation']);
-const CONSULT_PLACEMENTS = new Set(['map', 'article']);
+const CONSULT_PLACEMENTS = new Set(['map', 'article', 'map_comparison', 'article_comparison']);
 const PAGES = Object.freeze({
   ...Object.fromEntries(Object.entries(journeyRoutes).filter(([id])=>!['map','estimate'].includes(id)).map(([id,path])=>[path,{id:`guide_${id.replaceAll('-','_')}`,title:"太陽光と蓄電池のガイド",article:true}])),
   "/": { id: "home", title: "はれトク", article: false },
@@ -108,12 +108,12 @@ export function createAnalytics({ config, productionBuild, window: win, document
         const target = new URL(link.href, win.location.href);
         const providerId = link.getAttribute('data-consult-provider');
         const consultPlacement = link.getAttribute('data-consult-placement');
-        const provider = consultationProviders.find(item => item.id === providerId && item.url === target.href);
+        const provider = consultationProviderForUrl(providerId,target.href);
         if (provider && CONSULT_PLACEMENTS.has(consultPlacement)
-          && (consultPlacement === 'map' ? path === '/' : page.article || path === '/simulator/')) {
+          && (consultPlacement === 'map' || consultPlacement === 'map_comparison' ? path === '/' : page.article || path === '/simulator/')) {
           event('consultation_click', undefined, {provider_id:provider.id, consultation_placement:consultPlacement});
           // 広告成果の既存イベントも維持する．相談全社のイベントとは別指標．
-          if (provider.affiliate) event('quote_click', consultPlacement === 'map' ? 'map_consultation' : 'diagnosis_result');
+          if (provider.affiliate && target.href === provider.url) event('quote_click', consultPlacement === 'map' ? 'map_consultation' : 'diagnosis_result');
           return;
         }
         const placement = link.getAttribute('data-quote-placement');

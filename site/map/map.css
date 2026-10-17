@@ -6,7 +6,7 @@ body.is-map { background-color:#f4f8ef;
 body.is-map > main { display:flex; flex-direction:column; justify-content:center; }
 .icon-library { position:absolute; width:0; height:0; overflow:hidden; }
 .map-width { width:min(1160px,calc(100% - 64px)); margin-inline:auto; }
-.journey { overflow:hidden; }
+.journey { overflow:clip; }
 .map-heading { display:flex; justify-content:center; align-items:flex-end; gap:20px; padding:88px 8px 20px; }
 .map-title-card { position:relative; width:fit-content; max-width:calc(100% - 68px); }
 .title-art { position:absolute; z-index:1; width:92px; height:92px; pointer-events:none; }
@@ -234,6 +234,9 @@ body.is-map .map-heading { padding-bottom:35px; }
 .mobile-landscape { height:1180px; }
 .mobile-landscape .road-border { stroke-width:37; }
 .mobile-landscape .road { stroke-width:30; }
+.mobile-landscape .board-tile-tint { fill:none; stroke:#fff0c8; stroke-width:28; stroke-dasharray:22 82; }
+.mobile-landscape .board-tile-tint-second { stroke:#d8eadd; stroke-dashoffset:-52; }
+.mobile-landscape .board-spaces { fill:none; stroke:#b2cbb8; stroke-width:30; stroke-dasharray:1.5 24.5; }
 .stop-start { top:25px; left:16px; width:calc(100% - 32px); text-align:center; }
 .stop.stop-start button { display:block; padding:0; }
 .stop.stop-start .station { display:block; width:100%; height:auto; min-height:245px; padding:30px 18px 18px; border:2px solid #d6b76b; border-radius:24px; background:#fffdf3; box-shadow:0 7px 0 #e5d8b5; }
@@ -487,6 +490,7 @@ summary { cursor:pointer; min-height:44px; padding:10px 0; color:#35624b; }
 .provider-comparison caption { text-align:left; font-weight:700; padding:12px 0; font-size:16px; }
 .provider-comparison th,.provider-comparison td { border:1px solid #dce5dc; padding:14px 12px; vertical-align:middle; overflow-wrap:anywhere; }
 .provider-comparison thead th { background:white; font-size:14px; }
+.provider-comparison thead { position:sticky; top:0; z-index:3; box-shadow:0 2px 0 #cbd8cc; }
 .provider-comparison thead th:first-child { width:21%; }
 .provider-comparison tbody th { text-align:left; background:#f7f9f6; font-weight:500; }
 .provider-comparison td p { margin:0; }

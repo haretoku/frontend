@@ -10,7 +10,7 @@ import {recordDiagnosisComplete,recordJourneyAction} from '../shared/analytics.j
 import {chapterNavigation,finishChapter} from './chapter-progress.js';
 import {renderProviderComparison} from './provider-comparison-view.js';
 import {openConsultationProvider} from './consultation-progress.js';
-import {renderConsultationProviders,consultationProviders} from './consultation-view.js';
+import {renderConsultationProviders,consultationProviderForUrl} from './consultation-view.js';
 import {initializeHeaderMenu} from '../shared/site-header.js';
 import {initialJourneyState,restoreJourneyState,validJourneyInput,normalizeJourneyDiagnosis,applyInitialSolarPlan} from './journey-state.js';
 
@@ -20,6 +20,8 @@ const backups = {solar_only:'昼間中心',solar_plus_standard_battery:'昼も�
 let data=null, preview=null, diagnosisStarted=false, hydrated=false;
 let diagnosisTimer;
 let state=initialJourneyState();
+let diagnosisDraft={prefecture:false,bill:false};
+let unsavedSource=null;
 const safe = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=value=>`約${(Math.abs(value)/10000).toLocaleString('ja-JP',{maximumFractionDigits:0})}万円`;
 const signed=value=>`${value<0?'−':'＋'}${money(value)}`;
@@ -28,7 +30,21 @@ function financeAmount(value,direction){
   const tone=effect===0?'zero':effect<0?'negative':'positive';
   return `<dd class="amount-${tone}">${effect===0?'0円':signed(effect)}</dd>`;
 }
-function save(){if(hydrated)writeProgress(state);}
+// 他タブが保存した項目は残し，この操作が変更した項目だけを重ねる．
+function save(change={}){
+  if(!hydrated)return;
+  const previousInput=JSON.stringify(state.input);
+  const stored=readProgress(),source=JSON.stringify(stored);
+  let latest=unsavedSource===source?state:restoreJourneyState(stored,pages,steps.length);
+  if(data)latest=normalizeJourneyDiagnosis(latest,data.prefectures,Object.keys(names));
+  state=typeof change==='function'?change(latest):{...latest,...change};
+  unsavedSource=writeProgress(state)?null:source;
+  if(data&&previousInput!==JSON.stringify(state.input)&&!diagnosisDraft.prefecture&&!diagnosisDraft.bill){
+    preview=valid(state.input)?estimate(state.input):null;
+    $('#prefecture').value=state.input?.prefectureCode??'';
+    $('#bill').value=state.input?.monthlyElectricityBillYen??'';
+  }
+}
 function valid(input){return validJourneyInput(input,data?.prefectures);}
 function estimate(input,equipment='solar_only') {
   const result=calculateJourneyEstimate({prefectureCode:input.prefectureCode,municipalityCode:null,housingAge:'existing',monthlyElectricityBillYen:input.monthlyElectricityBillYen,systemCapacityKw:4,equipmentPackage:equipment,roofOrientation:'south',daytimeOccupancy:'unknown_standard'},data);
@@ -68,7 +84,7 @@ function renderMap({keepConsultationLinks=false}={}){
   $('#goal-consultation-status').hidden=!state.consultation.openedProviderIds.length;
   const consultationVisible=!$('#map').hidden;
   $('#map-consultation').hidden=!consultationVisible;
-  if(!keepConsultationLinks)$('#map-consultation').innerHTML=consultationVisible?renderConsultationProviders({compact:true,comparison:renderProviderComparison({idPrefix:'map-'})}):'';
+  if(!keepConsultationLinks)$('#map-consultation').innerHTML=consultationVisible?renderConsultationProviders({compact:true,comparison:renderProviderComparison({idPrefix:'map-',placement:'map_comparison'})}):'';
 }
 function renderResponsePortrait(){
   const portrait=state.pawnChosen?`<img src="${assets[`pawn-${state.pawn}`]}" alt="">`:'<span class="neutral-pawn"></span>';
@@ -104,8 +120,7 @@ function renderPage(focus=true){
   $('#reading').classList.toggle('reading-provider-comparison',!!page?.providerComparison);
   $('.map-link').removeAttribute('aria-current');
   if(!page){document.title='わが家の太陽光えらび｜はれトク';$('.map-link').setAttribute('aria-current','page');renderMap();if(focus)requestAnimationFrame(()=>{$('#map-title').focus({preventScroll:true});window.scrollTo(0,0);});return;}
-  state.step=page.step;state.last[page.step]=page.id;
-  save();renderMap();
+  save(latest=>({...latest,step:page.step,last:{...latest.last,[page.step]:page.id}}));renderMap();
   const siblings=pages.filter(p=>p.step===page.step);
   $('#page-chapter').textContent=`${page.step===0?'':`${page.step}．`}${steps[page.step]}`;
   $('#page-position').textContent=`${siblings.indexOf(page)+1}／${siblings.length}`;
@@ -172,7 +187,7 @@ function renderResults(){
   $('#diagnosis-result').hidden=!ready;$('#page-ending').hidden=!ready;$('#page-response').hidden=!ready;
   if(!ready)return;
   const initialPlan=applyInitialSolarPlan(state,data.prefectures);
-  if(initialPlan!==state){state=initialPlan;save();renderMap();}
+  if(initialPlan!==state){save(latest=>applyInitialSolarPlan(latest,data.prefectures));renderMap();if(!preview){renderResults();return;}}
   $('#result-cards').innerHTML=resultCard('solar_only')+resultCard('solar_plus_standard_battery');
   $('#chart').innerHTML=chart();recordDiagnosisComplete();const name=data.prefectures.find(p=>p.code===state.input.prefectureCode)?.name;
   $('#result-condition').textContent=state.input.monthlyElectricityBillYen===null?`${name}・標準的な電気代（月${preview.input.monthly_electricity_bill_yen.toLocaleString('ja-JP')}円）で試算．`:`${name}・月々の電気代 ${state.input.monthlyElectricityBillYen.toLocaleString('ja-JP')}円で試算．`;
@@ -181,9 +196,9 @@ const closeMenu=initializeHeaderMenu();
 function recordConsultationClick(event){
   if(event.defaultPrevented||event.button>1)return;
   const link=event.target.closest('[data-consult-provider]');
-  const provider=consultationProviders.find(item=>item.id===link?.dataset.consultProvider&&item.url===link.href);
+  const provider=consultationProviderForUrl(link?.dataset.consultProvider,link?.href);
   if(!provider)return;
-  state=openConsultationProvider(state,provider.id,steps.length);save();
+  save(latest=>openConsultationProvider(latest,provider.id,steps.length));
   // MAP上のクリック元を取り替えると，新しいタブを開く既定動作を妨げるため，状態表示だけ変える．
   renderMap({keepConsultationLinks:true});
 }
@@ -195,21 +210,21 @@ document.addEventListener('click',event=>{
   if(next){
     const navigation=chapterNavigation(pages,journeyPageId(new URL(location.href)));
     if(navigation.completedStep!==null){
-      state=finishChapter(state,navigation.completedStep,steps.length);save();
+      save(latest=>finishChapter(latest,navigation.completedStep,steps.length));
       recordJourneyAction('chapter_complete',navigation.completedStep);
     }
   }
   const selection=event.target.closest('[data-select]');
   if(selection&&journeyPageId(new URL(location.href))==='estimate'&&valid(state.input)){
     const equipment=selection.dataset.select;
-    try{estimate(state.input,equipment);const changed=state.goal?.equipment!==equipment||JSON.stringify(state.goal?.input)!==JSON.stringify(state.input);state.goal={input:{...state.input},equipment};save();renderMap();
+    try{estimate(state.input,equipment);const changed=state.goal?.equipment!==equipment||JSON.stringify(state.goal?.input)!==JSON.stringify(state.input);const input={...state.input};save({input,goal:{input:{...input},equipment}});renderMap();
       if(changed)recordJourneyAction('plan_change');
       renderResults();
       document.querySelector(`#result-cards [data-select="${equipment}"]`)?.focus({preventScroll:true});
     }catch(error){$('#form-message').textContent=error.message;}
   }
 });
-document.addEventListener('change',event=>{if(event.target.name==='pawn'){state.pawn=event.target.value;state.pawnChosen=true;save();renderMap();renderResponsePortrait();}});
+document.addEventListener('change',event=>{if(event.target.name==='pawn'){save({pawn:event.target.value,pawnChosen:true});renderMap();renderResponsePortrait();}});
 for(const button of document.querySelectorAll('[data-step]'))button.addEventListener('click',()=>{const step=Number(button.dataset.step);recordJourneyAction('map_step_click',step);location.assign(journeyRoutes[step===0&&!state.pawnChosen?starts[0]:state.last[step]||starts[step]]);});
 $('#start-diagnosis').addEventListener('click',()=>{diagnosisStarted=true;renderResults();$('#prefecture').focus();$('#diagnose').scrollIntoView({block:'start'});recordJourneyAction('diagnosis_start');});
 function updateDiagnosis(){
@@ -218,12 +233,13 @@ function updateDiagnosis(){
   if(!$('#prefecture').value){preview=null;renderResults();$('#form-message').textContent='';return;}
   if(!$('#diagnose').checkValidity()){preview=null;renderResults();$('#form-message').textContent='電気代は0〜1,000,000円の整数で入力してください．';return;}
   const input={prefectureCode:$('#prefecture').value,monthlyElectricityBillYen:$('#bill').value===''?null:Number($('#bill').value)};
-  try{preview=estimate(input);state.input=input;save();renderResults();$('#form-message').textContent='';}
+  try{preview=estimate(input);save({input});diagnosisDraft={prefecture:false,bill:false};renderMap();renderResults();$('#form-message').textContent='';}
   catch(error){preview=null;renderResults();$('#form-message').textContent=error.message;}
 }
 $('#diagnose').addEventListener('submit',event=>{event.preventDefault();updateDiagnosis();});
 // 編集途中と計算済みの入力を区別する．選んだ目標は別のスナップショットとして保持する．
 $('#diagnose').addEventListener('input',event=>{
+  if(event.target.id==='prefecture'||event.target.id==='bill')diagnosisDraft[event.target.id]=true;
   clearTimeout(diagnosisTimer);preview=null;renderResults();$('#form-message').textContent='';
   if(event.target.id==='prefecture')updateDiagnosis();else diagnosisTimer=setTimeout(updateDiagnosis,250);
 });
@@ -235,12 +251,13 @@ $('#reset-dialog').addEventListener('close',()=>$('#menu-button').focus());
 $('#confirm-reset').addEventListener('click',()=>{
   $('#reset-dialog').close();
   history.replaceState(null,'',location.pathname+location.hash);
-  clearTimeout(diagnosisTimer);closeMenu();clearProgress();state=initialJourneyState();preview=null;diagnosisStarted=false;save();$('#diagnose').reset();$('#form-message').textContent=data?'':'データを読み込んでいます．';if(location.pathname==='/')renderPage();else location.assign('/');
+  clearTimeout(diagnosisTimer);closeMenu();clearProgress();diagnosisDraft={prefecture:false,bill:false};preview=null;diagnosisStarted=false;save(initialJourneyState());$('#diagnose').reset();$('#form-message').textContent=data?'':'データを読み込んでいます．';if(location.pathname==='/')renderPage();else location.assign('/');
 });
 window.addEventListener('hashchange',()=>{clearTimeout(diagnosisTimer);closeMenu();renderPage();});
 // 別URLから「戻る」で復元された画面にも，他ページで保存したプラン・読了を反映する．
 window.addEventListener('pageshow',event=>{
   if(!event.persisted)return;
+  clearTimeout(diagnosisTimer);diagnosisDraft={prefecture:false,bill:false};
   state=restoreJourneyState(readProgress(),pages,steps.length);
   if(data){
     state=normalizeJourneyDiagnosis(state,data.prefectures,Object.keys(names));
@@ -260,11 +277,16 @@ renderPage();
 try{
   ({publicData:data}=await loadFrontendData());
   for(const p of data.prefectures){const option=document.createElement('option');option.value=p.code;option.textContent=p.name;$('#prefecture').append(option);}
-  state=normalizeJourneyDiagnosis(state,data.prefectures,Object.keys(names));
-  if(valid(state.input)){preview=estimate(state.input);diagnosisStarted=diagnosisStarted||!!state.goal||state.completed.includes(1);$('#prefecture').value=state.input.prefectureCode;$('#bill').value=state.input.monthlyElectricityBillYen??'';}
+  save();
   const queryInput=readDiagnosisQuery(new URL(location.href),data.prefectures.map(p=>p.code));
-  if(queryInput){state.input=queryInput;preview=estimate(queryInput);$('#prefecture').value=queryInput.prefectureCode;$('#bill').value=queryInput.monthlyElectricityBillYen??'';diagnosisStarted=true;}
-  save();if(queryInput)history.replaceState(null,'',location.pathname+location.hash);$('#form-message').textContent='';
+  const restoredInput=queryInput??state.input;
+  if(!diagnosisDraft.prefecture)$('#prefecture').value=restoredInput?.prefectureCode??'';
+  if(!diagnosisDraft.bill)$('#bill').value=restoredInput?.monthlyElectricityBillYen??'';
+  diagnosisStarted=diagnosisStarted||!!queryInput||!!state.goal||state.completed.includes(1);
+  if(queryInput)history.replaceState(null,'',location.pathname+location.hash);
+  $('#form-message').textContent='';
+  if(diagnosisDraft.prefecture||diagnosisDraft.bill){preview=null;updateDiagnosis();}
+  else if(valid(restoredInput)){preview=estimate(restoredInput);if(queryInput)save({input:queryInput});}
   // 説明を読み始めた後のデータ到着で，開いた質問やフォーカスを作り直さない．
   const currentPage=journeyPageId(new URL(location.href));
   if(currentPage==='map'||currentPage==='estimate')renderPage(false);else renderMap();

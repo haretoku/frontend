@@ -5,6 +5,7 @@ import { analyticsAllowed, cleanReferrer, createAnalytics } from "../../site/sha
 import { quoteMaterial } from '../../site/shared/quote-config.js';
 import { analyticsConfig } from "../../site/shared/analytics-config.js";
 import {renderConsultationProviders} from '../../site/map/consultation-view.js';
+import {renderProviderComparison} from '../../site/map/provider-comparison-view.js';
 
 const configured = { enabled: true, enhancedMeasurementDisabled: true, measurementId: "G-TEST123456" };
 function fixture(href, config = configured, productionBuild = true, referrer = "https://haretoku.jp/guides/subsidies/?private=CANARY#CANARY") {
@@ -47,6 +48,30 @@ test('相談先ID・配置・完全URLを照合し，任意値や取消し・右
   f.handlers.auxclick({type:'auxclick',button:2,target:{closest:()=>link()}});
   assert.deepEqual(events(f).map(e=>e[1]),['page_view']);
   assert(!JSON.stringify(f.commands()).includes('CANARY'));
+});
+
+test('MAPと記事の比較表は公式リンク3社を記録し，SP通常リンクを広告クリックにしない',()=>{
+  for(const [path,placement] of [['/','map_comparison'],['/guides/quote-services/','article_comparison']]){
+    const f=fixture('https://haretoku.jp'+path+'?bill=CANARY');
+    const html=renderProviderComparison({placement});
+    const anchors=[...html.matchAll(/<a\b[^>]*class="provider-brand"[^>]*>/g)].map(([tag])=>{
+      const attr=name=>tag.match(new RegExp(`${name}="([^"]*)"`))?.[1]??null;
+      return {href:attr('href'),getAttribute:attr,hasAttribute:name=>attr(name)!==null};
+    });
+    assert.equal(anchors.length,3);
+    for(const link of anchors)f.handlers.click({type:'click',button:0,target:{closest:()=>link}});
+    const clicks=events(f).filter(event=>event[1]==='consultation_click');
+    assert.deepEqual(clicks.map(event=>event[2].provider_id),['solar-partners','tainavi','griene']);
+    assert(clicks.every(event=>event[2].consultation_placement===placement));
+    assert.equal(events(f).filter(event=>event[1]==='quote_click').length,0);
+    f.handlers.auxclick({type:'auxclick',button:1,target:{closest:()=>anchors[0]}});
+    assert.equal(events(f).filter(event=>event[1]==='consultation_click').length,4);
+    const payload=JSON.stringify(f.commands());
+    assert(!payload.includes('CANARY'));assert(!payload.includes('www.solar-partners.jp'));assert(!payload.includes('www.tainavi.com'));assert(!payload.includes('griene.jp'));assert(!payload.includes('a8mat'));
+    const wrongPage=fixture('https://haretoku.jp'+(path==='/'?'/guides/quote-services/':'/'));
+    wrongPage.handlers.click({type:'click',button:0,target:{closest:()=>anchors[0]}});
+    assert.equal(events(wrongPage).filter(event=>event[1]==='consultation_click').length,0);
+  }
 });
 
 test('主要操作は許可した画面と固定値だけを送り，自動表示を操作として扱わない',()=>{

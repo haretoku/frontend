@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {consultationProgress,restoreConsultation,openConsultationProvider} from '../../site/map/consultation-progress.js';
-import {consultationProviders,renderConsultationProviders} from '../../site/map/consultation-view.js';
+import {consultationProviders,consultationProviderForUrl,renderConsultationProviders} from '../../site/map/consultation-view.js';
 import {providers,comparisonRows,comparisonSources} from '../../site/map/provider-comparison.js';
 import {renderProviderComparison} from '../../site/map/provider-comparison-view.js';
 import {pages} from '../../site/map/content.js';
@@ -45,6 +45,20 @@ test('不正な保存値を除き，閲覧と相談先識別を型検査する',
   assert.deepEqual(consultationProgress({viewed:'true',openedProviderIds:'tainavi'}),{viewed:false,openedProviderIds:[]});
   assert.deepEqual(consultationProgress({viewed:1,openedProviderIds:['tainavi','tainavi','eco-hatsu',null,5]}),{viewed:true,openedProviderIds:['tainavi']});
   assert.deepEqual(consultationProgress(null),{viewed:false,openedProviderIds:[]});
+});
+
+test('比較表の公式URLも相談履歴へ反映し，任意URLや入力付きリンクは除く',()=>{
+  let state=restoreConsultation(initial(),5);
+  for(const provider of providers){
+    const accepted=consultationProviderForUrl(provider.id,provider.url);
+    assert.equal(accepted?.id,provider.id);
+    state=openConsultationProvider(state,accepted.id,5);
+    for(const url of [provider.url+'?bill=CANARY',provider.url+'#CANARY',provider.url.replace('https:','http:'),'https://example.com/'])assert.equal(consultationProviderForUrl(provider.id,url),null);
+  }
+  assert.deepEqual(state.consultation.openedProviderIds,providers.map(provider=>provider.id));
+  assert.equal(consultationProviderForUrl('solar-partners',quoteMaterial.url)?.id,'solar-partners');
+  assert.equal(consultationProviderForUrl('CANARY',providers[0].url),null);
+  assert.equal(consultationProviderForUrl(undefined,undefined),null);
 });
 
 test('第4章は具体的な9支援の出典と未確認を保ち，GOALと同じ3社だけを比較する',()=>{
@@ -98,7 +112,7 @@ test('広告素材038は対で維持し，通常リンクと区別し，入力�
 
 test('MAPと第4章に同じ比較表を置いても，見出し・セルの参照先が衝突しない',()=>{
   const chapter=renderProviderComparison();
-  const mapTable=renderProviderComparison({idPrefix:'map-'});
+  const mapTable=renderProviderComparison({idPrefix:'map-',placement:'map_comparison'});
   const map=renderConsultationProviders({compact:true,comparison:mapTable});
   const combined=chapter+map;
   const ids=[...combined.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
@@ -106,7 +120,9 @@ test('MAPと第4章に同じ比較表を置いても，見出し・セルの参�
   for(const [,references] of combined.matchAll(/(?:headers|aria-labelledby)="([^"]+)"/g)){
     for(const reference of references.split(' '))assert(ids.includes(reference),reference);
   }
-  assert.equal(mapTable.replaceAll('map-provider-','provider-'),chapter);
+  assert.equal(mapTable.replaceAll('map-provider-','provider-').replaceAll('map_comparison','article_comparison'),chapter);
+  assert.equal((mapTable.match(/data-consult-placement="map_comparison"/g)??[]).length,3);
+  assert.equal((chapter.match(/data-consult-placement="article_comparison"/g)??[]).length,3);
   assert.match(map,/<details class="consult-provider-comparison"><summary>3社の違いを比べる<\/summary>/);
   assert(map.indexOf(mapTable)<map.indexOf('<div class="consult-provider-cards">'));
   assert(!map.includes('第4章の比較'));assert(!map.includes('自動送信'));

@@ -6,10 +6,15 @@ const providerLogos={
   tainavi:new URL('../shared/assets/tainavi.webp',import.meta.url).href
 };
 export const consultationProviders = [
-  {id:'solar-partners',name:'ソーラーパートナーズ',url:quoteMaterial.url,logo:'solar-partners.png',affiliate:true,description:'自社施工の会社に絞って探したい方や，比較・断りまで支援してほしい方におすすめします．'},
-  {id:'tainavi',name:'タイナビ',url:'https://www.tainavi.com/',logo:'tainavi.webp',affiliate:false,description:'加盟会社の審査や相談支援を確かめて，タイナビで相談したい方へ．'},
-  {id:'griene',name:'グリエネ',url:'https://griene.jp/',logo:'griene.png',affiliate:false,description:'運営による聞き取りを経て，対応する会社の紹介を受けたい方へ．'}
+  {id:'solar-partners',name:'ソーラーパートナーズ',url:quoteMaterial.url,officialUrl:'https://www.solar-partners.jp/',logo:'solar-partners.png',affiliate:true,description:'自社施工の会社に絞って探したい方や，比較・断りまで支援してほしい方におすすめします．'},
+  {id:'tainavi',name:'タイナビ',url:'https://www.tainavi.com/',officialUrl:'https://www.tainavi.com/',logo:'tainavi.webp',affiliate:false,description:'加盟会社の審査や相談支援を確かめて，タイナビで相談したい方へ．'},
+  {id:'griene',name:'グリエネ',url:'https://griene.jp/',officialUrl:'https://griene.jp/',logo:'griene.png',affiliate:false,description:'運営による聞き取りを経て，対応する会社の紹介を受けたい方へ．'}
 ];
+
+// 通常公式リンクと採用済み広告リンクだけを，履歴・計測の両方で認める．
+export function consultationProviderForUrl(id,url) {
+  return consultationProviders.find(provider=>provider.id===id&&(provider.url===url||provider.officialUrl===url))??null;
+}
 
 export function providerLogo(provider) {
   const src=providerLogos[provider.id];
