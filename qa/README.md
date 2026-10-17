@@ -6,9 +6,9 @@
 
 > **結論：LINE共有の旧写真をMAPと同じ意匠へ置き換える候補を作成し，標準ビルド・独立検収を完了した．本番はv0.3.1のままで，候補は未公開である．**
 
-画像は`site/shared/assets/og-step-map-20261017.png`（PNG・1200×630・460805bytes）．原稿は公開対象外の`site/map/local-preview/share-card.html`．既存のハレナ・博士・家・蓄電池・すごろくの道・共通フォントを使用し，ユーザーが添付したLINE画面や私的な会話内容は資産へ含めていない．31HTMLはog:imageのURL・形式・寸法・代替文だけを変更し，調査記事は専用画像を維持する．旧JPEGのURLは原バイトを保持し，og-image.pngは新PNGを配信する候補とした．
+画像は`site/shared/assets/og-step-map-20261017.png`（PNG・1200×630・369508bytes）．原稿は公開対象外の`site/map/local-preview/share-card.html`．既存のハレナ・博士・家・蓄電池・すごろくの道・共通フォントを使用し，ユーザーが添付したLINE画面や私的な会話内容は資産へ含めていない．31HTMLはog:imageのURL・形式・寸法・代替文だけを変更し，調査記事は専用画像を維持する．旧JPEGのURLは原バイトを保持し，og-image.pngは新PNGを配信する候補とした．
 
-標準PagesビルドPASS（123ファイル・正規30URL・公開データ13.0.0同一・原稿非混入）．独立mobile_review_earlyは画像の小サイズ可読性・キャラ統一・切れ／重なり，31HTMLのOGメタ除外後の差分0，news未変更，新URL／互換PNG／旧JPEGの原バイト一致とPNG署名・寸法を確認し，MUST／RECOMMEND／NITS 0．初回は拡張子PNGの実体がJPEGだったMUSTを指摘し，PNGへ変換して解消した．最終PNGのSHA256は`e8f676203567a2b32173fcbace563caf744892b3fe6c22bee9cd1bd851c75b21`．今回，本文・診断・広告リンク・検索向けタイトルは変更していない．LINEの実共有とキャッシュ更新は未確認であり，候補の公開後に確認する．
+標準PagesビルドPASS（123ファイル・正規30URL・公開データ13.0.0同一・原稿非混入）．独立mobile_review_earlyは画像の小サイズ可読性・キャラ統一・切れ／重なり，31HTMLのOGメタ除外後の差分0，news未変更，新URL／互換PNG／旧JPEGの原バイト一致とPNG署名・寸法を確認し，MUST／RECOMMEND／NITS 0．初回は拡張子PNGの実体がJPEGだったMUSTを指摘し，PNGへ変換して解消した．最終PNGのSHA256は`29a0afa4d69b37a5f4c63c430eb566237c5c10b2839a3de840ff2857b1e3d0c7`．ユーザーの小サイズ可読性の指摘を受け，小さい補足文・段階ラベル・吹き出し・URLを削り，主タイトルを88pxへ，博士とハレナも拡大した．修正版も標準ビルドPASS，独立の画像差分再確認で切れ・不自然な重なりなし，MUST／RECOMMEND／NITS 0．今回，本文・診断・広告リンク・検索向けタイトルは変更していない．LINEの実共有とキャッシュ更新は未確認であり，候補の公開後に確認する．
 
 ## v0.3.1公開と本番検収（2026年10月17日）
 
