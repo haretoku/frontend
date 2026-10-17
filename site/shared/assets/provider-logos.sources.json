@@ -2,7 +2,7 @@
   "assets": [
     {
       "name": "ソーラーパートナーズ",
-      "file": "solar-partners.png",
+      "file": "shared/assets/solar-partners.png",
       "page": "https://www.solar-partners.jp/pt01",
       "bytes": 11834,
       "sha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39",
@@ -16,12 +16,12 @@
         "decided_on": "2026-10-15",
         "variant": "原画像全体．屋根マーク・会社名・上部キャッチコピー『暮らす家族に喜びを．』を含む",
         "display_crop": false,
-        "scope": "ユーザーによるロゴ案採用・ローカル試作適用．本番公開・commit・pushの承認ではない"
+        "scope": "2026-10-17のユーザー指摘に基づき，本番掲載へ採用．原画像全体を表示"
       }
     },
     {
       "name": "タイナビ",
-      "file": "tainavi.webp",
+      "file": "shared/assets/tainavi.webp",
       "page": "https://www.tainavi.com/",
       "bytes": 12230,
       "sha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83",
@@ -30,27 +30,23 @@
         "note": "公式サイト内画像の使用案内を確認．描き直しや切抜きの明示許諾とは別",
         "checked_on": "2026-10-15",
         "source": "https://media-console.a8.net/program/detail-partnered?programId=s00000010685001"
-      },
-      "display_adjustment": {
-        "method": "CSSの表示枠で下部説明だけ省略．原画像は無加工",
-        "viewport": "492x120",
-        "requested_on": "2026-10-15",
-        "explicit_crop_permission_confirmed": false,
-        "note": "ユーザー希望によるローカル試作．提供広告バナーの改変許諾へ一般化せず，個別問い合わせをリリース条件にしない"
       }
     },
     {
       "name": "グリエネ",
-      "file": "griene.png",
+      "file": "map/local-preview/provider-logos/griene.png",
       "page": "https://griene.jp/",
       "bytes": 18362,
       "sha256": "2f7f8bfa33688e5e36288cb56e1a7839a63501f3af072e72131da2be37d20494",
       "source": "https://griene.jp/images/lp/common/griene-logo_p1.png"
     }
   ],
-  "purpose": "ローカル試作の表示確認",
+  "purpose": "相談先ロゴの出典・使用条件",
   "modified": false,
-  "production_included": false,
+  "production_included": [
+    "ソーラーパートナーズ",
+    "タイナビ"
+  ],
   "retrieved_on": "2026-10-15",
   "public_use_permission": "ソーラーパートナーズ・タイナビはA8案件備考のサイト内画像使用案内を確認．グリエネは未確認．ロゴ改変の明示許諾とは別"
 }

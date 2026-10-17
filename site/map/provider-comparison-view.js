@@ -1,16 +1,17 @@
 import {comparisonDate,providers,statusLegend,comparisonRows,comparisonSources,comparisonScope} from './provider-comparison.js';
-import {consultationProviders,previewLogo} from './consultation-view.js';
+import {consultationProviders,providerLogo} from './consultation-view.js';
 
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 // 一つの表を画面幅に応じて組み替え，項目・会社とセルの対応を保つ．
-export function renderProviderComparison({preview=import.meta.env?.DEV===true,idPrefix=''}={}){
+export function renderProviderComparison({idPrefix=''}={}){
   const titleId=`${idPrefix}provider-comparison-title`;
   const providerHeading=provider=>`${idPrefix}provider-heading-${provider.id}`;
   const rowHeading=row=>`${idPrefix}provider-row-${row.id}`;
   const brand=provider=>{
-    const logo=previewLogo(consultationProviders.find(item=>item.id===provider.id),preview);
-    return `<a class="provider-brand" href="${safe(provider.url)}" target="_blank" rel="noopener" aria-label="${safe(provider.name)}の公式サイト（別タブ）">${logo||safe(provider.name)}<span aria-hidden="true">↗</span></a>`;
+    const logo=providerLogo(consultationProviders.find(item=>item.id===provider.id));
+    const name=provider.id==='solar-partners'?'<span>ソーラー</span><span>パートナーズ</span>':safe(provider.name);
+    return `<a class="provider-brand" href="${safe(provider.url)}" target="_blank" rel="noopener" aria-label="${safe(provider.name)}の公式サイト（別タブ）">${logo}<span class="provider-brand-name">${name}</span><span aria-hidden="true">↗</span></a>`;
   };
   return `<section class="provider-comparison" aria-labelledby="${safe(titleId)}">
     <h2 id="${safe(titleId)}">一括見積もりサイトを，同じ基準で比べよう</h2>
@@ -23,7 +24,7 @@ export function renderProviderComparison({preview=import.meta.env?.DEV===true,id
           const status=statusLegend[part.status];
           return `<p class="provider-feature"><span class="provider-status status-${safe(part.status)}" role="img" aria-label="${safe(status.label)}">${safe(status.symbol)}</span>${part.text?`<span>${safe(part.text)}</span>`:''}</p>`;
         }).join('');
-        return `<td role="cell" headers="${safe(rowHeading(row))} ${safe(providerHeading(provider))}"><strong class="provider-mobile-name" aria-hidden="true">${safe(provider.name)}</strong>${parts}</td>`;
+        return `<td role="cell" headers="${safe(rowHeading(row))} ${safe(providerHeading(provider))}">${parts}</td>`;
       }).join('')}</tr>`).join('')}</tbody>
     </table>
     <ul class="provider-status-legend" aria-label="比較表の記号の意味">${Object.values(statusLegend).map(status=>`<li><span aria-hidden="true">${safe(status.symbol)}</span> ${safe(status.label)}</li>`).join('')}</ul>

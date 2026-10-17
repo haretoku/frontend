@@ -58,24 +58,25 @@ test('第4章は具体的な9支援の出典と未確認を保ち，GOALと同�
   for(const row of comparisonRows)for(const cell of row.cells)assert.equal(cell.parts.length,1);
   assert.equal(comparisonRows.find(row=>row.id==='disputes').cells.find(cell=>cell.providerId==='tainavi').parts[0].status,'no');
   assert.equal(comparisonRows.find(row=>row.id==='declining').cells.find(cell=>cell.providerId==='griene').parts[0].status,'unknown');
-  for(const preview of [true,false]){
-    const html=renderProviderComparison({preview});
+  {
+    const html=renderProviderComparison();
     const table=html.match(/<table[\s\S]*?<\/table>/)[0];
     assert(!table.includes('根拠'));assert(!table.includes('provider-source'));
     assert.equal((table.match(/class="provider-feature"/g)??[]).length,27);
     assert(!html.includes('<summary>保証の条件</summary>'));assert(html.includes('<summary>参考資料・確認日</summary>'));
     assert(html.includes('https://www.solar-partners.jp/guarantee-clause/'));
-    assert.equal(html.includes('local-preview'),preview);
+    assert(!html.includes('local-preview'));
     assert(html.includes('広告：ソーラーパートナーズ・タイナビと提携しています．'));
     assert(html.indexOf('provider-comparison-ad')>html.indexOf('</table>'));
     assert.equal((table.match(/class="provider-brand"/g)??[]).length,3);
-    if(preview)for(const [anchor] of table.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g))assert(anchor.includes('consult-provider-logo'));
+    assert.equal((table.match(/class="consult-provider-logo"/g)??[]).length,2);
+    assert.equal((table.match(/<th scope="col"/g)??[]).length,4);
   }
 });
 
 test('広告素材038は対で維持し，通常リンクと区別し，入力を含む送信先を作らない',()=>{
   for(const compact of [false,true]){
-    const html=renderConsultationProviders({compact,preview:true});
+    const html=renderConsultationProviders({compact});
     const destinations=[...html.matchAll(/<a[^>]*href="([^"]+)"[^>]*data-consult-provider="([^"]+)"/g)];
     assert.equal(destinations.length,3);
     for(const [tag,href,id] of destinations){
@@ -87,18 +88,18 @@ test('広告素材038は対で維持し，通常リンクと区別し，入力�
     assert(html.includes(`src="${quoteMaterial.impressionUrl}" width="1" height="1"`));
     assert.match(html,/広告・アフィリエイト/);assert.match(html,/通常リンク ／ 広告リンクではありません/);
     assert.match(html,/無料見積もり ↗/);
-    assert.equal([...html.matchAll(/class="consult-provider-logo"/g)].length,3);
+    assert.equal([...html.matchAll(/class="consult-provider-logo"/g)].length,2);
     for(const [anchor] of html.matchAll(/<a\b[^>]*>[\s\S]*?<\/a>/g))assert(!anchor.includes('consult-provider-logo'));
-    const production=renderConsultationProviders({compact,preview:false});
-    assert(!production.includes('local-preview'));assert(!production.includes('consult-provider-logo'));
-    assert(production.includes('ソーラーパートナーズ'));assert(production.includes('タイナビ'));assert(production.includes('グリエネ'));
+    assert(!html.includes('local-preview'));
+    assert(html.includes('提携：タイナビ ／ 公式サイトへのリンク'));
+    for(const [,src] of html.matchAll(/class="consult-provider-logo" src="([^"]+)"/g))assert.match(src,/\/shared\/assets\/(solar-partners\.png|tainavi\.webp)$/);
   }
 });
 
 test('MAPと第4章に同じ比較表を置いても，見出し・セルの参照先が衝突しない',()=>{
-  const chapter=renderProviderComparison({preview:false});
-  const mapTable=renderProviderComparison({preview:false,idPrefix:'map-'});
-  const map=renderConsultationProviders({compact:true,preview:false,comparison:mapTable});
+  const chapter=renderProviderComparison();
+  const mapTable=renderProviderComparison({idPrefix:'map-'});
+  const map=renderConsultationProviders({compact:true,comparison:mapTable});
   const combined=chapter+map;
   const ids=[...combined.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
   assert.equal(new Set(ids).size,ids.length);
