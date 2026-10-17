@@ -2,6 +2,15 @@
 
 公開した変更を記録します．開発中の作業と予定は[開発計画](../business-research/運営/開発計画.md)で管理します．記録の開始版はv0.2.0です．
 
+## v0.3.3 2026年10月17日
+
+[GitHub Releases](https://github.com/haretoku/frontend/releases/tag/v0.3.3)にも同じ公開履歴を掲載しています．
+
+- 旧写真URLでも，マップと同じ新イラストを返すよう変更しました．旧URLとJPEG形式は維持しています．
+- 新しい共有用PNGと互換PNG，記事専用画像，本文・診断・広告リンク・公開データは変更していません．
+
+公開コミットは`fec681a98c9bbff1a05fcc01d55f91c51aee8c16`です．[公開処理](https://github.com/haretoku/frontend/actions/runs/39021859480)は成功し，公開用123検査・標準ビルドと新旧3画像URLの本番独立照合は合格済みです．LINE内に保存された画像の即時更新を保証する変更ではなく，LINEでの実共有表示は未確認として残しています．
+
 ## v0.3.2 2026年10月17日
 
 [GitHub Releases](https://github.com/haretoku/frontend/releases/tag/v0.3.2)にも同じ公開履歴を掲載しています．
