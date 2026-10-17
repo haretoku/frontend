@@ -1,7 +1,9 @@
-import {journeyRoutes} from '../map/routes.js';
+import {journeyRoutes,journeyPageId} from '../map/routes.js';
 import { quoteMaterial } from './quote-config.js';
+import {consultationProviders} from '../map/consultation-view.js';
 const ORIGIN = "https://haretoku.jp";
-const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result']);
+const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result', 'map_consultation']);
+const CONSULT_PLACEMENTS = new Set(['map', 'article']);
 const PAGES = Object.freeze({
   ...Object.fromEntries(Object.entries(journeyRoutes).filter(([id])=>!['map','estimate'].includes(id)).map(([id,path])=>[path,{id:`guide_${id.replaceAll('-','_')}`,title:"太陽光と蓄電池のガイド",article:true}])),
   "/": { id: "home", title: "はれトク", article: false },
@@ -47,17 +49,23 @@ export function analyticsAllowed(config, href, productionBuild) {
 
 // テスト時はwindow/documentを差し替え，Googleへ接続せず送信予定コマンドを検証する．
 export function createAnalytics({ config, productionBuild, window: win, document: doc }) {
-  const noop = Object.freeze({ active: false, diagnosisComplete() { return false; } });
+  const noop = Object.freeze({ active: false, diagnosisComplete() { return false; }, journeyAction() { return false; } });
   if (!analyticsAllowed(config, win.location.href, productionBuild)) return noop;
   try {
-    const path = canonicalPath(new URL(win.location.href).pathname);
-    const page = PAGES[path];
-    const context = Object.freeze({
+    const resolvePath = () => {
+      const url = new URL(win.location.href);
+      if (url.origin !== ORIGIN || !canonicalPath(url.pathname)) return null;
+      return journeyRoutes[journeyPageId(url)] ?? canonicalPath(url.pathname);
+    };
+    let path = resolvePath();
+    let page = PAGES[path];
+    const pageContext = () => Object.freeze({
       page_location: ORIGIN + path,
       page_referrer: cleanReferrer(doc.referrer),
       page_title: page.title,
       page_id: page.id
     });
+    let context = pageContext();
     const flags = {
       send_page_view: false,
       allow_google_signals: false,
@@ -72,30 +80,55 @@ export function createAnalytics({ config, productionBuild, window: win, document
     gtag("set", { ...flags, ...context });
     gtag("js", new Date());
     gtag("config", config.measurementId, { ...flags, ...context });
-    function event(name, placement) {
-      // 配置は固定列挙値だけ．入力・金額・リンク文字列は送信しない．
-      gtag("event", name, { ...context, send_to: config.measurementId, ...(QUOTE_PLACEMENTS.has(placement) ? { quote_placement: placement } : {}) });
+    function event(name, placement, fields = {}) {
+      // 呼出元で検証した固定列挙値だけを追加し，入力・金額・リンク文字列は送信しない．
+      gtag("event", name, { ...context, send_to: config.measurementId, ...(QUOTE_PLACEMENTS.has(placement) ? { quote_placement: placement } : {}), ...fields });
     }
     event("page_view");
     if (page.article) event("article_view");
     let started = false, completed = false;
-    doc.addEventListener("click", e => {
-      if (e.defaultPrevented || (e.button !== undefined && e.button !== 0)) return;
+    const recordedActions = new Set();
+    win.addEventListener?.('hashchange', () => {
+      try {
+        const nextPath = resolvePath();
+        if (!nextPath || nextPath === path) return;
+        path = nextPath;page = PAGES[path];context = pageContext();
+        started = false;completed = false;recordedActions.clear();
+        gtag('set',context);
+        event('page_view');
+        if (page.article) event('article_view');
+      } catch { /* 計測失敗で旧入口からの画面移動を止めない． */ }
+    });
+    const trackLink = e => {
+      const auxiliary = e.type === 'auxclick';
+      if (e.defaultPrevented || (auxiliary ? e.button !== 1 : e.button !== undefined && e.button !== 0)) return;
       const link = e.target?.closest?.("a[href]");
       if (!link || link.hasAttribute("download") || link.getAttribute("aria-disabled") === "true") return;
       try {
         const target = new URL(link.href, win.location.href);
+        const providerId = link.getAttribute('data-consult-provider');
+        const consultPlacement = link.getAttribute('data-consult-placement');
+        const provider = consultationProviders.find(item => item.id === providerId && item.url === target.href);
+        if (provider && CONSULT_PLACEMENTS.has(consultPlacement)
+          && (consultPlacement === 'map' ? path === '/' : page.article || path === '/simulator/')) {
+          event('consultation_click', undefined, {provider_id:provider.id, consultation_placement:consultPlacement});
+          // 広告成果の既存イベントも維持する．相談全社のイベントとは別指標．
+          if (provider.affiliate) event('quote_click', consultPlacement === 'map' ? 'map_consultation' : 'diagnosis_result');
+          return;
+        }
         const placement = link.getAttribute('data-quote-placement');
         if (target.href === quoteMaterial.url && QUOTE_PLACEMENTS.has(placement)) {
           event('quote_click', placement);
           return;
         }
-        if (!(page.article || page.data) || started) return;
+        if (auxiliary || !(page.article || page.data) || started) return;
         if (target.origin !== ORIGIN || !(canonicalPath(target.pathname) === "/simulator/" || canonicalPath(target.pathname) === "/" && target.hash === "#estimate")) return;
         started = true;
         event(page.data ? "data_diagnosis_click" : "article_diagnosis_click");
       } catch { /* 不正なリンクは計測しない． */ }
-    });
+    };
+    doc.addEventListener('click', trackLink);
+    doc.addEventListener('auxclick', trackLink);
     const script = doc.createElement("script");
     script.async = true;
     script.referrerPolicy = "no-referrer";
@@ -103,6 +136,28 @@ export function createAnalytics({ config, productionBuild, window: win, document
     doc.head.append(script);
     return Object.freeze({
       active: true,
+      journeyAction(action, value) {
+        if (action === 'map_step_click' && path === '/' && [0,1,2,3,4].includes(value)) {
+          event(action, undefined, {chapter_id:String(value)});
+          return true;
+        }
+        if (action === 'goal_consultation_click' && path === '/') {
+          event(action);
+          return true;
+        }
+        if (action === 'plan_change' && path === '/simulator/') {
+          event(action);
+          return true;
+        }
+        const chapter = Object.entries(journeyRoutes).find(([,route]) => route === path)?.[0];
+        const chapterEnd = {try:0,estimate:1,disaster:2,installation:3,compare:4};
+        const oneTime = action === 'diagnosis_start' && path === '/simulator/'
+          || action === 'chapter_complete' && Object.hasOwn(chapterEnd,chapter) && value === chapterEnd[chapter];
+        if (!oneTime || recordedActions.has(action)) return false;
+        recordedActions.add(action);
+        event(action, undefined, action === 'chapter_complete' ? {chapter_id:String(value)} : {});
+        return true;
+      },
       diagnosisComplete() {
         if (!["/", "/simulator/"].includes(path) || completed) return false;
         completed = true;

@@ -11,3 +11,8 @@ export function recordDiagnosisComplete() {
   try { return analytics?.diagnosisComplete() ?? false; }
   catch { return false; } // 計測の失敗で診断処理を中断しない．
 }
+
+export function recordJourneyAction(action, value) {
+  try { return analytics?.journeyAction(action, value) ?? false; }
+  catch { return false; }
+}

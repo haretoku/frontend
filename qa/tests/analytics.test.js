@@ -4,11 +4,12 @@ import { readFile } from "node:fs/promises";
 import { analyticsAllowed, cleanReferrer, createAnalytics } from "../../site/shared/analytics-core.js";
 import { quoteMaterial } from '../../site/shared/quote-config.js';
 import { analyticsConfig } from "../../site/shared/analytics-config.js";
+import {renderConsultationProviders} from '../../site/map/consultation-view.js';
 
 const configured = { enabled: true, enhancedMeasurementDisabled: true, measurementId: "G-TEST123456" };
 function fixture(href, config = configured, productionBuild = true, referrer = "https://haretoku.jp/guides/subsidies/?private=CANARY#CANARY") {
-  const scripts = [], handlers = {};
-  const window = { location: { href } };
+  const scripts = [], handlers = {}, windowHandlers = {};
+  const window = { location: { href }, addEventListener(type,fn){windowHandlers[type]=fn;} };
   const document = {
     referrer,
     createElement(tag) { assert.equal(tag, "script"); return {}; },
@@ -16,16 +17,102 @@ function fixture(href, config = configured, productionBuild = true, referrer = "
     addEventListener(type, fn) { handlers[type] = fn; }
   };
   const analytics = createAnalytics({ config, productionBuild, window, document });
-  return { analytics, window, scripts, handlers, commands: () => (window.dataLayer ?? []).map(args => [...args]) };
+  return { analytics, window, scripts, handlers, windowHandlers, commands: () => (window.dataLayer ?? []).map(args => [...args]) };
 }
 const events = f => f.commands().filter(c => c[0] === "event");
+
+test('MAPで実際に描画する3社の相談ボタンは全社計測し，広告指標も維持する',()=>{
+  const f=fixture('https://haretoku.jp/?bill=CANARY#CANARY');
+  const html=renderConsultationProviders({compact:true,preview:false});
+  const anchors=[...html.matchAll(/<a\b[^>]*class="[^"]*consult-provider-action[^"]*"[^>]*>/g)].map(([tag])=>{
+    const attr=name=>{const value=tag.match(new RegExp(`${name}="([^"]*)"`))?.[1]??null;return value===null?null:value.replaceAll('&amp;','&');};
+    return {href:attr('href'),getAttribute:attr,hasAttribute:name=>attr(name)!==null};
+  });
+  assert.equal(anchors.length,3);
+  for(const link of anchors)f.handlers.click({type:'click',button:0,target:{closest:()=>link}});
+  const clicks=events(f).filter(e=>e[1]==='consultation_click');
+  assert.deepEqual(clicks.map(e=>e[2].provider_id),['solar-partners','tainavi','griene']);
+  assert(clicks.every(e=>e[2].consultation_placement==='map'));
+  assert.deepEqual(events(f).filter(e=>e[1]==='quote_click').map(e=>e[2].quote_placement),['map_consultation']);
+  assert(!JSON.stringify(f.commands()).includes('CANARY'));
+  f.handlers.auxclick({type:'auxclick',button:1,target:{closest:()=>anchors[1]}});
+  assert.equal(events(f).filter(e=>e[1]==='consultation_click').length,4);
+});
+
+test('相談先ID・配置・完全URLを照合し，任意値や取消し・右クリックを送らない',()=>{
+  const f=fixture('https://haretoku.jp/');
+  const link=(provider='tainavi',placement='map',href='https://www.tainavi.com/')=>({href,hasAttribute:()=>false,getAttribute:name=>({'data-consult-provider':provider,'data-consult-placement':placement}[name]??null)});
+  for(const target of [link('CANARY'),link('tainavi','CANARY'),link('tainavi','map','https://www.tainavi.com/?CANARY')])f.handlers.click({button:0,target:{closest:()=>target}});
+  f.handlers.click({button:0,defaultPrevented:true,target:{closest:()=>link()}});
+  f.handlers.auxclick({type:'auxclick',button:2,target:{closest:()=>link()}});
+  assert.deepEqual(events(f).map(e=>e[1]),['page_view']);
+  assert(!JSON.stringify(f.commands()).includes('CANARY'));
+});
+
+test('主要操作は許可した画面と固定値だけを送り，自動表示を操作として扱わない',()=>{
+  const f=fixture('https://haretoku.jp/');
+  for(const value of [0,1,2,3,4])assert.equal(f.analytics.journeyAction('map_step_click',value),true);
+  for(const value of [-1,5,'1','CANARY',{chapter:1}])assert.equal(f.analytics.journeyAction('map_step_click',value),false);
+  assert.equal(f.analytics.journeyAction('goal_consultation_click'),true);
+  assert.equal(f.analytics.journeyAction('plan_change'),false);
+  assert.equal(f.analytics.journeyAction('CANARY','CANARY'),false);
+  const d=fixture('https://haretoku.jp/simulator/');
+  assert.deepEqual(events(d).map(e=>e[1]),['page_view']);
+  assert.equal(d.analytics.journeyAction('diagnosis_start'),true);
+  assert.equal(d.analytics.journeyAction('diagnosis_start'),false);
+  assert.equal(d.analytics.journeyAction('plan_change'),true);
+  assert.equal(d.analytics.journeyAction('plan_change'),true);
+  assert.equal(d.analytics.journeyAction('map_step_click',1),false);
+  assert(events(d).every(e=>!Object.hasOwn(e[2],'equipment')));
+  assert(!JSON.stringify(f.commands()).includes('CANARY'));
+});
+
+test('章読了は正しい章末の明示操作を文書内で一度記録し，途中ページは除く',()=>{
+  for(const [path,chapter] of [['solar-costs',0],['../simulator',1],['disaster-preparedness',2],['installation-process',3],['choosing-installer',4]]){
+    const href=path==='../simulator'?'https://haretoku.jp/simulator/':`https://haretoku.jp/guides/${path}/`;
+    const f=fixture(href);
+    assert.equal(f.analytics.journeyAction('chapter_complete',chapter+1),false);
+    assert.equal(f.analytics.journeyAction('chapter_complete',chapter),true);
+    assert.equal(f.analytics.journeyAction('chapter_complete',chapter),false);
+    assert.equal(events(f).filter(e=>e[1]==='chapter_complete')[0][2].chapter_id,String(chapter));
+  }
+  const middle=fixture('https://haretoku.jp/guides/solar-benefits/');
+  assert.equal(middle.analytics.journeyAction('chapter_complete',0),false);
+  for(const [config,prod] of [[configured,false],[{...configured,enabled:false},true]]){
+    const f=fixture('https://haretoku.jp/',config,prod);
+    assert.equal(f.analytics.journeyAction('map_step_click',0),false);
+    assert.equal(f.window.dataLayer,undefined);
+  }
+});
+
+test('旧TOPの既知ハッシュは正規URLとして集計し，任意ハッシュは送らない',()=>{
+  for(const [hash,path,chapter] of [['estimate','/simulator/',1],['try','/guides/solar-costs/',0]]){
+    const f=fixture(`https://haretoku.jp/?secret=CANARY#${hash}`);
+    assert.equal(events(f)[0][2].page_location,'https://haretoku.jp'+path);
+    assert.equal(f.analytics.journeyAction('chapter_complete',chapter),true);
+    if(hash==='estimate'){
+      assert.equal(f.analytics.journeyAction('diagnosis_start'),true);
+      assert.equal(f.analytics.journeyAction('plan_change'),true);
+    }
+    assert(!JSON.stringify(f.commands()).includes('CANARY'));
+  }
+  const f=fixture('https://haretoku.jp/');
+  f.window.location.href='https://haretoku.jp/?secret=CANARY#estimate';
+  f.windowHandlers.hashchange();
+  assert.equal(f.analytics.journeyAction('diagnosis_start'),true);
+  assert.deepEqual(events(f).filter(e=>e[1]==='page_view').map(e=>e[2].page_location),['https://haretoku.jp/','https://haretoku.jp/simulator/']);
+  f.window.location.href='https://haretoku.jp/simulator/#CANARY';
+  f.windowHandlers.hashchange();
+  assert.equal(events(f).filter(e=>e[1]==='page_view').length,2);
+  assert(!JSON.stringify(f.commands()).includes('CANARY'));
+});
 
 test('マップ診断の完了と記事からの移動は一度だけ記録し，入力やハッシュを送らない',()=>{
   const home=fixture('https://haretoku.jp/?prefecture=CANARY&monthlyElectricityBill=CANARY#estimate');
   assert.equal(home.analytics.diagnosisComplete(),true);
   assert.equal(home.analytics.diagnosisComplete(),false);
   assert.deepEqual(events(home).map(e=>e[1]),['page_view','diagnosis_complete']);
-  assert(events(home).every(e=>e[2].page_location==='https://haretoku.jp/'));
+  assert(events(home).every(e=>e[2].page_location==='https://haretoku.jp/simulator/'));
   assert(!JSON.stringify(home.commands()).includes('CANARY'));
   const article=fixture('https://haretoku.jp/guides/subsidies/');
   const click=href=>article.handlers.click({button:0,target:{closest:()=>({href,hasAttribute:()=>false,getAttribute:()=>null})}});

@@ -6,7 +6,7 @@ import {pages, starts, steps} from './content.js';
 import {readProgress,writeProgress,clearProgress} from './progress-storage.js';
 import {assets} from './assets.js';
 import {readDiagnosisQuery} from './legacy-route.js';
-import {recordDiagnosisComplete} from '../shared/analytics.js';
+import {recordDiagnosisComplete,recordJourneyAction} from '../shared/analytics.js';
 import {chapterNavigation,finishChapter} from './chapter-progress.js';
 import {renderProviderComparison} from './provider-comparison-view.js';
 import {openConsultationProvider} from './consultation-progress.js';
@@ -189,27 +189,29 @@ function recordConsultationClick(event){
 }
 document.addEventListener('click',recordConsultationClick);
 document.addEventListener('auxclick',recordConsultationClick);
-$('#goal-consult').addEventListener('click',()=>{$('#map-consultation').scrollIntoView({block:'start',behavior:'smooth'});$('#map-consultation-title').focus({preventScroll:true});});
+$('#goal-consult').addEventListener('click',()=>{$('#map-consultation').scrollIntoView({block:'start',behavior:'smooth'});$('#map-consultation-title').focus({preventScroll:true});recordJourneyAction('goal_consultation_click');});
 document.addEventListener('click',event=>{
   const next=event.target.closest('#next');
   if(next){
     const navigation=chapterNavigation(pages,journeyPageId(new URL(location.href)));
     if(navigation.completedStep!==null){
       state=finishChapter(state,navigation.completedStep,steps.length);save();
+      recordJourneyAction('chapter_complete',navigation.completedStep);
     }
   }
   const selection=event.target.closest('[data-select]');
   if(selection&&journeyPageId(new URL(location.href))==='estimate'&&valid(state.input)){
     const equipment=selection.dataset.select;
-    try{estimate(state.input,equipment);state.goal={input:{...state.input},equipment};save();renderMap();
+    try{estimate(state.input,equipment);const changed=state.goal?.equipment!==equipment||JSON.stringify(state.goal?.input)!==JSON.stringify(state.input);state.goal={input:{...state.input},equipment};save();renderMap();
+      if(changed)recordJourneyAction('plan_change');
       renderResults();
       document.querySelector(`#result-cards [data-select="${equipment}"]`)?.focus({preventScroll:true});
     }catch(error){$('#form-message').textContent=error.message;}
   }
 });
 document.addEventListener('change',event=>{if(event.target.name==='pawn'){state.pawn=event.target.value;state.pawnChosen=true;save();renderMap();renderResponsePortrait();}});
-for(const button of document.querySelectorAll('[data-step]'))button.addEventListener('click',()=>{const step=Number(button.dataset.step);location.assign(journeyRoutes[step===0&&!state.pawnChosen?starts[0]:state.last[step]||starts[step]]);});
-$('#start-diagnosis').addEventListener('click',()=>{diagnosisStarted=true;renderResults();$('#prefecture').focus();$('#diagnose').scrollIntoView({block:'start'});});
+for(const button of document.querySelectorAll('[data-step]'))button.addEventListener('click',()=>{const step=Number(button.dataset.step);recordJourneyAction('map_step_click',step);location.assign(journeyRoutes[step===0&&!state.pawnChosen?starts[0]:state.last[step]||starts[step]]);});
+$('#start-diagnosis').addEventListener('click',()=>{diagnosisStarted=true;renderResults();$('#prefecture').focus();$('#diagnose').scrollIntoView({block:'start'});recordJourneyAction('diagnosis_start');});
 function updateDiagnosis(){
   clearTimeout(diagnosisTimer);
   if(!data||!diagnosisStarted||journeyPageId(new URL(location.href))!=='estimate')return;

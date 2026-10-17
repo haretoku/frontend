@@ -23,7 +23,7 @@ export function renderConsultationProviders({compact=false,preview=import.meta.e
       <div class="consult-provider-brand">${previewLogo(provider,preview)}<h3 id="${compact?'map-':''}consult-${provider.id}">${safe(provider.name)}</h3></div>
       <p class="consult-provider-description">${safe(provider.description)}</p>
       <p class="consult-provider-disclosure">${provider.affiliate?'広告・アフィリエイト ／ ソーラーパートナーズ':'通常リンク ／ 広告リンクではありません'}</p>
-      <a class="${provider.affiliate?'primary':'secondary'} consult-provider-action" href="${safe(provider.url)}" target="_blank" rel="${provider.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" ${provider.affiliate&&!compact?'data-quote-placement="diagnosis_result" ':''}data-consult-provider="${provider.id}">${provider.affiliate?'無料見積もり ↗':'公式サイトへ ↗'}<span class="visually-hidden">（${safe(provider.name)}）</span></a>
+      <a class="${provider.affiliate?'primary':'secondary'} consult-provider-action" href="${safe(provider.url)}" target="_blank" rel="${provider.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" ${provider.affiliate?`data-quote-placement="${compact?'map_consultation':'diagnosis_result'}" `:''}data-consult-provider="${provider.id}" data-consult-placement="${compact?'map':'article'}">${provider.affiliate?'無料見積もり ↗':'公式サイトへ ↗'}<span class="visually-hidden">（${safe(provider.name)}）</span></a>
       ${provider.affiliate?`<img class="consult-impression" src="${safe(quoteMaterial.impressionUrl)}" width="1" height="1" alt="" aria-hidden="true" referrerpolicy="no-referrer">`:''}
     </section>`).join('')}</div>
     ${compact?'':'<p class="form-note">各社の違いは<a href="#quote-sites">第4章の比較</a>で確かめられます．</p>'}
