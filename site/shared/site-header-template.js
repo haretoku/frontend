@@ -1,7 +1,7 @@
 const destinations=[
   ['guides','/guides/','詳しいガイド'],
   ['press','/press/','プレスリリース'],
-  ['data','/data/','根拠データ'],
+  ['data','/data/','補助金を調べる'],
   ['method','/pages/calculation-method.html','計算方法・使用データ']
 ];
 
@@ -15,7 +15,7 @@ export function renderSiteHeader(current='') {
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a href="/simulator/">設備・目標を選び直す</a>
+            <a href="/simulator/">わが家のプランを見直す</a>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
               ${destinations.map(([id,url,label])=>`<a href="${url}"${current===id?' aria-current="page"':''}>${label}</a>`).join('\n              ')}

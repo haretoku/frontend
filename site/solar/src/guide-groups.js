@@ -1,6 +1,6 @@
 export const guideGroups = [
   { id: 'core', title: 'つける前に気になること', label: 'はじめのガイド' },
-  { id: 'detail', title: 'わが家の場合は？', label: '地域・暮らし別ガイド' }
+  { id: 'detail', title: '金額や制度を詳しく', label: '費用・制度の詳しいガイド' }
 ];
 export const pressGroups = [{id:'news',title:'調査結果・発表資料',label:'プレスリリース'}];
 
