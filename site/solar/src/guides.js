@@ -1,7 +1,9 @@
 import guideArticles from "../data/articles.json";
 import { groupedArticles } from './guide-groups.js';
 
-const guideImages = import.meta.glob("../../shared/assets/*.{png,webp}", {
+const directoryArticles = guideArticles;
+
+const guideImages = import.meta.glob("../../shared/assets/*.{png,webp,svg}", {
   eager: true,
   query: "?url",
   import: "default"
@@ -12,7 +14,7 @@ function imageUrlFor(article) {
   return guideImages[`../../shared/assets/${fileName}`] ?? article.image.src;
 }
 
-function cardFor(article) {
+function cardFor(article, {compact = false} = {}) {
   const link = document.createElement("a");
   link.className = "guide-article-card";
   link.href = article.href;
@@ -35,14 +37,14 @@ function cardFor(article) {
   category.textContent = article.category;
   const title = document.createElement("strong");
   title.className = "guide-article-card__title";
-  const titleParts = article.title.split(/(蓄電池)/);
+  const titleParts = (compact ? article.listTitle ?? article.title : article.title).split(/(蓄電池)/);
   title.append(...titleParts.map(text => {
     if (text !== '蓄電池') return document.createTextNode(text);
     return Object.assign(document.createElement('span'), { className: 'guide-title-term', textContent: text });
   }));
   const summary = document.createElement("span");
   summary.className = "guide-article-card__summary";
-  summary.textContent = article.summary;
+  summary.textContent = compact ? article.listSummary ?? article.summary : article.summary;
   const meta = document.createElement("span");
   meta.className = "guide-article-card__meta";
   meta.textContent = article.articleType === 'news'
@@ -53,8 +55,8 @@ function cardFor(article) {
   return link;
 }
 
-function renderCards(container, articles) {
-  container.replaceChildren(...articles.map((article) => cardFor(article)));
+function renderCards(container, articles, options) {
+  container.replaceChildren(...articles.map((article) => cardFor(article, options)));
 }
 
 function scrollControlsFor(cards, label) {
@@ -107,7 +109,9 @@ function scrollControlsFor(cards, label) {
 function initializeGuideDirectory() {
   const container = document.querySelector('[data-guide-groups]');
   if (!container) return;
-  const sections = groupedArticles(guideArticles,{press:container.dataset.guideGroups==='press'}).map(group => {
+  const press = container.dataset.guideGroups === 'press';
+  const topics = container.dataset.guideGroups === 'topics';
+  const sections = groupedArticles(directoryArticles,{press,topics}).map(group => {
     const section = document.createElement('section');
     section.className = 'guide-group';
     section.dataset.guideGroup = group.id;
@@ -129,15 +133,15 @@ function initializeGuideDirectory() {
     const cards = document.createElement('div');
     cards.className = 'guide-card-grid';
     cards.id = `guide-cards-${group.id}`;
-    renderCards(cards, group.articles);
+    renderCards(cards, group.articles, {compact:topics});
     const actions = document.createElement('div');
     actions.className = 'guide-group__actions';
     actions.append(count);
-    if (group.articles.length > 0) cards.classList.add('guide-card-grid--scrollable');
+    if (!topics && group.articles.length > 0) cards.classList.add('guide-card-grid--scrollable');
     const rail = document.createElement('div');
     rail.className = 'guide-card-rail';
     rail.append(cards);
-    if (group.articles.length > 3) rail.append(scrollControlsFor(cards, group.label));
+    if (!topics && group.articles.length > 3) rail.append(scrollControlsFor(cards, group.label));
     header.append(title, subtitle, actions);
     if (group.articles.length === 0) {
       const empty = document.createElement('p');

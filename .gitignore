@@ -18,5 +18,8 @@ Thumbs.db
 .idea/
 
 dist-pages/
+dist-review/
+.preview-upload/
+review-site.tar.gz
 .codex/
 /qa/reports/shared-preview-*.log

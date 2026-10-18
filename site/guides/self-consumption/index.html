@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="太陽光の電気は，売るより自宅で使う方がお得？電気代と売電価格，FITの単価を比べ，家事の時間を変えて買う電気を減らす工夫を紹介します．">
+  <link rel="canonical" href="https://haretoku.jp/guides/self-consumption/">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>太陽光の電気は，売るのと自宅で使うの，どちらがお得？｜はれトク</title>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="はれトク">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="太陽光の電気は，売るのと自宅で使うの，どちらがお得？｜はれトク">
+  <meta property="og:description" content="電気代と売電価格を比べて，自宅で使うメリットと暮らしの工夫を確認します．">
+  <meta property="og:url" content="https://haretoku.jp/guides/self-consumption/">
+  <meta property="og:image" content="https://haretoku.jp/og-self-consumption-v040.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="売るのと自宅で使うの，どちらがお得？ 太陽光パネル，コイン，食洗機のイラスト">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="https://haretoku.jp/favicon.png" type="image/png" sizes="96x96">
+  <script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+  <script type="module" src="/shared/site-header-entry.js"></script>
+</head>
+<body class="guide-article">
+<header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <a class="map-link" href="/">マップ</a>
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <a href="/simulator/">わが家のプランを見直す</a>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/guides/" aria-current="page">詳しいガイド</a>
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">補助金を調べる</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
+<main id="main-content">
+  <nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">マップ</a> ／ <a href="/guides/">詳しいガイド</a> ／ 電気の使い方</nav>
+  <article aria-labelledby="article-title">
+    <header>
+      <div class="article-meta"><span class="category">電気の使い方</span><span>更新日：<time datetime="2026-10-18">2026年10月18日</time></span></div>
+      <h1 id="article-title">太陽光の電気は，売るのと自宅で使うの，<span class="title-question">どちらがお得？</span></h1>
+      <div class="lead-dialogue" aria-label="博士とハレナの導入の会話">
+        <div class="lead-turn lead-turn--doctor">
+          <img src="/map/assets/professor-chibi.png" alt="" width="72" height="96">
+          <div class="lead-bubble"><span class="speaker">はれトク博士</span>
+            <p>基本的には，売るより自宅で使う方がお得です．買う電気の単価の方が高いことが多く，電気代を減らす効果が大きいためです．</p>
+          </div>
+        </div>
+        <div class="lead-turn lead-turn--harena">
+          <img src="/map/assets/navigator.png" alt="" width="72" height="72">
+          <div class="lead-bubble"><span class="speaker">ハレナ</span>
+            <p>売るよりも，家で使って電気代を減らす方がお得なんだね．</p>
+          </div>
+        </div>
+        <div class="lead-turn lead-turn--doctor">
+          <img src="/map/assets/professor-chibi.png" alt="" width="72" height="96">
+          <div class="lead-bubble"><span class="speaker">はれトク博士</span>
+            <p>はい．電気の行き先から，単価の比べ方，暮らしの工夫まで見ていきましょう．各章の最後は，ハレナがポイントをまとめます．</p>
+          </div>
+        </div>
+      </div>
+      <nav aria-label="この記事の内容"><ol class="chapter-index"><li><a href="#where">01　電気の行き先</a></li><li><a href="#rates">02　同じ量で比べる</a></li><li><a href="#use-more">03　使う時間の工夫</a></li></ol></nav>
+    </header>
+
+    <section class="chapter" id="where" aria-labelledby="where-title">
+      <span class="chapter-number" aria-hidden="true">01</span>
+      <h2 id="where-title">発電した電気は，どこへ行く？</h2>
+      <p>住宅用の太陽光では，発電した電気をまず自宅で使い，余った分を電力会社などへ売る使い方が一般的です．自宅で使うことを<strong>「自家消費」</strong>，余った電気を売ることを<strong>「売電」</strong>といいます．<a href="#source-1" aria-label="出典1を読む"><sup>［1］</sup></a></p>
+      <figure aria-labelledby="flow-caption">
+        <div class="flow-figure">
+          <div class="flow-origin"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"></use></svg><span>屋根で発電</span></div>
+          <div class="flow-branches">
+            <div class="flow-option self-use"><h3>自宅で使う</h3><p>電気代を節約<small>買う電気が減る</small></p></div>
+            <div class="flow-option sell"><h3>余った分を売る</h3><p>売電収入になる<small>売った量に応じて受け取る</small></p></div>
+          </div>
+        </div>
+        <figcaption id="flow-caption">図1　発電した電気は，自宅で使う分と，余って売る分に分かれる．</figcaption>
+      </figure>
+      <p>昼に発電した電気で冷蔵庫や照明などを動かせば，その分は電力会社から買わずに済みます．発電だけでは足りないときは，電力会社から買う電気で補います．</p>
+      <p>自宅で使った分は売らず，余った分を売ります．では，家で使って減らせる電気代と，売って受け取るお金には，どのくらい差があるのでしょうか．</p>
+      <aside class="harena-summary" aria-label="第1章のハレナのまとめ"><img src="/map/assets/navigator.png" alt="" width="52" height="52"><div><span class="speaker">ハレナのまとめ</span><ul><li>自宅で使うと，電力会社から買う電気が減る．</li><li>余った電気は売れる．</li></ul></div></aside>
+    </section>
+
+    <section class="chapter" id="rates" aria-labelledby="compare-title">
+      <span class="chapter-number" aria-hidden="true">02</span>
+      <h2 id="compare-title">同じ電力量なら，どちらがお得？</h2>
+      <p><strong>基本的には，自宅で使って電気代を減らす方がお得です．</strong>電気の量を表す単位「kWh」を使い，同じ1 kWhで比べてみましょう．</p>
+      <p>例えば，東京電力エナジーパートナーの「従量電灯B」では，2026年10月分の料金で1 kWhの購入を減らすと，31.28円分の節約になります．月120 kWh超〜300 kWhの料金部分を減らす場合です．<a href="#source-2" aria-label="出典2を読む"><sup>［2］</sup></a><a href="#source-3" aria-label="出典3を読む"><sup>［3］</sup></a><a href="#source-4" aria-label="出典4を読む"><sup>［4］</sup></a></p>
+      <p>売る場合は，東京電力EPの<strong>「再エネ買取標準プラン」で1 kWhあたり8.50円</strong>です．国の固定価格で買い取るFIT制度が終わった後の単価です．<a href="#source-6" aria-label="出典6を読む"><sup>［6］</sup></a></p>
+      <figure aria-labelledby="rate-caption">
+        <div class="rate-comparison">
+          <p class="figure-heading">同じ1 kWhの電気を…</p>
+          <div class="rate-row"><div class="rate-label"><span>自宅で使う<small>電気代の節約</small></span><strong>31.28<span class="unit">円分</span></strong></div><div class="rate-track" aria-hidden="true"><span class="rate-fill"></span></div></div>
+          <div class="rate-row"><div class="rate-label"><span>売る<small>FIT終了後の売電収入</small></span><strong class="sell-value">8.50<span class="unit">円</span></strong></div><div class="rate-track" aria-hidden="true"><span class="rate-fill rate-fill--sell"></span></div></div>
+          <p class="difference">この条件では，自宅で使う方が22.78円分お得．</p>
+          <p class="comparison-condition">東京電力EP・関東の料金例（2026年10月，税込）．</p>
+        </div>
+        <figcaption id="rate-caption">図2　自宅で使う場合と売る場合の，1 kWhあたりの家計効果．</figcaption>
+      </figure>
+      <h3>FITでは，1〜4年目24円，5〜10年目8.3円</h3>
+      <p>2026年度に認定を受ける住宅用太陽光（10 kW未満）は，FIT制度でこの単価が適用されます．<a href="#source-4" aria-label="FIT単価の出典を読む"><sup>［4］</sup></a>今回の電気代31.28円と比べると，どちらの期間も自宅で使う方がお得です．以前に認定を受けた設備や，時間帯で電気代が変わる契約では，手元の明細の単価で比べましょう．</p>
+      <p>ここで比べているのは，発電した電気の使い道です．設備費を回収できるかは，設置費や維持費も含めて別に考えます．</p>
+      <aside class="harena-summary" aria-label="第2章のハレナのまとめ"><img src="/map/assets/navigator.png" alt="" width="52" height="52"><div><span class="speaker">ハレナのまとめ</span><ul><li>基本的には，自宅で使って電気代を減らす方がお得．</li><li>今回の買う電気31.28円の方が，FITで売る24円・8.3円より高いんだね．</li></ul></div></aside>
+    </section>
+
+    <section class="chapter" id="use-more" aria-labelledby="use-more-title">
+      <span class="chapter-number" aria-hidden="true">03</span>
+      <h2 id="use-more-title">自宅で使う量を増やすには？</h2>
+      <p>まずは，<strong>予定していた家事を，太陽光の電気が余る昼へ移す</strong>工夫から始めましょう．発電量や売電量が分かるモニターなどで，電気が余る時間を確かめます．晴れた日と曇りの日では，発電の様子も変わります．</p>
+      <p>例えば，夜に動かしていた食器洗い乾燥機や洗濯乾燥機を，無理のない範囲で昼に使う方法があります．タイマーなども活用し，家電の説明書に沿って使いましょう．同時に動かすと発電だけでは足りない場合は，順番に動かす方法も考えられます．<a href="#source-5" aria-label="出典5を読む"><sup>［5］</sup></a></p>
+      <figure aria-labelledby="time-caption">
+        <div class="time-shift">
+          <p class="shift-heading">食洗機の運転を，夜から昼へ</p>
+          <div class="shift-panels">
+            <section class="shift-panel" aria-labelledby="shift-before">
+              <h3 id="shift-before">夜に動かすと</h3>
+              <div class="shift-period"><span class="period-label">昼</span><div><svg class="energy-icon energy-icon--coin" viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="29"/><circle cx="40" cy="40" r="23"/><path d="M30 25l10 15 10-15M40 40v16M29 42h22M29 49h22"/></svg><p>余った電気を<br>売る</p></div></div>
+              <div class="shift-period"><span class="period-label">夜</span><div><svg class="dishwasher" viewBox="0 0 80 80" aria-hidden="true"><rect x="14" y="8" width="52" height="64" rx="5"/><path d="M14 24h52M23 16h12"/><circle cx="55" cy="16" r="2"/><path d="M25 34h30v27H25zM30 55c3-12 17-12 20 0"/></svg><p><strong>電気を買って</strong><br>食洗機を動かす</p></div></div>
+            </section>
+            <div class="shift-arrow" aria-hidden="true">→</div>
+            <section class="shift-panel shift-panel--after" aria-labelledby="shift-after">
+              <h3 id="shift-after">電気が余る昼に動かすと</h3>
+              <div class="shift-period"><span class="period-label">昼</span><div><svg class="dishwasher" viewBox="0 0 80 80" aria-hidden="true"><rect x="14" y="8" width="52" height="64" rx="5"/><path d="M14 24h52M23 16h12"/><circle cx="55" cy="16" r="2"/><path d="M25 34h30v27H25zM30 55c3-12 17-12 20 0"/></svg><p><strong>太陽光の電気で</strong><br>食洗機を動かす</p></div></div>
+              <div class="shift-period"><span class="period-label">夜</span><div><svg class="energy-icon energy-icon--unneeded" viewBox="0 0 80 80" aria-hidden="true"><path class="energy-bolt" d="M45 12L25 43h14l-4 25 21-34H42z"/><circle cx="40" cy="40" r="33"/><path d="M17 63l46-46"/></svg><p>その運転分の電気は<br><strong>買わずに済む</strong></p></div></div>
+            </section>
+          </div>
+          <p class="shift-takeaway">使う家電と運転は同じ．変えるのは時間だけ．</p>
+        </div>
+        <figcaption id="time-caption">図3　食洗機を，太陽光の電気が余る昼に動かして，買う電気を減らす．</figcaption>
+      </figure>
+      <p>時間帯で料金が違うプランなら，元の時間帯に買わずに済む電気代と，昼に売れなくなる分の収入を比べます．発電が足りず昼に電気を買う場合もあるので，<strong>昼へ移せば必ず安くなるわけではありません．</strong></p>
+      <h3>使う電気を，わざわざ増やす必要はない</h3>
+      <p>使う予定のない家電を動かしても，もともと買うはずだった電気を減らすことにはなりません．余った電気は売れるので，使い切るための無駄な運転はせず，必要な範囲で時間を調整しましょう．</p>
+      <aside class="harena-summary" aria-label="第3章のハレナのまとめ"><img src="/map/assets/navigator.png" alt="" width="52" height="52"><div><span class="speaker">ハレナのまとめ</span><ul><li>予定していた家事を，発電に余りがある時間へ移せるか考える．</li><li>必要な電気の使い方を工夫し，無駄に使う量は増やさない．</li></ul></div></aside>
+    </section>
+
+    <nav class="next-reading" aria-labelledby="next-reading-title"><h2 id="next-reading-title">わが家では，どのくらい得になる？</h2><p>設置費や維持費も含めた30年間の収支を，診断で比べられます．</p><a href="/simulator/">わが家の収支を調べる →</a></nav>
+    <details class="source-notes"><summary>参考資料・単価の確認日</summary><p class="small-note">単価・資料確認日：2026年10月18日．料金やFITの数値は，以下の公式資料をもとに記載しています．比較計算は，記載した条件によるはれトクの計算です．</p><ol>
+      <li id="source-1">東京電力EP「<a href="https://evdays.tepco.co.jp/glossary/jikasyohi" target="_blank" rel="noopener">自家消費</a>」．自家消費と余剰売電の意味．</li>
+      <li id="source-2">東京電力EP「<a href="https://www.tepco.co.jp/ep/private/plan/chargelist01.html" target="_blank" rel="noopener">料金単価表‐電灯</a>」．従量電灯Bの第2段階（月120 kWh超〜300 kWh）を減らす比較．電力量料金36.40円−燃料費調整9.30円＋再エネ賦課金4.18円＝31.28円／kWh．基本料金は含まず，請求時の端数処理前．</li>
+      <li id="source-3">東京電力EP「<a href="https://www.tepco.co.jp/ep/private/fuelcost2/backnumber/2610.html" target="_blank" rel="noopener">燃料費調整のお知らせ（2026年10月分）</a>」．関東エリア・従量電灯の支援反映後−9.30円／kWh．</li>
+      <li id="source-4">経済産業省「<a href="https://www.enecho.meti.go.jp/category/saving_and_new/saiene/data/kaitori/2026_fit_fip_guidebook.pdf" target="_blank" rel="noopener">2026年度 FIT・FIPガイドブック</a>」の住宅用太陽光10 kW未満の買取単価（1〜4年目24円，5〜10年目8.3円／kWh），および「<a href="https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html" target="_blank" rel="noopener">2026年度以降の買取価格等と賦課金単価</a>」の再エネ賦課金4.18円／kWh（2026年5月〜2027年4月分）．</li>
+      <li id="source-5">東京電力EP「<a href="https://kurashi-idea.tepco.co.jp/entry/20250619/june-02" target="_blank" rel="noopener">家の中で一番電気使用量が多い家電ってなに？</a>」．太陽光発電時の食器洗い乾燥機・洗濯乾燥機の活用例．</li>
+      <li id="source-6">東京電力EP「<a href="https://www.tepco.co.jp/ep/renewable_energy/plan/standard.html" target="_blank" rel="noopener">再エネ買取標準プラン</a>」．FIT終了後の余剰電力8.50円／kWh（税込）．同社が示す関東の対象地域・契約条件による価格で，今後見直す場合があるとされています．</li>
+    </ol></details>
+  </article>
+</main>
+<footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
+</html>

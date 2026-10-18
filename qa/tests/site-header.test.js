@@ -50,7 +50,7 @@ test('全表示ページが共通ヘッダーと確認画面を1個ずつ持ち�
     assert.equal((html.match(/src="\/shared\/site-header-entry.js"/g)??[]).length,html.includes('src="/map/journey.js"')?0:1,path);
     count++;
   }
-  assert.equal(count,33);
+  assert.equal(count,34);
   assert.equal(headerSection('guides/electricity-support-end/index.html'),'press');
   const press=await readFile(new URL('press/index.html',root),'utf8');
   assert(press.includes('data-guide-groups="press"'));

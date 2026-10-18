@@ -1,0 +1,119 @@
+$ node qa/sync-site-header.mjs --check && node qa/sync-journey-pages.mjs --check && node qa/sync-guide-numbers.mjs --check && vite build --config .config/vite.review.config.js && node site/hosting/finalize-review.js && node site/hosting/verify-review.js
+共通ヘッダー・フッター確認：34ページ
+MAP記事・診断HTML確認：15ページ
+{"mode":"check","pages":10,"bindings":263,"dataVersion":"20261013-national-prefectures.1"}
+vite v8.0.14 building client environment for production...
+[2K
+transforming...✓ 179 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-review/assets/favicon-Cps3Me14.svg                                      0.51 kB │ gzip:     0.30 kB
+dist-review/prototypes/guide-self-consumption/index.html                     1.34 kB │ gzip:     0.86 kB
+dist-review/assets/title-art-CxXD5rU-.svg                                    2.43 kB │ gzip:     0.80 kB
+dist-review/404.html                                                         5.08 kB │ gzip:     2.36 kB
+dist-review/data/index.html                                                  6.57 kB │ gzip:     2.93 kB
+dist-review/press/index.html                                                 6.71 kB │ gzip:     2.84 kB
+dist-review/guides/index.html                                                7.21 kB │ gzip:     2.99 kB
+dist-review/data/subsidies/index.html                                        8.18 kB │ gzip:     3.53 kB
+dist-review/assets/hare-display-binding-ByES3t9O.json                        9.29 kB │ gzip:     1.53 kB
+dist-review/assets/hero-haretoku-chart-selected-NdXP4o99.svg                10.08 kB │ gzip:     2.34 kB
+dist-review/assets/article-solar-cashflow-c2ewPg6k.svg                      10.94 kB │ gzip:     3.74 kB
+dist-review/assets/solar-partners-D00TnDtz.png                              11.83 kB
+dist-review/assets/article-solar-cashflow-compact-Cbb4UKr5.svg              12.19 kB │ gzip:     3.82 kB
+dist-review/assets/tainavi-BIkDNw0f.webp                                    12.23 kB
+dist-review/assets/support-shock-daily-DdFQA0Ah.svg                         12.51 kB │ gzip:     2.50 kB
+dist-review/pages/policy.html                                               13.60 kB │ gzip:     5.45 kB
+dist-review/assets/support-shock-daily-compact-DPcvJas5.svg                 14.80 kB │ gzip:     2.61 kB
+dist-review/index.html                                                      19.34 kB │ gzip:     6.26 kB
+dist-review/guides/self-consumption/index.html                              21.10 kB │ gzip:     7.24 kB
+dist-review/guides/welcome/index.html                                       23.59 kB │ gzip:     7.48 kB
+dist-review/simulator/index.html                                            23.72 kB │ gzip:     7.49 kB
+dist-review/guides/consultation-preparation/index.html                      24.18 kB │ gzip:     7.46 kB
+dist-review/guides/choosing-installer/index.html                            24.27 kB │ gzip:     7.87 kB
+dist-review/guides/solar-benefits/index.html                                24.56 kB │ gzip:     7.65 kB
+dist-review/assets/tokyo-subsidy-r8-rate-table-Bk90gcx_.png                 25.50 kB
+dist-review/guides/installation-process/index.html                          25.81 kB │ gzip:     7.92 kB
+dist-review/guides/solar-living/index.html                                  25.92 kB │ gzip:     7.86 kB
+dist-review/guides/home-survey/index.html                                   26.12 kB │ gzip:     8.20 kB
+dist-review/assets/metadata-D8VIoK63.json                                   26.13 kB │ gzip:     5.58 kB
+dist-review/guides/solar-consultation/index.html                            26.81 kB │ gzip:     8.31 kB
+dist-review/guides/disaster-preparedness/index.html                         27.25 kB │ gzip:     8.32 kB
+dist-review/guides/solar-costs/index.html                                   28.92 kB │ gzip:     8.68 kB
+dist-review/guides/equipment-maintenance/index.html                         29.93 kB │ gzip:     8.77 kB
+dist-review/guides/home-battery/index.html                                  30.16 kB │ gzip:     8.74 kB
+dist-review/guides/quotes-contractors/index.html                            30.46 kB │ gzip:     9.66 kB
+dist-review/guides/power-outage/index.html                                  30.58 kB │ gzip:     8.78 kB
+dist-review/guides/subsidies/index.html                                     30.60 kB │ gzip:     9.48 kB
+dist-review/guides/electricity-support-end/index.html                       32.76 kB │ gzip:    10.77 kB
+dist-review/assets/diagnostic-display-binding-CKdfZiu5.json                 33.66 kB │ gzip:     5.64 kB
+dist-review/guides/disaster/index.html                                      34.21 kB │ gzip:    10.45 kB
+dist-review/guides/quote-services/index.html                                35.86 kB │ gzip:     9.13 kB
+dist-review/guides/subsidy-amount/index.html                                38.40 kB │ gzip:    10.97 kB
+dist-review/assets/support-shock-daily-PY2QO3dT.png                         39.19 kB
+dist-review/assets/support-shock-burden-CfPq4i2Y.png                        39.88 kB
+dist-review/assets/tepco-bill-sample-CpU_pHqS.png                           42.83 kB
+dist-review/assets/og-self-consumption-v040-C83jk8Fe.png                    44.48 kB
+dist-review/guides/solar-fit/index.html                                     45.66 kB │ gzip:    12.99 kB
+dist-review/guides/solar-installation-cost/index.html                       47.00 kB │ gzip:    12.53 kB
+dist-review/guides/solar-maintenance-cost/index.html                        48.48 kB │ gzip:    12.69 kB
+dist-review/guides/solar-electricity-savings/index.html                     55.23 kB │ gzip:    14.37 kB
+dist-review/guides/solar-economics/index.html                               65.80 kB │ gzip:    18.31 kB
+dist-review/pages/calculation-method.html                                   77.87 kB │ gzip:    22.52 kB
+dist-review/assets/support-shock-table-4-CJasC_yM.png                       92.10 kB
+dist-review/assets/support-shock-table-2-B3198h95.png                       93.19 kB
+dist-review/assets/support-shock-table-1-C5RbJ9zd.png                       94.89 kB
+dist-review/assets/contractor-checksheet-DmgL5J0n.pdf                       99.35 kB
+dist-review/assets/support-shock-table-3-xJz9LKXc.png                      108.32 kB
+dist-review/assets/article-subsidy-search-photo-BONaKZwG.webp              109.25 kB
+dist-review/assets/article-disaster-battery-photo-BULkBDoF.webp            119.54 kB
+dist-review/assets/article-solar-inspection-photo-Mu20mJ3D.webp            120.38 kB
+dist-review/assets/article-disaster-preparation-photo-Bb6eORkP.webp        122.77 kB
+dist-review/assets/article-electricity-budget-photo-T9A-SNAC.webp          124.44 kB
+dist-review/assets/article-quotes-explanation-photo-3RYDjaMM.webp          136.82 kB
+dist-review/assets/article-subsidies-application-photo-fHux_JIz.webp       138.05 kB
+dist-review/assets/article-disaster-daytime-photo-BjttfRTA.webp            140.04 kB
+dist-review/assets/article-subsidy-documents-photo-0Juhycm1.webp           141.74 kB
+dist-review/assets/hero-solar-low-plants-Cbt2SYRJ.webp                     163.61 kB
+dist-review/assets/article-solar-estimate-photo-DVTE66ar.webp              169.73 kB
+dist-review/assets/article-solar-economics-photo-DB5uCIa9.webp             196.73 kB
+dist-review/assets/navigator-C6wSog06.png                                  341.30 kB
+dist-review/assets/pawn-male-DkOsVmn1.png                                  353.79 kB
+dist-review/assets/pawn-female-DSZs4HJW.png                                362.28 kB
+dist-review/assets/og-step-map-20261017-CJaztr1X.png                       415.22 kB
+dist-review/assets/professor-chibi-BwE1xmLE.png                            549.93 kB
+dist-review/assets/diagnostic-display-table-E4yzT3FH.json                  770.52 kB │ gzip:    76.96 kB
+dist-review/assets/hare-display-table-GvQlwHhJ.json                      1,434.29 kB │ gzip:   144.64 kB
+dist-review/assets/harena-rooftops-Cwq_PN9m.png                          1,897.79 kB
+dist-review/assets/article-daytime-self-consumption-photo-BsXsIhtd.png   2,044.75 kB
+dist-review/assets/article-fit-meter-photo-ByVS3mj0.png                  2,716.09 kB
+dist-review/assets/public-data-CZscpcC-.json                            21,557.05 kB │ gzip: 1,697.78 kB
+dist-review/assets/guides-solar-maintenance-cost-index-Bsrbn0Fa.css          2.73 kB │ gzip:     0.73 kB
+dist-review/assets/guides-solar-installation-cost-index-CZqJuoU0.css         2.76 kB │ gzip:     0.73 kB
+dist-review/assets/guides-solar-electricity-savings-index-CoYbUR4X.css       3.39 kB │ gzip:     0.98 kB
+dist-review/assets/guides-electricity-support-end-index-DK-szL2n.css         3.47 kB │ gzip:     1.07 kB
+dist-review/assets/article-data-CRvVfxfp.css                                 3.59 kB │ gzip:     0.88 kB
+dist-review/assets/guides-subsidy-amount-index-Dva0ssd3.css                  3.86 kB │ gzip:     1.03 kB
+dist-review/assets/pages-calculation-method-CpnqUPX9.css                     4.55 kB │ gzip:     1.35 kB
+dist-review/assets/guide-chapters-CoOWGtx0.css                               8.14 kB │ gzip:     1.84 kB
+dist-review/assets/guides-self-consumption-index-62Ce7q4l.css               10.93 kB │ gzip:     2.56 kB
+dist-review/assets/guides-BVDjwsHs.css                                      12.04 kB │ gzip:     2.84 kB
+dist-review/assets/data-CTlfnS1N.css                                        14.00 kB │ gzip:     3.19 kB
+dist-review/assets/electricity-sales-hero-BreODcIr.css                      20.21 kB │ gzip:     3.82 kB
+dist-review/assets/article-Bj71asNy.css                                     27.08 kB │ gzip:     4.65 kB
+dist-review/assets/site-header-W7KsMm7B.css                                 30.77 kB │ gzip:     7.44 kB
+dist-review/assets/journey-D60l5w54.css                                     42.11 kB │ gzip:     9.42 kB
+dist-review/assets/site-header-entry-DWFAz4tA.js                             0.05 kB │ gzip:     0.07 kB
+dist-review/assets/table-scroll-hint-BMcEuJb1.js                             0.33 kB │ gzip:     0.26 kB
+dist-review/assets/pages-calculation-method-DFs2qu2I.js                      0.48 kB │ gzip:     0.34 kB
+dist-review/assets/guides-electricity-support-end-index-BCugO2Nv.js          0.64 kB │ gzip:     0.39 kB
+dist-review/assets/site-header-D73ipkur.js                                   2.74 kB │ gzip:     1.10 kB
+dist-review/assets/data-loader-_UALgZOL.js                                   4.96 kB │ gzip:     1.90 kB
+dist-review/assets/analytics-D7StQcqC.js                                    10.44 kB │ gzip:     4.51 kB
+dist-review/assets/retained-diagnostic-display-DOTGF6p4.js                  24.12 kB │ gzip:     7.03 kB
+dist-review/assets/data-subsidies-index-D7_ZwgPm.js                         26.56 kB │ gzip:     9.88 kB
+dist-review/assets/guides-CnOiUsd4.js                                       29.83 kB │ gzip:    12.43 kB
+dist-review/assets/article-data-D4wg0d8V.js                                 39.37 kB │ gzip:    12.33 kB
+dist-review/assets/journey-Bj6c0DfY.js                                     166.85 kB │ gzip:    50.83 kB
+
+✓ built in 889ms
+確認用検証PASS：128ファイル・35HTML，試作あり，本番origin／GA-ID／A8なし，検索除外・ローカル参照・配信allowlist

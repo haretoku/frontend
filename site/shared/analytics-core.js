@@ -13,6 +13,7 @@ const PAGES = Object.freeze({
   "/data/": { id: "data", title: "はれトクデータ", article: false, data: true },
   "/data/subsidies/": { id: "data_subsidies", title: "太陽光・蓄電池の補助金", article: false, data: true },
   ...Object.fromEntries([
+    ["self-consumption", "太陽光の自家消費と売電"],
     ["electricity-sales", "太陽光の収支"], ["subsidies", "補助金"],
     ["disaster", "停電への備え"], ["quotes-contractors", "見積もり"],
     ["solar-electricity-savings", "太陽光による電気代の削減"], ["solar-fit", "FIT制度"],

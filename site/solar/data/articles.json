@@ -1,6 +1,26 @@
 [
   {
+    "id": "self-consumption",
+    "href": "/guides/self-consumption/",
+    "articleType": "detail",
+    "categoryId": "electricity",
+    "category": "電気の使い方",
+    "title": "太陽光の電気は，売るのと自宅で使うの，どちらがお得？",
+    "listTitle": "売るのと自宅で使うの，どちらがお得？",
+    "listSummary": "電気代と売電価格を比べます．",
+    "summary": "電気代と売電価格を比べて，発電した電気を自宅で使うメリットと，家事の時間を変える工夫を紹介します．",
+    "metaLabel": "更新日",
+    "metaValue": "2026-10-18",
+    "image": {
+      "src": "../shared/assets/article-self-consumption.svg",
+      "width": 240,
+      "height": 240,
+      "alt": "太陽光パネル，硬貨，食洗機のイラスト"
+    }
+  },
+  {
     "id": "electricity-sales",
+    "listSummary": "節約・売電・費用から収支を考えます．",
     "href": "/guides/solar-economics/",
     "articleType": "core",
     "categoryId": "economics",
@@ -19,6 +39,7 @@
   },
   {
     "id": "subsidies",
+    "listSummary": "制度の探し方と申請の流れを確認します．",
     "href": "/guides/subsidies/",
     "articleType": "core",
     "categoryId": "subsidies",
@@ -37,6 +58,7 @@
   },
   {
     "id": "quotes-contractors",
+    "listSummary": "金額・設備・工事・保証を比べます．",
     "href": "/guides/quotes-contractors/",
     "articleType": "core",
     "categoryId": "quotes",
@@ -55,6 +77,7 @@
   },
   {
     "id": "disaster",
+    "listSummary": "停電時に使える家電と注意点を確認します．",
     "href": "/guides/disaster/",
     "articleType": "core",
     "categoryId": "safety",
@@ -73,6 +96,7 @@
   },
   {
     "id": "solar-electricity-savings",
+    "listSummary": "家で使う電気の量から節約額を考えます．",
     "href": "/guides/solar-electricity-savings/",
     "articleType": "detail",
     "categoryId": "economics",
@@ -91,6 +115,7 @@
   },
   {
     "id": "solar-fit",
+    "listSummary": "売電価格と手続き，終了後を確認します．",
     "href": "/guides/solar-fit/",
     "articleType": "detail",
     "categoryId": "economics",
@@ -109,6 +134,7 @@
   },
   {
     "id": "solar-installation-cost",
+    "listSummary": "機器代・工事代の内訳を確認します．",
     "href": "/guides/solar-installation-cost/",
     "articleType": "detail",
     "categoryId": "economics",
@@ -127,6 +153,7 @@
   },
   {
     "id": "solar-maintenance-cost",
+    "listSummary": "点検・修理・交換にかかる費用を確認します．",
     "href": "/guides/solar-maintenance-cost/",
     "articleType": "detail",
     "categoryId": "economics",
@@ -145,6 +172,7 @@
   },
   {
     "id": "subsidy-amount",
+    "listSummary": "補助額と自己負担の計算を確認します．",
     "href": "/guides/subsidy-amount/",
     "articleType": "detail",
     "categoryId": "subsidies",

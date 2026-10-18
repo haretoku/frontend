@@ -370,6 +370,34 @@
 }
 
 .guide-title-term { white-space: nowrap; }
+
+/* ガイド一覧はテーマから探す．プレスリリースのカード表示には適用しない． */
+.guide-directory--topics .guide-page-title { margin: 0 0 2rem; font-size: clamp(1.5rem, 3vw, 2rem); }
+.guide-directory--topics .guide-card-rail { margin-inline: 0; }
+.guide-directory--topics .guide-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; overflow: visible; }
+.guide-directory--topics .guide-article-card { display: grid; grid-template-columns: 132px minmax(0, 1fr); align-items: start; min-height: 0; height: auto; padding: 16px; gap: 16px; border-radius: 10px; }
+.guide-directory--topics .guide-article-card:hover { transform: none; }
+.guide-directory--topics .guide-article-card__visual { position: static; align-self: start; width: 100%; height: auto; margin: 0; aspect-ratio: 1; border: 0; border-radius: 6px; }
+.guide-directory--topics .guide-article-card__visual img { position: static; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
+.guide-directory--topics .guide-article-card__body { min-height: 0; padding: 0; }
+.guide-directory--topics .guide-article-card__category { display: none; }
+.guide-directory--topics .guide-article-card__title { min-height: 0; font-size: 18px; line-height: 1.6; }
+.guide-directory--topics .guide-article-card__summary { display: block; overflow: visible; margin-top: 8px; font-size: 14px; line-height: 1.8; -webkit-line-clamp: unset; }
+.guide-directory--topics .guide-article-card__meta { margin-top: 10px; padding-top: 0; font-size: 12px; font-weight: 400; }
+.guide-directory--topics .guide-group__subtitle { display: none; }
+@media (min-width: 40.001rem) {
+  .guide-directory--topics .guide-article-card__title { margin-top: 0; }
+}
+@media (max-width: 56rem) {
+  .guide-directory--topics .guide-card-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 40rem) {
+  .guide-directory--topics .guide-article-card { grid-template-columns: 96px minmax(0, 1fr); padding: 12px; gap: 12px; }
+  .guide-directory--topics .guide-article-card__visual { aspect-ratio: 1; }
+  .guide-directory--topics .guide-article-card__visual img { aspect-ratio: 1; object-fit: cover; }
+  .guide-directory--topics .guide-article-card__title { font-size: 16px; }
+  .guide-directory--topics .guide-article-card__summary { font-size: 14px; }
+}
 .guide-group__actions { display: flex; align-items: center; gap: .75rem; grid-column: 2; grid-row: 1 / 3; align-self: center; }
 .guide-group__actions .guide-library__count { margin: 0; }
 .guide-scroll-controls { display: none; }

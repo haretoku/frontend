@@ -17,6 +17,7 @@ const newDetailSlugs = ["solar-electricity-savings", "solar-fit", "solar-install
 const htmlPaths = [
   resolve(siteRoot, "index.html"),
   resolve(siteRoot, "guides/index.html"),
+  resolve(siteRoot, "guides/self-consumption/index.html"),
   resolve(siteRoot, "press/index.html"),
   resolve(siteRoot, "pages/calculation-method.html"),
   resolve(siteRoot, "guides/solar-economics/index.html"),
@@ -151,6 +152,7 @@ test("全ページの共通フッターが方針の対応見出しへ接続す�
 });
 test("共通メニューでガイドとプレスリリースを分け，現在地を示す", async () => {
   const guideCurrentPaths = new Set([
+    resolve(siteRoot, "guides/self-consumption/index.html"),
     ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
     resolve(siteRoot, "guides/index.html"),
     resolve(siteRoot, "guides/solar-economics/index.html"),
@@ -187,7 +189,7 @@ test("ガイド2分類とプレスリリースが分離され，旧記事10件�
   assert.doesNotMatch(main, /data-featured-guides/);
   assert.doesNotMatch(main, /data-safety-guides/);
   assert.match(main, /<h1 id="guide-library-title"[^>]*>/);
-  assert.equal(articles.length, 10);
+  assert.equal(articles.length, 11);
   assert.equal(articles.filter(article => article.articleType === "core").length, 4);
   assert.equal(articles.filter((article) => Number.isInteger(article.featuredOrder)).length, 3);
   for (const [title, target, articleTitle = title] of [
@@ -218,7 +220,7 @@ test("ガイド2分類とプレスリリースが分離され，旧記事10件�
   const { groupedArticles } = await import("../../site/solar/src/guide-groups.js");
   const groups = groupedArticles(articles);
   assert.deepEqual(groups.map((group) => group.id), ["core", "detail"]);
-  assert.deepEqual(groups.map((group) => group.articles.length), [4, 5]);
+  assert.deepEqual(groups.map((group) => group.articles.length), [4, 6]);
   const releases=groupedArticles(articles,{press:true});
   assert.deepEqual(releases.map(group=>group.id),['news']);
   assert.equal(releases[0].articles.length,1);
@@ -235,7 +237,7 @@ test("ガイド2分類とプレスリリースが分離され，旧記事10件�
   assert.deepEqual(futureGroups.map((group) => group.id), ["news"]);
   assert.deepEqual(futureGroups[0].articles.map((article) => article.id), ["recent", "updated"]);
   assert.match(script, /link\.className = "guide-article-card"/);
-  assert.match(script, /import\.meta\.glob\("\.\.\/\.\.\/shared\/assets\/\*\.\{png,webp\}"/);
+  assert.match(script, /import\.meta\.glob\("\.\.\/\.\.\/shared\/assets\/\*\.\{png,webp,svg\}"/);
   assert.match(css, /@media \(min-width: 40\.001rem\)[\s\S]*grid-auto-flow: column/);
   assert.match(css, /grid-auto-columns: calc\(\(100% - var\(--guide-card-gap\) \* 2\) \/ 3\)/);
   assert.match(css, /@media \(max-width: 62rem\)[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/);

@@ -1,6 +1,6 @@
 {
   "name": "haretoku-frontend",
-  "version": "0.3.6",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "engines": {
@@ -20,7 +20,8 @@
     "preview": "vite preview --config .config/vite.pages.config.js",
     "test": "node qa/run-tests.mjs",
     "test:data": "node qa/run-tests.mjs data",
-    "test:public": "node qa/run-tests.mjs public"
+    "test:public": "node qa/run-tests.mjs public",
+    "build:review": "node qa/sync-site-header.mjs --check && node qa/sync-journey-pages.mjs --check && node qa/sync-guide-numbers.mjs --check && vite build --config .config/vite.review.config.js && node site/hosting/finalize-review.js && node site/hosting/verify-review.js"
   },
   "devDependencies": {
     "vite": "8.0.14"

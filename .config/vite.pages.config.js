@@ -17,7 +17,7 @@ export default defineConfig({
     rollupOptions: {
       input: Object.fromEntries([
         "index.html", "guides/index.html", "press/index.html", "data/index.html", "data/subsidies/index.html",
-        ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(name => `guides/${name}/index.html`), "simulator/index.html", "404.html",
+        ...["self-consumption", "solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(name => `guides/${name}/index.html`), "simulator/index.html", "404.html",
         ...["calculation-method", "policy"].map(name => `pages/${name}.html`)
       ,...Object.values(journeyRoutes).filter(path=>path.startsWith('/guides/')).map(path=>path.slice(1)+'index.html')
       ].map(path => [path.replaceAll("/", "-").replace(".html", ""), resolve(root, path)]))

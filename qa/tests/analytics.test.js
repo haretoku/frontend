@@ -250,7 +250,7 @@ test("最初の有効結果だけを記録し再計算・履歴変更で完了�
 });
 
 test("基礎・詳細・時事・データページに入口があり結果描画成功後にだけ完了を通知する", async () => {
-  const pages = ["index.html", "guides/index.html", "press/index.html", "data/index.html", "data/subsidies/index.html", ...["solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
+  const pages = ["index.html", "guides/index.html", "press/index.html", "data/index.html", "data/subsidies/index.html", ...["self-consumption", "solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(n => `guides/${n}/index.html`), ...["policy", "calculation-method"].map(n => `pages/${n}.html`)];
   for (const page of pages) {
     const html = await readFile(new URL(`../../site/${page}`, import.meta.url), "utf8");
     assert.equal((html.match(/src="(?:\.\.\/|\/)?shared\/analytics\.js"/g) ?? []).length, 1, page);
@@ -292,7 +292,7 @@ test('データページは地域・受付・金額を送らず，診断遷移�
 
 
 test('詳細5記事と時事記事は閲覧と見積もりを計測し，入力URLを送らない', () => {
-  for (const slug of ['solar-electricity-savings', 'solar-fit', 'solar-installation-cost', 'solar-maintenance-cost', 'subsidy-amount', 'electricity-support-end']) {
+  for (const slug of ['self-consumption', 'solar-electricity-savings', 'solar-fit', 'solar-installation-cost', 'solar-maintenance-cost', 'subsidy-amount', 'electricity-support-end']) {
     const path='/guides/'+slug+'/';
     const f=fixture('https://haretoku.jp'+path+'?private=CANARY#CANARY');
     assert.equal(f.analytics.active,true,slug);

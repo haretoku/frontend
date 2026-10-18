@@ -4,6 +4,118 @@
 
 リリースごとの適用・判定・報告は[リリースチェックリスト](release-checklist.md)に従う．
 
+## v0.4.0正式候補の公開前検収（2026年10月18日）
+
+> **結論：新記事1件・一覧・接続の実装と独立検収は合格した．本番公開の承認と公開後検査は未実施であり，本番はv0.3.6のままである．**
+
+範囲は「リードだけ対話」の正式化，自家消費記事 `/guides/self-consumption/`，テーマ別一覧と正方形画像，共通パンくず，確認用ホスティングの分離である．旧記事本文・既存URL・MAP・診断の計算・広告設定は変更しない．以下は正式候補の記録であり，後続の試作履歴とは区別する．実装・操作確認は親担当，内容・表示の独立検収は `v040_content_review`，公開成果物・接続・安全性の独立検収は `v040_release_review` が担当した．
+
+|ID|結果|確認範囲・根拠|残件・次の確認|
+|---|---|---|---|
+|P01|PASS|候補0.4.0．対象コードは本節を含むfrontendの候補コミットで固定する．切戻し先は公開済みv0.3.6，`c49e0b7876aca91cca353602985854e792afe8a3`．旧記事の段階置換と設置後MAPは範囲外|公開時は承認対象コミットと一致させる|
+|P02|PASS|本文・図1〜3・ハレナのまとめ・導線を独立照合．31.28＝36.40−9.30＋4.18円，卒FIT8.50円，差22.78円，2026年度認定FIT24／8.3円を一次資料と照合．診断ロジック不変|なし|
+|P03|PASS|公開用125検査が125件合格（`artifacts/v040-public-tests.log`）．共有画像修正後の対象2検査も合格．最終公開ビルド129ファイル・正規31URL・公開データ13.0.0同一（`artifacts/v040-public-build.log`）|文書だけの更新で全件再実行しない|
+|P04|PASS|公開成果物を1280×900／360×800のブラウザー幅で確認．記事・図・まとめ，目次#rates，参考資料の自動展開，記事→診断，一覧→記事，メニューとEscape，横はみ出しなし．一覧画像10/10読込み．保存画像 `v040-article-{pc,mobile}.jpg`，`v040-directory-{pc,mobile}.jpg`，`v040-directory-mobile-bottom.jpg`|実スマホでの最終確認はユーザーの確認用サイト閲覧で行う．今回の実績を実端末検査とは扱わない|
+|P05|PASS|内容・表示の独立検収はMUST／RECOMMEND／NITS各0件．公開成果物・接続のコード検収もMUST0件．比較図の標準明確化と共有画像の中央切取り対策を採用．正式QA記録の不足を本節で解消|なし|
+|P06|PASS|canonical・サイトマップ31URL・robots・34HTML・アンカー・参照資産・404と配信allowlistを機械検査．公開物に試作経路・QA・内部文書なし．確認用だけ旧試作URLを転送．旧13HTMLはパンくず以外v0.3.6と同一|本番HTTPはD02|
+|P07|PASS|新記事のtitle／description／OG／Twitter／faviconとJS後titleを確認．OG1200×630を320×168と中央正方形240×240で目視し，文字欠けなし．画像SHA256 `0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c` は最終公開物と一致|実際の共有表示はE04|
+|P08|PASS（再利用）|広告設定・素材・表示ページはv0.3.6と不変．広告掲載はTOPと `/guides/quote-services/` の2ページを維持．新記事・一覧に広告を新設しないため既存広告検収・報告を再利用|新たな実申込みはしない|
+|P09|PASS（実装）|固定ID `self-consumption` と既存page_view／article_view／article_diagnosis_clickへ接続．入力・金額・任意クエリーの非送信を含む公開検査PASS．確認用／ローカルは計測無効|本番実受信はD03で確認する|
+|P10|未確認|本番公開を承認されたとは扱わず，候補と検査結果を提示する|ユーザーのv0.4.0公開指示を待つ|
+|D01〜D04|未確認|本番公開・本番HTTP／操作・タグ／Releaseの固定は未実施|公開承認後に実施|
+|E01|対象外|広告掲載ページ・広告URLに変更なし|既存ASP報告を維持|
+|E02|未確認|新記事のSearch Console更新依頼は未実施|公開後にサイトマップと新URLを確認・送信|
+|E03|未確認|新記事の実検索掲載は未確認|公開後の外部反映として追跡|
+|E04|未確認|新記事のLINE等の実共有表示は未確認．保存画像だけで実共有PASSとしない|公開後，許可された自身宛て確認で追跡|
+|E05|PASS（範囲確認）|依存・ランタイム・本番workflowは変更なし．今回のビルドに阻害警告なし|既存運用残件は既存計画を維持|
+|E06|PASS（候補）|CHANGELOGは「公開前候補」とし，未公開を公開済みと記さない|公開日・公開コミットはD04で確定|
+
+独立検収した新記事HTMLのSHA256は `a319b3a7aedb9ed3f7f31d2f4da2e86953df1bf372217b7e82fe3bc26bdc8940`，CSSは `e1d49bf53e95d6b922b9b3d6762cd9a7cdbd7d74812ea7fa4d5fe65acd411d6b`．共有画像・文書以外のアプリコードは公開用125検査後に変更していない．確認用ビルドも128ファイル／35HTMLの検査に合格し，本番origin・GA-ID・A8実体の除去，検索除外，許可ファイルだけのstageを確認した．
+
+正式候補を本人限定Sitesの確認用v11へ配置した（2026年10月18日16:49 JST，succeeded）．記事は https://haretoku-preview.wordmindblack.chatgpt.site/guides/self-consumption/ ，一覧は同originの `/guides/`．source `13e567121ac64240dabf56d1408072f007b41e74`，version `appgprj_6ad443af93d0819196462588cef5c7e1~appgver_50237c6409d0819193bd3e97bcd8eca4`，deployment `appgdep_6ad47a1a10908191bef0be8d62c9af18`，archive SHA256 `71d63276640879910060b637d0500438627497b9c5885441df322def1d301329`．配置直前にowner・custom・許可1名・外部0を確認した．配信後のHTTPは未認証で本文非表示，認証後のTOP・記事・診断・比較・robots・確認情報200，未知URL404，記事全文と参照資産が検収ビルドと一致してPASS．既知のフッター後Cloudflareスクリプト1件だけを区別した．本人限定の確認用であり，本番公開・実共有確認の実績にはしない．
+
+リリース担当の差分再検収もMUST／RECOMMEND／NITS各0件で完了した．一時公開成果物サーバー127.0.0.1:4173（PID16020）は終了し，表示幅を解除した．共有開発サーバー5173は継続確認用に保持した．同期・HTTP検査プロセスは終了し，短期認証情報はファイルへ保存しない．
+
+## 開発確認用ホスティング（2026年10月18日）
+
+> **結論：本番と独立した本人限定Sitesへ試作を配置した．初期ホスティング検収と，更新ごとの変更箇所の自己確認を区別し，最新の確認範囲は以下に記す．**
+
+確認用v10（16:24 JST，succeeded）は，PCも左画像・右文章へ戻し，画像とタイトルの上端，説明・更新日の詰め方を調整した．PC132px角／スマホ96px角の1:1を維持し，スマホの配置は不変．変更箇所のローカル実表示と先頭6画像の読込み・132×132pxを確認し，[PCの横配置](guide-directory-pc-horizontal-square-20261018.jpg)を保存した．確認用ビルド・stage・差分の空白検査PASS．全体の独立再レビューはしていない．sourceは`458336cd367b346b48840b8bef0976620ebed944`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_6ed916a49d888191a3466a6fe32d24fd`，deploymentは`appgdep_6ad47433153881918d2e86bef725d5b4`．本番は更新していない．
+
+確認用v9（16:15 JST，succeeded）は，PCカードを画像が上・文章が下の配置へ変更した．PC132px角／スマホ96px角で画像比率を1:1へ統一し，PCは同じ行のタイトル開始位置・更新日をそろえた．変更箇所のローカル実表示と先頭6画像の読込み・132×132pxを確認し，[PCの上下配置](guide-directory-pc-vertical-square-20261018.jpg)を保存した．スマホの配置は不変．確認用ビルド・stage・差分の空白検査PASSで，全体の独立再レビューは行っていない．sourceは`b7b4141e70f18af8ae877b948cbe92312834503a`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_0e7e167fdcc88191b0a35d1fe8854a5b`，deploymentは`appgdep_6ad471fd5cf88191ab4798f67f14f681`．本番は更新していない．
+
+確認用v8（16:00 JST，succeeded）では，ユーザー指示でスマホの画像枠を96px角へ広げ，文字欄を狭めた．写真は正方形の中央切取り，自家消費記事は正方形の原図へ変更し，イラスト全体を保持した．390×844pxで変更箇所を確認し，[正方形画像のスマホ一覧](guide-directory-mobile-square-20261018.jpg)を保存．確認用ビルド・stage・差分の空白検査PASS．全体の独立再レビューはしていない．sourceは`66e893e2fbc2881c5e51e5452101c501812e8f1d`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_2fde868f02188191a467263e98d1fbbc`，deploymentは`appgdep_6ad46e72630c819191b85bddf71c5943`．本番は更新していない．
+
+確認用v7（15:18 JST，succeeded）は，スマホ一覧で画像が文章の高さへ伸びて切れる不具合を修正した．枠を上寄せの3:2とし，画像の高さを自然比率へ戻した．新記事の一覧タイトルと全ガイドの一覧説明を短縮し，分類の副題を除いた．本文・元のタイトル・プレスの説明は変更していない．390×844pxで画像全体・短い説明の実表示を確認し，[スマホ一覧](guide-directory-mobile-compact-20261018.jpg)を保存した．確認用ビルド・stage・差分の空白検査PASS．全体の独立再レビューはしていない．sourceは`c7ee73a60ab50efa1dcde82ad1eb1474300ec680`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_f07203ab199c8191a82e3478a6b2b910`，deploymentは`appgdep_6ad464ab06c48191bc470e7823b9f7ba`．本番は更新していない．
+
+確認用v6（15:13 JST，succeeded）では，`/guides/`を4テーマ別・小画像付きの縦並びへ変更し，承認済み記事を「電気の使い方」の先頭へ追加した．sourceは`b1fa13f6fc570f618cfdaeff8bc0a5f625290e3d`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_02553c2792ec8191842b5fe9d25f14d4`，deploymentは`appgdep_6ad4636fdf048191a56ea65af156bd57`．旧記事の本文・URL・プレス一覧は維持した．確認用10件の重複なし・新記事先頭・プレス1件の分離，ローカル一覧の実表示と新記事への遷移，確認用／公開用ビルド，公開用bundleへの試作リンク非混入，対象差分の空白検査を確認した．[一覧PC表示](guide-directory-topics-pc-20261018.jpg)を保存．狭幅表示・全体の独立レビュー・配信後HTTPの再検査は今回行っていない．更新は本人限定の確認用だけで，本番公開はしていない．
+
+確認用v5（14:59 JST，succeeded）へ更新した．sourceは`f819f9a498f5c304ea6f4c53ec1530c3267a3e76`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_2f0b0b5a16008191ae44b5af636fdd20`，deploymentは`appgdep_6ad4603b0d908191b03da346d545d057`．購入単価の導入に「例えば」を追加し，まとめを買う電気の方が高い表現へ変更．図3は各場面1アイコン（円記号入りコイン／食洗機／食洗機／稲妻に従来と同じ取り消し線）へ簡素化した．`build:review`・stage検査・対象差分の空白検査PASS．画面接続は再取得を含め応答せず，この版の実表示確認は未完．独立レビューは依頼していない．配置前のowner-private（許可1名・外部0）を維持し，本番は変更していない．以下は過去版の記録である．
+
+最新は確認用v4（14:11 JST，succeeded）．sourceは`755b4d9a2fb83627c8c2e6432d55a5c98152189a`，versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_b07935713c348191a2486c79a532aea3`，deploymentは`appgdep_6ad454dfcc6481918c9d0ffc35a8b6bb`．導入のハレナを「売るよりも」へ変更し，売電説明・図2の注記を短縮した．途中の料金内訳は末尾の参考資料へ移し，FITの具体単価24円／8.3円を2026年度認定・10 kW未満の条件付きで示した．図3へ電気の流れ・購入不要のアイコンを追加した．一次資料の単価確認，変更箇所のローカル実表示と折返し調整，`build:review`，対象差分の空白検査を実施した．[図3](guide-self-use-figure3-icons-20261018.jpg)を保存．合意した開発版運用に従い，独立レビュー・全体HTTP・全ページ表示の再検査は行っていない．配置直前にowner-private（許可1名・外部0）を確認した．本番は変更していない．以下はv3以前の検収履歴であり，v4の独立レビュー実績ではない．
+
+同日の記事修正を確認用v3へ更新した．最新sourceは`b8defd255fe9edcc4a3826991095dac31d5cdb85`，保存versionは`appgprj_6ad443af93d0819196462588cef5c7e1~appgver_29f0af5a6b9481918600e426a6a62d51`，deploymentは`appgdep_6ad44f80a5708191acdaa06fe95625cc`（13:48 JST，succeeded），archive SHA-256は`5c865c4f7c4dabfbf7845ffb13dedfc26557e4c75ccec5c174cb13f0ce2bf40a`．直前にget_siteで所有者だけ1名・外部0のcustomを再確認した．archive126件のallowlistとstage全内容一致，確認用125ファイル／34HTML，共通正本の一致検査PASS．本番は更新していない．以下の表・初回記録はv2までの構築履歴である．
+
+v3配信後のHTTP検査もPASS．未認証では本人ログイン画面となり試作本文なし，認証付きでは主要ページ・記事資産・robots・確認用情報を取得でき，未知URLは404だった．記事はフッター後に配信基盤が加える既知のCloudflare JSDスクリプト1件だけを分離し，それ以外の全文が検収済みビルドと一致した．この同一性検査について，独立preview_hosting_reviewが9ケースを確認し，本文・資産URL・未知スクリプト等の差分は拒否されることを検証した（MUST／RECOMMEND／NITS 0）．所有者の実ブラウザーでのログイン後表示は別途確認対象であり，HTTP検査をその代替実績とはしない．
+
+ユーザーは相談チャット経由で，スマホから開ける確認用環境の構築・試作配置・同一frontend利用を明示依頼した．本番公開は未承認であり行わない．既存接続を調べ，新規契約・DNS変更・新しいアカウントを増やさずSitesを採用した．以前のharetoku Siteは変更せず，新規確認用Siteをowner-privateで作成した．
+
+|項目|対象・結果|
+|---|---|
+|URL|https://haretoku-preview.wordmindblack.chatgpt.site/ ，記事 `/prototypes/guide-self-consumption/`|
+|Site|appgprj_6ad443af93d0819196462588cef5c7e1，custom，ownerだけ1名・外部閲覧者0をget_siteで確認|
+|最新の配信保存commit|411c50e73e6a0b121447ac2fc40468a9a15f3fe9（生成した配信物だけのSite保存領域）|
+|保存version|appgprj_6ad443af93d0819196462588cef5c7e1~appgver_6825361599288191a95e1346f57e171a|
+|deployment|appgdep_6ad446b21d7481918d5e8bb59c598dea，2026年10月18日13:10 JST，succeeded|
+|archive SHA-256|20f7a78d1e027273f66c79674b2667467dbe3847fc3478049416672eceb18cee|
+|基準のfrontend|cbd6352a4483dd95bb0fce9b71b6a1e02dda3bd9，公開済みbaseVersion0.3.6．未コミットの試作とパンくず変更を確認用だけに含める|
+|独立担当|preview_hosting_review．最新版の配信物・stage・archive・パンくず差分・保存PC／スマホ画像でMUST／RECOMMEND／NITS 0|
+
+確認用ビルドは本番Vite設定を継承する．本番のconfig・workflow・verify-pagesは変更せず，finalizeの静的資産部分だけ共通関数へ抽出した．抽出直後のpublic123検査・本番build125ファイル／正規30URL・公開データ13.0.0同一PASS．抽出前後の本番125ファイルは全ハッシュ一致．その後，合意済みのパンくず「トップ→マップ」を14ページのaria-label=パンくずリスト内・href=/のリンクだけへ反映した．独立担当がHEAD原文から同じ置換を適用した期待値と全14HTMLを照合し，他変更0．public123と本番buildを再実行してPASS．旧baselineとの差分は該当14HTMLだけで，他111ファイルは原バイト一致．この14ページも本番へはまだ配信していない．
+
+`build:review`／verify-reviewは125ファイル・34HTMLでPASS．全HTMLに確認用banner・noindex,nofollow,noarchiveとCSP，robotsはDisallow:/，本番CNAME／sitemapなし．GA設定と広告設定を確認用aliasで差し替え，JS・静的HTML双方で本番GA-ID・A8広告URL／計測画像0．policyにあるA8公式ヘルプへの参照は広告計測ではなく保持した．本番originの動的canonical生成も確認originへ置換し，ルート相対リンクを維持した．全ローカル参照・symlink排除・配信allowlistを検査した．
+
+stageは`.git`・`.openai/hosting.json`・生成distのみ．Sites source helperは生成物だけを同期し，frontend正本のcommit／pushはしていない．archiveは126 regular files＝配信125件＋hosting.jsonだけ．独立担当がtarヘッダーと各内容を読み，stageとの全バイト一致・余分／欠落／危険形式0を確認した．秘密情報・QA・リポジトリや作業フォルダ全体を送信していない．
+
+最初のSite版はsource782fe6e6292d26c7d736fc3f59a2602aaf87c2ce，archive21d2d7eaacc6eca3665b97b77740f4a31010558c760a8e4ef2e114344c6648d8，deployment appgdep_6ad4450e37448191816c899c5d391a49で成功．パンくずを含めた上記最新版へ手動更新した．初回source helperは同期後の梱包だけWindowsApps bash／tarのC:解釈で失敗したが，既存Git BashとTAR_OPTIONS=--force-localで標準helperを再実行し，最新版では同期・commit SHA返却・梱包まで一貫して成功した．同じSiteを再利用し，重複作成はしていない．
+
+最新版のHTTPは専用のサービス認証をメモリーstdinで渡して検査した．未認証では本文を読めず認証画面／リダイレクト，認証後のTOP・試作・診断・比較・robots・preview-infoは200，試作が参照するassetsは全200，未知URLは404．検索除外・bannerも一致した．これをブラウザーの本人ログインと区別する．通常ブラウザーはChatGPTで続ける→所有者アカウント選択→認証アプリのMFAまで到達し，ユーザーへコード入力だけを依頼した．コードをチャットで求めず，認証制限は緩めない．認証後のホスティング画面操作と実スマホからの閲覧は未確認である．
+
+配信したものと同じdist-reviewを一時127.0.0.1:5174で表示し，[PC試作](review-hosting-pc-20261018.jpg)・[スマホ試作](review-hosting-mobile-20261018.jpg)・[スマホパンくず](review-breadcrumb-mobile-20261018.jpg)・[PCパンくず](review-breadcrumb-pc-20261018.jpg)を保存した．親は幅1280／360pxで確認表示・画像・横はみ出しなし，料金の内訳のEnter開閉，試作→診断，同一確認originのMAP・ガイド遷移を確認した．診断は東京・電気代5000円の入力後に＋約50万円／＋約95万円へ再計算，エラー0．MAPの広告リンクは通常公式URL，外部計測画像0．ガイド一覧は「マップ ／ はれトクガイド」，パンくずクリックで/へ到達．独立担当は保存画像を目視してPASS．途中tab51の再読込後に接続タイムアウトがあり，新しいtab52でPCパンくず・MAP遷移を確認して解消した．viewportは解除済み．
+
+更新方法・本人限定の利用方法・PCを閉じた後の閲覧可否は[実装方針](../site/docs/実装方針.md#スマホから閲覧する開発確認用サイト)へ記載した．本人認証後のブラウザー最終確認を残件とし，ユーザーのログイン完了後に同じ確認URLで続ける．公開済みharetoku.jpと本番用workflow・ドメインは一切変更していない．
+
+検査専用のVite preview PID59232（親41924，127.0.0.1:5174）は終了した．共有開発サーバーPID53152の5173は継続確認用として保持する．HTTP検収helper・同期／梱包helperは終了し，短期認証情報はファイルへ保存せずセッション保持も解除した．検査タブ51の終了操作は接続タイムアウトになったが，このタブは一時タブとして扱い，引渡し対象にしない．通常viewportは別操作で解除し，本人認証待ちのhosted tab50だけを引渡し対象として保持した．
+
+## v0.4.0向け：記事形式のローカル試作（2026年10月18日）
+
+> **結論：「売るのと自宅で使うの，どちらがお得？」の独立した試作を作成し，内容・PC／スマホ幅を独立検収して確認用サイトへ配置した．本番公開・既存記事の置換・形式の正式採用はしていない．**
+
+ユーザーの読後指摘を受け，リードと第2・3章を「基本的には，売るより自宅で使う方がお得」を先に示す構成へ改訂した．高いFIT契約や時間帯別料金で逆転する場合は短く保持する．第1章末は「余った電気は売れる」へ簡略化．比較の売電単価は卒FIT後の東京電力EP「再エネ買取標準プラン」8.50円／kWhに変更し，本日公式ページの本文で価格・税込・対象地域・見直し可能性を確認した．独立担当も同じ一次ページを確認．購入31.28円は同日・同条件の先行PASSを再利用し，差22.78円，棒比率27.173913％を再計算した．全国一律価格・導入直後の価格・将来の保証価格にはしない．FIT制度説明は買取期間10年と卒FITの意味に絞った．
+
+図3は同じ食洗機の運転について「昼に余剰を売り，夜に電気を買って運転」から「余剰のある昼に太陽光で運転し，夜はその運転分を買わない」への時間移動を示す2パネルに変更した．家電・運転は同じと明示し，電気を使い切るための不要な運転を勧めない．PCは横比較，スマホは縦比較，家電はSVGの線画である．
+
+対象index.html SHA-256は`9f305d27f09f0f04e2dd6e55cee5d1a86f5eadbbcec9139880dd53680982c00d`，style.cssは`f623f7962e4b133a33296540286e049a3911fd272f9aa1d3b310c26c4fa2630d`．header/footerは正本・変更前と一致し，確認用検査へ正本との一致と共通CSS読込検査を追加した．記事のタグ・フォーカスCSSをarticle内へ限定し，共通リセット確認画面のh2へ波及しないようにした．親はメニューからリセット確認を開きPCの見出し25pxを確認し，キャンセルで閉じた．PC1280／スマホ360pxで本文・比較・図・まとめの表示，横はみ出しなし，新出典6への移動で参考資料が開くことを確認した．[PCリード](guide-self-use-revised-pc-20261018.jpg)・[PC比較図](guide-self-use-comparison-pc-20261018.jpg)・[PC図3](guide-self-use-figure3-pc-20261018.jpg)・[スマホ全体](guide-self-use-revised-mobile-full-20261018.jpg)・[スマホ図3](guide-self-use-figure3-mobile-20261018.jpg)を保存した．独立article_format_reviewは同版の本文・根拠・図とまとめ・共通正本／CSS・各画像を確認しMUST／RECOMMEND／NITS 0．図3のスマホ下半分も通常幅画像で追加検収した．確認用v3へ配置し，本番更新は行っていない．以下は修正前の試作履歴である．
+
+末尾もユーザー合意に沿って「最終章まとめ→次の行動→参考資料・確認日→共通フッター」へ整理した．今回の次の行動は/simulator/への1リンクとし，見出し「わが家では，どのくらい得になる？」と設置・維持費込みの30年間の収支を比較できる短い説明を置く．本文・リード・図・まとめは直前版から不変．最新版index.html SHA-256は`b86a45dcf937a4475557db385ce093372c9d37fb3261924bc4be3d9716c48957`，style.cssは`322c260c1100e9470eeb2bd32f45ad22ded73cceca91840cccc8f2f8ddcca55e`．親が[PC末尾](guide-trial-ending-pc-20261018.jpg)・[スマホ末尾](guide-trial-ending-mobile-20261018.jpg)の見切れ・折返し・横はみ出しなしを確認し，リンク実クリックで診断の正規URL・現行タイトルへ到達した．差分検査PASS，viewport解除済み，ローカル試作の末尾を確認するタブを保持．独立article_format_reviewは同じ末尾HTML・専用CSSと両画像を検収し，MUST／RECOMMEND／NITS 0．不変範囲の検収・公開ビルド除外は先行PASSを再利用する．
+
+同日の追加合意で，リードだけを博士の結論→ハレナの受け止め→博士の本文案内の3発言へ変更した．博士右・ハレナ左の吹き出しとし，尾を各話者へ向ける．本文・3図・各章末まとめと公開側のコードは不変．当該時点のindex.html SHA-256は`1f8db18660c0d765e331ed268a8e0d3146fa6ac7aaf3027599b8769665f35f1e`，style.cssは`a968175bfe9908a527476be68e14c1b7937e51e1ce1a09d47777b423dffc9417`．親がPC1280×900／スマホ360×800を目視し，横はみ出しなし・3発言の全文とキャラ画像・話者への尾を確認した．独立article_format_reviewも最新2ファイルと[PCリード](guide-trial-dialogue-pc-20261018.jpg)・[スマホリード](guide-trial-dialogue-mobile-view-20261018.jpg)・[スマホ全体](guide-trial-dialogue-mobile-20261018.jpg)を検収し，MUST／RECOMMEND／NITS 0．差分検査PASS．不変の本文・数値・操作・公開ビルド除外は以下の先行PASSを再利用する．viewportは解除済み．以下の初回ハッシュと画像は対話化前の版を表す．
+
+確認URLは http://localhost:5173/prototypes/guide-self-consumption/ ．博士の短い結論・概要とまとめ役の紹介，通常の本文・3図，各3章末のハレナの箇条書きまとめを組み合わせる．扱う範囲は電気の行き先，同じ電力量の単価比較，必要な家電運転の時間移動．設備投資回収・売電先比較・蓄電池購入判断へ拡張しない．既存のsolar-economics／solar-electricity-savingsは保持する．試作専用2ファイルと本記録・画面設計の試作注記だけを追加・更新し，版番号は公開済み0.3.6のままにした．
+
+|対象|SHA-256|
+|---|---|
+|site/prototypes/guide-self-consumption/index.html|37eeafd39f246b975ea735113b3588b3ad6d7358d9ed45c72b99500cfdcf41ce|
+|site/prototypes/guide-self-consumption/style.css|fa75f38411dc5dbb0417729d32b0b9492cc29e381d528b8a98af830662cc0f1a|
+
+単価比較は東京電力EPの関東・従量電灯B，2026年10月分の第2段階（120 kWh超〜300 kWh）に限定し，36.40−9.30＋4.18＝31.28円／kWhを公式料金表・支援反映後の燃調表画像・賦課金資料で照合した．2026年度認定・住宅用10 kW未満FITの最初の4年24円，5〜10年目8.3円も同省公式ガイドの表と一致．METI本文／PDFの直接取得は403であり，検索取得表を一次資料照合に用いた．期間は売電開始後，買う単価は現在の比較条件，円未満処理前であることを保持する．請求総額を使用量で割った平均単価は使わない．家電の移動先は「発電に余りがある時間」とし，時間帯別料金で結論が変わる条件と不要な運転を増やさない説明を置く．TEPCOの用語・家電記事も独立担当が本文照合した．
+
+親担当がPC1280×900とスマホ360×800のブラウザー幅で全章・図・まとめを確認した．実端末検査ではない．横はみ出し・図の欠け・画像読込失敗なし．料金表はEnterで開閉でき，出典2のクリックで閉じた参考資料が開き対応項目へ移動する．診断リンクは実クリックで/simulator/と現行タイトルへ到達．共通メニューの開閉・Escape・リンク一覧も確認し，ブラウザーのerror記録は0件．viewportは解除し，試作タブをユーザー確認用に保持した．
+
+独立article_format_reviewは最終2ファイルと[PC全体](guide-trial-pc-20261018.jpg)・[スマホ全体](guide-trial-mobile-full-20261018.jpg)・[PC比較図](guide-trial-comparison-pc-20261018.jpg)・[スマホ比較図](guide-trial-comparison-mobile-20261018.jpg)・[時間移動図](guide-trial-timing-mobile-20261018.jpg)を確認し，MUST／RECOMMEND／NITS 0．事前RECOMMENDの端数処理・期間・余剰時刻・リードの同量比較・設備回収との区別はすべて採用・解消．操作確認は同版の親担当結果を参照しており，独立した実操作とは区別する．[スマホ冒頭](guide-trial-mobile-20261018.jpg)・[流れ図](guide-trial-flow-mobile-20261018.jpg)も保存した．
+
+標準build:pagesは125ファイル・正規30URL・公開データ13.0.0同一・ローカル参照／QA非混入PASS．公開成果物の全テキストを照合し，試作名・URLの混入0件．試作の3章／3まとめ，ID重複0，同一ページの欠落アンカー0，ローカル資産の欠落0，noindex指定，算術31.28／差7.28を確認した．公開側ソースは不変のためpublic123検査はv0.3.6の同実装PASSを再利用し，今回の対象外へ拡張しない．コミット・push・公開は未実施．既存Vite PID53152（親57288）をユーザーのローカル確認に再利用・保持し，補助プロセスは起動していない．
+
 ## v0.3.6：時事記事のサービス紹介更新（2026年10月18日）
 
 > **結論：ユーザーの完成稿確認・明示承認後にv0.3.6を公開し，本番表示・HTTPの独立検収と公開タグ／Releaseの固定を完了した．今回変更の未解消MUSTはない．**

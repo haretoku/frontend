@@ -13,14 +13,14 @@ async function walk(dir) {
 }
 const files = await walk(output);
 const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\", "/"));
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|favicon\.png|og-home-photo-20260926\.jpg|og-step-map-20261017(?:-v034)?\.png|og-image\.png|og-support-shock-burden\.png)$/.test(path)), "未承認の配信ファイルがあります");
+assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|favicon\.png|og-home-photo-20260926\.jpg|og-step-map-20261017(?:-v034)?\.png|og-image\.png|og-support-shock-burden\.png|og-self-consumption-v040\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
 for (const retired of ['solar/index.html', 'guides/solar-profit-conditions/index.html', ...['electricity-sales','costs-maintenance','subsidies','disaster','quotes-contractors'].map(name => `pages/${name}.html`)]) {
   assert(!relative.includes(retired), `廃止URLが配信されています: ${retired}`);
 }
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-assert.equal(urls.length, 15+Object.keys(journeyRoutes).length-1);
+assert.equal(urls.length, 16+Object.keys(journeyRoutes).length-1);
 for(const route of Object.values(journeyRoutes)){
   assert(urls.includes(`https://haretoku.jp${route}`));
   const html=await readFile(resolve(output,'.'+route,'index.html'),'utf8');
@@ -42,10 +42,11 @@ for (const url of urls) {
     assert(html.includes('property="og:title" content="わが家の太陽光・蓄電池えらび｜はれトク"'));
   }
   const news = path === '/guides/electricity-support-end/';
+  const selfConsumption = path === '/guides/self-consumption/';
   const journeyArticle=Object.entries(journeyRoutes).some(([id,route])=>!['map','estimate'].includes(id)&&route===path);
-  assert(html.includes('property="og:type" content="' + (news||journeyArticle ? 'article' : 'website') + '"'), `og:type: ${path}`);
+  assert(html.includes('property="og:type" content="' + (news||journeyArticle||selfConsumption ? 'article' : 'website') + '"'), `og:type: ${path}`);
   assert(html.includes(`property="og:url" content="${url}"`), `og:url: ${path}`);
-  assert(html.includes('content="https://haretoku.jp/' + (news ? 'og-support-shock-burden.png' : 'og-step-map-20261017-v034.png') + '"'));
+  assert(html.includes('content="https://haretoku.jp/' + (news ? 'og-support-shock-burden.png' : selfConsumption ? 'og-self-consumption-v040.png' : 'og-step-map-20261017-v034.png') + '"'));
   assert(html.includes('property="og:image:type" content="image/png"'));
   assert(html.includes('property="og:image:width" content="' + (news ? '1320' : '1200') + '"'));
   assert(html.includes('property="og:image:height" content="' + (news ? '585' : '630') + '"'));
