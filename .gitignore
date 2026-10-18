@@ -11,6 +11,10 @@ site/dist/
 site/.openai/
 .wrangler/
 qa/screenshots/
+/qa/*.jpg
+/qa/*.png
+/qa/artifacts/*.log
+/qa/artifacts/top-map-prototype/
 
 .DS_Store
 Thumbs.db
