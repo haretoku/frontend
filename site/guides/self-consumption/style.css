@@ -30,11 +30,12 @@
 .guide-article .flow-figure { padding: 28px; border: 1px solid #dce4dd; border-radius: 14px; background: #fbfcfa; }
 .guide-article .flow-origin { display: flex; justify-content: center; align-items: center; gap: 20px; margin: 0 auto 30px; color: var(--guide-dark); font-size: 19px; font-weight: 700; }
 .guide-article .flow-origin svg { width: 104px; height: 104px; flex: 0 0 auto; }
-.guide-article .flow-branches { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-top: 26px; }
-.guide-article .flow-branches::before { content: ''; position: absolute; top: 0; left: 25%; width: 50%; border-top: 2px solid #a6bcad; }
-.guide-article .flow-branches::after { content: ''; position: absolute; top: -24px; left: 50%; height: 24px; border-left: 2px solid #a6bcad; }
+.guide-article .flow-branches { --flow-gap: 24px; position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: var(--flow-gap); padding-top: 26px; }
+.guide-article .flow-branches::before { content: ''; position: absolute; top: 0; left: calc(25% - var(--flow-gap) / 4); right: calc(25% - var(--flow-gap) / 4); border-top: 2px solid #a6bcad; }
+.guide-article .flow-branches::after { content: ''; position: absolute; top: -24px; left: 50%; height: 26px; border-left: 2px solid #a6bcad; transform: translateX(-50%); }
 .guide-article .flow-option { position: relative; padding: 22px 12px; background: #fff; border-radius: 8px; text-align: center; }
-.guide-article .flow-option::before { content: '↓'; position: absolute; top: -35px; left: calc(50% - 9px); color: #638b72; font-size: 22px; }
+.guide-article .flow-option::before { content: ''; position: absolute; top: -26px; left: 50%; height: 18px; border-left: 2px solid #a6bcad; transform: translateX(-50%); }
+.guide-article .flow-option::after { content: ''; position: absolute; top: -14px; left: 50%; width: 7px; height: 7px; border-right: 2px solid #a6bcad; border-bottom: 2px solid #a6bcad; transform: translateX(-50%) rotate(45deg); }
 .guide-article .flow-option h3 { margin: 0 0 10px; font-size: 20px; }
 .guide-article .flow-option p { margin: 0; font-size: 15px; line-height: 1.8; }
 .guide-article .flow-option small { display: block; color: #515d56; font-size: 13px; }
@@ -115,7 +116,7 @@
   .guide-article .flow-figure { padding: 20px 12px; }
   .guide-article .flow-origin { gap: 12px; font-size: 17px; }
   .guide-article .flow-origin svg { width: 82px; height: 82px; }
-  .guide-article .flow-branches { gap: 12px; }
+  .guide-article .flow-branches { --flow-gap: 12px; }
   .guide-article .flow-option { padding: 18px 7px; }
   .guide-article .flow-option h3 { font-size: 16px; }
   .guide-article .flow-option p { font-size: 13px; }

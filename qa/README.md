@@ -21,7 +21,7 @@
 |P07|PASS|新記事のtitle／description／OG／Twitter／faviconとJS後titleを確認．OG1200×630を320×168と中央正方形240×240で目視し，文字欠けなし．画像SHA256 `0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c` は最終公開物と一致|実際の共有表示はE04|
 |P08|PASS（再利用）|広告設定・素材・表示ページはv0.3.6と不変．広告掲載はTOPと `/guides/quote-services/` の2ページを維持．新記事・一覧に広告を新設しないため既存広告検収・報告を再利用|新たな実申込みはしない|
 |P09|PASS（実装）|固定ID `self-consumption` と既存page_view／article_view／article_diagnosis_clickへ接続．入力・金額・任意クエリーの非送信を含む公開検査PASS．確認用／ローカルは計測無効|本番実受信はD03で確認する|
-|P10|未確認|本番公開を承認されたとは扱わず，候補と検査結果を提示する|ユーザーのv0.4.0公開指示を待つ|
+|P10|PASS|ユーザーが図1の接続ずれを指摘し，「ここだけ直したらリリースしていい」と修正後の公開を承認した．分岐線・矢印だけを修正し，PC／360px表示の自己確認と独立再検収で残る指摘0件|この承認対象だけを公開する|
 |D01〜D04|未確認|本番公開・本番HTTP／操作・タグ／Releaseの固定は未実施|公開承認後に実施|
 |E01|対象外|広告掲載ページ・広告URLに変更なし|既存ASP報告を維持|
 |E02|未確認|新記事のSearch Console更新依頼は未実施|公開後にサイトマップと新URLを確認・送信|
@@ -30,7 +30,7 @@
 |E05|PASS（範囲確認）|依存・ランタイム・本番workflowは変更なし．今回のビルドに阻害警告なし|既存運用残件は既存計画を維持|
 |E06|PASS（候補）|CHANGELOGは「公開前候補」とし，未公開を公開済みと記さない|公開日・公開コミットはD04で確定|
 
-独立検収した新記事HTMLのSHA256は `a319b3a7aedb9ed3f7f31d2f4da2e86953df1bf372217b7e82fe3bc26bdc8940`，CSSは `e1d49bf53e95d6b922b9b3d6762cd9a7cdbd7d74812ea7fa4d5fe65acd411d6b`．共有画像・文書以外のアプリコードは公開用125検査後に変更していない．確認用ビルドも128ファイル／35HTMLの検査に合格し，本番origin・GA-ID・A8実体の除去，検索除外，許可ファイルだけのstageを確認した．
+独立検収した新記事HTMLのSHA256は `a319b3a7aedb9ed3f7f31d2f4da2e86953df1bf372217b7e82fe3bc26bdc8940`．公開直前の図1の修正後CSSは `8db702de0524e10fa0dbeac6195596cf1c5ea7793c8af48f837edc752974a3b8`．カード間の余白を含めて分岐線の端をカード中央へ合わせ，矢印文字をCSSの線と矢尻へ置き換えた．PC・スマホの証跡は `v040-flow-fixed-pc.jpg`，`v040-flow-fixed-mobile.jpg`．修正後に公開用125検査と129ファイル・31URLのビルドを再実行してPASS，`v040_content_review`の限定再検収も全優先度0件だった．確認用ビルドの先行128ファイル／35HTML検収では，本番origin・GA-ID・A8実体の除去，検索除外，許可ファイルだけのstageを確認した．
 
 正式候補を本人限定Sitesの確認用v11へ配置した（2026年10月18日16:49 JST，succeeded）．記事は https://haretoku-preview.wordmindblack.chatgpt.site/guides/self-consumption/ ，一覧は同originの `/guides/`．source `13e567121ac64240dabf56d1408072f007b41e74`，version `appgprj_6ad443af93d0819196462588cef5c7e1~appgver_50237c6409d0819193bd3e97bcd8eca4`，deployment `appgdep_6ad47a1a10908191bef0be8d62c9af18`，archive SHA256 `71d63276640879910060b637d0500438627497b9c5885441df322def1d301329`．配置直前にowner・custom・許可1名・外部0を確認した．配信後のHTTPは未認証で本文非表示，認証後のTOP・記事・診断・比較・robots・確認情報200，未知URL404，記事全文と参照資産が検収ビルドと一致してPASS．既知のフッター後Cloudflareスクリプト1件だけを区別した．本人限定の確認用であり，本番公開・実共有確認の実績にはしない．
 
