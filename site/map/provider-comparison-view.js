@@ -4,7 +4,7 @@ import {consultationProviders,providerLogo,providerImpression} from './consultat
 const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 // 一つの表を画面幅に応じて組み替え，項目・会社とセルの対応を保つ．
-export function renderProviderComparison({idPrefix='',placement='article_comparison'}={}){
+export function renderProviderComparison({idPrefix='',placement='article_comparison',includeImpressions=true}={}){
   const consultationPlacement=placement==='map_comparison'?'map_comparison':'article_comparison';
   const titleId=`${idPrefix}provider-comparison-title`;
   const providerHeading=provider=>`${idPrefix}provider-heading-${provider.id}`;
@@ -13,7 +13,7 @@ export function renderProviderComparison({idPrefix='',placement='article_compari
     const consultation=consultationProviders.find(item=>item.id===provider.id);
     const logo=providerLogo(consultation);
     const name=provider.id==='solar-partners'?'<span>ソーラー</span><span>パートナーズ</span>':safe(provider.name);
-    return `<a class="provider-brand" href="${safe(consultation.url)}" target="_blank" rel="${consultation.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="${safe(provider.id)}" data-consult-placement="${consultationPlacement}" aria-label="${safe(provider.name)}の${consultation.affiliate?'無料見積もり':'公式サイト'}（別タブ）">${logo}<span class="provider-brand-name">${name}</span><span aria-hidden="true">↗</span></a>${providerImpression(consultation)}`;
+    return `<a class="provider-brand" href="${safe(consultation.url)}" target="_blank" rel="${consultation.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="${safe(provider.id)}" data-consult-placement="${consultationPlacement}" aria-label="${safe(provider.name)}の${consultation.affiliate?'無料見積もり':'公式サイト'}（別タブ）">${logo}<span class="provider-brand-name">${name}</span><span aria-hidden="true">↗</span></a>${includeImpressions?providerImpression(consultation):''}`;
   };
   return `<section class="provider-comparison" aria-labelledby="${safe(titleId)}">
     <h2 id="${safe(titleId)}">一括見積もりサイトを，同じ基準で比べよう</h2>

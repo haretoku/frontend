@@ -1,0 +1,3 @@
+.map-header .menu-panel #reset.walkthrough-reset-action { margin-top:8px; border-top:1px solid #e6ddd2; border-radius:0 0 6px 6px; color:#ad3933; font-size:13px; font-weight:500; }
+.map-header .menu-panel #reset.walkthrough-reset-action:hover { background:#fff0eb; }
+.site-reset-dialog:has(#reset-description) #confirm-reset { background:#ad3933; border-color:#ad3933; }

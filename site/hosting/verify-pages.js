@@ -42,8 +42,8 @@ for (const url of urls) {
   assert.equal(siteNames.length,path==='/'?1:0, `サイト名の構造化データはTOPだけ: ${path}`);
   if(path==='/') {
     assert.deepEqual(JSON.parse(siteNames[0][1]),{'@context':'https://schema.org','@type':'WebSite',name:'はれトク',url:'https://haretoku.jp/'});
-    assert(html.includes('<title>わが家の太陽光・蓄電池えらび｜はれトク</title>'));
-    assert(html.includes('property="og:title" content="わが家の太陽光・蓄電池えらび｜はれトク"'));
+    assert(html.includes('<title>はれトク｜わが家の太陽光・蓄電池えらび</title>'));
+    assert(html.includes('property="og:title" content="はれトク｜わが家の太陽光・蓄電池えらび"'));
   }
   const news = path === '/guides/electricity-support-end/';
   const selfConsumption = path === '/guides/self-consumption/';

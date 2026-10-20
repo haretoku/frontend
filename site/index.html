@@ -6,7 +6,7 @@
     <meta name="description" content="太陽光パネル・蓄電池の費用，電気代の節約，停電への備えをマップで確認．30年間の収支を診断し，設備や相談先を比べられます．">
     <link rel="canonical" href="https://haretoku.jp/">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta property="og:title" content="わが家の太陽光・蓄電池えらび｜はれトク">
+    <meta property="og:title" content="はれトク｜わが家の太陽光・蓄電池えらび">
     <meta property="og:description" content="太陽光パネル・蓄電池の費用，電気代の節約，停電への備えをマップで確認．30年間の収支を診断し，設備や相談先を比べられます．">
     <meta property="og:url" content="https://haretoku.jp/">
     <meta property="og:type" content="website">
@@ -20,7 +20,7 @@
     <meta name="twitter:card" content="summary_large_image">
 
   <script type="application/ld+json" data-site-name>{"@context":"https://schema.org","@type":"WebSite","name":"はれトク","url":"https://haretoku.jp/"}</script>
-  <title>わが家の太陽光・蓄電池えらび｜はれトク</title>
+  <title>はれトク｜わが家の太陽光・蓄電池えらび</title>
   <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="https://haretoku.jp/favicon.png" type="image/png" sizes="96x96">
   <link rel="stylesheet" href="/shared/styles/main.css">
@@ -41,13 +41,12 @@
   </defs></svg>
   <header class="map-header">
     <div class="header-inner">
-      <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <a class="brand" href="/" aria-label="はれトクの太陽光えらびマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
       <nav aria-label="主要メニュー" class="header-nav">
-        <a class="map-link" href="/" aria-current="page">マップ</a>
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a href="/simulator/">わが家のプランを見直す</a>
+            <a class="map-link" href="/" aria-current="page">太陽光えらびマップ</a>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
               <a href="/guides/">詳しいガイド</a>
@@ -59,6 +58,7 @@
         </div>
       </nav>
     </div>
+    <script type="module" src="/shared/walkthrough/entry.js"></script>
   </header>
   <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
     <h2 id="reset-title">進み具合をリセットしますか？</h2>
@@ -125,7 +125,6 @@
         <div class="goal" aria-live="polite">
           <span class="goal-flag">GOAL</span>
           <p class="goal-title">わが家のプラン</p>
-          <p class="goal-consultation-status" id="goal-consultation-status" hidden>✓ 相談先を開いた</p>
           <div id="goal-home" hidden>
             <svg class="goal-house" viewBox="0 0 160 120" aria-hidden="true">
               <use href="/map/assets/title-art.svg#solar-house" x="7" width="120" height="120"/>

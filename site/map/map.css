@@ -161,14 +161,11 @@ body.is-map > main { width:min(1440px,calc(100% - 64px)); }
 .stop-4 { left:17.86%; top:calc(57.86% - var(--station-size)/2); }
 .map-landscape:has(.goal:not(.has-result)) { margin-bottom:80px; }
 .map-landscape:has(.goal.has-result) { margin-bottom:100px; }
-.map-landscape:has(.goal.has-result #goal-consultation-status:not([hidden])) { margin-bottom:125px; }
 .map-landscape:has(.goal.has-result) .stop-3 { left:50%; top:calc(65.14% - var(--station-size)/2); }
 .goal.has-result { top:calc(78% - 65px); width:440px; padding:16px; display:grid; grid-template-columns:140px minmax(0,1fr); grid-template-areas:"title title" "home effects" "note review" "action action"; gap:8px 14px; align-items:center; }
-.goal.has-result:has(#goal-consultation-status:not([hidden])) { grid-template-areas:"title title" "status status" "home effects" "note review" "action action"; }
 .goal.has-result .goal-flag { position:absolute; left:18px; top:23px; }
 .goal.has-result.is-current .goal-flag { left:58px; }
 .goal.has-result .goal-title { grid-area:title; margin:0; }
-.goal.has-result .goal-consultation-status { grid-area:status; margin:0; }
 .goal.has-result #goal-home { grid-area:home; }
 .goal.has-result .goal-house { width:110px; height:84px; margin:0 auto 4px; }
 .goal.has-result .goal-equipment { margin:0; }
@@ -431,7 +428,6 @@ summary { cursor:pointer; min-height:44px; padding:10px 0; color:#35624b; }
 .battery-line { color:#946409; }
 .form-note { line-height:1.85; font-size:12px; }
 .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
-.goal-consultation-status { margin:8px 0; font-size:13px; font-weight:700; color:var(--map-green); }
 .consult-providers { margin:32px 0; }
 .consult-providers h2,.consult-provider-brand h3,.consult-provider-badge,.consult-provider-action { font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif; }
 .consult-providers h2 { margin:0 0 18px; font-size:28px; font-weight:900; line-height:1.5; letter-spacing:.02em; }

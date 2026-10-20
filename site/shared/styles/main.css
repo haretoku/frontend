@@ -83,7 +83,7 @@ img { max-width: 100%; }
 .brand__toku { position: relative; display: inline-block; margin-left: -0.12em; padding-right: 0.18em; font-weight: 900; }
 .brand__mark { position: absolute; top: -0.06em; right: -0.01em; display: block; width: 0.54em; height: 0.54em; max-width: none; }
 .brand-word { position: relative; display: inline-block; margin-right: 0.3em; color: var(--color-brand-green); font-family: var(--font-brand); font-weight: 900; letter-spacing: -0.08em; }
-.brand-word::after { position: absolute; top: -0.06em; right: -0.19em; width: 0.54em; height: 0.54em; background: url("../assets/yen-sun-mark.svg") center / contain no-repeat; content: ""; }
+.brand-word::after { position: absolute; top: -0.06em; right: -0.19em; width: 0.54em; height: 0.54em; background: url("../../map/assets/sun-face.svg") center / contain no-repeat; content: ""; }
 .brand-term {
   color: inherit;
   font-family: inherit;

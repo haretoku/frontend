@@ -7,6 +7,22 @@ import {renderProviderComparison} from '../../site/map/provider-comparison-view.
 import {pages} from '../../site/map/content.js';
 import {readProgress,writeProgress,clearProgress} from '../../site/map/progress-storage.js';
 import {quoteMaterial,tainaviMaterial} from '../../site/shared/quote-config.js';
+import {renderReadingBody} from '../../site/map/reading-view.js';
+
+test('見積もり案内もTOP共通の3社カードを使い，解説の比較表を最初から開く',()=>{
+  const html=renderReadingBody(pages.find(page=>page.id==='quote-sites'),{pawn:'male'});
+  assert.match(html,/<details class="consult-provider-comparison" open><summary>3社の違いを比べる<\/summary>/);
+  assert.equal((html.match(/class="consult-provider-card /g)??[]).length,3);
+  assert.equal((html.match(/class="consult-impression"/g)??[]).length,2);
+  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(match=>match[1]);
+  assert.equal(new Set(ids).size,ids.length);
+  const cards=html.slice(html.indexOf('<div class="consult-provider-cards">'));
+  for(const provider of consultationProviders){
+    assert(cards.includes(provider.description));
+    assert(cards.includes(provider.url.replaceAll('&','&amp;')));
+  }
+  assert.equal((cards.match(/data-consult-placement="article_comparison"/g)??[]).length,3);
+});
 
 const initial=()=>({completed:[0,1,2,3,4],step:5,input:{prefectureCode:'08',monthlyElectricityBillYen:12000},goal:{equipment:'solar_only',input:{prefectureCode:'08',monthlyElectricityBillYen:12000}},last:{5:'quote'}});
 function storageHost(){const local=new Map(),session=new Map();return {localStorage:{getItem:key=>local.get(key),setItem:(key,value)=>local.set(key,value),removeItem:key=>local.delete(key)},sessionStorage:{getItem:key=>session.get(key),setItem:(key,value)=>session.set(key,value),removeItem:key=>session.delete(key)}};}

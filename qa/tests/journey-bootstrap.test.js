@@ -3,6 +3,15 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {readProgress,writeProgress} from '../../site/map/progress-storage.js';
 
+test('TOPのtitle・OGとMAPへ戻る際のタイトルをブランド先頭へそろえる',async()=>{
+  const title='はれトク｜わが家の太陽光・蓄電池えらび';
+  const html=await readFile(new URL('../../site/index.html',import.meta.url),'utf8');
+  const journey=await readFile(new URL('../../site/map/journey.js',import.meta.url),'utf8');
+  assert(html.includes(`<title>${title}</title>`));
+  assert(html.includes(`<meta property="og:title" content="${title}">`));
+  assert(journey.includes(`document.title='${title}'`));
+});
+
 // 実際のjourney入口を読み込み，DOM操作だけを小さく代替する．保存・復元・fetch待ちは本体の経路を通す．
 function browserFixture(saved){
   const nodes=new Map(),handlers=new Map(),windowHandlers=new Map();
@@ -27,6 +36,21 @@ function browserFixture(saved){
   },choosePawn(value){for(const handler of handlers.get('change')??[])handler({target:{name:'pawn',value}});},pageshow(){windowHandlers.get('pageshow')?.({persisted:true});}};
 }
 const saved=()=>({step:4,last:{4:'compare'},pawn:'male',pawnChosen:true,completed:[0,1,2,3],consultation:{viewed:true,openedProviderIds:['griene']},input:{prefectureCode:'08',monthlyElectricityBillYen:null,keep:'raw-input'},goal:{equipment:'solar_only',input:{prefectureCode:'08',monthlyElectricityBillYen:null},keep:'raw-goal'}});
+
+test('実入口：TOPの相談欄へ直接入るとカード位置へ移動し，診断入力を変えない',async()=>{
+  const f=browserFixture(saved());
+  try{
+    f.window.location.href='http://localhost:5173/#map-consultation';
+    const {imported}=await begin(f,'consultation-anchor');
+    assert.equal(f.query('#map-consultation').scrolled,true);
+    assert.equal(f.query('#map-consultation-title').focused,true);
+    assert.equal(f.query('#map').hidden,false);
+    assert.deepEqual(readProgress(f.window).input,saved().input);
+    f.release();await imported;
+    assert.equal(f.window.location.hash,'#map-consultation');
+    assert.deepEqual(readProgress(f.window).input,{prefectureCode:'08',monthlyElectricityBillYen:null});
+  }finally{f.restore();}
+});
 
 test('実入口：データ待ち中の電気代編集は旧保存より優先し，未編集の地域だけ復元する',async()=>{
   const f=browserFixture(saved());
@@ -177,10 +201,10 @@ test('実入口：両保存先が書込不可でも駒と相談履歴を現在�
     f.choosePawn('female');f.clickProvider('tainavi');
     f.release();await imported;
     assert.match(f.query('#response-portrait').innerHTML,/pawn-female/);
-    assert.equal(f.query('#goal-consultation-status').hidden,false);
+    assert.equal(f.nodes.has('#goal-consultation-status'),false);
     f.query('#confirm-reset').handlers.get('click')();f.choosePawn('female');
     assert.equal(f.query('#goal-equipment').textContent,'');
-    assert.equal(f.query('#goal-consultation-status').hidden,true);
+    assert.equal(f.nodes.has('#goal-consultation-status'),false);
   }finally{f.restore();}
 });
 
@@ -249,7 +273,7 @@ test('実入口：データ失敗前に保存を復元し，失敗後も相談cl
     assert.match(f.query('#form-message').textContent,/診断データを読み込めません/);
     f.clickProvider('griene');
     const current=readProgress(f.window);assert.deepEqual(current.input,original.input);assert.deepEqual(current.goal,original.goal);
-    assert.equal(current.pawn,'female');assert(!current.completed.includes(5));assert.equal(f.query('#goal-consultation-status').hidden,false);
+    assert.equal(current.pawn,'female');assert(!current.completed.includes(5));assert.equal(f.nodes.has('#goal-consultation-status'),false);
   }finally{f.restore();}
 });
 

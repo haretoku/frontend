@@ -1,0 +1,28 @@
+.walkthrough-target {
+  animation:walkthrough-target-glow 1.5s ease-in-out 2;
+}
+@keyframes walkthrough-target-glow {
+  0%,100% { box-shadow:0 0 0 0 transparent; }
+  50% { box-shadow:0 0 20px 5px color-mix(in srgb,var(--walkthrough-glow-color,#008653) 40%,transparent); }
+}
+/* MAPは各マスの枠色に合わせて内側を光らせる． */
+.stop .walkthrough-target { animation:none; box-shadow:none; }
+.stop .walkthrough-target > .station::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:inset 0 0 24px 6px color-mix(in srgb,var(--walkthrough-glow-color,#008653) 40%,transparent);
+  opacity:0;
+  animation:walkthrough-map-glow 1.5s ease-in-out 2;
+}
+@keyframes walkthrough-map-glow {
+  0%,100% { opacity:0; }
+  50% { opacity:1; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .walkthrough-target { animation:none; box-shadow:0 0 16px 3px color-mix(in srgb,var(--walkthrough-glow-color,#008653) 33%,transparent); }
+  .stop .walkthrough-target { box-shadow:none; }
+  .stop .walkthrough-target > .station::after { animation:none; opacity:1; }
+}

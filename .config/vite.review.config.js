@@ -11,7 +11,7 @@ if(!/^https:\/\/[a-z0-9.-]+\.chatgpt\.site$/.test(origin))throw Error('確認用
 const previewRoute='prototypes/guide-self-consumption/index.html';
 const stamp=new Date().toISOString();
 const csp="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'";
-function previewHtml(html){
+function previewHtml(html,context){
   let result=html.replaceAll('https://haretoku.jp',origin)
     .replace(/<meta\b[^>]*name=["']robots["'][^>]*>/gi,'')
     .replace(/<link\b[^>]*rel=["']canonical["'][^>]*>/gi,'')
@@ -20,7 +20,7 @@ function previewHtml(html){
     .replaceAll(tainaviMaterial.url,'https://www.tainavi.com/')
     .replace('<title>','<title>【確認用】');
   result=result.replace(/<head>/i,`<head>\n<meta name="robots" content="noindex,nofollow,noarchive">\n<meta http-equiv="Content-Security-Policy" content="${csp}">`);
-  return result.replace(/(<body\b[^>]*>)/i,`$1\n<aside class="review-notice" aria-label="開発確認用サイト"><strong>開発確認用</strong> 本番とは別のサイトです．アクセス解析・広告計測は無効です． <a href="/guides/self-consumption/">新しい記事を見る →</a></aside><style>.review-notice{position:relative;z-index:10;background:#fff3d3;color:#123f31;padding:12px 20px;font:14px/1.8 sans-serif;border-bottom:1px solid #d9ba6b}.review-notice strong{margin-right:10px}.review-notice a{color:#007447;text-decoration:underline;text-underline-offset:.2em}</style><!-- review-build:${stamp} -->`);
+  return result.replace(/(<body\b[^>]*>)/i,`$1\n<aside class="review-notice" aria-label="開発確認用サイト"><strong>開発確認用</strong> 本番とは別のサイトです．アクセス解析・広告計測は無効です． <a href="/guides/">歩き方の試作を見る →</a></aside><style>.review-notice{position:relative;z-index:10;background:#fff3d3;color:#123f31;padding:12px 20px;font:14px/1.8 sans-serif;border-bottom:1px solid #d9ba6b}.review-notice strong{margin-right:10px}.review-notice a{color:#007447;text-decoration:underline;text-underline-offset:.2em}</style><!-- review-build:${stamp} -->`);
 }
 
 export default defineConfig({

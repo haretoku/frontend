@@ -1,0 +1,55 @@
+.has-walkthrough .header-nav { gap:22px; }
+.map-header .walkthrough-trigger { display:flex; align-items:center; gap:8px; min-height:44px; padding:8px 14px; border:1px solid #b7c9b7; border-radius:9px 14px 14px 9px; background:#f1f6eb; color:#123f31; font:inherit; cursor:pointer; box-shadow:inset 3px 0 #d7e3cd; }
+.walkthrough-trigger svg { width:19px; height:19px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; }
+.walkthrough-trigger:hover,.walkthrough-trigger[aria-expanded="true"] { background:#e7efde; border-color:#8fa88d; }
+.walkthrough-panel { box-sizing:border-box; position:fixed; inset:var(--walkthrough-top,100px) max(28px,calc((100vw - 1160px)/2)) auto auto; margin:0; width:470px; max-width:calc(100% - 28px); max-height:calc(100dvh - var(--walkthrough-top,100px) - 16px); overflow-y:auto; overscroll-behavior:contain; padding:25px 25px 22px 49px; border:1px solid #cbd8cc; border-left:7px solid #b7c9ba; border-radius:10px 18px 18px 10px; background:linear-gradient(90deg,transparent 30px,#b6c7b94d 30px,#b6c7b94d 31px,transparent 31px),#fffdf7; color:#123f31; box-shadow:inset 4px 0 #e3ebe0,0 12px 44px #123f3129; font-family:"Noto Sans JP",sans-serif; line-height:1.7; }
+.walkthrough-binding { position:absolute; top:27px; left:5px; display:grid; gap:31px; pointer-events:none; }
+.walkthrough-binding i { display:block; width:13px; height:6px; border:1px solid #8fa394; border-radius:9px; background:#eef3e9; box-shadow:0 1px 1px #637b6630; }
+.walkthrough-panel__header { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:22px; }
+.walkthrough-eyebrow { margin:0 0 3px; color:#6d7d6c; font-size:11px; font-weight:700; letter-spacing:.08em; }
+.walkthrough-panel h2 { margin:0; color:#123f31; font-size:23px; line-height:1.5; }
+.walkthrough-close { flex:none; width:36px; height:36px; border:1px solid #d8e2d5; border-radius:50%; background:#f0f5ec; color:#60715e; font:400 25px/1 sans-serif; cursor:pointer; }
+.walkthrough-group__description { margin:7px 0 12px; font-size:12px; line-height:1.8; color:#647463; }
+.walkthrough-group+.walkthrough-group { margin-top:24px; }
+.walkthrough-group__heading { display:flex; align-items:center; gap:9px; min-height:33px; }
+.walkthrough-group h3 { margin:0; color:#254e3c; font-size:17px; font-weight:700; }
+.walkthrough-group__fraction { margin-left:auto; color:#6c796b; font-size:11px; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.walkthrough-medal { flex:none; width:30px; height:35px; transform:rotate(7deg); }
+.walkthrough-medal[hidden] { display:none; }
+.walkthrough-medal svg { display:block; width:100%; height:100%; filter:drop-shadow(0 1px 1px #b68f4b40); }
+.walkthrough-group__progress { height:5px; margin:9px 0 5px; border-radius:5px; overflow:hidden; background:#e4ebdf; }
+.walkthrough-group__progress>span { display:block; height:100%; background:#6f997a; border-radius:5px; }
+.walkthrough-groups ul { list-style:none; padding:0; margin:0; }
+.walkthrough-groups li { position:relative; display:flex; align-items:center; gap:12px; min-height:57px; border-bottom:1px solid #d3ded273; }
+.walkthrough-stamp { flex:none; position:relative; display:grid; place-items:center; width:25px; height:25px; box-sizing:border-box; border:1px dashed #bac7b7; border-radius:50%; color:#7b8a78; font-size:11px; font-weight:500; }
+.walkthrough-stamp svg { display:none; width:21px; height:21px; fill:none; stroke:currentColor; stroke-width:2.3; stroke-linecap:round; stroke-linejoin:round; }
+.is-done .walkthrough-stamp { border:2px solid #5f8d70; color:#497558; background:#e8f0e05e; transform:rotate(-9deg); box-shadow:0 0 0 2px #fffdf7,0 0 0 3px #5f8d7040; }
+.is-done .walkthrough-stamp__number { display:none; }
+.is-done .walkthrough-stamp svg { display:block; }
+.walkthrough-groups li a { display:block; flex:1; min-width:0; padding:12px 0; color:#007447; font-size:13px; font-weight:700; text-decoration:underline; text-decoration-color:#a6bca9; text-underline-offset:.24em; }
+.walkthrough-groups li a:hover { text-decoration-color:currentColor; }
+.walkthrough-arrow { display:inline-block; margin-left:7px; }
+.walkthrough-groups .is-done a { color:#536e5c; }
+.walkthrough-sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.walkthrough-first-visit { position:fixed; z-index:1000; display:flex; align-items:center; gap:10px; box-sizing:border-box; width:max-content; max-width:calc(100vw - 24px); padding:10px 15px 10px 10px; border:1px solid #b7c9b7; border-radius:14px; background:#fffdf7; color:#123f31; box-shadow:0 5px 18px #123f3120; font:700 14px/1.5 "Noto Sans JP",sans-serif; pointer-events:none; animation:walkthrough-hint 6.5s ease both; }
+.walkthrough-first-visit::before { content:""; position:absolute; left:var(--hint-point); top:-6px; width:10px; height:10px; background:#fffdf7; border-top:1px solid #b7c9b7; border-left:1px solid #b7c9b7; transform:translateX(-50%) rotate(45deg); }
+.walkthrough-first-visit svg { flex:none; width:40px; height:40px; }
+.walkthrough-trigger--introduced { animation:walkthrough-introduction 1.6s ease-in-out 2; }
+@keyframes walkthrough-hint { 0% { opacity:0; } 8%,85% { opacity:1; } 100% { opacity:0; } }
+@keyframes walkthrough-introduction { 0%,100% { box-shadow:inset 3px 0 #d7e3cd,0 0 0 0 #6f997a00; } 50% { box-shadow:inset 3px 0 #d7e3cd,0 0 12px 4px #6f997a55; } }
+@media(prefers-reduced-motion:reduce) { .walkthrough-first-visit,.walkthrough-trigger--introduced { animation:none; } }
+@media(max-width:760px) {
+ .has-walkthrough .header-nav { gap:12px; }
+ .map-header .walkthrough-trigger { gap:6px; padding:6px 10px; font-size:12px; }
+ .walkthrough-trigger svg { width:16px; height:16px; }
+ .has-walkthrough .map-header #menu-button { padding-left:0; gap:6px; }
+ .walkthrough-panel { right:14px; padding:20px 16px 20px 35px; background:linear-gradient(90deg,transparent 19px,#b6c7b94d 19px,#b6c7b94d 20px,transparent 20px),#fffdf7; }
+ .walkthrough-binding { left:3px; }
+ .walkthrough-panel h2 { font-size:21px; }
+ .walkthrough-group h3 { font-size:16px; }
+ .walkthrough-group__heading { gap:6px; }
+ .walkthrough-group__fraction { font-size:10px; }
+ .walkthrough-medal { width:25px; height:30px; }
+ .walkthrough-groups li { gap:10px; }
+ .walkthrough-groups li a { font-size:13px; }
+}

@@ -25,16 +25,17 @@ export function providerImpression(provider) {
   return provider.material?`<img class="consult-impression" src="${safe(provider.material.impressionUrl)}" width="1" height="1" alt="" aria-hidden="true" referrerpolicy="no-referrer">`:'';
 }
 
-export function renderConsultationProviders({compact=false,comparison=''}={}) {
+export function renderConsultationProviders({compact=false,comparison='',comparisonOpen=false,idPrefix=compact?'map-':'',placement=compact?'map':'article'}={}) {
+  const quotePlacement=compact?(placement==='map'?'map_consultation':null):'diagnosis_result';
   return `<section class="consult-providers ${compact?'consult-providers-compact':''}" aria-label="相談先を選ぶ">
-    <h2${compact?' id="map-consultation-title" tabindex="-1"':''}>わが家のことを相談しよう</h2>
-    ${compact?`<p class="consult-provider-intro">あなたの家に設置できるか，費用や補助金を相談で確かめよう．</p>${comparison?`<details class="consult-provider-comparison"><summary>3社の違いを比べる</summary>${comparison}</details>`:''}`:''}
-    <div class="consult-provider-cards">${consultationProviders.map(provider=>`<section class="consult-provider-card ${provider.recommended?'consult-provider-recommended':''}" aria-labelledby="${compact?'map-':''}consult-${provider.id}">
+    <h2${compact?` id="${safe(idPrefix)}consultation-title" tabindex="-1"`:''}>わが家のことを相談しよう</h2>
+    ${compact?`<p class="consult-provider-intro">あなたの家に設置できるか，費用や補助金を相談で確かめよう．</p>${comparison?`<details class="consult-provider-comparison"${comparisonOpen?' open':''}><summary>3社の違いを比べる</summary>${comparison}</details>`:''}`:''}
+    <div class="consult-provider-cards">${consultationProviders.map(provider=>`<section class="consult-provider-card ${provider.recommended?'consult-provider-recommended':''}" aria-labelledby="${safe(idPrefix)}consult-${provider.id}">
       ${provider.recommended?'<p class="consult-provider-badge">はれトクのおすすめ</p>':''}
-      <div class="consult-provider-brand">${providerLogo(provider)}<h3 id="${compact?'map-':''}consult-${provider.id}">${safe(provider.name)}</h3></div>
+      <div class="consult-provider-brand">${providerLogo(provider)}<h3 id="${safe(idPrefix)}consult-${provider.id}">${safe(provider.name)}</h3></div>
       <p class="consult-provider-description">${safe(provider.description)}</p>
       <p class="consult-provider-disclosure">${provider.affiliate?`広告・アフィリエイト ／ ${safe(provider.name)}`:'通常リンク ／ 広告リンクではありません'}</p>
-      <a class="${provider.recommended?'primary':'secondary'} consult-provider-action" href="${safe(provider.url)}" target="_blank" rel="${provider.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" ${provider.id==='solar-partners'?`data-quote-placement="${compact?'map_consultation':'diagnosis_result'}" `:''}data-consult-provider="${provider.id}" data-consult-placement="${compact?'map':'article'}">${provider.affiliate?'無料見積もり ↗':'公式サイトへ ↗'}<span class="visually-hidden">（${safe(provider.name)}）</span></a>
+      <a class="${provider.recommended?'primary':'secondary'} consult-provider-action" href="${safe(provider.url)}" target="_blank" rel="${provider.affiliate?'sponsored nofollow ':''}noopener noreferrer" referrerpolicy="no-referrer" ${provider.id==='solar-partners'&&quotePlacement?`data-quote-placement="${quotePlacement}" `:''}data-consult-provider="${provider.id}" data-consult-placement="${safe(placement)}">${provider.affiliate?'無料見積もり ↗':'公式サイトへ ↗'}<span class="visually-hidden">（${safe(provider.name)}）</span></a>
       ${providerImpression(provider)}
     </section>`).join('')}</div>
     ${compact?'':'<p class="form-note">各社の違いは<a href="#quote-sites">第4章の比較</a>で確かめられます．</p>'}

@@ -35,6 +35,16 @@ test('参照ページからのリセットは取消しで保存を保ち，明�
   assert.equal(f.host.localStorage.getItem(storageKey),null);assert.equal(f.nodes.get('#menu-button').focused,true);
 });
 
+test('MAP入口をメニューへまとめ，見直す入口を重複させない',()=>{
+  const header=renderSiteHeader('map');
+  const nav=header.match(/<nav aria-label="主要メニュー"[\s\S]*?<\/nav>/)[0];
+  const [outsideMenu,insideMenu]=nav.split('<div id="menu"');
+  assert(!outsideMenu.includes('class="map-link"'));
+  assert.match(insideMenu,/<a class="map-link" href="\/" aria-current="page">太陽光えらびマップ<\/a>/);
+  assert(!nav.includes('わが家のプランを見直す'));
+  assert.match(header,/aria-label="はれトクの太陽光えらびマップ"/);
+});
+
 test('全表示ページが共通ヘッダーと確認画面を1個ずつ持ち，旧ナビを残さない',async()=>{
   const root=new URL('../../site/',import.meta.url),files=(await readdir(root,{recursive:true})).filter(path=>path.endsWith('.html')&&!path.replaceAll('\\','/').startsWith('prototypes/'));
   let count=0;

@@ -1,5 +1,6 @@
 import {assets} from './assets.js';
 import {renderProviderComparison} from './provider-comparison-view.js';
+import {renderConsultationProviders} from './consultation-view.js';
 import {journeyLinks} from './routes.js';
 const safe = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const contractorChecklistUrl = new URL('./assets/contractor-checksheet.pdf',import.meta.url).href;
@@ -68,7 +69,7 @@ export function renderReadingBody(page,state){
   }
   if(page.checkQuestions)body+=`<section class="company-check-questions"><h2>施工会社を選ぶ，5つのチェック</h2><ul role="list">${page.checkQuestions.map(item=>`<li><h3><span class="company-check-box" aria-hidden="true"></span>${safe(item.question)}</h3><p>${safe(item.explanation)}</p></li>`).join('')}</ul><a class="company-check-download" href="${safe(contractorChecklistUrl)}" download="haretoku-contractor-checksheet.pdf">相談で使うチェックシートをダウンロード<span>PDF・A4 1枚</span></a></section>`;
   if(page.companyNote)body+=`<p class="company-request-note">${safe(page.companyNote)}</p>`;
-  if(page.providerComparison)body+=renderProviderComparison();
+  if(page.providerComparison)body+=renderConsultationProviders({compact:true,idPrefix:'article-',placement:'article_comparison',comparisonOpen:true,comparison:renderProviderComparison({idPrefix:'article-',includeImpressions:false})});
   if(page.note)body+=`<p class="form-note">${safe(page.note)}</p>`;
   if(page.characters)body+=`<fieldset class="character-choice"><legend>マップを進むキャラクターを選ぼう</legend><p>見た目だけの選択です．あとから変えても大丈夫．</p>${['male','female'].map((v,i)=>`<label><input type="radio" name="pawn" value="${v}" ${state.pawn===v?'checked':''}><img src="${assets[`pawn-${v}`]}" alt=""><span>キャラクター${i+1}</span></label>`).join('')}</fieldset>`;
   return journeyLinks(body);

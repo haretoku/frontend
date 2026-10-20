@@ -81,7 +81,6 @@ function renderMap({keepConsultationLinks=false}={}){
   $('#goal-backup').textContent=has?backups[state.goal.equipment]:'';
   $('#goal-note').textContent=has?'収支は概算です．':'診断で設備を選んでみよう';
   $('#goal-review').textContent=has?'プランを見直す →':'診断してプランを選ぶ →';
-  $('#goal-consultation-status').hidden=!state.consultation.openedProviderIds.length;
   const consultationVisible=!$('#map').hidden;
   $('#map-consultation').hidden=!consultationVisible;
   if(!keepConsultationLinks)$('#map-consultation').innerHTML=consultationVisible?renderConsultationProviders({compact:true,comparison:renderProviderComparison({idPrefix:'map-',placement:'map_comparison'})}):'';
@@ -119,7 +118,12 @@ function renderPage(focus=true){
   $('#map').hidden=!!page;$('#reading').hidden=!page;
   $('#reading').classList.toggle('reading-provider-comparison',!!page?.providerComparison);
   $('.map-link').removeAttribute('aria-current');
-  if(!page){document.title='わが家の太陽光・蓄電池えらび｜はれトク';$('.map-link').setAttribute('aria-current','page');renderMap();if(focus)requestAnimationFrame(()=>{$('#map-title').focus({preventScroll:true});window.scrollTo(0,0);});return;}
+  if(!page){document.title='はれトク｜わが家の太陽光・蓄電池えらび';$('.map-link').setAttribute('aria-current','page');renderMap();if(focus)requestAnimationFrame(()=>{
+    if(location.hash==='#map-consultation'){
+      $('#map-consultation').scrollIntoView({block:'start'});
+      $('#map-consultation-title').focus({preventScroll:true});
+    }else{$('#map-title').focus({preventScroll:true});window.scrollTo(0,0);}
+  });return;}
   save(latest=>({...latest,step:page.step,last:{...latest.last,[page.step]:page.id}}));renderMap();
   const siblings=pages.filter(p=>p.step===page.step);
   $('#page-chapter').textContent=`${page.step===0?'':`${page.step}．`}${steps[page.step]}`;

@@ -3,8 +3,6 @@ body.is-map .map-header { background:#ffffffc9; }
 .map-header .header-inner { width:min(1160px,calc(100% - 64px)); margin-inline:auto; display:flex; justify-content:space-between; align-items:center; height:80px; }
 .map-header .header-nav { display:flex; align-items:center; gap:32px; font-size:15px; font-weight:700; }
 .map-header .header-nav a { color:inherit; text-decoration:none; }
-.map-header .map-link { padding:15px 0; border-bottom:3px solid transparent; }
-.map-header .map-link[aria-current="page"] { border-bottom-color:#efb72e; }
 .map-header .menu-wrap { position:relative; }
 .map-header #menu-button { display:flex; gap:10px; align-items:center; min-height:44px; border:0; background:none; color:inherit; cursor:pointer; padding:8px 0 8px 14px; font:inherit; }
 .map-header .menu-lines { width:19px; height:12px; border-block:2px solid; position:relative; }
