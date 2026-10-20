@@ -1,0 +1,23 @@
+{
+  "otherCatalogItemsUnchanged": true,
+  "articles": [
+    {
+      "slug": "solar-maintenance-cost",
+      "bodySha256": "be727bebafe4e4d940539ecb471347dace027ef1470d482a256afe416a05e6e6",
+      "bodyUnchanged": true,
+      "shareImage": "/assets/og-guide-solar-maintenance-cost-20261019-v2.png"
+    },
+    {
+      "slug": "disaster",
+      "bodySha256": "9de2acd565d28b061815f670e9c41fadcf5568c72b3a34096902af7a66f86aec",
+      "bodyUnchanged": true,
+      "shareImage": "/assets/og-guide-disaster-20261019-v2.png"
+    },
+    {
+      "slug": "quotes-contractors",
+      "bodySha256": "5f07849531bc8424b3ab3c491efe0656afee724d7b0f055cee6429eb55c6fa69",
+      "bodyUnchanged": true,
+      "shareImage": "/assets/og-guide-quotes-contractors-20261019-v2.png"
+    }
+  ]
+}

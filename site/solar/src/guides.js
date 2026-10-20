@@ -3,7 +3,19 @@ import { groupedArticles } from './guide-groups.js';
 
 const directoryArticles = guideArticles;
 
-const guideImages = import.meta.glob("../../shared/assets/*.{png,webp,svg}", {
+const guideImages = import.meta.glob([
+  "../../shared/assets/article-self-consumption.svg",
+  "../../shared/assets/article-solar-economics.svg",
+  "../../shared/assets/article-subsidies.svg",
+  "../../shared/assets/article-quotes-contractors.svg",
+  "../../shared/assets/article-disaster.svg",
+  "../../shared/assets/article-solar-electricity-savings.svg",
+  "../../shared/assets/article-solar-fit.svg",
+  "../../shared/assets/article-solar-installation-cost.svg",
+  "../../shared/assets/article-solar-maintenance-cost.svg",
+  "../../shared/assets/article-subsidy-amount.svg",
+  "../../shared/assets/support-shock-burden.png"
+], {
   eager: true,
   query: "?url",
   import: "default"

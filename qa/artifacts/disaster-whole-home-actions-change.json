@@ -1,0 +1,33 @@
+{
+  "file": "site/guides/disaster/index.html",
+  "beforeSha256": "57f1a6ee7aa71917e22aebfe2c90cfbb546d6ce75c4ab9a2d9f5d715bb664a3b",
+  "afterSha256": "a844a8dc42ba0e22db733cdd7931cac5743a66f6397891fb81cf25f99d9ab73f",
+  "caseAndNumbersUnchanged": true,
+  "onlyApprovedEdits": true,
+  "edits": [
+    [
+      "<h3>太陽光＋蓄電池</h3><p>昼の発電に加え，ためた電気を夜にも使う．残量がなくなれば使えない．</p>",
+      "<h3>太陽光＋蓄電池</h3><p>家全体への給電に対応した構成なら，普段のコンセントや照明も使える．ためた電気は夜にも使える．</p>"
+    ],
+    [
+      "図1　停電時の給電に対応した機器・配線がある場合の違い．",
+      "図1　停電時の給電に対応した機器・配線がある場合の違い．給電先・出力・蓄電池残量には制約がある．"
+    ],
+    [
+      "<p id=\"battery-case\">",
+      "<p><strong>家全体への給電に対応した機器・配線なら，停電中も普段のコンセントや照明を使えます．</strong>ただし，一部の部屋・回路だけに給電する構成もあり，同時に使える電力には上限があります．<a href=\"#source-2\" aria-label=\"出典2を読む\"><sup>［2］</sup></a></p><p id=\"battery-case\">"
+    ],
+    [
+      "家じゅうで普段どおりではなく，家電を絞り，同時に使う量も調整するんだね．",
+      "家全体への給電に対応しても，使う家電と同時に使う量は調整するんだね．"
+    ],
+    [
+      "<nav class=\"next-reading\" aria-labelledby=\"next-reading-title\"><h2 id=\"next-reading-title\">停電時に使いたい家電を，相談しよう</h2><p>希望する設備と使い方を整理して，現地調査や見積もりにつなげます．</p><a href=\"/guides/consultation-preparation/\">相談の準備をする →</a></nav>",
+      "<nav class=\"next-reading\" aria-labelledby=\"next-reading-title\"><h2 id=\"next-reading-title\">停電への備えを相談できる施工会社を探そう</h2><p>家中のコンセントを使いたい，冷蔵庫やエアコンを動かしたいなど，希望に合う設備や配線を施工会社に相談しましょう．</p><a class=\"guide-link\" href=\"/guides/choosing-installer/\">複数社の見積もり<svg class=\"guide-link__arrow\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M3 8h10M9 4l4 4-4 4\"/></svg></a></nav>"
+    ],
+    [
+      "全製品共通の性能ではない．</li>",
+      "全製品共通の性能ではない．給電先が構成で異なる点は，ニチコン「<a href=\"https://www.nichicon.co.jp/products/ess/qa_ess-tribrid-t1.html\" target=\"_blank\" rel=\"noopener\">ESS-T1/T2 Q&amp;A</a>」も参照．</li>"
+    ]
+  ]
+}

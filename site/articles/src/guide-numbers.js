@@ -1,9 +1,19 @@
 import { calculateEstimate } from '../../simulator/src/calculator.js';
+import { calculateJourneyEstimate, repairReserveYen, batteryRepairReserveYenPerEvent,
+  batteryRepairReserveYears, annualInsuranceYen } from '../../map/estimate-model.js';
 
 export const economicsExampleInput = Object.freeze({
   prefectureCode: '13', housingAge: 'existing', systemCapacityKw: 4,
   monthlyElectricityBillYen: null, detailConditions: { roof_orientation: 'south' },
   daytimeOccupancy: 'almost_every_weekday', equipmentPackage: 'solar_only'
+});
+
+// This article uses the same household and daytime assumptions as the simple
+// diagnosis. Keep it separate from the older, daytime-at-home economics case.
+export const electricitySavingsExampleInput = Object.freeze({
+  prefectureCode: '13', housingAge: 'existing', systemCapacityKw: 4,
+  monthlyElectricityBillYen: null, detailConditions: { roof_orientation: 'south' },
+  daytimeOccupancy: 'unknown_standard', equipmentPackage: 'solar_only'
 });
 
 // The article deliberately compares equipment without subsidies. Preserve the
@@ -34,6 +44,11 @@ export function guideNumberValues(data, refs) {
   const c = data.calculation;
   if (c.evaluation_period_years !== 30) throw Error('記事の30年間比較を見直してください．');
   const standard = economicsExample(data).find(s => s.scenario === 'standard');
+  const billExample = calculateEstimate(electricitySavingsExampleInput, data);
+  const billFirstYear = billExample.scenarios.find(s => s.scenario === 'standard').annual_cash_flows[0];
+  const journey = calculateJourneyEstimate(electricitySavingsExampleInput, data).scenarios.find(s => s.scenario === 'standard');
+  const journeyBattery = calculateJourneyEstimate({ ...electricitySavingsExampleInput,
+    equipmentPackage: 'solar_plus_standard_battery' }, data).scenarios.find(s => s.scenario === 'standard');
   const batteryExample = economicsExample(data, { ...economicsExampleInput,
     equipmentPackage: 'solar_plus_standard_battery' }).find(s => s.scenario === 'standard');
   const tokyo = data.prefectures.find(p => p.code === '13');
@@ -56,6 +71,27 @@ export function guideNumberValues(data, refs) {
       * (1 + growth) ** i * 12;
   });
   const numbers = {
+    'billSavings.monthly': billFirstYear.electricity_savings_yen / 12,
+    'billSavings.annual': billFirstYear.electricity_savings_yen,
+    'billSavings.monthlySelf': billExample.energy.annual_self_consumed_kwh / 12,
+    'billSavings.unitPrice': billFirstYear.purchase_price_yen_per_kwh,
+    'journey.revenue': journey.total_revenue_yen,
+    'journey.savings': journey.total_electricity_savings_yen,
+    'journey.sales': journey.total_sales_income_yen,
+    'journey.installation': journey.gross_installation_cost_yen,
+    'journey.subsidy': journey.subsidy_yen,
+    'journey.netInitial': journey.net_initial_outlay_yen,
+    'journey.lifecycle': journey.total_maintenance_and_replacement_cost_yen,
+    'journey.profit': journey.profit_yen,
+    'journey.payback': journey.payback_year,
+    'journey.batteryLifecycle': journeyBattery.total_maintenance_and_replacement_cost_yen,
+    'journey.repairReserve': repairReserveYen,
+    'journey.batteryRepairReserve': batteryRepairReserveYenPerEvent * batteryRepairReserveYears.length,
+    'journey.batteryRepairEvent': batteryRepairReserveYenPerEvent,
+    'journey.solarInsurancePerYear': annualInsuranceYen.solar_only,
+    'journey.batteryInsurancePerYear': annualInsuranceYen.solar_plus_standard_battery,
+    'journey.solarInsurance': annualInsuranceYen.solar_only * c.evaluation_period_years,
+    'journey.batteryInsurance': annualInsuranceYen.solar_plus_standard_battery * c.evaluation_period_years,
     'economics.profit': standard.profit_yen,
     'economics.benefit': standard.total_revenue_yen,
     'economics.savings': standard.total_electricity_savings_yen,

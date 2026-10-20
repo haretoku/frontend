@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-20",
+  "article_sha256": "dae4188c077e8164a2180a5e7a42dddc422ebf56d9df915b3aa2d68679bb0a5a",
+  "hashes": {
+    "site/guides/solar-maintenance-cost/index.html": "dae4188c077e8164a2180a5e7a42dddc422ebf56d9df915b3aa2d68679bb0a5a",
+    "site/guides/solar-maintenance-cost/style.css": "3cd136c657ca44ba64dc3534613f74b931364b03015c7d045056c7a0ccf856b3",
+    "site/pages/calculation-method.html": "2d06b53b7c7a1b140b9c4d7f7252e93e55eed236d07187c48cb0939681a55d15",
+    "data/input/public-data.json": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23",
+    "site/map/estimate-model.js": "a4e172b13f24b0919c4a931e6bdbdb180ab87d7340a3e9e26bd59386d34d4963",
+    "site/simulator/src/calculator.js": "4cbd395cfab65e99fa6c916e7328a275078a5667f9576e1da4fb82066a30159d"
+  },
+  "source_commit": "d3492f02b527cd4bd33297517b44a261450b77a4",
+  "deployment_id": "appgdep_6ad6efa564e88191bfbda9579760fc28",
+  "version_id": "appgprj_6ad443af93d0819196462588cef5c7e1~appgver_44b17e8184988191b378335ca51c0f5e",
+  "deployment_status": "succeeded",
+  "tests": {
+    "pass": 9,
+    "fail": 0,
+    "log": "maintenance-final-tests.log"
+  },
+  "build": "maintenance-final-build.log",
+  "numeric_check_reused": "maintenance-diagnosis-consistency.json",
+  "mobile": {
+    "width": 360,
+    "document_width": 345,
+    "comparison_scroll_width": 680,
+    "horizontal_scroll_reached": 400.6666564941406,
+    "viewport_reset": true
+  },
+  "pc_table1": {
+    "column_edges": [
+      130,
+      392,
+      654,
+      916
+    ],
+    "same_edges_all_7_rows": true
+  },
+  "screenshots": [
+    "maintenance-final-mobile-actions.png",
+    "maintenance-final-mobile-inspection-start.png",
+    "maintenance-final-mobile-inspection.png",
+    "maintenance-final-mobile-lead.png",
+    "maintenance-final-mobile-left.png",
+    "maintenance-final-mobile-lifecycle-total.png",
+    "maintenance-final-mobile-lifecycle.png",
+    "maintenance-final-mobile-note.png",
+    "maintenance-final-mobile-right.png",
+    "maintenance-final-pc-inspection.png",
+    "maintenance-final-pc-lifecycle.png",
+    "maintenance-final-pc-table.png"
+  ],
+  "production_release": false
+}

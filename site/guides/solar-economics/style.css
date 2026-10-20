@@ -1,0 +1,18 @@
+.guide-article .economics-equation { display:grid; grid-template-columns:minmax(0,1.15fr) 28px minmax(0,1.15fr) 28px minmax(0,.75fr); align-items:stretch; gap:10px; }
+.guide-article .economics-equation .diagram-card { padding:20px 14px; }
+.guide-article .economics-equation .diagram-card h3 { font-size:17px; }
+.guide-article .economics-equation__operator { align-self:center; text-align:center; font-size:30px; font-weight:700; color:#648a75; }
+.guide-article .economics-equation__result { background:#eaf3eb; }
+.guide-article .economics-table .economics-table__group th { width:auto; background:#eaf3eb; color:#007447; font-weight:700; }
+.guide-article .economics-table .economics-table__group--cost th { background:#fff8e9; color:#87600d; }
+.guide-article .economics-table tbody tr:not(.economics-table__group) th { padding-left:24px; }
+.guide-article .economics-chart { background:#fff; padding:18px 12px; }
+.guide-article .economics-chart picture { display:block; }
+.guide-article .economics-cumulative { display:block; width:100%; height:auto; margin:0; }
+@media (max-width:700px) {
+ .guide-article .economics-equation { grid-template-columns:1fr; gap:8px; }
+ .guide-article .economics-equation .diagram-card { padding:16px; }
+ .guide-article .economics-equation__operator { line-height:1.2; }
+ .guide-article .economics-table tbody tr:not(.economics-table__group) th { padding-left:12px; }
+ .guide-article .economics-chart { padding:12px 0; }
+}

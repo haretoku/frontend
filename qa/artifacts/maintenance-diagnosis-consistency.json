@@ -1,0 +1,38 @@
+{
+  "date": "2026-10-20",
+  "inputs": {
+    "prefectureCode": "13",
+    "municipalityCode": null,
+    "housingAge": "existing",
+    "monthlyElectricityBillYen": 15000,
+    "systemCapacityKw": 4,
+    "roofOrientation": "south",
+    "daytimeOccupancy": "unknown_standard"
+  },
+  "results": {
+    "solar_only": {
+      "total": 722000,
+      "maintenance": 338000,
+      "replacement": 384000,
+      "batteryReplacement": 0
+    },
+    "solar_plus_standard_battery": {
+      "total": 962000,
+      "maintenance": 578000,
+      "replacement": 384000,
+      "batteryReplacement": 0
+    }
+  },
+  "hashes": {
+    "data/input/public-data.json": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23",
+    "site/map/estimate-model.js": "a4e172b13f24b0919c4a931e6bdbdb180ab87d7340a3e9e26bd59386d34d4963",
+    "site/simulator/src/calculator.js": "4cbd395cfab65e99fa6c916e7328a275078a5667f9576e1da4fb82066a30159d",
+    "site/guides/solar-maintenance-cost/index.html": "4240a292cb234b583743d6d38796cbbe713ab5907ebc621a789196119ad41940"
+  },
+  "notSeparatelyIncluded": [
+    "屋根補修とパネル脱着",
+    "パネル本体の交換・撤去・処分",
+    "蓄電池本体の交換"
+  ],
+  "assertions": "Actual diagnosis loader adapter and calculation executed; article totals match; annual sums match."
+}

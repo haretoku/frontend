@@ -1,0 +1,6 @@
+.guide-article .maintenance-cost-scroll { overflow-x: auto; overscroll-behavior-x: contain; }
+.guide-article .maintenance-cost-comparison { min-width: 680px; }
+.guide-article .maintenance-cost-comparison th { width: 25%; }
+.guide-article .maintenance-cost-comparison td small { display: block; color: #515d56; font-size: 13px; }
+
+.guide-article .maintenance-cost-comparison td[colspan="3"] { text-align: left; }

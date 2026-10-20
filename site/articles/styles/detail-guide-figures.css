@@ -1,0 +1,45 @@
+.guide-article .article-diagram { padding: 26px; border: 1px solid #dce4dd; border-radius: 14px; background: #f4f7f3; }
+.guide-article .diagram-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.guide-article .diagram-grid--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.guide-article .diagram-card { padding: 22px 16px; border: 1px solid #dce4dd; border-radius: 10px; background: #fff; }
+.guide-article .diagram-card h3 { margin: 0 0 10px; font-size: 18px; line-height: 1.7; }
+.guide-article .diagram-card p { margin: 0; font-size: 15px; line-height: 1.9; }
+.guide-article .diagram-card .metric { display: block; margin: 10px 0; color: #007447; font-size: 29px; font-weight: 700; line-height: 1.5; }
+.guide-article .diagram-card .metric small { font-size: 14px; }
+.guide-article .diagram-card--later { background: #fff9eb; }
+.guide-article .diagram-card--later .metric { color: #93680c; }
+.guide-article .step-flow { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; margin: 0; padding: 0; list-style: none; counter-reset: guide-step; }
+.guide-article .step-flow li { position: relative; padding: 16px; border-radius: 10px; background: #fff; font-size: 15px; line-height: 1.8; counter-increment: guide-step; }
+.guide-article .step-flow li::before { content: counter(guide-step); display: grid; place-items: center; width: 28px; height: 28px; margin-bottom: 10px; border-radius: 50%; color: #fff; background: #638b72; font-size: 14px; font-weight: 700; }
+.guide-article .step-flow li + li::after { content: '→'; position: absolute; top: 48%; left: -19px; color: #638b72; }
+.guide-article .step-flow strong, .guide-article .step-flow small { display: block; }
+.guide-article .step-flow small { margin-top: 7px; color: #515d56; font-size: 13px; }
+.guide-article .guide-equation { margin: 0; color: #123f31; font-size: 22px; font-weight: 700; line-height: 2; text-align: center; }
+.guide-article .guide-equation span { display: inline-block; }
+.guide-article .guide-list { margin: 20px 0; padding-left: 1.3em; font-size: 17px; line-height: 2; }
+.guide-article .guide-list li + li { margin-top: 9px; }
+.guide-article .guide-data-table { table-layout: fixed; margin: 0; background: #fff; }
+.guide-article .guide-data-table th, .guide-article .guide-data-table td { padding: 14px 12px; font-size: 15px; line-height: 1.8; overflow-wrap: anywhere; }
+.guide-article .guide-data-table th { width: 52%; }
+.guide-article .guide-data-table td { white-space: normal; }
+.guide-article .guide-data-table--three th { width: 40%; }
+.guide-article .guide-data-table thead th { text-align: right; font-weight: 700; color: #123f31; }
+.guide-article .guide-data-table thead th:first-child { text-align: left; }
+.guide-article .guide-data-table tfoot { background: #f4f7f3; }
+.guide-article .guide-callout { margin: 24px 0; padding: 18px 22px; border-left: 4px solid #e3bc63; background: #fff9eb; font-size: 16px; line-height: 1.9; }
+.guide-article .source-notes p { font-size: 13px; line-height: 1.9; }
+@media (max-width: 700px) {
+  .guide-article .article-diagram { padding: 20px 14px; }
+  .guide-article .diagram-grid, .guide-article .diagram-grid--two, .guide-article .step-flow { grid-template-columns: 1fr; }
+  .guide-article .diagram-card { padding: 18px; }
+  .guide-article .diagram-card h3 { font-size: 17px; }
+  .guide-article .diagram-card .metric { font-size: 28px; }
+  .guide-article .step-flow { gap: 24px; }
+  .guide-article .step-flow li { padding: 16px 16px 16px 58px; }
+  .guide-article .step-flow li::before { position: absolute; top: 18px; left: 16px; }
+  .guide-article .step-flow li + li::after { content: '↓'; top: -24px; left: 50%; transform: translateX(-50%); }
+  .guide-article .guide-equation { font-size: 19px; }
+  .guide-article .guide-list { font-size: 16px; }
+  .guide-article .guide-data-table th, .guide-article .guide-data-table td { padding: 12px 6px; font-size: 14px; }
+  .guide-article .guide-callout { padding: 16px; font-size: 15px; }
+}

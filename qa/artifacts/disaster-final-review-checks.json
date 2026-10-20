@@ -1,0 +1,26 @@
+{
+  "file": "site/guides/disaster/index.html",
+  "sha256": "a844a8dc42ba0e22db733cdd7931cac5743a66f6397891fb81cf25f99d9ab73f",
+  "dailyKWh": {
+    "fridge": 0.7205479452054795,
+    "lights": 0.0876,
+    "phones": 0.09625,
+    "aux": 0.72
+  },
+  "totalDailyKWh": 1.6243979452054795,
+  "usableACkWh": 8,
+  "basicDays": 4.924901575757678,
+  "coolingHours": 8.85500285388128,
+  "heatingHours": 4.980939105308219,
+  "display": {
+    "basicDays": "約5日分",
+    "cooling": "約8時間（短めの表示）",
+    "heating": "約5時間"
+  },
+  "internalPaths": 19,
+  "missingPaths": [],
+  "duplicateIds": [],
+  "tests": "関連9テストの同一版PASSを再利用",
+  "parentClickCheck": "複数社の見積もり→/guides/choosing-installer/正常遷移",
+  "siteChangesThisTurn": false
+}

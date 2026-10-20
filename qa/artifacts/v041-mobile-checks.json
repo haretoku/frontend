@@ -1,0 +1,519 @@
+[
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　同じ期間のプラスと費用を差し引いて，収支を求める．",
+        "height": 591.8125,
+        "top": 1160.843505859375
+      },
+      {
+        "caption": "注：図1と同じ順に，プラスから費用を差し引いた試算．内訳と合計は，丸める前の値で計算して表示している．",
+        "height": 582.6666870117188,
+        "top": 2693.7393798828125
+      },
+      {
+        "caption": "図2　第2章と同じ条件で，設置から各年までのプラスと費用を差し引いた累積収支．点検・機器交換などの費用を年末に計上した試算．",
+        "height": 433.8854370117187,
+        "top": 4607.82275390625
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "lazy",
+        "naturalWidth": 360,
+        "src": "/assets/article-solar-economics-cumulative-DefzOuOL.svg"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "solar-economics",
+    "fullPageProof": "qa/artifacts/v041-mobile-solar-economics-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　診断で比べる2設備の設置費．どちらも補助金を引く前で，個別の見積価格ではない．",
+        "height": 427.5833435058594,
+        "top": 1386.375
+      },
+      {
+        "caption": "図2　2025年設置・新築・値引き前の参考例．金額は資料の単価×4 kWを万円単位に丸めたもの．第1章の既存住宅の試算とは別の例．［3］",
+        "height": 393.0833435058594,
+        "top": 2753.0416259765625
+      },
+      {
+        "caption": "図3　設置費の総額が変わる主な条件．",
+        "height": 954.6666870117188,
+        "top": 4055.2083129882817
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "solar-installation-cost",
+    "fullPageProof": "qa/artifacts/v041-mobile-solar-installation-cost-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　契約前から売電開始までに確かめること．認定・接続の手続きは並行する場合があります．",
+        "height": 529.7083740234375,
+        "top": 3217.0728302001953
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "solar-fit",
+    "fullPageProof": "qa/artifacts/v041-mobile-solar-fit-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　補助金を探す3つの窓口．3つとも制度がある，またはすべて併用できるという意味ではない．",
+        "height": 527.8125,
+        "top": 1231.187255859375
+      },
+      {
+        "caption": "図2　工事後の報告から入金までの流れの一例．交付決定の時期や提出書類は，制度の募集要領で確認する．",
+        "height": 553.1041870117188,
+        "top": 4050.97900390625
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "subsidies",
+    "fullPageProof": "qa/artifacts/v041-mobile-subsidies-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　補助額の代表的な計算方式．定額や併用など，制度固有の条件も確認する．",
+        "height": 352.0833435058594,
+        "top": 1160.843505859375
+      },
+      {
+        "caption": "注：補助金を使えるとした設置時の自己負担．上乗せ助成・市区町村分は含めていない．",
+        "height": 309.41668701171875,
+        "top": 2597.3643798828125
+      },
+      {
+        "caption": "図2　入金があとになる制度の一例．実際の支払方法・時期は契約と制度の案内に従う．",
+        "height": 529.7083740234375,
+        "top": 4198.41650390625
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "subsidy-amount",
+    "fullPageProof": "qa/artifacts/v041-mobile-subsidy-amount-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　停電時の給電に対応した機器・配線がある場合の違い．給電先・出力・蓄電池残量には制約がある．",
+        "height": 432.4791870117187,
+        "top": 1263.1875
+      },
+      {
+        "caption": "図2　新品・満充電，太陽光から追加充電しない場合の参考計算．冷房と暖房は別々の例で，調理・給湯・テレビなどは含めていない．",
+        "height": 522.7083740234375,
+        "top": 2892.104164123535
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "disaster",
+    "fullPageProof": "qa/artifacts/v041-mobile-disaster-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　家で使う電力量×買う電気の単価．表示は丸めている．",
+        "height": 558.7916870117188,
+        "top": 1323.97900390625
+      },
+      {
+        "caption": "図2　節約額を見るときに確かめたい，3つの条件．",
+        "height": 333.5520935058594,
+        "top": 2821.208251953125
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "solar-electricity-savings",
+    "fullPageProof": "qa/artifacts/v041-mobile-solar-electricity-savings-full.png"
+  },
+  {
+    "documentWidth": 345,
+    "figures": [
+      {
+        "caption": "図1　発電した電気は，自宅で使う分と，余って売る分に分かれる．",
+        "height": 373.1041870117187,
+        "top": 1359.625
+      },
+      {
+        "caption": "図2　自宅で使う場合と売る場合の，1 kWhあたりの家計効果．",
+        "height": 497.75,
+        "top": 2850.625
+      },
+      {
+        "caption": "図3　食洗機を，太陽光の電気が余る昼に動かして，買う電気を減らす．",
+        "height": 801.4375,
+        "top": 4605.854156494141
+      }
+    ],
+    "images": [
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 150,
+        "src": "data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3e%3cg%20stroke='%23efb72e'%20stroke-width='5'%20stroke-linecap='round'%3e%3cpath%20d='M32%204v5m0%2046v5M4%2032h5m46%200h5M12%2012l4%204m32%2032%204%204M12%2052l4-4m32-32%204-4'/%3e%3ccircle%20cx='32'%20cy='32'%20r='17'%20fill='%23ffd86a'%20stroke-width='2'/%3e%3c/g%3e%3cg%20fill='%23704b21'%3e%3ccircle%20cx='26'%20cy='29'%20r='2'/%3e%3ccircle%20cx='38'%20cy='29'%20r='2'/%3e%3c/g%3e%3cpath%20d='M26%2036q6%206%2012%200'%20fill='none'%20stroke='%23704b21'%20stroke-width='2'%20stroke-linecap='round'/%3e%3c/svg%3e"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/professor-chibi-BwE1xmLE.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      },
+      {
+        "complete": true,
+        "loading": "auto",
+        "naturalWidth": 1254,
+        "src": "/assets/navigator-C6wSog06.png"
+      }
+    ],
+    "width": 360,
+    "slug": "self-consumption",
+    "fullPageProof": "qa/artifacts/v041-mobile-self-consumption-full.png"
+  }
+]

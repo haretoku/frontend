@@ -10,9 +10,9 @@ test('新記事は正式URL・共有画像・計測へ接続し，試作表記�
   assert(html.includes('name="robots" content="index,follow"'));
   assert(!/試作|prototype|guide-trial|trial-meta/.test(html));
   assert(html.includes('src="/shared/analytics.js"'));
-  assert(html.includes('https://haretoku.jp/og-self-consumption-v040.png'));
+  assert(html.includes('https://haretoku.jp/assets/og-guide-self-consumption-20261018.png'));
   assert.equal(canonicalPath('/guides/self-consumption/index.html'),'/guides/self-consumption/');
-  const png=await readFile(new URL('../../site/shared/assets/og-self-consumption-v040.png',import.meta.url));
+  const png=await readFile(new URL('../../site/shared/assets/og-guide-self-consumption-20261018.png',import.meta.url));
   assert(png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10])));
   assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
 });

@@ -237,7 +237,8 @@ test("ガイド2分類とプレスリリースが分離され，旧記事10件�
   assert.deepEqual(futureGroups.map((group) => group.id), ["news"]);
   assert.deepEqual(futureGroups[0].articles.map((article) => article.id), ["recent", "updated"]);
   assert.match(script, /link\.className = "guide-article-card"/);
-  assert.match(script, /import\.meta\.glob\("\.\.\/\.\.\/shared\/assets\/\*\.\{png,webp,svg\}"/);
+  const bundledGuideImages = [...script.matchAll(/"(\.\.\/\.\.\/shared\/assets\/[^"*]+)"/g)].map(m=>m[1]);
+  assert.deepEqual(new Set(bundledGuideImages), new Set(articles.map(a=>"../../shared/assets/"+a.image.src.split("/").at(-1))), "一覧へ読み込む画像はcatalog採用分だけ");
   assert.match(css, /@media \(min-width: 40\.001rem\)[\s\S]*grid-auto-flow: column/);
   assert.match(css, /grid-auto-columns: calc\(\(100% - var\(--guide-card-gap\) \* 2\) \/ 3\)/);
   assert.match(css, /@media \(max-width: 62rem\)[\s\S]*repeat\(2, minmax\(0, 1fr\)\)/);

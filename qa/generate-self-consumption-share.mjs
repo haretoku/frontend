@@ -6,14 +6,13 @@ const sharp=require(process.env.HARETOKU_SHARP_MODULE || 'sharp');
 const assets=new URL('../site/shared/assets/',import.meta.url);
 const illustration=(await readFile(new URL('article-self-consumption.svg',assets),'utf8')).replace(/<svg[^>]*>/,'').replace(/<\/svg>\s*$/,'');
 const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-<rect width="1200" height="630" fill="#fffaf0"/>
-<rect x="40" y="40" width="1120" height="550" rx="28" fill="#fff" stroke="#dfcfaa" stroke-width="3"/>
-<g font-family="Yu Gothic, Noto Sans CJK JP, sans-serif" fill="#123f31">
-<text x="600" y="116" font-size="42" text-anchor="middle" font-weight="700">はれトク</text>
-<g font-size="64" text-anchor="middle" font-weight="700"><text x="600" y="222">売るのと</text><text x="600" y="300">自宅で使うの，</text><text x="600" y="378">どちらがお得？</text></g>
-</g>
-<svg x="510" y="402" width="180" height="180" viewBox="0 0 240 240">${illustration}</svg>
+<rect width="1200" height="630" fill="#fff8e9"/>
+<circle cx="160" cy="315" r="140" fill="#eef2e6"/>
+<circle cx="1040" cy="315" r="140" fill="#eef2e6"/>
+<!-- 中央630角への切り抜きでも，左右の選択肢が両方収まる． -->
+<svg x="345" y="25" width="510" height="510" viewBox="0 0 240 240">${illustration}</svg>
+<text x="600" y="584" fill="#123f31" font-size="38" text-anchor="middle" font-family="Yu Gothic, Noto Sans CJK JP, sans-serif" font-weight="700">はれトク</text>
 </svg>`;
-await writeFile(new URL('og-self-consumption-v040.svg',assets),svg);
-await sharp(Buffer.from(svg)).png().toFile(fileURLToPath(new URL('og-self-consumption-v040.png',assets)));
+await writeFile(new URL('og-guide-self-consumption-20261018.svg',assets),svg);
+await sharp(Buffer.from(svg)).png().toFile(fileURLToPath(new URL('og-guide-self-consumption-20261018.png',assets)));
 console.log('記事専用の共有画像を生成：1200×630 PNG');

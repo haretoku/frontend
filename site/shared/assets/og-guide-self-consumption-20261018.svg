@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+<rect width="1200" height="630" fill="#fff8e9"/>
+<circle cx="160" cy="315" r="140" fill="#eef2e6"/>
+<circle cx="1040" cy="315" r="140" fill="#eef2e6"/>
+<!-- 中央630角への切り抜きでも，左右の選択肢が両方収まる． -->
+<svg x="345" y="25" width="510" height="510" viewBox="0 0 240 240">
+  <rect width="240" height="240" rx="12" fill="#fff8e9"/>
+  <g fill="#fffdf8" stroke="#d8e1d5" stroke-width="1.5">
+    <rect x="12" y="32" width="100" height="176" rx="12"/>
+    <rect x="128" y="32" width="100" height="176" rx="12"/>
+  </g>
+  <g stroke="#b18b3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="62" cy="122" r="33" fill="#ffe5a3"/>
+    <circle cx="62" cy="122" r="26" fill="none"/>
+    <path d="M51 107l11 16 11-16M62 123v19M51 123h22M51 131h22" fill="none"/>
+  </g>
+  <g stroke="#648a75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M147 112h62v58h-62z" fill="#fff"/>
+    <path d="M139 113l39-34 39 34" fill="none"/>
+  </g>
+  <path d="M184 116l-19 25h16l-7 20 22-29h-16z" fill="#f7d47b" stroke="#b18b3d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<text x="600" y="584" fill="#123f31" font-size="38" text-anchor="middle" font-family="Yu Gothic, Noto Sans CJK JP, sans-serif" font-weight="700">はれトク</text>
+</svg>

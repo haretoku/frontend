@@ -4,6 +4,13 @@ import {resolve} from "node:path";
 // 本番と確認用で共有する，静的資産・配布物・CSS順序の後処理．
 export async function finalizeStaticAssets({root,output}) {
 await copyFile(resolve(root,"site/shared/assets/og-self-consumption-v040.png"),resolve(output,"og-self-consumption-v040.png"));
+// 詳細記事の代表イラストと同じ，記事別の共有画像を固定URLで配布する．
+const articles=JSON.parse(await readFile(resolve(root,'site/solar/data/articles.json'),'utf8'));
+for(const article of articles.filter(article=>article.shareImage)){
+  if(!/^\/assets\/og-guide-[a-z-]+-\d{8}(?:-v\d+)?\.png$/.test(article.shareImage))throw Error('記事共有画像の配布先が不正です．');
+  const name=article.shareImage.slice('/assets/'.length);
+  await copyFile(resolve(root,'site/shared/assets',name),resolve(output,'assets',name));
+}
 await copyFile(resolve(root, "site/shared/assets/favicon-96.png"), resolve(output, "favicon.png"));
 // マップの共有画像．旧写真URLもJPEG形式の同じ新イラストへそろえる．
 await copyFile(resolve(root, "site/shared/assets/og-step-map-20261017.png"), resolve(output, "og-step-map-20261017.png"));

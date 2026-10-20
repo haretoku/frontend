@@ -1,0 +1,22 @@
+{
+  "path": "site/guides/subsidy-amount/index.html",
+  "scope": "Tokyo capacity wording and diagnosis / installer routes",
+  "municipalityCount": 2,
+  "numberBindingsUnchanged": true,
+  "beforeSha256": "c9851a6c743308f498de30964a72d311b6ef7fcd04690305681f677b4e292bdc",
+  "afterSha256": "514866943f2de5c417b26c68bc81cb979327dd8473918cad04743fca132f8bf1",
+  "edits": [
+    [
+      "例えば東京都の2026年度の太陽光助成では，既存住宅で3.75 kWを超える場合，",
+      "例えば東京都の2026年度の太陽光助成は，住宅区分と対象容量で単価が変わります．既存住宅で3.75 kWを超える場合は，"
+    ],
+    [
+      "新築などの区分では単価が異なります．",
+      ""
+    ],
+    [
+      "<a href=\"/simulator/\">わが家の収支を調べる →</a></nav>",
+      "<a href=\"/simulator/\">はれトク診断を始める →</a><p>補助金の利用も相談できる施工会社を探す方法もあります．<a class=\"guide-link\" href=\"/guides/choosing-installer/\">複数社の見積もり<svg class=\"guide-link__arrow\" viewBox=\"0 0 16 16\" aria-hidden=\"true\" focusable=\"false\"><path d=\"M3 8h10M9 4l4 4-4 4\"/></svg></a>で，費用と補助金申請のサポートを比べましょう．</p></nav>"
+    ]
+  ]
+}

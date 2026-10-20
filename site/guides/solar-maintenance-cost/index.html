@@ -1,38 +1,38 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="太陽光の設置後の費用を，点検・修理交換・屋根工事・撤去処分に分けて説明します．30年間の点検・交換費の試算と，自宅で別に見込む支出を照合しましょう．">
-    <link rel="canonical" href="https://haretoku.jp/guides/solar-maintenance-cost/">
-    <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta property="og:title" content="太陽光の維持費は，何にいくらかかる？｜はれトク">
-    <meta property="og:description" content="太陽光の設置後の費用を，点検・修理交換・屋根工事・撤去処分に分けて説明します．30年間の点検・交換費の試算と，自宅で別に見込む支出を照合しましょう．">
-    <meta property="og:url" content="https://haretoku.jp/guides/solar-maintenance-cost/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="はれトク">
-    <meta property="og:locale" content="ja_JP">
-    <meta property="og:image" content="https://haretoku.jp/og-step-map-20261017-v034.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="ハレナとはれトク博士，太陽光パネルのある家とすごろくの道">
-    <meta name="twitter:card" content="summary_large_image">
-    <title>太陽光の維持費は，何にいくらかかる？｜はれトク</title>
-    <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <meta name="description" content="点検・修理・パワコン交換・保険の費用と，屋根工事や設備更新で別にかかる費用を確認します．">
+  <link rel="canonical" href="https://haretoku.jp/guides/solar-maintenance-cost/">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>太陽光の維持費は，何にいくらかかる？｜はれトク</title>
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="はれトク">
+  <meta property="og:locale" content="ja_JP">
+  <meta property="og:title" content="太陽光の維持費は，何にいくらかかる？｜はれトク">
+  <meta property="og:description" content="点検・修理・パワコン交換・保険の費用と，屋根工事や設備更新で別にかかる費用を確認します．">
+  <meta property="og:url" content="https://haretoku.jp/guides/solar-maintenance-cost/">
+  <meta property="og:image" content="https://haretoku.jp/assets/og-guide-solar-maintenance-cost-20261019-v2.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="MAPと同じ太陽光パネルに，点検・修理のレンチを重ねたイラスト">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="https://haretoku.jp/favicon.png" type="image/png" sizes="96x96">
-    <link rel="stylesheet" href="/shared/styles/main.css">
-    <link rel="stylesheet" href="/articles/styles/article.css">
-    <link rel="stylesheet" href="/articles/styles/electricity-sales-hero.css">
-    <link rel="stylesheet" href="/articles/styles/maintenance-cost.css">
-    <script type="module" src="/articles/src/article-data.js"></script>
-    <script type="module" src="/shared/analytics.js"></script>
+  <script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="/articles/styles/detail-guide.css">
+  <link rel="stylesheet" href="/articles/styles/detail-guide-figures.css">
+  <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="/shared/site-header.css">
   <link rel="stylesheet" href="/shared/site-footer.css">
   <script type="module" src="/shared/site-header-entry.js"></script>
 </head>
-  <body class="guide-benchmark-page economics-page">
-    <header class="map-header">
+<body class="guide-article">
+<header class="map-header">
     <div class="header-inner">
       <a class="brand" href="/" aria-label="はれトクのマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
       <nav aria-label="主要メニュー" class="header-nav">
@@ -58,167 +58,15 @@
     <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
     <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
   </dialog>
-    <main>
-      <nav class="article-width breadcrumb" aria-label="パンくずリスト"><a href="/">マップ</a> ／ <a href="/guides/">はれ<span class="brand-term">トク</span>ガイド</a> ／ 維持費</nav>
-      <header class="economics-hero"><div class="economics-hero__inner"><div class="economics-hero__copy"><div class="economics-hero__meta"><span class="economics-hero__category">収支</span><span>更新日 <time datetime="2026-10-10">2026.10.10</time></span></div><h1><span>太陽光の維持費は，</span><span>何にいくらかかる？</span></h1><p class="economics-hero__lead">設置後の支出は，点検や機器交換だけではありません．修理，屋根工事の取り外し・再設置，使用終了時の撤去・処分を分けて，費用が必要になる場面と内訳を確認します．診断で収支の目安を知り，見積もりで自宅の保守・保証や費用を確かめましょう．</p><p class="economics-hero__scope">全国の住宅用太陽光 ／ 設置後から撤去までの費用</p></div><figure class="economics-hero__visual"><img src="/shared/assets/article-solar-inspection-photo.webp" width="1536" height="1024" alt="太陽光発電の機器を点検する作業員" decoding="async" fetchpriority="high"></figure></div></header>
-      <article data-guide-presentation id="economics-article" data-quote-description="設備・屋根の条件と，保守・保証の範囲を確認しましょう．" class="article-width article article--continuous article--guide">
-<details class="article-toc"><summary><span class="article-toc__title">目次</span><span class="article-toc__state" aria-hidden="true"></span></summary><ol><li><a href="#maintenance-overview">設置後の維持費は，どうなる？</a><ol><li><a href="#overview-inspection">点検・保守の費用</a></li><li><a href="#overview-repairs">修理・機器交換の費用</a></li><li><a href="#overview-roof">屋根工事に伴う取り外し・再設置の費用</a></li><li><a href="#overview-removal">使用終了時の撤去・処分の費用</a></li><li><a href="#overview-budget">自宅の費用の見込み方</a></li></ol></li><li><a href="#inspection-cost">点検には，どんな費用がかかる？</a><ol><li><a href="#inspection-schedule">点検の時期と作業内容で，総額が変わる</a></li><li><a href="#maintenance-contract">保守契約は，含まれる作業と別料金を確かめる</a></li></ol></li><li><a href="#repair-replacement">修理・機器交換では，何を見込む？</a><ol><li><a href="#replacement-plan">予定した交換と，故障時の修理を分ける</a></li><li><a href="#warranty-cost">保証は，機器代と作業費の負担範囲を確認する</a></li></ol></li><li><a href="#roof-work">屋根工事をすると，何が追加になる？</a><ol><li><a href="#roof-plan">屋根の工事計画と，設備の使用予定を合わせる</a></li><li><a href="#roof-cost-scope">取り外し・再設置の費用を，屋根工事と分けて確認する</a></li></ol></li><li><a href="#end-of-use">使い終えた設備には，どんな費用がかかる？</a><ol><li><a href="#removal-work">設備の撤去と，屋根側の作業範囲を確認する</a></li><li><a href="#transport-disposal">運搬・処分まで含めて，依頼範囲をそろえる</a></li></ol></li><li><a href="#household-cost">自宅の維持費は，どう確かめる？</a><ol><li><a href="#simulation-reconciliation">複雑な費用計算は，まず診断で収支の目安を調べる</a></li><li><a href="#records-plan">見積もりで，自宅の条件と費用を確かめる</a></li></ol></li></ol></details>
-        <section id="maintenance-overview" class="economics-intro">
-          <h2>設置後の維持費は，どうなる？</h2>
-          <figure class="economics-chapter-photo"><img src="/shared/assets/hero-solar-low-plants.webp" width="1536" height="1024" alt="太陽光パネルのある住宅と，費用を確認するためのノートPC" loading="lazy" decoding="async"></figure>
-          <p class="economics-intro__answer"><strong>太陽光は，設置後も点検・修理・交換に費用がかかり，屋根工事や使用終了時には設備を外す支出も生じます．</strong>ここでは，戸建住宅の太陽光を使い始めてから撤去するまでの費用を扱います．繰り返す点検，機器の状態に応じた修理・交換，住宅の工事，使用終了の4つに分け，自宅で何を見込むかを考えましょう．</p>
-          <figure class="maintenance-cost-overview" aria-labelledby="maintenance-overview-caption">
-            <div class="maintenance-cost-overview__total">
-              <p class="maintenance-cost-overview__title"><strong>設置後にかかる費用</strong></p>
-              <ul class="maintenance-cost-overview__parts">
-                <li class="maintenance-cost-overview__part"><p class="maintenance-cost-overview__part-title"><strong>点検・保守</strong></p><ul class="maintenance-cost-overview__items"><li>設備の状態の確認</li><li>継続的な保守契約</li></ul></li>
-                <li class="maintenance-cost-overview__part"><p class="maintenance-cost-overview__part-title"><strong>修理・機器交換</strong></p><ul class="maintenance-cost-overview__items"><li>不具合の修理</li><li>パワーコンディショナ等の交換</li></ul></li>
-                <li class="maintenance-cost-overview__part"><p class="maintenance-cost-overview__part-title"><strong>取り外し・再設置</strong></p><ul class="maintenance-cost-overview__items"><li>屋根工事前の取り外し</li><li>工事後の再設置・接続</li></ul></li>
-                <li class="maintenance-cost-overview__part"><p class="maintenance-cost-overview__part-title"><strong>撤去・処分</strong></p><ul class="maintenance-cost-overview__items"><li>使用終了時の取り外し</li><li>運搬・処分</li></ul></li>
-              </ul>
-            </div>
-            <figcaption id="maintenance-overview-caption">図1　設置後にかかる費用の4つの内訳</figcaption>
-          </figure>
-          <section id="overview-inspection">
-            <h3>点検・保守の費用</h3>
-            <p>点検は，設備の状態を確認する作業です．定期的に依頼する費用は，1回の料金だけでなく，必要な回数と作業内容で変わります．点検などを継続的に依頼する保守契約がある場合は，契約料に何が含まれるかを確かめます．実際の料金と点検計画は，販売店・メーカー等へ確認します．</p>
-          </section>
-          <section id="overview-repairs">
-            <h3>修理・機器交換の費用</h3>
-            <p>修理は不具合を直す作業，交換は機器を取り替える作業です．パワーコンディショナは，発電した直流の電気を家庭で使える交流へ変換する機器で，長く使ううえで交換費も見込む必要があります．故障時の修理や実際の交換時期は設備の状態で変わり，保証の対象と作業費の扱いが自己負担を左右します．</p>
-          </section>
-          <section id="overview-roof">
-            <h3>屋根工事に伴う取り外し・再設置の費用</h3>
-            <p>屋根の補修や葺き替えで，太陽光パネルを一時的に取り外す場合があります．使い続けるなら工事後の再設置までが必要な作業となり，屋根そのものの工事費と設備を外して戻す費用を分けて見ます．住宅の工事計画と設備の使用予定を合わせることで，依頼する作業の範囲を整理できます．</p>
-          </section>
-          <section id="overview-removal">
-            <h3>使用終了時の撤去・処分の費用</h3>
-            <p>使い終えた設備を撤去する場合は，屋根から取り外す工事と，取り外した設備の運搬・処分を見込みます．再設置を伴う一時取り外しとは目的が違い，金具を外した後の屋根の防水処理なども確認する必要があります．撤去の相談では，どの設備を外し，どこまで処理を依頼するかをそろえます．</p>
-          </section>
-          <section id="overview-budget">
-            <h3>自宅の費用の見込み方</h3>
-            <p><strong>点検・機器交換の費用は，1回の費用と，利用期間中に必要な回数から見込みます．</strong>調達価格等算定委員会の2026年資料には，住宅用5 kW設備の点検・パワーコンディショナ交換費が示されています．表1はその費用を使い，30年間の点検6回・交換1回を想定して求めた目安です．内訳と費用が必要になる時期は，後の章で説明します．</p>
-            <div class="maintenance-cost-table-scroll" role="region" aria-label="30年間の点検・交換費の試算" tabindex="0"><table class="article-table article-table--multi-column maintenance-cost-price-table"><caption>表1　資料の費用から求めた30年間の点検・交換費</caption><colgroup><col style="width:40%"><col style="width:20%"><col style="width:15%"><col style="width:25%"></colgroup><thead><tr><th scope="col">項目</th><th scope="col">1回の費用</th><th scope="col">回数</th><th scope="col">合計</th></tr></thead><tbody><tr><th scope="row">定期点検</th><td><span data-guide-number="reference.inspection" data-guide-format="approx-man-decimal:1">約3.8万円</span></td><td>6回</td><td><span data-guide-number="reference.inspectionTotal" data-guide-format="approx-man-decimal:1">約22.8万円</span></td></tr><tr><th scope="row">パワーコンディショナ<br>交換</th><td><span data-guide-number="reference.replacement" data-guide-format="approx-man-decimal:1">約38.4万円</span></td><td>1回</td><td><span data-guide-number="reference.replacement" data-guide-format="approx-man-decimal:1">約38.4万円</span></td></tr><tr><th scope="row">点検・交換の合計</th><td>—</td><td>—</td><td><strong><span data-guide-number="reference.maintenanceTotal" data-guide-format="approx-man-decimal:1">約61.2万円</span></strong></td></tr></tbody></table></div>
-            <p class="maintenance-cost-source-note">1回の費用の出典：<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">調達価格等算定委員会（2026），31頁</a>．点検5年ごと・交換20年目の1回は当サイトの試算条件．原典の税区分は未確認．<a href="/pages/calculation-method.html#cost-maintenance-notes">詳しい試算条件</a></p>
-            <p>突発的な修理，追加の機器交換，蓄電池交換，屋根工事時の取り外し・再設置，最終的な撤去・運搬・処分は，表1の試算に含みません．まず診断で収支の目安をつかみ，導入時の見積もりで保守・保証や住宅の工事計画を確認しましょう．最後の章では，この2つの確認方法を紹介します．</p>
-          </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料・計算根拠</p><ul class="source-list"><li>調達価格等算定委員会（2026）．<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">令和8年度以降の調達価格等に関する意見</a>．</li><li>はれトク．<a href="/pages/calculation-method.html#cost-maintenance-notes">維持費の採用値・含まない費用</a>．</li><li>太陽光発電協会（2026年アクセスb）．<a href="https://www.jpea.gr.jp/house/waste/">住宅用太陽光発電システムの廃棄を検討している方へ</a>．</li></ul></footer>
-        </section>
+<main id="main-content"><nav class="breadcrumb" aria-label="パンくずリスト"><a href="/">マップ</a> ／ <a href="/guides/">詳しいガイド</a> ／ 設備・維持管理</nav><article aria-labelledby="article-title"><header><div class="article-meta"><span class="category">設備・維持管理</span><span>更新日：<time datetime="2026-10-20">2026年10月20日</time></span></div><h1 id="article-title">太陽光の維持費は，何にいくらかかる？</h1><div class="lead-dialogue" aria-label="博士とハレナの導入の会話"><div class="lead-turn lead-turn--doctor"><img src="/map/assets/professor-chibi.png" alt="" width="72" height="96"><div class="lead-bubble"><span class="speaker">はれトク博士</span><p>長く使うなら，点検だけでなく，修理や機器交換の費用も考えておきます．</p></div></div><div class="lead-turn lead-turn--harena"><img src="/map/assets/navigator.png" alt="" width="72" height="72"><div class="lead-bubble"><span class="speaker">ハレナ</span><p>取り付けたあとは，ずっと費用がかからないわけではないんだね．</p></div></div><div class="lead-turn lead-turn--doctor"><img src="/map/assets/professor-chibi.png" alt="" width="72" height="96"><div class="lead-bubble"><span class="speaker">はれトク博士</span><p>そうです．点検やパワコン交換のほか，屋根を補修するときにパネルを外す費用がかかる場合もあります．各章の要点はハレナがまとめます．</p></div></div></div><nav aria-label="この記事の内容"><ol class="chapter-index"><li><a href="#periodic-inspection">01　点検にはいくら？</a></li><li><a href="#repair-replacement">02　修理・交換の備え</a></li><li><a href="#roof-renewal">03　屋根補修・交換は？</a></li></ol></nav></header>
+<section class="chapter" id="periodic-inspection" aria-labelledby="chapter-1-title"><span class="chapter-number" aria-hidden="true">01</span><h2 id="chapter-1-title">点検は，どのくらいの頻度と費用で考える？</h2><p><strong>診断では5年に1回，1回<span data-guide-number="cost.inspection" data-guide-format="man:1">3.8万円</span>を見込みます．</strong>国の資料にある3〜5年に1回程度の定期点検と，1回3.8万円の費用を参考にした設定です．30年間に6回で<span data-guide-number="cost.inspectionTotal" data-guide-format="man:1">22.8万円</span>です．<a href="#source-1" aria-label="出典1を読む"><sup>［1］</sup></a></p><figure aria-labelledby="maintenance-routine"><div class="article-diagram"><div class="diagram-grid"><div class="diagram-card"><h3>普段の確認</h3><p>発電量・エラー表示など，地上からできる範囲</p></div><div class="diagram-card"><h3>専門業者の点検</h3><p>機器・配線・固定部などを確認</p></div><div class="diagram-card"><h3>異常を見つけたとき</h3><p>販売店・施工会社に連絡して調べてもらう</p></div></div></div><figcaption id="maintenance-routine">図1　普段の確認と専門業者の点検を組み合わせる．自分で屋根へ上がらない．<a href="#source-2" aria-label="出典2を読む"><sup>［2］</sup></a></figcaption></figure><p>点検と修理は別の作業です．足場・洗浄・部品・出張などの追加料金を確認します．保守契約は，同じ期間の点検回数・対象設備で都度払いと比べ，更新・解約条件も確かめましょう．</p><p>蓄電池付きも同額の点検代とするのは，診断の仮定です．</p><aside class="harena-summary" aria-label="第1章のハレナのまとめ"><img src="/map/assets/navigator.png" alt="" width="52" height="52"><div><span class="speaker">ハレナのまとめ</span><ul><li>診断は5年に1回・3.8万円で，30年間の点検は22.8万円．</li><li>点検代に含まれる作業と，修理などの別料金を確かめるんだね．</li></ul></div></aside></section>
+<section class="chapter" id="repair-replacement" aria-labelledby="chapter-2-title"><span class="chapter-number" aria-hidden="true">02</span><h2 id="chapter-2-title">修理や機器の交換には，いくら見込む？</h2><p><strong>診断では，20年目にパワコン（発電した電気を家で使える形に変える機器）の交換<span data-guide-number="cost.replacement" data-guide-format="man:1">38.4万円</span>を1回見込んでいます．</strong>国の資料の「20年間に1回」を参考にした設定で，20年間の寿命保証ではありません．<a href="#source-1" aria-label="出典1を読む"><sup>［1］</sup></a></p><figure aria-labelledby="maintenance-cost-table"><div class="article-diagram"><table class="guide-data-table guide-data-table--three"><caption>表1　診断で見込む，30年間の維持費</caption><thead><tr><th scope="col">費用</th><th scope="col">太陽光のみ</th><th scope="col">蓄電池付き</th></tr></thead><tbody><tr><th scope="row">定期点検</th><td><span data-guide-number="cost.inspectionTotal" data-guide-format="man:1">22.8万円</span></td><td><span data-guide-number="cost.inspectionTotal" data-guide-format="man:1">22.8万円</span></td></tr><tr><th scope="row">パワコン交換</th><td><span data-guide-number="cost.replacement" data-guide-format="man:1">38.4万円</span></td><td><span data-guide-number="cost.replacement" data-guide-format="man:1">38.4万円</span></td></tr><tr><th scope="row">太陽光側の修理予備費</th><td><span data-guide-number="journey.repairReserve" data-guide-format="man">2万円</span></td><td><span data-guide-number="journey.repairReserve" data-guide-format="man">2万円</span></td></tr><tr><th scope="row">蓄電池側の修理予備費</th><td>なし</td><td><span data-guide-number="journey.batteryRepairReserve" data-guide-format="man">15万円</span></td></tr><tr><th scope="row">設備分の保険料</th><td><span data-guide-number="journey.solarInsurance" data-guide-format="man">9万円</span></td><td><span data-guide-number="journey.batteryInsurance" data-guide-format="man">18万円</span></td></tr></tbody><tfoot><tr><th scope="row">合計</th><td><span data-guide-number="journey.lifecycle" data-guide-format="man:1">72.2万円</span></td><td><span data-guide-number="journey.batteryLifecycle" data-guide-format="man:1">96.2万円</span></td></tr></tfoot></table></div><figcaption id="maintenance-cost-table">注：診断の仮定．平均修理額や保険の見積価格ではない．</figcaption></figure><p>蓄電池側の予備費は，エクソルの10 kWh用20年保証料約10万円から，5年分を<span data-guide-number="journey.batteryRepairEvent" data-guide-format="man:1">2.5万円</span>とし，30年間へ延ばした仮定です．保証購入や本体交換の費用ではありません．<a href="#source-3" aria-label="出典3を読む"><sup>［3］</sup></a></p><p>保険は住宅の火災保険に設備分を追加する想定で，太陽光のみ年<span data-guide-number="journey.solarInsurancePerYear" data-guide-format="yen">3,000円</span>，蓄電池付き合計年<span data-guide-number="journey.batteryInsurancePerYear" data-guide-format="yen">6,000円</span>です．補償と実際の料金は保険会社に確認します．<a href="#source-4" aria-label="出典4を読む"><sup>［4］</sup></a></p><p>保証書は対象機器・期間・出張費・工賃を確認します．期間内でも，全額無料とは限りません．</p><aside class="harena-summary" aria-label="第2章のハレナのまとめ"><img src="/map/assets/navigator.png" alt="" width="52" height="52"><div><span class="speaker">ハレナのまとめ</span><ul><li>パワコン交換・修理予備費・保険料も，点検代とは別に見込む．</li><li>予備費は平均修理額ではなく，本体交換費も別なんだね．</li></ul></div></aside></section>
+<section class="chapter" id="roof-renewal" aria-labelledby="chapter-3-title"><span class="chapter-number" aria-hidden="true">03</span><h2 id="chapter-3-title">屋根の補修やパネルの交換には，何が別にかかる？</h2><p><strong>太陽光設備に問題がなくても，屋根の塗装や補修のために，パネルの取り外し・付け直しが必要になる場合があります．</strong>外して戻す・撤去して処分する・新品に交換する，の3つで必要な費用が変わります．</p>
+<figure aria-labelledby="roof-work-note"><div class="article-diagram"><div class="maintenance-cost-scroll" role="region" aria-label="表2 パネル工事の費用比較（横にスクロールできます）" tabindex="0"><table class="guide-data-table maintenance-cost-comparison"><caption>表2　パネルを外す目的による費用の違い</caption><thead><tr><th scope="col">費用</th><th scope="col">外して戻す</th><th scope="col">撤去・処分</th><th scope="col">新品へ交換</th></tr></thead><tbody><tr><th scope="row">取り外し等の工事</th><td>9,000円／枚<small>取り外し・取付</small></td><td>9,000円／枚<small>取り外し</small></td><td>2〜4万円／枚<small>交換工事</small></td></tr><tr><th scope="row">新品パネル代</th><td>不要</td><td>不要</td><td>3〜6万円／枚</td></tr><tr><th scope="row">古いパネルの処分</th><td>不要</td><td>5,000円／枚<small>運搬込み</small></td><td>0.5〜1.5万円／枚</td></tr><tr><th scope="row">足場（必要な場合）</th><td colspan="3">3ケース共通．参考15.1〜18.84万円／棟．施工費に含む場合は重ねて加算しない．</td></tr><tr><th scope="row">金具・配線の作業</th><td>再利用できれば交換不要</td><td>撤去・防水の作業を確認</td><td>必要なら金具・配線を変更</td></tr></tbody></table></div></div><figcaption id="roof-work-note">注：栃和の公開情報による．脱着・撤去は同社で足場を施工する1〜19枚の単価，交換は同社解説の1枚交換の目安．足場は同社施工例の1棟分で，すべての工事に一律の価格ではない．<a href="#source-7" aria-label="出典7を読む"><sup>［7］</sup></a><a href="#source-8" aria-label="出典8を読む"><sup>［8］</sup></a><a href="#source-9" aria-label="出典9を読む"><sup>［9］</sup></a>本サイトの診断では，30年使用後の設備交換に伴う撤去・再設置費を，次の設置費用として考えます．</figcaption></figure>
 
-        <section id="inspection-cost">
-          <h2>点検には，どんな費用がかかる？</h2>
-          <figure class="economics-chapter-photo"><img src="/shared/assets/article-solar-inspection-photo.webp" width="1536" height="1024" alt="太陽光発電の機器を点検する作業員" loading="lazy" decoding="async"></figure>
-          <p><strong>点検費は，必要な時期・回数と，1回に行う作業の範囲で変わります．</strong>まず点検の計画と内容を確認し，次に都度の料金や保守契約に含む範囲を比べると，継続して必要な費用を整理できます．</p>
-          <section id="inspection-schedule">
-            <h3>点検の時期と作業内容で，総額が変わる</h3>
-            <p>点検は，発電性能と安全を確かめるために必要です．太陽光発電協会は，所有者による日常の確認と専門業者による定期点検を分け，定期点検は設置後1年目，その後は4年に1度を推奨しています．点検項目は使用年数や故障状況で異なるため，自宅で必要な内容は販売店・施工店・メーカー等へ確認します（太陽光発電協会，2026a）．</p>
-            <p>調達価格等算定委員会の2026年資料では，5 kW設備の定期点検について，表2の1回当たりの費用が示されています．点検を5年ごとに行う場合，30年間では6回となり，1回の費用に回数を掛けて総額を求められます．</p>
-            <div class="maintenance-cost-table-scroll" role="region" aria-label="資料の点検費と30年間の試算" tabindex="0"><table class="article-table article-table--multi-column maintenance-cost-price-table"><caption>表2　資料の点検費と30年間の試算</caption><colgroup><col style="width:22%"><col style="width:28%"><col style="width:28%"><col style="width:22%"></colgroup><thead><tr><th scope="col">1回の費用</th><th scope="col">想定する時期</th><th scope="col">30年間の回数</th><th scope="col">合計</th></tr></thead><tbody><tr><th scope="row"><span data-guide-number="reference.inspection" data-guide-format="approx-man-decimal:1">約3.8万円</span></th><td>5年ごと</td><td>6回</td><td><span data-guide-number="reference.inspectionTotal" data-guide-format="approx-man-decimal:1">約22.8万円</span></td></tr></tbody></table></div>
-            <p class="maintenance-cost-source-note">出典：<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">調達価格等算定委員会（2026），31頁</a>の5 kW設備のヒアリング．同資料の点検頻度は3〜5年ごと．表2・3は5年ごとに点検する試算例です．<a href="/pages/calculation-method.html#cost-maintenance-notes">費用・試算条件の詳細</a></p>
-            <div class="maintenance-cost-table-scroll" role="region" aria-label="点検・交換費が必要になる時期の試算" tabindex="0"><table class="article-table article-table--multi-column maintenance-cost-price-table"><caption>表3　5年ごとに点検し，20年目に交換する場合の支出</caption><colgroup><col style="width:36%"><col style="width:40%"><col style="width:24%"></colgroup><thead><tr><th scope="col">想定する年</th><th scope="col">作業</th><th scope="col">その年の費用</th></tr></thead><tbody><tr><th scope="row">5・10・15年目<br>25・30年目</th><td>定期点検</td><td>各<span data-guide-number="reference.inspection" data-guide-format="approx-man-decimal:1">約3.8万円</span></td></tr><tr><th scope="row">20年目</th><td>定期点検＋機器交換</td><td><span data-guide-number="reference.inspectionAndReplacement" data-guide-format="approx-man-decimal:1">約42.2万円</span></td></tr></tbody></table></div>
-            <p>表3の例では，支出は毎年同じではなく，20年目に点検と交換が重なります．長期の合計に加え，いつまとまった支出を見込むかを確認しましょう．交換の内容は次の章で説明します．</p>
-            <p>実際の総額は，1回の料金が同じなら回数が増えるほど増えます．同じ回数でも，確認する機器や測定・報告の内容，現場への出張や足場の必要性によって依頼範囲が変わります．「点検一式」という表示だけで比較せず，どの設備をどの方法で確認するか，結果の報告と不具合発見後の対応を含むかまで聞きましょう．</p>
-          </section>
-          <section id="maintenance-contract">
-            <h3>保守契約は，含まれる作業と別料金を確かめる</h3>
-            <p>保守契約を読むときは，契約期間中の点検回数と対象設備を先に確認します．年間料金などの継続払いと，点検ごとの都度払いでは，支払う時期と含まれる作業の示し方が違います．同じ期間に必要な作業をそろえてから，比較する支出を整理しましょう．</p>
-            <p><strong>設備を調べる点検と，不具合を直す修理は別の作業です．</strong>点検料に修理まで含むか，部品・作業・出張・足場が別料金かを確認します．例えば「定期点検を契約料に含む，故障時の部品交換は別途」という条件なら，契約料だけで将来の支出全体を把握したことにはなりません．これは契約の読み方の例で，特定のサービスの提供内容を示すものではありません．</p>
-            <p>契約書には，料金のほか，契約期間，更新・解約条件，故障時の連絡先も残します．点検を都度依頼する場合も，設備の型式と過去の点検記録を渡せるようにしておくと，今回必要な作業を相談しやすくなります．</p>
-          </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料・計算根拠</p><ul class="source-list"><li>太陽光発電協会（2026年アクセスa）．<a href="https://www.jpea.gr.jp/house/longuser/">長く使っていただくために</a>．</li><li>調達価格等算定委員会（2026）．<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">令和8年度以降の調達価格等に関する意見</a>．</li><li>はれトク．<a href="/pages/calculation-method.html#cost-maintenance-notes">点検費の出典・試算条件</a>．</li></ul></footer>
-        </section>
-
-        <section id="repair-replacement">
-          <h2>修理・機器交換では，何を見込む？</h2>
-          <figure class="economics-chapter-photo"><img src="/shared/assets/article-subsidy-documents-photo.webp" width="1536" height="1024" alt="住宅の図面と設備の仕様書を広げ，機器の条件を確認する手元" loading="lazy" decoding="async"></figure>
-          <p><strong>修理・交換は，必要な機器と作業を特定し，保証で負担される部分と自己負担を分けて見込みます．</strong>予定として見込む交換費と，故障したときの対応を分けたうえで，保証書と見積書の範囲を照合します．</p>
-          <section id="replacement-plan">
-            <h3>予定した交換と，故障時の修理を分ける</h3>
-            <p>調達価格等算定委員会の2026年資料では，5 kW設備のパワーコンディショナは20年間に一度交換され，表4の費用が相場とされています．ここでは，30年間使う間に交換を1回行う場合の費用を示します．</p>
-            <div class="maintenance-cost-table-scroll" role="region" aria-label="資料のパワーコンディショナ交換費と試算" tabindex="0"><table class="article-table article-table--multi-column maintenance-cost-price-table"><caption>表4　資料のパワーコンディショナ交換費と試算</caption><colgroup><col style="width:22%"><col style="width:28%"><col style="width:28%"><col style="width:22%"></colgroup><thead><tr><th scope="col">1回の費用</th><th scope="col">想定する時期</th><th scope="col">30年間の回数</th><th scope="col">合計</th></tr></thead><tbody><tr><th scope="row"><span data-guide-number="reference.replacement" data-guide-format="approx-man-decimal:1">約38.4万円</span></th><td>20年目</td><td>1回</td><td><span data-guide-number="reference.replacement" data-guide-format="approx-man-decimal:1">約38.4万円</span></td></tr></tbody></table></div>
-            <p class="maintenance-cost-source-note">出典：<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">調達価格等算定委員会（2026），31頁</a>の5 kW設備のヒアリング．20年目に1回交換するのは当サイトの試算条件．<a href="/pages/calculation-method.html#cost-maintenance-notes">交換費・試算条件の詳細</a></p>
-            <p>表4では20年目の交換を想定していますが，実際の交換時期は機器の状態や使用条件で変わります．不具合が起きたときは，修理で使い続けられるかも踏まえて相談します．</p>
-            <p>故障した場合は，どの機器の何が不具合か，修理で使い続けられるか，交換が必要かを販売店・施工店等に確認します．パワーコンディショナの不具合が見つかっても，パネルを含む設備全体を一度に交換するとは限りません．JPEAも，故障を理由に廃棄を考える場合には，修理・交換の相談を先に行うよう案内しています（太陽光発電協会，2026b）．</p>
-            <p>表1の試算に含まない突発的な修理や追加の交換は，必要な対応が分かってから費用を確認します．蓄電池を併設する場合も，型式・保証・交換の必要性を別に確認してください．<strong>現行の診断は，蓄電池を30年間交換しない仮定で，その交換費を含んでいません．</strong>蓄電池を含む設備を使い続ける費用を判断するときは，この範囲を踏まえます．</p>
-          </section>
-          <section id="warranty-cost">
-            <h3>保証は，機器代と作業費の負担範囲を確認する</h3>
-            <p>保証は，期間だけでなく，対象機器と保証される不具合の条件を読みます．例えばソーラーフロンティアの公式案内は，パネルの出力保証とシステム機器の保証を分け，機器保証のプランによって対象機器・期間が異なることを示しています（ソーラーフロンティア，2026）．自宅の製品に適用される条件は，型式と契約時の保証書で確認しましょう．</p>
-            <p><strong>「保証対象」という回答だけで自己負担をゼロと決めず，機器代と作業費の扱いを確かめます．</strong>取り外し・取り付けの労務費，出張費，足場費などについて，修理に必要な作業と保証が負担する範囲を対応させます．保証の対象外なら，その理由と有償での対応内容を聞き，修理と交換それぞれの費用を比べます．</p>
-            <table class="article-table"><caption>表5　修理・交換の自己負担を確認する項目</caption><tbody><tr><th scope="row">対象・期間</th><td>機器の型式，保証開始日，対象となる不具合，必要な申込手続．</td></tr><tr><th scope="row">機器・部品</th><td>修理部品や交換機器を，どの条件で保証するか．</td></tr><tr><th scope="row">作業・現場費</th><td>取り外し・取り付け，出張，足場などの費用を誰が負担するか．</td></tr><tr><th scope="row">対象外の対応</th><td>有償となる理由，修理・交換の内訳と総額．</td></tr></tbody></table>
-            <p>申込条件や点検記録の提出などが定められている場合は，必要な手続と書類も確認します．保証書，設置時の契約書，機器の型式，点検・修理の記録を保管し，故障時に同じ条件で相談できるようにしておきましょう．</p>
-          </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料・計算根拠</p><ul class="source-list"><li>調達価格等算定委員会（2026）．<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf">令和8年度以降の調達価格等に関する意見</a>．</li><li>太陽光発電協会（2026年アクセスb）．<a href="https://www.jpea.gr.jp/house/waste/">住宅用太陽光発電システムの廃棄を検討している方へ</a>．</li><li>ソーラーフロンティア（2026年アクセス）．<a href="https://www.solar-frontier.com/jpn/residential/sp/features/hosyou/">充実の保証内容で，トータルにサポート</a>．</li><li>はれトク．<a href="/pages/calculation-method.html#cost-maintenance-notes">機器交換の採用値・含まない費用</a>．</li></ul></footer>
-        </section>
-
-        <section id="roof-work">
-          <h2>屋根工事をすると，何が追加になる？</h2>
-          <figure class="economics-chapter-photo"><img src="/shared/assets/article-fit-meter-photo.png" width="1536" height="1024" alt="太陽光パネルを設置した住宅の屋根と外壁" loading="lazy" decoding="async"></figure>
-          <p><strong>屋根工事で設備を外す必要がある場合は，取り外しと，使い続けるための再設置を見込みます．</strong>まず屋根の工事内容と設備の使用予定を合わせ，その計画に必要な太陽光側の作業を，屋根工事の費用と分けて確認します．</p>
-          <section id="roof-plan">
-            <h3>屋根の工事計画と，設備の使用予定を合わせる</h3>
-            <p>屋根の補修・葺き替えでは，工事する範囲と方法によってパネルの取り外しが必要かが変わります．JPEAは，屋根葺き替えや住宅のリフォーム等を撤去の場面として挙げています（太陽光発電協会，2026b）．屋根工事業者と太陽光の販売店・施工店へ，どの部分の工事に，どの設備の取り外しが必要かを相談しましょう．</p>
-            <p>工事後も使う予定なら，取り外す前に再設置できる条件を確認します．屋根材や配置が変わる場合は，既存の機器・取付部材を再使用できるかも相談します．「外す工事」だけを依頼してから戻す方法を考えると，再設置に必要な作業と費用を見落としやすくなります．</p>
-            <p>例えば導入前から屋根の葺き替えを予定している家庭は，先に屋根を工事する場合と，設置後に設備を外して工事する場合の工程を相談できます．これは住宅計画に応じた検討の例で，どちらが一律に安いとは決まりません．必要な工事と時期をそろえた見積もりで判断します．</p>
-          </section>
-          <section id="roof-cost-scope">
-            <h3>取り外し・再設置の費用を，屋根工事と分けて確認する</h3>
-            <p>屋根そのものの補修費と，太陽光設備の取り外し・再設置費は，目的が違う費用です．取り外し，保管が必要な場合の扱い，再設置，配線や動作確認など，どこまで依頼するかを明細で確認します．屋根工事の見積もりに太陽光側の作業が含まれるか，別の施工店へ依頼するかも合わせて整理しましょう．</p>
-            <table class="article-table"><caption>表6　屋根工事に伴う支出の分け方</caption><tbody><tr><th scope="row">屋根そのもの</th><td>補修・葺き替えなど，住宅側の工事内容と費用．</td></tr><tr><th scope="row">太陽光設備</th><td>取り外す設備，再使用する部材，再設置と配線・確認の範囲．</td></tr><tr><th scope="row">共通の現場作業</th><td>足場などを共用できるか，どちらの見積もりに含むか．</td></tr></tbody></table>
-            <p><strong>取り外し・再設置には，パネルの作業費に加え，足場などの費用がかかります．</strong>太陽光パネル脱着専門店が公開する千葉市の施工事例では，パネル14枚の取り外し・再設置と足場に，表7の費用がかかっています．</p>
-            <div class="maintenance-cost-table-scroll" role="region" aria-label="屋根工事に伴う取り外し・再設置費の施工例" tabindex="0"><table class="article-table article-table--multi-column maintenance-cost-price-table"><caption>表7　パネル14枚の取り外し・再設置と足場の施工例（税別）</caption><colgroup><col style="width:32%"><col style="width:40%"><col style="width:28%"></colgroup><thead><tr><th scope="col">費用の内訳</th><th scope="col">作業内容</th><th scope="col">金額</th></tr></thead><tbody><tr><th scope="row">取り外し・再設置</th><td>パネル14枚の脱着</td><td>12.6万円</td></tr><tr><th scope="row">足場</th><td>設置・解体</td><td>約18.8万円</td></tr><tr><th scope="row">合計</th><td>脱着＋足場</td><td><strong>約31.4万円</strong></td></tr></tbody></table></div>
-            <p class="maintenance-cost-source-note">出典：太陽光パネル脱着専門店（株式会社栃和），<a href="https://solar-panel.jp/works/chiba-chiba-roof-painting-03/">千葉市の施工事例</a>．2024年9月施工，2026年3月公開，2026年10月10日確認．税別の公表額を万円表示に丸めています．屋根の塗装・補修そのものの費用は含みません．</p>
-            <p>足場などを複数の工事で使う場合は，設置期間や作業条件を確認し，同じ費用を重複して数えないようにします．共用できると決まっていなければ，無料になるとも見込みません．<strong>表1の試算には一時取り外し・再設置費を含めていないため，自宅の屋根計画に必要な分を別に確認します．</strong></p>
-            <nav class="article-related-card" aria-label="設置費の関連情報"><p class="article-related-card__label">あわせて読みたい</p><div class="article-related-card__item"><a href="/guides/solar-installation-cost/"><span>太陽光の設置費は，何にいくらかかる？</span><span aria-hidden="true">→</span></a></div></nav>
-          </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料・計算根拠</p><ul class="source-list"><li>太陽光発電協会（2026年アクセスb）．<a href="https://www.jpea.gr.jp/house/waste/">住宅用太陽光発電システムの廃棄を検討している方へ</a>．</li><li>太陽光パネル脱着専門店（2026）．<a href="https://solar-panel.jp/works/chiba-chiba-roof-painting-03/">屋根塗装に伴うパネル脱着・足場の施工事例</a>．</li><li>はれトク．<a href="/pages/calculation-method.html#cost-maintenance-notes">試算に含まない屋根工事関連費用</a>．</li></ul></footer>
-        </section>
-
-        <section id="end-of-use">
-          <h2>使い終えた設備には，どんな費用がかかる？</h2>
-          <figure class="economics-chapter-photo"><img src="/shared/assets/article-quotes-explanation-photo.webp" width="1536" height="1024" alt="工事の見積書を見ながら，依頼する作業の範囲を確認する手元" loading="lazy" decoding="async"></figure>
-          <p><strong>使用終了時は，設備を取り外す工事と，運搬・処分まで含めた費用を確認します．</strong>まず撤去する設備と屋根側の作業を定め，次に取り外した設備の行き先と処理を含む依頼範囲をそろえます．</p>
-          <section id="removal-work">
-            <h3>設備の撤去と，屋根側の作業範囲を確認する</h3>
-            <p>撤去は，使用を終える設備を取り外す工事です．屋根工事後に戻す一時取り外しとは区別し，パネルだけか，架台・配線・パワーコンディショナまで外すかを確認します．JPEAは，撤去工事の費用はパネル枚数，屋根の形状・傾斜，建物の階数，足場の必要性などで変わると説明しています（太陽光発電協会，2026b）．</p>
-            <p><strong>撤去の総額は，外す工事だけでなく，運搬・処分と足場を合わせて確認します．</strong>太陽光パネル脱着専門店は，自社の公開単価から，表8のように枚数別の費用を示しています．パネルが増えると撤去・処分費が増え，足場費は建物の大きさや形によって変わります．</p>
-            <div class="maintenance-cost-table-scroll" role="region" aria-label="枚数別のパネル撤去・運搬・処分費の公開試算" tabindex="0"><table class="article-table article-table--multi-column maintenance-cost-price-table"><caption>表8　パネル撤去・運搬・処分の公開試算（足場込み）</caption><colgroup><col style="width:14%"><col style="width:17%"><col style="width:17%"><col style="width:27%"><col style="width:25%"></colgroup><thead><tr><th scope="col">パネル枚数</th><th scope="col">撤去工事</th><th scope="col">運搬・処分</th><th scope="col">足場</th><th scope="col">合計の目安</th></tr></thead><tbody><tr><th scope="row">10枚</th><td>9万円</td><td>5万円</td><td>約15.1〜18.8万円</td><td><strong>約29〜33万円</strong></td></tr><tr><th scope="row">20枚</th><td>16万円</td><td>10万円</td><td>約15.1〜18.8万円</td><td><strong>約41〜45万円</strong></td></tr></tbody></table></div>
-            <p class="maintenance-cost-source-note">出典：太陽光パネル脱着専門店，<a href="https://solar-panel.jp/contents/solar-panel-dismantling-cost/">枚数別の撤去費用と内訳</a>（2026年8月31日公開，10月10日確認）．同社が足場を施工する場合の単価による試算で，税区分は記載されていません．運搬・処分欄は処分場への運搬とマニフェスト発行を含みます．屋根の補修，電気の切り離し，機器・配線等の撤去は別途確認します．</p>
-            <p>設備を外した後に住宅を使い続ける場合は，屋根の状態も確認します．架台はパネルを固定する支持部材で，それを屋根へ固定する金具を外す場合には防水処理が必要です．金具を残す場合もあるため，外す部材と残す部材，雨漏りを防ぐ作業を販売店・施工店等へ相談します（太陽光発電協会，2026b）．</p>
-            <p>住宅を解体する予定なら，太陽光設備の撤去と解体工事の担当範囲を合わせます．屋根を残す工事と家全体の解体では，設備を外した後に必要な作業が違うため，同じ「撤去費」という名称だけで総額を比較しないようにしましょう．</p>
-            <p>補助金を受けて設置した設備を早期に撤去すると，補助金の返還が必要になる場合があります．工事費とは別の負担となるため，撤去を決める前に交付条件と必要な手続を確認しましょう（太陽光発電協会，2026b）．</p>
-          </section>
-          <section id="transport-disposal">
-            <h3>運搬・処分まで含めて，依頼範囲をそろえる</h3>
-            <p>取り外した設備には，運搬・処分の費用も必要です．JPEAは，撤去工事費と廃棄物処分等の費用を分け，処分等の費用もパネルの状態などで変わると説明しています．相談は購入した販売店・施工店，屋根工事や解体を伴う場合はその工事業者を入口とし，連絡がつかない場合はメーカーの窓口などへ確認します（太陽光発電協会，2026b）．</p>
-            <p>表8の公開試算では，運搬・処分が一つの料金に含まれています．見積もりでは，取り外し後の搬出・運搬と処分を誰が担当し，どこまで総額に含むかを聞きます．「撤去一式」が運搬・処分も含む提案と，屋根から外す工事だけの提案では，表示額をそのまま比べられません．<strong>屋根から外して終わりではなく，依頼した設備の処理まで含む範囲をそろえます．</strong></p>
-            <p>設備を外す時期は，住宅の使用予定や修理の可否と合わせて考えます．表1の30年間という試算期間は，30年目に設備を廃棄する前提ではなく，最終的な撤去・運搬・処分費も含みません．使い終える計画を立てるときに，必要な作業と費用を個別に確認しましょう．</p>
-          </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の参考資料・計算根拠</p><ul class="source-list"><li>太陽光発電協会（2026年アクセスb）．<a href="https://www.jpea.gr.jp/house/waste/">住宅用太陽光発電システムの廃棄を検討している方へ</a>．</li><li>太陽光パネル脱着専門店（2026）．<a href="https://solar-panel.jp/contents/solar-panel-dismantling-cost/">撤去・運搬・処分費の公開単価と試算</a>．</li><li>はれトク．<a href="/pages/calculation-method.html#cost-maintenance-notes">試算に含まない撤去・処分費用</a>．</li></ul></footer>
-        </section>
-
-        <section id="household-cost">
-          <h2>自宅の維持費は，どう確かめる？</h2>
-          <figure class="economics-chapter-photo"><img src="/shared/assets/article-solar-estimate-photo.webp" width="1536" height="1024" alt="設備の見積書と電卓を並べ，必要な費用を確認する手元" loading="lazy" decoding="async"></figure>
-          <p><strong>維持費を含めた収支は，まず診断で概要をつかみ，見積もりで自宅の条件と具体的な費用を確かめましょう．</strong>費用の概算から，住宅や設備に合わせた確認へ進めます．</p>
-          <section id="simulation-reconciliation">
-            <h3>複雑な費用計算は，まず診断で収支の目安を調べる</h3>
-            <p>維持費を含めた収支の計算は，費用がかかる時期や回数まで考えると複雑になります．点検や機器交換の支出と，電気代削減・売電収入を長期間にわたって組み合わせる必要があるためです．</p>
-            <p>はれトク診断なら，設備と自宅の条件を選ぶだけで，設置費と定期点検・パワーコンディショナ交換費を考慮した収支を調べられます．まず，太陽光全体でどのくらいトクするか，元手回収まで何年かかるかの概要をつかみましょう．</p>
-
-          </section>
-          <section id="records-plan">
-            <h3>見積もりで，自宅の条件と費用を確かめる</h3>
-            <p>実際に必要な作業と費用は，設備の型式や屋根の状態，保守・保証の条件によって変わります．診断では分からない住宅の状況や，予定している屋根工事も，施工会社に見てもらって確認しましょう．</p>
-            <p>導入時の無料見積もりでは，自宅の条件に合う設備・工事に加え，点検料金や保証に含まれる機器・作業を相談できます．見積書と契約条件で，必要な費用・自己負担の範囲を確定させましょう．将来の修理や屋根工事の相談先も確認しておくと安心です．</p>
-
-            <nav class="article-related-card" aria-label="収支と見積もりの関連情報"><p class="article-related-card__label">あわせて読みたい</p><div class="article-related-card__item"><a href="/guides/solar-economics/#lifecycle-cost"><span>設置後の費用を含めて，太陽光の収支を考える</span><span aria-hidden="true">→</span></a></div><div class="article-related-card__item"><a href="/guides/quotes-contractors/#comparison-items"><span>見積もりの工事範囲・保証を比較する</span><span aria-hidden="true">→</span></a></div></nav>
-          </section>
-          <footer class="economics-chapter-footer" aria-label="この章の補足"><p class="economics-resource-label">この章の計算根拠</p><ul class="source-list"><li>はれトク．<a href="/pages/calculation-method.html#cost-maintenance-notes">維持費の出典・試算条件・対象範囲</a>．</li></ul><p>点検・保証・撤去の公式ページは2026年10月8日に確認しました．点検・交換の費用は調達価格等算定委員会の2026年資料を基にし，30年間の回数・実施年は当サイトの試算条件です．</p></footer>
-        </section>
-      </article>
-    <nav class="map-reading-route" aria-label="マップで検討を続ける"><a href="/guides/equipment-maintenance/">マップで，点検と機器交換について知る<span aria-hidden="true">→</span></a></nav>
-</main>
-    <footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
-  </body>
+<h3>屋根の補修で，同じパネルを戻すとき</h3><p>同じパネルを再利用するので，新品の購入・処分費は通常かかりません．14枚の脱着12.6万円と足場18.84万円で，計31.44万円（税別）の施工例があります．屋根塗装代は別で，共用する足場を二重に計上しないようにします．<a href="#source-6" aria-label="出典6を読む"><sup>［6］</sup></a></p>
+<h3>使い終えて撤去・処分するとき</h3><p>戻さない場合は，新しいパネルの購入・取付費は不要ですが，古いパネルの運搬・処分費がかかります．金具を外した跡の防水費用も確認しましょう．<a href="#source-5" aria-label="出典5を読む"><sup>［5］</sup></a></p><p>補助金で付けた設備を早く撤去する場合は，事前手続きや返還が必要か交付元へ確認します．<a href="#source-5" aria-label="出典5を読む"><sup>［5］</sup></a></p>
+<h3>パネルを交換して使い続けるとき</h3><p>屋根上の工事がある点は脱着と共通ですが，新品の本体代と古いパネルの処分費が加わります．交換工事は脱着と同額とは限らず，運搬・足場・金具・配線をどこまで含むかも見積もりで確かめます．<a href="#source-8" aria-label="出典8を読む"><sup>［8］</sup></a></p><p>設置済みの設備に不具合が出たら，まず販売店・施工会社に連絡し，交換が必要か，保証の対象かを調べてもらいましょう．</p><aside class="harena-summary" aria-label="第3章のハレナのまとめ"><img src="/map/assets/navigator.png" alt="" width="52" height="52"><div><span class="speaker">ハレナのまとめ</span><ul><li>脱着・撤去・交換とも工事費がかかり，処分費・新品代の有無が違う．</li><li>足場・金具・配線は，どの工事費に含まれるか確かめるんだね．</li></ul></div></aside></section><nav class="next-reading" aria-labelledby="next-reading-title"><h2 id="next-reading-title">維持費も含めて，わが家の収支を調べよう</h2><p>設置費だけでなく，点検や機器交換も含めた収支の目安を確認できます．</p><a class="guide-link" href="/simulator/">はれトク診断<svg class="guide-link__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></nav><nav class="next-reading" aria-labelledby="next-installer-title"><h2 id="next-installer-title">設置後の対応も相談できる施工会社を探そう</h2><p>導入前に，点検・修理の窓口や保証，別料金になる作業も比べておきましょう．</p><a class="guide-link" href="/guides/choosing-installer/">複数社の見積もり<svg class="guide-link__arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></nav><details class="source-notes"><summary>参考資料・試算の条件</summary><p class="small-note">診断の費用範囲：期間中はパネル本体・蓄電池本体を交換せず使う仮定です．屋根補修の脱着や，パネル本体の交換・撤去・処分費は個別に計上していません．修理予備費とは別の費用です．30年後の撤去・再設置は次の設置費用として扱い，次の30年間の収支は算定しません．30年間の使用保証ではありません．</p><p class="small-note">記事更新日：2026年10月20日．当サイトの試算・説明用の例と，公式資料の制度・仕様を分けて記載しています．</p><ol><li id="source-1">経済産業省「<a href="https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf" target="_blank" rel="noopener">令和8年度以降の調達価格等に関する意見</a>」．住宅用5 kW設備の業界ヒアリング値：点検3.8万円／回，交換38.4万円／回．原資料の税区分は未確認．5年ごとの点検・20年目の交換を当サイトで採用している．</li><li id="source-2">太陽光発電協会「<a href="https://www.jpea.gr.jp/house/longuser/" target="_blank" rel="noopener">長く使っていただくために</a>」．日常の確認・専門業者による点検．</li><li id="source-3">エクソル「<a href="https://www.xsol.co.jp/wp-content/uploads/2021/09/202212_hbt_warranty.pdf" target="_blank" rel="noopener">蓄電システムの20年保証料</a>」の10 kWh単品96,800円（税込）の例を約10万円とし，10万円÷20年×5年＝2.5万円を参考に設定．21〜30年目への延長は当サイトの仮定．</li><li id="source-4"><a href="/pages/calculation-method.html#equipment-insurance">保険料の採用根拠</a>と<a href="/pages/calculation-method.html#battery-repair-reserve">修理予備費の計上方法</a>．災害発生・損害額・保険金は計算していない．</li><li id="source-5">太陽光発電協会「<a href="https://www.jpea.gr.jp/house/waste/" target="_blank" rel="noopener">住宅用太陽光発電システムの廃棄を検討している方へ</a>」．撤去・処分にかかる費用，屋根の防水，早期廃棄時の補助金の手続きと専門業者への相談．</li><li id="source-6">太陽光パネル脱着専門店（株式会社栃和）「<a href="https://solar-panel.jp/works/chiba-chiba-roof-painting-03/" target="_blank" rel="noopener">千葉市の屋根塗装に伴う脱着・足場の施工事例</a>」．14枚，2024年9月施工，2026年3月公表．費用は税別で屋根塗装そのものを含まない．2026年10月18日確認．</li><li id="source-7">太陽光パネル脱着専門店（株式会社栃和）「<a href="https://solar-panel.jp/contents/solar-panel-dismantling-cost/" target="_blank" rel="noopener">枚数別の撤去費用と内訳</a>」．1〜19枚の撤去9,000円／枚，運搬・処分5,000円／枚，足場施工例151,000〜188,400円／棟．税区分は明記なし．2026年10月20日確認．</li><li id="source-8">同社「<a href="https://solar-panel.jp/contents/solar-panel-replacement/" target="_blank" rel="noopener">太陽光パネルの交換</a>」．1枚交換の掲載目安：本体3〜6万円，施工2〜4万円，処分0.5〜1.5万円．同社の解説に掲載された一般的な目安で，個別見積価格ではない．足場・運搬の含有と税区分は明記なし．枚数分の単純な比例や，別資料の足場費との無条件な合算はしない．2026年10月20日確認．</li><li id="source-9">同社「<a href="https://solar-panel.jp/price/" target="_blank" rel="noopener">脱着工事の単価表</a>」．標準工事1〜19枚は9,000円／枚で取り外し・取り付け・現場調査・簡易清掃・電圧測定・連系確認込み．同社による足場施工が単価の条件で，足場・金具は別途．税区分は明記なし．2026年10月20日確認．</li></ol></details></article></main>
+<footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
 </html>

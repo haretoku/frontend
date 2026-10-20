@@ -81,7 +81,7 @@
     <li><a href="#model-scope">対象・計算条件</a></li><li><a href="#cost-maintenance-notes">含む費用・含まない費用</a></li>
     <li><a href="#calculation-flow">発電から収支まで</a></li><li><a href="#adopted-parameters">採用値・出典</a></li>
     <li><a href="#calculation-formulas">詳しい計算式</a></li>
-  </ol><p class="method-note"><a href="#related-calculations">付録：記事固有の計算条件</a></p></nav>
+  </ol><p class="method-note"><a href="#related-calculations">付録：旧記事の計算条件</a></p></nav>
   <section id="model-scope">
     <h2>2．対象と計算条件</h2>
     <p class="method-answer">太陽光パネルを新しく設置する場合と，太陽光パネル・蓄電池を同時に設置する場合を比較します．地域は国・都道府県の単位で扱います．</p>
@@ -100,7 +100,7 @@
   <section id="cost-maintenance-notes">
     <h2>3．含む費用・含まない費用</h2>
     <p class="method-answer">設置時の費用に，30年間の点検・パワーコンディショナーの交換・追加修理予備費・設備分の保険料を含めます．補助金は設置費から差し引きます．</p>
-    <div class="method-table-wrap"><table class="article-table article-table--multi-column method-table"><caption>費用の計上範囲</caption><thead><tr><th scope="col">項目</th><th scope="col">計算上の扱い</th></tr></thead><tbody><tr><th scope="row">設置費</th><td>太陽光・蓄電池の設備費と工事費．標準単価と容量で概算します．</td></tr><tr><th scope="row">定期点検</th><td>1回<span data-guide-number="cost.inspection" data-guide-format="man:1">3.8万円</span>を，<span data-maintenance-years>5，10，15，20，25，30年目</span>に計上します．蓄電池付きも，同じ費用で一緒に点検する想定です．</td></tr><tr><th scope="row">機器交換</th><td>パワーコンディショナーの交換<span data-guide-number="cost.replacement" data-guide-format="man:1">38.4万円</span>を<span data-replacement-years>20年目</span>に1回計上します．</td></tr><tr><th scope="row">追加修理予備費</th><td>パネル側は2万円を30年目に計上します．蓄電池付きは，別に2.5万円を5，10，15，20，25，30年目に計上し，30年間で15万円を加えます．いずれも実際の修理代の平均値ではありません．</td></tr><tr><th scope="row">設備分の保険料</th><td>太陽光のみは毎年3,000円，蓄電池付きは合計で毎年6,000円を計上します．30年間でそれぞれ9万円・18万円です．住宅の火災保険に設備分を上乗せする費用の仮定で，実際の平均保険料ではありません．<a href="#equipment-insurance">根拠と対象範囲</a></td></tr><tr><th scope="row">蓄電池本体の交換</th><td>費用へ含めません．修理予備費は見込みますが，本体を交換せず30年間使う仮定であり，30年の寿命・動作保証を意味しません．</td></tr><tr><th scope="row">30年後の設備更新</th><td>30年後の撤去・再設置費は，次の設置費用に含めて考えるので，今回の診断には含めていません．撤去に伴う処分費も同じ扱いとし，次の30年間の収支は算定しません．</td></tr><tr><th scope="row">期間中のその他の支出</th><td>屋根工事や，それに伴うパネルの一時撤去・再設置，借入の利息・手数料，税金は含めません．予備費を超える修理の実額や時期も予測しません．</td></tr></tbody></table></div>
+    <div class="method-table-wrap"><table class="article-table article-table--multi-column method-table"><caption>費用の計上範囲</caption><thead><tr><th scope="col">項目</th><th scope="col">計算上の扱い</th></tr></thead><tbody><tr><th scope="row">設置費</th><td>太陽光・蓄電池の設備費と工事費．標準単価と容量で概算します．</td></tr><tr><th scope="row">定期点検</th><td>1回<span data-guide-number="cost.inspection" data-guide-format="man:1">3.8万円</span>を，<span data-maintenance-years>5，10，15，20，25，30年目</span>に計上します．蓄電池付きも，同じ費用で一緒に点検する想定です．</td></tr><tr><th scope="row">機器交換</th><td>パワーコンディショナーの交換<span data-guide-number="cost.replacement" data-guide-format="man:1">38.4万円</span>を<span data-replacement-years>20年目</span>に1回計上します．</td></tr><tr><th scope="row">追加修理予備費</th><td>パネル側は2万円を30年目に計上します．蓄電池付きは，別に2.5万円を5，10，15，20，25，30年目に計上し，30年間で15万円を加えます．いずれも実際の修理代の平均値ではありません．</td></tr><tr><th scope="row">設備分の保険料</th><td>太陽光のみは毎年3,000円，蓄電池付きは合計で毎年6,000円を計上します．30年間でそれぞれ9万円・18万円です．住宅の火災保険に設備分を上乗せする費用の仮定で，実際の平均保険料ではありません．<a href="#equipment-insurance">根拠と対象範囲</a></td></tr><tr><th scope="row">蓄電池本体の交換</th><td>費用へ含めません．修理予備費は見込みますが，本体を交換せず30年間使う仮定であり，30年の寿命・動作保証を意味しません．</td></tr><tr><th scope="row">30年後の設備更新</th><td>30年後の撤去・再設置費は，次の設置費用に含めて考えるので，今回の診断には含めていません．撤去に伴う処分費も同じ扱いとし，次の30年間の収支は算定しません．</td></tr><tr><th scope="row">期間中のその他の支出</th><td>屋根工事や，それに伴うパネルの一時撤去・再設置，パネル本体の交換・撤去・処分，借入の利息・手数料，税金は含めません．予備費を超える修理の実額や時期も予測しません．</td></tr></tbody></table></div>
     <p>点検の頻度と機器交換の時期は，当サイトの評価上の仮定です．原資料のヒアリング値・税区分・作業範囲は<a href="#adopted-parameters">採用値と出典</a>で確認できます．足場，特殊測定，洗浄，修理・部品交換は，標準の点検費の範囲に含めていません．</p>
     <details class="method-detail" id="equipment-insurance"><summary>保険料の根拠と対象範囲</summary><div class="method-detail__body">
       <p>住宅の火災保険に設備分を追加する費用として，太陽光のみは年3,000円，蓄電池付きは両設備を合わせて年6,000円を置きます．設置後1～30年目の各年末に計上し，30年間同額とする当サイトの試算仮定です．住宅全体の保険料や，地震保険の追加料は含めません．</p>
@@ -254,10 +254,10 @@
     </div></details></div>
   </section>
   <section id="related-calculations">
-    <h2>付録：記事固有の計算条件</h2>
+    <h2>付録：旧記事の計算条件</h2>
     <details class="method-detail"><summary>記事の計算条件を開く</summary><div class="method-detail__body">
-    <p>ここからは既存記事の図表を再現するための条件です．現在のマップ診断とは，住宅・在宅状況等が異なります．記事の固定試算は追加修理予備費を含まず，現在の診断はパネル側2万円，蓄電池付きではさらに15万円を加えます．設備分の保険料も現在の診断にだけ含め，30年間で太陽光のみ9万円，蓄電池付き18万円を加えます．</p>
-    <div id="electricity-sales-example"><h3>収支記事の代表試算</h3><details class="method-detail"><summary>東京都・4 kWの金額と計算根拠</summary><div class="method-detail__body"><p><a href="/guides/solar-economics/">「太陽光の収支は，何で決まる？」</a>の金額の根拠です．全国平均や全家庭の標準額ではなく，東京都の特定条件による比較用の試算です．個別見積価格，将来の利益や費用回収を保証しません．</p>
+    <p>以下は，改修前のガイド記事の図表を再現するための条件です．現在のガイド記事・マップ診断とは条件が異なり，旧試算には追加修理予備費・設備分の保険料を含めていません．現在の条件は，本ページの採用値と各記事の参考資料で確認できます．</p>
+    <div id="electricity-sales-example"><h3>旧収支記事の代表試算</h3><details class="method-detail"><summary>東京都・4 kWの金額と計算根拠</summary><div class="method-detail__body"><p>改修前の収支記事で用いた金額の根拠です．現在の<a href="/guides/solar-economics/">収支記事</a>は，前半の採用値を使い，追加修理予備費・設備分の保険料・利用想定の補助金も含めて計算しています．以下の旧試算は全国平均や自宅の予測ではなく，特定条件の比較例です．</p>
           <h3>共通条件と金額</h3>
           <p>公開データ<span data-guide-version>20261013-national-prefectures.1</span>版の標準シナリオを使用します．東京都，本人所有・本人居住の既存戸建て，太陽光のみ4 kW，南向き，平日昼間にほぼ毎日在宅とし，月間電気料金は未入力時の関東甲信<span data-guide-number="economics.monthlyBill" data-guide-format="yen">15,467円</span>を用います．この月額は「戸建て・4人以上世帯の地域平均（令和5年度）」です．評価期間は30年，買電料金は年1.5％上昇という比較仮定を置きます．記事見出しの金額は補助金0円とし，診断で算入される補助金を除き，設備の収入と支出を比較しています．</p>
           <p>初年度の電気代削減<span data-guide-number="economics.firstYearSavings" data-guide-format="yen">56,593円</span>／年と売電収入<span data-guide-number="economics.firstYearSales" data-guide-format="yen">68,946円</span>／年をそれぞれ12で割り，100円単位に丸めると，月約4,700円と月約5,700円です．初年度の月平均であり，毎月同額でも30年間一定でもありません．</p>
@@ -272,21 +272,21 @@
           <p>実際の買電料金は，1つの単価を全使用量へ掛けるとは限りません．東京電力エナジーパートナー「従量電灯B」の30 A契約を例にすると，基本料金は935.25円／月，電力量料金は最初の120 kWhまで<span data-guide-number="tariff.firstPrice" data-guide-format="yen:2">29.80円</span>／kWh，120 kWh超300 kWhまで<span data-guide-number="tariff.secondPrice" data-guide-format="yen:2">36.40円</span>／kWh，300 kWh超の部分が<span data-guide-number="tariff.thirdPrice" data-guide-format="yen:2">40.49円</span>／kWhです．<span data-guide-number="tariff.thirdPrice" data-guide-format="yen:2">40.49円</span>／kWhを月間使用量の全量へ掛ける計算ではありません（東京電力エナジーパートナー，2026a）．</p>
           <p>実際の契約には燃料費調整額や再エネ賦課金等も加わります．2026年度賦課金は4.18円／kWh（2026年5月～2027年4月検針分）です．この従量電灯Bの料金表と2026年度賦課金は参考値であり，診断の地域別代表単価へ追加したり，置き換えたりはしません．</p>
           <p>FIT期間終了後は，電力会社等が提示する条件で売電先を選びます．はれトク診断が11～30年目に置く<span data-guide-number="fit.postPrice" data-guide-format="yen:2">8.50円</span>／kWhは，東京電力エナジーパートナー「再エネ買取標準プラン」の例です．原資料は対象地域・契約に条件のある価格例です．診断では比較用の仮定として全国へ共通に適用し，将来の契約価格を保証するものではありません（東京電力エナジーパートナー，2026b）．</p></div></details></div>
-    <details class="method-detail"><summary>記事で使う診断外の比較条件</summary><div class="method-detail__body">
+    <details class="method-detail"><summary>旧記事で用いた診断外の比較条件</summary><div class="method-detail__body">
 <div class="method-table-wrap"><table class="article-table method-table"><caption>新築の記事用参考価格（現行診断は既存住宅）</caption><thead><tr><th>項目</th><th>値</th><th>条件・根拠</th></tr></thead><tbody><tr><th scope="row">新築住宅の導入費用</th><td><span data-installation-cost-new-per-kw>317,900円</span>／kW</td><td>28.9万円／kWへ消費税10％を仮置き<p class="method-source">（太陽光発電協会，年不明d；診断上の採用仮定） <a data-source-id="jpea-residential-solar-installation-cost">原資料</a></p></td></tr></tbody></table></div>
 <p>新築の317,900円／kWは，資料の28.9万円／kWに消費税10％を仮置きした値です．原典の税区分は未確認です．</p>
 <p>記事の条件付き比較には，蓄電池の20年末容量を70％・85％と置く場合があります．年間容量保持係数はそれぞれ0.70・0.85の20分の1乗とし，同じ係数を30年目まで延長します．平均的な寿命や製品保証を示す値ではありません．</p>
 <p>記事の下振れ・標準・上振れ比較では，買電単価の年上昇率を0％・1.5％・3％とし，下振れのみ補助金を含めません．現在の診断は標準の条件だけを使います．</p>
 </div></details>
     <div id="outage-scenarios"><h3>停電時の給電時間</h3><details class="method-detail"><summary>約10時間・約70時間の計算条件</summary><div class="method-detail__body">
-<p><a href="/guides/disaster/#battery-case">災害記事の比較</a>は，停電開始時に取り出せる放電損失前の電力量を5 kWhと置いた別計算です．製品の公称容量ではなく，残量・劣化・保護下限を反映した後の値です．太陽光からの補充はなく，接続回路と出力条件が合うものとします．</p>
+<p>従来の5 kWhの比較例は，停電開始時に取り出せる放電損失前の電力量を5 kWhと置いた別計算です．現在の<a href="/guides/disaster/#battery-case">停電の記事</a>は，<a href="#map-outage-assumptions">9.5 kWh設備の家電別の計算条件</a>を使います．この5 kWhは，製品の公称容量ではなく，残量・劣化・保護下限を反映した後の値です．太陽光からの補充はなく，接続回路と出力条件が合うものとします．</p>
 <p>放電効率は√0.9，設備自身の消費は交流側30 W（1日0.72 kWh）とし，どちらも同じように適用します．30 Wは<a href="https://www.nichicon.co.jp/products/ess/qa_ess-tribrid-t1.html">メーカーの待機電力の説明</a>を参考にした仮定で，停電中の実測値ではありません．</p>
 <div class="method-table-wrap"><table class="article-table method-table"><caption>停電時の家電消費量の比較</caption><thead><tr><th>使い方</th><th>家電側の消費量</th><th>根拠・仮定</th></tr></thead><tbody>
 <tr><th>全国平均を基準</th><td>約10.69 kWh／日</td><td><a href="https://www.env.go.jp/earth/ondanka/kateico2tokei/energy/detail/01/">2023年度全国全世帯の購入電力量3,911 kWh／年</a>を同年度の366日で割った値．<a href="https://www.env.go.jp/earth/ondanka/kateico2tokei/cautions/">自宅太陽光の自家消費を含まない</a>．</td></tr>
 <tr><th>家電を絞る</th><td>約0.90 kWh／日</td><td>冷蔵庫，LED2灯を6時間，スマホ4台の充電だけ．冷暖房・調理・給湯等は含まない．</td></tr>
 </tbody></table></div>
 <p>給電時間（時間）＝5 kWh × √0.9 ÷｛（家電消費量（kWh／日）＋0.72 kWh／日）÷24時間｝（式 (15)）．丸める前の値で計算すると，それぞれ約10時間・約70時間です．1日の消費を均した比較であり，実機の連続給電時間を保証しません．</p>
-<p id="outage-reference">記事の停電参考線は，家電を絞るケースを1日使うための放電損失前容量です．家電約0.90 kWhと設備自身0.72 kWhを足して√0.9で割り，約1.7 kWhとします．満充電からの放電を扱うため，充電損失はもう一度掛けません．</p>
+<p id="outage-reference">この5 kWhの比較例に対応する停電参考線は，家電を絞るケースを1日使うための放電損失前容量です．家電約0.90 kWhと設備自身0.72 kWhを足して√0.9で割り，約1.7 kWhとします．満充電からの放電を扱うため，充電損失はもう一度掛けません．</p>
 <details class="method-detail"><summary>家電を絞るケースの内訳</summary><div class="method-detail__body"><ul>
 <li>冷蔵庫：<a href="https://panasonic.jp/reizo/products/NR-E457PX/spec.html">年間263 kWhの仕様値</a>÷365日．</li>
 <li>LED：<a href="https://panasonic.jp/lamp/products/LDA7WWGEW1/spec.html">7.3 Wの電球</a>×2灯×6時間÷1,000．</li>

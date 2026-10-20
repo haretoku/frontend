@@ -1,0 +1,68 @@
+{
+  "sourceUrl": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+  "reference": "参考26：住宅用太陽光発電のシステム費用の推移とその内訳",
+  "population": "2025年設置・新築・住宅用10 kW未満",
+  "checkedAt": "2026-10-19",
+  "access": "公式検索索引に加え，保存済み原資料画像（参考26，本文30頁）を2026年10月19日に親と独立担当が再目視し費目・金額を照合．今回PDF直接取得は403で，新規PDFバイトの再取得とは扱わない．",
+  "publishedUnit": "万円/kW",
+  "components": [
+    {
+      "id": "panels",
+      "label": "パネル",
+      "amount": 13.5
+    },
+    {
+      "id": "pcs",
+      "label": "パワコン",
+      "amount": 5.3
+    },
+    {
+      "id": "mounting",
+      "label": "架台",
+      "amount": 3.2
+    },
+    {
+      "id": "other",
+      "label": "その他",
+      "amount": 0.2
+    },
+    {
+      "id": "work",
+      "label": "工事費",
+      "amount": 8.5
+    }
+  ],
+  "publishedGross": 30.6,
+  "publishedDiscount": 1.7,
+  "publishedNet": 28.9,
+  "normalization": "掲載された正の費目の合計30.7を100%とし，値引き前の構成例として再計算．原図の合計30.6との表示差0.1は配分せず，原資料本文の値引き後総額に対する約47%・約29%とも区別する．既存住宅の132万円へ乗じない．税区分は未確認．金額は資料掲載単価を4倍した参考換算であり，税込見積額とはしない．丸めた割合から逆算しない．",
+  "groups": [
+    {
+      "label": "パネル",
+      "amount": 13.5,
+      "roundedPercent": 44,
+      "convertedYen": 540000,
+      "roundedManYen": 54
+    },
+    {
+      "label": "パワコン・架台など",
+      "amount": 8.7,
+      "roundedPercent": 28,
+      "convertedYen": 348000,
+      "roundedManYen": 35
+    },
+    {
+      "label": "工事",
+      "amount": 8.5,
+      "roundedPercent": 28,
+      "convertedYen": 340000,
+      "roundedManYen": 34
+    }
+  ],
+  "capacityKw": 4,
+  "visualEvidence": {
+    "path": "qa/artifacts/installation-meti-source-cost-chart.png",
+    "sha256": "24002b1489d6ae2777456a9fd70fdbb3055381f99e5e9072e6d9b33c17d71f90",
+    "checkedAt": "2026-10-19"
+  }
+}
