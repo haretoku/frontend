@@ -6,6 +6,8 @@
 - ハレナと博士の採用済み画像を原本として保管し，用途別素材を生成する手順を整えました．
 - 検索用の画像URL `/favicon.png`，記事・診断・広告・計測は維持しています．Google検索の実表示は再取得後に別途確認します．
 
+公開commitは`948f8d192f4cd20f1a92ccccc5eb93628a135598`です．[公開処理](https://github.com/haretoku/frontend/actions/runs/39421736963)はCI145検査・build・deployに成功し，本番31正規URLと画像の独立検収，PC・スマホ幅の表示確認も合格しました．同commitへ注釈付きタグと[Release v0.5.1](https://github.com/haretoku/frontend/releases/tag/v0.5.1)を固定しました．切戻し先はv0.5.0です．GoogleへのTOP更新依頼は受理済みで，検索結果の実表示は別途確認します．
+
 ## v0.5.0 2026年10月20日
 
 - 全ページの共通ヘッダーへ「はれトクの歩き方」を追加し，マップ5章・診断・無料見積もりと，詳しいガイドの案内をまとめました．

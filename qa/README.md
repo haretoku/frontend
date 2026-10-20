@@ -4,7 +4,29 @@
 
 リリースごとの適用・判定・報告は[リリースチェックリスト](release-checklist.md)に従う．
 
-## v0.5.1公開候補の検収（2026年10月20日）
+## v0.5.1公開と本番検収（2026年10月20日）
+
+> **結論：v0.5.1を本番公開し，31正規URLと新ハレナ画像の独立検収・PC／スマホ幅確認・公開タグ／Releaseを完了した．GoogleへのTOP更新依頼は受理され，実検索アイコンの表示は別に追跡する．**
+
+公開commitは`948f8d192f4cd20f1a92ccccc5eb93628a135598`．[Pages実行39421736963](https://github.com/haretoku/frontend/actions/runs/39421736963)のbuild（118624117142）・deploy（118624275680）はsuccess．CIでも145検査と標準ビルドを通過した．注釈付きタグ`v0.5.1`と[Release](https://github.com/haretoku/frontend/releases/tag/v0.5.1)は同じ公開commitへ固定済み．切戻し先はv0.5.0の`3299e108171f2e81cdbd1ec4b927feb51a6a42cf`．既存の確認用設定や未採用画像は含めていない．
+
+[本番の独立検収](artifacts/v051-production-independent-review.md)と[詳細JSON](artifacts/v051-production-checks.json)はPASS．31／31正規URLが200で，新favicon・ロゴ参照・canonicalが対応し，原本／QAの代表5URLは404．SVGと96×96 PNGは公開commitと完全一致した．不変の全112資産や計算・データ・広告・導線・保存の検収はv0.5.0のPASSとコード不変性を再利用した．親担当は[本番PC](artifacts/v051-production-pc.png)と[360×812幅](artifacts/v051-production-mobile.png)でロゴの読込み・表示と横はみ出しなしを確認し，[本番画像](artifacts/v051-production-icon.png)も目視した．実端末検査ではない．
+
+|ID|結果|確認範囲・根拠・残件|
+|---|---|---|
+|P01〜P10|PASS|直下の公開前検収を参照．親の表示検収と別担当の独立レビューを接続し，ユーザーが本番公開を明示承認|
+|D01|PASS|公開commit948f8d1のActions build・deployがともにsuccess|
+|D02|PASS|別担当の31正規URL・画像2件・原本／QA非配信・正規化／404の独立HTTP検収．全43取得|
+|D03|PASS|親が本番PC・360px幅の画像読込み・ロゴ表示・横はみ出しを確認．不変の操作・GAはv0.5.0検収を再利用|
+|D04|PASS|実際の公開commitへ注釈付きタグとReleaseを固定．CHANGELOG・README・仕様・開発計画・運営方針の現況を更新|
+|E01|対象外|広告の掲載URL・素材・提携に変更なし|
+|E02|PASS|既存のsc-domain:haretoku.jpプロパティで公開後のTOP更新依頼を1回実施し，優先クロールキューへの追加を確認．[受理画面](artifacts/v051-google-top-request-accepted.png)．v0.5.0の未受理残件もこの受理で解消．URL・サイトマップ構成は不変で再送信なし|
+|E03|未確認|検索結果のアイコン実表示は未確認．サイト配信と受理を実表示反映へ読み替えず，次の週次運用確認で確認する|
+|E04|対象外|共有タイトル・description・OG画像はこのパッチで変更なし．過去版の実共有表示確認は別残件として維持|
+|E05|PASS（警告の対応判断済み）|CI成功．Actions v4のNode20→24強制実行とubuntu-latest移行の非阻害警告を確認．この画像パッチの不具合ではなく，次の依存・運用保守で対応要否を確認する|
+|E06|PASS|版番号・日付・公開コミット・Release・切戻し先の表記を照合|
+
+## v0.5.1公開前の検収記録（2026年10月20日）
 
 > **結論：本人がv0.5.1の公開を承認し，公開前の145検査・標準ビルド・独立レビュー・PC／スマホ幅の表示確認が合格した．本番反映と外部再取得は次工程．**
 
