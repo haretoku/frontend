@@ -1,0 +1,48 @@
+{
+  "version": "0.4.1",
+  "approvedCommit": "eb309c3f58b52d5db29e28dc1ead3af8c491894b",
+  "dispatchMethod": "GitHub Actions UI (API dispatch permission 403)",
+  "dispatchAccepted": true,
+  "dispatchedAt": "2026-10-20T07:17:03Z",
+  "rollbackCommit": "1737bb92c27665f7da51aac8d484f443258619fa",
+  "rollbackTag": "v0.4.0",
+  "run": {
+    "id": 39385498758,
+    "url": "https://github.com/haretoku/frontend/actions/runs/39385498758",
+    "status": "completed",
+    "conclusion": "success",
+    "sha": "eb309c3f58b52d5db29e28dc1ead3af8c491894b",
+    "completedAt": "2026-10-20T07:17:41Z"
+  },
+  "release": {
+    "id": 418108939,
+    "url": "https://github.com/haretoku/frontend/releases/tag/v0.4.1",
+    "tag": "v0.4.1",
+    "publishedAt": "2026-10-20T07:21:06Z"
+  },
+  "tagCommit": "eb309c3f58b52d5db29e28dc1ead3af8c491894b",
+  "productionVerification": {
+    "status": "pass",
+    "report": "v041-production-independent-review.md",
+    "files": 112,
+    "canonicalUrls": 31,
+    "unexplainedDifferences": 0
+  },
+  "browserVerification": {
+    "quotesTable": true,
+    "quoteToChecklist": true,
+    "maintenanceToDiagnosis": true,
+    "reloadRestoresExistingState": true,
+    "existingInputsModified": false
+  },
+  "google": {
+    "sitemap": "success-31-urls",
+    "accepted": 8,
+    "deferred": [
+      "solar-electricity-savings",
+      "subsidy-amount"
+    ],
+    "record": "v041-google-updates.json"
+  },
+  "overall": "published-with-google-renotification-and-external-display-followups"
+}
