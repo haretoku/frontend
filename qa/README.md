@@ -4,6 +4,32 @@
 
 リリースごとの適用・判定・報告は[リリースチェックリスト](release-checklist.md)に従う．
 
+## v0.5.1公開候補の検収（2026年10月20日）
+
+> **結論：本人がv0.5.1の公開を承認し，公開前の145検査・標準ビルド・独立レビュー・PC／スマホ幅の表示確認が合格した．本番反映と外部再取得は次工程．**
+
+対象は[11ファイルの識別記録](artifacts/v051-release-candidate-files.json)に固定した原本・生成スクリプト・画像・版番号・仕様．原本・ロゴ・favicon以外の計算・データ・広告・GA・歩き方の実装は不変．既存の`site/hosting/finalize-review.js`と旧未採用画像は公開対象外とする．切戻し先はv0.5.0の`3299e108171f2e81cdbd1ec4b927feb51a6a42cf`．ユーザーの「OK．ではリリースよろしくね．」を公開承認として記録する．
+
+親担当の`pnpm run test:public`は145／145 PASS，`pnpm run build:pages`は112ファイル・31正規URLの検証PASS．[独立レビュー](artifacts/v051-release-independent-review.md)もMUST／RECOMMEND／NITS各0件．既存キャラクターとのバイト一致，原本からの派生再現，固定/favicon.png，全31URLの参照と原本／QAの非混入を独立確認した．親担当は同一画像・同一runtimeの開発版保存90で[PC](artifacts/v051-release-preview-pc.png)と[360×812幅](artifacts/v051-release-preview-mobile.png)のロゴ読込みと表示を自己確認し，横はみ出しなし．実端末確認ではない．元の原本・生成画像の小サイズ確認は直下の開発版検収を再利用する．
+
+P01〜P07・P10は上記でPASS．P08・P09はv0.5.0公開検収の同一広告／GA実装・同一URLのPASSを再利用する．D01〜D04は本番公開後に実施する．E01は広告掲載URL・素材・提携不変のため対象外，E02は公開後TOPの再取得依頼を実施し，E03の実検索アイコンは配信確認と区別する．E04は共有メタ・OG画像不変のため今回の対象外．E05は今回の標準ビルドに非阻害警告なし，E06はCHANGELOGの版・日付・範囲を確認した．
+
+## v0.5.1候補：ハレナ原本と派生素材（2026年10月20日）
+
+> **結論：簡略な太陽図形を撤回し，採用済みのハレナ原本からロゴとfaviconを生成して開発版へ反映した．本番公開は未実施．**
+
+[キャラクター原本](../design/characters/README.md)としてハレナ・博士の採用済み1254×1254透過PNGを無加工で保管した．原本と従来のnavigator.png／professor-chibi.pngはそれぞれSHA-256で一致する．原本を上書きせず，配信用コピーとロゴ用SVG，タブ用SVG，検索用96×96 PNGを生成する．ロゴ用SVGとfaviconは同一画像で，外部画像依存を残さない．光の先端が欠けない表示窓を使用した．原本管理の規則は画面設計・実装方針にも反映した．
+
+16・32・96 pxの[見え方](artifacts/v051-harena-master-sizes.png)を自己確認し，公開用112ファイル・31正規URL，確認用111ファイル・35HTMLのビルド配信検証に合格した．計算・データ・記事内容・操作の変更はなく，全回帰検査の再実行はしていない．Sites保存版90，source commit `c40b2ecb205f8ed4e98eeef43ed629cde29c2e12`，deployment `appgdep_6ad75ad0e53c81918dfca35217d7a452` はsucceeded．認証済みブラウザで[配信PNGの実表示](artifacts/v051-harena-master-deployed.png)を確認した．SVG参照は`/assets/sun-face-BmMVSVLw.svg`でfaviconとロゴに共通する．検索用の固定URL`/favicon.png`は維持した．公開前の独立レビューと本番公開は別工程とする．
+
+## v0.5.1候補：簡略な太陽SVGの旧案（2026年10月20日）
+
+> **結論：保存版88は簡略な太陽SVGを使った旧案であり，本人の指摘により撤回した．下記は履歴として保持し，ハレナ原本を使う保存版90に置き換える．**
+
+`site/map/assets/sun-face.svg`を正本に，`qa/generate-favicon.mjs`でタブ用SVGと96×96 PNGを生成した．SVGは正本とバイト一致．検索用の固定URL `/favicon.png`と既存のHTML参照は維持した．公開用ビルドは112ファイル・31正規URL，確認用ビルドは111ファイル・35HTMLの配信検証に合格．計算・データ・記事本文・操作の変更はなく，この段階で全回帰検査は再実行していない．
+
+16・32・96 pxを[サイズ比較](artifacts/v051-favicon-sizes.png)で自己確認した．開発版TOPのSVG参照は`/assets/favicon-Dl042xAG.svg`，PNGは`/favicon.png`．認証済みブラウザで配信PNGが96×96であることと[実表示](artifacts/v051-favicon-deployed.png)を確認した．Sites保存版88，source commit `9a19d0a3b2d5c974e6ee3db476aec4c4cebb2f65`，deployment `appgdep_6ad758ac7e50819185230edc5a21d9f5` はsucceeded．[開発版](https://haretoku-preview.wordmindblack.chatgpt.site/)に配置し，公開中のv0.5.0は変更していない．ブラウザ・検索側のキャッシュによる反映時差は残る．GoogleのTOP再取得依頼未受理はv0.5.0の残件として継続する．
+
 ## v0.5.0公開と本番検収（2026年10月20日）
 
 > **結論：ユーザーの明示承認でv0.5.0を本番公開し，CI・独立配信検収・本番のPC／スマホ幅操作確認・公開タグ／Releaseを完了した．検索・実共有表示の反映は別に追跡する．**
