@@ -1,0 +1,1625 @@
+{
+  "checkedAt": "2026-10-20T11:45:33.114Z",
+  "productionCommit": "3299e108171f2e81cdbd1ec4b927feb51a6a42cf",
+  "origin": "https://haretoku.jp",
+  "localFiles": 112,
+  "productionFetched": 112,
+  "localArtifactHash": "6008ae651a720ffd95069c66a1736e3be5aeff708f0dd683411a1d375b71587d",
+  "productionArtifactHash": "5492eb33284fc969ebe568c6964a483c2bdc6162a6b99f4f16ca36cfadc49d4c",
+  "httpFailures": [],
+  "transient": [],
+  "comparisonCounts": {
+    "exact": 73,
+    "lineEndingOnly": 21,
+    "lineEndingAndHashedNameOnly": 18
+  },
+  "comparisons": [
+    {
+      "path": "/.nojekyll",
+      "local": "dist-pages/.nojekyll",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "kind": "exact",
+      "localSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "productionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/404.html",
+      "local": "dist-pages/404.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "31701281df54c8651231e63af8dcc1cf21c6a7a0b68b168232fb66cabdcb59b9",
+      "productionSha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f"
+    },
+    {
+      "path": "/CNAME",
+      "local": "dist-pages/CNAME",
+      "status": 200,
+      "contentType": "application/octet-stream",
+      "kind": "exact",
+      "localSha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e",
+      "productionSha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e"
+    },
+    {
+      "path": "/assets/og-guide-disaster-20261019-v3.png",
+      "local": "dist-pages/assets/og-guide-disaster-20261019-v3.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344",
+      "productionSha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344"
+    },
+    {
+      "path": "/assets/og-guide-quotes-contractors-20261019-v2.png",
+      "local": "dist-pages/assets/og-guide-quotes-contractors-20261019-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206",
+      "productionSha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206"
+    },
+    {
+      "path": "/assets/og-guide-solar-economics-20261019-v3.png",
+      "local": "dist-pages/assets/og-guide-solar-economics-20261019-v3.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d",
+      "productionSha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d"
+    },
+    {
+      "path": "/assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "local": "dist-pages/assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "productionSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639"
+    },
+    {
+      "path": "/assets/og-guide-solar-fit-20261019-v4.png",
+      "local": "dist-pages/assets/og-guide-solar-fit-20261019-v4.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11",
+      "productionSha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11"
+    },
+    {
+      "path": "/assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "local": "dist-pages/assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1",
+      "productionSha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1"
+    },
+    {
+      "path": "/assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "local": "dist-pages/assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6",
+      "productionSha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6"
+    },
+    {
+      "path": "/assets/og-guide-subsidies-20261019-v2.png",
+      "local": "dist-pages/assets/og-guide-subsidies-20261019-v2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174",
+      "productionSha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174"
+    },
+    {
+      "path": "/assets/og-guide-subsidy-amount-20261019-v5.png",
+      "local": "dist-pages/assets/og-guide-subsidy-amount-20261019-v5.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "productionSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639"
+    },
+    {
+      "path": "/assets/support-shock-burden.png",
+      "local": "dist-pages/assets/support-shock-burden.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "productionSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+    },
+    {
+      "path": "/assets/support-shock-burden.svg",
+      "local": "dist-pages/assets/support-shock-burden.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496",
+      "productionSha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496"
+    },
+    {
+      "path": "/assets/support-shock-daily.png",
+      "local": "dist-pages/assets/support-shock-daily.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "b5e3df2c4f073963c430db5f609d331569709dd1aa9efdb8c699741a0047139c",
+      "productionSha256": "b5e3df2c4f073963c430db5f609d331569709dd1aa9efdb8c699741a0047139c"
+    },
+    {
+      "path": "/assets/support-shock-daily.svg",
+      "local": "dist-pages/assets/support-shock-daily.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9",
+      "productionSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
+    },
+    {
+      "path": "/assets/support-shock-table-1.csv",
+      "local": "dist-pages/assets/support-shock-table-1.csv",
+      "status": 200,
+      "contentType": "text/csv; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "300fd83c3c70e352c5a23ecaa4cad85801030b74ee044820e8393c69d3295354",
+      "productionSha256": "3cd59ba40672c241a4df274e103e140bce6b0512ca97634d58a1579d7608f452"
+    },
+    {
+      "path": "/assets/support-shock-table-1.png",
+      "local": "dist-pages/assets/support-shock-table-1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "7e4735fac5903543cad047a2fc3026872cd7ac1b5e77442d2fe1e30fe9008547",
+      "productionSha256": "7e4735fac5903543cad047a2fc3026872cd7ac1b5e77442d2fe1e30fe9008547"
+    },
+    {
+      "path": "/assets/support-shock-table-2.csv",
+      "local": "dist-pages/assets/support-shock-table-2.csv",
+      "status": 200,
+      "contentType": "text/csv; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "c1f06657b4aea2f304b89df32b8be575354672429c782bc712d1f9169ca0b789",
+      "productionSha256": "1ae9b340ccbab9a358d8ba0f4129ad052145f0ab9c56330e3ab790a692847e30"
+    },
+    {
+      "path": "/assets/support-shock-table-2.png",
+      "local": "dist-pages/assets/support-shock-table-2.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "fbaea5728a686155181a30b18df8b6d353a7c857827ed86f3fab7d22e2200b2e",
+      "productionSha256": "fbaea5728a686155181a30b18df8b6d353a7c857827ed86f3fab7d22e2200b2e"
+    },
+    {
+      "path": "/assets/support-shock-table-3.csv",
+      "local": "dist-pages/assets/support-shock-table-3.csv",
+      "status": 200,
+      "contentType": "text/csv; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "9b9e694b55e45162b74f1d46f5d46fd2fb6be16163b0a8b10f4d607ee41f1863",
+      "productionSha256": "2ad3b75374f1a8ce5c938142f9cce0f275bb12f423f413c0063a20af7ed95ef0"
+    },
+    {
+      "path": "/assets/support-shock-table-3.png",
+      "local": "dist-pages/assets/support-shock-table-3.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "01247c2f6d2b1e617288497d3a7a196e2a5b3a37c69b1ee657ecc5f6017f09ff",
+      "productionSha256": "01247c2f6d2b1e617288497d3a7a196e2a5b3a37c69b1ee657ecc5f6017f09ff"
+    },
+    {
+      "path": "/assets/support-shock-table-4.csv",
+      "local": "dist-pages/assets/support-shock-table-4.csv",
+      "status": 200,
+      "contentType": "text/csv; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "88dbbe45fd3feac5756d2c09fb4b2429c5c55c3c12e62f93e312c277bffc9d93",
+      "productionSha256": "242d91dcb04db0e35653ca80cb16326def5181e3aa28dc67d4c43c74a0732ac6"
+    },
+    {
+      "path": "/assets/support-shock-table-4.png",
+      "local": "dist-pages/assets/support-shock-table-4.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "e9d5101331c383b444cb63f7a4d92e514717d3647376a17ae0b8bdd038dcaadf",
+      "productionSha256": "e9d5101331c383b444cb63f7a4d92e514717d3647376a17ae0b8bdd038dcaadf"
+    },
+    {
+      "path": "/data/index.html",
+      "local": "dist-pages/data/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "2d11922db707f4beefd22eebe195c1f60204c0a6662e0df09df8d6a4d15344b5",
+      "productionSha256": "e80a2c5c4293073411551df64527ed26d4b87b70715e8134b664d117aff55169"
+    },
+    {
+      "path": "/data/subsidies/index.html",
+      "local": "dist-pages/data/subsidies/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "f49c40317a88583c6a4d033666c798cf3120f26ecf1a2ed08b2fce9add186f73",
+      "productionSha256": "5b4db6e495a2e8eaa327158f4d87d61bbd735741b519a5b65831a0eecf36c675"
+    },
+    {
+      "path": "/favicon.png",
+      "local": "dist-pages/favicon.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "d7520a042a9ad66ca04c7d82ead19a3e49a83c9d59c22763bfd3a74b34b17a5c",
+      "productionSha256": "d7520a042a9ad66ca04c7d82ead19a3e49a83c9d59c22763bfd3a74b34b17a5c"
+    },
+    {
+      "path": "/guides/choosing-installer/index.html",
+      "local": "dist-pages/guides/choosing-installer/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "ad7de66a82728b5cf1999603cff87586bd9148f92344fa17924a0b9fd3424bf2",
+      "productionSha256": "c9ef180c89b76f2c4d31eaa0dc02e83c873754c9d1aaf85beb030afef491edda"
+    },
+    {
+      "path": "/guides/consultation-preparation/index.html",
+      "local": "dist-pages/guides/consultation-preparation/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "1d38b5879fa3bd9857e475ff421855666b2868fdddcebfe0f073fa899df60853",
+      "productionSha256": "44bd438bc33a85ee57a5e62fd7898ce07aef6f69a7fbed115e3d41ab0d6b58c4"
+    },
+    {
+      "path": "/guides/disaster-preparedness/index.html",
+      "local": "dist-pages/guides/disaster-preparedness/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "132e0afedaa1ce3d3cdd5378be39b3245ef33b718a27b62f085b5fb2e0f963b4",
+      "productionSha256": "70e8e266d0f7c6efc3a23211e4d7bfa605410cd7d0d70e88c6f14ad120e8a27b"
+    },
+    {
+      "path": "/guides/disaster/index.html",
+      "local": "dist-pages/guides/disaster/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "4897dd36ffc35878e4150564f5f5f4313b31906601f1eb9a2fe73bd98a656cb8",
+      "productionSha256": "727654d9f0b7fae4ceac1349c5c7600e087d27ebe198cec5e79a548741ae1a86"
+    },
+    {
+      "path": "/guides/electricity-support-end/index.html",
+      "local": "dist-pages/guides/electricity-support-end/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "bf005141734735a3652fccda45b968e3110f300081c527129e02420311195adc",
+      "productionSha256": "17126724f85b410a33d767ee2811bdae434a1362d8013c9e13f435848f67733f"
+    },
+    {
+      "path": "/guides/equipment-maintenance/index.html",
+      "local": "dist-pages/guides/equipment-maintenance/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "e9e0fb16f4896efe7ecdbb6be870ef3e70018b7c8d34af7db7e9c547b2a9aca2",
+      "productionSha256": "feb99370066d99d0d98136c3ccb175ddf2e06bd32d19d62fcbffbe187db72c0e"
+    },
+    {
+      "path": "/guides/home-battery/index.html",
+      "local": "dist-pages/guides/home-battery/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "9efd905c99562146529e82c5b9ebf6665f87f46694813bdd56624924fc458348",
+      "productionSha256": "45a41563a780926fcc445d87553d7eefeea48608f667af9e433ba4f678d2dc99"
+    },
+    {
+      "path": "/guides/home-survey/index.html",
+      "local": "dist-pages/guides/home-survey/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "9b806c604007a617ea1bf7d30b28ae6f4f004716262c4b4a5a0f595aa229ec1b",
+      "productionSha256": "aa7808dcec218b598647d03fdf777b463cbe1411db6174a2b7ce749de597f5a8"
+    },
+    {
+      "path": "/guides/index.html",
+      "local": "dist-pages/guides/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "7e890f5525e7940c3d0f69e312eba5213a8ccdf2b0d1f8a5e6c9da2497fa9b07",
+      "productionSha256": "06658e8269a09613beebf03311eb6b94ce699630fd7659cc8b056dee1631ad4e"
+    },
+    {
+      "path": "/guides/installation-process/index.html",
+      "local": "dist-pages/guides/installation-process/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "a3fd106931196f70533a5bdbe1b7d5d789bad9c151a8fb71c2142f08d188fb5e",
+      "productionSha256": "3c212f9e8d4b29bb97704a78cc061a968fdb3625bbbbb5fb54dd867b558c385f"
+    },
+    {
+      "path": "/guides/power-outage/index.html",
+      "local": "dist-pages/guides/power-outage/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "805519031223eeae00505713adac19724b8f23cc07919e078c4550bbf64b4f8f",
+      "productionSha256": "5076098ee8df158097d66bc091050f8db880d201fabbd68c4a0fa3fae16f2641"
+    },
+    {
+      "path": "/guides/quote-services/index.html",
+      "local": "dist-pages/guides/quote-services/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "b0376c1aae9645f80898461bb25108d896b3449d0dce25af363b843b0c127ab0",
+      "productionSha256": "407f9f9500f7c37e28e6ae8f826e9708ed101b29d1acbcb139086def0384f5c6"
+    },
+    {
+      "path": "/guides/quotes-contractors/index.html",
+      "local": "dist-pages/guides/quotes-contractors/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "e9b97a21152597252e303d94b5c7f9fec14f8238f67038fc7272fd479b416ebc",
+      "productionSha256": "99837596e15d11c3e73946ddb4b4ede75c4bdf0f940e8a568961bf430dc9d137"
+    },
+    {
+      "path": "/guides/self-consumption/index.html",
+      "local": "dist-pages/guides/self-consumption/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "a67ce7225000fd4fb745bc410dc6d4da77669785f9068151648b0a005a177dbb",
+      "productionSha256": "e24f85a67c0c9b0a5ec929cf59edbe27114c43f9355f53c792acae702deacdab"
+    },
+    {
+      "path": "/guides/solar-benefits/index.html",
+      "local": "dist-pages/guides/solar-benefits/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "f79ec6c408e5803b9d4b5e4b20f693f2cd5f7efb467bae820a6e0223f60e2ae9",
+      "productionSha256": "7326a9a22016cb0a5adf62fe82cbf3e45b4d9182aab777a0c4fd705c6d711556"
+    },
+    {
+      "path": "/guides/solar-consultation/index.html",
+      "local": "dist-pages/guides/solar-consultation/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "1e2cd7b6bfd4acb283d1529e5022dad0df178d999f0365abd28c3ab5e8b7c941",
+      "productionSha256": "82cb586610ccb8cbdbbde3e5546d84d8bf25e00306272b900b2ad10d7ccc52c6"
+    },
+    {
+      "path": "/guides/solar-costs/index.html",
+      "local": "dist-pages/guides/solar-costs/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "b96013c0fcfd2e1550aaa247176f0eea118d4c614d79bfc27facdd95b661e16c",
+      "productionSha256": "076b45eee719beb6e5feeb0dcad227efd42b7aabdacb76c8b6004266cc4c679b"
+    },
+    {
+      "path": "/guides/solar-economics/index.html",
+      "local": "dist-pages/guides/solar-economics/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "3e5cc369d9435fe3a59ba60ba294ed4ed02fde3122061ba74664ad507d83c8fd",
+      "productionSha256": "9c54dd2f9d3fe6eea968ae1b7d49c55ef72696bc960961bb63ff01b1f9ae9c1b"
+    },
+    {
+      "path": "/guides/solar-electricity-savings/index.html",
+      "local": "dist-pages/guides/solar-electricity-savings/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "e1c0f58c0ecd8fb085fee56eaf85c8ccbb10e54ea5d14e125030dd1099b9fed2",
+      "productionSha256": "ff09cef98ee993b38df82083a891dbce459bc3ef73da17ab1767afd135fa0301"
+    },
+    {
+      "path": "/guides/solar-fit/index.html",
+      "local": "dist-pages/guides/solar-fit/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "eb2b1e79d0d8abdacef7406ce893f825d29c579c99a4bf907075a388dbcd3645",
+      "productionSha256": "56f8d79b9f5cf125c89918127ea1e4c2af1c1cc9f39a4a9f6d3f79ef701a9bfa"
+    },
+    {
+      "path": "/guides/solar-installation-cost/index.html",
+      "local": "dist-pages/guides/solar-installation-cost/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "5dd92546e80115bf6b02a1e5d2a0b9dc324f5ee57825c34800616e87666b90ea",
+      "productionSha256": "5dd92546e80115bf6b02a1e5d2a0b9dc324f5ee57825c34800616e87666b90ea"
+    },
+    {
+      "path": "/guides/solar-living/index.html",
+      "local": "dist-pages/guides/solar-living/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "aa089401587b9bc50c4bcd26b504d60b0097fee2bf24dbda2d8334fd833f4dbe",
+      "productionSha256": "247af0568e918f0e18cca01c9a612317b428ad7d2a647eb10e19a5abe0fb8881"
+    },
+    {
+      "path": "/guides/solar-maintenance-cost/index.html",
+      "local": "dist-pages/guides/solar-maintenance-cost/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "0c2c8862ebe5b5d69e9c8d426bce242d3b5344447d1162c9b9256c52e4bc93b1",
+      "productionSha256": "2ffc77fe19e72063ab8a366b2c942d0e1f87c147347be60050d020b29af91b78"
+    },
+    {
+      "path": "/guides/subsidies/index.html",
+      "local": "dist-pages/guides/subsidies/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "dfe1a42c170550e554315696f627b69b5ac724d4a72192c32ea614a6937e1d0e",
+      "productionSha256": "239c2f9527869959694c31362594c77611908d09f762f8074d2aeeca15c6bf31"
+    },
+    {
+      "path": "/guides/subsidy-amount/index.html",
+      "local": "dist-pages/guides/subsidy-amount/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "78a1eec8c42c7172b1ab65b1f1db3dffbb04667adba5433159e043fcf74435cb",
+      "productionSha256": "536c8b198705a195941e9d7835173178a5a403cba409e91a53996f9e96f1e0ab"
+    },
+    {
+      "path": "/guides/welcome/index.html",
+      "local": "dist-pages/guides/welcome/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "e00904d6fa790267652db1e9fe08710f2d8bfb2b03b53b48d08ca3fb3bc4f26f",
+      "productionSha256": "6e0c41a8b309a720ca52f9b55a117d72da057cafc53f79bbce99d6968eb606db"
+    },
+    {
+      "path": "/index.html",
+      "local": "dist-pages/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "89401e2f3545387c6f353c766337e8de553843af0452f29bb9c3b4ef8fc7d3d3",
+      "productionSha256": "927abc2464697b964e8b941d257ac5e3ff4ee89013ad7dff4c3cb4bf737e3df5"
+    },
+    {
+      "path": "/og-home-photo-20260926.jpg",
+      "local": "dist-pages/og-home-photo-20260926.jpg",
+      "status": 200,
+      "contentType": "image/jpeg",
+      "kind": "exact",
+      "localSha256": "bcbda55c0c9fa8bd840891ab9ee21f57383736376c3936f83029a64d3a035e62",
+      "productionSha256": "bcbda55c0c9fa8bd840891ab9ee21f57383736376c3936f83029a64d3a035e62"
+    },
+    {
+      "path": "/og-image.png",
+      "local": "dist-pages/og-image.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "productionSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04"
+    },
+    {
+      "path": "/og-self-consumption-v040.png",
+      "local": "dist-pages/og-self-consumption-v040.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c",
+      "productionSha256": "0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c"
+    },
+    {
+      "path": "/og-step-map-20261017-v034.png",
+      "local": "dist-pages/og-step-map-20261017-v034.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "productionSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04"
+    },
+    {
+      "path": "/og-step-map-20261017.png",
+      "local": "dist-pages/og-step-map-20261017.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "productionSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04"
+    },
+    {
+      "path": "/og-support-shock-burden.png",
+      "local": "dist-pages/og-support-shock-burden.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "productionSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+    },
+    {
+      "path": "/pages/calculation-method.html",
+      "local": "dist-pages/pages/calculation-method.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "a8733ff313bdca4dfb7de0f5f27bcd090e64d0412c5a8aca3bca71c22bc36303",
+      "productionSha256": "35f88385e306e5607dd463fb07387c289c5152c1f3e9e77c496ba252df2c6e50"
+    },
+    {
+      "path": "/pages/policy.html",
+      "local": "dist-pages/pages/policy.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "c4eec87aebbc7a238cc72e2f6cc82c9eafa4b89617fdf9e9ed6afad63ceefeb4",
+      "productionSha256": "19fa67e1b2a98f54d3c961e8c3c5d6850c17c222a8db59067c20ab85417ca436"
+    },
+    {
+      "path": "/press/index.html",
+      "local": "dist-pages/press/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingOnly",
+      "localSha256": "82ab6b4e7c6a71e61aaf88a65a7caec26805f6fa825c55dadc23656716d6d60d",
+      "productionSha256": "29aec7c588a928085fc8e5f664dec19788eba173130d1ff7d0adef867392a805"
+    },
+    {
+      "path": "/robots.txt",
+      "local": "dist-pages/robots.txt",
+      "status": 200,
+      "contentType": "text/plain; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "5eb08d7202a7815316a495e465625a5b27d854def0a3c65fd2b297643bc62de6",
+      "productionSha256": "5eb08d7202a7815316a495e465625a5b27d854def0a3c65fd2b297643bc62de6"
+    },
+    {
+      "path": "/simulator/index.html",
+      "local": "dist-pages/simulator/index.html",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "b422b318deff82322220754e8a9f28a0e14260a7dbf397b10384691c5dcb21f6",
+      "productionSha256": "9e6dce8fe668b7067a4a7004c44c41cdbcadb6b70fc6fe833394c7188499206f"
+    },
+    {
+      "path": "/sitemap.xml",
+      "local": "dist-pages/sitemap.xml",
+      "status": 200,
+      "contentType": "application/xml",
+      "kind": "exact",
+      "localSha256": "ffb0506130a5edd4517687635c476390160aa77b086e6f3650a2321308a8fce5",
+      "productionSha256": "ffb0506130a5edd4517687635c476390160aa77b086e6f3650a2321308a8fce5"
+    },
+    {
+      "path": "/assets/favicon-Cps3Me14.svg",
+      "local": "dist-pages/assets/favicon-Cps3Me14.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "41b6d9de70d9406089f6f85cb3fb1dbdc698d01b1297e5a2393c0bc66bbd6bcf",
+      "productionSha256": "41b6d9de70d9406089f6f85cb3fb1dbdc698d01b1297e5a2393c0bc66bbd6bcf"
+    },
+    {
+      "path": "/assets/entry-CRZPMldm.js",
+      "local": "dist-pages/assets/entry-CRZPMldm.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "61945855a7925b51799ec843c6f0b1614309fba875ee38de72146cdaf7f7c660",
+      "productionSha256": "61945855a7925b51799ec843c6f0b1614309fba875ee38de72146cdaf7f7c660"
+    },
+    {
+      "path": "/assets/site-header-entry-Dvlt3RRH.js",
+      "local": "dist-pages/assets/site-header-entry-Dvlt3RRH.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "72373e7f2d3b2eef81c11b673bdf39dc14446952598d5124a044baa8c264773d",
+      "productionSha256": "72373e7f2d3b2eef81c11b673bdf39dc14446952598d5124a044baa8c264773d"
+    },
+    {
+      "path": "/assets/article-Bj71asNy.css",
+      "local": "dist-pages/assets/article-Bj71asNy.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3",
+      "productionSha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3"
+    },
+    {
+      "path": "/assets/entry-CXfehw0n.css",
+      "local": "dist-pages/assets/entry-CXfehw0n.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "37d1300d1fec68583bbb55b024f178151fc8d63365558ca5ec0f9ceb80004747",
+      "productionSha256": "37d1300d1fec68583bbb55b024f178151fc8d63365558ca5ec0f9ceb80004747"
+    },
+    {
+      "path": "/assets/analytics-CMcOERSm.js",
+      "local": "dist-pages/assets/analytics-CMcOERSm.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "0ad45aafb87c36cf99180a08042c1e182ba1117639a5181bfa5b1053ebc753f4",
+      "productionSha256": "0ad45aafb87c36cf99180a08042c1e182ba1117639a5181bfa5b1053ebc753f4"
+    },
+    {
+      "path": "/assets/data-CTlfnS1N.css",
+      "local": "dist-pages/assets/data-CTlfnS1N.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "dbd066ce8683ce1e6fa86e1232d85438b8f44281e068ec078464dd4a46419c7b",
+      "productionSha256": "dbd066ce8683ce1e6fa86e1232d85438b8f44281e068ec078464dd4a46419c7b"
+    },
+    {
+      "path": "/assets/data-subsidies-index-BVRGhVyw.js",
+      "local": "dist-pages/assets/data-subsidies-index-BVRGhVyw.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "36f742de57287f97e1d67234a4a1852231586643b2a4008e67d0ac9374ce909e",
+      "productionSha256": "36f742de57287f97e1d67234a4a1852231586643b2a4008e67d0ac9374ce909e"
+    },
+    {
+      "path": "/assets/data-loader-_UALgZOL.js",
+      "local": "dist-pages/assets/data-loader-_UALgZOL.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117",
+      "productionSha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117"
+    },
+    {
+      "path": "/assets/retained-diagnostic-display-DOTGF6p4.js",
+      "local": "dist-pages/assets/retained-diagnostic-display-DOTGF6p4.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48",
+      "productionSha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48"
+    },
+    {
+      "path": "/assets/journey-CePVgnBL.js",
+      "local": "dist-pages/assets/journey-Dbednyri.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "lineEndingAndHashedNameOnly",
+      "localSha256": "dd9a7991346cb85de190f36c78a4761647beec0e474cdf6aa0e8f9cb49a97de8",
+      "productionSha256": "263d7400ba68195b020ea8079fed3d7e23a62573fb8cb064fde628b2a4a2cf81"
+    },
+    {
+      "path": "/assets/journey-D3L5ICk6.css",
+      "local": "dist-pages/assets/journey-D3L5ICk6.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "7045dfb576f526e3dea42aa681191d0ef6a5eedfb54270460c142336cbf5c43e",
+      "productionSha256": "7045dfb576f526e3dea42aa681191d0ef6a5eedfb54270460c142336cbf5c43e"
+    },
+    {
+      "path": "/assets/navigator-C6wSog06.png",
+      "local": "dist-pages/assets/navigator-C6wSog06.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "1cfc6cd08c52ee36e60d4f37261ce6b219112a9c731658c6de191118d5e544fb",
+      "productionSha256": "1cfc6cd08c52ee36e60d4f37261ce6b219112a9c731658c6de191118d5e544fb"
+    },
+    {
+      "path": "/assets/professor-chibi-BwE1xmLE.png",
+      "local": "dist-pages/assets/professor-chibi-BwE1xmLE.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "cd752bd66b6710e403c69cd9756c6cbf00ac5a1c459ae3d39052fbc14e01f069",
+      "productionSha256": "cd752bd66b6710e403c69cd9756c6cbf00ac5a1c459ae3d39052fbc14e01f069"
+    },
+    {
+      "path": "/assets/contractor-checksheet-DmgL5J0n.pdf",
+      "local": "dist-pages/assets/contractor-checksheet-DmgL5J0n.pdf",
+      "status": 200,
+      "contentType": "application/pdf",
+      "kind": "exact",
+      "localSha256": "83816ce8cadaa141db74d06ea694987379eeabe4144d9a9e4ee7fe1b05177c70",
+      "productionSha256": "83816ce8cadaa141db74d06ea694987379eeabe4144d9a9e4ee7fe1b05177c70"
+    },
+    {
+      "path": "/assets/detail-guide-figures-DVnpR0PL.css",
+      "local": "dist-pages/assets/detail-guide-figures-DVnpR0PL.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "c7a7cb443b5a836f94dc535d2a15785c89fefc5340a95577e7a9859ec01c4b97",
+      "productionSha256": "c7a7cb443b5a836f94dc535d2a15785c89fefc5340a95577e7a9859ec01c4b97"
+    },
+    {
+      "path": "/assets/guides-electricity-support-end-index-CBZ06Ruk.js",
+      "local": "dist-pages/assets/guides-electricity-support-end-index-CBZ06Ruk.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "7de76614a91b2ecfaa2482eeae44805c3e9d76094e8402dcfe4d2431c29703cc",
+      "productionSha256": "7de76614a91b2ecfaa2482eeae44805c3e9d76094e8402dcfe4d2431c29703cc"
+    },
+    {
+      "path": "/assets/table-scroll-hint-BMcEuJb1.js",
+      "local": "dist-pages/assets/table-scroll-hint-BMcEuJb1.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "882f10fd344a6f62c7e4598ea9510426986e7ce092d8b95adacba06cd74af71a",
+      "productionSha256": "882f10fd344a6f62c7e4598ea9510426986e7ce092d8b95adacba06cd74af71a"
+    },
+    {
+      "path": "/assets/guides-electricity-support-end-index-DK-szL2n.css",
+      "local": "dist-pages/assets/guides-electricity-support-end-index-DK-szL2n.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b",
+      "productionSha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b"
+    },
+    {
+      "path": "/assets/support-shock-daily-compact-DPcvJas5.svg",
+      "local": "dist-pages/assets/support-shock-daily-compact-DPcvJas5.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4",
+      "productionSha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4"
+    },
+    {
+      "path": "/assets/support-shock-daily-DdFQA0Ah.svg",
+      "local": "dist-pages/assets/support-shock-daily-DdFQA0Ah.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9",
+      "productionSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
+    },
+    {
+      "path": "/assets/guides-B5A5_2_U.js",
+      "local": "dist-pages/assets/guides-B5A5_2_U.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "3236da537f792795901de1e87c62d99dad64f0e13c54176f11a607101fd0d737",
+      "productionSha256": "3236da537f792795901de1e87c62d99dad64f0e13c54176f11a607101fd0d737"
+    },
+    {
+      "path": "/assets/guides-BVDjwsHs.css",
+      "local": "dist-pages/assets/guides-BVDjwsHs.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "3e4f6c23b67a4cd0908fc36a6a30230ba7cedd7b854e24de4187f42d9915ebb8",
+      "productionSha256": "3e4f6c23b67a4cd0908fc36a6a30230ba7cedd7b854e24de4187f42d9915ebb8"
+    },
+    {
+      "path": "/assets/solar-partners-D00TnDtz.png",
+      "local": "dist-pages/assets/solar-partners-D00TnDtz.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39",
+      "productionSha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39"
+    },
+    {
+      "path": "/assets/tainavi-BIkDNw0f.webp",
+      "local": "dist-pages/assets/tainavi-BIkDNw0f.webp",
+      "status": 200,
+      "contentType": "image/webp",
+      "kind": "exact",
+      "localSha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83",
+      "productionSha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83"
+    },
+    {
+      "path": "/assets/guides-self-consumption-index-CVZawU3t.css",
+      "local": "dist-pages/assets/guides-self-consumption-index-CVZawU3t.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "1379e358e85496a49f25b3d4b390c062295346331f442724e48977ca22b93087",
+      "productionSha256": "1379e358e85496a49f25b3d4b390c062295346331f442724e48977ca22b93087"
+    },
+    {
+      "path": "/assets/guides-solar-economics-index-CMvQrjsJ.css",
+      "local": "dist-pages/assets/guides-solar-economics-index-CMvQrjsJ.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "29715262bf59b85406fe57a41ed96e49263b8392d569638105208ef2eab71203",
+      "productionSha256": "29715262bf59b85406fe57a41ed96e49263b8392d569638105208ef2eab71203"
+    },
+    {
+      "path": "/assets/article-solar-economics-cumulative-compact-CIGTExUV.svg",
+      "local": "dist-pages/assets/article-solar-economics-cumulative-compact-CIGTExUV.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7",
+      "productionSha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7"
+    },
+    {
+      "path": "/assets/article-solar-economics-cumulative-DefzOuOL.svg",
+      "local": "dist-pages/assets/article-solar-economics-cumulative-DefzOuOL.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "exact",
+      "localSha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6",
+      "productionSha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6"
+    },
+    {
+      "path": "/assets/guides-solar-electricity-savings-index-KaY4wo2D.css",
+      "local": "dist-pages/assets/guides-solar-electricity-savings-index-KaY4wo2D.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "3e78e2beb4fe8cbb661bee9d8f363185f74cd8778f024a9196926d2305c80053",
+      "productionSha256": "3e78e2beb4fe8cbb661bee9d8f363185f74cd8778f024a9196926d2305c80053"
+    },
+    {
+      "path": "/assets/guides-solar-installation-cost-index-D_gosE4s.css",
+      "local": "dist-pages/assets/guides-solar-installation-cost-index-D_gosE4s.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "42145e12bf5cf681791e88ea99e71c68e3a015030492efca18c6bf1360e60e83",
+      "productionSha256": "42145e12bf5cf681791e88ea99e71c68e3a015030492efca18c6bf1360e60e83"
+    },
+    {
+      "path": "/assets/guides-solar-maintenance-cost-index-BfX-UV_h.css",
+      "local": "dist-pages/assets/guides-solar-maintenance-cost-index-BfX-UV_h.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "715f9e1f08843c1f14b1a845327a8c1e573d29231103edafd7aa83c53ccb2dd9",
+      "productionSha256": "715f9e1f08843c1f14b1a845327a8c1e573d29231103edafd7aa83c53ccb2dd9"
+    },
+    {
+      "path": "/assets/harena-rooftops-Cwq_PN9m.png",
+      "local": "dist-pages/assets/harena-rooftops-Cwq_PN9m.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4",
+      "productionSha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4"
+    },
+    {
+      "path": "/assets/pawn-male-DkOsVmn1.png",
+      "local": "dist-pages/assets/pawn-male-DkOsVmn1.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "0917d1153746e74958ff6d355c8620d5cfb1be813e9d345220613243b92e8de2",
+      "productionSha256": "0917d1153746e74958ff6d355c8620d5cfb1be813e9d345220613243b92e8de2"
+    },
+    {
+      "path": "/assets/pawn-female-DSZs4HJW.png",
+      "local": "dist-pages/assets/pawn-female-DSZs4HJW.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "31ce7412569c8f367062b5ee47c4ca9900a5f05db9be54465e9d928525b00c6b",
+      "productionSha256": "31ce7412569c8f367062b5ee47c4ca9900a5f05db9be54465e9d928525b00c6b"
+    },
+    {
+      "path": "/assets/pages-calculation-method-DXaFHnEZ.js",
+      "local": "dist-pages/assets/pages-calculation-method-DXaFHnEZ.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "bcf9895fb34df63a42f0ac79b29ff5afce97b6724285c54bd49dde9bb2b2a40d",
+      "productionSha256": "bcf9895fb34df63a42f0ac79b29ff5afce97b6724285c54bd49dde9bb2b2a40d"
+    },
+    {
+      "path": "/assets/pages-calculation-method-FO3eh5vu.css",
+      "local": "dist-pages/assets/pages-calculation-method-FO3eh5vu.css",
+      "status": 200,
+      "contentType": "text/css; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9",
+      "productionSha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9"
+    },
+    {
+      "path": "/assets/og-guide-self-consumption-20261018.png",
+      "local": "dist-pages/assets/og-guide-self-consumption-20261018.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48",
+      "productionSha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48"
+    },
+    {
+      "path": "/assets/hare-display-table-GvQlwHhJ.json",
+      "local": "dist-pages/assets/hare-display-table-GvQlwHhJ.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff",
+      "productionSha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff"
+    },
+    {
+      "path": "/assets/hare-display-binding-ByES3t9O.json",
+      "local": "dist-pages/assets/hare-display-binding-ByES3t9O.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a",
+      "productionSha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a"
+    },
+    {
+      "path": "/assets/public-data-CZscpcC-.json",
+      "local": "dist-pages/assets/public-data-CZscpcC-.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23",
+      "productionSha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23"
+    },
+    {
+      "path": "/assets/metadata-D8VIoK63.json",
+      "local": "dist-pages/assets/metadata-D8VIoK63.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd",
+      "productionSha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd"
+    },
+    {
+      "path": "/assets/title-art-DaW-V9L4.svg",
+      "local": "dist-pages/assets/title-art-CxXD5rU-.svg",
+      "status": 200,
+      "contentType": "image/svg+xml",
+      "kind": "lineEndingOnly",
+      "localSha256": "52c3887d06417cebde6c54c813a0c686f9e7a618b8e134eb51c7b5c9d00344dc",
+      "productionSha256": "c996ba2c758ed645f16e619b20a37ee189d5ee4f7d85a9fc1dcf7823c18881f9"
+    },
+    {
+      "path": "/assets/support-shock-burden-CfPq4i2Y.png",
+      "local": "dist-pages/assets/support-shock-burden-CfPq4i2Y.png",
+      "status": 200,
+      "contentType": "image/png",
+      "kind": "exact",
+      "localSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "productionSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+    },
+    {
+      "path": "/assets/diagnostic-display-table-E4yzT3FH.json",
+      "local": "dist-pages/assets/diagnostic-display-table-E4yzT3FH.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7",
+      "productionSha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7"
+    },
+    {
+      "path": "/assets/diagnostic-display-binding-CKdfZiu5.json",
+      "local": "dist-pages/assets/diagnostic-display-binding-CKdfZiu5.json",
+      "status": 200,
+      "contentType": "application/json; charset=utf-8",
+      "kind": "exact",
+      "localSha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919",
+      "productionSha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919"
+    }
+  ],
+  "unmapped": [],
+  "localUnused": [],
+  "canonical": [
+    {
+      "path": "/guides/welcome/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/welcome/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "あなたの家に合うか，一つずつ確かめよう．｜はれトク",
+      "ogTitle": "あなたの家に合うか，一つずつ確かめよう．｜はれトク"
+    },
+    {
+      "path": "/guides/solar-benefits/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-benefits/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光で，電気代の節約と停電への備え．｜はれトク",
+      "ogTitle": "太陽光で，電気代の節約と停電への備え．｜はれトク"
+    },
+    {
+      "path": "/guides/solar-costs/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-costs/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光パネルには，どんなお金がかかる？｜はれトク",
+      "ogTitle": "太陽光パネルには，どんなお金がかかる？｜はれトク"
+    },
+    {
+      "path": "/simulator/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/simulator/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "わが家では，どのくらい得になりそう？｜はれトク",
+      "ogTitle": "わが家では，どのくらい得になりそう？｜はれトク"
+    },
+    {
+      "path": "/guides/solar-living/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-living/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光パネルで，暮らしはどう変わる？｜はれトク",
+      "ogTitle": "太陽光パネルで，暮らしはどう変わる？｜はれトク"
+    },
+    {
+      "path": "/guides/home-battery/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/home-battery/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "蓄電池を入れると，何が変わる？｜はれトク",
+      "ogTitle": "蓄電池を入れると，何が変わる？｜はれトク"
+    },
+    {
+      "path": "/guides/equipment-maintenance/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/equipment-maintenance/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "使い続けるには，どんな手入れがいる？｜はれトク",
+      "ogTitle": "使い続けるには，どんな手入れがいる？｜はれトク"
+    },
+    {
+      "path": "/guides/power-outage/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/power-outage/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "停電したとき，どこまで使える？｜はれトク",
+      "ogTitle": "停電したとき，どこまで使える？｜はれトク"
+    },
+    {
+      "path": "/guides/disaster-preparedness/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/disaster-preparedness/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "災害にはどう備え，壊れたらどうする？｜はれトク",
+      "ogTitle": "災害にはどう備え，壊れたらどうする？｜はれトク"
+    },
+    {
+      "path": "/guides/consultation-preparation/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/consultation-preparation/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "相談に向けて，今の希望を考えてみよう．｜はれトク",
+      "ogTitle": "相談に向けて，今の希望を考えてみよう．｜はれトク"
+    },
+    {
+      "path": "/guides/home-survey/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/home-survey/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "自宅を見てもらい，見積もりを取ろう．｜はれトク",
+      "ogTitle": "自宅を見てもらい，見積もりを取ろう．｜はれトク"
+    },
+    {
+      "path": "/guides/installation-process/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/installation-process/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "納得して契約し，工事と引渡しへ進もう．｜はれトク",
+      "ogTitle": "納得して契約し，工事と引渡しへ進もう．｜はれトク"
+    },
+    {
+      "path": "/guides/solar-consultation/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-consultation/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "どこに相談すればいい？｜はれトク",
+      "ogTitle": "どこに相談すればいい？｜はれトク"
+    },
+    {
+      "path": "/guides/quote-services/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/quote-services/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "一括見積もりサイトは，どう選ぶ？｜はれトク",
+      "ogTitle": "一括見積もりサイトは，どう選ぶ？｜はれトク"
+    },
+    {
+      "path": "/guides/choosing-installer/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/choosing-installer/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "良い施工会社はどう選ぶ？｜はれトク",
+      "ogTitle": "良い施工会社はどう選ぶ？｜はれトク"
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "はれトク｜わが家の太陽光・蓄電池えらび",
+      "ogTitle": "はれトク｜わが家の太陽光・蓄電池えらび"
+    },
+    {
+      "path": "/guides/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "はれトクガイド｜住宅用太陽光の記事一覧",
+      "ogTitle": "はれトクガイド｜住宅用太陽光の記事一覧"
+    },
+    {
+      "path": "/press/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/press/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "プレスリリース｜はれトク",
+      "ogTitle": "プレスリリース｜はれトク"
+    },
+    {
+      "path": "/guides/self-consumption/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/self-consumption/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光の電気は，売るのと自宅で使うの，どちらがお得？｜はれトク",
+      "ogTitle": "太陽光の電気は，売るのと自宅で使うの，どちらがお得？｜はれトク"
+    },
+    {
+      "path": "/guides/solar-economics/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-economics/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光の収支は，何で決まる？｜はれトク",
+      "ogTitle": "太陽光の収支は，何で決まる？｜はれトク"
+    },
+    {
+      "path": "/guides/subsidies/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/subsidies/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "補助金は，どう探してどう申請する？｜はれトク",
+      "ogTitle": "補助金は，どう探してどう申請する？｜はれトク"
+    },
+    {
+      "path": "/guides/disaster/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/disaster/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "停電時，太陽光・蓄電池で何ができる？｜はれトク",
+      "ogTitle": "停電時，太陽光・蓄電池で何ができる？｜はれトク"
+    },
+    {
+      "path": "/guides/quotes-contractors/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/quotes-contractors/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光の見積もりは，何を比べる？｜はれトク",
+      "ogTitle": "太陽光の見積もりは，何を比べる？｜はれトク"
+    },
+    {
+      "path": "/guides/solar-electricity-savings/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-electricity-savings/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光で，電気代はどれくらい減る？｜はれトク",
+      "ogTitle": "太陽光で，電気代はどれくらい減る？｜はれトク"
+    },
+    {
+      "path": "/guides/solar-fit/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-fit/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "FIT制度とは？住宅用太陽光の売電価格・手続き・終了後｜はれトク",
+      "ogTitle": "FIT制度とは？住宅用太陽光の売電価格・手続き・終了後｜はれトク"
+    },
+    {
+      "path": "/guides/solar-installation-cost/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-installation-cost/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光の設置費は，何にいくらかかる？｜はれトク",
+      "ogTitle": "太陽光の設置費は，何にいくらかかる？｜はれトク"
+    },
+    {
+      "path": "/guides/solar-maintenance-cost/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-maintenance-cost/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "太陽光の維持費は，何にいくらかかる？｜はれトク",
+      "ogTitle": "太陽光の維持費は，何にいくらかかる？｜はれトク"
+    },
+    {
+      "path": "/guides/subsidy-amount/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/subsidy-amount/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "補助金で，自己負担はどれくらい減る？｜はれトク",
+      "ogTitle": "補助金で，自己負担はどれくらい減る？｜はれトク"
+    },
+    {
+      "path": "/guides/electricity-support-end/",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/electricity-support-end/",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "2026年11月分から電気代支援終了，太陽光・蓄電池の有無で年間の負担増に約3.3倍の差｜はれトク",
+      "ogTitle": "2026年11月分から電気代支援終了，太陽光・蓄電池の有無で年間の負担増に約3.3倍の差｜はれトク"
+    },
+    {
+      "path": "/pages/policy.html",
+      "status": 200,
+      "canonical": "https://haretoku.jp/pages/policy.html",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "はれトクの方針｜はれトク",
+      "ogTitle": "はれトクの方針｜はれトク"
+    },
+    {
+      "path": "/pages/calculation-method.html",
+      "status": 200,
+      "canonical": "https://haretoku.jp/pages/calculation-method.html",
+      "canonicalMatch": true,
+      "noindex": false,
+      "leak": false,
+      "title": "計算方法・使用データ｜はれトク",
+      "ogTitle": "計算方法・使用データ｜はれトク"
+    }
+  ],
+  "headerConnections": [
+    {
+      "path": "/404.html",
+      "entryReached": true
+    },
+    {
+      "path": "/data/",
+      "entryReached": true
+    },
+    {
+      "path": "/data/subsidies/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/choosing-installer/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/consultation-preparation/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/disaster-preparedness/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/disaster/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/electricity-support-end/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/equipment-maintenance/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/home-battery/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/home-survey/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/installation-process/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/power-outage/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/quote-services/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/quotes-contractors/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/self-consumption/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-benefits/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-consultation/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-costs/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-economics/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-electricity-savings/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-fit/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-installation-cost/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-living/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/solar-maintenance-cost/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/subsidies/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/subsidy-amount/",
+      "entryReached": true
+    },
+    {
+      "path": "/guides/welcome/",
+      "entryReached": true
+    },
+    {
+      "path": "/",
+      "entryReached": true
+    },
+    {
+      "path": "/pages/calculation-method.html",
+      "entryReached": true
+    },
+    {
+      "path": "/pages/policy.html",
+      "entryReached": true
+    },
+    {
+      "path": "/press/",
+      "entryReached": true
+    },
+    {
+      "path": "/simulator/",
+      "entryReached": true
+    }
+  ],
+  "jsonCount": 6,
+  "normalization": "Text CR removal only; production Vite basename mapped one-to-one to matching local basename excluding terminal 8-character content hash. No normalization for binary files.",
+  "renamedAssets": [
+    {
+      "production": "/assets/journey-CePVgnBL.js",
+      "local": "/assets/journey-Dbednyri.js"
+    },
+    {
+      "production": "/assets/title-art-DaW-V9L4.svg",
+      "local": "/assets/title-art-CxXD5rU-.svg"
+    }
+  ],
+  "hashNameProvenance": {
+    "sourceFile": "site/map/assets/title-art.svg",
+    "sourceCommit": "3299e108171f2e81cdbd1ec4b927feb51a6a42cf",
+    "sourceSha256": "c996ba2c758ed645f16e619b20a37ee189d5ee4f7d85a9fc1dcf7823c18881f9",
+    "productionTitleArtSha256": "c996ba2c758ed645f16e619b20a37ee189d5ee4f7d85a9fc1dcf7823c18881f9",
+    "sourceBytesMatchProduction": true
+  },
+  "redirects": [
+    {
+      "url": "http://haretoku.jp/",
+      "status": 301,
+      "location": "https://haretoku.jp/"
+    },
+    {
+      "url": "https://www.haretoku.jp/",
+      "status": 301,
+      "location": "https://haretoku.jp/"
+    }
+  ],
+  "notFound": [
+    {
+      "path": "/solar/",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/guides/solar-profit-conditions/",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/pages/electricity-sales.html",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/pages/costs-maintenance.html",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/pages/subsidies.html",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/pages/disaster.html",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/pages/quotes-contractors.html",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    },
+    {
+      "path": "/__v050_independent_absent__",
+      "status": 404,
+      "sha256": "9cf3ed3bade95ea4efd840d5328285d6755168589d67385c8eccdd9b0ea2597f",
+      "matches404": true,
+      "noindex": true
+    }
+  ],
+  "consultationArticle": {
+    "status": 200,
+    "comparisonDefaultOpen": true,
+    "cardCount": 3,
+    "impressionImages": 2,
+    "providerLinks": [
+      {
+        "provider": "solar-partners",
+        "placement": "article_comparison",
+        "href": "https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E",
+        "target": "_blank",
+        "rel": "sponsored nofollow noopener noreferrer",
+        "referrerpolicy": "no-referrer"
+      },
+      {
+        "provider": "tainavi",
+        "placement": "article_comparison",
+        "href": "https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU",
+        "target": "_blank",
+        "rel": "sponsored nofollow noopener noreferrer",
+        "referrerpolicy": "no-referrer"
+      },
+      {
+        "provider": "griene",
+        "placement": "article_comparison",
+        "href": "https://griene.jp/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "referrerpolicy": "no-referrer"
+      },
+      {
+        "provider": "solar-partners",
+        "placement": "article_comparison",
+        "href": "https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E",
+        "target": "_blank",
+        "rel": "sponsored nofollow noopener noreferrer",
+        "referrerpolicy": "no-referrer"
+      },
+      {
+        "provider": "tainavi",
+        "placement": "article_comparison",
+        "href": "https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU",
+        "target": "_blank",
+        "rel": "sponsored nofollow noopener noreferrer",
+        "referrerpolicy": "no-referrer"
+      },
+      {
+        "provider": "griene",
+        "placement": "article_comparison",
+        "href": "https://griene.jp/",
+        "target": "_blank",
+        "rel": "noopener noreferrer",
+        "referrerpolicy": "no-referrer"
+      }
+    ]
+  },
+  "contentTypeFailures": [],
+  "overallPassed": true
+}
