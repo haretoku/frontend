@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-10-20T07:33:47.257Z",
+  "checkedAt": "2026-10-20T08:23:24.1643885Z",
   "sitemap": {
     "url": "https://haretoku.jp/sitemap.xml",
     "submitted": true,
@@ -26,8 +26,20 @@
     },
     {
       "slug": "solar-electricity-savings",
-      "result": "inspection-error",
-      "message": "Google側でエラー．解消しない場合は数時間後に再試行の表示．今回同じURLを再送信しない．"
+      "result": "priority-crawl-queue-accepted",
+      "message": "2026年10月20日の再試行で受理．初回エラーはattemptsへ保持．",
+      "attempts": [
+        {
+          "checkedAt": "2026-10-20T07:33:47.257Z",
+          "result": "inspection-error",
+          "message": "Google側でエラー．解消しない場合は数時間後に再試行の表示．今回同じURLを再送信しない．"
+        },
+        {
+          "checkedAt": "2026-10-20T08:23:24.1643885Z",
+          "result": "priority-crawl-queue-accepted",
+          "message": "ユーザーの再試行指示を受けて1回再送信し，優先クロールキューへの追加を確認．"
+        }
+      ]
     },
     {
       "slug": "solar-fit",
@@ -43,18 +55,27 @@
     },
     {
       "slug": "subsidy-amount",
-      "result": "daily-quota-exceeded",
-      "message": "1日の割り当て量を超えたため処理不可．明日もう一度の表示．追加送信を停止．"
+      "result": "priority-crawl-queue-accepted",
+      "message": "2026年10月20日の再試行で受理．初回エラーはattemptsへ保持．",
+      "attempts": [
+        {
+          "checkedAt": "2026-10-20T07:33:47.257Z",
+          "result": "daily-quota-exceeded",
+          "message": "1日の割り当て量を超えたため処理不可．明日もう一度の表示．追加送信を停止．"
+        },
+        {
+          "checkedAt": "2026-10-20T08:23:24.1643885Z",
+          "result": "priority-crawl-queue-accepted",
+          "message": "ユーザーの再試行指示を受けて1回再送信し，優先クロールキューへの追加を確認．"
+        }
+      ]
     },
     {
       "slug": "disaster",
       "result": "priority-crawl-queue-accepted"
     }
   ],
-  "accepted": 8,
-  "deferred": [
-    "solar-electricity-savings",
-    "subsidy-amount"
-  ],
-  "nextAction": "Googleの案内と日次上限に従い，2026-10-21以降の次回運用確認で残2URLを再通知．今回追加送信なし．"
+  "accepted": 10,
+  "deferred": [],
+  "nextAction": "改稿10URLすべて更新依頼受理済み．追加の再送信は不要．実検索表示と新規LINE等の実共有表示は別途確認する．"
 }

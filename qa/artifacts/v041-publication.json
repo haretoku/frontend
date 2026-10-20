@@ -37,12 +37,9 @@
   },
   "google": {
     "sitemap": "success-31-urls",
-    "accepted": 8,
-    "deferred": [
-      "solar-electricity-savings",
-      "subsidy-amount"
-    ],
+    "accepted": 10,
+    "deferred": [],
     "record": "v041-google-updates.json"
   },
-  "overall": "published-with-google-renotification-and-external-display-followups"
+  "overall": "published-with-external-display-followups"
 }
