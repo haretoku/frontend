@@ -27,14 +27,14 @@
   },
   "openCounts": {
     "MUST": 0,
-    "RECOMMEND": 2,
+    "RECOMMEND": 0,
     "NITS": 0
   },
   "findings": [
     {
       "id": "R1",
       "priority": "RECOMMEND",
-      "status": "PROPOSED_PARENT_DELETE",
+      "status": "DELETED_BY_PARENT_AFTER_PATH_AND_SHA_CHECK",
       "file": "site/shared/assets/",
       "issue": "未採用OG生成案28点が未追跡のまま残る．",
       "action": "oldOgCandidatesの絶対パス・件数・SHAを親が直前確認して削除できる．QA READMEの過去版名等は経緯集約と合わせて整理する．採用原図・生成器・旧固定公開URLを削除しない．"
@@ -60,7 +60,7 @@
     {
       "id": "R4",
       "priority": "RECOMMEND",
-      "status": "DEFERRED_UNTIL_AFTER_RELEASE",
+      "status": "DELETED_AND_HISTORY_REFERENCES_CONSOLIDATED",
       "file": "qa/artifacts/",
       "issue": "v050試作・開発確認画像に，旧経緯以外の利用がないものが残る．",
       "action": "legacyQaCandidatesへ具体的な44候補を記録．現在のv060独立目視が参照するv050-quote-cards-pc.pngは除外．旧QA経緯の参照を公開commit／Actions等へ集約し，v060公開作業終了後に削除する．現在は削除しない．"
@@ -83,7 +83,7 @@
       "sha256": "92010a4a14d4e32fed22d556ea7190d0f557864b8b55ba8dd194723a9259f965",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -95,7 +95,7 @@
       "references": [
         "qa/artifacts/three-guide-images-change-20261019.json"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -105,7 +105,7 @@
       "sha256": "9a147333dfe59797ed0202bcf96be2580839743b6a936721dbde9d4e78a91416",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -115,7 +115,7 @@
       "sha256": "aa626c6981ffbff1ae4acd412ce3791d9ca0ab71aaec61847ac8ddaa58987b42",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -127,7 +127,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -139,7 +139,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -151,7 +151,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -163,7 +163,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -173,7 +173,7 @@
       "sha256": "2c0c2a0137c86a1e56a2a2176d083fe0710d17aa92a9f0958057f85d10961e6d",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -185,7 +185,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -197,7 +197,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -209,7 +209,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -221,7 +221,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -233,7 +233,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -245,7 +245,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -257,7 +257,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -269,7 +269,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -281,7 +281,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -291,7 +291,7 @@
       "sha256": "08d6a772f95dbd98481784a4bcdaef804d511a3b80ed23aaf966bf7587e4b4d2",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -303,7 +303,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -315,7 +315,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -325,7 +325,7 @@
       "sha256": "ddf1fc2839005125fd82d960c6102506e972595e487b0d5a3553940033889a1f",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -335,7 +335,7 @@
       "sha256": "f822dcdcb587164069c5e13e435e75a35ee8945d14684009fa700f1442aa8b5e",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -345,7 +345,7 @@
       "sha256": "4ef8835e315f7dc3c42c8dcb79bafddec5abb72d163be1b97975915b7eef9aee",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -355,7 +355,7 @@
       "sha256": "0384c3ce57593ea1553b0a8be7f0f1e8b6a0ad732789852b4ec1e1445bcdc260",
       "tracked": false,
       "references": [],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -368,7 +368,7 @@
         "qa/README.md",
         "qa/artifacts/subsidy-amount-image-change-20261019.json"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -381,7 +381,7 @@
         "qa/README.md",
         "qa/artifacts/subsidy-amount-arrow-change-20261019.json"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     },
     {
@@ -394,7 +394,7 @@
         "qa/README.md",
         "qa/artifacts/subsidy-two-stacks-change-20261019.json"
       ],
-      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "action": "DELETED_BY_PARENT",
       "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
     }
   ],
@@ -412,8 +412,9 @@
     "distImageHashesCompared": 34,
     "distHashMatches": 0,
     "neverTrackedInAvailableLocalHistory": true,
-    "deleted": false,
-    "disposalCaveat": "未追跡でローカルGit履歴にもない旧案のため，削除後のGit復元はできない．採用済み10点と生成入力を残す．旧v041ビルド指摘での「原図保持」は当時の過包含修正案であり，今回の使用済み旧生成案の整理とは区別する．"
+    "deleted": true,
+    "disposalCaveat": "未追跡でローカルGit履歴にもない旧案のため，削除後のGit復元はできない．採用済み10点と生成入力を残す．旧v041ビルド指摘での「原図保持」は当時の過包含修正案であり，今回の使用済み旧生成案の整理とは区別する．",
+    "deletedBy": "親"
   },
   "legacyQaCandidates": [
     {
@@ -424,7 +425,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -435,7 +436,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -446,7 +447,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -455,7 +456,7 @@
       "bytes": 63246,
       "sha256": "0ec26a3fac6c3feb5ebb3572da96d7f2b9068e91d27f7827617cb896ad1033ae",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -466,7 +467,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -477,7 +478,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -488,7 +489,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -499,7 +500,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -511,7 +512,7 @@
         "qa/artifacts/v050-notebook-preview.json",
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -522,7 +523,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -533,7 +534,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -545,7 +546,7 @@
         "qa/artifacts/v050-notebook-preview.json",
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -557,7 +558,7 @@
         "qa/artifacts/v050-notebook-preview.json",
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -568,7 +569,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -579,7 +580,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -590,7 +591,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -601,7 +602,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -612,7 +613,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -621,7 +622,7 @@
       "bytes": 98732,
       "sha256": "d056e01e4a0671bc0d6e8498328d6f1060f15f751674c7da83a2ee5c9bddd51a",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -632,7 +633,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -641,7 +642,7 @@
       "bytes": 98502,
       "sha256": "bb846409e266565c825d482d61ca87f06352fd06109d2992988d33d64dad0854",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -652,7 +653,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -663,7 +664,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -674,7 +675,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -685,7 +686,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -696,7 +697,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -707,7 +708,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -718,7 +719,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -727,7 +728,7 @@
       "bytes": 45747,
       "sha256": "972df794a7e25ae10d1fd5c386520d4a944db26a57e639a39044843ed2299d86",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -738,7 +739,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -749,7 +750,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -760,7 +761,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -769,7 +770,7 @@
       "bytes": 71374,
       "sha256": "869930a2f37040b7181fbb720c714046ac9f867f0cf2c6a375157647bfcdd211",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -780,7 +781,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -791,7 +792,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -802,7 +803,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -813,7 +814,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -824,7 +825,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -833,7 +834,7 @@
       "bytes": 83053,
       "sha256": "5f436f873191eff6a03255408877c18bfebeed481466c0348585163f74ca1015",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -844,7 +845,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -853,7 +854,7 @@
       "bytes": 73048,
       "sha256": "a98700c198edf55fe762ac4c49513aeacc3842396ad3348c77332db285c499cf",
       "references": [],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -864,7 +865,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -875,7 +876,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     },
     {
@@ -886,7 +887,7 @@
       "references": [
         "qa/README.md"
       ],
-      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "action": "DELETED",
       "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
     }
   ],
@@ -1084,12 +1085,77 @@
     "旧OG28案以外の全ファイルを到達性解析した監査ではない．具体候補について静的参照・build/test・互換性を確認したもので，名前や更新日だけを削除根拠にしていない．",
     "v050の旧スクリーンショットは未追跡のものが多く，Gitで復元できない．画像の最新検収上の役割を公開後に再確認してから削除する．",
     "現在のUI・本文・数値は既存PASSを再利用し，小整理後のブラウザ再検査・全件buildは本担当では実施しない．親が公開処理・必要なビルドを担当する．",
-    "本記録は新しい常設保管台帳を目的とせず，今回の削除候補と保持根拠・小整理の検査記録として既存qa/artifactsへ保存する．"
+    "本記録は新しい常設保管台帳を目的とせず，今回の削除候補と保持根拠・小整理の検査記録として既存qa/artifactsへ保存する．",
+    "今回の44画像は未追跡のためGitから復元できない．本人及び親の明示指示の範囲で使用終了した旧試作画像として削除し，採用済み原本と現行v060証跡は保持した．"
   ],
   "parentDeletion": {
     "count": 28,
     "verifiedAbsoluteContainment": true,
     "bytes": 1274648,
     "verifiedSha256": true
+  },
+  "followupActions": [
+    {
+      "date": "2026-10-22",
+      "action": "OLD_OG_PARENT_DELETE_RECORDED",
+      "count": 28,
+      "bytes": 1274648,
+      "actor": "親",
+      "evidence": "親が絶対パス・SHA照合後に28旧OG案を削除したと報告．本追記時にも28件不在を確認．",
+      "allAbsent": true
+    },
+    {
+      "date": "2026-10-22",
+      "action": "LEGACY_QA_44_DELETE",
+      "actor": "v060_renewal_review",
+      "count": 44,
+      "bytes": 3128400,
+      "validation": "PowerShellだけで全44絶対パスをqa/artifacts直下の範囲内に解決し，通常ファイル・非symlink・SHA一致を全件先に確認後，Remove-Item -LiteralPathで個別削除．再帰削除・シェル跨ぎはしない．",
+      "remaining": 0,
+      "protected": {
+        "file": "qa/artifacts/v050-quote-cards-pc.png",
+        "exists": true,
+        "sha256": "25d4c9f43130c17bad7f3b761c7f3a2f9cde0ab3973dbe63c47074c87ce32276"
+      }
+    },
+    {
+      "action": "QA_README_HISTORY_CONSOLIDATION",
+      "date": "2026-10-22",
+      "authorization": "親からQA/README.mdの旧v060試作経緯圧縮，監査済みv050画像44件の削除，監査記録への追記を許可．製品コードは今回変更しない．",
+      "file": "qa/README.md",
+      "beforeSha256": "515028c34f6832760f755701f371aac588705a5643a1aa27fd0166e9c71234d5",
+      "afterSha256": "6078c43d2217008a0f8a68552533c92c2496a58100050c2ea90d30f210440918",
+      "fixedGitCommit": "66f1754641ecbdab90710175824f6167b020c604",
+      "beforeLines": 1323,
+      "afterLines": 1161,
+      "topCurrentSections": "公開実行・最新表示比較・公開前候補判定の3節は全バイト不変．人間承認範囲・P01〜E06表・外部未完事項・最新レビュー参照を保持．",
+      "v060History": "旧19節を，採用内容・人間承認・内容根拠・保存移行・後続合意を記した6行表と固定Git版の該当行への参照へ集約．途中の待ち状態は現行へ適用しないと明記．",
+      "legacyImageReferences": "削除画像を参照していた旧v050の16参照行を，固定Git版qa/README.mdの該当15節への参照へ置換．同一節の連続する重複文は1文へ統合．未追跡PNGを固定Git内にあるかのようなリンクは作らない．",
+      "checks": {
+        "topPrefixSha256": "74675e0274c3638a692f70c3e7ca47cafb3c40602560aab98b64c10050ef67bf",
+        "topPrefixUnchanged": true,
+        "newLocalEvidenceLinks": 11,
+        "newLocalEvidenceLinksExist": true,
+        "fixedGitLineLinks": 16,
+        "fixedGitLineRangesExist": true,
+        "deletedImageNamesRemainingInReadme": 0,
+        "currentV060RecordReferencesToDeletedImages": 0,
+        "productCodeChangedInThisStep": false
+      },
+      "testPolicy": "READMEと使用済み旧画像だけの整理のため，25検査PASSと製品ソース不変の結果を再利用し，build・実画面を再実行しない．リンク・固定Git参照・保持対象だけ限定確認．"
+    }
+  ],
+  "currentDecision": "CLEANUP_APPLIED_AND_LIMITED_CHECKS_PASS",
+  "completedCiTemporaryRemoval": {
+    "bytes": 71038718,
+    "retained": [
+      "v060-ci-artifact-independent-manifest.json",
+      "v060-production-independent-review.json"
+    ],
+    "containmentAndUsageEnded": true,
+    "paths": [
+      "qa/artifacts/v060-ci-pages",
+      "qa/artifacts/v060-github-pages.zip"
+    ]
   }
 }

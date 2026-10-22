@@ -1,0 +1,2465 @@
+{
+  "checkedAt": "2026-10-22T14:23:25.529Z",
+  "reviewer": "/root/v060_release_integrity",
+  "productionCommit": "66f1754641ecbdab90710175824f6167b020c604",
+  "run": "https://github.com/haretoku/frontend/actions/runs/39793564301",
+  "origin": "https://haretoku.jp",
+  "ciArtifact": {
+    "directory": "qa/artifacts/v060-ci-pages",
+    "files": 135,
+    "manifestSha256": "824a9a4991e7c232ef67d20b9b197e07077c720cca3bee3e9763d9f08eb19cf7",
+    "archive": {
+      "path": "qa/artifacts/v060-ci-pages/artifact.tar",
+      "bytes": 31703040,
+      "sha256": "a60777a035bfb6242479a536b4ae7c96543b2152eb148aaf989182927cc19382"
+    }
+  },
+  "scope": "D02公開後の独立HTTP検収．CI実物135配信物・38正規URLとHTTPS/正規化/404非配信を照合．ブラウザー操作・保存・Google実受信は親担当．",
+  "files": [
+    {
+      "path": ".nojekyll",
+      "url": "https://haretoku.jp/.nojekyll",
+      "status": 200,
+      "type": "application/octet-stream",
+      "bytes": 0,
+      "ciSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "productionSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-0\""
+    },
+    {
+      "path": "404.html",
+      "url": "https://haretoku.jp/404.html",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 4067,
+      "ciSha256": "450eb47af6941036f53b63a9add82343b9bbc73477d3a159d7e2152181660f64",
+      "productionSha256": "450eb47af6941036f53b63a9add82343b9bbc73477d3a159d7e2152181660f64",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-fe3\""
+    },
+    {
+      "path": "assets/analytics-BUBPSZHq.js",
+      "url": "https://haretoku.jp/assets/analytics-BUBPSZHq.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 11598,
+      "ciSha256": "8a133afa139c465a033e8acf7741b5ee05af82d368e54e883e355ee30906c97f",
+      "productionSha256": "8a133afa139c465a033e8acf7741b5ee05af82d368e54e883e355ee30906c97f",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-2d4e\""
+    },
+    {
+      "path": "assets/article-Bj71asNy.css",
+      "url": "https://haretoku.jp/assets/article-Bj71asNy.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 27082,
+      "ciSha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3",
+      "productionSha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-69ca\""
+    },
+    {
+      "path": "assets/article-solar-economics-cumulative-compact-CIGTExUV.svg",
+      "url": "https://haretoku.jp/assets/article-solar-economics-cumulative-compact-CIGTExUV.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 18086,
+      "ciSha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7",
+      "productionSha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-46a6\""
+    },
+    {
+      "path": "assets/article-solar-economics-cumulative-DefzOuOL.svg",
+      "url": "https://haretoku.jp/assets/article-solar-economics-cumulative-DefzOuOL.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 18094,
+      "ciSha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6",
+      "productionSha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-46ae\""
+    },
+    {
+      "path": "assets/assets-BK3lZRv2.js",
+      "url": "https://haretoku.jp/assets/assets-BK3lZRv2.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 520,
+      "ciSha256": "c86bf5403894360a40db77536c6d192b46f9337e64650b908b8073ac14fe4dd7",
+      "productionSha256": "c86bf5403894360a40db77536c6d192b46f9337e64650b908b8073ac14fe4dd7",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-208\""
+    },
+    {
+      "path": "assets/cards-kEJrbhPN.css",
+      "url": "https://haretoku.jp/assets/cards-kEJrbhPN.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 2476,
+      "ciSha256": "798be81494277d218a03042d0b0271fa745b175f16d66faee8bb0699f9901889",
+      "productionSha256": "798be81494277d218a03042d0b0271fa745b175f16d66faee8bb0699f9901889",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-9ac\""
+    },
+    {
+      "path": "assets/consultation-providers-D-Yg8-MO.css",
+      "url": "https://haretoku.jp/assets/consultation-providers-D-Yg8-MO.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 6443,
+      "ciSha256": "7fb1db773f07053baa5acbc0df3e352f91306df5ac9b8b3571902f1c5ee33d09",
+      "productionSha256": "7fb1db773f07053baa5acbc0df3e352f91306df5ac9b8b3571902f1c5ee33d09",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-192b\""
+    },
+    {
+      "path": "assets/contractor-checksheet-DmgL5J0n.pdf",
+      "url": "https://haretoku.jp/assets/contractor-checksheet-DmgL5J0n.pdf",
+      "status": 200,
+      "type": "application/pdf",
+      "bytes": 99350,
+      "ciSha256": "83816ce8cadaa141db74d06ea694987379eeabe4144d9a9e4ee7fe1b05177c70",
+      "productionSha256": "83816ce8cadaa141db74d06ea694987379eeabe4144d9a9e4ee7fe1b05177c70",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-18416\""
+    },
+    {
+      "path": "assets/data-CTlfnS1N.css",
+      "url": "https://haretoku.jp/assets/data-CTlfnS1N.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 14003,
+      "ciSha256": "dbd066ce8683ce1e6fa86e1232d85438b8f44281e068ec078464dd4a46419c7b",
+      "productionSha256": "dbd066ce8683ce1e6fa86e1232d85438b8f44281e068ec078464dd4a46419c7b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-36b3\""
+    },
+    {
+      "path": "assets/data-loader-_UALgZOL.js",
+      "url": "https://haretoku.jp/assets/data-loader-_UALgZOL.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 4961,
+      "ciSha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117",
+      "productionSha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-1361\""
+    },
+    {
+      "path": "assets/data-subsidies-index-BL4xE5rd.js",
+      "url": "https://haretoku.jp/assets/data-subsidies-index-BL4xE5rd.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 26557,
+      "ciSha256": "82ec0e7e7d78ab878662b669a4d925b094690f5f37cf70e73abb2bd105a4b69d",
+      "productionSha256": "82ec0e7e7d78ab878662b669a4d925b094690f5f37cf70e73abb2bd105a4b69d",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-67bd\""
+    },
+    {
+      "path": "assets/detail-guide-CgQSBg9B.css",
+      "url": "https://haretoku.jp/assets/detail-guide-CgQSBg9B.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 6453,
+      "ciSha256": "2515d0917b7dee0d1946899a208d841e1f115fc14240ec3b222b494b4293543d",
+      "productionSha256": "2515d0917b7dee0d1946899a208d841e1f115fc14240ec3b222b494b4293543d",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-1935\""
+    },
+    {
+      "path": "assets/detail-guide-figures-B_s8fnqU.css",
+      "url": "https://haretoku.jp/assets/detail-guide-figures-B_s8fnqU.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 3572,
+      "ciSha256": "0f79732c5fe7ba8b659d08a5cfda1790991db5184b7f63dbd0080afd0ce6fc03",
+      "productionSha256": "0f79732c5fe7ba8b659d08a5cfda1790991db5184b7f63dbd0080afd0ce6fc03",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-df4\""
+    },
+    {
+      "path": "assets/diagnostic-display-binding-CKdfZiu5.json",
+      "url": "https://haretoku.jp/assets/diagnostic-display-binding-CKdfZiu5.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "bytes": 33669,
+      "ciSha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919",
+      "productionSha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-8385\""
+    },
+    {
+      "path": "assets/diagnostic-display-table-E4yzT3FH.json",
+      "url": "https://haretoku.jp/assets/diagnostic-display-table-E4yzT3FH.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "bytes": 770520,
+      "ciSha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7",
+      "productionSha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-bc1d8\""
+    },
+    {
+      "path": "assets/entry-B5WcVJxE.css",
+      "url": "https://haretoku.jp/assets/entry-B5WcVJxE.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 40039,
+      "ciSha256": "ed806f5bc0f17eb7c1ad7bac657dabcf747fff16fcdd43d6bc77837effb3f484",
+      "productionSha256": "ed806f5bc0f17eb7c1ad7bac657dabcf747fff16fcdd43d6bc77837effb3f484",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-9c67\""
+    },
+    {
+      "path": "assets/entry-ChgWZR9D.css",
+      "url": "https://haretoku.jp/assets/entry-ChgWZR9D.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 7556,
+      "ciSha256": "72c5d22a234ff3dc72ebd8f355a31ca56ba324d2ca84401f109ab42cfdc5ffb9",
+      "productionSha256": "72c5d22a234ff3dc72ebd8f355a31ca56ba324d2ca84401f109ab42cfdc5ffb9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-1d84\""
+    },
+    {
+      "path": "assets/entry-Mi3giSqF.js",
+      "url": "https://haretoku.jp/assets/entry-Mi3giSqF.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 1038,
+      "ciSha256": "e300f87b1308fa3bbfd8cba879192001c82f866910ca36b704e76622f96c7a12",
+      "productionSha256": "e300f87b1308fa3bbfd8cba879192001c82f866910ca36b704e76622f96c7a12",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-40e\""
+    },
+    {
+      "path": "assets/entry-UobnqAeu.js",
+      "url": "https://haretoku.jp/assets/entry-UobnqAeu.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 34488,
+      "ciSha256": "959c38ee26e4a459725161b884e80cdd809ac4f1772d638b77c6d47365417a64",
+      "productionSha256": "959c38ee26e4a459725161b884e80cdd809ac4f1772d638b77c6d47365417a64",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-86b8\""
+    },
+    {
+      "path": "assets/favicon-BmMVSVLw.svg",
+      "url": "https://haretoku.jp/assets/favicon-BmMVSVLw.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 47916,
+      "ciSha256": "558e837accce56ac69644f56c744790e4a342faa2f4de65bc7eb47ac71eb5e94",
+      "productionSha256": "558e837accce56ac69644f56c744790e4a342faa2f4de65bc7eb47ac71eb5e94",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-bb2c\""
+    },
+    {
+      "path": "assets/guides-DwUJrXYW.js",
+      "url": "https://haretoku.jp/assets/guides-DwUJrXYW.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 22143,
+      "ciSha256": "f2cf690e82757786ccab832f2d12ab109f6c63ff4faa08055afb00a5dbe60212",
+      "productionSha256": "f2cf690e82757786ccab832f2d12ab109f6c63ff4faa08055afb00a5dbe60212",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-567f\""
+    },
+    {
+      "path": "assets/guides-electricity-support-end-index-DK-szL2n.css",
+      "url": "https://haretoku.jp/assets/guides-electricity-support-end-index-DK-szL2n.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 3475,
+      "ciSha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b",
+      "productionSha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-d93\""
+    },
+    {
+      "path": "assets/guides-electricity-support-end-index-DK74h4Q6.js",
+      "url": "https://haretoku.jp/assets/guides-electricity-support-end-index-DK74h4Q6.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 640,
+      "ciSha256": "6afb3f0f240649bf125edc7861c883bbef2ee0efad96823f728d56547adf8041",
+      "productionSha256": "6afb3f0f240649bf125edc7861c883bbef2ee0efad96823f728d56547adf8041",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-280\""
+    },
+    {
+      "path": "assets/guides-Re8FBS7e.css",
+      "url": "https://haretoku.jp/assets/guides-Re8FBS7e.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 13685,
+      "ciSha256": "2338593832b652ae3c2462a80177bca63f7462d1b8632cad3543104e96ebe057",
+      "productionSha256": "2338593832b652ae3c2462a80177bca63f7462d1b8632cad3543104e96ebe057",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-3575\""
+    },
+    {
+      "path": "assets/guides-self-consumption-index-Oslr8jQX.css",
+      "url": "https://haretoku.jp/assets/guides-self-consumption-index-Oslr8jQX.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 12516,
+      "ciSha256": "fa7bb4d8461fa35c36b3429bbb079e89cff5afd571b3149d238491252c253e70",
+      "productionSha256": "fa7bb4d8461fa35c36b3429bbb079e89cff5afd571b3149d238491252c253e70",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-30e4\""
+    },
+    {
+      "path": "assets/guides-solar-economics-index-CMvQrjsJ.css",
+      "url": "https://haretoku.jp/assets/guides-solar-economics-index-CMvQrjsJ.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 1346,
+      "ciSha256": "29715262bf59b85406fe57a41ed96e49263b8392d569638105208ef2eab71203",
+      "productionSha256": "29715262bf59b85406fe57a41ed96e49263b8392d569638105208ef2eab71203",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-542\""
+    },
+    {
+      "path": "assets/guides-solar-electricity-savings-index-KaY4wo2D.css",
+      "url": "https://haretoku.jp/assets/guides-solar-electricity-savings-index-KaY4wo2D.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 8519,
+      "ciSha256": "3e78e2beb4fe8cbb661bee9d8f363185f74cd8778f024a9196926d2305c80053",
+      "productionSha256": "3e78e2beb4fe8cbb661bee9d8f363185f74cd8778f024a9196926d2305c80053",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-2147\""
+    },
+    {
+      "path": "assets/guides-solar-installation-cost-index-D_gosE4s.css",
+      "url": "https://haretoku.jp/assets/guides-solar-installation-cost-index-D_gosE4s.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 1916,
+      "ciSha256": "42145e12bf5cf681791e88ea99e71c68e3a015030492efca18c6bf1360e60e83",
+      "productionSha256": "42145e12bf5cf681791e88ea99e71c68e3a015030492efca18c6bf1360e60e83",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-77c\""
+    },
+    {
+      "path": "assets/guides-solar-maintenance-cost-index-BfX-UV_h.css",
+      "url": "https://haretoku.jp/assets/guides-solar-maintenance-cost-index-BfX-UV_h.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 376,
+      "ciSha256": "715f9e1f08843c1f14b1a845327a8c1e573d29231103edafd7aa83c53ccb2dd9",
+      "productionSha256": "715f9e1f08843c1f14b1a845327a8c1e573d29231103edafd7aa83c53ccb2dd9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-178\""
+    },
+    {
+      "path": "assets/hare-display-binding-ByES3t9O.json",
+      "url": "https://haretoku.jp/assets/hare-display-binding-ByES3t9O.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "bytes": 9291,
+      "ciSha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a",
+      "productionSha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-244b\""
+    },
+    {
+      "path": "assets/hare-display-table-GvQlwHhJ.json",
+      "url": "https://haretoku.jp/assets/hare-display-table-GvQlwHhJ.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "bytes": 1434290,
+      "ciSha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff",
+      "productionSha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-15e2b2\""
+    },
+    {
+      "path": "assets/harena-rooftops-Cwq_PN9m.png",
+      "url": "https://haretoku.jp/assets/harena-rooftops-Cwq_PN9m.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 1897796,
+      "ciSha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4",
+      "productionSha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-1cf544\""
+    },
+    {
+      "path": "assets/journey-BYGRx30H.js",
+      "url": "https://haretoku.jp/assets/journey-BYGRx30H.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 164907,
+      "ciSha256": "0a888779624144345e7d0187ece19069b876dbac4b3356bb38fab7788000f9e5",
+      "productionSha256": "0a888779624144345e7d0187ece19069b876dbac4b3356bb38fab7788000f9e5",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-2842b\""
+    },
+    {
+      "path": "assets/journey-CAZk8pFz.css",
+      "url": "https://haretoku.jp/assets/journey-CAZk8pFz.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 42326,
+      "ciSha256": "076d6e0081786a9a90eae8ea752f992ec3c3f86fb8340a010f77e479a377c1f8",
+      "productionSha256": "076d6e0081786a9a90eae8ea752f992ec3c3f86fb8340a010f77e479a377c1f8",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-a556\""
+    },
+    {
+      "path": "assets/journey-state-CCTPYMpn.js",
+      "url": "https://haretoku.jp/assets/journey-state-CCTPYMpn.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 2763,
+      "ciSha256": "db7c1c26ef2d5fc9299a5a4ae9848fa2928daf5dfecbc1df8d343640f664d278",
+      "productionSha256": "db7c1c26ef2d5fc9299a5a4ae9848fa2928daf5dfecbc1df8d343640f664d278",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-acb\""
+    },
+    {
+      "path": "assets/manual-equipment-renewal-consultation-index-D1nzFn4_.css",
+      "url": "https://haretoku.jp/assets/manual-equipment-renewal-consultation-index-D1nzFn4_.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 1169,
+      "ciSha256": "8736d7431700def70635bd49cbbc81bfc0ea6b04ccc5e2664f295e605ee5690d",
+      "productionSha256": "8736d7431700def70635bd49cbbc81bfc0ea6b04ccc5e2664f295e605ee5690d",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-491\""
+    },
+    {
+      "path": "assets/manual-index-Cw0FJBHy.css",
+      "url": "https://haretoku.jp/assets/manual-index-Cw0FJBHy.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 4336,
+      "ciSha256": "9e7f0212b0184582f7d5f7090483ea0100fe96fbc1f2fedba6070c6cc8a494d4",
+      "productionSha256": "9e7f0212b0184582f7d5f7090483ea0100fe96fbc1f2fedba6070c6cc8a494d4",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-10f0\""
+    },
+    {
+      "path": "assets/manual-index-DhJJs8OD.js",
+      "url": "https://haretoku.jp/assets/manual-index-DhJJs8OD.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 3276,
+      "ciSha256": "76f2e8fce35dab4038c4be7eedfc7e3722342937668086eebd1534967dd76be7",
+      "productionSha256": "76f2e8fce35dab4038c4be7eedfc7e3722342937668086eebd1534967dd76be7",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-ccc\""
+    },
+    {
+      "path": "assets/metadata-D8VIoK63.json",
+      "url": "https://haretoku.jp/assets/metadata-D8VIoK63.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "bytes": 26138,
+      "ciSha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd",
+      "productionSha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-661a\""
+    },
+    {
+      "path": "assets/navigator-C6wSog06.png",
+      "url": "https://haretoku.jp/assets/navigator-C6wSog06.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 341304,
+      "ciSha256": "1cfc6cd08c52ee36e60d4f37261ce6b219112a9c731658c6de191118d5e544fb",
+      "productionSha256": "1cfc6cd08c52ee36e60d4f37261ce6b219112a9c731658c6de191118d5e544fb",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-53538\""
+    },
+    {
+      "path": "assets/og-guide-disaster-20261019-v3.png",
+      "url": "https://haretoku.jp/assets/og-guide-disaster-20261019-v3.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 48156,
+      "ciSha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344",
+      "productionSha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-bc1c\""
+    },
+    {
+      "path": "assets/og-guide-quotes-contractors-20261019-v2.png",
+      "url": "https://haretoku.jp/assets/og-guide-quotes-contractors-20261019-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 35486,
+      "ciSha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206",
+      "productionSha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-8a9e\""
+    },
+    {
+      "path": "assets/og-guide-self-consumption-20261018.png",
+      "url": "https://haretoku.jp/assets/og-guide-self-consumption-20261018.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 46277,
+      "ciSha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48",
+      "productionSha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-b4c5\""
+    },
+    {
+      "path": "assets/og-guide-solar-economics-20261019-v3.png",
+      "url": "https://haretoku.jp/assets/og-guide-solar-economics-20261019-v3.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 42610,
+      "ciSha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d",
+      "productionSha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-a672\""
+    },
+    {
+      "path": "assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "url": "https://haretoku.jp/assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 47003,
+      "ciSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "productionSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-b79b\""
+    },
+    {
+      "path": "assets/og-guide-solar-fit-20261019-v4.png",
+      "url": "https://haretoku.jp/assets/og-guide-solar-fit-20261019-v4.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 40382,
+      "ciSha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11",
+      "productionSha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-9dbe\""
+    },
+    {
+      "path": "assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "url": "https://haretoku.jp/assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 54384,
+      "ciSha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1",
+      "productionSha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-d470\""
+    },
+    {
+      "path": "assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "url": "https://haretoku.jp/assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 48170,
+      "ciSha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6",
+      "productionSha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-bc2a\""
+    },
+    {
+      "path": "assets/og-guide-subsidies-20261019-v2.png",
+      "url": "https://haretoku.jp/assets/og-guide-subsidies-20261019-v2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 39535,
+      "ciSha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174",
+      "productionSha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-9a6f\""
+    },
+    {
+      "path": "assets/og-guide-subsidy-amount-20261019-v5.png",
+      "url": "https://haretoku.jp/assets/og-guide-subsidy-amount-20261019-v5.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 47003,
+      "ciSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "productionSha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-b79b\""
+    },
+    {
+      "path": "assets/og-manual-20261021.png",
+      "url": "https://haretoku.jp/assets/og-manual-20261021.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 55091,
+      "ciSha256": "a5d4ee79d8637de26b3d33f2571debfacf1d49177349bf6b3433d1ec8a6e08c5",
+      "productionSha256": "a5d4ee79d8637de26b3d33f2571debfacf1d49177349bf6b3433d1ec8a6e08c5",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-d733\""
+    },
+    {
+      "path": "assets/og-manual-intro-20261021.png",
+      "url": "https://haretoku.jp/assets/og-manual-intro-20261021.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 59454,
+      "ciSha256": "1c21b765c1f1f37b3e129216f104d62052a96fef4d9df57f7f2657775e61cbd2",
+      "productionSha256": "1c21b765c1f1f37b3e129216f104d62052a96fef4d9df57f7f2657775e61cbd2",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-e83e\""
+    },
+    {
+      "path": "assets/og-manual-renewal-20261021.png",
+      "url": "https://haretoku.jp/assets/og-manual-renewal-20261021.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 56668,
+      "ciSha256": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599",
+      "productionSha256": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-dd5c\""
+    },
+    {
+      "path": "assets/pages-calculation-method-FO3eh5vu.css",
+      "url": "https://haretoku.jp/assets/pages-calculation-method-FO3eh5vu.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 8144,
+      "ciSha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9",
+      "productionSha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-1fd0\""
+    },
+    {
+      "path": "assets/pages-calculation-method-wRtgT__m.js",
+      "url": "https://haretoku.jp/assets/pages-calculation-method-wRtgT__m.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 39822,
+      "ciSha256": "846add2e925021cc6092c9243c198b21c0b7f7edd952d8096ad8c011c62ce857",
+      "productionSha256": "846add2e925021cc6092c9243c198b21c0b7f7edd952d8096ad8c011c62ce857",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-9b8e\""
+    },
+    {
+      "path": "assets/pawn-female-DSZs4HJW.png",
+      "url": "https://haretoku.jp/assets/pawn-female-DSZs4HJW.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 362283,
+      "ciSha256": "31ce7412569c8f367062b5ee47c4ca9900a5f05db9be54465e9d928525b00c6b",
+      "productionSha256": "31ce7412569c8f367062b5ee47c4ca9900a5f05db9be54465e9d928525b00c6b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-5872b\""
+    },
+    {
+      "path": "assets/pawn-male-DkOsVmn1.png",
+      "url": "https://haretoku.jp/assets/pawn-male-DkOsVmn1.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 353797,
+      "ciSha256": "0917d1153746e74958ff6d355c8620d5cfb1be813e9d345220613243b92e8de2",
+      "productionSha256": "0917d1153746e74958ff6d355c8620d5cfb1be813e9d345220613243b92e8de2",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-56605\""
+    },
+    {
+      "path": "assets/professor-chibi-BwE1xmLE.png",
+      "url": "https://haretoku.jp/assets/professor-chibi-BwE1xmLE.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 549930,
+      "ciSha256": "cd752bd66b6710e403c69cd9756c6cbf00ac5a1c459ae3d39052fbc14e01f069",
+      "productionSha256": "cd752bd66b6710e403c69cd9756c6cbf00ac5a1c459ae3d39052fbc14e01f069",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-8642a\""
+    },
+    {
+      "path": "assets/public-data-CZscpcC-.json",
+      "url": "https://haretoku.jp/assets/public-data-CZscpcC-.json",
+      "status": 200,
+      "type": "application/json; charset=utf-8",
+      "bytes": 21557052,
+      "ciSha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23",
+      "productionSha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-148ef3c\""
+    },
+    {
+      "path": "assets/retained-diagnostic-display-DOTGF6p4.js",
+      "url": "https://haretoku.jp/assets/retained-diagnostic-display-DOTGF6p4.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 24129,
+      "ciSha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48",
+      "productionSha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-5e41\""
+    },
+    {
+      "path": "assets/site-header-entry-B7pGwjIz.js",
+      "url": "https://haretoku.jp/assets/site-header-entry-B7pGwjIz.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 44,
+      "ciSha256": "724dee22943cb213655de5f4525d722289a977c8fb68bc67427db222d03a3d40",
+      "productionSha256": "724dee22943cb213655de5f4525d722289a977c8fb68bc67427db222d03a3d40",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-2c\""
+    },
+    {
+      "path": "assets/solar-partners-D00TnDtz.png",
+      "url": "https://haretoku.jp/assets/solar-partners-D00TnDtz.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 11834,
+      "ciSha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39",
+      "productionSha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-2e3a\""
+    },
+    {
+      "path": "assets/step-icons-WybuhB-8.svg",
+      "url": "https://haretoku.jp/assets/step-icons-WybuhB-8.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 664,
+      "ciSha256": "a7650527c195cf27da2f401422d8fce5ee3d51141cb3e48880e504fed9e3f19a",
+      "productionSha256": "a7650527c195cf27da2f401422d8fce5ee3d51141cb3e48880e504fed9e3f19a",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-298\""
+    },
+    {
+      "path": "assets/style-BDpO0ne3.css",
+      "url": "https://haretoku.jp/assets/style-BDpO0ne3.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 4139,
+      "ciSha256": "bf7aaf644f37d543308536c66c040a1be7b76a5c2e77f640d8483f417a4c6815",
+      "productionSha256": "bf7aaf644f37d543308536c66c040a1be7b76a5c2e77f640d8483f417a4c6815",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-102b\""
+    },
+    {
+      "path": "assets/support-shock-burden-CfPq4i2Y.png",
+      "url": "https://haretoku.jp/assets/support-shock-burden-CfPq4i2Y.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 39885,
+      "ciSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "productionSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-9bcd\""
+    },
+    {
+      "path": "assets/support-shock-burden.png",
+      "url": "https://haretoku.jp/assets/support-shock-burden.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 39885,
+      "ciSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "productionSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-9bcd\""
+    },
+    {
+      "path": "assets/support-shock-burden.svg",
+      "url": "https://haretoku.jp/assets/support-shock-burden.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 2672,
+      "ciSha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496",
+      "productionSha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-a70\""
+    },
+    {
+      "path": "assets/support-shock-daily-compact-DPcvJas5.svg",
+      "url": "https://haretoku.jp/assets/support-shock-daily-compact-DPcvJas5.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 14801,
+      "ciSha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4",
+      "productionSha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-39d1\""
+    },
+    {
+      "path": "assets/support-shock-daily-DdFQA0Ah.svg",
+      "url": "https://haretoku.jp/assets/support-shock-daily-DdFQA0Ah.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 12518,
+      "ciSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9",
+      "productionSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-30e6\""
+    },
+    {
+      "path": "assets/support-shock-daily.png",
+      "url": "https://haretoku.jp/assets/support-shock-daily.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 39192,
+      "ciSha256": "b5e3df2c4f073963c430db5f609d331569709dd1aa9efdb8c699741a0047139c",
+      "productionSha256": "b5e3df2c4f073963c430db5f609d331569709dd1aa9efdb8c699741a0047139c",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-9918\""
+    },
+    {
+      "path": "assets/support-shock-daily.svg",
+      "url": "https://haretoku.jp/assets/support-shock-daily.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 12518,
+      "ciSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9",
+      "productionSha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-30e6\""
+    },
+    {
+      "path": "assets/support-shock-table-1.csv",
+      "url": "https://haretoku.jp/assets/support-shock-table-1.csv",
+      "status": 200,
+      "type": "text/csv; charset=utf-8",
+      "bytes": 703,
+      "ciSha256": "3cd59ba40672c241a4df274e103e140bce6b0512ca97634d58a1579d7608f452",
+      "productionSha256": "3cd59ba40672c241a4df274e103e140bce6b0512ca97634d58a1579d7608f452",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-2bf\""
+    },
+    {
+      "path": "assets/support-shock-table-1.png",
+      "url": "https://haretoku.jp/assets/support-shock-table-1.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 94898,
+      "ciSha256": "7e4735fac5903543cad047a2fc3026872cd7ac1b5e77442d2fe1e30fe9008547",
+      "productionSha256": "7e4735fac5903543cad047a2fc3026872cd7ac1b5e77442d2fe1e30fe9008547",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-172b2\""
+    },
+    {
+      "path": "assets/support-shock-table-2.csv",
+      "url": "https://haretoku.jp/assets/support-shock-table-2.csv",
+      "status": 200,
+      "type": "text/csv; charset=utf-8",
+      "bytes": 729,
+      "ciSha256": "1ae9b340ccbab9a358d8ba0f4129ad052145f0ab9c56330e3ab790a692847e30",
+      "productionSha256": "1ae9b340ccbab9a358d8ba0f4129ad052145f0ab9c56330e3ab790a692847e30",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-2d9\""
+    },
+    {
+      "path": "assets/support-shock-table-2.png",
+      "url": "https://haretoku.jp/assets/support-shock-table-2.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 93193,
+      "ciSha256": "fbaea5728a686155181a30b18df8b6d353a7c857827ed86f3fab7d22e2200b2e",
+      "productionSha256": "fbaea5728a686155181a30b18df8b6d353a7c857827ed86f3fab7d22e2200b2e",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-16c09\""
+    },
+    {
+      "path": "assets/support-shock-table-3.csv",
+      "url": "https://haretoku.jp/assets/support-shock-table-3.csv",
+      "status": 200,
+      "type": "text/csv; charset=utf-8",
+      "bytes": 1320,
+      "ciSha256": "2ad3b75374f1a8ce5c938142f9cce0f275bb12f423f413c0063a20af7ed95ef0",
+      "productionSha256": "2ad3b75374f1a8ce5c938142f9cce0f275bb12f423f413c0063a20af7ed95ef0",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-528\""
+    },
+    {
+      "path": "assets/support-shock-table-3.png",
+      "url": "https://haretoku.jp/assets/support-shock-table-3.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 108329,
+      "ciSha256": "01247c2f6d2b1e617288497d3a7a196e2a5b3a37c69b1ee657ecc5f6017f09ff",
+      "productionSha256": "01247c2f6d2b1e617288497d3a7a196e2a5b3a37c69b1ee657ecc5f6017f09ff",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-1a729\""
+    },
+    {
+      "path": "assets/support-shock-table-4.csv",
+      "url": "https://haretoku.jp/assets/support-shock-table-4.csv",
+      "status": 200,
+      "type": "text/csv; charset=utf-8",
+      "bytes": 633,
+      "ciSha256": "242d91dcb04db0e35653ca80cb16326def5181e3aa28dc67d4c43c74a0732ac6",
+      "productionSha256": "242d91dcb04db0e35653ca80cb16326def5181e3aa28dc67d4c43c74a0732ac6",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-279\""
+    },
+    {
+      "path": "assets/support-shock-table-4.png",
+      "url": "https://haretoku.jp/assets/support-shock-table-4.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 92109,
+      "ciSha256": "e9d5101331c383b444cb63f7a4d92e514717d3647376a17ae0b8bdd038dcaadf",
+      "productionSha256": "e9d5101331c383b444cb63f7a4d92e514717d3647376a17ae0b8bdd038dcaadf",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-167cd\""
+    },
+    {
+      "path": "assets/table-scroll-hint-BMcEuJb1.js",
+      "url": "https://haretoku.jp/assets/table-scroll-hint-BMcEuJb1.js",
+      "status": 200,
+      "type": "application/javascript; charset=utf-8",
+      "bytes": 338,
+      "ciSha256": "882f10fd344a6f62c7e4598ea9510426986e7ce092d8b95adacba06cd74af71a",
+      "productionSha256": "882f10fd344a6f62c7e4598ea9510426986e7ce092d8b95adacba06cd74af71a",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-152\""
+    },
+    {
+      "path": "assets/tainavi-BIkDNw0f.webp",
+      "url": "https://haretoku.jp/assets/tainavi-BIkDNw0f.webp",
+      "status": 200,
+      "type": "image/webp",
+      "bytes": 12230,
+      "ciSha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83",
+      "productionSha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-2fc6\""
+    },
+    {
+      "path": "assets/timeline-B-2dL9ie.css",
+      "url": "https://haretoku.jp/assets/timeline-B-2dL9ie.css",
+      "status": 200,
+      "type": "text/css; charset=utf-8",
+      "bytes": 1894,
+      "ciSha256": "c7c1b8bd8d47eebdaec724444517e2a3925d01f8a815e2bca535b63314743979",
+      "productionSha256": "c7c1b8bd8d47eebdaec724444517e2a3925d01f8a815e2bca535b63314743979",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-766\""
+    },
+    {
+      "path": "assets/title-art-DaW-V9L4.svg",
+      "url": "https://haretoku.jp/assets/title-art-DaW-V9L4.svg",
+      "status": 200,
+      "type": "image/svg+xml",
+      "bytes": 2407,
+      "ciSha256": "c996ba2c758ed645f16e619b20a37ee189d5ee4f7d85a9fc1dcf7823c18881f9",
+      "productionSha256": "c996ba2c758ed645f16e619b20a37ee189d5ee4f7d85a9fc1dcf7823c18881f9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-967\""
+    },
+    {
+      "path": "CNAME",
+      "url": "https://haretoku.jp/CNAME",
+      "status": 200,
+      "type": "application/octet-stream",
+      "bytes": 12,
+      "ciSha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e",
+      "productionSha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-c\""
+    },
+    {
+      "path": "data/index.html",
+      "url": "https://haretoku.jp/data/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 5570,
+      "ciSha256": "bd17b231574799d235ca9a1277b06e206d1945aa1473d708dda822e57a906856",
+      "productionSha256": "bd17b231574799d235ca9a1277b06e206d1945aa1473d708dda822e57a906856",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-15c2\""
+    },
+    {
+      "path": "data/subsidies/index.html",
+      "url": "https://haretoku.jp/data/subsidies/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 7192,
+      "ciSha256": "c48c8103f1f7bc7b4455a684c2a4a5eaedba23b7dc67af25ad2171147399cde4",
+      "productionSha256": "c48c8103f1f7bc7b4455a684c2a4a5eaedba23b7dc67af25ad2171147399cde4",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-1c18\""
+    },
+    {
+      "path": "favicon.png",
+      "url": "https://haretoku.jp/favicon.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 6722,
+      "ciSha256": "b97e71632febfa997e483b4fb070f4d3d9d1d3862d8ba8b88f6251e0bb3853a5",
+      "productionSha256": "b97e71632febfa997e483b4fb070f4d3d9d1d3862d8ba8b88f6251e0bb3853a5",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-1a42\""
+    },
+    {
+      "path": "guides/choosing-installer/index.html",
+      "url": "https://haretoku.jp/guides/choosing-installer/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 23193,
+      "ciSha256": "29dacbc2b1bb9410b81d40a78c03a29e9868f9d1dce82bef835c4a3cae9873fb",
+      "productionSha256": "29dacbc2b1bb9410b81d40a78c03a29e9868f9d1dce82bef835c4a3cae9873fb",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-5a99\""
+    },
+    {
+      "path": "guides/consultation-preparation/index.html",
+      "url": "https://haretoku.jp/guides/consultation-preparation/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 23102,
+      "ciSha256": "3f85b3a12b99b4e3590f6eeae2b76c8afee898bf49bb00380f79cc683bc62bb1",
+      "productionSha256": "3f85b3a12b99b4e3590f6eeae2b76c8afee898bf49bb00380f79cc683bc62bb1",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-5a3e\""
+    },
+    {
+      "path": "guides/disaster-preparedness/index.html",
+      "url": "https://haretoku.jp/guides/disaster-preparedness/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 26171,
+      "ciSha256": "7a7ab63962720b973e8fb66ce36e0c45b798f1d6677dda75eb68fd49d2fc7b99",
+      "productionSha256": "7a7ab63962720b973e8fb66ce36e0c45b798f1d6677dda75eb68fd49d2fc7b99",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-663b\""
+    },
+    {
+      "path": "guides/disaster/index.html",
+      "url": "https://haretoku.jp/guides/disaster/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 20178,
+      "ciSha256": "04e1ea15d2792ed4702de077e90b6daf65624458d9400dce91a53d7ddaf7f2ef",
+      "productionSha256": "04e1ea15d2792ed4702de077e90b6daf65624458d9400dce91a53d7ddaf7f2ef",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4ed2\""
+    },
+    {
+      "path": "guides/electricity-support-end/index.html",
+      "url": "https://haretoku.jp/guides/electricity-support-end/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 31536,
+      "ciSha256": "ef7bb2b04ed6544ab56758b0a3c408ec17e0ba8ea40b9dd0ec114f88870061fa",
+      "productionSha256": "ef7bb2b04ed6544ab56758b0a3c408ec17e0ba8ea40b9dd0ec114f88870061fa",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-7b30\""
+    },
+    {
+      "path": "guides/equipment-maintenance/index.html",
+      "url": "https://haretoku.jp/guides/equipment-maintenance/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 28893,
+      "ciSha256": "c3751628f7f9e3626258bde7b5ada3557da1fa5a78017e98014b777eaa37b4a3",
+      "productionSha256": "c3751628f7f9e3626258bde7b5ada3557da1fa5a78017e98014b777eaa37b4a3",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-70dd\""
+    },
+    {
+      "path": "guides/home-battery/index.html",
+      "url": "https://haretoku.jp/guides/home-battery/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 29066,
+      "ciSha256": "9f9240b7415331f86347ac447edbaf9be69321911a64945729cbddc0554fb966",
+      "productionSha256": "9f9240b7415331f86347ac447edbaf9be69321911a64945729cbddc0554fb966",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-718a\""
+    },
+    {
+      "path": "guides/home-survey/index.html",
+      "url": "https://haretoku.jp/guides/home-survey/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 25028,
+      "ciSha256": "2d278e4bed98d0d998c6f235c1664e68a1487673913b26d1ddf8ccc0d826a00c",
+      "productionSha256": "2d278e4bed98d0d998c6f235c1664e68a1487673913b26d1ddf8ccc0d826a00c",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-61c4\""
+    },
+    {
+      "path": "guides/index.html",
+      "url": "https://haretoku.jp/guides/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 6240,
+      "ciSha256": "c49e60f47b1c9ffb17eefd0276e177c1cae1206f5e72f3bd0219d5b1fecb03ec",
+      "productionSha256": "c49e60f47b1c9ffb17eefd0276e177c1cae1206f5e72f3bd0219d5b1fecb03ec",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-1860\""
+    },
+    {
+      "path": "guides/installation-process/index.html",
+      "url": "https://haretoku.jp/guides/installation-process/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 24760,
+      "ciSha256": "37664208690b57094eca14960412be10396474a80f155c91da63bad7cf2f1cbb",
+      "productionSha256": "37664208690b57094eca14960412be10396474a80f155c91da63bad7cf2f1cbb",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-60b8\""
+    },
+    {
+      "path": "guides/power-outage/index.html",
+      "url": "https://haretoku.jp/guides/power-outage/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 29491,
+      "ciSha256": "b5cee9673f64511f73c377e3b85c8f83e70603164b1e4bb40aeb07a94320324a",
+      "productionSha256": "b5cee9673f64511f73c377e3b85c8f83e70603164b1e4bb40aeb07a94320324a",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-7333\""
+    },
+    {
+      "path": "guides/quote-services/index.html",
+      "url": "https://haretoku.jp/guides/quote-services/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 38990,
+      "ciSha256": "254102c3c994c064554e91d94e95dbdc72a1ebcfc3bc30065aa8428169636ee9",
+      "productionSha256": "254102c3c994c064554e91d94e95dbdc72a1ebcfc3bc30065aa8428169636ee9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-984e\""
+    },
+    {
+      "path": "guides/quotes-contractors/index.html",
+      "url": "https://haretoku.jp/guides/quotes-contractors/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 16728,
+      "ciSha256": "7cc608fd92220cbe582740f3bf6b02efff51ed95d0c29c2a6ea74ac4402ae440",
+      "productionSha256": "7cc608fd92220cbe582740f3bf6b02efff51ed95d0c29c2a6ea74ac4402ae440",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4158\""
+    },
+    {
+      "path": "guides/self-consumption/index.html",
+      "url": "https://haretoku.jp/guides/self-consumption/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 26169,
+      "ciSha256": "8bdcc0fd91b73ade7629e85d2ace2d7166a9df2e1c148a736c4e69c075a35a7b",
+      "productionSha256": "8bdcc0fd91b73ade7629e85d2ace2d7166a9df2e1c148a736c4e69c075a35a7b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-6639\""
+    },
+    {
+      "path": "guides/solar-benefits/index.html",
+      "url": "https://haretoku.jp/guides/solar-benefits/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 23467,
+      "ciSha256": "e4e2a2f9231273c6a6769c4fcaf7c91f27b37ff8cbe84fff95256f8c06f48255",
+      "productionSha256": "e4e2a2f9231273c6a6769c4fcaf7c91f27b37ff8cbe84fff95256f8c06f48255",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-5bab\""
+    },
+    {
+      "path": "guides/solar-consultation/index.html",
+      "url": "https://haretoku.jp/guides/solar-consultation/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 25770,
+      "ciSha256": "79851e60ec1363913e6d07eeeb8f3f9c86feba0633de717c5cf250e0f0fc3f7f",
+      "productionSha256": "79851e60ec1363913e6d07eeeb8f3f9c86feba0633de717c5cf250e0f0fc3f7f",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-64aa\""
+    },
+    {
+      "path": "guides/solar-costs/index.html",
+      "url": "https://haretoku.jp/guides/solar-costs/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 27825,
+      "ciSha256": "bab871421eb4ec349ab9702533eec0ec5066f5992491a094c2a5f540d8b3447f",
+      "productionSha256": "bab871421eb4ec349ab9702533eec0ec5066f5992491a094c2a5f540d8b3447f",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-6cb1\""
+    },
+    {
+      "path": "guides/solar-economics/index.html",
+      "url": "https://haretoku.jp/guides/solar-economics/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 18825,
+      "ciSha256": "12167bd03d082f2e2baceadb6eec090e10e97650d90872532de51f7d153551a9",
+      "productionSha256": "12167bd03d082f2e2baceadb6eec090e10e97650d90872532de51f7d153551a9",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4989\""
+    },
+    {
+      "path": "guides/solar-electricity-savings/index.html",
+      "url": "https://haretoku.jp/guides/solar-electricity-savings/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 16785,
+      "ciSha256": "d5455b3741e4e346724841df3bc1f54ba83b138b4de7219abec53e6a8dba5494",
+      "productionSha256": "d5455b3741e4e346724841df3bc1f54ba83b138b4de7219abec53e6a8dba5494",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4191\""
+    },
+    {
+      "path": "guides/solar-fit/index.html",
+      "url": "https://haretoku.jp/guides/solar-fit/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 18105,
+      "ciSha256": "d64f9b7ae2b302486acab1101133e70656f43dc56619ac26227006ae80a1f92c",
+      "productionSha256": "d64f9b7ae2b302486acab1101133e70656f43dc56619ac26227006ae80a1f92c",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-46b9\""
+    },
+    {
+      "path": "guides/solar-installation-cost/index.html",
+      "url": "https://haretoku.jp/guides/solar-installation-cost/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 18967,
+      "ciSha256": "d5ab9dd147116c7f9bae146fc96d75b9c214d2a8a86c1362c642a2be794307ef",
+      "productionSha256": "d5ab9dd147116c7f9bae146fc96d75b9c214d2a8a86c1362c642a2be794307ef",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4a17\""
+    },
+    {
+      "path": "guides/solar-living/index.html",
+      "url": "https://haretoku.jp/guides/solar-living/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 24914,
+      "ciSha256": "726e53c492b5d12c666e3da0a2969c6fbea6e6584b759789a1db05de44cd128b",
+      "productionSha256": "726e53c492b5d12c666e3da0a2969c6fbea6e6584b759789a1db05de44cd128b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-6152\""
+    },
+    {
+      "path": "guides/solar-maintenance-cost/index.html",
+      "url": "https://haretoku.jp/guides/solar-maintenance-cost/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 22638,
+      "ciSha256": "1d05276a27878df7f431a2f3e7f2cfd4be3dc91a473c515b762362508f28afa8",
+      "productionSha256": "1d05276a27878df7f431a2f3e7f2cfd4be3dc91a473c515b762362508f28afa8",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-586e\""
+    },
+    {
+      "path": "guides/subsidies/index.html",
+      "url": "https://haretoku.jp/guides/subsidies/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 15076,
+      "ciSha256": "c401653a4367741ea11fc5c70b8e9c25397813bd0848e6f8f52ac766916c7f44",
+      "productionSha256": "c401653a4367741ea11fc5c70b8e9c25397813bd0848e6f8f52ac766916c7f44",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-3ae4\""
+    },
+    {
+      "path": "guides/subsidy-amount/index.html",
+      "url": "https://haretoku.jp/guides/subsidy-amount/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 16792,
+      "ciSha256": "09f3fa9412a46de2fe60c1605e5c27aa7a6c146c72f68286f4063087e94d9886",
+      "productionSha256": "09f3fa9412a46de2fe60c1605e5c27aa7a6c146c72f68286f4063087e94d9886",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4198\""
+    },
+    {
+      "path": "guides/welcome/index.html",
+      "url": "https://haretoku.jp/guides/welcome/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 22498,
+      "ciSha256": "4deff308ef4c37c995fa211c988d49c9fd0d278301f73aafc086b587eda30617",
+      "productionSha256": "4deff308ef4c37c995fa211c988d49c9fd0d278301f73aafc086b587eda30617",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-57e2\""
+    },
+    {
+      "path": "index.html",
+      "url": "https://haretoku.jp/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 18196,
+      "ciSha256": "ab055d7de42d92b3094f89ca9d7ed7e9d425ded6ebd18f2106aeea5905141bdd",
+      "productionSha256": "ab055d7de42d92b3094f89ca9d7ed7e9d425ded6ebd18f2106aeea5905141bdd",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4714\""
+    },
+    {
+      "path": "manual/equipment-renewal/consultation/index.html",
+      "url": "https://haretoku.jp/manual/equipment-renewal/consultation/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 29153,
+      "ciSha256": "0feb08d2eeb86a2dfe6fa341a01443d43ac428bbc511fa5b49450a8b311b0c3b",
+      "productionSha256": "0feb08d2eeb86a2dfe6fa341a01443d43ac428bbc511fa5b49450a8b311b0c3b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-71e1\""
+    },
+    {
+      "path": "manual/equipment-renewal/costs/index.html",
+      "url": "https://haretoku.jp/manual/equipment-renewal/costs/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 16999,
+      "ciSha256": "dcb1d42507feb4fa81fecaf9583026f8f4d481911965cf91beb5c75bce82b841",
+      "productionSha256": "dcb1d42507feb4fa81fecaf9583026f8f4d481911965cf91beb5c75bce82b841",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4267\""
+    },
+    {
+      "path": "manual/equipment-renewal/index.html",
+      "url": "https://haretoku.jp/manual/equipment-renewal/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 14655,
+      "ciSha256": "fb062af73649849ec2f7c3ec7bf18e403952ae0dc50514703b0005efa8af84a3",
+      "productionSha256": "fb062af73649849ec2f7c3ec7bf18e403952ae0dc50514703b0005efa8af84a3",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-393f\""
+    },
+    {
+      "path": "manual/getting-started/index.html",
+      "url": "https://haretoku.jp/manual/getting-started/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 11403,
+      "ciSha256": "9c063b002e372e8c3321a130767d65a0f92ac565406ea1e2fe9a3ca964cf938a",
+      "productionSha256": "9c063b002e372e8c3321a130767d65a0f92ac565406ea1e2fe9a3ca964cf938a",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-2c8b\""
+    },
+    {
+      "path": "manual/getting-started/milestones/index.html",
+      "url": "https://haretoku.jp/manual/getting-started/milestones/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 12422,
+      "ciSha256": "f096d3b64b600eb40d3ef9b9e32d31c0ce336412676618a9c6bf80279044c2be",
+      "productionSha256": "f096d3b64b600eb40d3ef9b9e32d31c0ce336412676618a9c6bf80279044c2be",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-3086\""
+    },
+    {
+      "path": "manual/getting-started/troubles/index.html",
+      "url": "https://haretoku.jp/manual/getting-started/troubles/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 16435,
+      "ciSha256": "e090b54286afc0da7f9f0412cac486900ed56351880f79069cfd26dab824f28d",
+      "productionSha256": "e090b54286afc0da7f9f0412cac486900ed56351880f79069cfd26dab824f28d",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-4033\""
+    },
+    {
+      "path": "manual/index.html",
+      "url": "https://haretoku.jp/manual/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 32322,
+      "ciSha256": "faa9c6f7a357b008c8290034308805e0eab4edb085d65355c02da4b135e173ec",
+      "productionSha256": "faa9c6f7a357b008c8290034308805e0eab4edb085d65355c02da4b135e173ec",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-7e42\""
+    },
+    {
+      "path": "og-home-photo-20260926.jpg",
+      "url": "https://haretoku.jp/og-home-photo-20260926.jpg",
+      "status": 200,
+      "type": "image/jpeg",
+      "bytes": 78275,
+      "ciSha256": "bcbda55c0c9fa8bd840891ab9ee21f57383736376c3936f83029a64d3a035e62",
+      "productionSha256": "bcbda55c0c9fa8bd840891ab9ee21f57383736376c3936f83029a64d3a035e62",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-131c3\""
+    },
+    {
+      "path": "og-image.png",
+      "url": "https://haretoku.jp/og-image.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 415229,
+      "ciSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "productionSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-655fd\""
+    },
+    {
+      "path": "og-self-consumption-v040.png",
+      "url": "https://haretoku.jp/og-self-consumption-v040.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 44485,
+      "ciSha256": "0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c",
+      "productionSha256": "0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-adc5\""
+    },
+    {
+      "path": "og-step-map-20261017-v034.png",
+      "url": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 415229,
+      "ciSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "productionSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-655fd\""
+    },
+    {
+      "path": "og-step-map-20261017.png",
+      "url": "https://haretoku.jp/og-step-map-20261017.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 415229,
+      "ciSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "productionSha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-655fd\""
+    },
+    {
+      "path": "og-support-shock-burden.png",
+      "url": "https://haretoku.jp/og-support-shock-burden.png",
+      "status": 200,
+      "type": "image/png",
+      "bytes": 39885,
+      "ciSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "productionSha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-9bcd\""
+    },
+    {
+      "path": "pages/calculation-method.html",
+      "url": "https://haretoku.jp/pages/calculation-method.html",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 76606,
+      "ciSha256": "39f6373a1f7054468d62ac57ee93c34514a870fd213631817788563600e0a93e",
+      "productionSha256": "39f6373a1f7054468d62ac57ee93c34514a870fd213631817788563600e0a93e",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-12b3e\""
+    },
+    {
+      "path": "pages/policy.html",
+      "url": "https://haretoku.jp/pages/policy.html",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 13121,
+      "ciSha256": "2a4a3a66d3511d6314838cef57b08af7b4b6da973401f83a1bb9a20899a0b55a",
+      "productionSha256": "2a4a3a66d3511d6314838cef57b08af7b4b6da973401f83a1bb9a20899a0b55a",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-3341\""
+    },
+    {
+      "path": "press/index.html",
+      "url": "https://haretoku.jp/press/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 5619,
+      "ciSha256": "76ae7bff4e670b47f4d7ab1a6fe39582f84f7d600c0a0480ec1d74462825603e",
+      "productionSha256": "76ae7bff4e670b47f4d7ab1a6fe39582f84f7d600c0a0480ec1d74462825603e",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-15f3\""
+    },
+    {
+      "path": "robots.txt",
+      "url": "https://haretoku.jp/robots.txt",
+      "status": 200,
+      "type": "text/plain; charset=utf-8",
+      "bytes": 65,
+      "ciSha256": "5eb08d7202a7815316a495e465625a5b27d854def0a3c65fd2b297643bc62de6",
+      "productionSha256": "5eb08d7202a7815316a495e465625a5b27d854def0a3c65fd2b297643bc62de6",
+      "exact": true,
+      "typeOK": true,
+      "etag": "\"6ada1ae5-41\""
+    },
+    {
+      "path": "simulator/index.html",
+      "url": "https://haretoku.jp/simulator/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "bytes": 22739,
+      "ciSha256": "f00ce697352d1ec96a8911ab3c3714bfae737624009e8bdfd3395ebd8ff43d2d",
+      "productionSha256": "f00ce697352d1ec96a8911ab3c3714bfae737624009e8bdfd3395ebd8ff43d2d",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-58d3\""
+    },
+    {
+      "path": "sitemap.xml",
+      "url": "https://haretoku.jp/sitemap.xml",
+      "status": 200,
+      "type": "application/xml",
+      "bytes": 2676,
+      "ciSha256": "5786845fbde129bd25e2cb700a3a7db065a676a94f3ada85617065e3a0a02b17",
+      "productionSha256": "5786845fbde129bd25e2cb700a3a7db065a676a94f3ada85617065e3a0a02b17",
+      "exact": true,
+      "typeOK": true,
+      "etag": "W/\"6ada1ae5-a74\""
+    }
+  ],
+  "normalization": [
+    {
+      "url": "https://haretoku.jp/manual",
+      "status": 301,
+      "location": "https://haretoku.jp/manual/",
+      "expected": "https://haretoku.jp/manual/",
+      "passed": true
+    },
+    {
+      "url": "http://haretoku.jp/",
+      "status": 301,
+      "location": "https://haretoku.jp/",
+      "expected": "https://haretoku.jp/",
+      "passed": true
+    },
+    {
+      "url": "https://www.haretoku.jp/",
+      "status": 301,
+      "location": "https://haretoku.jp/",
+      "expected": "https://haretoku.jp/",
+      "passed": true
+    },
+    {
+      "url": "https://haretoku.jp/manual/equipment-renewal",
+      "status": 301,
+      "location": "https://haretoku.jp/manual/equipment-renewal/",
+      "expected": "https://haretoku.jp/manual/equipment-renewal/",
+      "passed": true
+    },
+    {
+      "url": "https://haretoku.jp/guides/self-consumption",
+      "status": 301,
+      "location": "https://haretoku.jp/guides/self-consumption/",
+      "expected": "https://haretoku.jp/guides/self-consumption/",
+      "passed": true
+    }
+  ],
+  "indexAliases": [
+    {
+      "path": "/guides/solar-economics/index.html",
+      "status": 200,
+      "canonical": "https://haretoku.jp/guides/solar-economics/",
+      "passed": true
+    },
+    {
+      "path": "/index.html",
+      "status": 200,
+      "canonical": "https://haretoku.jp/",
+      "passed": true
+    },
+    {
+      "path": "/manual/getting-started/index.html",
+      "status": 200,
+      "canonical": "https://haretoku.jp/manual/getting-started/",
+      "passed": true
+    },
+    {
+      "path": "/manual/index.html",
+      "status": 200,
+      "canonical": "https://haretoku.jp/manual/",
+      "passed": true
+    }
+  ],
+  "notFound": [
+    {
+      "path": "/manual/not-a-page-v060/",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/qa/artifacts/v060-release-candidate-files.json",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/prototypes/step-map/",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/qa/README.md",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/site/docs/画面設計.md",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/.openai/hosting.json",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/AGENTS.md",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/package.json",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/shared/walkthrough/state.js",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/design/characters/harena.png",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/design/characters/professor.png",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/solar/",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/guides/solar-profit-conditions/",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/pages/costs-maintenance.html",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/pages/electricity-sales.html",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/pages/subsidies.html",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/pages/disaster.html",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    },
+    {
+      "path": "/pages/quotes-contractors.html",
+      "status": 404,
+      "type": "text/html; charset=utf-8",
+      "noindex": true,
+      "exact404": true,
+      "passed": true
+    }
+  ],
+  "canonical": [
+    {
+      "path": "/manual/",
+      "canonical": "https://haretoku.jp/manual/",
+      "title": "わが家の太陽光トリセツ｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/manual/getting-started/",
+      "canonical": "https://haretoku.jp/manual/getting-started/",
+      "title": "太陽光の設置，おめでとう！｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-intro-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/manual/getting-started/milestones/",
+      "canonical": "https://haretoku.jp/manual/getting-started/milestones/",
+      "title": "これからの節目を知っておこう｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-intro-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/manual/getting-started/troubles/",
+      "canonical": "https://haretoku.jp/manual/getting-started/troubles/",
+      "title": "気になることがあったら，トリセツへ｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-intro-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/manual/equipment-renewal/",
+      "canonical": "https://haretoku.jp/manual/equipment-renewal/",
+      "title": "長く使った太陽光，更新する？使い続ける？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-renewal-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/manual/equipment-renewal/costs/",
+      "canonical": "https://haretoku.jp/manual/equipment-renewal/costs/",
+      "title": "継続・更新・撤去に，いくらかかる？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-renewal-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/manual/equipment-renewal/consultation/",
+      "canonical": "https://haretoku.jp/manual/equipment-renewal/consultation/",
+      "title": "誰に，何を相談すればいい？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-manual-renewal-20261021.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/welcome/",
+      "canonical": "https://haretoku.jp/guides/welcome/",
+      "title": "あなたの家に合うか，一つずつ確かめよう．｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-benefits/",
+      "canonical": "https://haretoku.jp/guides/solar-benefits/",
+      "title": "太陽光で，電気代の節約と停電への備え．｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-costs/",
+      "canonical": "https://haretoku.jp/guides/solar-costs/",
+      "title": "太陽光パネルには，どんなお金がかかる？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/simulator/",
+      "canonical": "https://haretoku.jp/simulator/",
+      "title": "わが家では，どのくらい得になりそう？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-living/",
+      "canonical": "https://haretoku.jp/guides/solar-living/",
+      "title": "太陽光パネルで，暮らしはどう変わる？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/home-battery/",
+      "canonical": "https://haretoku.jp/guides/home-battery/",
+      "title": "蓄電池を入れると，何が変わる？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/equipment-maintenance/",
+      "canonical": "https://haretoku.jp/guides/equipment-maintenance/",
+      "title": "使い続けるには，どんな手入れがいる？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/power-outage/",
+      "canonical": "https://haretoku.jp/guides/power-outage/",
+      "title": "停電したとき，どこまで使える？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/disaster-preparedness/",
+      "canonical": "https://haretoku.jp/guides/disaster-preparedness/",
+      "title": "災害にはどう備え，壊れたらどうする？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/consultation-preparation/",
+      "canonical": "https://haretoku.jp/guides/consultation-preparation/",
+      "title": "相談に向けて，今の希望を考えてみよう．｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/home-survey/",
+      "canonical": "https://haretoku.jp/guides/home-survey/",
+      "title": "自宅を見てもらい，見積もりを取ろう．｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/installation-process/",
+      "canonical": "https://haretoku.jp/guides/installation-process/",
+      "title": "納得して契約し，工事と引渡しへ進もう．｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-consultation/",
+      "canonical": "https://haretoku.jp/guides/solar-consultation/",
+      "title": "どこに相談すればいい？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/quote-services/",
+      "canonical": "https://haretoku.jp/guides/quote-services/",
+      "title": "一括見積もりサイトは，どう選ぶ？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/choosing-installer/",
+      "canonical": "https://haretoku.jp/guides/choosing-installer/",
+      "title": "良い施工会社はどう選ぶ？｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/",
+      "canonical": "https://haretoku.jp/",
+      "title": "はれトク｜わが家の太陽光・蓄電池えらび",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/",
+      "canonical": "https://haretoku.jp/guides/",
+      "title": "太陽光えらびの詳しいガイド｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/press/",
+      "canonical": "https://haretoku.jp/press/",
+      "title": "プレスリリース｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/self-consumption/",
+      "canonical": "https://haretoku.jp/guides/self-consumption/",
+      "title": "太陽光の収支をよくするには？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-self-consumption-20261018.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-economics/",
+      "canonical": "https://haretoku.jp/guides/solar-economics/",
+      "title": "太陽光の収支は，何で決まる？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-solar-economics-20261019-v3.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/subsidies/",
+      "canonical": "https://haretoku.jp/guides/subsidies/",
+      "title": "補助金は，どう探してどう申請する？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-subsidies-20261019-v2.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/disaster/",
+      "canonical": "https://haretoku.jp/guides/disaster/",
+      "title": "停電時，太陽光・蓄電池で何ができる？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-disaster-20261019-v3.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/quotes-contractors/",
+      "canonical": "https://haretoku.jp/guides/quotes-contractors/",
+      "title": "太陽光の見積もりは，何を比べる？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-quotes-contractors-20261019-v2.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-electricity-savings/",
+      "canonical": "https://haretoku.jp/guides/solar-electricity-savings/",
+      "title": "太陽光で，電気代はどれくらい減る？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-fit/",
+      "canonical": "https://haretoku.jp/guides/solar-fit/",
+      "title": "FIT制度とは？住宅用太陽光の売電価格・手続き・終了後｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-solar-fit-20261019-v4.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-installation-cost/",
+      "canonical": "https://haretoku.jp/guides/solar-installation-cost/",
+      "title": "太陽光の設置費は，何にいくらかかる？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/solar-maintenance-cost/",
+      "canonical": "https://haretoku.jp/guides/solar-maintenance-cost/",
+      "title": "太陽光の維持費は，何にいくらかかる？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/subsidy-amount/",
+      "canonical": "https://haretoku.jp/guides/subsidy-amount/",
+      "title": "補助金で，自己負担はどれくらい減る？｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/assets/og-guide-subsidy-amount-20261019-v5.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/guides/electricity-support-end/",
+      "canonical": "https://haretoku.jp/guides/electricity-support-end/",
+      "title": "2026年11月分から電気代支援終了，太陽光・蓄電池の有無で年間の負担増に約3.3倍の差｜はれトク",
+      "robots": "index,follow",
+      "og": "https://haretoku.jp/og-support-shock-burden.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/pages/policy.html",
+      "canonical": "https://haretoku.jp/pages/policy.html",
+      "title": "はれトクの方針｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    },
+    {
+      "path": "/pages/calculation-method.html",
+      "canonical": "https://haretoku.jp/pages/calculation-method.html",
+      "title": "計算方法・使用データ｜はれトク",
+      "og": "https://haretoku.jp/og-step-map-20261017-v034.png",
+      "noPreviewLeak": false
+    }
+  ],
+  "shareImages": [
+    {
+      "path": "/assets/og-manual-20261021.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "a5d4ee79d8637de26b3d33f2571debfacf1d49177349bf6b3433d1ec8a6e08c5",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-manual-intro-20261021.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "1c21b765c1f1f37b3e129216f104d62052a96fef4d9df57f7f2657775e61cbd2",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-manual-renewal-20261021.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/og-step-map-20261017-v034.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-self-consumption-20261018.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-solar-economics-20261019-v3.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-subsidies-20261019-v2.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-disaster-20261019-v3.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-quotes-contractors-20261019-v2.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-solar-fit-20261019-v4.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/assets/og-guide-subsidy-amount-20261019-v5.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "path": "/og-support-shock-burden.png",
+      "status": 200,
+      "exact": true,
+      "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b",
+      "width": 1320,
+      "height": 585
+    }
+  ],
+  "advertisingPages": [
+    {
+      "path": "/manual/",
+      "links": [
+        {
+          "id": "solar-partners",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E",
+          "affiliate": true
+        },
+        {
+          "id": "tainavi",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU",
+          "affiliate": true
+        },
+        {
+          "id": "griene",
+          "href": "https://griene.jp/",
+          "affiliate": false
+        },
+        {
+          "id": "solar-partners",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E",
+          "affiliate": true
+        },
+        {
+          "id": "tainavi",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU",
+          "affiliate": true
+        },
+        {
+          "id": "griene",
+          "href": "https://griene.jp/",
+          "affiliate": false
+        }
+      ],
+      "passed": true,
+      "newApplicationSent": false
+    },
+    {
+      "path": "/manual/equipment-renewal/consultation/",
+      "links": [
+        {
+          "id": "solar-partners",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E",
+          "affiliate": true
+        },
+        {
+          "id": "tainavi",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU",
+          "affiliate": true
+        },
+        {
+          "id": "griene",
+          "href": "https://griene.jp/",
+          "affiliate": false
+        },
+        {
+          "id": "solar-partners",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E",
+          "affiliate": true
+        },
+        {
+          "id": "tainavi",
+          "href": "https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU",
+          "affiliate": true
+        },
+        {
+          "id": "griene",
+          "href": "https://griene.jp/",
+          "affiliate": false
+        }
+      ],
+      "passed": true,
+      "newApplicationSent": false
+    }
+  ],
+  "errors": [],
+  "processesStarted": [],
+  "sitemap": {
+    "status": 200,
+    "count": 38,
+    "unique": 38,
+    "sha256": "5786845fbde129bd25e2cb700a3a7db065a676a94f3ada85617065e3a0a02b17"
+  },
+  "robots": {
+    "allow": true,
+    "sitemap": true
+  },
+  "reused": [
+    "qa/artifacts/v060-release-integrity-review.jsonの本文/数値/計算と公開データの独立PASS．",
+    "qa/artifacts/v060-ci-artifact-independent-manifest.jsonのローカルとCIの対応証明．",
+    "広告素材URL・表記・比較範囲は未変更の既存PASSを再利用．HTTPは新規2掲載先の実HTMLとCI一致を確認し，外部申込フォームは送信しない．"
+  ],
+  "limits": [
+    "本検収はGETによるHTTP・配信物照合．ブラウザーの実操作・保存・Google実受信・ASP報告・Search Console・SNS実共有は親担当又は別工程．",
+    "広告リンクをHTMLで照合し，外部アフィリエイトURLや1px広告画像へのリクエストは発生させていない．",
+    "本番HTTPSはNode fetchの既定TLS検証を有効にした状態で取得．明示的に証明書検証を無効化していない．"
+  ],
+  "counts": {
+    "files": 135,
+    "exact": 135,
+    "canonical": 38,
+    "shares": 15,
+    "notFound": 18,
+    "errors": 0
+  },
+  "status": "PASS_D02_PRODUCTION",
+  "completedAt": "2026-10-22T14:23:34.288Z",
+  "parentAftercare": {
+    "asp": {
+      "existingRegistrationsChanged": false,
+      "preparedCsv": "qa/artifacts/v060-a8-additions-pending.csv",
+      "status": "not submitted",
+      "additions": 4,
+      "reason": "separate management window did not open through normal tab and global-menu links"
+    },
+    "completedAt": "2026-10-22T14:37:50.7432848+00:00",
+    "browser": {
+      "result": "PASS in documented representative scope",
+      "pc": [
+        1280,
+        900
+      ],
+      "processesStarted": [],
+      "handoffTabs": [
+        "A8 existing program detail",
+        "Search Console user account"
+      ],
+      "temporaryTabsClosed": true,
+      "viewportReset": true,
+      "mobile": [
+        390,
+        844
+      ]
+    },
+    "annotatedTag": "v0.6.0",
+    "ga": {
+      "evidence": "local only; excluded from public Git",
+      "authorization": "user explicitly approved new-page GA reading after initial automated review denial",
+      "status": "PASS scoped",
+      "receivedPaths": [
+        "/manual/",
+        "/manual/getting-started/",
+        "/manual/equipment-renewal/consultation/",
+        "/manual/equipment-renewal/costs/"
+      ],
+      "eventsObserved": [
+        "page_view",
+        "article_view"
+      ],
+      "scope": "representative receipt; operational test traffic; not all payloads or all7 URLs"
+    },
+    "release": "https://github.com/haretoku/frontend/releases/tag/v0.6.0",
+    "google": {
+      "duplicateRetries": 0,
+      "requests": [
+        {
+          "url": "https://haretoku.jp/manual/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-manual-request.jpg",
+          "indexed": "not confirmed"
+        },
+        {
+          "url": "https://haretoku.jp/manual/getting-started/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-intro-request.jpg",
+          "indexed": "not confirmed"
+        },
+        {
+          "url": "https://haretoku.jp/manual/getting-started/milestones/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-milestones-request.jpg",
+          "indexed": "not confirmed"
+        },
+        {
+          "url": "https://haretoku.jp/manual/getting-started/troubles/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-intro-troubles-request.jpg",
+          "indexed": "not confirmed"
+        },
+        {
+          "url": "https://haretoku.jp/manual/equipment-renewal/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-renewal-request.jpg",
+          "indexed": "not confirmed"
+        },
+        {
+          "url": "https://haretoku.jp/manual/equipment-renewal/costs/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-renewal-costs-request.jpg",
+          "indexed": "not confirmed"
+        },
+        {
+          "url": "https://haretoku.jp/manual/equipment-renewal/consultation/",
+          "status": "priority crawl queue accepted",
+          "evidence": "v060-google-renewal-consultation-request.jpg",
+          "indexed": "not confirmed"
+        }
+      ],
+      "sitemap": "submission accepted; published sitemap38 URLs; last read31 on console was old read",
+      "actualIndexing": "pending"
+    },
+    "ciTemporaryStorage": "download ZIP/tar/extracted files removed after independent comparison; fixed manifest and checks retained",
+    "sharing": {
+      "noMessagesSent": true,
+      "actualLineShare": "not performed"
+    }
+  }
+}

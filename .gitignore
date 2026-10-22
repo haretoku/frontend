@@ -14,6 +14,8 @@ qa/screenshots/
 /qa/*.jpg
 /qa/*.png
 /qa/artifacts/*.log
+/qa/artifacts/v060-ga-new-routes-received.jpg
+/qa/artifacts/v060-a8-management-open-failed.jpg
 /qa/artifacts/top-map-prototype/
 
 .DS_Store
