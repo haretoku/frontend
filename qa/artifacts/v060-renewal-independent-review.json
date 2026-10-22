@@ -1,0 +1,162 @@
+{
+  "reviewer": "v060_renewal_review（実装担当とは別のサブエージェント）",
+  "date": "2026-10-21",
+  "sourceDeploymentCommit": "0cf2e4a9c95702068cbb5a72bf5def730dc35c45",
+  "decision": "PASS_WITH_RECOMMENDATIONS",
+  "meaning": "本文・図表・数値根拠の確認範囲でMUST指摘なし．実表示及び人間レビューの合格を意味しない．",
+  "targetFiles": [
+    {
+      "file": "site/manual/equipment-renewal/index.html",
+      "sha256": "227dd5d272b6ead0c7ce16b9d6244f489f8605f5202eeaaaf0af93fa9d8d3a90"
+    },
+    {
+      "file": "site/manual/equipment-renewal/costs/index.html",
+      "sha256": "c4129ac1bbcedf706889e7db31cae90caed23d7b7d17f42d2de0a11d47c132d4"
+    },
+    {
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "sha256": "ab044dab75b8cadd7e0a599d6ffc1c7f00ab0ad1f36ae70773c34f4aad3f9664"
+    },
+    {
+      "file": "site/manual/equipment-renewal/style.css",
+      "sha256": "e3f620d33df3e471a52132fa59d43768c5591b8cc8f5c5b09b76be368783e18c"
+    },
+    {
+      "file": "qa/artifacts/v060-equipment-renewal-sources.json",
+      "sha256": "84f479c5bad623628fb8c5d5829a399375da0519ddb96371c5247a92015b25a2"
+    }
+  ],
+  "checked": [
+    "3ページは継続・更新・撤去の判断，費用，相談の各問いに順に答えている．各ページにハレナの疑問への答え，図表を受ける発言，自然な読者の返事と補足質問がある．",
+    "30年はサイトの目安として説明し，一律の交換義務・保証又は確定寿命を主張していない．JPEAの漸次的性能変化，修理・部分交換検討と整合．",
+    "栃和の4kW載せ替え75〜150万円・パワコン別約35万円を原ページの該当説明に照合．合算した確定額は掲載せず，税区分・足場・撤去処分の含有不明を示している．",
+    "撤去10枚は9万円＋5万円＋15.1〜18.84万円＝29.1〜32.84万円．掲載丸め値29〜33万円と一致．同社足場施工条件・金具別途・税不明も記載．",
+    "価格2例は別条件であり，同一容量の更新対撤去の差額比較とは扱っていない．1枚交換価格の掛け算を全更新額にしない説明も妥当．",
+    "診断の新設から30年の対象期間及び30年後撤去再設置は次の設置費・次の30年は算定外という説明を，calculation-method.htmlと既存維持費記事へ照合した．",
+    "JPEAの既設販売施工店・屋根工事店・メーカーへの相談，撤去時の防水と認定／補助金確認に対応する．既存機器の組合せは施工会社・メーカーへ確認する限定説明で，一律の互換性を主張していない．",
+    "記事から次ページ・前ページ・各章・トリセツへ進むリンクと，正規アバターの共通読み出しを静的に確認．",
+    "CSSは600px以下でカード1列，表は固定幅・通常折返し・2列であることを確認．実表示は別担当．"
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "RECOMMEND",
+      "file": "site/manual/equipment-renewal/index.html",
+      "line": 43,
+      "excerpt": "パネル・パワコン・屋根の状態",
+      "issue": "設置済み読者向けでも記事単体で入ると「パワコン」が説明されていない．",
+      "fix": "初出を「パワコン（電気を家庭で使える形に変える機器）」等の短い説明にする．詳しい機能や交換年数を追加する必要はない．"
+    },
+    {
+      "id": "R2",
+      "priority": "RECOMMEND",
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "line": 43,
+      "excerpt": "JPEAが案内する取外し・適正処理に対応する施工業者の一覧もあります",
+      "issue": "撤去の相談先の一覧を本文で案内するが，そこから直接開けず，末尾の折りたたみ資料からJPEAの親ページを経由する必要がある．撤去だけを検討する人が次の行動を選びにくい．",
+      "fix": "本文の該当語句をJPEAの施工業者一覧（PDF）へリンクし，対応地域・機種を確認する案内を短く添える．",
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/20260513_allchart.pdf"
+    },
+    {
+      "id": "N1",
+      "priority": "NITS",
+      "file": "site/manual/equipment-renewal/costs/index.html",
+      "line": 43,
+      "excerpt": "表2　株式会社栃和の公開価格例",
+      "issue": "原資料の載せ替え額は同社が掲載する一般的な説明上の目安で，実際に請けた工事の契約価格の事例とは区別したい．本文と注記で目安と示しているため，現状をMUSTとはしない．",
+      "fix": "captionを「表2　株式会社栃和の解説に掲載された費用の目安」とし，博士の「公開例」も「掲載目安」にそろえると厳密．"
+    }
+  ],
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 2,
+    "NITS": 1
+  },
+  "sources": [
+    {
+      "url": "https://solar-panel.jp/contents/solar-panel-replacement/",
+      "checkedSection": "4kW全交換の費用目安，PC同時交換の別額．一枚交換表の合計不整合は記事未採用のため影響なし．"
+    },
+    {
+      "url": "https://solar-panel.jp/contents/solar-panel-dismantling-cost/",
+      "checkedSection": "1〜19枚単価・10枚の積上げ，足場自社施工・金具別途，運搬処分の範囲．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/house/waste/",
+      "checkedSection": "撤去前の修理交換，相談先，認定・補助金，防水，費用の2分類．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/faq/583/",
+      "checkedSection": "パネルの漸次的性能変化と寿命表現の区別．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/house/longuser/",
+      "checkedSection": "点検・状態確認．"
+    },
+    {
+      "url": "https://jp.sharp/sunvista/support/faqs/answer.html",
+      "checkedSection": "他社パネルの接続条件，構成確認後の既設への機器提案．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/20260513_allchart.pdf",
+      "checkedSection": "2026年5月13日更新の撤去・適正処理施工業者一覧及び対応地域・機種確認の注記．"
+    }
+  ],
+  "notChecked": [
+    "ブラウザ実表示・PC／スマホ実画面，DOM実動作，外部サイトへの送客操作．親担当が担当する．",
+    "実際の工事価格，業者の対応可否又は個別設備への技術適合性．記事自体が個別確認へ案内している．",
+    "新しい数値のbackend実計算．本記事は診断計算を変更しておらず，既存の費用範囲説明との照合のみ実施．",
+    "人間レビュー，本番公開，検索・共有情報の本番検収．"
+  ],
+  "processesStarted": [],
+  "followupReviews": [
+    {
+      "date": "2026-10-21",
+      "scope": "R1・R2・N1の3修正に限定した再確認．他の本文・数値根拠のPASSは前回レビューから再利用．",
+      "decision": "PASS_CONTENT_SCOPE",
+      "targetFiles": [
+        {
+          "file": "site/manual/equipment-renewal/index.html",
+          "sha256": "16e77bcc37f4e1f624bfd122d3e2cdac9a8bb717bbd9e4d2542916d78b442a3a"
+        },
+        {
+          "file": "site/manual/equipment-renewal/costs/index.html",
+          "sha256": "bce73eb19e851993805fe6ebdf2f9d253875b321d9ff31303a489dc8360726f4"
+        },
+        {
+          "file": "site/manual/equipment-renewal/consultation/index.html",
+          "sha256": "0e228410572b3bb561245f33695277c8ce90516cf9b3ef265082cad5a74fb6a6"
+        }
+      ],
+      "resolved": [
+        {
+          "id": "R1",
+          "result": "PASS",
+          "evidence": "1ページ目の初出にパワコンの役割を短く説明する括弧書きが入った．"
+        },
+        {
+          "id": "R2",
+          "result": "PASS",
+          "evidence": "3ページ目の本文から，確認済みJPEA一覧PDF（20260513_allchart.pdf）へ直接移動するリンクを配置．別タブ・noopener noreferrerあり．"
+        },
+        {
+          "id": "N1",
+          "result": "PASS",
+          "evidence": "表2のcaptionを同社解説に掲載された費用の目安へ変更し，実際の契約価格例との混同を抑えた．"
+        }
+      ],
+      "openCounts": {
+        "MUST": 0,
+        "RECOMMEND": 0,
+        "NITS": 0
+      },
+      "notChecked": "実表示・ブラウザ操作・人間レビューは引き続き本再確認の対象外．"
+    }
+  ],
+  "currentDecision": "PASS_CONTENT_SCOPE",
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  }
+}

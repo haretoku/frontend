@@ -1,9 +1,13 @@
-import { mapReadingMissions } from './state.js';
+import { mapReadingMissions, manualScheduleLinks } from './state.js';
 // 歩き方からの移動だけを，同じタブの次のページで1回受け取る．
 const key = 'haretoku-walkthrough-target-v1';
 const destinations = {
   ...Object.fromEntries(mapReadingMissions.map(mission => [mission.id, { pathname: '/', hash: '', selector: `#map [data-step="${mission.step}"]` }])),
   diagnosis: { pathname: '/simulator/', hash: '', selector: '#start-diagnosis, #prefecture' },
+  article: { pathname:'/guides/', hash:'', selector:'[data-guide-map-index]' },
+  'manual-schedule-article': { pathname:'/manual/', hash:'#timeline', selector:manualScheduleLinks.map(link=>`#panel-timeline .manual-guide[href="${link.href}"]`).join(', ') },
+  'manual-quote': { pathname:'/manual/', hash:'#manual-consultation', selector:'#manual-consultation .consult-provider-action' },
+  'manual-article': { pathname:'/manual/', hash:'#troubles', selector:'#panel-troubles .manual-guide:not([href="/manual/equipment-renewal/"])' },
   quote: { pathname: '/', hash: '#map-consultation', selector: '#map-consultation .consult-provider-action' }
 };
 

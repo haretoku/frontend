@@ -1,7 +1,6 @@
 const destinations=[
-  ['guides','/guides/','詳しいガイド'],
   ['press','/press/','プレスリリース'],
-  ['data','/data/','補助金を調べる'],
+  ['data','/data/','データを見る'],
   ['method','/pages/calculation-method.html','計算方法・使用データ']
 ];
 
@@ -14,7 +13,17 @@ export function renderSiteHeader(current='') {
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a class="map-link" href="/"${current==='map'?' aria-current="page"':''}>太陽光えらびマップ</a>
+            <div class="menu-primary">
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光を考えている方へ</p>
+                <a class="map-link" href="/"${current==='map'?' aria-current="page"':''}><span class="menu-primary-title">太陽光えらびマップ</span></a>
+                <a class="map-link" href="/guides/"${current==='guides'?' aria-current="page"':''}><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>
+              </div>
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光をつけた方へ</p>
+                <a class="map-link" href="/manual/"${current==='manual'?' aria-current="page"':''}><span class="menu-primary-title">太陽光トリセツ</span></a>
+              </div>
+            </div>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
               ${destinations.map(([id,url,label])=>`<a href="${url}"${current===id?' aria-current="page"':''}>${label}</a>`).join('\n              ')}
@@ -34,6 +43,8 @@ export function renderSiteHeader(current='') {
 
 export function headerSection(path) {
   if(path==='index.html')return 'map';
+  if(path.startsWith('manual/'))return 'manual';
+  if(['guides/self-consumption/index.html','guides/disaster/index.html'].includes(path))return 'manual';
   if(path==='press/index.html'||path==='guides/electricity-support-end/index.html')return 'press';
   if(path.startsWith('guides/'))return 'guides';
   if(path.startsWith('data/'))return 'data';

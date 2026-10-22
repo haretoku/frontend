@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 150" fill="none" stroke="#648a75" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <ellipse cx="100" cy="132" rx="83" ry="8" fill="#dce6cf" stroke="none"/>
+  <g transform="rotate(-7 75 83)">
+    <path d="M21 43q25-7 51 4 26-11 51-4v82q-25-6-51 5-26-11-51-5Z" fill="#b5d0c3"/>
+    <path d="M25 35q24-5 47 6 24-11 47-6v82q-23-5-47 6-23-11-47-6Z" fill="#fffdf3"/>
+    <path d="M72 41v82"/>
+    <path d="M36 55q12-1 24 4m-24 7q12-1 24 4M84 55q12-4 23-3m-23 13q12-4 23-3" stroke="#8baa96"/>
+    <path d="m36 89 13-11 13 11m-22-3v17h18V86" fill="#e6eee0"/>
+    <path d="m45 79 12 2 2 9-12-2Z" fill="#b5d0c3"/>
+    <path d="M84 84h23m-23 10h18m-18 10h23" stroke="#8baa96"/>
+  </g>
+  <g>
+    <path d="M133 119v12m-16 2h44" stroke-width="3"/>
+    <rect x="88" y="48" width="106" height="73" rx="8" fill="#e5eee6"/>
+    <rect x="96" y="56" width="90" height="49" rx="3" fill="#fffdf3"/>
+    <g fill="#8baa96" stroke="none" font-family="Arial, sans-serif">
+      <text x="103" y="69" font-size="9">発電</text>
+      <text x="103" y="92" font-size="16">3.2</text>
+      <text x="130" y="92" font-size="11">kW</text>
+    </g>
+    <g fill="#b5d0c3" stroke="none">
+      <rect x="162" y="88" width="4" height="9" rx="1"/>
+      <rect x="168" y="81" width="4" height="16" rx="1"/>
+      <rect x="174" y="75" width="4" height="22" rx="1"/>
+    </g>
+    <circle cx="141" cy="113" r="2.5" fill="#f7d47b" stroke-width="1.5"/>
+  </g>
+</svg>

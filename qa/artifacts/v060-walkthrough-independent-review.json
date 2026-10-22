@@ -1,0 +1,192 @@
+{
+  "reviewer": "/root/v060_walkthrough_review",
+  "date": "2026-10-21T12:13:28.703Z",
+  "status": "PASS_WITH_VERIFICATION_LIMITS",
+  "humanReview": "not performed",
+  "sourceStageCommit": "0cf2e4a9c95702068cbb5a72bf5def730dc35c45",
+  "scope": "歩き方5項目，公開分4項目の集計，導入・更新各3ページの達成，独立した分類，保存互換性，リセット，外部見積もりリンクと強調移動．現在のローカル版の静的・限定実行レビュー．",
+  "reviewed": [
+    {
+      "path": "site/shared/walkthrough/state.js",
+      "sha256": "9301cb86c788228e670074ad3088549e00fc6eee7d848b14c77d80d116c8585d"
+    },
+    {
+      "path": "site/shared/walkthrough/reading.js",
+      "sha256": "83e8d7435afa4870b1e7c58f321525fbdc4df7a6143c0562f8d8782103f8a95f"
+    },
+    {
+      "path": "site/shared/walkthrough/tracker.js",
+      "sha256": "0eb256436f6bb352a38c2dd96b01b46265a2b480694fb768d4aebca6353d8538"
+    },
+    {
+      "path": "site/shared/walkthrough/panel.js",
+      "sha256": "a4f3113277e35569cd1d9b47292ce8b13b08ed98b45494881e6825082111a800"
+    },
+    {
+      "path": "site/shared/walkthrough/navigation.js",
+      "sha256": "e89a53edc735f5707745ab8abf2bcea08f269afc0bde4e12a4d1073f644a5381"
+    },
+    {
+      "path": "site/shared/walkthrough/panel.css",
+      "sha256": "1ce530d923022d741330fb2a6b3e3ffbcfa06057e007a3fafbc166197459b1bb"
+    },
+    {
+      "path": "site/shared/walkthrough/target.js",
+      "sha256": "d7a4eace7ea689b700f6950df162e8ddc685e4abc7c71f3aa15d7ccd20de1516"
+    },
+    {
+      "path": "site/shared/walkthrough/reset.css",
+      "sha256": "d5024c6af858ea38b1dc53e0e6a9c81103acb1e82472dac41d5400e6666f1538"
+    },
+    {
+      "path": "site/shared/site-header.js",
+      "sha256": "b85c470736382e1714d4dc655f08a1e4a5b43d4920a1cf8ec9933440fb48bb65"
+    },
+    {
+      "path": "site/manual/content.js",
+      "sha256": "61cc4c76671bcd1a2c5007df66e23bb242de16810959d6d355f3abb10bb9f269"
+    },
+    {
+      "path": "qa/tests/walkthrough.test.js",
+      "sha256": "4aa4ef4d88aae80515bdcf3ffde11631448afcf86505cf5728042252901986e6"
+    },
+    {
+      "path": "qa/tests/walkthrough-target.test.js",
+      "sha256": "2fdbe2a6572d7ffec35a566b369315f8646a464ca0eceb489978fe879adb0fc0"
+    }
+  ],
+  "reused": [
+    {
+      "artifact": "qa/artifacts/v060-walkthrough-five-step-tests.log",
+      "result": "17 PASS",
+      "note": "同一変更版の既存PASSを再利用．追加で旧HEAD版との共有保存再現を独立実行．"
+    }
+  ],
+  "checks": [
+    {
+      "area": "mission order and pending",
+      "result": "PASS",
+      "details": "map/guides/manualの順．manualは5行，scheduleが準備中で非リンク・集計対象外．公開分4を分母としてのみ集計する．"
+    },
+    {
+      "area": "reading independence",
+      "result": "PASS",
+      "details": "導入・更新はそれぞれ3ページすべての末尾表示で集約する．更新をschedule/trouble記事へ重複計上しない．困りごとは2記事，詳しいガイドは現行一覧8記事で分類する．"
+    },
+    {
+      "area": "reset",
+      "result": "PASS for current version",
+      "details": "capture listenerで歩き方の同一保存キーを先に消し，既存処理でMAP条件をリセットする．取消しには消去処理を接続していない．"
+    },
+    {
+      "area": "external action",
+      "result": "PASS",
+      "details": "会社カードへの移動だけでは達成させず，有効なhttp(s)のdata-consult-providerを左／中クリックした時だけquote/manual-quoteを記録．依頼完了とは表示しない．"
+    },
+    {
+      "area": "target navigation",
+      "result": "PASS for current available items",
+      "details": "期限・指定文書・hash一致・一度消費・通常閲覧で強調しない仕様．pending scheduleは操作不可．更新h1，困りごと既存記事，TOP会社カードの移動先が対応．"
+    },
+    {
+      "area": "legacy concurrent tab",
+      "result": "PASS after limited recheck",
+      "details": "公開済みHEAD版は同じv1キーをvalidIdsで濾過して上書きし，新版のmanualキーを失わせる．"
+    }
+  ],
+  "findings": [
+    {
+      "id": "WT-M1",
+      "level": "MUST",
+      "file": "site/shared/walkthrough/state.js",
+      "line": 3,
+      "title": "旧版タブの書込みから新しい進捗を保護する",
+      "reason": "現行と公開済みHEADが同じharetoku-walkthrough-v1を使う．旧タブでMAP項目を達成すると旧validIdsに存在しないトリセツの進捗を保存から落とす．",
+      "reproduction": {
+        "before": "{\"manual-renewal-page-1\":true}",
+        "action": "旧HEAD版completeMission('read-intro')",
+        "after": "{\"read-intro\":true}"
+      },
+      "suggestion": "新しい保存キーへ移行し，旧キーから同じ意味の有効値を引き継ぐ．新キーに保存後は旧タブ書込みで戻らないようにし，共通リセットでは新旧両方を消す．",
+      "status": "resolved",
+      "resolution": "保存キーv2へ変更し，正常な旧オブジェクト読取時に直ちにv2へ保存．旧タブはv1だけを書き込むため新進捗を失わせない．共通リセットはv1も含む全旧キーを消す．"
+    }
+  ],
+  "limits": [
+    "ブラウザ及び共有タブは依頼に従い操作していない．PC実表示は親担当．スマホ実表示・スクリーンリーダー・実端末・本番は本レビューでは未確認．",
+    "記事本文・費用の一次根拠のレビューは別担当の範囲．",
+    "独立レビューの合格は人間レビュー又は本番公開を意味しない．"
+  ],
+  "processesStarted": [],
+  "rechecks": [
+    {
+      "date": "2026-10-21T12:15:53.796Z",
+      "scope": "WT-M1：保存キーv2化の限定再確認",
+      "stateSha256": "68574d2308845d4856aa26b9e6c434b9d09ce56b1dcea50cf3c7bd21fb008922",
+      "results": [
+        {
+          "case": "v2へ新規達成を保存してから旧HEAD版でread-introを書き込む",
+          "result": "PASS",
+          "observed": "manual-renewal-page-1 remains true"
+        },
+        {
+          "case": "v1から新版が読取っただけの移行直後に旧HEAD版が書き込む",
+          "result": "FAIL",
+          "observed": {
+            "before": "{\"manual-renewal-page-1\":true,\"article\":true}",
+            "v2Written": false,
+            "after": "{\"article\":true,\"read-intro\":true}"
+          }
+        }
+      ],
+      "conclusion": "新規保存後は保護されるが，移行が読取り時に確定しないためWT-M1を未解決とする．親へ追加修正を依頼した．"
+    },
+    {
+      "date": "2026-10-21T12:17:01.678Z",
+      "scope": "WT-M1最終限定再確認：正常な旧値の読取り時v2移行，旧HEAD書込み，fallback，リセット",
+      "reviewed": [
+        {
+          "path": "site/shared/walkthrough/state.js",
+          "sha256": "486945dea0885a6fecce579c02b49f267f04ad4c9128391beba082da5957dbde"
+        },
+        {
+          "path": "qa/tests/walkthrough.test.js",
+          "sha256": "3a1aecb23b7ea198578056fa7f26013435dbeb268517fee36f4e8cc93818a959"
+        }
+      ],
+      "results": [
+        {
+          "case": "新規v2書込み後に公開済み旧HEADタブがv1を上書きしても新進捗を保持",
+          "result": "PASS"
+        },
+        {
+          "case": "v1を読んだ時点で移行確定し，操作前の旧HEAD書込みでも新進捗を保持",
+          "result": "PASS"
+        },
+        {
+          "case": "preview-v3から意味が同じ有効値を保存し，無効値を除く",
+          "result": "PASS"
+        },
+        {
+          "case": "preview-v2からは旧仕様と意味が同じ診断・見積・記事の3項目だけ移行",
+          "result": "PASS"
+        },
+        {
+          "case": "既存の空v2保存を尊重し，旧v1から未要求の再移行をしない",
+          "result": "PASS"
+        },
+        {
+          "case": "リセットはv2・v1・preview全てを削除し，MAPと初回案内は既存担当へ残す",
+          "result": "PASS"
+        }
+      ],
+      "conclusion": "6ケースPASS．初回の保存互換性MUSTを解消．それ以外の対象は初回静的レビューと同一コードのPASSを再利用．親が更新した既存18テストPASSは親の記録を参照．"
+    }
+  ],
+  "finalUnresolvedCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "finalReviewedAt": "2026-10-21T12:17:01.679Z"
+}

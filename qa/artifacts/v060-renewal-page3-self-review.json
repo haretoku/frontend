@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-22",
+  "scope": "設備更新3ページ目のみ",
+  "deploymentCommit": "a47407ec1fc29dae299d1a36677ff227ac291120",
+  "deployment": "appgdep_6ad9fd9e72308191858e5b400df2756f",
+  "files": [
+    {
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "sha256": "a4ff8853ca5328f143be7c41a4402cbce94443e4e71121617399a3a7c0f88ecd"
+    },
+    {
+      "file": "site/manual/equipment-renewal/style.css",
+      "sha256": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d"
+    }
+  ],
+  "checks": {
+    "mainQuestion": true,
+    "figure3": true,
+    "qualifiedReferral": true,
+    "fallbackQuestion": true,
+    "proceduresQuestion": true,
+    "threeReaderReplies": true,
+    "localTargets": true,
+    "avatarImagesLoaded": true
+  },
+  "display": {
+    "pc": {
+      "width": 1280,
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "screenshot": "v060-renewal-page3-review-pc.png"
+    },
+    "mobile": {
+      "width": 360,
+      "height": 812,
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "cardWidth": 309,
+      "screenshot": "v060-renewal-page3-review-mobile.png"
+    },
+    "screenshots": [
+      "v060-renewal-page3-review-pc-top.png",
+      "v060-renewal-page3-review-questions.png",
+      "v060-renewal-page3-review-mobile-top.png",
+      "v060-renewal-page3-review-mobile-question.png"
+    ],
+    "questions": "補足2問の開閉・回答表示を確認し，確認後は閉じた．",
+    "navigation": "返事から/#map-consultationへ移動し3社カードと見出しへの到達を確認．元ページへ戻した．他の2返事はDOMと静的リンク先を照合．",
+    "viewportOverrideReset": true,
+    "realDevice": false
+  },
+  "reuse": [
+    "v060-renewal-page3-consultation-build.log：対象HTML/CSS不変の開発版ビルドPASS",
+    "v060-renewal-page3-review.json：今回の別担当内容レビューPASS"
+  ],
+  "decision": "PASS",
+  "humanReview": {
+    "status": "OK",
+    "authorization": "3ページ目レビューして．問題なければ人間レビューOKで．",
+    "scope": "設備更新3ページ目．既存1・2ページの承認を維持する．v0.6.0全体の承認・本番公開を意味しない．"
+  },
+  "limits": [
+    "修理のみ・撤去のみの個別紹介可否は運営への問い合わせで確認する範囲．今回実際の問合せ送信は行っていない．",
+    "実機UX検査とは区別する．"
+  ],
+  "processesStarted": []
+}

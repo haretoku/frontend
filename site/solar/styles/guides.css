@@ -484,3 +484,22 @@
   .guide-filter-row { flex-direction: column; align-items: stretch; gap: .5rem; }
   .guide-filter-row .guide-library__count { text-align: right; }
 }
+
+/* マップのマスと，対応する詳しい記事の関係を示す． */
+.guide-directory-audience { margin:0 0 .5rem; color:var(--color-muted); font-size:.8rem; }
+.guide-directory--topics .guide-page-title { margin-bottom:1.5rem; line-height:1.5; }
+.guide-map-index { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin:0 0 2.25rem; }
+.guide-map-index a { display:flex; align-items:center; gap:12px; min-height:64px; padding:14px 18px; border:1px solid #d6e1d7; border-radius:12px; background:#f4f8f1; color:#123f31; font-size:.95rem; font-weight:700; text-decoration:none; }
+.guide-map-index a:hover { background:#eaf3e7; border-color:#7fa68a; }
+.guide-map-marker { position:relative; display:inline-flex; flex:none; margin-right:4px; }
+.guide-map-number { position:absolute; right:-5px; bottom:-3px; display:grid; place-items:center; width:18px; height:18px; border:2px solid #f4f8f1; border-radius:50%; background:#286c50; color:#fff; font-size:11px; font-weight:700; line-height:1; }
+.guide-group__heading .guide-map-number { border-color:var(--color-background, #fff); }
+.guide-map-icon { display:block; flex:none; width:36px; height:36px; fill:none; stroke:#527c62; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+.guide-directory--topics .guide-group__heading h2 { gap:10px; }
+.guide-map-link { display:inline-flex; min-height:40px; align-items:center; margin:-.5rem 0 .75rem; color:#007447; font-size:.85rem; font-weight:700; text-underline-offset:4px; }
+.guide-map-index a:focus-visible, .guide-map-link:focus-visible { outline:3px solid #005fcc; outline-offset:4px; }
+@media(max-width:600px) {
+ .guide-map-index { grid-template-columns:1fr; gap:8px; margin-bottom:1.75rem; }
+ .guide-map-index a { min-height:54px; padding:12px 14px; font-size:.85rem; }
+ .guide-map-icon { width:30px; height:30px; }
+}

@@ -5,10 +5,10 @@ export const guideGroups = [
 export const pressGroups = [{id:'news',title:'調査結果・発表資料',label:'プレスリリース'}];
 
 const topicGroups = [
-  {id:'electricity',label:'電気の使い方',title:'使う・売るを知る',ids:['self-consumption','solar-electricity-savings','solar-fit']},
-  {id:'cost',label:'費用・補助金',title:'かかるお金と収支を知る',ids:['electricity-sales','solar-installation-cost','subsidies','subsidy-amount']},
-  {id:'equipment',label:'設備・維持管理',title:'長く使うために',ids:['solar-maintenance-cost','disaster']},
-  {id:'companies',label:'会社選び',title:'見積もりを比べる',ids:['quotes-contractors']}
+  {id:'economics',step:1,icon:'calc',mission:'read-economics',label:'わが家はいくら得になる？',title:'収支・電気代・設置費・補助額',ids:['electricity-sales','solar-electricity-savings','solar-installation-cost','subsidy-amount']},
+  {id:'equipment',step:2,icon:'sun',mission:'read-equipment',label:'太陽光と蓄電池を知ろう',title:'売電の制度・長く使うための費用',ids:['solar-fit','solar-maintenance-cost']},
+  {id:'installation',step:3,icon:'route',mission:'read-installation',label:'つけるまでの流れ',title:'補助金を探して，申請を進める',ids:['subsidies']},
+  {id:'companies',step:4,icon:'people',mission:'read-companies',label:'どんな会社に頼む？',title:'見積もりを比べる',ids:['quotes-contractors']}
 ];
 
 export function groupedArticles(articles,{press=false,topics=false}={}) {

@@ -1,5 +1,6 @@
 import articles from '../../solar/data/articles.json';
-import { completeMission, clearWalkthrough, mapReadingMissions } from './state.js';
+import { completeMission, clearWalkthrough, mapReadingMissions, manualIntroPages, manualRenewalPages } from './state.js';
+import {articleReadingMission} from './reading.js';
 import './reset.css';
 import './target.js';
 
@@ -15,10 +16,10 @@ if (reset) {
 // 既存MAPの保存・判定は読み書きしない．
 const pathname = location.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
 const complete = id => completeMission(id);
-function whenVisible(element, callback, threshold = 0.5) {
+function whenVisible(element, callback, threshold = 0.5, eligible = () => true) {
   if (!element) return;
   const observer = new IntersectionObserver(entries => {
-    if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= threshold)) {
+    if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= threshold) && eligible()) {
       callback();
       observer.disconnect();
     }
@@ -69,16 +70,25 @@ if (pathname === '/simulator/') {
   if (result) new MutationObserver(checkResult).observe(result, { attributes: true, childList: true, subtree: true });
   checkResult();
 }
-if (articles.some(article => ['detail', 'core'].includes(article.articleType) && article.href === pathname)) {
-  const ending = document.querySelector('article .chapter:last-of-type .harena-summary') || document.querySelector('article');
+const readingPage = [...manualIntroPages,...manualRenewalPages].find(page => page.pathname === pathname);
+if (readingPage) whenVisible(document.querySelector('.starter-response-person'), () => complete(readingPage.id));
+const articleMission = articleReadingMission(pathname, articles);
+if (articleMission) {
+  const ending = document.querySelector('article .chapter:last-of-type .harena-summary') || document.querySelector('.starter-response-person') || document.querySelector('article');
   whenVisible(ending, () => {
-    complete('article');
+    complete(articleMission);
   });
 }
-if (pathname === '/' || pathname === '/guides/quote-services/') {
+if (['/','/guides/quote-services/','/manual/','/manual/equipment-renewal/consultation/'].includes(pathname)) {
   const trackQuote = event => {
     if (event.type === 'auxclick' && event.button !== 1) return;
-    if (event.target.closest('a[data-consult-provider]')) complete('quote');
+    if (event.type === 'click' && event.button !== 0) return;
+    const provider = event.target.closest('a[data-consult-provider]');
+    if (!provider || provider.getAttribute('aria-disabled') === 'true') return;
+    const href = provider.getAttribute('href');
+    if (!href || !/^https?:/.test(href)) return;
+    complete('quote');
+    complete('manual-quote');
   };
   document.addEventListener('click', trackQuote);
   document.addEventListener('auxclick', trackQuote);

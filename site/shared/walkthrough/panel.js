@@ -2,6 +2,7 @@ import './panel.css';
 import { missionGroups, readWalkthrough, groupProgress, walkthroughStorageKey } from './state.js';
 import { rememberWalkthroughTarget } from './navigation.js';
 import { introduceWalkthrough } from './first-visit.js';
+import { walkthroughAudiences, preferredWalkthroughAudience, saveWalkthroughAudience } from './audience.js';
 
 // 金色の勲章の中央には，記事と共通のハレナを使う．
 const harena = new URL('../../map/assets/navigator.png', import.meta.url).href;
@@ -26,14 +27,69 @@ if (nav) {
   panel.setAttribute('role', 'dialog');
   panel.setAttribute('aria-labelledby', 'walkthrough-title');
   panel.innerHTML = `<div class="walkthrough-binding" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-    <header class="walkthrough-panel__header"><div><p class="walkthrough-eyebrow">わが家の太陽光えらび</p><h2 id="walkthrough-title">はれトクの歩き方</h2></div><button class="walkthrough-close" type="button" aria-label="歩き方を閉じる">×</button></header>
+    <header class="walkthrough-panel__header"><div><p class="walkthrough-eyebrow">わが家の太陽光</p><h2 id="walkthrough-title">はれトクの歩き方</h2></div><button class="walkthrough-close" type="button" aria-label="歩き方を閉じる">×</button></header>
+    <div class="walkthrough-tabs" role="tablist" aria-label="対象を選ぶ"></div>
     <div class="walkthrough-groups"></div>`;
+  const audienceTabs = new Map();
+  const audiencePanels = new Map();
+  function selectAudience(id, focus=false, save=true) {
+    if(save)saveWalkthroughAudience(id);
+    for (const audience of walkthroughAudiences) {
+      const selected=audience.id===id;
+      const tab=audienceTabs.get(audience.id);
+      tab.setAttribute('aria-selected', String(selected));
+      tab.tabIndex=selected?0:-1;
+      audiencePanels.get(audience.id).hidden=!selected;
+    }
+    panel.scrollTop=0;
+    if(focus)audienceTabs.get(id).focus();
+  }
+  for (const [index,audience] of walkthroughAudiences.entries()) {
+    const tab=document.createElement('button');
+    tab.type='button';
+    tab.className='walkthrough-tab';
+    tab.id=`walkthrough-tab-${audience.id}`;
+    tab.setAttribute('role','tab');
+    tab.setAttribute('aria-controls',`walkthrough-audience-${audience.id}`);
+    const subject=document.createElement('span');
+    subject.className='walkthrough-tab__subject';
+    subject.textContent='太陽光を';
+    const audienceLabel=document.createElement('span');
+    audienceLabel.textContent=audience.label.slice(subject.textContent.length);
+    tab.append(subject,audienceLabel);
+    tab.addEventListener('click',()=>selectAudience(audience.id));
+    tab.addEventListener('keydown',event=>{
+      let target;
+      if(event.key==='ArrowRight')target=(index+1)%walkthroughAudiences.length;
+      else if(event.key==='ArrowLeft')target=(index+walkthroughAudiences.length-1)%walkthroughAudiences.length;
+      else if(event.key==='Home')target=0;
+      else if(event.key==='End')target=walkthroughAudiences.length-1;
+      else return;
+      event.preventDefault();
+      selectAudience(walkthroughAudiences[target].id,true);
+    });
+    const content=document.createElement('section');
+    content.id=`walkthrough-audience-${audience.id}`;
+    content.className='walkthrough-audience';
+    content.setAttribute('role','tabpanel');
+    content.setAttribute('aria-labelledby',tab.id);
+    audienceTabs.set(audience.id,tab);
+    audiencePanels.set(audience.id,content);
+    panel.querySelector('.walkthrough-tabs').append(tab);
+    panel.querySelector('.walkthrough-groups').append(content);
+  }
+  let previousAudience = null;
   for (const group of missionGroups) {
     const section = document.createElement('section');
     section.className = 'walkthrough-group';
     section.dataset.missionGroup = group.id;
     const titleId = `walkthrough-group-${group.id}`;
     section.setAttribute('aria-labelledby', titleId);
+    const audience = document.createElement('p');
+    audience.className = 'walkthrough-group__audience';
+    audience.textContent = group.audience;
+    audience.hidden = previousAudience === group.audience;
+    previousAudience = group.audience;
     const header = document.createElement('div');
     header.className = 'walkthrough-group__heading';
     const title = document.createElement('h3');
@@ -64,6 +120,7 @@ if (nav) {
     group.missions.forEach((mission, index) => {
       const row = document.createElement('li');
       row.dataset.mission = mission.id;
+      row.dataset.pending = String(Boolean(mission.pending));
       const indicator = document.createElement('span');
       indicator.className = 'walkthrough-stamp';
       indicator.setAttribute('aria-hidden', 'true');
@@ -72,9 +129,13 @@ if (nav) {
       status.id = `walkthrough-status-${mission.id}`;
       status.className = 'walkthrough-sr-only';
       status.dataset.missionStatus = '';
-      const link = document.createElement('a');
-      link.href = mission.href;
+      const link = document.createElement(mission.pending ? 'span' : 'a');
+      if (mission.pending) {
+        link.className = 'walkthrough-pending-label';
+        link.setAttribute('aria-disabled', 'true');
+      } else link.href = mission.href;
       const remember = event => {
+        if (mission.pending) return;
         if ((event.type === 'click' && event.button === 0) || (event.type === 'auxclick' && event.button === 1)) {
           rememberWalkthroughTarget(mission.id);
           panel.hidePopover();
@@ -94,13 +155,20 @@ if (nav) {
       arrow.className = 'walkthrough-arrow';
       arrow.setAttribute('aria-hidden', 'true');
       arrow.textContent = '→';
-      link.append(arrow);
+      if (mission.pending) {
+        const badge = document.createElement('span');
+        badge.className = 'walkthrough-pending-badge';
+        badge.textContent = '準備中';
+        link.append(badge);
+      } else link.append(arrow);
       row.append(indicator, link, status);
       list.append(row);
     });
-    section.append(header, description, progress, list);
-    panel.querySelector('.walkthrough-groups').append(section);
+    section.append(audience, header, description, progress, list);
+    const groupAudience=walkthroughAudiences.find(audience=>audience.groups.includes(group.id));
+    audiencePanels.get(groupAudience.id).append(section);
   }
+  selectAudience(preferredWalkthroughAudience(location.pathname),false,false);
   document.body.append(panel);
   button.popoverTargetElement = panel;
   document.querySelector('#menu-button').addEventListener('click', () => {
@@ -135,9 +203,10 @@ if (nav) {
       section.querySelector('.walkthrough-medal').hidden = !result.complete;
     }
     for (const row of panel.querySelectorAll('[data-mission]')) {
-      const done = state[row.dataset.mission] === true;
+      const pending = row.dataset.pending === 'true';
+      const done = !pending && state[row.dataset.mission] === true;
       row.classList.toggle('is-done', done);
-      row.querySelector('[data-mission-status]').textContent = done ? '達成済み' : '未達成';
+      row.querySelector('[data-mission-status]').textContent = pending ? '準備中．進捗の対象外' : done ? '達成済み' : '未達成';
     }
   }
   window.addEventListener('walkthrough-change', render);

@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-22",
+  "scope": "設備更新の1ページ目のみ",
+  "deploymentCommit": "b42c7967fd69b2c048d43e6c614579769b0dd7d7",
+  "checks": {
+    "threeChoices": true,
+    "benefits": true,
+    "cautions": true,
+    "opening": true,
+    "noEarlyExit": true,
+    "next": true,
+    "questions": true
+  },
+  "files": [
+    {
+      "file": "site/manual/equipment-renewal/index.html",
+      "sha256": "49a3da7d9e8d48e211cc74cbb5b53b34c1b91a89a0f96e12da3f5f2ec836375d"
+    },
+    {
+      "file": "site/manual/equipment-renewal/style.css",
+      "sha256": "5e31f39f031dfb7658b09293d51ab5e40d11fb5bb2ec195a1749e31b0d433032"
+    }
+  ],
+  "display": {
+    "pc": "v060-renewal-page1-review-pc.png",
+    "mobile": "v060-renewal-page1-review-mobile.png",
+    "viewportOverride": {
+      "width": 360,
+      "height": 812
+    },
+    "observedDocument": {
+      "clientWidth": 345,
+      "scrollWidth": 345
+    },
+    "question": "保証が終わったら，使えなくなる？ の開閉・回答表示確認",
+    "realDevice": false
+  },
+  "reuse": [
+    "v060-renewal-independent-review.jsonの不変な一次根拠確認",
+    "v060-harena-opening-preview-build.logの同一配信物ビルド"
+  ],
+  "note": "独立判定と本人の条件付き承認は別記録．2・3ページ目又は記事全体の人間レビュー完了を意味しない．"
+}

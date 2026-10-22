@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-22",
+  "scope": "設備更新2ページ目：継続・更新・撤去の価格例へ再構成",
+  "amounts": [
+    {
+      "scenario": "継続",
+      "inspectionManYenPerVisit": 3.8,
+      "pcsExchangeManYenPerVisit": 38.4,
+      "condition": "必要な場合だけ交換．その他の修理は別途．",
+      "source": "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+      "basis": "5 kW設備の資料に基づくサイトの既存診断採用額．同値を維持費記事・backendの根拠C1・旧検収から再利用．",
+      "verificationLimit": "今回のweb取得は403．一次資料原表・税区分の新規照合はできていない．今回新たな市場価格としては扱わない．"
+    },
+    {
+      "scenario": "更新",
+      "kw": 4,
+      "replacementManYen": [
+        75,
+        150
+      ],
+      "additionalPcsManYen": 35,
+      "source": "https://solar-panel.jp/contents/solar-panel-replacement/",
+      "verified": "本文「全交換（載せ替え）の費用目安」に今回照合．PCS同時交換の追加額を継続時の単独交換価格には転用しない．",
+      "scopeUnclear": "税・足場・古い設備の撤去処分を含む範囲"
+    },
+    {
+      "scenario": "撤去",
+      "panelCount": 10,
+      "totalManYen": [
+        29,
+        33
+      ],
+      "detailManYen": {
+        "remove": 9,
+        "transportAndDisposal": 5,
+        "scaffold": [
+          15.1,
+          18.84
+        ]
+      },
+      "source": "https://solar-panel.jp/contents/solar-panel-dismantling-cost/",
+      "verified": "1〜19枚，同社足場施工条件，金具等別途．本文の内訳に今回照合．"
+    }
+  ],
+  "notComparable": "作業・容量・出典が異なる参考額．同一設備・同一期間の総額比較ではない．",
+  "humanReview": "pending",
+  "page1": "本文は人間レビューOKの版を維持．末尾の2ページ目リンク名だけ変更．"
+}

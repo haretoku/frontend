@@ -1,0 +1,87 @@
+.guide-article .starter-series { margin:0 0 12px; color:#647268; font-size:14px; }
+.guide-article .starter-response { display:grid; grid-template-columns:minmax(0,1fr) 85px; gap:20px; align-items:start; margin-top:32px; }
+.guide-article .starter-response-person { grid-column:2; grid-row:1; text-align:center; }
+.guide-article .starter-response-person > img { display:block; width:75px; height:90px; margin:0 auto; object-fit:contain; }
+.guide-article .starter-response-person h2 { margin:8px 0 0; padding:0; border:0; font-size:12px; line-height:1.6; }
+.guide-article .starter-response-bubble { position:relative; grid-column:1; grid-row:1; min-width:0; padding:20px; border:1px solid #dce5dc; border-radius:16px; background:#fff; }
+.guide-article .starter-response-bubble::before { content:""; position:absolute; box-sizing:border-box; right:-7px; top:30px; width:12px; height:12px; background:inherit; border-right:1px solid #dce5dc; border-top:1px solid #dce5dc; transform:rotate(45deg); }
+.guide-article .starter-reply-link { display:block; min-height:48px; padding:14px 18px; border:1px solid #008653; border-radius:10px; background:#008653; color:#fff; font-size:16px; font-weight:700; line-height:1.8; text-align:center; text-decoration:none; }
+.guide-article .starter-reply-link + .starter-reply-link { margin-top:12px; background:#fff; color:#007447; }
+.guide-article .starter-reply-link:hover { background:#006d45; color:#fff; }
+.guide-article .starter-question { margin-top:12px; }
+.guide-article .starter-question > summary { padding:12px 16px; border:1px solid #dce5dc; border-radius:10px; font-size:14px; line-height:1.8; cursor:pointer; }
+.guide-article .starter-question[open] > summary { background:#f4f7f1; }
+.guide-article .starter-question .lead-turn { width:100%; margin-top:16px; gap:12px; }
+.guide-article .starter-question .lead-turn img { flex-basis:48px; width:48px; height:64px; }
+.guide-article .starter-question .lead-bubble { padding:14px 16px; }
+.guide-article .starter-question .lead-bubble p { font-size:14px; }
+.guide-article .starter-question .lead-bubble .starter-reference { margin-top:10px; font-size:12px; }
+.guide-article .starter-reference a { color:#007447; font-weight:700; text-underline-offset:4px; }
+.guide-article .starter-previous { margin-top:18px; font-size:13px; }
+.guide-article .starter-previous a { display:inline-flex; align-items:center; min-height:44px; color:#647268; text-underline-offset:4px; }
+.guide-article .starter-page-index { margin-top:24px; padding-top:20px; border-top:1px solid #dce5dc; font-size:13px; line-height:1.8; }
+.guide-article .starter-page-index ol { list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:8px 20px; }
+.guide-article .starter-page-index a { display:block; padding:6px 0; color:#647268; text-underline-offset:4px; }
+.guide-article .starter-page-index a[aria-current="page"] { color:#007447; font-weight:700; }
+.guide-article .starter-character-choice { margin:28px 0; padding:20px; border:1px solid #dce5dc; border-radius:12px; }
+.guide-article .starter-character-choice legend { padding:0 6px; color:#123f31; font-size:15px; font-weight:700; }
+.guide-article .starter-character-choice p { margin:0 0 12px; color:#647268; font-size:12px; line-height:1.8; }
+.guide-article .starter-character-options { display:flex; flex-wrap:wrap; gap:16px; }
+.guide-article .starter-character-options label { display:flex; flex-direction:column; align-items:center; gap:6px; min-width:112px; padding:12px; border-radius:10px; font-size:12px; cursor:pointer; }
+.guide-article .starter-character-options label:has(input:checked) { background:#edf6ed; outline:2px solid #008653; }
+.guide-article .starter-character-options input { width:18px; height:18px; accent-color:#008653; }
+.guide-article .starter-character-options img { width:90px; height:90px; object-fit:contain; }
+.guide-article .starter-character-choice .starter-save-status { margin:12px 0 0; }
+.guide-article .starter-save-status:empty { display:none; }
+.guide-article .starter-timeline-figure { margin:28px 0; }
+.guide-article .starter-timeline-panel { padding:22px; border:1px solid #dce4dc; border-radius:18px; background:#edf3ec; }
+.guide-article .starter-timeline-figure .manual-timeline { --timeline-axis:99px; --timeline-dot-y:24px; }
+.guide-article .starter-timeline-figure .manual-timeline > li { grid-template-columns:82px minmax(0,1fr); column-gap:34px; padding-bottom:12px; }
+.guide-article .starter-timeline-figure .manual-timeline > li:last-child:before { bottom:12px; }
+.guide-article .starter-timeline-figure .manual-timeline > li:after { width:16px; height:16px; border-width:3px; }
+.guide-article .starter-timeline-figure .manual-year { padding-top:10px; font-size:15px; }
+.guide-article .starter-timeline-figure .manual-timeline-card { padding:12px 16px; }
+.guide-article .starter-timeline-figure h3 { margin:0; font-size:16px; line-height:1.6; }
+.guide-article .starter-timeline-figure p { margin:5px 0 0; font-size:12px; line-height:1.8; }
+@media(max-width:600px) {
+ .guide-article .starter-response { grid-template-columns:minmax(0,1fr) 58px; gap:8px 0; }
+ .guide-article .starter-response-person > img { width:44px; height:60px; }
+ .guide-article .starter-response-person h2 { font-size:10px; margin-top:4px; }
+ .guide-article .starter-response-bubble { grid-column:1 / -1; grid-row:2; padding:14px; }
+ .guide-article .starter-response-bubble::before { top:-7px; right:22px; transform:rotate(-45deg); }
+ .guide-article .starter-reply-link { padding:12px; font-size:14px; }
+ .guide-article .starter-question > summary { padding:12px; font-size:13px; }
+ .guide-article .starter-question .lead-turn { gap:10px; }
+ .guide-article .starter-question .lead-turn img { flex-basis:38px; width:38px; height:52px; }
+ .guide-article .starter-question .lead-bubble { padding:12px; }
+ .guide-article .starter-page-index ol { display:grid; gap:2px; }
+ .guide-article .starter-character-choice { padding:16px; }
+ .guide-article .starter-character-options { gap:12px; }
+ .guide-article .starter-character-options label { min-width:96px; }
+ .guide-article .starter-character-options img { width:76px; height:76px; }
+ .guide-article .starter-timeline-panel { padding:16px 10px; }
+ .guide-article .starter-timeline-figure .manual-timeline { --timeline-axis:68px; }
+ .guide-article .starter-timeline-figure .manual-timeline > li { grid-template-columns:58px minmax(0,1fr); column-gap:23px; }
+ .guide-article .starter-timeline-figure .manual-year { font-size:12px; padding-top:13px; }
+ .guide-article .starter-timeline-figure .manual-timeline-card { padding:12px; }
+ .guide-article .starter-timeline-figure h3 { font-size:14px; }
+}
+.guide-article .starter-problems-figure { margin:28px 0; }
+.guide-article .starter-problems-panel { padding:18px; border:1px solid #e5ddcc; border-radius:18px; background:#fbf5e8; }
+.guide-article .starter-problems-figure .manual-problems { gap:12px; }
+.guide-article .starter-problems-figure .manual-problem--pending { padding:16px 14px; }
+.guide-article .starter-problems-figure .manual-pending-head { grid-template-columns:34px minmax(0,1fr); gap:10px; }
+.guide-article .starter-problems-figure .manual-icon { width:32px; height:32px; }
+.guide-article .starter-problems-figure h3 { margin:0; font-size:14px; line-height:1.65; }
+.guide-article .starter-problems-figure p { margin:5px 0 0; font-size:11px; line-height:1.8; }
+.guide-article .starter-problems-figure .manual-status { margin-left:5px; padding:1px 5px; font-size:9px; }
+@media(max-width:600px) {
+ .guide-article .starter-problems-panel { padding:12px; }
+ .guide-article .starter-problems-figure .manual-problem--pending { padding:14px 12px; }
+}
+
+.guide-article .starter-response-links { display:grid; gap:12px; margin-top:0; }
+.guide-article .starter-response-links .starter-reply-link + .starter-reply-link { margin-top:0; }
+.guide-article .starter-response-links + .starter-question { margin-top:18px; }
+.guide-article .starter-response-links .starter-reply-link--return { background:#f6f8f4; border-color:#cfd9d0; color:#446451; }
+.guide-article .starter-response-links .starter-reply-link--return:hover { background:#eaf1e7; color:#123f31; }

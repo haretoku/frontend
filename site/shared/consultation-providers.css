@@ -1,0 +1,83 @@
+/* TOP・記事で共用する3社カードと比較表． */
+.consult-providers { margin:32px 0; }
+.consult-providers h2,.consult-provider-brand h3,.consult-provider-badge,.consult-provider-action { font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif; }
+.consult-providers h2 { margin:0 0 18px; font-size:28px; font-weight:900; line-height:1.5; letter-spacing:.02em; }
+.consult-provider-intro { font-size:14px; line-height:1.9; margin:0 0 22px; }
+.consult-provider-cards { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.consult-provider-card { position:relative; display:flex; flex-direction:column; min-width:0; padding:22px; border:1px solid #ddcfab; border-radius:22px; background:#fffdf3; box-shadow:0 3px 0 #e5d8b580; }
+.consult-provider-recommended { grid-column:1/-1; border:2px solid #7fac92; background:#fffdf3; }
+.consult-provider-badge { align-self:flex-start; padding:5px 12px; margin:0 0 18px; border-radius:20px; background:#e5f0e7; color:#126643; font-size:12px; font-weight:700; }
+.consult-provider-brand { min-height:104px; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; gap:10px; }
+.consult-provider-logo { display:block; width:auto; height:auto; max-width:min(100%,230px); max-height:65px; object-fit:contain; }
+.consult-provider-brand h3 { font-size:17px; line-height:1.6; margin:0; }
+.consult-provider-description { flex:1; font-size:14px; line-height:1.9; margin:14px 0; }
+.consult-provider-disclosure { font-size:11px; line-height:1.8; color:#566c5d; margin:8px 0 12px; }
+.consult-provider-action { display:flex; justify-content:center; align-items:center; text-align:center; width:100%; min-height:48px; border-radius:12px; font-size:15px; }
+.consult-impression { position:absolute; width:1px; height:1px; bottom:0; left:0; }
+#map-consultation { max-width:1050px; margin-inline:auto; scroll-margin-top:85px; }
+.consult-providers-compact { padding:28px; border:1px solid #e4d8b9; border-radius:24px; background:#fffdf6ed; box-shadow:0 4px 0 #e5d8b560; }
+.consult-providers-compact .consult-provider-cards { grid-template-columns:1.2fr 1fr 1fr; align-items:stretch; }
+.consult-providers-compact .consult-provider-recommended { grid-column:auto; }
+.consult-provider-comparison { margin:0 0 24px; border:1px solid #dce5dc; border-radius:12px; background:#fffdfa; }
+.consult-provider-comparison>summary { padding:16px 20px; color:var(--map-green); font-family:"Zen Maru Gothic","Noto Sans JP",sans-serif; font-size:16px; font-weight:700; cursor:pointer; }
+.consult-provider-comparison>.provider-comparison { margin:0; padding:0 20px 12px; }
+.consult-provider-comparison .provider-comparison>h2 { font-size:20px; }
+@media(max-width:760px) {
+ .consult-providers h2 { font-size:24px; }
+ .consult-provider-cards,.consult-providers-compact .consult-provider-cards { grid-template-columns:1fr; }
+ .consult-provider-recommended { grid-column:auto; }
+ .consult-providers-compact { padding:20px 16px; }
+ .consult-provider-card { padding:20px; }
+ .consult-provider-brand { min-height:90px; }
+ .consult-provider-logo { max-width:min(100%,220px); max-height:60px; }
+ .consult-provider-brand:not(:has(img)) { min-height:0; }
+}
+.provider-comparison { margin:30px 0; }
+.provider-comparison-ad { margin:8px 0; color:#515d56; font-size:12px; line-height:1.8; }
+.provider-comparison table { width:100%; table-layout:fixed; border-collapse:collapse; font-size:14px; line-height:1.85; }
+.provider-comparison caption { text-align:left; font-weight:700; padding:12px 0; font-size:16px; }
+.provider-comparison th,.provider-comparison td { border:1px solid #dce5dc; padding:14px 12px; vertical-align:middle; overflow-wrap:anywhere; }
+.provider-comparison thead th { background:white; font-size:14px; }
+.provider-comparison thead { position:sticky; top:0; z-index:3; box-shadow:0 2px 0 #cbd8cc; }
+.provider-comparison thead th:first-child { width:21%; }
+.provider-comparison tbody th { text-align:left; background:#f7f9f6; font-weight:500; }
+.provider-comparison td p { margin:0; }
+.provider-comparison td p:last-child { margin-bottom:0; }
+.provider-comparison a { color:var(--map-green); text-underline-offset:3px; }
+.provider-brand { min-height:90px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; font-size:13px; text-decoration:none; }
+.provider-brand-name { overflow-wrap:normal; word-break:normal; }
+.provider-brand-name>span { display:inline-block; }
+.provider-brand .consult-provider-logo { max-width:170px; max-height:40px; width:100%; }
+.provider-feature { display:flex; align-items:center; gap:8px; }
+.provider-feature>span:last-child:not(.provider-status) { font-size:13px; line-height:1.7; }
+.provider-status-legend { display:flex; flex-wrap:wrap; gap:6px 18px; list-style:none; margin:14px 0 8px; padding:0; font-size:12px; color:#515d56; line-height:1.8; }
+.provider-status { display:inline-block; flex-shrink:0; min-width:1.2em; font-size:22px; line-height:1.3; font-weight:700; color:#008653; }
+.provider-status.status-unknown,.provider-status.status-no { color:#65756c; font-size:18px; }
+.provider-status.status-partial { color:#95712d; }
+.provider-comparison-detail { border-top:1px solid #dce5dc; font-size:13px; line-height:1.9; }
+.provider-comparison-detail>summary { padding:12px 0; }
+.provider-comparison-detail ul { padding-left:20px; }
+.provider-comparison-detail li+li { margin-top:7px; }
+@media(max-width:760px) {
+.provider-comparison table { font-size:12px; line-height:1.6; }
+.reading-provider-comparison .provider-comparison table { width:calc(100% + 24px); margin-inline:-12px; }
+.provider-comparison th,.provider-comparison td { padding:12px 4px; }
+.provider-comparison thead th { font-size:12px; }
+.provider-comparison thead th:first-child { width:25%; }
+.provider-brand { min-height:88px; gap:4px; font-size:12px; line-height:1.5; }
+.provider-brand .consult-provider-logo { max-height:25px; }
+.provider-brand-name { font-size:10px; }
+.provider-brand-name>span { white-space:nowrap; }
+.provider-feature { flex-direction:column; gap:4px; text-align:center; }
+.provider-feature>span:last-child:not(.provider-status) { font-size:12px; line-height:1.6; }
+.consult-provider-comparison>.provider-comparison { padding:0 8px 12px; }
+.consult-provider-comparison .provider-comparison table { width:calc(100% + 16px); margin-inline:-8px; }
+.consult-provider-comparison>summary { padding:16px 12px; }
+}
+.consult-providers { --map-green:#008653; }
+.consult-provider-action.primary { padding:15px 24px; border:1px solid #008653; background:#008653; color:#fff; font-weight:700; text-decoration:none; }
+.consult-provider-action.primary:hover { background:#006f45; }
+.consult-provider-action.secondary { padding:13px 18px; border:1px solid #008653; color:#006d45; background:#fff; font-weight:700; text-decoration:none; }
+.consult-provider-action.secondary:hover { background:#edf6ed; }
+
+.consult-providers .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }

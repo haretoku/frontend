@@ -1,0 +1,14 @@
+.guide-article .consult-providers h2 { padding:0; border:0; margin:0 0 18px; font-size:24px; font-weight:900; line-height:1.5; }
+.guide-article .consult-provider-brand h3 { margin:0; font-size:17px; line-height:1.6; }
+.guide-article .consult-provider-comparison > summary { padding:16px 20px; color:#008653; font-size:16px; font-weight:700; }
+.guide-article .provider-comparison table { table-layout:fixed; font-size:14px; line-height:1.85; }
+.guide-article .provider-comparison th,.guide-article .provider-comparison td { padding:14px 12px; border:1px solid #dce5dc; text-align:left; vertical-align:middle; white-space:normal; overflow-wrap:anywhere; }
+.guide-article .provider-comparison thead th { font-weight:700; }
+.guide-article .provider-comparison-detail > summary { padding:12px 0; font-size:13px; }
+.guide-article .provider-comparison-scope { margin:0 0 16px; font-size:13px; line-height:1.9; color:#515d56; }
+@media(max-width:760px) {
+ .guide-article .consult-providers h2 { font-size:22px; }
+ .guide-article .consult-provider-comparison > summary { padding:16px 12px; }
+ .guide-article .provider-comparison table { font-size:12px; line-height:1.6; }
+ .guide-article .provider-comparison th,.guide-article .provider-comparison td { padding:12px 4px; }
+}

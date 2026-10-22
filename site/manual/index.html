@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="太陽光をつけたあとの使い方・点検・FIT終了・設備更新を，時期と困りごとの二つの入口から確認します．">
+  <title>わが家の太陽光トリセツ｜はれトク</title>
+  <link rel="canonical" href="https://haretoku.jp/manual/">
+  <link rel="icon" href="/shared/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/shared/styles/main.css">
+  <link rel="stylesheet" href="./timeline.css">
+  <link rel="stylesheet" href="./cards.css">
+  <link rel="stylesheet" href="/shared/consultation-providers.css">
+  <link rel="stylesheet" href="./manual.css">
+  <script type="module" src="./manual.js"></script>
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="はれトク">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="わが家の太陽光トリセツ｜はれトク">
+<meta property="og:description" content="太陽光をつけたあとの使い方・点検・FIT終了・設備更新を，時期と困りごとの二つの入口から確認します．">
+<meta property="og:url" content="https://haretoku.jp/manual/">
+<meta property="og:image" content="https://haretoku.jp/assets/og-manual-20261021.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="https://haretoku.jp/favicon.png" type="image/png" sizes="96x96">
+<script type="module" src="/shared/analytics.js"></script>
+  <link rel="stylesheet" href="/shared/site-header.css">
+  <link rel="stylesheet" href="/shared/site-footer.css">
+  <script type="module" src="/shared/site-header-entry.js"></script>
+</head>
+<body class="manual-page" data-page="manual">
+  <header class="map-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="はれトクの太陽光えらびマップ"><span class="brand__hare">はれ</span><span class="brand__toku">トク<img class="brand__mark" src="/map/assets/sun-face.svg" alt=""></span></a>
+      <nav aria-label="主要メニュー" class="header-nav">
+        <div class="menu-wrap">
+          <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
+          <div id="menu" class="menu-panel" hidden>
+            <div class="menu-primary">
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光を考えている方へ</p>
+                <a class="map-link" href="/"><span class="menu-primary-title">太陽光えらびマップ</span></a>
+                <a class="map-link" href="/guides/"><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>
+              </div>
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光をつけた方へ</p>
+                <a class="map-link" href="/manual/" aria-current="page"><span class="menu-primary-title">太陽光トリセツ</span></a>
+              </div>
+            </div>
+            <button id="reset" type="button">進み具合をリセット</button>
+            <div class="menu-references">
+              <a href="/press/">プレスリリース</a>
+              <a href="/data/">データを見る</a>
+              <a href="/pages/calculation-method.html">計算方法・使用データ</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <script type="module" src="/shared/walkthrough/entry.js"></script>
+  </header>
+  <dialog id="reset-dialog" class="site-reset-dialog" aria-labelledby="reset-title" aria-describedby="reset-description">
+    <h2 id="reset-title">進み具合をリセットしますか？</h2>
+    <p id="reset-description">進み具合・診断条件・選んだ設備を消して，最初の状態へ戻します．</p>
+    <div class="reset-actions"><button id="cancel-reset" type="button" class="secondary" autofocus>キャンセル</button><button id="confirm-reset" type="button" class="primary">リセットする</button></div>
+  </dialog>
+  <main id="main-content" class="manual-wrap">
+    <nav class="manual-breadcrumb" aria-label="パンくずリスト"><a href="/">はれトク</a> ／ 太陽光トリセツ</nav>
+    <section class="manual-hero" aria-labelledby="manual-title">
+      <div class="manual-title-card">
+        <span class="manual-title-art manual-title-panel" data-manual-panel aria-hidden="true"></span>
+        <p class="title-audience">太陽光をつけた方へ</p>
+        <h1 id="manual-title">わが家の<span>太陽光トリセツ</span></h1>
+        <img class="manual-title-art manual-title-harena" src="/map/assets/navigator.png" alt="" width="92" height="92">
+      </div>
+    </section>
+    <a class="manual-start" href="/manual/getting-started/">
+      <img class="manual-start-art" src="./getting-started-illustration.svg" alt="" width="200" height="150">
+      <span class="manual-start-copy"><span class="manual-start-label">はじめに</span><strong>太陽光をつけたら，これから何をする？</strong><small>長く使うための確認・点検と，トリセツの使い方</small></span>
+      <span class="manual-start-arrow" aria-hidden="true">→</span>
+    </a>
+    <span id="timeline"></span><span id="troubles"></span>
+    <div class="manual-tabs" role="tablist" aria-label="トリセツの探し方">
+      <button class="manual-tab" id="tab-timeline" type="button" role="tab" aria-selected="true" aria-controls="panel-timeline" data-view="timeline"><span class="manual-icon" data-manual-icon="clock"></span>時期・節目から探す</button>
+      <button class="manual-tab" id="tab-troubles" type="button" role="tab" aria-selected="false" aria-controls="panel-troubles" tabindex="-1" data-view="troubles"><span class="manual-icon" data-manual-icon="question"></span>困りごとから探す</button>
+    </div>
+    <section class="manual-panel" id="panel-timeline" role="tabpanel" aria-labelledby="tab-timeline" tabindex="0">
+      <!-- manual-component:timeline -->
+<ol class="manual-timeline">
+<li id="after-installation"><div class="manual-year">0年目<small>設置したら</small></div><div class="manual-timeline-card"><h3>はじめに</h3><p>これからの節目と，困ったときの調べ方を知ろう．</p><div class="manual-links"><a class="manual-guide" href="/manual/getting-started/">トリセツの使い方<span aria-hidden="true">→</span></a></div></div></li>
+<li><div class="manual-year">5年ごと</div><div class="manual-timeline-card"><h3>定期点検 <span class="manual-status">準備中</span></h3><p>専門業者による点検の予定と費用を確認しよう．</p></div></li>
+<li><div class="manual-year">10年目</div><div class="manual-timeline-card"><h3>FITが終わるとき <span class="manual-status">準備中</span></h3><p>買取期間の終了日を確かめ，そのあとの売電先と，自宅での使い方を考えよう．</p></div></li>
+<li><div class="manual-year">10〜15<small>年目</small></div><div class="manual-timeline-card"><h3>パワコンの交換を考える <span class="manual-status">準備中</span></h3><p>機器の状態や点検結果に合わせて，修理・交換を相談しよう．</p></div></li>
+<li><div class="manual-year">30年目</div><div class="manual-timeline-card"><h3>設備全体の更新を考える</h3><p>パネル・屋根の状態とこれからの暮らしに合わせて，使い続けるか，更新・撤去するかを考えよう．</p><div class="manual-links"><a class="manual-guide" href="/manual/equipment-renewal/">長く使った太陽光，更新する？使い続ける？<span aria-hidden="true">→</span></a></div></div></li>
+</ol>
+<!-- /manual-component:timeline -->
+      <p class="manual-note">年数は目安です．</p>
+    </section>
+    <section class="manual-panel manual-panel--troubles" id="panel-troubles" role="tabpanel" aria-labelledby="tab-troubles" tabindex="0">
+      <!-- manual-component:problems -->
+<div class="manual-problems">
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 17-4 19h29l-4-19ZM17 17l-1 19m7-19 1 19M6 26h25M18.5 36v7m-6 0h12"/><path d="m39 4-8 11h6l-3 10L45 10h-7Z" opacity=".5"/></svg></span><div><h3>発電が少ない・動かない <span class="manual-status">準備中</span></h3><p>発電量の低下，エラー，モニターの不調</p></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="24" cy="24" r="19"/><path d="m16 13 8 11 8-11m-8 11v13m-8-12h16m-16 6h16"/></svg></span><div><h3>電気代・売電が気になる</h3><p>思ったほど安くならない，売電収入が減った</p><div class="manual-links"><a class="manual-guide" href="/guides/self-consumption/">太陽光の収支をよくするには？<span aria-hidden="true">→</span></a></div></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 33v-3c0-5-6-7-6-15a14 14 0 0 1 28 0c0 8-6 10-6 15v3Zm0 5h16m-13 5h10"/><path d="M5 43 43 5"/></svg></span><div><h3>停電・災害に備えたい</h3><p>停電時の使い方，台風・雪，被災後の対応</p><div class="manual-links"><a class="manual-guide" href="/guides/disaster/">停電時，太陽光・蓄電池で何ができる？<span aria-hidden="true">→</span></a></div></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="20" r="14"/><path d="m30 30 13 13"/></svg></span><div><h3>掃除・点検はどうする？ <span class="manual-status">準備中</span></h3><p>汚れが気になる，点検の頼み先・費用</p></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 17 13-12 13 12M8 13v18h13" opacity=".65"/><g transform="translate(12 12) scale(.75)" stroke-width="3"><path d="M29 7a13 13 0 0 0-14 17L4 35a6 6 0 0 0 9 9l12-12A13 13 0 0 0 42 17L31 28l-9-9Z" fill="#fffefa"/><circle cx="10" cy="38" r="1"/></g></svg></span><div><h3>屋根を修理したい <span class="manual-status">準備中</span></h3><p>雨漏り，塗装・葺き替え，パネルの取り外し</p></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 17A18 18 0 0 1 39 11l3 5m0-10v10H32M42 31A18 18 0 0 1 9 37l-3-5m0 10V32h10"/><path d="m17 17-3 14h20l-3-14ZM23 17l-1 14m5-14 1 14M16 24h16M24 31v6m-5 0h10"/></svg></span><div><h3>設備を変えたい・撤去したい</h3><p>パワコン交換，蓄電池の追加，更新・撤去</p><div class="manual-links"><a class="manual-guide" href="/manual/equipment-renewal/">長く使った太陽光，更新する？使い続ける？<span aria-hidden="true">→</span></a></div></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 3h19l9 9v33H11ZM29 3v11h10M18 21h14m-14 7h9m-9 7h14"/></svg></span><div><h3>引っ越し・名義変更をしたい <span class="manual-status">準備中</span></h3><p>家の売買，相続，契約・認定の手続き</p></div></div></article>
+<article class="manual-problem manual-problem--pending"><div class="manual-pending-head"><span class="manual-icon" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M41 21a17 17 0 0 1-24 16L6 42l3-11A17 17 0 1 1 41 21Z"/><path d="M16 21h1m7 0h1m7 0h1"/></svg></span><div><h3>保証・相談先を確認したい <span class="manual-status">準備中</span></h3><p>保証・保険，施工会社と連絡がつかない，勧誘</p></div></div></article>
+</div>
+<!-- /manual-component:problems -->
+    </section>
+    <div id="manual-consultation">
+      <!-- manual-component:consultation-providers -->
+<section class="consult-providers consult-providers-compact" aria-label="相談先を選ぶ">
+    <h2 id="manual-consultation-title" tabindex="-1">太陽光のこれからを相談しよう</h2>
+    <p class="consult-provider-intro">設備の点検・交換・撤去などの相談先を探そう．</p><details class="consult-provider-comparison"><summary>3社の違いを比べる</summary><section class="provider-comparison" aria-labelledby="manual-provider-comparison-title">
+    <h2 id="manual-provider-comparison-title">一括見積もりサイトを，同じ基準で比べよう</h2>
+    <p class="provider-comparison-scope">比較は太陽光＋蓄電池を新設する場合のサービス内容です．更新・修理・撤去への対応や支援の条件は，各社に確認してください．</p><table role="table">
+      <caption class="visually-hidden">3つのサービスの比較</caption>
+      <thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">手伝ってもらえること</th><th scope="col" role="columnheader" id="manual-provider-heading-solar-partners"><a class="provider-brand" href="https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="solar-partners" data-consult-placement="article_comparison" aria-label="ソーラーパートナーズの無料見積もり（別タブ）"><img class="consult-provider-logo" src="/shared/assets/solar-partners.png" alt="" decoding="async"><span class="provider-brand-name"><span>ソーラー</span><span>パートナーズ</span></span><span aria-hidden="true">↗</span></a></th><th scope="col" role="columnheader" id="manual-provider-heading-tainavi"><a class="provider-brand" href="https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="tainavi" data-consult-placement="article_comparison" aria-label="タイナビの無料見積もり（別タブ）"><img class="consult-provider-logo" src="/shared/assets/tainavi.webp" alt="" decoding="async"><span class="provider-brand-name">タイナビ</span><span aria-hidden="true">↗</span></a></th><th scope="col" role="columnheader" id="manual-provider-heading-griene"><a class="provider-brand" href="https://griene.jp/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="griene" data-consult-placement="article_comparison" aria-label="グリエネの公式サイト（別タブ）"><span class="provider-brand-name">グリエネ</span><span aria-hidden="true">↗</span></a></th></tr></thead>
+      <tbody role="rowgroup"><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-screening">加盟する会社の審査</th><td role="cell" headers="manual-provider-row-screening manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>加盟時に審査</span></p></td><td role="cell" headers="manual-provider-row-screening manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>加盟時に審査</span></p></td><td role="cell" headers="manual-provider-row-screening manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>保険・財務などを審査</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-ongoing-screening">加盟後の継続審査</th><td role="cell" headers="manual-provider-row-ongoing-screening manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>継続して審査</span></p></td><td role="cell" headers="manual-provider-row-ongoing-screening manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="manual-provider-row-ongoing-screening manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-contact">最初の連絡</th><td role="cell" headers="manual-provider-row-contact manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>サイトの窓口が希望を確認</span></p></td><td role="cell" headers="manual-provider-row-contact manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>サイトの窓口から確認連絡</span></p></td><td role="cell" headers="manual-provider-row-contact manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>サイトの窓口が聞き取り</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-support">見積もりの相談</th><td role="cell" headers="manual-provider-row-support manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>比較の相談</span></p></td><td role="cell" headers="manual-provider-row-support manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>相談受付</span></p></td><td role="cell" headers="manual-provider-row-support manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>相談受付</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-scheduling">日程の調整</th><td role="cell" headers="manual-provider-row-scheduling manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>調整の支援</span></p></td><td role="cell" headers="manual-provider-row-scheduling manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="manual-provider-row-scheduling manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-declining">お断りの代行</th><td role="cell" headers="manual-provider-row-declining manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>断りの連絡を代行</span></p></td><td role="cell" headers="manual-provider-row-declining manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="manual-provider-row-declining manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-trouble">営業への苦情対応</th><td role="cell" headers="manual-provider-row-trouble manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>警告・紹介停止など</span></p></td><td role="cell" headers="manual-provider-row-trouble manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-yes" role="img" aria-label="あり">○</span><span>警告・登録解除</span></p></td><td role="cell" headers="manual-provider-row-trouble manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-disputes">契約トラブルへの関与</th><td role="cell" headers="manual-provider-row-disputes manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span><span>原則は当事者間で解決</span></p></td><td role="cell" headers="manual-provider-row-disputes manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-no" role="img" aria-label="対応しないと明記">×</span><span>契約交渉への介入も対象外</span></p></td><td role="cell" headers="manual-provider-row-disputes manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span><span>原則は利用者側で解決</span></p></td></tr><tr role="row"><th scope="row" role="rowheader" id="manual-provider-row-guarantee">工事が完成しない場合の保証</th><td role="cell" headers="manual-provider-row-guarantee manual-provider-heading-solar-partners"><p class="provider-feature"><span class="provider-status status-partial" role="img" aria-label="条件・範囲あり">△</span><span>別途申込が必要・補償額に上限</span></p></td><td role="cell" headers="manual-provider-row-guarantee manual-provider-heading-tainavi"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td><td role="cell" headers="manual-provider-row-guarantee manual-provider-heading-griene"><p class="provider-feature"><span class="provider-status status-unknown" role="img" aria-label="公式情報に明記なし">—</span></p></td></tr></tbody>
+    </table>
+    <ul class="provider-status-legend" aria-label="比較表の記号の意味"><li><span aria-hidden="true">○</span> あり</li><li><span aria-hidden="true">△</span> 条件・範囲あり</li><li><span aria-hidden="true">×</span> 対応しないと明記</li><li><span aria-hidden="true">—</span> 公式情報に明記なし</li></ul>
+    <p class="provider-comparison-ad">広告：ソーラーパートナーズ・タイナビと提携しています．</p>
+    <details class="provider-comparison-detail"><summary>参考資料・確認日</summary><p>比較対象：太陽光＋蓄電池の新設の場合．</p><p>公式情報の確認日：<time datetime="2026-10-15">2026-10-15</time>．</p><ul><li><a href="https://www.solar-partners.jp/" target="_blank" rel="noopener">ソーラーパートナーズ：サービス案内 ↗</a></li><li><a href="https://www.solar-partners.jp/contents/260287.html" target="_blank" rel="noopener">ソーラーパートナーズ：運営・支援と利用規約 ↗</a></li><li><a href="https://www.solar-partners.jp/guarantee-clause/" target="_blank" rel="noopener">ソーラーパートナーズ：あんしん完了保証約款 ↗</a></li><li><a href="https://www.solar-partners.jp/lp-manga-unneigaisha.html" target="_blank" rel="noopener">ソーラーパートナーズ：運営会社・サービス ↗</a></li><li><a href="https://www.tainavi.com/library/770/" target="_blank" rel="noopener">タイナビ：加盟企業の審査 ↗</a></li><li><a href="https://www.tainavi.com/library/610/" target="_blank" rel="noopener">タイナビ：相談窓口の案内 ↗</a></li><li><a href="https://www.tainavi.com/rules/" target="_blank" rel="noopener">タイナビ：利用規約 ↗</a></li><li><a href="https://www.tainavi.com/introduce/" target="_blank" rel="noopener">タイナビ：サービス紹介 ↗</a></li><li><a href="https://griene.jp/" target="_blank" rel="noopener">グリエネ：サービス案内 ↗</a></li><li><a href="https://griene.jp/area" target="_blank" rel="noopener">グリエネ：対応地域 ↗</a></li><li><a href="https://griene.jp/terms" target="_blank" rel="noopener">グリエネ：利用規約 ↗</a></li></ul></details>
+  </section></details>
+    <div class="consult-provider-cards"><section class="consult-provider-card consult-provider-recommended" aria-labelledby="manual-consult-solar-partners">
+      <p class="consult-provider-badge">はれトクのおすすめ</p>
+      <div class="consult-provider-brand"><img class="consult-provider-logo" src="/shared/assets/solar-partners.png" alt="" decoding="async"><h3 id="manual-consult-solar-partners">ソーラーパートナーズ</h3></div>
+      <p class="consult-provider-description">自社施工の会社に絞って探したい方や，比較・断りまで支援してほしい方におすすめします．</p>
+      <p class="consult-provider-disclosure">広告・アフィリエイト ／ ソーラーパートナーズ</p>
+      <a class="primary consult-provider-action" href="https://px.a8.net/svt/ejp?a8mat=4BCKBS+DN6MUQ+3LME+66H9E" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="solar-partners" data-consult-placement="article_comparison">無料見積もり ↗<span class="visually-hidden">（ソーラーパートナーズ）</span></a>
+      <img class="consult-impression" src="https://www11.a8.net/0.gif?a8mat=4BCKBS+DN6MUQ+3LME+66H9E" width="1" height="1" alt="" aria-hidden="true" referrerpolicy="no-referrer">
+    </section><section class="consult-provider-card " aria-labelledby="manual-consult-tainavi">
+
+      <div class="consult-provider-brand"><img class="consult-provider-logo" src="/shared/assets/tainavi.webp" alt="" decoding="async"><h3 id="manual-consult-tainavi">タイナビ</h3></div>
+      <p class="consult-provider-description">加盟会社の審査や相談支援を確かめて，タイナビで相談したい方へ．</p>
+      <p class="consult-provider-disclosure">広告・アフィリエイト ／ タイナビ</p>
+      <a class="secondary consult-provider-action" href="https://px.a8.net/svt/ejp?a8mat=4BEH5B+8YOYNM+2AG2+644DU" target="_blank" rel="sponsored nofollow noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="tainavi" data-consult-placement="article_comparison">無料見積もり ↗<span class="visually-hidden">（タイナビ）</span></a>
+      <img class="consult-impression" src="https://www14.a8.net/0.gif?a8mat=4BEH5B+8YOYNM+2AG2+644DU" width="1" height="1" alt="" aria-hidden="true" referrerpolicy="no-referrer">
+    </section><section class="consult-provider-card " aria-labelledby="manual-consult-griene">
+
+      <div class="consult-provider-brand"><h3 id="manual-consult-griene">グリエネ</h3></div>
+      <p class="consult-provider-description">運営による聞き取りを経て，対応する会社の紹介を受けたい方へ．</p>
+      <p class="consult-provider-disclosure">通常リンク ／ 広告リンクではありません</p>
+      <a class="secondary consult-provider-action" href="https://griene.jp/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" data-consult-provider="griene" data-consult-placement="article_comparison">公式サイトへ ↗<span class="visually-hidden">（グリエネ）</span></a>
+
+    </section></div>
+
+  </section>
+<!-- /manual-component:consultation-providers -->
+    </div>
+  </main>
+<footer class="map-footer site-footer-shell"><nav class="site-footer__links" aria-label="運営情報"><a href="/pages/policy.html#operation">運営方針</a> <a href="/pages/policy.html#advertising">広告方針</a> <a href="/pages/policy.html#data">データ方針</a> <a href="/pages/policy.html#privacy">プライバシー</a> <a href="/pages/policy.html#disclaimer">免責事項</a></nav></footer>
+</body>
+</html>

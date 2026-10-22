@@ -44,12 +44,21 @@
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a class="map-link" href="/">太陽光えらびマップ</a>
+            <div class="menu-primary">
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光を考えている方へ</p>
+                <a class="map-link" href="/"><span class="menu-primary-title">太陽光えらびマップ</span></a>
+                <a class="map-link" href="/guides/"><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>
+              </div>
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光をつけた方へ</p>
+                <a class="map-link" href="/manual/"><span class="menu-primary-title">太陽光トリセツ</span></a>
+              </div>
+            </div>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
-              <a href="/guides/">詳しいガイド</a>
               <a href="/press/">プレスリリース</a>
-              <a href="/data/">補助金を調べる</a>
+              <a href="/data/">データを見る</a>
               <a href="/pages/calculation-method.html">計算方法・使用データ</a>
             </div>
           </div>
@@ -67,9 +76,10 @@
     <section id="map" class="journey" aria-labelledby="map-title" hidden>
       <div class="map-heading">
         <div class="map-title-card">
-          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <img class="title-art title-harena" src="/map/assets/navigator.png" alt="" width="92" height="92">
           <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
-          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <p class="title-audience">太陽光を考えている方へ</p>
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
         </div>
       </div>
       <div class="map-landscape" aria-label="太陽光を検討する道のり">
@@ -176,7 +186,7 @@
       <div id="page-ending"><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>30年間の節約・収入と，補助金を差し引いた費用を比べた目安．</li><li>費用と残りそうなお金を比べて，気になる設備を仮に選ぼう．</li></ul></div></div></div>
       <section id="page-response" class="page-response" aria-labelledby="response-label">
         <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
-        <div class="response-bubble"><a id="next" class="primary" href="/">わかった！ マップへ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>この診断は，どう見ればいいの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>カードの「30年間で残りそうなお金」は，30年間の電気代の節約と売電収入から，設置費や維持費を引いた目安です．補助金は設置費から差し引いています．</p><p>グラフは，設置時からの収支の変化を表しています．0円より上なら，その時点までの節約・収入が費用を上回り，下なら費用の方が大きい状態です．途中で下がるのは，点検や機器交換などの費用を引くためです．</p></div></div></details><details class="response-choice response-dialogue"><summary>蓄電池を入れると，どうなるの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>蓄電池があると，昼間に余った電気を夜などにも使えるので，電気代を減らす効果が増えます．一方，設備費も増え，売る電気は減ります．費用まで引くと，太陽光だけの方が得になることもあります．停電への備えも，設備を選ぶ理由になります．</p></div></div></details><details class="response-choice response-dialogue"><summary>補助金も入っているの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．受付中・受付開始前の国と都道府県の補助金を，住宅や設備の条件を満たして使える想定で，設置費から差し引いています．市区町村の補助金は含めていません．実際に補助金をもらえるかは，契約前に公式情報と施工会社で確かめてください．</p></div></div></details><details class="response-choice response-dialogue"><summary>どうやって計算しているの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>地域から発電量を，電気代から家で使う電気の量を見積もります．それをもとに，30年間の節約・売電収入から費用を引いています．電気代が空欄なら，その地域の標準的な電気代を使います．</p><p>既存の住宅に，太陽光パネル4 kWを南向きに取り付ける想定です．蓄電池付きは9.5 kWhで比べています．まずは同じ条件で設備の違いを見て，自宅の屋根や費用は見積もりで確かめましょう．</p><p>蓄電池付きは，修理への備えとして5年ごとに2.5万円，30年間で15万円を見込みます．蓄電池本体は交換せず使う想定で，本体交換費は含めていません．</p><p>保険料は，太陽光のみで年3,000円，蓄電池付きで合計年6,000円を見込んでいます．</p><p class="question-reference"><a href="/pages/calculation-method.html#calculation-flow">詳しい計算方法・使用データを見る ↗</a></p></div></div></details></div></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/">わかった！ マップへ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>この診断は，どう見ればいいの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>カードの「30年間で残りそうなお金」は，<a href="/guides/solar-economics/">30年間の電気代の節約と売電収入</a>から，<a href="/guides/solar-installation-cost/">設置費</a>や維持費を引いた目安です．補助金は設置費から差し引いています．</p><p>グラフは，設置時からの収支の変化を表しています．0円より上なら，その時点までの節約・収入が費用を上回り，下なら費用の方が大きい状態です．途中で下がるのは，点検や機器交換などの費用を引くためです．</p></div></div></details><details class="response-choice response-dialogue"><summary>蓄電池を入れると，どうなるの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>蓄電池があると，昼間に余った電気を夜などにも使えるので，電気代を減らす効果が増えます．一方，設備費も増え，売る電気は減ります．費用まで引くと，太陽光だけの方が得になることもあります．停電への備えも，設備を選ぶ理由になります．</p></div></div></details><details class="response-choice response-dialogue"><summary>補助金も入っているの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．受付中・受付開始前の国と都道府県の<a href="/guides/subsidy-amount/">補助金</a>を，住宅や設備の条件を満たして使える想定で，設置費から差し引いています．市区町村の補助金は含めていません．実際に補助金をもらえるかは，契約前に公式情報と施工会社で確かめてください．</p></div></div></details><details class="response-choice response-dialogue"><summary>どうやって計算しているの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>地域から発電量を，電気代から家で使う電気の量を見積もります．それをもとに，30年間の節約・売電収入から費用を引いています．電気代が空欄なら，その地域の標準的な電気代を使います．</p><p>既存の住宅に，太陽光パネル4 kWを南向きに取り付ける想定です．蓄電池付きは9.5 kWhで比べています．まずは同じ条件で設備の違いを見て，自宅の屋根や費用は見積もりで確かめましょう．</p><p>蓄電池付きは，修理への備えとして5年ごとに2.5万円，30年間で15万円を見込みます．蓄電池本体は交換せず使う想定で，本体交換費は含めていません．</p><p>保険料は，太陽光のみで年3,000円，蓄電池付きで合計年6,000円を見込んでいます．</p><p class="question-reference"><a href="/pages/calculation-method.html#calculation-flow">詳しい計算方法・使用データを見る ↗</a></p></div></div></details></div></div>
       </section>
       <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/guides/solar-costs/">← 前のページへ</a></nav>
     </section>

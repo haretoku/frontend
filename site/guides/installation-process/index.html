@@ -44,12 +44,21 @@
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a class="map-link" href="/">太陽光えらびマップ</a>
+            <div class="menu-primary">
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光を考えている方へ</p>
+                <a class="map-link" href="/"><span class="menu-primary-title">太陽光えらびマップ</span></a>
+                <a class="map-link" href="/guides/" aria-current="page"><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>
+              </div>
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光をつけた方へ</p>
+                <a class="map-link" href="/manual/"><span class="menu-primary-title">太陽光トリセツ</span></a>
+              </div>
+            </div>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
-              <a href="/guides/" aria-current="page">詳しいガイド</a>
               <a href="/press/">プレスリリース</a>
-              <a href="/data/">補助金を調べる</a>
+              <a href="/data/">データを見る</a>
               <a href="/pages/calculation-method.html">計算方法・使用データ</a>
             </div>
           </div>
@@ -67,9 +76,10 @@
     <section id="map" class="journey" aria-labelledby="map-title" hidden>
       <div class="map-heading">
         <div class="map-title-card">
-          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <img class="title-art title-harena" src="/map/assets/navigator.png" alt="" width="92" height="92">
           <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
-          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <p class="title-audience">太陽光を考えている方へ</p>
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
         </div>
       </div>
       <div class="map-landscape" aria-label="太陽光を検討する道のり">
@@ -176,7 +186,7 @@
       <div id="page-ending"><details class="sources"><summary>参考資料</summary><ul><li><a href="https://www.jpea.gr.jp/house/setting/" target="_blank" rel="noopener">太陽光発電協会：設置までの流れ ↗</a></li></ul></details><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>条件と補助金の手順を契約前に確認し，合意した内容は書面で保管しよう．</li><li>工事後は，必要な手続き・動作確認と使用開始の案内を確かめよう．</li><li>使い方・停電時の対応を聞き，説明書・保証書・連絡先を受け取ろう．</li></ul></div></div></div>
       <section id="page-response" class="page-response" aria-labelledby="response-label">
         <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
-        <div class="response-bubble"><a id="next" class="primary" href="/">わかった！ マップへ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>見積もりをもらったら，断れない？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>見積もりを受け取ることと，契約することは別です．その場で決めず，条件を書面で確認しましょう．納得できなければ，導入を見送ることもできます．</p></div></div></details><details class="response-choice response-dialogue"><summary>補助金の申請は，施工会社に任せていい？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>施工会社に頼む場合も，どこまで代行するか，自分が用意する書類，申請・報告の期限を確認しましょう．自分が行うことと，会社に任せることを分けておくと安心です．</p></div></div></details><details class="response-choice response-dialogue"><summary>工事中，普段どおり家で過ごせる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>工事内容や家の状況で変わるので，作業日程や在宅・立会いが必要かを施工会社に聞きましょう．停電があるか，いつ・どのくらい続くかも事前に確認します．</p></div></div></details></div></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/">わかった！ マップへ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>見積もりをもらったら，断れない？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>見積もりを受け取ることと，契約することは別です．その場で決めず，条件を書面で確認しましょう．納得できなければ，導入を見送ることもできます．</p></div></div></details><details class="response-choice response-dialogue"><summary>補助金の申請は，施工会社に任せていい？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>施工会社に頼む場合も，どこまで代行するか，自分が用意する書類，<a href="/guides/subsidies/">申請・報告</a>の期限を確認しましょう．自分が行うことと，会社に任せることを分けておくと安心です．</p></div></div></details><details class="response-choice response-dialogue"><summary>工事中，普段どおり家で過ごせる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>工事内容や家の状況で変わるので，作業日程や在宅・立会いが必要かを施工会社に聞きましょう．停電があるか，いつ・どのくらい続くかも事前に確認します．</p></div></div></details></div></div>
       </section>
       <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/guides/home-survey/">← 前のページへ</a></nav>
     </section>

@@ -152,12 +152,12 @@ test("全ページの共通フッターが方針の対応見出しへ接続す�
 });
 test("共通メニューでガイドとプレスリリースを分け，現在地を示す", async () => {
   const guideCurrentPaths = new Set([
-    resolve(siteRoot, "guides/self-consumption/index.html"),
+
     ...newDetailSlugs.map(slug => resolve(siteRoot, `guides/${slug}/index.html`)),
     resolve(siteRoot, "guides/index.html"),
     resolve(siteRoot, "guides/solar-economics/index.html"),
     resolve(siteRoot, "guides/subsidies/index.html"),
-    resolve(siteRoot, "guides/disaster/index.html"),
+
     resolve(siteRoot, "guides/quotes-contractors/index.html")
   ]);
 
@@ -176,14 +176,14 @@ test("共通メニューでガイドとプレスリリースを分け，現在�
 
   }
 });
-test("ガイド2分類とプレスリリースが分離され，旧記事10件への入口を保つ", async () => {
+test("ガイド4マス・トリセツ・プレスが分離され，既存記事の入口を保つ", async () => {
   const html = await readFile(resolve(siteRoot, "guides/index.html"), "utf8");
   const articles = JSON.parse(await readFile(resolve(siteRoot, "solar/data/articles.json"), "utf8"));
   const script = await readFile(resolve(siteRoot, "solar/src/guides.js"), "utf8");
   const css = await readFile(resolve(siteRoot, "solar/styles/guides.css"), "utf8");
   const main = html.match(/<main>[\s\S]*?<\/main>/)?.[0];
   assert.ok(main);
-  assert.match(html, /<title>はれトクガイド｜住宅用太陽光の記事一覧<\/title>/);
+  assert.match(html, /<title>太陽光えらびの詳しいガイド｜はれトク<\/title>/);
   assert.match(html, /meta name="description" content="[^"]+"/);
   assert.match(html, /src="\/solar\/src\/guides\.js"/);
   assert.doesNotMatch(main, /data-featured-guides/);
@@ -218,14 +218,14 @@ test("ガイド2分類とプレスリリースが分離され，旧記事10件�
   assert.doesNotMatch(JSON.stringify(articles), /calculation-method\.html|policy\.html/);
   assert.match(main, /map-reading-route[\s\S]*href="\/"/);
   const { groupedArticles } = await import("../../site/solar/src/guide-groups.js");
-  const groups = groupedArticles(articles);
-  assert.deepEqual(groups.map((group) => group.id), ["core", "detail"]);
-  assert.deepEqual(groups.map((group) => group.articles.length), [4, 6]);
+  const groups = groupedArticles(articles,{topics:true});
+  assert.deepEqual(groups.map((group) => group.id), ["economics", "equipment", "installation", "companies"]);
+  assert.deepEqual(groups.map((group) => group.articles.length), [4, 2, 1, 1]);
   const releases=groupedArticles(articles,{press:true});
   assert.deepEqual(releases.map(group=>group.id),['news']);
   assert.equal(releases[0].articles.length,1);
-  assert.equal(new Set([...groups.flatMap(group=>group.articles),...releases[0].articles].map(article=>article.id)).size,articles.length);
-  assert.deepEqual(groups[0].articles.map((article) => article.categoryId), ["economics", "subsidies", "quotes", "safety"]);
+  assert.equal(new Set([...groups.flatMap(group=>group.articles),...releases[0].articles,...articles.filter(article=>['self-consumption','disaster'].includes(article.id))].map(article=>article.id)).size,articles.length);
+  assert.deepEqual(groups[0].articles.map((article) => article.id), ["electricity-sales", "solar-electricity-savings", "solar-installation-cost", "subsidy-amount"]);
   assert.match(main, /data-guide-groups/);
   assert.doesNotMatch(main, /data-guide-filters/);
   const futureGroups = groupedArticles([

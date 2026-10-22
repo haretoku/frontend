@@ -1,3 +1,4 @@
+import {manualPages} from '../site/manual/routes.js';
 import {journeyRoutes} from '../site/map/routes.js';
 import { defineConfig } from "vite";
 import { resolve } from "node:path";
@@ -16,7 +17,7 @@ export default defineConfig({
     sourcemap: false,
     rollupOptions: {
       input: Object.fromEntries([
-        "index.html", "guides/index.html", "press/index.html", "data/index.html", "data/subsidies/index.html",
+        "index.html", ...manualPages.map(page => page.path.slice(1)+"index.html"), "guides/index.html", "press/index.html", "data/index.html", "data/subsidies/index.html",
         ...["self-consumption", "solar-economics", "subsidies", "disaster", "quotes-contractors", "solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount", "electricity-support-end"].map(name => `guides/${name}/index.html`), "simulator/index.html", "404.html",
         ...["calculation-method", "policy"].map(name => `pages/${name}.html`)
       ,...Object.values(journeyRoutes).filter(path=>path.startsWith('/guides/')).map(path=>path.slice(1)+'index.html')

@@ -9,7 +9,7 @@ export const reviewOutput=resolve(import.meta.dirname,'../../dist-review');
 export async function verifyReview(output=reviewOutput){
   const source=await readFile(new URL('../guides/self-consumption/index.html',import.meta.url),'utf8');
   const normalize=text=>text.replace(/\s+/g,' ').trim();
-  assert(normalize(source).includes(normalize(renderSiteHeader('guides'))),'試作も共通ヘッダー・メニュー・リセット確認画面の正本へそろえる');
+  assert(normalize(source).includes(normalize(renderSiteHeader('manual'))),'トリセツ記事も共通ヘッダー・メニュー・リセット確認画面の正本へそろえる');
   assert(normalize(source).includes(normalize(renderSiteFooter())),'試作も共通フッターの正本へそろえる');
   for(const css of ['main.css','site-header.css','site-footer.css'])assert(source.includes(css),`共通スタイル：${css}`);
   const files=[];
@@ -21,7 +21,7 @@ export async function verifyReview(output=reviewOutput){
   }
   await walk(output);
   const names=files.map(file=>relative(output,file).split(sep).join('/'));
-  const allowed=/^(?:assets\/[^/]+\.(?:js|css|json|png|jpg|jpeg|webp|svg|pdf|csv|woff2?)|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|prototypes\/guide-self-consumption\/index\.html|index\.html|404\.html|robots\.txt|preview-info\.json|favicon\.png|og-home-photo-20260926\.jpg|og-step-map-20261017(?:-v034)?\.png|og-image\.png|og-support-shock-burden\.png|og-self-consumption-v040\.png)$/;
+  const allowed=/^(?:assets\/[^/]+\.(?:js|css|json|png|jpg|jpeg|webp|svg|pdf|csv|woff2?)|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|manual\/(?:(?:getting-started\/(?:(?:milestones|troubles)\/)?)|(?:equipment-renewal\/(?:(?:costs|consultation)\/)?))?index\.html|prototypes\/guide-self-consumption\/index\.html|index\.html|404\.html|robots\.txt|preview-info\.json|favicon\.png|og-home-photo-20260926\.jpg|og-step-map-20261017(?:-v034)?\.png|og-image\.png|og-support-shock-burden\.png|og-self-consumption-v040\.png)$/;
   assert(names.every(name=>allowed.test(name)),`未承認ファイル：${names.filter(name=>!allowed.test(name))}`);
   assert(!names.some(name=>/(?:\.map$|fixture|audit|(?:^|\/)qa\/|\.env|credential|CNAME|sitemap\.xml)/i.test(name)),'内部資料・本番公開設定を同梱しない');
   assert(names.includes('prototypes/guide-self-consumption/index.html'),'試作記事を含める');

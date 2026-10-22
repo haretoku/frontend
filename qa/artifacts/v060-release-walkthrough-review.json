@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-22",
+  "reviewer": "v060_renewal_review（実装とは別担当）",
+  "scope": "v0.6.0リリース準備の歩き方・Manual TOP相談カード・analytics接続の後続差分レビュー．記事本文・数値及び承認済みコンテンツは再レビューしない．",
+  "sourceDeploymentCommit": "64fca1f24835d45162d3155140bdc7fd546c4f36",
+  "targetFiles": [
+    {
+      "file": "site/shared/walkthrough/audience.js",
+      "sha256": "e1eea310e24b76248a1a8d0fa277334542ccb8790daf8346fddc1ba1730a1518"
+    },
+    {
+      "file": "site/shared/walkthrough/panel.js",
+      "sha256": "e325fa0b4e77c750bf83bd47caae8dc3a353e39bbb02d1a3639149a541640c46"
+    },
+    {
+      "file": "site/shared/walkthrough/state.js",
+      "sha256": "a15eb8c91b54f20eb5dc5d5173f369233a78259b00c1ad38fed41eaff20c66dd"
+    },
+    {
+      "file": "site/shared/walkthrough/navigation.js",
+      "sha256": "7f02d9a4030039340c2b69f5966528d051b479761676c35e5ca5739bb6c842d3"
+    },
+    {
+      "file": "site/shared/walkthrough/tracker.js",
+      "sha256": "786f76c0897602777aa0ffc0d438384df7371a1dae90e13751f307dc4108b9ac"
+    },
+    {
+      "file": "site/shared/walkthrough/reading.js",
+      "sha256": "83e8d7435afa4870b1e7c58f321525fbdc4df7a6143c0562f8d8782103f8a95f"
+    },
+    {
+      "file": "qa/sync-manual-components.mjs",
+      "sha256": "cc2fe53b15d89cad0d0f3cedc53db8a9461f54a0fe7ead4d4bb044163407be36"
+    },
+    {
+      "file": "site/manual/index.html",
+      "sha256": "98a70d4f1d440ef889decfbcf9e1befcd8fe579964ba775d08aa7f0648a192d8"
+    },
+    {
+      "file": "site/manual/manual.css",
+      "sha256": "097ee0ba3500d2238542fedb288c5c006b9d1341291a70332924b70cce55b1f2"
+    },
+    {
+      "file": "site/shared/analytics-core.js",
+      "sha256": "54bdcbd7f263fb7f26f62d0912f56f13bc5deac18f63e2f061593eee3f5f32fd"
+    }
+  ],
+  "supportingFiles": [
+    {
+      "file": "site/shared/walkthrough/target.js",
+      "sha256": "d7a4eace7ea689b700f6950df162e8ddc685e4abc7c71f3aa15d7ccd20de1516"
+    },
+    {
+      "file": "site/manual/content.js",
+      "sha256": "61cc4c76671bcd1a2c5007df66e23bb242de16810959d6d355f3abb10bb9f269"
+    },
+    {
+      "file": "site/manual/manual.js",
+      "sha256": "4b70f7af7ea9f0f0a0315b2b3ecb52fa4653a13badca9d3ce419a8ae7204556a"
+    },
+    {
+      "file": "site/manual/routes.js",
+      "sha256": "e948205e334900b9935c52ecb2fd479b12b284bf06674f1315e79e61bac5e240"
+    },
+    {
+      "file": "site/map/consultation-view.js",
+      "sha256": "74737c2cf53b7817a74f7e814cc38e66f35e6596067a18d091ba867941d1eb9c"
+    },
+    {
+      "file": "site/shared/consultation-providers.css",
+      "sha256": "8cee043f540f3e8855f24fb34498bfe9ee71cf04bf99d0af3dfd3d4c74f7439b"
+    },
+    {
+      "file": "qa/tests/walkthrough.test.js",
+      "sha256": "86600ea5052e571bf861562ecb4a9b7edc2bc2d68556fbd849f0e8278818d954"
+    },
+    {
+      "file": "qa/tests/manual-readiness.test.js",
+      "sha256": "2f904e194514aa7f099a108c3eb12d1b0dfdc330c09bf1c61a58ae63427e56bc"
+    },
+    {
+      "file": "qa/tests/analytics.test.js",
+      "sha256": "80344cf6f59fa0ad4ebfc8d217cec57e23500032ee3f3ef748ee95b7d4642a07"
+    }
+  ],
+  "decision": "PASS_CONTENT_AND_LIMITED_RUNTIME_SCOPE",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "findings": [],
+  "authoritativeAgreements": [
+    "最後に手動選択した歩き方の対象タブをlocalStorageに保存して優先し，未保存又は保存値無効時だけページ分類を使う．",
+    "設備更新3ページ読了は節目の記事1つ読了を満たし，更新単独のミッションも残す．過去レビューの重複計上禁止はこの合意で失効．",
+    "記事ページのh1へは強調を付けず，節目・困りごとの一覧及び相談カードへ案内する．",
+    "最後のラベルはMAP「わが家のことを相談しよう」，Manual「太陽光のこれからを相談しよう」．"
+  ],
+  "checks": [
+    {
+      "id": "audience-preference",
+      "result": "PASS",
+      "detail": "保存値はconsidering／installedだけ採用．手動クリック・キーボード選択はsaveWalkthroughAudienceを呼び，初期selectAudienceはsave=falseなので自動分類を手動設定として保存しない．保存値はページ分類より優先し，不正値・未保存・保存不能時は閲覧ページで分類．既存2記事もinstalledへ分類する．"
+    },
+    {
+      "id": "audience-panel-behavior",
+      "result": "PASS_STATIC_AND_TEST",
+      "detail": "対象タブはmap＋guidesとmanualへ分離．aria-selected，tabIndex，tabpanel.hidden，矢印／Home／End，選択時スクロール上端復帰が対応．Manual TOPのタブ操作は.manual-tabsと.manual-panelだけを対象にし，共存する歩き方を変えない．DOMモック検査PASS．"
+    },
+    {
+      "id": "manual-five-missions",
+      "result": "PASS",
+      "detail": "はじめに3ページ，節目記事1つ，困りごと記事1つ，設備更新3ページ，相談先外部リンクの5項目．現節目記事には設備更新が存在するためpending=falseで分母5．設備更新の3ページ読了でmanual-renewalとmanual-schedule-articleを同時達成し，困りごと達成へは流用しない．これは最新合意通り．"
+    },
+    {
+      "id": "stored-renewal-migration",
+      "result": "PASS_TEST",
+      "detail": "保存済みmanual-renewal=trueからもmanual-schedule-article=trueを派生し，移行前に読了した人の達成を失わない．v2保存は旧v1タブの上書きから隔離され，導入・更新ページの部分達成と従来MAP進捗を保つ．"
+    },
+    {
+      "id": "reading-classification",
+      "result": "PASS_REUSED_AND_TEST",
+      "detail": "導入・更新は各3ページ末尾表示を別集計し，はじめに／更新単独記事の途中ページを完了扱いしない．他の記事は現行分類から節目・困りごと・詳しいガイドを判別．既存2トリセツ記事と8ガイドを混同しないテストPASS．"
+    },
+    {
+      "id": "navigation",
+      "result": "PASS",
+      "detail": "manual-schedule-articleは/manual/#timelineの公開記事へ，manual-articleは/manual/#troublesの更新以外の記事へ，manual-quoteは/manual/#manual-consultationの相談ボタンへ案内．manual-intro／manual-renewalは対象selectorを持たず，h1強調を行わない．1回消費・60秒期限・path/hash一致の既存制約を保持．"
+    },
+    {
+      "id": "manual-top-component",
+      "result": "PASS_EXACT",
+      "detail": "Manual TOPの相談ブロックは同期スクリプトと同じrenderer引数（manual-接頭辞，article_comparison，専用title／intro，閉じた比較表）からの出力と完全一致．カードはトリセツ2タブの外にあり，どちらのタブからも到達できる．比較表の新設対象・既設対応確認の注記も表の直前に表示する．"
+    },
+    {
+      "id": "labels",
+      "result": "PASS",
+      "detail": "MAPミッションと既定rendererのタイトルは「わが家のことを相談しよう」．ManualミッションとTOP相談見出しは「太陽光のこれからを相談しよう」へ一致する．"
+    },
+    {
+      "id": "manual-top-layout-static",
+      "result": "PASS_STATIC",
+      "detail": "#manual-consultationにscroll-margin-top 90pxとmargin-top40pxがあり，案内先のアンカーは存在する．共通相談CSSは読み込まれ，Manual固有の対象注の文字サイズと行高を指定．全Manual TOPの重複IDは0件．実表示は本担当の対象外．"
+    },
+    {
+      "id": "external-action-progress",
+      "result": "PASS_LIMITED_RUNTIME",
+      "detail": "Manual TOPの閲覧・タブ表示・内部遷移だけでは相談達成しない．現HTMLの3社ボタンを抽出してtrackerのVM文脈へ渡し，各社の左クリックでquoteとmanual-quoteが呼ばれることを確認．既存テストで中クリック可・右クリック／disabled／内部hrefは対象外を確認．これはリンク有効化の観測であり，フォーム送信や依頼完了を表さない．"
+    },
+    {
+      "id": "analytics-manual-top",
+      "result": "PASS_LIMITED_RUNTIME",
+      "detail": "analytics-coreへ/manual/を相談クリックの許可ページとして追加．現TOPカード3件でconsultation_clickのprovider_idはsolar-partners／tainavi／griene，page_idはmanual，placementはarticle_comparison．SP広告だけquote_clickを1件維持．入力canary付きURL・外部referrerのpath/queryはイベントへ漏れない．"
+    },
+    {
+      "id": "analytics-disabled",
+      "result": "PASS_LIMITED_RUNTIME",
+      "detail": "本番URLでもproductionBuild=falseなら無効，preview originではproductionBuild=trueを与えても無効．モック環境でscripts／eventsとも0件．実Google送信は行っていない．"
+    },
+    {
+      "id": "existing-focused-tests",
+      "result": "PASS",
+      "detail": "node --test qa/tests/walkthrough.test.js qa/tests/manual-readiness.test.js qa/tests/analytics.test.js を独立実行．39件PASS，0件FAIL．対象は保存・移行・移動先・進捗・主要計測とトリセツタブの干渉防止．"
+    }
+  ],
+  "limitedRuntime": {
+    "externalNetworkUsed": false,
+    "browserUsed": false,
+    "commands": [
+      "node --test qa/tests/walkthrough.test.js qa/tests/manual-readiness.test.js qa/tests/analytics.test.js",
+      "node --input-type=module（読み取り専用の個別assert：Manual静的同期，実カード抽出，analyticsとtrackerのモック実行，h1対象なし，ラベル，ID）"
+    ],
+    "testResults": {
+      "tests": 39,
+      "pass": 39,
+      "fail": 0
+    },
+    "additionalAssertions": {
+      "manualStaticSync": true,
+      "manualCardProviders": [
+        "solar-partners",
+        "tainavi",
+        "griene"
+      ],
+      "consultationEvents": 3,
+      "spQuoteEvents": 1,
+      "queryAndReferrerCanaryLeak": false,
+      "previewScripts": 0,
+      "previewEvents": 0,
+      "topVisitCompletes": false,
+      "headingTargets": null,
+      "manualDuplicateIds": 0
+    }
+  },
+  "reusedEvidence": [
+    {
+      "file": "qa/artifacts/v060-walkthrough-independent-review.json",
+      "sha256": "6a5d01aa7bcc4bd550a76a57fa4a9c0156f80cd3ee7fa4c822f0677d1bc8e8d6",
+      "scope": "旧保存タブ対策・有効な外部クリック・既存ナビゲーションの不変仕様を再利用．節目準備中／更新を節目へ重複計上しないという旧評価は最新合意で置換し，再利用しない．"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page3-providers-review.json",
+      "sha256": "9617787c5b0ed9b267b6e05048355aba2fbfb8cc5937c3e564fce69f229a2f7d",
+      "scope": "3社の同一renderer，既設工事への条件注記，広告と通常リンクの区別，静的同期の先行PASS．Manual TOPへ追加する配置と接続だけ今回確認．"
+    },
+    {
+      "file": "qa/artifacts/v060-walkthrough-tabs-self-check.json",
+      "sha256": "0d6721a4d77f01a23620c5bcd04fd676e844d77fd550e863663f518bb5677aa2",
+      "scope": "先行の2タブレイアウト／表示証跡の所在として参照．保存優先化など後続変更の動作は今回別途検査し，この旧版の表示記録を現版全UI検収とは扱わない．"
+    }
+  ],
+  "limits": [
+    "ブラウザ・共有タブは操作していない．PC／モバイルの現版実表示，popover開閉・スクロール・発光アニメーション，保存再訪の実ブラウザ動作は親の同一版証跡又は別担当の確認範囲．",
+    "外部サイトへ実遷移・送信・フォーム操作・広告成果検査・Google送信は行っていない．外部クリック接続は現HTMLから抽出したリンクとモックイベントで検証．",
+    "記事本文・数値・工事費根拠と各社のサービス一次資料の全件再調査は今回の対象外．承認済みの記事内容と不変な先行検収を再利用．",
+    "source commitは親から受領した開発版の識別子．この記録はtargetFilesの現ローカルSHA256で対象を固定し，配信バイト又は公開commitとの一致は独立に確認していない．",
+    "本番公開，ASP掲載URL登録，人間承認の記録，v0.6.0全体のリリース可否を本判定だけで決めない．"
+  ],
+  "processesStarted": []
+}

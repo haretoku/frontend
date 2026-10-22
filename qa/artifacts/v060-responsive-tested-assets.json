@@ -1,0 +1,326 @@
+[
+  {
+    "name": "analytics-w6aiH9Ni.js",
+    "sha256": "a1fae07cb346efe24c914d12db632cd369cd7c6f6ade2ed0b5de33bfc76252e7"
+  },
+  {
+    "name": "article-Bj71asNy.css",
+    "sha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3"
+  },
+  {
+    "name": "article-solar-economics-cumulative-compact-CIGTExUV.svg",
+    "sha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7"
+  },
+  {
+    "name": "article-solar-economics-cumulative-DefzOuOL.svg",
+    "sha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6"
+  },
+  {
+    "name": "assets-wVBih1br.js",
+    "sha256": "2c3569f23522fcd023782a96d35c2dd36a16d1855151e2f7b0c2e301f6362083"
+  },
+  {
+    "name": "cards-bVv9OsRP.css",
+    "sha256": "ed19089904fde68a16c39dab89963f76d47c227ab8bf2b13cb083e312e970fd2"
+  },
+  {
+    "name": "contractor-checksheet-DmgL5J0n.pdf",
+    "sha256": "83816ce8cadaa141db74d06ea694987379eeabe4144d9a9e4ee7fe1b05177c70"
+  },
+  {
+    "name": "data-CTlfnS1N.css",
+    "sha256": "dbd066ce8683ce1e6fa86e1232d85438b8f44281e068ec078464dd4a46419c7b"
+  },
+  {
+    "name": "data-loader-_UALgZOL.js",
+    "sha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117"
+  },
+  {
+    "name": "data-subsidies-index-UHo2iT2N.js",
+    "sha256": "267c146dab4b2a92adc9405bbc93f256cf4205693cb767f1ec5871a2ab9dc89d"
+  },
+  {
+    "name": "detail-guide-CgQSBg9B.css",
+    "sha256": "2515d0917b7dee0d1946899a208d841e1f115fc14240ec3b222b494b4293543d"
+  },
+  {
+    "name": "detail-guide-figures-B_s8fnqU.css",
+    "sha256": "0f79732c5fe7ba8b659d08a5cfda1790991db5184b7f63dbd0080afd0ce6fc03"
+  },
+  {
+    "name": "diagnostic-display-binding-CKdfZiu5.json",
+    "sha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919"
+  },
+  {
+    "name": "diagnostic-display-table-E4yzT3FH.json",
+    "sha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7"
+  },
+  {
+    "name": "entry-ChgWZR9D.css",
+    "sha256": "72c5d22a234ff3dc72ebd8f355a31ca56ba324d2ca84401f109ab42cfdc5ffb9"
+  },
+  {
+    "name": "entry-CVcKDIlb.js",
+    "sha256": "279175e06f5800eb8f664f89216de713014d8abb55620471af66bd1aff21402f"
+  },
+  {
+    "name": "entry-DtWZ7QJk.css",
+    "sha256": "4bf3a47f0db1692943e931dc97d84317d69a8b577eb5ce7b73bf3759dce39b09"
+  },
+  {
+    "name": "entry-DuTDOPAv.js",
+    "sha256": "5dea092a094cadab76c729a8c641541cf105b709a14a822ab059e79859428779"
+  },
+  {
+    "name": "favicon-BmMVSVLw.svg",
+    "sha256": "558e837accce56ac69644f56c744790e4a342faa2f4de65bc7eb47ac71eb5e94"
+  },
+  {
+    "name": "guides-Bs9uTwOP.js",
+    "sha256": "c1328bfb8b13c839793eab189f15277dab713a439fb4cb4bdd410012f1b33fa2"
+  },
+  {
+    "name": "guides-electricity-support-end-index-DK-szL2n.css",
+    "sha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b"
+  },
+  {
+    "name": "guides-electricity-support-end-index-Dl-sw3Jh.js",
+    "sha256": "981d6a0a38dfd3ab60090a13f3663b54429fa7821a022a66ce2a9e2a6472c502"
+  },
+  {
+    "name": "guides-Re8FBS7e.css",
+    "sha256": "2338593832b652ae3c2462a80177bca63f7462d1b8632cad3543104e96ebe057"
+  },
+  {
+    "name": "guides-self-consumption-index-Oslr8jQX.css",
+    "sha256": "fa7bb4d8461fa35c36b3429bbb079e89cff5afd571b3149d238491252c253e70"
+  },
+  {
+    "name": "guides-solar-economics-index-CMvQrjsJ.css",
+    "sha256": "29715262bf59b85406fe57a41ed96e49263b8392d569638105208ef2eab71203"
+  },
+  {
+    "name": "guides-solar-electricity-savings-index-KaY4wo2D.css",
+    "sha256": "3e78e2beb4fe8cbb661bee9d8f363185f74cd8778f024a9196926d2305c80053"
+  },
+  {
+    "name": "guides-solar-installation-cost-index-D_gosE4s.css",
+    "sha256": "42145e12bf5cf681791e88ea99e71c68e3a015030492efca18c6bf1360e60e83"
+  },
+  {
+    "name": "guides-solar-maintenance-cost-index-BfX-UV_h.css",
+    "sha256": "715f9e1f08843c1f14b1a845327a8c1e573d29231103edafd7aa83c53ccb2dd9"
+  },
+  {
+    "name": "hare-display-binding-ByES3t9O.json",
+    "sha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a"
+  },
+  {
+    "name": "hare-display-table-GvQlwHhJ.json",
+    "sha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff"
+  },
+  {
+    "name": "harena-rooftops-Cwq_PN9m.png",
+    "sha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4"
+  },
+  {
+    "name": "journey-D7tNsRtJ.js",
+    "sha256": "685817a3f42b3cdd05dcdebdc3a2fc83a5c7ae73b1f3628cfbb8cd5a5387e4d7"
+  },
+  {
+    "name": "journey-DFijtR8g.css",
+    "sha256": "673ab46a7703a565d4e2e0e034b76411301c934274750cb5b77cb0b7107e28d2"
+  },
+  {
+    "name": "journey-state-CCTPYMpn.js",
+    "sha256": "db7c1c26ef2d5fc9299a5a4ae9848fa2928daf5dfecbc1df8d343640f664d278"
+  },
+  {
+    "name": "manual-index-CYfyJATU.css",
+    "sha256": "723d652cea547758b962b0609807f54538fd329017d1810fcc4e249ab5f9aa75"
+  },
+  {
+    "name": "manual-index-DpisEQl6.js",
+    "sha256": "c6cc013ef6bcf6470e9ecf4db4043e8d7a19cda0b170c35ba61725dccd16dce5"
+  },
+  {
+    "name": "metadata-D8VIoK63.json",
+    "sha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd"
+  },
+  {
+    "name": "navigator-C6wSog06.png",
+    "sha256": "1cfc6cd08c52ee36e60d4f37261ce6b219112a9c731658c6de191118d5e544fb"
+  },
+  {
+    "name": "og-guide-disaster-20261019-v3.png",
+    "sha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344"
+  },
+  {
+    "name": "og-guide-quotes-contractors-20261019-v2.png",
+    "sha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206"
+  },
+  {
+    "name": "og-guide-self-consumption-20261018.png",
+    "sha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48"
+  },
+  {
+    "name": "og-guide-solar-economics-20261019-v3.png",
+    "sha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d"
+  },
+  {
+    "name": "og-guide-solar-electricity-savings-20261019-v14.png",
+    "sha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639"
+  },
+  {
+    "name": "og-guide-solar-fit-20261019-v4.png",
+    "sha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11"
+  },
+  {
+    "name": "og-guide-solar-installation-cost-20261019-v2.png",
+    "sha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1"
+  },
+  {
+    "name": "og-guide-solar-maintenance-cost-20261019-v2.png",
+    "sha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6"
+  },
+  {
+    "name": "og-guide-subsidies-20261019-v2.png",
+    "sha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174"
+  },
+  {
+    "name": "og-guide-subsidy-amount-20261019-v5.png",
+    "sha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639"
+  },
+  {
+    "name": "og-manual-20261021.png",
+    "sha256": "a5d4ee79d8637de26b3d33f2571debfacf1d49177349bf6b3433d1ec8a6e08c5"
+  },
+  {
+    "name": "og-manual-intro-20261021.png",
+    "sha256": "1c21b765c1f1f37b3e129216f104d62052a96fef4d9df57f7f2657775e61cbd2"
+  },
+  {
+    "name": "og-manual-renewal-20261021.png",
+    "sha256": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599"
+  },
+  {
+    "name": "pages-calculation-method-CgXKgyDd.js",
+    "sha256": "1c183f45bb43d0e8981200da15495dbed6006e4cb6a44b2318e5cbb66cab5b22"
+  },
+  {
+    "name": "pages-calculation-method-FO3eh5vu.css",
+    "sha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9"
+  },
+  {
+    "name": "pawn-female-DSZs4HJW.png",
+    "sha256": "31ce7412569c8f367062b5ee47c4ca9900a5f05db9be54465e9d928525b00c6b"
+  },
+  {
+    "name": "pawn-male-DkOsVmn1.png",
+    "sha256": "0917d1153746e74958ff6d355c8620d5cfb1be813e9d345220613243b92e8de2"
+  },
+  {
+    "name": "professor-chibi-BwE1xmLE.png",
+    "sha256": "cd752bd66b6710e403c69cd9756c6cbf00ac5a1c459ae3d39052fbc14e01f069"
+  },
+  {
+    "name": "public-data-CZscpcC-.json",
+    "sha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23"
+  },
+  {
+    "name": "retained-diagnostic-display-DOTGF6p4.js",
+    "sha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48"
+  },
+  {
+    "name": "site-header-entry-B7uH3SHy.js",
+    "sha256": "bece279147685eda0dd56400a777325b8f367abe22b91c80a9aea8f29b7f67b1"
+  },
+  {
+    "name": "solar-partners-D00TnDtz.png",
+    "sha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39"
+  },
+  {
+    "name": "step-icons-WybuhB-8.svg",
+    "sha256": "a7650527c195cf27da2f401422d8fce5ee3d51141cb3e48880e504fed9e3f19a"
+  },
+  {
+    "name": "style-D2SrZ_x4.css",
+    "sha256": "56839b3a0973c2fb5bef3f3cf979eb209043a5a693f6ff3f8f000a8d85885ce6"
+  },
+  {
+    "name": "support-shock-burden-CfPq4i2Y.png",
+    "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+  },
+  {
+    "name": "support-shock-burden.png",
+    "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+  },
+  {
+    "name": "support-shock-burden.svg",
+    "sha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496"
+  },
+  {
+    "name": "support-shock-daily-compact-DPcvJas5.svg",
+    "sha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4"
+  },
+  {
+    "name": "support-shock-daily-DdFQA0Ah.svg",
+    "sha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
+  },
+  {
+    "name": "support-shock-daily.png",
+    "sha256": "b5e3df2c4f073963c430db5f609d331569709dd1aa9efdb8c699741a0047139c"
+  },
+  {
+    "name": "support-shock-daily.svg",
+    "sha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
+  },
+  {
+    "name": "support-shock-table-1.csv",
+    "sha256": "300fd83c3c70e352c5a23ecaa4cad85801030b74ee044820e8393c69d3295354"
+  },
+  {
+    "name": "support-shock-table-1.png",
+    "sha256": "7e4735fac5903543cad047a2fc3026872cd7ac1b5e77442d2fe1e30fe9008547"
+  },
+  {
+    "name": "support-shock-table-2.csv",
+    "sha256": "c1f06657b4aea2f304b89df32b8be575354672429c782bc712d1f9169ca0b789"
+  },
+  {
+    "name": "support-shock-table-2.png",
+    "sha256": "fbaea5728a686155181a30b18df8b6d353a7c857827ed86f3fab7d22e2200b2e"
+  },
+  {
+    "name": "support-shock-table-3.csv",
+    "sha256": "9b9e694b55e45162b74f1d46f5d46fd2fb6be16163b0a8b10f4d607ee41f1863"
+  },
+  {
+    "name": "support-shock-table-3.png",
+    "sha256": "01247c2f6d2b1e617288497d3a7a196e2a5b3a37c69b1ee657ecc5f6017f09ff"
+  },
+  {
+    "name": "support-shock-table-4.csv",
+    "sha256": "88dbbe45fd3feac5756d2c09fb4b2429c5c55c3c12e62f93e312c277bffc9d93"
+  },
+  {
+    "name": "support-shock-table-4.png",
+    "sha256": "e9d5101331c383b444cb63f7a4d92e514717d3647376a17ae0b8bdd038dcaadf"
+  },
+  {
+    "name": "table-scroll-hint-BMcEuJb1.js",
+    "sha256": "882f10fd344a6f62c7e4598ea9510426986e7ce092d8b95adacba06cd74af71a"
+  },
+  {
+    "name": "tainavi-BIkDNw0f.webp",
+    "sha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83"
+  },
+  {
+    "name": "timeline-B-2dL9ie.css",
+    "sha256": "c7c1b8bd8d47eebdaec724444517e2a3925d01f8a815e2bca535b63314743979"
+  },
+  {
+    "name": "title-art-CxXD5rU-.svg",
+    "sha256": "52c3887d06417cebde6c54c813a0c686f9e7a618b8e134eb51c7b5c9d00344dc"
+  }
+]

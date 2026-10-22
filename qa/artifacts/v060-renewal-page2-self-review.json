@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-22",
+  "scope": "設備更新2ページ目のみ",
+  "deploymentCommit": "b8fc6ca378f244910c41fd0a671ed5b055ec9788",
+  "checks": {
+    "figureCards": true,
+    "breakdown": true,
+    "pointCost": true,
+    "exchangeCost": true,
+    "renewalRange": true,
+    "optionalExchange": true,
+    "removalRange": true,
+    "removalSum": true,
+    "sourceLimits": true,
+    "new30Years": true,
+    "noEarlyExit": true,
+    "next": true,
+    "questions": true,
+    "cardBasis": true
+  },
+  "files": [
+    {
+      "file": "site/manual/equipment-renewal/costs/index.html",
+      "sha256": "2fbf8b78f34084f678704d59da766dbb49a6cb871e247d22ff2d2a60c4209fc3"
+    },
+    {
+      "file": "site/manual/equipment-renewal/style.css",
+      "sha256": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d"
+    }
+  ],
+  "display": {
+    "pc": "v060-renewal-page2-review-pc.png",
+    "mobile": "v060-renewal-page2-review-mobile.png",
+    "viewportOverride": {
+      "width": 360,
+      "height": 812
+    },
+    "document": {
+      "clientWidth": 345,
+      "scrollWidth": 345
+    },
+    "questionOpenClose": "2問の開閉と回答，次ページhrefを確認",
+    "realDevice": false
+  },
+  "reuse": [
+    "同一配信物のv060-renewal-replacement-breakdown-build.log",
+    "数値根拠のv060-renewal-page2-three-costs-sources.jsonと旧独立検収の不変範囲",
+    "最終変更のv060-renewal-page2-reviewed-build.log"
+  ],
+  "note": "独立判定・本人の条件付き承認は別記録．本番公開・3ページ目の人間レビュー完了は対象外．独立レビューの条件表示指摘により，各カードへ短い出典種別を追加し，最終版のPC・360px幅を再確認．変更前に確認した不変の質問・数値・導線は再利用．",
+  "deployment": "appgdep_6ad9f7568bac8191911c0aabb9d6b25f"
+}

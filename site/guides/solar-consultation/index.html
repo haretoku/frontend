@@ -44,12 +44,21 @@
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a class="map-link" href="/">太陽光えらびマップ</a>
+            <div class="menu-primary">
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光を考えている方へ</p>
+                <a class="map-link" href="/"><span class="menu-primary-title">太陽光えらびマップ</span></a>
+                <a class="map-link" href="/guides/" aria-current="page"><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>
+              </div>
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光をつけた方へ</p>
+                <a class="map-link" href="/manual/"><span class="menu-primary-title">太陽光トリセツ</span></a>
+              </div>
+            </div>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
-              <a href="/guides/" aria-current="page">詳しいガイド</a>
               <a href="/press/">プレスリリース</a>
-              <a href="/data/">補助金を調べる</a>
+              <a href="/data/">データを見る</a>
               <a href="/pages/calculation-method.html">計算方法・使用データ</a>
             </div>
           </div>
@@ -67,9 +76,10 @@
     <section id="map" class="journey" aria-labelledby="map-title" hidden>
       <div class="map-heading">
         <div class="map-title-card">
-          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <img class="title-art title-harena" src="/map/assets/navigator.png" alt="" width="92" height="92">
           <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
-          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <p class="title-audience">太陽光を考えている方へ</p>
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
         </div>
       </div>
       <div class="map-landscape" aria-label="太陽光を検討する道のり">
@@ -176,7 +186,7 @@
       <div id="page-ending"><details class="sources"><summary>参考資料</summary><ul><li><a href="https://griene.jp/" target="_blank" rel="noopener">グリエネ：希望に応じた会社紹介と相談 ↗</a></li><li><a href="https://www.tainavi.com/" target="_blank" rel="noopener">タイナビ：一括依頼と見積もりの比較 ↗</a></li><li><a href="https://www.solar-partners.jp/lp-manga-unneigaisha.html" target="_blank" rel="noopener">ソーラーパートナーズ：相談対応と紹介の仕組み ↗</a></li><li><a href="https://www.caa.go.jp/policies/policy/consumer_transaction/release/pdf/160219kouhyou_2.pdf" target="_blank" rel="noopener">消費者庁：住宅リフォームの注意喚起（2016年2月，1ページ目のポイント3） ↗</a></li><li><a href="https://www.jpea.gr.jp/house/setting/" target="_blank" rel="noopener">太陽光発電協会：複数見積もりと設置業者の比較 ↗</a></li></ul></details><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>どの相談先でも，複数社の提案を，価格・設備・工事範囲・保証で比べよう．</li><li>一括見積もりサイトなら，会社探しと一社ずつ依頼する手間を減らせるよ．</li></ul></div></div></div>
       <section id="page-response" class="page-response" aria-labelledby="response-label">
         <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
-        <div class="response-bubble"><a id="next" class="primary" href="/guides/quote-services/" hidden>わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ"><a class="primary" href="/guides/quote-services/"><span>会社探しから始めたい方</span><strong>一括見積もりサイトの選び方へ →</strong></a><a class="primary" href="/guides/choosing-installer/"><span>相談したい会社が決まっている方</span><strong>施工会社の選び方へ →</strong></a></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>複数社から見積もりを取ると，安くなる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>同じ希望で複数社に頼むと，より安い提案を見つける機会が増えます．設備や工事の内容が違うこともあるので，金額と，何が含まれるかを比べましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>直接相談でも，一括見積もりサイトでも，比べることが大事なんだね．</p></div></div></details><details class="response-choice response-dialogue"><summary>一括見積もりだと，何社も一度に電話してくる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>連絡の仕組みはサービスによって違います．サイトの窓口が最初に希望を聞くものも，各社から連絡が入るものもあります．申込前に，紹介される会社数と連絡の流れを確認しましょう．</p></div></div></details></div></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/guides/quote-services/" hidden>わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ"><a class="primary" href="/guides/quote-services/"><span>会社探しから始めたい方</span><strong>一括見積もりサイトの選び方へ →</strong></a><a class="primary" href="/guides/choosing-installer/"><span>相談したい会社が決まっている方</span><strong>施工会社の選び方へ →</strong></a></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>複数社から見積もりを取ると，安くなる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>同じ希望で複数社に頼むと，より安い提案を見つける機会が増えます．設備や工事の内容が違うこともあるので，<a href="/guides/quotes-contractors/">金額と，何が含まれるか</a>を比べましょう．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>直接相談でも，一括見積もりサイトでも，比べることが大事なんだね．</p></div></div></details><details class="response-choice response-dialogue"><summary>一括見積もりだと，何社も一度に電話してくる？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>連絡の仕組みはサービスによって違います．サイトの窓口が最初に希望を聞くものも，各社から連絡が入るものもあります．申込前に，紹介される会社数と連絡の流れを確認しましょう．</p></div></div></details></div></div>
       </section>
       <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/guides/installation-process/">← 前のページへ</a></nav>
     </section>

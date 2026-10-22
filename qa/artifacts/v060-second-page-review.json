@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-21",
+  "scope": "トリセツ導入2ページ目の本文・図・補足3問・導線と，TOPタイムラインとの整合．1・3ページ目の本文は対象外．",
+  "files": {
+    "site/manual/timeline.css": "A19C051E5F93491FCA010A6795A353C586AAB3C3B9AA7C4438B644625E5025CE",
+    "site/manual/getting-started/style.css": "D9200D3BA0F71796C41593B5C2F77FBD89CE4DF57F686143E31BFB28F2CEE68C",
+    "site/manual/getting-started/milestones/index.html": "7F10D31522C2A97AE101573311350EA2C53D16F721AA80E3EBBBB7CD0BDC17EF",
+    "site/manual/index.html": "8229CC16756C56E368190BC12119059C11E4F016DED305FA9BE009A9E14677E3"
+  },
+  "result": "PASS：MUST・RECOMMENDの修正指摘なし．",
+  "humanStatus": "人間レビューOK．ユーザーの「2ページ目レビューして．OKなら人間レビューok」という条件付き承認を，自己確認・独立レビューPASSにより適用．",
+  "independentReview": "manual_second_page_review：本文・図・TOPの4項目，目安と前提の区別，補足3問，読者の発話としての次ページリンクに問題なし．NITSとしてパワコンの用語補足余地のみ，現状を妨げない．",
+  "screen": "PC実画面で本文と図，補足3問の開閉・回答・参考リンク，次への返事を確認．明らかな表示崩れなし．",
+  "consistency": "TOPは0年目を残し，点検を5年ごとの1項目へ集約．図とTOPは5年ごと／10年目／10〜15年目／30年目の表示が一致．点検表示は診断前提，交換・更新は必須でなく目安．",
+  "sources": [
+    "https://www.meti.go.jp/shingikai/santeii/pdf/20260205_1.pdf",
+    "https://www.jpea.gr.jp/house/selluser/",
+    "https://www.jpea.gr.jp/faq/583/"
+  ],
+  "build": "qa/artifacts/v060-top-timeline-compact-build.log：123ファイル・39HTMLの確認用ビルドPASS．",
+  "screenshot": "qa/artifacts/v060-second-page-review.png",
+  "limits": "スマホの実機・幅別表示検査，本番リリース前の全体検収は別途．アバターの保存処理は不変の直前PASSを再利用．3ページ目は未レビュー．"
+}

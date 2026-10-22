@@ -1,0 +1,57 @@
+.guide-article .renewal-figure { margin:28px 0; }
+.guide-article .renewal-options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.guide-article .renewal-option { min-width:0; padding:20px 18px; border:1px solid #d5dfd4; border-radius:14px; background:#f6f8f2; }
+.guide-article .renewal-icon { display:block; width:48px; height:48px; margin-bottom:12px; color:#6c947b; }
+.guide-article .renewal-icon svg { display:block; width:100%; height:100%; }
+.guide-article .renewal-option h2 { padding:0; border:0; margin:0 0 8px; font-size:18px; line-height:1.6; }
+.guide-article .renewal-option p { margin:0; font-size:14px; line-height:1.9; }
+.guide-article .renewal-tradeoffs { margin:16px 0 0; padding-top:14px; border-top:1px solid #d5dfd4; font-size:14px; line-height:1.8; }
+.guide-article .renewal-tradeoffs > div + div { margin-top:12px; }
+.guide-article .renewal-tradeoffs dt { margin:0 0 3px; font-size:12px; font-weight:700; color:#476950; }
+.guide-article .renewal-tradeoffs dd { margin:0; }
+.guide-article .renewal-figure figcaption { margin-top:10px; font-size:12px; color:#647268; line-height:1.9; }
+.guide-article article .renewal-table { width:100%; max-width:100%; table-layout:fixed; }
+.guide-article article .renewal-table .renewal-label { width:26%; }
+.guide-article article .renewal-table .renewal-price-label { width:38%; }
+.guide-article article .renewal-table th,.guide-article article .renewal-table td { padding:14px 12px; white-space:normal; text-align:left; vertical-align:top; overflow-wrap:anywhere; font-size:14px; line-height:1.9; }
+.guide-article .renewal-table small { font-size:12px; }
+.guide-article .renewal-cost-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+.guide-article .renewal-cost-card { min-width:0; padding:20px 16px; border:1px solid #d5dfd4; border-radius:16px; background:#fff; text-align:center; }
+.guide-article .renewal-cost-art { width:120px; height:96px; margin:0 auto 10px; }
+.guide-article .renewal-cost-art svg { display:block; width:100%; height:100%; }
+.guide-article .renewal-cost-card h2 { margin:0 0 18px; padding:0; border:0; font-size:20px; line-height:1.5; }
+.guide-article .renewal-cost-card .renewal-cost-label { margin:0 0 4px; font-size:13px; line-height:1.7; }
+.guide-article .renewal-cost-card .renewal-cost-basis { margin:0 0 6px; font-size:11px; line-height:1.7; color:#647268; }
+.guide-article .renewal-cost-card .renewal-cost-price { margin:0; font-size:28px; font-weight:700; line-height:1.6; white-space:nowrap; color:#123f33; }
+.guide-article .renewal-cost-price span { margin-left:3px; font-size:14px; font-weight:500; }
+.guide-article .renewal-cost-extra { margin-top:16px; padding-top:12px; border-top:1px solid #e3dcc8; font-size:14px; line-height:1.8; }
+.guide-article .renewal-cost-extra p { margin:0; font-size:12px; }
+.guide-article .renewal-cost-extra { text-align:left; }
+.guide-article .renewal-cost-extra .renewal-breakdown-title { font-weight:700; color:#476950; }
+.guide-article .renewal-breakdown { margin:8px 0 0; font-size:13px; line-height:1.8; }
+.guide-article .renewal-breakdown > div { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:10px; align-items:start; }
+.guide-article .renewal-breakdown > div + div { margin-top:6px; }
+.guide-article .renewal-breakdown dt,.guide-article .renewal-breakdown dd { margin:0; }
+.guide-article .renewal-breakdown dd { font-weight:700; white-space:nowrap; }
+.guide-article .renewal-breakdown small { font-size:11px; font-weight:400; }
+.guide-article .renewal-cost-extra .renewal-cost-component { margin-top:8px; font-size:13px; }
+.guide-article .renewal-cost-extra .renewal-cost-condition { margin-top:8px; font-size:11px; color:#647268; }
+.guide-article .renewal-sources { margin-top:28px; font-size:12px; line-height:1.9; color:#647268; }
+.guide-article .renewal-sources summary { cursor:pointer; min-height:36px; padding:8px 0; }
+@media(max-width:600px) {
+ .guide-article .renewal-cost-grid { grid-template-columns:1fr; gap:12px; }
+ .guide-article .renewal-cost-card { display:grid; grid-template-columns:80px minmax(0,1fr); gap:0 12px; padding:18px 14px; text-align:left; }
+ .guide-article .renewal-cost-art { grid-row:1/3; width:80px; height:72px; margin:0; }
+ .guide-article .renewal-cost-card h2 { margin-bottom:8px; font-size:18px; }
+ .guide-article .renewal-cost-values { grid-column:2; }
+ .guide-article .renewal-cost-card .renewal-cost-price { font-size:24px; }
+ .guide-article .renewal-cost-price span { font-size:12px; }
+ .guide-article .renewal-cost-extra { margin-top:12px; padding-top:8px; }
+ .guide-article .renewal-options { grid-template-columns:1fr; gap:10px; }
+ .guide-article .renewal-option { display:grid; grid-template-columns:38px minmax(0,1fr); gap:0 12px; padding:16px; }
+ .guide-article .renewal-icon { grid-row:1/3; width:36px; height:36px; margin:3px 0 0; }
+ .guide-article .renewal-option h2 { font-size:16px; }
+ .guide-article .renewal-option p { font-size:13px; }
+ .guide-article .renewal-tradeoffs { grid-column:2; font-size:13px; margin-top:12px; padding-top:10px; }
+ .guide-article article .renewal-table th,.guide-article article .renewal-table td { padding:11px 8px; font-size:12px; }
+}

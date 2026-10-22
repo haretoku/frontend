@@ -17,13 +17,17 @@ test('新記事は正式URL・共有画像・計測へ接続し，試作表記�
   assert.equal(png.readUInt32BE(16),1200);assert.equal(png.readUInt32BE(20),630);
 });
 
-test('テーマ別一覧は新記事と旧9記事を重複なく掲載し，プレスを分ける',async()=>{
+test('詳しいガイドは8記事を掲載し，トリセツの2記事とプレスを分ける',async()=>{
   const articles=JSON.parse(await readFile(new URL('../../site/solar/data/articles.json',import.meta.url),'utf8'));
   const groups=groupedArticles(articles,{topics:true});
-  assert.deepEqual(groups.map(g=>g.id),['electricity','cost','equipment','companies']);
-  assert.deepEqual(groups.map(g=>g.articles.length),[3,4,2,1]);
+  assert.deepEqual(groups.map(g=>g.id),['economics','equipment','installation','companies']);
+  assert.deepEqual(groups.map(g=>g.articles.length),[4,2,1,1]);
   const ids=groups.flatMap(g=>g.articles.map(a=>a.id));
-  assert.equal(new Set(ids).size,10);assert.equal(ids[0],'self-consumption');
+  assert.equal(new Set(ids).size,8);
+  for(const id of ['self-consumption','disaster']){
+    assert(!ids.includes(id));
+    assert(articles.some(article=>article.id===id));
+  }
   assert.equal(groupedArticles(articles,{press:true})[0].articles.length,1);
   const redirect=await readFile(new URL('../../site/prototypes/guide-self-consumption/index.html',import.meta.url),'utf8');
   assert(redirect.includes('url=/guides/self-consumption/'));

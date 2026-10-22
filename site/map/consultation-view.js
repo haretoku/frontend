@@ -25,11 +25,11 @@ export function providerImpression(provider) {
   return provider.material?`<img class="consult-impression" src="${safe(provider.material.impressionUrl)}" width="1" height="1" alt="" aria-hidden="true" referrerpolicy="no-referrer">`:'';
 }
 
-export function renderConsultationProviders({compact=false,comparison='',comparisonOpen=false,idPrefix=compact?'map-':'',placement=compact?'map':'article'}={}) {
+export function renderConsultationProviders({compact=false,comparison='',comparisonOpen=false,idPrefix=compact?'map-':'',placement=compact?'map':'article',title='わが家のことを相談しよう',intro='あなたの家に設置できるか，費用や補助金を相談で確かめよう．'}={}) {
   const quotePlacement=compact?(placement==='map'?'map_consultation':null):'diagnosis_result';
   return `<section class="consult-providers ${compact?'consult-providers-compact':''}" aria-label="相談先を選ぶ">
-    <h2${compact?` id="${safe(idPrefix)}consultation-title" tabindex="-1"`:''}>わが家のことを相談しよう</h2>
-    ${compact?`<p class="consult-provider-intro">あなたの家に設置できるか，費用や補助金を相談で確かめよう．</p>${comparison?`<details class="consult-provider-comparison"${comparisonOpen?' open':''}><summary>3社の違いを比べる</summary>${comparison}</details>`:''}`:''}
+    <h2${compact?` id="${safe(idPrefix)}consultation-title" tabindex="-1"`:''}>${safe(title)}</h2>
+    ${compact?`<p class="consult-provider-intro">${safe(intro)}</p>${comparison?`<details class="consult-provider-comparison"${comparisonOpen?' open':''}><summary>3社の違いを比べる</summary>${comparison}</details>`:''}`:''}
     <div class="consult-provider-cards">${consultationProviders.map(provider=>`<section class="consult-provider-card ${provider.recommended?'consult-provider-recommended':''}" aria-labelledby="${safe(idPrefix)}consult-${provider.id}">
       ${provider.recommended?'<p class="consult-provider-badge">はれトクのおすすめ</p>':''}
       <div class="consult-provider-brand">${providerLogo(provider)}<h3 id="${safe(idPrefix)}consult-${provider.id}">${safe(provider.name)}</h3></div>

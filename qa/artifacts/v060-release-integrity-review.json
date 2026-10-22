@@ -1,0 +1,234 @@
+{
+  "reviewer": "/root/v060_release_integrity",
+  "date": "2026-10-22",
+  "type": "公開前の独立ソース・配信構造差分レビュー",
+  "baseline": {
+    "version": "v0.5.1",
+    "commit": "948f8d192f4cd20f1a92ccccc5eb93628a135598"
+  },
+  "candidate": {
+    "packageVersion": "0.6.0",
+    "sourceFiles": {
+      "package.json": "26794c41e8c08e7d96ab56c1acbd5014b4332caf9428f26e9ede7d6bb72e04aa",
+      "CHANGELOG.md": "d7a484170dd70e04cefc58d660ee8bec21e088971055c5ceb6e9a44d22041c2e",
+      ".config/vite.pages.config.js": "dac420186e32300bee4ec2b19491daed8003eeb1a50af5c2156ae53727ad7b80",
+      "site/hosting/finalize-pages.js": "fc1f8071a44c8cf1b94d71205b56d292bf96edbc2d71adaec88f51cd3ddb7e62",
+      "site/hosting/finalize-static-assets.js": "8dcd3bbffd0c6e3a33b847461c9c263b822f68b7465af2080da0318fb0056b41",
+      "site/hosting/verify-pages.js": "1a433fca94409a8fcbcebaba96db53ac11b37065efaedc472415a9a21c4b3697",
+      "site/manual/routes.js": "e948205e334900b9935c52ecb2fd479b12b284bf06674f1315e79e61bac5e240",
+      "site/shared/analytics-core.js": "54bdcbd7f263fb7f26f62d0912f56f13bc5deac18f63e2f061593eee3f5f32fd",
+      "site/shared/quote-config.js": "f5384f460132d11f9b8de710f6791f0593af35c38b0e173d54df60e77bc9e639",
+      "site/shared/analytics-config.js": "710e0b03e43bedb066323607c5902d8a14d25fa7d86fa63b9cceb187299e0ef9",
+      "site/solar/src/guide-groups.js": "0e8426d3e2b0e01d8cf35e0e94975afee98a8741c2db22a6015e2352eb9ce949",
+      "site/shared/site-header-template.js": "67228cd13dfe3ecf1fa428588890919c7ad9c5e660d59b8585310b3227a7eb99",
+      "site/manual/index.html": "98a70d4f1d440ef889decfbcf9e1befcd8fe579964ba775d08aa7f0648a192d8",
+      "site/manual/getting-started/index.html": "52b1dc748d3b91ac80c2cf049b6251c0277f6c0445662834d96b0a706ec0265b",
+      "site/manual/getting-started/milestones/index.html": "35b7043915d49946a0570677917714c4f87e4e8b7d41309320a35352dd3fdc08",
+      "site/manual/getting-started/troubles/index.html": "6f37cbb3e51751703ae0188d14d2c9d206babe8636ebe3f38aa144a89ffc80c0",
+      "site/manual/equipment-renewal/index.html": "20c0e51041bac8d7c878e059e18950214b702918e8cca758cd8814499551c2e6",
+      "site/manual/equipment-renewal/costs/index.html": "2fbf8b78f34084f678704d59da766dbb49a6cb871e247d22ff2d2a60c4209fc3",
+      "site/manual/equipment-renewal/consultation/index.html": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d"
+    },
+    "buildOutput": "dist-pages",
+    "buildScan": "qa/artifacts/v060-release-integrity-scan.json",
+    "buildOutputDigest": "c529c6e42de9ad6cefca6ac582a843db3a0a2c93616be4d25c8df55b644cac75"
+  },
+  "status": "PASS_IN_REVIEW_SCOPE",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "findings": [],
+  "checks": [
+    {
+      "id": "P01",
+      "result": "PASS_SCOPE",
+      "detail": "0.6.0候補を確認．切戻し先v0.5.1を特定．本番公開承認は別であり本検収は未公開候補に限定．"
+    },
+    {
+      "id": "P02",
+      "result": "PASS_REUSED_AND_SAME",
+      "detail": "設備更新各ページと収支改善/停電の承認済み内容検収を再利用．収支改善/停電は前回独立内容レビュー記録と現HTMLのSHA256一致．導入詳細8記事のarticle要素全体はv0.5.1と同一．計算・データ入力・広告定義・GA設定はgit diffで変更なし．",
+      "guideChecks": [
+        {
+          "path": "site/guides/solar-economics/index.html",
+          "articleHtmlSha256": "28e2b8c964e6aff7fa30fe47902a5cc70aa5ee2247901b73c54ece4d1b303bb2",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/solar-electricity-savings/index.html",
+          "articleHtmlSha256": "5434e13919927c591f2deceeabb173e1cd7232d1fa2e7e28703004adf0e6cbae",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/solar-installation-cost/index.html",
+          "articleHtmlSha256": "b83911eab45d9643527ee99141b1079309ef772e830861d0a646034d1c2b4680",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/subsidy-amount/index.html",
+          "articleHtmlSha256": "5691caefa99c8404e9ed1f84d15e4a083792f492a5dfd36ad5277d72c6dc304f",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/solar-fit/index.html",
+          "articleHtmlSha256": "60e024a69ee1e2b9837c270bc13293215d587c28e4cbe1cea75a80d7f1e3472e",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/solar-maintenance-cost/index.html",
+          "articleHtmlSha256": "0b93662ce8aa4208bdc3ab3774ed27ae5d6e4e8892cf35c30336b3601c774a5f",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/subsidies/index.html",
+          "articleHtmlSha256": "525db238d446435d87597a94250484d2d2998833005780c59904c0fedf4156b4",
+          "sameAsV051": true
+        },
+        {
+          "path": "site/guides/quotes-contractors/index.html",
+          "articleHtmlSha256": "37600b583986e0c280323e2667a122f74e87c7881e2d82c75be9c2885cdbb17a",
+          "sameAsV051": true
+        }
+      ],
+      "protectedFiles": {
+        "site/simulator/src/calculator.js": "4cbd395cfab65e99fa6c916e7328a275078a5667f9576e1da4fb82066a30159d",
+        "site/map/estimate-model.js": "a4e172b13f24b0919c4a931e6bdbdb180ab87d7340a3e9e26bd59386d34d4963",
+        "site/shared/quote-config.js": "f5384f460132d11f9b8de710f6791f0593af35c38b0e173d54df60e77bc9e639",
+        "site/shared/analytics-config.js": "710e0b03e43bedb066323607c5902d8a14d25fa7d86fa63b9cceb187299e0ef9"
+      }
+    },
+    {
+      "id": "P06",
+      "result": "PASS_STATIC",
+      "detail": "135配信物・41HTML・38重複なし正規URLを独立走査．内部ファイル，アンカー，CSS url参照の欠落0，重複ID0，QA/MD/map/hosting等の混入0．7Manualは登録・build入力・canonical・sitemapが一致．robotsは本番Allow，404はnoindex．既存MAPの旧hash16経路をroute関数で照合．外部出典HTTPは前回PASSとアクセス制約の記録を再利用し全再取得しない．"
+    },
+    {
+      "id": "P07",
+      "result": "PASS_STATIC_AND_REUSED_VISUAL",
+      "detail": "38正規URLのtitle/canonical/robots/OGを独立確認．15採用共有PNGの存在・署名・寸法を確認し，Manual3共有PNGの1200x630と採用ソースとのバイト一致を確認．favicon96x96と旧共有互換配信は本ビルドverifyのPASSを再利用．小サイズ・PC/スマホの見た目は前回証跡と親確認の範囲を再利用し独立ブラウザ目視とはしない．"
+    },
+    {
+      "id": "P08",
+      "result": "PASS_STATIC_SCOPE",
+      "detail": "SP/Tainavi広告定義・計測画像はv0.5.1から不変．ManualTOPと更新相談ページへ3社カード追加．広告2社はsponsored/nofollow+広告表示，Grieneは通常リンクと明記，推薦はSPだけ．新設サービス比較と修理/更新/撤去の要確認注記を確認．実申込・外部問い合わせは行っていない．ASP掲載先報告は公開後別工程．",
+      "newAdvertisingPages": [
+        "/manual/",
+        "/manual/equipment-renewal/consultation/"
+      ]
+    },
+    {
+      "id": "P09",
+      "result": "PASS_LOCAL_COMMANDS",
+      "detail": "Manual新規7URLの本番限定・開発版無効・ビルドフラグ境界を独立実行．ManualTOP/更新相談で3社クリックの固定ID，広告SP1件，個人入力・広告URL非送信をモック実行で確認．Google実受信は未公開なので未確認．",
+      "analyticsChecks": [
+        {
+          "route": "/manual/",
+          "events": [
+            {
+              "page_location": "https://haretoku.jp/manual/",
+              "page_referrer": "https://haretoku.jp/manual/",
+              "page_title": "太陽光トリセツ",
+              "page_id": "manual",
+              "send_to": "G-TEST123456",
+              "provider_id": "solar-partners",
+              "consultation_placement": "article_comparison"
+            },
+            {
+              "page_location": "https://haretoku.jp/manual/",
+              "page_referrer": "https://haretoku.jp/manual/",
+              "page_title": "太陽光トリセツ",
+              "page_id": "manual",
+              "send_to": "G-TEST123456",
+              "provider_id": "tainavi",
+              "consultation_placement": "article_comparison"
+            },
+            {
+              "page_location": "https://haretoku.jp/manual/",
+              "page_referrer": "https://haretoku.jp/manual/",
+              "page_title": "太陽光トリセツ",
+              "page_id": "manual",
+              "send_to": "G-TEST123456",
+              "provider_id": "griene",
+              "consultation_placement": "article_comparison"
+            }
+          ],
+          "adClicks": 1,
+          "privateInputAbsent": true
+        },
+        {
+          "route": "/manual/equipment-renewal/consultation/",
+          "events": [
+            {
+              "page_location": "https://haretoku.jp/manual/equipment-renewal/consultation/",
+              "page_referrer": "https://haretoku.jp/manual/",
+              "page_title": "太陽光トリセツ",
+              "page_id": "manual_renewal_3",
+              "send_to": "G-TEST123456",
+              "provider_id": "solar-partners",
+              "consultation_placement": "article_comparison"
+            },
+            {
+              "page_location": "https://haretoku.jp/manual/equipment-renewal/consultation/",
+              "page_referrer": "https://haretoku.jp/manual/",
+              "page_title": "太陽光トリセツ",
+              "page_id": "manual_renewal_3",
+              "send_to": "G-TEST123456",
+              "provider_id": "tainavi",
+              "consultation_placement": "article_comparison"
+            },
+            {
+              "page_location": "https://haretoku.jp/manual/equipment-renewal/consultation/",
+              "page_referrer": "https://haretoku.jp/manual/",
+              "page_title": "太陽光トリセツ",
+              "page_id": "manual_renewal_3",
+              "send_to": "G-TEST123456",
+              "provider_id": "griene",
+              "consultation_placement": "article_comparison"
+            }
+          ],
+          "adClicks": 1,
+          "privateInputAbsent": true
+        }
+      ]
+    }
+  ],
+  "reused": [
+    {
+      "artifact": "qa/artifacts/v060-existing-manual-content-review.json",
+      "reason": "収支改善・停電HTMLハッシュ完全一致"
+    },
+    {
+      "artifact": "qa/artifacts/v060-structure-independent-review.json",
+      "reason": "Manual7URL登録と共有画像・8ガイドの未変更本文等"
+    },
+    {
+      "artifact": "qa/artifacts/v060-renewal-page1-review.json",
+      "reason": "本人承認済み1ページの本文・図・参考文献の内容"
+    },
+    {
+      "artifact": "qa/artifacts/v060-renewal-page2-review.json",
+      "reason": "本人承認済み2ページの費用図・参考額の条件"
+    },
+    {
+      "artifact": "qa/artifacts/v060-renewal-page3-providers-review.json",
+      "reason": "更新相談HTMLのSHA256が最終注記追加後の承認版と一致"
+    },
+    {
+      "artifact": "qa/artifacts/v060-release-public-tests.log",
+      "reason": "親実施157PASSを再利用し同じ全検査を重複実行しない"
+    },
+    {
+      "artifact": "qa/artifacts/v060-release-public-build.log",
+      "reason": "親実施135配信物38正規URLのverify PASS．独立は追加の全内部アンカー・CSS参照・データ同梱一致を実施"
+    }
+  ],
+  "limits": [
+    "本検収は静的配信物・ソース・モック計測の差分範囲．親のPC/スマホ実画面確認は独立の目視と区別する．",
+    "本番HTTP/配信/Google実受信，ASP報告，Search Console，実SNS共有は未実施・公開後工程．",
+    "数値根拠の全再調査と外部全URLのHTTP再取得は不変範囲の既存PASSを再利用．以前記録済みの政府ページ取得制約を解消済みとはしない．",
+    "このPASSは候補の保存/リリース準備に対するもので本番公開の承認ではない．"
+  ],
+  "processesStarted": []
+}

@@ -9,7 +9,16 @@
 .walkthrough-eyebrow { margin:0 0 3px; color:#6d7d6c; font-size:11px; font-weight:700; letter-spacing:.08em; }
 .walkthrough-panel h2 { margin:0; color:#123f31; font-size:23px; line-height:1.5; }
 .walkthrough-close { flex:none; width:36px; height:36px; border:1px solid #d8e2d5; border-radius:50%; background:#f0f5ec; color:#60715e; font:400 25px/1 sans-serif; cursor:pointer; }
+.walkthrough-tabs { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:6px; padding-bottom:10px; margin:0 0 18px; border-bottom:1px solid #d3ded2; }
+.walkthrough-tab { min-width:0; min-height:44px; padding:10px 8px; border:1px solid #d1ddce; border-radius:10px 10px 5px 5px; background:#f3f6ee; color:#657364; font:700 13px/1.6 "Noto Sans JP",sans-serif; cursor:pointer; }
+.walkthrough-tab[aria-selected="true"] { background:#e7efde; color:#123f31; border-color:#8fa88d; box-shadow:inset 0 -3px #6f997a; }
+.walkthrough-tab:hover { background:#eaf1e3; }
+.walkthrough-tab > span { display:inline-block; }
+.walkthrough-tab:focus-visible { outline:2px solid #008653; outline-offset:2px; }
+.walkthrough-audience[hidden] { display:none; }
 .walkthrough-group__description { margin:7px 0 12px; font-size:12px; line-height:1.8; color:#647463; }
+.walkthrough-group__audience[hidden] { display:none; }
+.walkthrough-group__audience { margin:0 0 2px; color:#66766a; font-size:12px; font-weight:400; }
 .walkthrough-group+.walkthrough-group { margin-top:24px; }
 .walkthrough-group__heading { display:flex; align-items:center; gap:9px; min-height:33px; }
 .walkthrough-group h3 { margin:0; color:#254e3c; font-size:17px; font-weight:700; }
@@ -28,6 +37,8 @@
 .is-done .walkthrough-stamp svg { display:block; }
 .walkthrough-groups li a { display:block; flex:1; min-width:0; padding:12px 0; color:#007447; font-size:13px; font-weight:700; text-decoration:underline; text-decoration-color:#a6bca9; text-underline-offset:.24em; }
 .walkthrough-groups li a:hover { text-decoration-color:currentColor; }
+.walkthrough-pending-label { display:block; flex:1; min-width:0; padding:12px 0; color:#6b786d; font-size:13px; line-height:1.8; }
+.walkthrough-pending-badge { display:inline-block; margin-left:8px; padding:1px 6px; border:1px solid #d5dcd2; border-radius:4px; background:#f5f7f1; color:#6b786d; font-size:10px; white-space:nowrap; vertical-align:middle; }
 .walkthrough-arrow { display:inline-block; margin-left:7px; }
 .walkthrough-groups .is-done a { color:#536e5c; }
 .walkthrough-sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
@@ -39,6 +50,7 @@
 @keyframes walkthrough-introduction { 0%,100% { box-shadow:inset 3px 0 #d7e3cd,0 0 0 0 #6f997a00; } 50% { box-shadow:inset 3px 0 #d7e3cd,0 0 12px 4px #6f997a55; } }
 @media(prefers-reduced-motion:reduce) { .walkthrough-first-visit,.walkthrough-trigger--introduced { animation:none; } }
 @media(max-width:760px) {
+ .walkthrough-tab__subject { display:block !important; }
  .has-walkthrough .header-nav { gap:12px; }
  .map-header .walkthrough-trigger { gap:6px; padding:6px 10px; font-size:12px; }
  .walkthrough-trigger svg { width:16px; height:16px; }

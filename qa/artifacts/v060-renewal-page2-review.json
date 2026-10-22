@@ -1,0 +1,162 @@
+{
+  "date": "2026-10-22",
+  "reviewer": "v060_renewal_review（今回の実装とは別担当）",
+  "scope": "設備更新2ページ目の内容確定レビュー．価格カード図2，本線会話，補足質問，次ページ返事とstyle.cssの静的影響を対象にする．",
+  "sourceDeploymentCommit": "3cf204fcdb25b2cc1e3154d90f7bbf68a45b877f",
+  "reviewedInitialHashes": {
+    "html": "c3210ddb799e4b2b369ff547a93750f7094a81a344938fa0f117627c6e241db7",
+    "style": "ee2a42ed51e62e39b461472f5734920d6f51d59f8927bf1b04c044cd4ed37315"
+  },
+  "targetFiles": [
+    {
+      "file": "site/manual/equipment-renewal/costs/index.html",
+      "sha256": "2fbf8b78f34084f678704d59da766dbb49a6cb871e247d22ff2d2a60c4209fc3"
+    },
+    {
+      "file": "site/manual/equipment-renewal/style.css",
+      "sha256": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page2-three-costs-sources.json",
+      "sha256": "df92e7ada4fcbacfe59873782a5c1de98dfae503aa058f3d641b8fe214e56a8a"
+    }
+  ],
+  "decision": "PASS_CONTENT_SCOPE",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "findings": [
+    {
+      "id": "M1",
+      "priority": "MUST",
+      "file": "site/manual/equipment-renewal/costs/index.html",
+      "line": 57,
+      "location": "図2・継続カードの金額の近く",
+      "issue": "点検3.8万円／回とPCS交換38.4万円／回は，今回確認できた一般市場価格ではなく，5 kW設備の既存資料をもとに採用した診断の前提額である．この出典・対象の限定が閉じた参考資料にのみあり，カードだけでは一般的な継続費用の価格例と読み取れる．更新4 kW・撤去10枚と並べるため，継続だけ対象・採用額の性格を省くと，根拠記録にある「今回新たな市場価格として扱わない」という限定が伝わらない．",
+      "fix": "継続カードの金額に近い短い補足として「診断の前提（5 kW設備）」等を表示する．長い出典・税・原表未照合の条件は資料欄に残してよく，大きな注意枠や長文を追加する必要はない．",
+      "status": "RESOLVED",
+      "resolution": "継続カードの金額直前に「診断の参考額（元資料5 kW）」を表示．閉じた資料欄を開く前から採用値の性格と容量条件を確認できる．"
+    }
+  ],
+  "checks": [
+    {
+      "id": "central-question",
+      "result": "PASS",
+      "detail": "継続・更新・撤去それぞれの必要作業と参考額を示し，博士が同じ順で概説．継続の点検だけが全費用とはせず，必要時のPCS交換・その他修理を別にする．"
+    },
+    {
+      "id": "inspection-and-pcs-values",
+      "result": "PASS_ADOPTED_MODEL_ONLY",
+      "detail": "3.8万円／回・38.4万円／回は既存診断・維持費記事及びbackend C1の採用値と一致．今回新たな実市場額としての原表照合はしていない．表示上の限定不足はM1へ分離． M1の短い表示補足を追加し，採用済みの診断参考額であることをカード上でも限定済み．"
+    },
+    {
+      "id": "replacement-prices",
+      "result": "PASS_REUSED",
+      "detail": "4 kW載せ替え75〜150万円・同時PCS別約35万円は，前回独立確認済み栃和解説と一致．75〜150へ35を自動加算した総額を作らず，撤去処分・足場の含有確認をカードにも残す．継続側PCS38.4は別資料・別条件として資料欄で区別．"
+    },
+    {
+      "id": "removal-arithmetic",
+      "result": "PASS_REUSED",
+      "detail": "10枚撤去は取外し9万円＋運搬処分5万円＋足場15.1〜18.84万円＝29.1〜32.84万円．栃和掲載の丸め値29〜33万円と整合．足場を含む例と明示し，追加の二重加算を避ける説明がある．"
+    },
+    {
+      "id": "comparison-scope",
+      "result": "PASS",
+      "detail": "単位（万円／回），更新4 kW，撤去10枚，PCS別途と必要時の条件，継続の診断参考額・元資料5 kWが見える．同一期間のライフサイクル総額又は同一容量の差額として計算していない．"
+    },
+    {
+      "id": "diagnosis-question",
+      "result": "PASS_QUALIFIED_REFERENCE",
+      "detail": "新しい設備をそこから30年間使う参考試算に使えるとの回答は，新設設備を想定する現在のモデルとの対応を示す．現在の料金・制度・標準費用が前提，実際の撤去・屋根補修・補助金は個別確認，一部を残す継続との比較は対象外と限定．更新そのものの見積額や将来制度を予測できるとの主張ではない．リンク先model-scopeの存在と新設・4 kW等の標準条件を確認．"
+    },
+    {
+      "id": "ten-panels-question",
+      "result": "PASS",
+      "detail": "10枚を1枚費用の単純な10倍にしない説明は，共通する足場・交換範囲の違いを理由にしている．図中の10枚撤去を，10枚の交換価格と誤って読み替えていない．"
+    },
+    {
+      "id": "dialogue-and-next-reply",
+      "result": "PASS",
+      "detail": "図の後に継続・更新・撤去のハレナの受け止めと博士の説明を並べ，主題を一度ずつ掘り下げる．進行用の返事「わが家の場合は，誰に相談すればいい？」は相談ページへの自然な読者発話．質問2問は下に分ける．"
+    },
+    {
+      "id": "redundancy",
+      "result": "PASS",
+      "detail": "カードは金額と内訳，本文は要否・含有範囲・確認を担う．点検とPCSの別費目の繰返しには必要時の条件を付け，3案の違いを理解する範囲の反復である．"
+    },
+    {
+      "id": "style",
+      "result": "PASS_STATIC_ONLY",
+      "detail": "白背景3列カード，600 px以下で1列・絵と値の2列を確認．数値に単位を併記し，説明を固定高や省略で落としていない．実表示は本担当の対象外．"
+    }
+  ],
+  "reusedEvidence": [
+    {
+      "file": "qa/artifacts/v060-renewal-independent-review.json",
+      "range": "栃和2ページの掲載額・含有範囲・算術とJPEAの工事費区分の先行PASS．今回金額が同一な箇所に限定．"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page2-three-costs-sources.json",
+      "range": "今回の採用額記録．政府原表403・税未確認を，採用済みモデル額と一次原表再照合の違いとして引き継ぐ．"
+    },
+    {
+      "file": "../backend/data/docs/発電量・費用の根拠.md",
+      "range": "根拠C1の5 kW設備・3.8万円／回・38.4万円／回と原表・税区分未照合の記録．"
+    },
+    {
+      "file": "site/pages/calculation-method.html",
+      "range": "model-scopeの新設4 kW・蓄電池9.5 kWh等の対象・標準条件と30年間の設定．"
+    }
+  ],
+  "limits": [
+    "政府PDFは今回再取得していない．前回の403と原表・税区分未照合の留保を維持する．既存採用値との一致は，現在の個別工事価格の独立保証ではない．",
+    "ブラウザ実表示・PC／360／412px実画面・質問開閉・保存／フォーカスの実動作は本担当では未実施．",
+    "1ページ目の承認を変更せず，3ページ目の内容と価格の将来予測は今回の対象外．",
+    "独立判定のみを行い，人間レビューOKは記録しない．ユーザーの条件付き承認は親が別記録する．"
+  ],
+  "processesStarted": [],
+  "initialDecision": "CHANGES_REQUESTED",
+  "initialCounts": {
+    "MUST": 1,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "currentDecision": "PASS_CONTENT_SCOPE",
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "followupReviews": [
+    {
+      "date": "2026-10-22",
+      "scope": "M1に対応した3枚の出典種別と専用CSSだけを限定再確認．既存PASSは再利用．",
+      "decision": "PASS_CONTENT_SCOPE",
+      "targetHashes": {
+        "html": "2fbf8b78f34084f678704d59da766dbb49a6cb871e247d22ff2d2a60c4209fc3",
+        "style": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d"
+      },
+      "checks": [
+        {
+          "result": "PASS",
+          "detail": "継続「診断の参考額（元資料5 kW）」，更新「栃和の掲載目安」，撤去「栃和の掲載例」は各金額欄冒頭・閉じた参考資料の外に存在する．"
+        },
+        {
+          "result": "PASS_STATIC_ONLY",
+          "detail": "renewal-cost-basisはfont-size 11px，margin-bottom 6px，line-height 1.7で通常表示され，非表示や省略の指定がない．実viewportは親担当．"
+        },
+        {
+          "result": "PASS_EXACT_DIFF",
+          "detail": "追加された3個のrenewal-cost-basis段落と専用CSS1行を除去した内容のSHA256が，レビュー初版HTML c3210ddb799e4b2b369ff547a93750f7094a81a344938fa0f117627c6e241db7及びCSS ee2a42ed51e62e39b461472f5734920d6f51d59f8927bf1b04c044cd4ed37315と完全一致．金額・会話・質問が不変なため，既存PASSをそのまま再利用する．"
+        }
+      ],
+      "openCounts": {
+        "MUST": 0,
+        "RECOMMEND": 0,
+        "NITS": 0
+      }
+    }
+  ]
+}

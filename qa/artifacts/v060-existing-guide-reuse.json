@@ -1,0 +1,54 @@
+{
+  "baseline": "1dc7b3136bf656fc56e9c925b1cdc0408c486503",
+  "scope": "article fragments, CRLF normalized; shared header and directory independently reviewed",
+  "result": [
+    {
+      "slug": "solar-economics",
+      "same": true,
+      "current": "28e2b8c964e6aff7fa30fe47902a5cc70aa5ee2247901b73c54ece4d1b303bb2",
+      "previous": "28e2b8c964e6aff7fa30fe47902a5cc70aa5ee2247901b73c54ece4d1b303bb2"
+    },
+    {
+      "slug": "solar-electricity-savings",
+      "same": true,
+      "current": "5434e13919927c591f2deceeabb173e1cd7232d1fa2e7e28703004adf0e6cbae",
+      "previous": "5434e13919927c591f2deceeabb173e1cd7232d1fa2e7e28703004adf0e6cbae"
+    },
+    {
+      "slug": "solar-installation-cost",
+      "same": true,
+      "current": "b83911eab45d9643527ee99141b1079309ef772e830861d0a646034d1c2b4680",
+      "previous": "b83911eab45d9643527ee99141b1079309ef772e830861d0a646034d1c2b4680"
+    },
+    {
+      "slug": "subsidy-amount",
+      "same": true,
+      "current": "5691caefa99c8404e9ed1f84d15e4a083792f492a5dfd36ad5277d72c6dc304f",
+      "previous": "5691caefa99c8404e9ed1f84d15e4a083792f492a5dfd36ad5277d72c6dc304f"
+    },
+    {
+      "slug": "solar-fit",
+      "same": true,
+      "current": "60e024a69ee1e2b9837c270bc13293215d587c28e4cbe1cea75a80d7f1e3472e",
+      "previous": "60e024a69ee1e2b9837c270bc13293215d587c28e4cbe1cea75a80d7f1e3472e"
+    },
+    {
+      "slug": "solar-maintenance-cost",
+      "same": true,
+      "current": "0b93662ce8aa4208bdc3ab3774ed27ae5d6e4e8892cf35c30336b3601c774a5f",
+      "previous": "0b93662ce8aa4208bdc3ab3774ed27ae5d6e4e8892cf35c30336b3601c774a5f"
+    },
+    {
+      "slug": "subsidies",
+      "same": true,
+      "current": "525db238d446435d87597a94250484d2d2998833005780c59904c0fedf4156b4",
+      "previous": "525db238d446435d87597a94250484d2d2998833005780c59904c0fedf4156b4"
+    },
+    {
+      "slug": "quotes-contractors",
+      "same": true,
+      "current": "37600b583986e0c280323e2667a122f74e87c7881e2d82c75be9c2885cdbb17a",
+      "previous": "37600b583986e0c280323e2667a122f74e87c7881e2d82c75be9c2885cdbb17a"
+    }
+  ]
+}

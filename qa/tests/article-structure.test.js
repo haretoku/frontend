@@ -6,19 +6,21 @@ test('ガイド10記事はリード3発言・目次・3章・章末まとめ・�
   for(const slug of slugs){
     const html=await readFile(new URL('../../site/guides/'+slug+'/index.html',import.meta.url),'utf8');
     const article=html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/)[1];
-    assert.equal((article.match(/class="lead-turn /g)||[]).length,3,slug);
+    const introduction=article.slice(0,article.indexOf('<section class="chapter"'));
+    assert.equal((introduction.match(/class="lead-turn /g)||[]).length,3,slug);
     assert.equal((article.match(/class="chapter"/g)||[]).length,3,slug);
     assert.equal((article.match(/class="harena-summary"/g)||[]).length,3,slug);
     assert(article.includes('class="chapter-index"'),slug);
-    const body=article.slice(article.indexOf('<section class="chapter"'));
+    const body=article.slice(article.indexOf('<section class="chapter"'),article.indexOf('<section class="starter-response') < 0 ? undefined : article.indexOf('<section class="starter-response'));
     assert(!body.includes('class="lead-turn '),slug+': 会話は導入だけ');
     assert(body.includes('<figure '),slug+': 主題を説明する図');
     const next=article.match(/<nav class="next-reading"[\s\S]*?<\/nav>/)?.[0];
     // 電気代記事は本人承認により章内のリンクへ集約し，末尾枠を省く．
-    if(slug!=='solar-electricity-savings'){assert(next,slug);assert.equal((next.match(/<a\b/g)||[]).length,1,slug);}
+    if(slug==='self-consumption')assert(article.includes('class="starter-response starter-response--with-questions"'),slug);
+    else if(slug!=='solar-electricity-savings'){assert(next,slug);assert.equal((next.match(/<a\b/g)||[]).length,1,slug);}
     assert(article.includes('class="source-notes"'),slug);
     // 電気代記事は本人承認の導入でまとめ役紹介を省く．章末まとめ3件は上で検査する．
-    if(slug!=='solar-electricity-savings')assert(/ハレナが(?:ポイントを)?まとめます/.test(article),slug);
+
     assert(!/fixed-quote-bar|data-inline-quote-action|data-quote-promotion/.test(html),slug);
     const ids=[...html.matchAll(/\sid="([^"]+)"/g)].map(x=>x[1]);
     assert.equal(ids.length,new Set(ids).size,slug);

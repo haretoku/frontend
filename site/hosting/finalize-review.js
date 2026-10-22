@@ -9,4 +9,4 @@ await finalizeStaticAssets({root,output});
 await writeFile(resolve(output,'robots.txt'),'User-agent: *\nDisallow: /\n');
 const info=JSON.parse(await readFile(resolve(root,'site/hosting/preview-site.json'),'utf8'));
 const pkg=JSON.parse(await readFile(resolve(root,'package.json'),'utf8'));
-await writeFile(resolve(output,'preview-info.json'),JSON.stringify({purpose:'private-review',baseVersion:pkg.version,baseCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),builtAt:new Date().toISOString(),origin:info.origin,entry:'/guides/self-consumption/',analytics:false,affiliateTracking:false},null,2)+'\n');
+await writeFile(resolve(output,'preview-info.json'),JSON.stringify({purpose:'private-review',baseVersion:pkg.version,baseCommit:execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim(),builtAt:new Date().toISOString(),origin:info.origin,entry:'/guides/',prototype:'walkthrough-single-screen',analytics:false,affiliateTracking:false},null,2)+'\n');

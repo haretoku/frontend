@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-21",
+  "reviewer": "/root/v060_structure_review",
+  "type": "independent structural/source review",
+  "sourceCommit": "0cf2e4a9c95702068cbb5a72bf5def730dc35c45",
+  "scope": "ガイドのMAP4分類と掲載8記事，トリセツTOP・導入3ページ・共通部品，既存収支改善・停電記事の位置づけと読後導線，共通メニュー．",
+  "result": "PASS：MUST 1件とNITS 1件の修正を限定再確認済み．未解消のMUST・RECOMMEND・NITSは0件．",
+  "files": {
+    "site/guides/index.html": "5c798ffd54190c81e933e8369a6a14ffa4a436a767942e2101001a2128a43177",
+    "site/solar/src/guides.js": "2c30b67daa3b63aad3ae7fbe5ba17bba63dcfc102307bad0f21b00405c49faf5",
+    "site/solar/src/guide-groups.js": "0e8426d3e2b0e01d8cf35e0e94975afee98a8741c2db22a6015e2352eb9ce949",
+    "site/solar/styles/guides.css": "1fc3d0757e7086d1f37b1050ad807b07aba46ce90f24306bf8db2f20f79ec566",
+    "site/solar/data/articles.json": "ecaeb96acb955139dcd2f9d8650e96fdfb2ac1f2cae61bc52d56a137e6d195db",
+    "site/map/assets/step-icons.svg": "a7650527c195cf27da2f401422d8fce5ee3d51141cb3e48880e504fed9e3f19a",
+    "site/manual/index.html": "8a56e8351a95770b7e90bcb031c4f0b4458c755647372b9d7942b3277c7a2235",
+    "site/manual/manual.js": "bae33299fadc5c3a2c8daa84aa4ceda9380c42878d256216d61fb87df3ceb93a",
+    "site/manual/manual.css": "685cc77f44e7d8c1207cf512d93ef97eed9294c907ecaf4b4a7fe84fac4a8fb2",
+    "site/manual/content.js": "61cc4c76671bcd1a2c5007df66e23bb242de16810959d6d355f3abb10bb9f269",
+    "site/manual/components.js": "95d20a9a84f18f90e798792a2a3d90cd36ac409f9070cbfd61dfbcc126a51c17",
+    "site/manual/timeline.css": "a19c051e5f93491fca010a6795a353c586aab3c3b9aa7c4438b644625e5025ce",
+    "site/manual/cards.css": "81c35d171aeb017d0f9ec4f352fef2c84ec4afc46de2edbee33f63a96330a0ff",
+    "site/manual/getting-started/index.html": "716971da525b7ca0a659a6a790af40d8575302b82bf544c2fe8754df9b802dd2",
+    "site/manual/getting-started/milestones/index.html": "217a902c2484bf90da99729689b6721cc575a2016a247ce654c951737853acbc",
+    "site/manual/getting-started/troubles/index.html": "22b19f8361495011e6f604d1c4cc575043bc6fe043247c8e476e22c7da7d356f",
+    "site/manual/getting-started/entry.js": "27b2c79da8e9029cfee5c11c2527862ae9cb12f67e35343af25641bbd2e2d0d3",
+    "site/manual/getting-started/avatar-state.js": "e4f89661a6d89902f58dc6d18d3c972332ff2df4210c2457c27d8cf39853ebbc",
+    "site/manual/getting-started/style.css": "f6b0d885371fd4c1973db8a42d299e64ea504d6b8bf0be725933e5cf67248fe5",
+    "site/guides/self-consumption/index.html": "ff6d3b927d6ad4634594bf207737153a3ed991fb48de1d4c0ec590bb95044ed0",
+    "site/guides/self-consumption/style.css": "60ad7b3f6a88e344a3c5096943d2ee36bf701e8e6cf145a78e77c3f04df3ce35",
+    "site/guides/disaster/index.html": "5d77ef9aa2fa597255ed92086c869140164533dcdcbf71590b887caa3624cb67",
+    "site/shared/site-header-template.js": "67228cd13dfe3ecf1fa428588890919c7ad9c5e660d59b8585310b3227a7eb99",
+    "site/shared/site-header.css": "8c39fd984d31fe00dbbe8708836d6d2bc8a644c65165ed6ec20cc2b60198e5f0",
+    "qa/sync-manual-components.mjs": "2367a3fa148cc7bf994a2bf737f01e9023e858054e56d93fd8e108715da62ba8"
+  },
+  "findings": [
+    {
+      "id": "S01",
+      "priority": "MUST",
+      "path": "site/guides/index.html",
+      "line": 74,
+      "issue": "本人が削除を依頼し削除済みと報告した「マップの内容を，もっと詳しく．」がh1の直後に残存．",
+      "fix": "guide-directory-leadのp要素を削除する．h1と同一行のため行頭アンカーを使った置換では当たらない．",
+      "status": "修正済み・独立限定再確認PASS"
+    },
+    {
+      "id": "S02",
+      "priority": "NITS",
+      "path": "site/manual/getting-started/index.html",
+      "line": 6,
+      "issue": "meta descriptionの「おめでとう！．」の句読点が重複．",
+      "fix": "「おめでとう！」の後の「．」を削除する．",
+      "status": "修正済み・独立限定再確認PASS"
+    }
+  ],
+  "checks": [
+    {
+      "name": "分類・件数・名称",
+      "result": "PASS",
+      "evidence": "MAPと4見出しが完全一致．掲載数4/2/1/1で計8，重複なし．self-consumptionとdisasterはガイド一覧から除外しトリセツへ接続．全8記事のcatalog titleとh1が一致．"
+    },
+    {
+      "name": "トリセツの準備中・公開記事",
+      "result": "PASS",
+      "evidence": "記事リンクのある分類は準備中を出さず，リンクなしは準備中．更新記事は30年目と設備変更・撤去の同じ記事へ接続．タイトル一致．"
+    },
+    {
+      "name": "本文と読後導線",
+      "result": "PASS",
+      "evidence": "導入3ページは1章1ページの自然な返事で次へ進み，質問は返事の下．既存2記事も他の疑問・時期・TOPに戻る返事を先，質問2問を後に配置．"
+    },
+    {
+      "name": "共通部品の同期",
+      "result": "PASS",
+      "command": "node qa/sync-manual-components.mjs --check",
+      "evidence": "TOPと導入2・3ページの図を同じ正本から生成．"
+    },
+    {
+      "name": "共通ヘッダー",
+      "result": "PASS",
+      "command": "node qa/sync-site-header.mjs --check",
+      "evidence": "41ページ同期．メニューは検討者向けにMAPとガイド，設置済み向けにトリセツ．既存2記事の現在地もmanual．"
+    },
+    {
+      "name": "既存限定テスト",
+      "result": "PASS",
+      "command": "node --test qa/tests/self-consumption.test.js",
+      "tests": 2
+    },
+    {
+      "name": "ローカル参照・ID",
+      "result": "PASS",
+      "evidence": "152件の参照を確認．7対象HTMLのページ内ID重複なし，存在しない実ファイル・実アンカーなし．manualのtimeline/troublesの空spanはタブ直前に置かれ，既存のJSタブ復元と両立する．"
+    },
+    {
+      "name": "アバターの保持",
+      "result": "PASS reused",
+      "evidence": "entry.js SHA256 27B2C79DA8E9029CFEE5C11C2527862AE9CB12F67E35343AF25641BBD2E2D0D3とavatar-state.js SHA256 E4F89661A6D89902F58DC6D18D3C972332FF2DF4210C2457C27D8CF39853EBBCが導入1ページ目レビュー時と完全一致．初期表示で書き込まず，変更時は最新の保存へpawnだけを重ねる．"
+    }
+  ],
+  "reused": [
+    {
+      "record": "qa/artifacts/v060-first-page-review.json",
+      "scope": "不変のアバター読取・保存と，本文・補足の一次情報の先行確認を再利用．HTML全体はヘッダー等が変更されているので全体HASHの同値とは扱わない．"
+    },
+    {
+      "record": "qa/artifacts/v060-second-page-review.json",
+      "scope": "本文・年数を目安とする説明と根拠の先行確認．共通部品変更と新しいリンクは今回読取り確認．"
+    },
+    {
+      "record": "qa/artifacts/v060-third-page-review.json",
+      "scope": "本文・相談先の先行確認．3リンク化した図は今回，共通正本との同期・リンク名を再確認．"
+    },
+    {
+      "record": "v0.4.1人間レビュー済みという依頼上の前提",
+      "scope": "8記事本文の不変範囲．今回の対象は一覧の再編と接続であり，数値の全件再検証は行わない．"
+    }
+  ],
+  "limits": [
+    "ブラウザ・共有タブの操作は行っていない．PC実表示は親担当．",
+    "スマホ実機・幅別の実レンダリングは未確認．CSSのレスポンシブ指定の読取り確認のみ．",
+    "本文の新しい制度・金額・一次情報の再検証は設備更新担当と親の別範囲．",
+    "本レビューは人間レビュー・本番公開承認ではない．"
+  ],
+  "postReviewAmendments": {
+    "scope": "親担当の3変更だけを限定再確認．他範囲のPASSは再利用．",
+    "files": [
+      "site/guides/index.html",
+      "site/manual/index.html",
+      "site/manual/getting-started/index.html"
+    ],
+    "checks": [
+      "guide-directory-lead要素と旧説明文が存在しないことを確認．",
+      "導入meta descriptionの「！．」がなくなり，本文や見出しは維持．",
+      "manualのtimeline/troubles実アンカーが各1個でタブ一覧直前に存在．manual.jsのhash復元処理は不変．",
+      "共通部品・共通ヘッダー同期を--checkで再確認しPASS．",
+      "7対象HTMLのローカル参照・実アンカーを例外なしで再確認しPASS．"
+    ],
+    "humanReview": "未実施．人間の承認として扱わない．"
+  },
+  "registrationReview": {
+    "date": "2026-10-21",
+    "scope": "追加のリリース登録・メタ情報・共有画像・計測境界・旧仕様テストの期待値変更だけ．本文の内容レビューは本追記の対象外．",
+    "result": "PASS：追加差分でMUST・RECOMMEND・NITSの修正指摘なし．",
+    "files": {
+      "site/manual/routes.js": "e948205e334900b9935c52ecb2fd479b12b284bf06674f1315e79e61bac5e240",
+      ".config/vite.pages.config.js": "dac420186e32300bee4ec2b19491daed8003eeb1a50af5c2156ae53727ad7b80",
+      "site/hosting/finalize-pages.js": "fc1f8071a44c8cf1b94d71205b56d292bf96edbc2d71adaec88f51cd3ddb7e62",
+      "site/hosting/finalize-static-assets.js": "8dcd3bbffd0c6e3a33b847461c9c263b822f68b7465af2080da0318fb0056b41",
+      "site/hosting/verify-pages.js": "1a433fca94409a8fcbcebaba96db53ac11b37065efaedc472415a9a21c4b3697",
+      "site/shared/analytics-core.js": "4c71b5f42db63baa2f5c3f00e575e8e6ffb65f3fc2ba805bc328625b4826f163",
+      "qa/generate-manual-shares.mjs": "94241cb90a45162d4c1bac80043f3fbb94781833f8f8fcf92f70fd07c815a7e4",
+      "qa/tests/public-integrity.test.js": "71426664473c36d6d11c23518240a9d7b3ac150387a8f27adf742b79c8664076",
+      "qa/tests/article-structure.test.js": "041fdf57215ab7ee76c32b153b19cf8f6089c9e301a97430680d391fff45a6f1",
+      "qa/tests/site-header.test.js": "be66c11812bd059395d44fa744caf4304844fcee5476b7a613567f27fabd0fc4",
+      "qa/tests/manual-readiness.test.js": "74248e2f8c06b910561f5aff9c8cbb9c623f15fbe97ae9b284d221db4510a759",
+      "site/manual/index.html": "fd026ffe9295f12d1a5a7dc11c9f271ec352c476cc82064e8d5dc2def825feab",
+      "site/manual/getting-started/index.html": "52b1dc748d3b91ac80c2cf049b6251c0277f6c0445662834d96b0a706ec0265b",
+      "site/manual/getting-started/milestones/index.html": "35b7043915d49946a0570677917714c4f87e4e8b7d41309320a35352dd3fdc08",
+      "site/manual/getting-started/troubles/index.html": "6f37cbb3e51751703ae0188d14d2c9d206babe8636ebe3f38aa144a89ffc80c0",
+      "site/manual/equipment-renewal/index.html": "ad4df9c39e1b1e8b420a491e0ce67acdaf31fba41dcd592cee75055fc46a2c9d",
+      "site/manual/equipment-renewal/costs/index.html": "e9e3da0e34c065b1cda697b260a1abd555f437f4d597ac20fe424f74e42a4bbe",
+      "site/manual/equipment-renewal/consultation/index.html": "11237330d60e8001e917aca58b14fb33d4acc3d92f6c3c294ea315f512166d06",
+      "site/shared/assets/og-manual-20261021.png": "a5d4ee79d8637de26b3d33f2571debfacf1d49177349bf6b3433d1ec8a6e08c5",
+      "site/shared/assets/og-manual-intro-20261021.png": "1c21b765c1f1f37b3e129216f104d62052a96fef4d9df57f7f2657775e61cbd2",
+      "site/shared/assets/og-manual-renewal-20261021.png": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599"
+    },
+    "checks": [
+      {
+        "name": "正規URLの一元登録",
+        "result": "PASS",
+        "detail": "manual/routes.jsはTOP1＋導入3＋更新3の7URLを明示し，pathとidは重複なし．vite.pages入力・sitemap・配布対象・analyticsの登録元が一致．既存31に7追加したsitemap38URLで重複なしを独立確認．"
+      },
+      {
+        "name": "メタ情報と実ビルド",
+        "result": "PASS",
+        "detail": "7ページのソースとdist-pagesでcanonical，robots=index,follow，og:type（TOP=website，6記事=article），og:url，固定og:imageを確認．sitemapにも全7件存在．"
+      },
+      {
+        "name": "共有PNGの固定配布",
+        "result": "PASS",
+        "detail": "3枚ともPNG署名と1200×630を独立確認．dist-pagesの固定名PNGは採用ソースとバイト一致．生成器は既存パネル／導入SVG・共通更新アイコン・正規navigator.pngの合成であり，新キャラクターを作成しない．"
+      },
+      {
+        "name": "計測の境界",
+        "result": "PASS",
+        "detail": "7URLは本番originかつPages本番フラグtrueの場合のみ有効．開発版origin・本番フラグfalse・未登録/manual/unlisted/は対象外．referrerはquery/hashを削除．既存のGA境界・送信条件に変更なし．"
+      },
+      {
+        "name": "public-integrityの期待値変更",
+        "result": "PASS",
+        "detail": "ガイドの名称と4分類4/2/1/1への変更を最新仕様へ更新．self-consumptionとdisasterをガイド現在地から除いた点はheaderSectionのmanual判定および全表示ページのヘッダー正本照合で補完．catalogに既存11件を残す，ガイド8＋トリセツ既存2＋ニュース1の網羅・件数・参照・図表等の既存検査は保持．"
+      },
+      {
+        "name": "article-structureの期待値変更",
+        "result": "PASS",
+        "detail": "リード3発言は導入範囲で検査し，3章・章末まとめ3個と本文非対話を維持．読後の補足質問の会話だけを本文検査から外す変更は承認済み形式に対応．self-consumptionの旧末尾案内を「あなたの返事」に置き換える期待値も妥当．「ハレナがまとめます」という定型句の必須検査削除は，まとめ3個の構造検査を残しており，承認済みの自然な呼応への改稿と整合する．"
+      },
+      {
+        "name": "site-headerとmanual-readiness",
+        "result": "PASS",
+        "detail": "表示ページ数34→41は7ページ追加と一致し，既存ヘッダー・リセット画面の1個性検査は残る．manual現在地とmetadata・計測境界の検査を追加．manual-readinessの2検査を独立実行してPASS．"
+      },
+      {
+        "name": "既存の検査結果再利用",
+        "result": "PASS reused",
+        "detail": "親実施の公開用ビルド133ファイル・正規38URLとpublic152検査を同じ入力範囲で再利用．独立担当は再ビルド・全テスト再実行をせず，新登録の契約・生成物・境界だけ限定確認．"
+      }
+    ],
+    "limits": [
+      "親から指定された登録・メタ情報の差分のみ．本追記は本文再検証，人間レビュー，本番公開承認を意味しない．",
+      "PC／スマホの実画面は親担当の範囲．SNS実共有・Google検索反映・本番HTTPの確認は未公開なので対象外．"
+    ]
+  }
+}

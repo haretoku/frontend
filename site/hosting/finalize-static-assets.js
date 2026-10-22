@@ -1,3 +1,4 @@
+import {manualPages} from '../manual/routes.js';
 import {copyFile,writeFile,readFile,readdir} from "node:fs/promises";
 import {resolve} from "node:path";
 
@@ -5,6 +6,10 @@ import {resolve} from "node:path";
 export async function finalizeStaticAssets({root,output}) {
 await copyFile(resolve(root,"site/shared/assets/og-self-consumption-v040.png"),resolve(output,"og-self-consumption-v040.png"));
 // 詳細記事の代表イラストと同じ，記事別の共有画像を固定URLで配布する．
+for(const image of new Set(manualPages.map(page=>page.shareImage))) {
+  const name=image.slice('/assets/'.length);
+  await copyFile(resolve(root,'site/shared/assets',name),resolve(output,'assets',name));
+}
 const articles=JSON.parse(await readFile(resolve(root,'site/solar/data/articles.json'),'utf8'));
 for(const article of articles.filter(article=>article.shareImage)){
   if(!/^\/assets\/og-guide-[a-z-]+-\d{8}(?:-v\d+)?\.png$/.test(article.shareImage))throw Error('記事共有画像の配布先が不正です．');

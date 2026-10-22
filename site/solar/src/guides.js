@@ -1,5 +1,6 @@
 import guideArticles from "../data/articles.json";
 import { groupedArticles } from './guide-groups.js';
+import { rememberWalkthroughTarget } from '../../shared/walkthrough/navigation.js';
 
 const directoryArticles = guideArticles;
 
@@ -118,12 +119,34 @@ function scrollControlsFor(cards, label) {
   return controls;
 }
 
+const mapStepIcons = new URL('../../map/assets/step-icons.svg?no-inline', import.meta.url).href;
+
+function createMapStepIcon(group) {
+  const icon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  icon.setAttribute('class', 'guide-map-icon');
+  icon.setAttribute('viewBox', '0 0 48 48');
+  icon.setAttribute('aria-hidden', 'true');
+  const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+  use.setAttribute('href', mapStepIcons + '#i-' + group.icon);
+  icon.append(use);
+  const marker = document.createElement('span');
+  marker.className = 'guide-map-marker';
+  const number = document.createElement('span');
+  number.className = 'guide-map-number';
+  number.textContent = group.step;
+  marker.append(icon, number);
+  return marker;
+}
+
 function initializeGuideDirectory() {
   const container = document.querySelector('[data-guide-groups]');
   if (!container) return;
   const press = container.dataset.guideGroups === 'press';
   const topics = container.dataset.guideGroups === 'topics';
-  const sections = groupedArticles(directoryArticles,{press,topics}).map(group => {
+  const groups = groupedArticles(directoryArticles,{press,topics});
+  const mapIndex = document.querySelector('[data-guide-map-index]');
+  if (mapIndex) mapIndex.replaceChildren();
+  const sections = groups.map(group => {
     const section = document.createElement('section');
     section.className = 'guide-group';
     section.dataset.guideGroup = group.id;
@@ -133,9 +156,15 @@ function initializeGuideDirectory() {
     header.className = 'guide-group__heading';
     const title = document.createElement('h2');
     title.id = headingId;
-    const icon = document.querySelector('.guide-page-title .guide-heading-icon').cloneNode(true);
-    icon.setAttribute('class', 'site-nav__icon guide-group__icon');
+    const icon = topics ? createMapStepIcon(group) : document.querySelector('.guide-page-title .guide-heading-icon').cloneNode(true);
+    if (!topics) icon.setAttribute('class', 'site-nav__icon guide-group__icon');
     title.append(icon, document.createTextNode(group.label));
+    if (topics && mapIndex) {
+      const jump = document.createElement('a');
+      jump.href = `#${headingId}`;
+      jump.append(createMapStepIcon(group), document.createTextNode(group.label));
+      mapIndex.append(jump);
+    }
     const subtitle = document.createElement('p');
     subtitle.className = 'guide-group__subtitle';
     subtitle.textContent = group.title;
@@ -161,7 +190,20 @@ function initializeGuideDirectory() {
       empty.textContent = '記事はまだありません．';
       cards.append(empty);
     }
-    section.append(header, rail);
+    section.append(header);
+    if (topics) {
+      const mapLink = document.createElement('a');
+      mapLink.className = 'guide-map-link';
+      mapLink.href = '/';
+      mapLink.textContent = 'マップでこのマスを見る →';
+      const remember = event => {
+        if ((event.type === 'click' && event.button === 0) || (event.type === 'auxclick' && event.button === 1)) rememberWalkthroughTarget(group.mission);
+      };
+      mapLink.addEventListener('click', remember);
+      mapLink.addEventListener('auxclick', remember);
+      section.append(mapLink);
+    }
+    section.append(rail);
     return section;
   });
   container.replaceChildren(...sections);

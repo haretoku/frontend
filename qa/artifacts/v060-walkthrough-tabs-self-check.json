@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-22",
+  "scope": "歩き方2タブ化とトリセツTOPのタブ操作範囲の限定",
+  "sourceCommit": "bd3a5d4955b43c79b445f9715c1cc4f1d3e95bea",
+  "deployment": "appgdep_6ada07f3b1888191a1d7f811ec7b5dc0",
+  "files": [
+    {
+      "file": "site/shared/walkthrough/panel.js",
+      "sha256": "a4d87a5e371d1275bb8bd68d3aa8be6591aab7aefb0a5f0044f82c1605a85aaa"
+    },
+    {
+      "file": "site/shared/walkthrough/panel.css",
+      "sha256": "3f6e795d022d636b8fe960b19ac2561eaf8e0463c8a234573caab89809b1740b"
+    },
+    {
+      "file": "site/shared/walkthrough/audience.js",
+      "sha256": "823449d9fd07ada5f62d55787aca32b1cd5afc0d8d1fc1fe4bf9855b7670e7b1"
+    },
+    {
+      "file": "site/manual/manual.js",
+      "sha256": "4b70f7af7ea9f0f0a0315b2b3ecb52fa4653a13badca9d3ce419a8ae7204556a"
+    }
+  ],
+  "checks": {
+    "consideringInitialOnGuides": true,
+    "installedInitialOnManual": true,
+    "manualLegacyArticlesClassifiedByTests": true,
+    "visibleGroupsConsidering": [
+      "map",
+      "guides"
+    ],
+    "visibleGroupsInstalled": [
+      "manual"
+    ],
+    "clickSwitch": true,
+    "arrowKeySwitch": true,
+    "manualTabsIndependent": true,
+    "noUndefinedHash": true,
+    "existingMissionsAndStoragePreserved": true
+  },
+  "display": {
+    "pc": [
+      "v060-walkthrough-tabs-installed-pc.png",
+      "v060-walkthrough-tabs-considering-pc.png"
+    ],
+    "mobile": {
+      "width": 360,
+      "height": 812,
+      "panelClientWidth": 294,
+      "panelScrollWidth": 294,
+      "documentClientWidth": 345,
+      "documentScrollWidth": 345,
+      "screenshot": "v060-walkthrough-tabs-installed-mobile.png"
+    },
+    "viewportReset": true,
+    "temporaryBrowserTabClosed": true,
+    "realDevice": false
+  },
+  "validation": {
+    "tests": 19,
+    "failures": 0,
+    "build": "133ファイル・42HTML検証PASS"
+  },
+  "independentReview": "未実施：開発版の更新．歩き方全体の確定時レビューへ引き継ぐ．",
+  "humanReview": "未完了",
+  "processesStarted": []
+}

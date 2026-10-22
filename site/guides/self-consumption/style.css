@@ -65,3 +65,17 @@
   .guide-article .shift-period { min-height: 98px; gap: 10px; }
   .guide-article .dishwasher { flex-basis: 38px; width: 38px; height: 38px; }
 }
+
+/* 文章を読む表は，数値比較表の右寄せ・折返し禁止を引き継がない． */
+.guide-article article .self-check-table { table-layout:fixed; width:100%; max-width:100%; }
+.guide-article article .self-check-table th, .guide-article article .self-check-table td { text-align:left; vertical-align:top; white-space:normal; overflow-wrap:anywhere; line-height:1.8; }
+.guide-article article .self-check-table__label { width:5.5em; }
+.guide-article article .self-check-table__source { width:32%; }
+.guide-article article .self-check-table__rate { width:36%; }
+.guide-article article .self-check-table tbody th { white-space:nowrap; }
+.guide-article article .self-check-table th small { display:block; margin-top:4px; font-size:10px; font-weight:400; }
+@media(max-width:600px) {
+ .guide-article article .self-check-table { font-size:12px; }
+ .guide-article article .self-check-table th, .guide-article article .self-check-table td { padding:10px 6px; }
+ .guide-article article .self-check-table__label { width:5.5em; }
+}

@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-22",
+  "scope": "設備更新3ページ目に追加した3社カード・折りたたみ比較表・TOP返事除去と共通部品の差分",
+  "deploymentCommit": "a0c9f8cdc3dd8b7b8442c411e4a39b55ac7aaedd",
+  "deployment": "appgdep_6ada028a1378819186754863ff8f44f3",
+  "files": [
+    {
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "sha256": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d"
+    },
+    {
+      "file": "site/manual/equipment-renewal/consultation/style.css",
+      "sha256": "9121e52dcc796345ddacb6421ff467d770fdece334730663eb15f45db832be1f"
+    },
+    {
+      "file": "site/shared/consultation-providers.css",
+      "sha256": "8cee043f540f3e8855f24fb34498bfe9ee71cf04bf99d0af3dfd3d4c74f7439b"
+    },
+    {
+      "file": "site/map/consultation-view.js",
+      "sha256": "e757849b80339cfc09399b351bc300d6865f31eb2c92e4a88e3184e17d0900f8"
+    },
+    {
+      "file": "site/map/map.css",
+      "sha256": "f904ac260458530f53b174ae948a8d036b507fedd8cc80a2b53268009c4146dc"
+    },
+    {
+      "file": "qa/sync-manual-components.mjs",
+      "sha256": "c229aa12ef76de39528802fb8e89510e3a41ba2a28995e268857c311d2d9844e"
+    }
+  ],
+  "checks": {
+    "sharedRenderer": true,
+    "threeCards": true,
+    "comparisonInitiallyClosed": true,
+    "removedTopReply": true,
+    "remainingTwoRepliesAndTwoQuestions": true,
+    "noDuplicateIds": true,
+    "comparisonScopeVisible": true,
+    "previewHasNoAffiliateTracking": true,
+    "screenReaderLabelsHidden": true
+  },
+  "display": {
+    "pc": {
+      "width": 1280,
+      "clientWidth": 1265,
+      "scrollWidth": 1265,
+      "screenshot": "v060-renewal-page3-providers-review-pc.png"
+    },
+    "mobile": {
+      "width": 360,
+      "height": 812,
+      "clientWidth": 345,
+      "scrollWidth": 345,
+      "screenshot": "v060-renewal-page3-providers-review-mobile.png"
+    },
+    "logosLoaded": true,
+    "accordionOpenClose": true,
+    "scopeBeforeTable": true,
+    "viewportOverrideReset": true,
+    "realDevice": false
+  },
+  "reuse": [
+    "v060-renewal-page3-providers-tests.log：既存9検査PASS．補足1段落のみの変更後に不変のrenderer・リンク・データ部分を再利用",
+    "v060-renewal-page3-providers-build.log：最終ビルド133ファイル・42HTML検証PASS",
+    "v060-renewal-page3-review.json：今回不変の本文・図・補足質問の先行PASS"
+  ],
+  "independentReview": "v060-renewal-page3-providers-review.json",
+  "decision": "PASS",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "resolved": [
+    "RECOMMEND1件：比較表は太陽光＋蓄電池の新設対象であり，更新・修理・撤去は各社確認と表の直前に表示"
+  ],
+  "humanReview": {
+    "status": "OK",
+    "authorization": "追加したところもレビューして．問題なければ人間レビューOKで．",
+    "scope": "追加分まで含む設備更新3ページ目．前2ページの承認を維持．v0.6.0全体の承認・本番公開は含めない．"
+  },
+  "limits": [
+    "実機UX試験とは区別する．",
+    "個別工事の紹介可否は確認しておらず，記事は運営窓口への確認を案内する．"
+  ],
+  "processesStarted": []
+}

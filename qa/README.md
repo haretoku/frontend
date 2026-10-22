@@ -4,6 +4,210 @@
 
 リリースごとの適用・判定・報告は[リリースチェックリスト](release-checklist.md)に従う．
 
+## v0.6.0 人間レビュー完了・公開前の準備（2026年10月22日）
+
+> **結論：v0.6.0の人間レビューを完了し，公開前の検査と独立差分レビューは合格した．公開候補として保存し，本番公開の指示を待つ．**
+
+対象は最新版の開発版source `64fca1f24835d45162d3155140bdc7fd546c4f36` と同一の製品ソース，package 0.6.0及びCHANGELOGの公開準備中記録．本番公開版はv0.5.1のまま．候補の正確なソース・配信ハッシュは[候補一覧](artifacts/v060-release-candidate-files.json)へ保持する．本人はガイド4分類，トリセツTOPの入口と記事間接続，収支改善・停電の再編部分，先行の歩き方進捗・移動先・保存と設備更新3ページを承認した．これでv0.6.0の人間レビュー待ちは解消．本文不変の8ガイド，導入の既確認部分，MAP回答文のリンク追加のレビュー不要指示を引き継ぐ．
+
+|ID|結果|範囲・根拠・残件|
+|---|---|---|
+|P01|PASS|package 0.6.0と変更範囲を固定し，公開準備中のCHANGELOGを用意．切戻し先v0.5.1，commit 948f8d192f4cd20f1a92ccccc5eb93628a135598．候補一覧でソース・135配信物を識別|
+|P02|PASS|人間レビュー全対象OK．設備更新の3ページと既存2記事の内容レビュー・未変更8ガイドの既存PASSを再利用．計算・公開データはv0.5.1不変|
+|P03|PASS|test:public157件，build:pages135ファイル・38正規URLが合格．v060-release-public-{tests,build}.log．ローカルpnpm11の依存確認がsandbox外のsymlink登録で失敗したため，依存を変更せず--config.verify-deps-before-run=falseで同じpackageスクリプトを実行．CIは既定のpnpm10.15.1・frozen-lockfileを維持|
+|P04|PASS|前回のPC／360・412pxと設備更新各ページの同一版証跡を再利用．直近のManualTOPカード・比較表・歩き方はPC／360pxで確認．document345/345px，panel294/294px，表278/278px．節目から公開済み記事のみ案内，単独記事見出しの強調なし，ページ分類より手動タブ保存を優先．既存の進捗は消さず，元の選択とviewportを復帰．実端末確認とは区別|
+|P05|PASS|[歩き方差分](artifacts/v060-release-walkthrough-review.json)と[配信構造](artifacts/v060-release-integrity-review.json)の独立レビューはMUST／RECOMMEND／NITS各0．以前の内容・数値レビューは不変範囲で再利用|
+|P06・P07|PASS|135配信物・41HTML・38正規URLの内部リンク・アンカー・CSS参照・共有画像・canonical・sitemap・robots・旧URL・404・非配信境界を独立確認．欠落・重複ID・混入0．公式出典は承認済み本文の同一性と既存レビューを再利用|
+|P08|PASS|広告設定・リンク・計測画像はv0.5.1不変．3社カードと比較表の通常リンク／広告の区分を照合し，新設向け比較の範囲注記を保持．受付ページ到達は同一リンクの既存確認を再利用し，実申込なし．新しい掲載先は下記E01へ引継ぎ|
+|P09|PASS|既存計測の送信条件と新設7ルート・ManualTOP／更新相談の固定IDを独立モックで確認．診断入力・金額・CANARY・広告URLを送信しない．本番実受信はD03へ引継ぎ|
+|P10|未確認|公開前の変更内容・検査・切戻し先は提示可能．今回はリリース準備の指示であり，本番公開の指示待ち|
+|D01〜D04|未確認|本番公開を実行していないため，公開処理・本番HTTP・主要操作・タグ／Release固定は公開時に実施|
+|E01|未確認|公開後にソーラーパートナーズ／タイナビのASPへ追加2URL /manual/ と /manual/equipment-renewal/consultation/ を報告し，既存登録と照合する|
+|E02|未確認|公開後に38URLのsitemapと新規Manual7URLをSearch Consoleへ送信．受理と実インデックスを区別する|
+|E03・E04|外部反映待ち|v0.5.1の検索favicon等の既存待ちを保持．v0.6.0新規ページの検索・実共有は公開後の確認．他人へのテスト送信はしない|
+|E05|PASS|ローカルViteのplugin timingは速度情報で，buildは成功．CI依存の既存非阻害警告は今回の公開不具合と分け，公開時実行の結果も確認する|
+|E06|PASS|候補CHANGELOGと版番号・日本語表記・確認用リンクを整理．公開日と本番commitは実公開後に記録する|
+
+直近の実画面は[PC](artifacts/v060-release-manual-consultation-pc.png)，[360px比較表](artifacts/v060-release-manual-consultation-mobile.png)，[360px歩き方](artifacts/v060-release-walkthrough-mobile.png)．確認用ブラウザタブは終了し，viewportを復帰．サーバーは新規起動していない．公開準備のため製品を変更したのはpackageの版番号と文書のみであり，承認済みの開発版画面は再配信しない．
+
+## v0.6.0 歩き方の相談項目名と本人確認（2026年10月22日）
+
+> **結論：相談項目を移動先見出しと同じ名前へそろえ，5項目の進捗・移動先・最後の対象タブ選択の保存は本人の明示承認により人間レビューOKとした．**
+
+MAPは「わが家のことを相談しよう」，トリセツは「太陽光のこれからを相談しよう」．文言だけを変更し，達成条件・移動先・保存処理は不変．build:reviewは134ファイル・42HTMLでPASS．ログはartifacts/v060-walkthrough-consultation-labels-build.log．定型テスト・実画面・独立レビューは反復せず．承認範囲は指定の進捗・移動先・選択保存及び採用文言に限定し，他対象のレビュー・公開前検収・本番公開の完了へ拡張しない．開発版sourceは64fca1f24835d45162d3155140bdc7fd546c4f36，deploymentはappgdep_6ada10a04aa4819192c4fff7ac6949c4，succeeded．
+
+## v0.6.0 トリセツTOPの相談先見出し（2026年10月22日）
+
+> **結論：本人確定文言「太陽光のこれからを相談しよう」をトリセツTOPへ反映した．**
+
+共通カードの見出しを引数化し，トリセツTOPだけ指定する．MAP・既存記事の見出しとカード内容は不変．build:review PASS（134ファイル・42HTML），ログはartifacts/v060-manual-consultation-heading-build.log．文言変更のため定型テスト・実画面・独立レビューは反復せず．開発版sourceはe73f26fdda743f08e21dde1bcdb4786a7eacd292，deploymentはappgdep_6ada0f7c8c3c81918a153f2967466e4a，succeeded．
+
+## v0.6.0 歩き方の選択保存・節目項目の有効化と相談先（2026年10月22日）
+
+> **結論：歩き方は最後の手動選択を保存し，節目の記事は公開済みの更新記事で達成可能にした．トリセツ下部へ相談先を置き，開発版へ反映した．人間レビューは未実施．**
+
+- 5項目を維持し，「時期・節目の記事を1つ読んでみよう」を有効化．更新3ページの読了は更新項目と節目項目の両条件を満たす．保存済みの更新読了も継承する．一覧を開くだけでは達成しない．
+- タブ選択を進捗とは別キーに保存し，未保存時だけページで初期選択．単独記事へ遷移したときの見出し強調は解除し，MAP・一覧内の案内は保持．節目一覧では公開済みの記事リンクだけを強調する．
+- 見積もり先は /manual/#manual-consultation へ案内．共通3社カードと閉じた比較表を配置し，後続指示により，カード上の長い相談手順は削除し，「設備の点検・交換・撤去などの相談先を探そう．」へ短縮．比較表内の新設向け比較・対応確認の注記は保持．外部リンク操作で歩き方の相談先達成を保存する．
+- 影響範囲の既存・追加テストは歩き方18件，計測18件PASS．build:reviewは134ファイル・42HTMLでPASS．ログは qa/artifacts/v060-walkthrough-preference-{tests,build}.log と v060-manual-consultation-analytics-tests.log．開発版の全幅・全ページ検査と独立レビューは再実行していない．
+- 開発版source：6a55633cad6651cae9eecd51d4496d8ea40f5d2f．deployment：appgdep_6ada0c9684388191bed49e4c39937ffc，succeeded．本番リリースは対象外．
+- 説明短縮後のsource：8dd17d6bcdc4005a6f772400cbf37e431c57e7bd，deployment：appgdep_6ada0d47dd148191b8ac7953f4cb36ac，succeeded．build:review PASS（134ファイル・42HTML），文言だけの変更のため定型テスト・画面検査は反復せず．ログはv060-manual-consultation-copy-build.log．
+- 後続合意：MAP／トリセツのTOP下部は進捗条件なしで常時表示．記事は必要箇所だけ個別配置．journey.jsの表示条件とmanualの配置をソース確認し，現行実装が一致することを確認．表示方針のみ本人確定し，その他の人間レビュー待ちは継続．コード変更・再ビルド・再配信は行わず．
+
+## v0.6.0歩き方のタブ名へ太陽光を明記（2026年10月22日）
+
+> **結論：本人の指摘により，タブを「太陽光を考えている方へ」「太陽光をつけた方へ」へ変更し，スマホでは「太陽光を」の後で2行に分けた．**
+
+ラベル・折返しだけを変更し，分類・初期選択・切替・進捗保存は不変．変更したラベルの限定検査と[開発版ビルド](artifacts/v060-walkthrough-tab-labels-build.log)133ファイル・42HTMLはPASS．[360px幅](artifacts/v060-walkthrough-tab-labels-mobile.png)で両タブ名と折返し，パネルclientWidth／scrollWidthの294／294pxを確認した．一時タブを閉じ，幅設定を解除．追加の独立レビューは実施していない．source commit `3a636c1c2ebfcf1b93f3730d62e93c11c5087e16`，deployment `appgdep_6ada09076cfc8191ad6cc2ec4e21e300`はsucceeded．本番公開は未実施．
+
+## v0.6.0歩き方の2タブ化（2026年10月22日）
+
+> **結論：本人の指示で，歩き方を対象者別の2タブへ分け，閲覧ページに応じた初期選択を実装した．既存の進捗・保存・勲章は維持し，今回の人間レビューは未完了とする．**
+
+マップと詳しいガイドを「考えている方へ」，トリセツを「つけた方へ」へ振り分けた．トリセツ配下に加え，/guides/self-consumption/と/guides/disaster/も設置後として扱う．手動で両方へ切り替えられ，左右矢印・Home／Endでも操作する．同じページで閉じ直した場合は手動選択を保ち，保存キー・達成判定・準備中の扱いは変えない．
+
+初回の表示確認で，トリセツTOPがページ内のすべてのtab／tabpanelを操作し，歩き方の内容が消える干渉を検出した．manual.jsの対象を.manual-tabsと.manual-panelへ限定し，別タブを変更せずTOPの切替も動く回帰ケースを追加した．[関連検査](artifacts/v060-walkthrough-tabs-tests.log)19件PASS，[最終ビルド](artifacts/v060-walkthrough-tabs-build.log)133ファイル・42HTMLの検証PASS．最終source commit `bd3a5d4955b43c79b445f9715c1cc4f1d3e95bea`，deployment `appgdep_6ada07f3b1888191a1d7f811ec7b5dc0`はsucceeded．[自己確認](artifacts/v060-walkthrough-tabs-self-check.json)に対象ハッシュと表示証跡を記録した．ガイドでは検討中，トリセツTOPでは設置後が初期選択となり，クリック・左右矢印で切り替わることを確認．トリセツの困りごとへ切り替えても歩き方の選択は変わらず，歩き方を切り替えても本文のタブとURL hashは変わらない．360px幅で歩き方パネルのclientWidth／scrollWidthは294／294px，ページは345／345px．一時タブを閉じ，幅設定を解除した．実機検査とは区別する．本番公開・独立レビューは未実施．
+
+## v0.6.0質問の回答文から詳しいガイドへ案内（2026年10月22日）
+
+> **結論：本人の合意により，MAP・診断の既存7問の回答文へ，詳しいガイド8記事の文中リンクを追加して開発版へ反映した．歩き方の折りたたみは提案段階とし，実装していない．**
+
+収支・設置費・補助額は診断の質問，電気代・FITは暮らしの質問，維持費は手入れの質問，申請は契約・工事の質問，見積書は相談先の質問に対応させた．本線や「あなたの返事」へガイド案内を追加せず，新しい質問も作らない．回答内の既存語句にだけリンクを付ける．入力文字列のエスケープを維持し，回答リンクは/guides/配下の正規URLへ限定する．
+
+8リンクの文言・記事一覧との対応・ファイル存在を照合．15ページについて，リンクタグを除いた質問回答HTMLはリンク指定を外した版と同一であり，数値・本文・質問数は不変．既存のURL・診断関連7検査PASS，[開発版ビルド](artifacts/v060-guide-answer-links-build.log)133ファイル・42HTML検証PASS．今回のブラウザ検査・独立レビューは追加していない．後続の本人指示「既存の文章は変更していませんかね？であればレビューなしでいいや」に対し，15ページの回答HTMLがリンクタグを除いて同一である照合結果を根拠として，このリンク追加差分の追加レビューは不要と記録する．新たな内容レビューを実施したという意味ではない．source commit `31da2226cb50629021ce1510813290985d29fd26`，deployment `appgdep_6ada05370e54819183671112831eaedc`はsucceeded．本番公開は未実施．
+
+## v0.6.0設備更新3ページ目の追加分も人間レビューOK（2026年10月22日）
+
+> **結論：追加した3社カード・折りたたみ比較表・返事の整理を自己確認と独立レビューで検収し，指摘1件を解消した．本人の「追加したところもレビューして．問題なければ人間レビューOKで」という条件付き承認を満たし，追加分も人間レビューOKとする．**
+
+[自己確認](artifacts/v060-renewal-page3-providers-self-review.json)と[別担当の独立レビュー](artifacts/v060-renewal-page3-providers-review.json)の最終対象ハッシュは一致．初回RECOMMEND1件は，比較表の対象が太陽光＋蓄電池の新設であることを見える位置で示す点．このページの表の直前へ短い説明を加え，更新・修理・撤去の対応や支援条件は各社に確認することを明記した．限定再レビュー後のMUST／RECOMMEND／NITSは各0件．比較表の数値・判定・TOPのカード内容は変えていない．
+
+3社・初期閉・共通生成との一致・CSS抽出漏れなし・重複IDなし・返事2件と補足2問・開発版の広告計測無効を確認．[PC1280px](artifacts/v060-renewal-page3-providers-review-pc.png)と[360px幅](artifacts/v060-renewal-page3-providers-review-mobile.png)で開いた表と対象条件を確認し，横はみ出しなし．clientWidth／scrollWidthは1265／1265pxと345／345px．比較表を閉じ，幅設定を解除した．実機UX検査とは区別する．既存9検査の不変部分を再利用し，最終ビルド133ファイル・42HTMLはPASS．
+
+最終source commit `a0c9f8cdc3dd8b7b8442c411e4a39b55ac7aaedd`，deployment `appgdep_6ada028a1378819186754863ff8f44f3`はsucceeded．これで設備更新記事は追加分を含め全3ページが人間レビューOK．v0.6.0全体の承認・公開前検収・本番公開は今回の範囲に含めない．
+
+## v0.6.0設備更新3ページ目へ3社カードを追加（2026年10月22日）
+
+> **結論：本人の指示により，本文と「あなたの返事」の間へTOPと共通の3社カードと初期閉の比較表を追加し，TOPへ移動する返事を外した．追加差分は本人の表示確認待ちとし，直前の本文レビューとは対象を区別する．**
+
+既存のrenderConsultationProviders／renderProviderComparisonを静的同期に利用し，カード・比較表のCSSをTOPと記事の共通ファイルへ移した．紹介可否を事前確認する説明と，メーカー・JPEAの補足質問は保持する．記事側の導入文だけを既設設備の相談向けに変更．比較表の初期閉，3社，旧TOP返事の削除，共通生成との一致，ID重複なしを差分照合した．既存の相談先関連9検査PASS，[開発版ビルド](artifacts/v060-renewal-page3-providers-build.log)133ファイル・42HTMLの検証PASS．
+
+PCのカード表示と比較表の開閉，360px幅の表を自己確認した．スマホのclientWidth／scrollWidthは345／345px．読み上げ用社名が画面にも出ていた点を共通CSSで修正した．追加分の独立レビュー・本番公開は未実施．source commit `447dc1343542d77a7dbf477312002f7f080e287a`，deployment `appgdep_6ada01618970819181caf4d9eb5e173e`はsucceeded． 最終配信の3社・初期閉・読み上げ用ラベルの非表示を確認した．[PC表示](artifacts/v060-renewal-page3-providers-pc.png)を記録．
+
+## v0.6.0設備更新3ページ目の人間レビューOK（2026年10月22日）
+
+> **結論：3ページ目は自己確認・独立レビューともに合格し，未解消指摘なし．本人の「3ページ目レビューして．問題なければ人間レビューOKで」という条件付き承認に基づき，人間レビューOKとして記録する．既存1・2ページを合わせ，設備更新記事の全3ページが承認済みとなった．**
+
+[自己確認](artifacts/v060-renewal-page3-self-review.json)と[別担当の独立レビュー](artifacts/v060-renewal-page3-review.json)の対象SHA-256は一致し，MUST／RECOMMEND／NITSは各0件．本文・図3・補足2問・返事3件・相談先・手続き説明が整合する．修理のみ・撤去のみの紹介は事前確認に限定し，未確認の紹介可否を保証していない．
+
+配信済みsource commit `a47407ec1fc29dae299d1a36677ff227ac291120`，deployment `appgdep_6ad9fd9e72308191858e5b400df2756f`の最新内容を再読込みして表示確認した．[PC1280px](artifacts/v060-renewal-page3-review-pc.png)と[360px幅](artifacts/v060-renewal-page3-review-mobile-question.png)で横はみ出しなし．clientWidth／scrollWidthはPC1265／1265px，スマホ345／345px．質問2問の開閉，TOP3社カードへの到達を確認した．幅設定を解除し，元の3ページ目へ戻した．実機UX試験とは区別する．対象内容が不変の直前ビルドPASSを再利用し，追加ビルドや再配信は不要．
+
+v0.6.0全体の人間レビュー完了・公開前検収・本番公開は今回の範囲に含めない．
+
+## v0.6.0設備更新3ページ目の相談導線整理（2026年10月22日）
+
+> **結論：設置店へ相談し，別の会社を探す場合は一括サイトの窓口で紹介可否を確認する流れへ整えた．メーカー・JPEAの案内は補足質問へ移し，人間レビューは継続中．**
+
+本文では設置店の廃業・会社を変えたい場合を扱い，修理だけ・撤去だけの紹介を保証しない．返事は「一括見積もりサイトを確認したい」とし，既存のTOP3社カードへ接続する．補足質問「紹介してもらえないときは？」へメーカー窓口・JPEA掲載業者・屋根工事会社をまとめた．
+
+ソーラーパートナーズの[公式説明・利用規約](https://www.solar-partners.jp/manga-36530.html)，[パワコン交換の相談案内](https://www.solar-partners.jp/contents/81170.html)，[撤去の相談先](https://www.solar-partners.jp/contents/42356.html)を確認した．交換費用の相談は明記されるが，修理のみ・撤去のみの施工会社紹介は公開情報で未確認．対象外とも断定せず，問い合わせ送信は行っていない．
+
+[開発版ビルド](artifacts/v060-renewal-page3-consultation-build.log)132ファイル・42HTMLの検証PASS．本文と補足質問の移動・条件文の差分を確認した．対象HTML SHA-256は a4ff8853ca5328f143be7c41a4402cbce94443e4e71121617399a3a7c0f88ecd．今回追加のブラウザ検査・独立レビューは実施していない．source commit `a47407ec1fc29dae299d1a36677ff227ac291120`，deployment `appgdep_6ad9fd9e72308191858e5b400df2756f`はsucceeded．本番公開は未実施．
+
+## v0.6.0設備更新3ページ目の見出し整理（2026年10月22日）
+
+> **結論：3ページ目の見出し上の重複タイトルを外し，「誰に，何を相談すればいい？」を主見出しにそろえた．本文の人間レビューは継続中．**
+
+本人指示によりシリーズタイトルの段落1件だけを削除した．末尾のページ一覧にある1ページ目の名称は保持．主題は相談先・伝える内容・現地確認・見積もり比較であり，本文・図・質問・導線は変更していない．[ビルド](artifacts/v060-renewal-page3-heading-build.log)132ファイル・42HTMLの検証PASS．source commit `b8abc4bc9178a50ec3d303c7779cae4ad291c767`，deployment `appgdep_6ad9f9762ef081918684b17ecf249ade`はsucceeded．本番公開は未実施．
+
+## v0.6.0設備更新2ページ目の人間レビューOK（2026年10月22日）
+
+> **結論：2ページ目は参考額の条件表示を補ったうえで自己確認・独立レビューを完了し，未解消指摘なし．本人の「2ページ目レビューして．問題なければ人間レビューOKで」という条件付き承認に基づき，このページを人間レビューOKとして記録する．**
+
+[自己確認](artifacts/v060-renewal-page2-self-review.json)と[別担当の独立レビュー](artifacts/v060-renewal-page2-review.json)で対象SHA-256を照合した．図2の3案・価格と内訳・博士の概説・2問の補足・相談へ進む返事が整合．初回独立レビューのMUSTは，継続の「診断の参考額（元資料5 kW）」が閉じた資料欄にしかない点．各カードへ短い出典種別を表示し，限定再確認で解消した．最終未解消MUST／RECOMMEND／NITSは各0件．長い脚注は戻していない．
+
+数値・図の内訳・条件付きの診断利用説明はPASS．経産省原表と税区分の未確認という既存の限界は維持し，診断採用額を新規の市場価格として検証したとは扱わない．[最終ビルド](artifacts/v060-renewal-page2-reviewed-build.log)132ファイル・42HTMLの検証PASS，[PC](artifacts/v060-renewal-page2-review-pc.png)・[360px幅](artifacts/v060-renewal-page2-review-mobile.png)の表示を自己確認した．document clientWidth／scrollWidthはともに345pxで，横はみ出しなし．2問の開閉・回答，3ページ目へのhrefも確認し，幅設定は解除した．実機UX試験とは区別する．
+
+最終source commitは`b8fc6ca378f244910c41fd0a671ed5b055ec9788`，deploymentは`appgdep_6ad9f7568bac8191911c0aabb9d6b25f`でsucceeded．1ページ目の内容承認は維持し，3ページ目・記事全体の人間レビューと本番公開は今回の対象外とする．
+
+## v0.6.0設備更新2ページ目の費用図（2026年10月22日）
+
+> **結論：本人の意図に合わせ，表をイラストと金額の3カードによる図へ置き換え，長い脚注は表示面から外した．人間レビュー継続中．**
+
+後続の本人指示で，更新カードの内訳を「載せ替え75〜150万円」「パワコン交換は同時に替える場合，別に約35万円」と明記した．金額は不変で，機器代と工事代を個別に推定していない．[ビルド](artifacts/v060-renewal-replacement-breakdown-build.log)PASS．source commit `3cf204fcdb25b2cc1e3154d90f7bbf68a45b877f`，deployment `appgdep_6ad9f66c61488191aa37439081914879`はsucceeded．
+
+同日の後続指示で，費用カードの背景色だけを生成りから白（#fff）へ変更した．[開発版ビルド](artifacts/v060-renewal-cost-white-build.log)PASS．source commit `81a73d7ee1a4a149378406c77173537004fb857f`，deployment `appgdep_6ad9f52804348191b5afab1882242ff8`はsucceeded．
+
+さらに本人の指示で，各カード下段へ内訳を置いた．継続は点検と必要時のパワコン交換，更新は機器・取付工事とパワコンの別額，撤去は取り外し9万円・運搬処分5万円・足場15.1〜18.84万円を示す．更新の撤去・処分・足場の含有は未確認を維持し，未確認の内訳額は補わない．博士の撤去説明から金額の重複を減らした．[ビルド](artifacts/v060-renewal-cost-breakdown-build.log)PASS，[PC表示](artifacts/v060-renewal-cost-breakdown-pc.png)を自己確認．source commit `3210c2b54376eb94588877ece2cfe2f56ac772b0`，deployment `appgdep_6ad9f5c18e0c8191b08e1a7abf41c8f1`はsucceeded．
+
+継続・更新・撤去それぞれに，共通パネルの形と配色を使ったSVGイラストを添えた．価格・容量・枚数・必要時の交換・別額・足場込みを図内の短い表示へ整理した．数値は不変．詳細な出典・税区分・含有範囲は既存の「参考資料・条件」に集約した．図2の追加に伴い，3ページ目の図番号だけ図3へ変更した．
+
+[開発版ビルド](artifacts/v060-renewal-cost-figure-build.log)132ファイル・42HTMLの検証PASS，[PCの図](artifacts/v060-renewal-cost-figure-pc.png)を自己確認した．source commitは`b21e8c6c4b41c307f8f4d8858acf3c8058f35e4a`，deploymentは`appgdep_6ad9f48ab6948191a3bb54c13799f7aa`でsucceeded．追加の独立レビュー・全幅検査・本番公開は未実施．
+
+## v0.6.0設備更新2ページ目の表と補足質問の調整（2026年10月22日）
+
+> **結論：価格表を3列に整理し，更新後の新しい設備を起点とする30年間の診断利用を参考試算として案内した．人間レビュー継続中．**
+
+表を「選択肢・作業の例・参考額」に分け，条件は表の下へ移した．価格は不変．質問を「パネルを10枚交換するなら，費用も1枚交換の10倍？」へ修正した．診断の質問は，新しい設備を設置した時点からの30年間を参考試算する利用と，新設から60年間を連続予測する計算を区別する．現在の料金・制度・標準費用が前提で，撤去・屋根補修を含む実際の更新費用と補助金の適用は別途確認する．既設の一部を残す案との比較は対象外という限定を維持した．計算方法ページの対象・計算条件・費用範囲とcalculator.jsの設置費算式を確認し，計算そのものは変更していない．
+
+[開発版ビルド](artifacts/v060-renewal-page2-polish-build.log)132ファイル・42HTMLの検証PASS．[PCの表](artifacts/v060-renewal-page2-polished-table.png)を自己確認し，幅360pxでdocument clientWidth／scrollWidthはともに345px，表の表示幅は約308.67px．一時的な幅設定は解除済み．source commitは`1905bf32cf1a26cd3458b427c5658c183601e95c`，deploymentは`appgdep_6ad9f37ba3348191b6632ae667caf6b4`でsucceeded．追加の独立レビューと本番公開は未実施．
+
+## v0.6.0設備更新2ページ目の3案費用比較（2026年10月22日）
+
+> **結論：2ページ目を「継続・更新・撤去に，いくらかかる？」へ再構成し，価格例の表と各案の内訳を説明する対話を開発版へ反映した．人間レビューは未完了．**
+
+旧表1の費目一覧と旧表2の更新・撤去価格例を，3案の費用例を並べる表1へ統合した．継続は既存診断の点検3.8万円／回・必要なパワコン交換38.4万円／回，更新は4 kW載せ替え75〜150万円（パワコン同時交換は別約35万円），撤去は10枚29〜33万円．容量・作業・出典が異なる参考額で，同一設備・同一期間の総額比較ではないと表の直下へ明記した．博士は同じ順で内訳を説明する．見出し上の重複した記事全体のタイトルは削除した．1・3ページ目は末尾の2ページ目リンク名だけ変更し，1ページ目の承認済み本文は維持した．
+
+[価格根拠と確認限界](artifacts/v060-renewal-page2-three-costs-sources.json)を記録した．経産省PDFの今回web取得は403であり，継続額は既存の診断・維持費記事・根拠C1と先行検収の採用値を再利用した．新たな市場価格として扱わない．栃和の更新・撤去額は今回一次ページへ照合した．税区分と更新の足場・撤去処分の含有範囲は未確認を維持する．
+
+ルート・メタ情報の既存2検査PASS，[開発版ビルド](artifacts/v060-renewal-three-costs-preview-build.log)132ファイル・42HTMLの検証PASS．[PCの価格表と対話](artifacts/v060-renewal-three-costs-pc.png)を自己確認した．更新ごとの独立レビュー・全幅検査は追加していない．source commitは`084d6b48296a2a0af3060b1165f192742a0206fc`，deploymentは`appgdep_6ad9f222da488191983de07ddd9f3eb9`でsucceeded．本番公開は未実施．
+
+## v0.6.0設備更新1ページ目の人間レビューOK（2026年10月22日）
+
+> **結論：設備更新の1ページ目は自己確認・独立内容レビューとも問題なし．本人の「1ページ目レビューして．OKなら人間レビューOKで」という条件付き承認に基づき，このページを人間レビューOKとして記録する．**
+
+対象は開発版source commit `b42c7967fd69b2c048d43e6c614579769b0dd7d7`の設備更新1ページ目．[自己確認](artifacts/v060-renewal-page1-self-review.json)と[別担当の独立レビュー](artifacts/v060-renewal-page1-review.json)で対象SHA-256が一致し，MUST／RECOMMEND／NITS各0件．3案の意味・メリット・気をつける点と博士の説明，一部交換を含む継続と更新の区別，30年を義務としない説明，2つの補足質問と費用ページへの返事を確認した．本線8発言は各案の説明を担い，不要な反復はないと判断した．
+
+[PC](artifacts/v060-renewal-page1-review-pc.png)と[360px幅](artifacts/v060-renewal-page1-review-mobile.png)の表示を自己確認し，折返し・カードの1列化と横はみ出しなしを確認した．スマホ幅のdocument clientWidth／scrollWidthはともに345px（幅360pxからスクロールバーを除く）．保証の補足質問の開閉と回答表示も確認し，一時的な幅設定は解除した．実機の人間UX試験とは区別する．2・3ページ目と記事全体の人間レビュー，本番公開は今回の承認範囲に含めない．コード・配信物は変更していない．
+
+## v0.6.0困りごとカードと途中の返事の調整（2026年10月22日）
+
+> **結論：困りごとの左右カードの高さとアイコンの縦位置をそろえ，設備更新の途中2ページから終了を示す返事を外した．人間レビュー継続中．**
+
+同日の後続指示で，設備更新1ページ目のハレナの最初の発言を「長いあいだ，わが家の電気をつくってくれてありがとう．30年くらいたったら，全部取り替えるの？」へ変更した．[開発版ビルド](artifacts/v060-harena-opening-preview-build.log)PASS，source commit `b42c7967fd69b2c048d43e6c614579769b0dd7d7`，deployment `appgdep_6ad9efbc05488191953704a709fde87b`はsucceeded．セリフ1件の変更であり，追加の独立・表示検査は実施していない．
+
+共通cards.cssのグリッドをstretch，カード内のアイコンを上揃えとしたため，TOPと導入記事の共通図へ同じ調整が適用される．設備更新1・2ページ目から「わかった！ひとまず大丈夫」を削除し，最終3ページ目は維持．[開発版ビルド](artifacts/v060-card-alignment-preview-build.log)132ファイル・42HTMLの検証PASS，[PC画面](artifacts/v060-trouble-cards-aligned-pc.png)で左右の高さを確認した．source commitは`0e5b6b4c87255ddc804a524f35b6cc8ebb35a460`，deploymentは`appgdep_6ad9ee827a1c81918244a2ad542ae1b2`でsucceeded．本文・数値・進捗処理は変更せず，本番公開もしていない．
+
+## v0.6.0設備更新1ページ目の比較図改訂（2026年10月22日）
+
+> **結論：本人レビューを受け，図1を3つの選択肢とメリット・気をつける点の比較へ改め，博士の解説を対応させた．改訂版の人間レビューは継続中．**
+
+1ページ目の「使い続ける・更新する・撤去する」を各カードの意味・メリット・気をつける点で比較する．博士は同じ順で，各案の条件と負担を説明する．パワコンに偏った問いを置き換え，一部交換は使い続ける案に含める．2・3ページ目の本文・費用数値・読了処理は変更していない．共通CSSの追加は比較図の子要素に限定した．
+
+ルート・メタ情報の既存2検査PASS，開発版ビルド132ファイル・42HTMLの検証PASS．[ビルド記録](artifacts/v060-renewal-choice-preview-build.log)と[PCの比較図](artifacts/v060-renewal-choice-figure-pc.png)を保持する．この改訂で新しいスマホ幅検査・独立レビューは実施しておらず，直下の旧版のPASSを変更部分の独立合格とは扱わない．開発版source commitは`6e0b4f56fb9822ee69d16244003fe65f895ca439`，deploymentは`appgdep_6ad9941937b48191aa2b74af3244ca5a`でsucceeded．本番公開は行っていない．
+
+## v0.6.0の人間レビュー引渡し（2026年10月21日）
+
+> **結論：対象範囲の実装・自己確認・独立レビューと指摘修正を完了し，開発版を人間レビュー待ちとした．本番公開は未実施．**
+
+対象は設備更新3ページ，歩き方，導入向けの詳しいガイド一覧・8記事，トリセツTOP・導入3ページ・既存2記事．[開発計画](../../business-research/運営/開発計画.md)に対するAI側の準備は完了し，対象全体の人間レビューが残る．過去の個別ページの本人確認は保持するが，今回の全体確認へ代用しない．時期・節目の独立記事は準備中で，今回の追加制作対象にも進捗の分母にも含めない．
+
+開発版source commitは`85f04dcf7fc6ac146a57ff129cd6f754cb3f4b8b`，deploymentは`appgdep_6ad8b088ec348191950ff78a48f403ca`でsucceeded．[設備更新の1ページ目](https://haretoku-preview.wordmindblack.chatgpt.site/manual/equipment-renewal/)を成果物タブとして保持した．公開中のharetoku.jp・main・タグ・Releaseは変更していない．版番号の確定と公開工程は人間レビュー後に扱う．
+
+|確認|結果と根拠|
+|---|---|
+|機械検査|[公開対象152検査](artifacts/v060-readiness-public-tests.log)PASS．[公開用ビルド](artifacts/v060-readiness-pages-build.log)133ファイル・38正規URL，[最終開発版ビルド](artifacts/v060-readiness-final-preview-build.log)132ファイル・42HTMLともPASS|
+|歩き方の独立レビュー|[記録](artifacts/v060-walkthrough-independent-review.json)の最終未解消MUST／RECOMMEND／NITS各0．旧タブの上書き対策としてv2保存へ変更し，旧キーからの初回読取時に有効な進捗を即時移行．6ケースの追加確認PASS|
+|構造・公開組込みの独立レビュー|[記録](artifacts/v060-structure-independent-review.json)の指摘解消済み．7ルート，リンク，メタ情報，sitemap，OG画像，analyticsの許可範囲とプライバシー制御を照合|
+|設備更新の独立内容レビュー|[記録](artifacts/v060-renewal-independent-review.json)の指摘解消済み．一次情報で更新・撤去の条件と価格例を確認．一社の解説例を全国相場として扱わず，税・工事範囲が不明な部分を補完しない|
+|既存記事の差分レビュー|[トリセツ2記事](artifacts/v060-existing-manual-content-review.json)PASS，各優先度0件．導入向け8記事の本文は[HEADとの一致](artifacts/v060-existing-guide-reuse.json)を確認し，既存の合格を再利用|
+|表示と操作の自己確認|[最終PC画面](artifacts/v060-human-review-preview-pc.png)，360・412 CSS pxで費用表・ガイド・歩き方・導入図・既存記事の質問とトリセツへの戻りを確認．目立つ崩れなし．実端末検査ではない|
+|後片付け|一時的な幅確認ページは最終ビルドから除外済み．[幅確認した81資産](artifacts/v060-responsive-tested-assets.json)は最終版とバイト一致．新規ローカルサーバーは起動せず，配信補助プロセスは終了済み|
+
+表示の証跡は，費用表の[内訳](artifacts/v060-readiness-mobile-costs.png)・[価格例](artifacts/v060-readiness-mobile-prices.png)，[歩き方](artifacts/v060-readiness-mobile-walkthrough.png)，[ガイド](artifacts/v060-readiness-mobile-guides.png)，[収支改善の表](artifacts/v060-readiness-mobile-income-tables.png)・[質問](artifacts/v060-readiness-mobile-reader-question.png)，[停電](artifacts/v060-readiness-mobile-outage.png)・[設備条件](artifacts/v060-readiness-mobile-outage-equipment.png)，導入の[節目](artifacts/v060-readiness-mobile-intro-timeline.png)・[困りごと](artifacts/v060-readiness-mobile-intro-troubles.png)を保持する．同一オリジンのiframeによる幅確認であり，子画面のscrollWidthの数値検査や実機合格とは表現しない．
+
+**人間レビューで見るところ**は，①設備更新3ページの対話・費用・相談の分かりやすさ，②歩き方5項目の名称と準備中を除く4項目の進捗，③ガイド4分類とMAPの対応，④トリセツTOP・導入・既存記事からの往復の自然さ．[トリセツTOP](https://haretoku-preview.wordmindblack.chatgpt.site/manual/)と[詳しいガイド](https://haretoku-preview.wordmindblack.chatgpt.site/guides/)から確認できる．新たなMUSTは影響範囲を修正・再確認し，人間レビューOK後に公開準備へ進む．
+
 ## v0.5.1公開と本番検収（2026年10月20日）
 
 > **結論：v0.5.1を本番公開し，31正規URLと新ハレナ画像の独立検収・PC／スマホ幅確認・公開タグ／Releaseを完了した．GoogleへのTOP更新依頼は受理され，実検索アイコンの表示は別に追跡する．**

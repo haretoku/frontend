@@ -44,12 +44,21 @@
         <div class="menu-wrap">
           <button id="menu-button" type="button" aria-expanded="false" aria-controls="menu"><span class="menu-lines" aria-hidden="true"></span>メニュー</button>
           <div id="menu" class="menu-panel" hidden>
-            <a class="map-link" href="/">太陽光えらびマップ</a>
+            <div class="menu-primary">
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光を考えている方へ</p>
+                <a class="map-link" href="/"><span class="menu-primary-title">太陽光えらびマップ</span></a>
+                <a class="map-link" href="/guides/" aria-current="page"><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>
+              </div>
+              <div class="menu-audience-group">
+                <p class="menu-audience">太陽光をつけた方へ</p>
+                <a class="map-link" href="/manual/"><span class="menu-primary-title">太陽光トリセツ</span></a>
+              </div>
+            </div>
             <button id="reset" type="button">進み具合をリセット</button>
             <div class="menu-references">
-              <a href="/guides/" aria-current="page">詳しいガイド</a>
               <a href="/press/">プレスリリース</a>
-              <a href="/data/">補助金を調べる</a>
+              <a href="/data/">データを見る</a>
               <a href="/pages/calculation-method.html">計算方法・使用データ</a>
             </div>
           </div>
@@ -67,9 +76,10 @@
     <section id="map" class="journey" aria-labelledby="map-title" hidden>
       <div class="map-heading">
         <div class="map-title-card">
-          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
+          <img class="title-art title-harena" src="/map/assets/navigator.png" alt="" width="92" height="92">
           <h1 id="map-title" tabindex="-1">わが家の<span>太陽光えらび</span></h1>
-          <svg class="title-art title-house" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-house"/></svg>
+          <p class="title-audience">太陽光を考えている方へ</p>
+          <svg class="title-art title-panel" viewBox="0 0 120 120" aria-hidden="true"><use href="/map/assets/title-art.svg#solar-panel"/></svg>
         </div>
       </div>
       <div class="map-landscape" aria-label="太陽光を検討する道のり">
@@ -176,7 +186,7 @@
       <div id="page-ending"><details class="sources"><summary>参考資料</summary><ul><li><a href="https://ondankataisaku.env.go.jp/re-start/howto/07/" target="_blank" rel="noopener">環境省：太陽光発電の導入について ↗</a></li><li><a href="/pages/calculation-method.html#calculation-flow" target="_blank" rel="noopener">はれトク：診断の計算方法・使用データ ↗</a></li><li><a href="https://www.meti.go.jp/press/2025/03/20260319004/20260319004.html" target="_blank" rel="noopener">経済産業省：2026年度の住宅用太陽光の買取価格 ↗</a></li></ul></details><div class="nav-summary"><img src="/map/assets/navigator.png" alt=""><div><p class="speaker">ハレナのまとめ</p><ul><li>昼に作った電気を使い，余りを売るのが太陽光の基本．</li><li>夜や発電が足りないときは，電気を買う．</li></ul></div></div></div>
       <section id="page-response" class="page-response" aria-labelledby="response-label">
         <div class="response-person"><span id="response-portrait" aria-hidden="true"></span><h2 id="response-label">あなた</h2></div>
-        <div class="response-bubble"><a id="next" class="primary" href="/guides/home-battery/">わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>昼は留守でも，付ける意味はある？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>留守でも，冷蔵庫などが使う電気に回し，余った分は売れます．ただし，昼にどのくらい使うかで節約と売電の割合が変わるので，費用も合わせて比べましょう．</p></div></div></details><details class="response-choice response-dialogue"><summary>電気代は，どのくらい減るの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>2026年10月時点の試算では，東京都・南向き4 kW・蓄電池なしの初年度は，月平均約4,700円の節約です．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>太陽光パネルの電気で，どのくらいまかなえるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>家で使う分は月平均約150 kWhです．単価は東京電力エリアの2023年度の平均料金をもとに，1 kWhあたり31.21円としています．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>家によって，節約できる金額は変わるんだね．</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．東京都の標準的な電気代で試算しています．実際の節約額は，地域や電気の使い方・契約で変わります．</p></div></div></details><details class="response-choice response-dialogue"><summary>余った電気は，いくらで売れるの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>2026年度認定の住宅用太陽光（10 kW未満）は，FITという買取制度を使うと，売り始めてから最初の4年間は1 kWhあたり24円で売れます．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>それだと，いくらくらいの収入になるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>東京都の標準的な電気代で，南向き4 kW・蓄電池なしを試算すると，初年度に売る量は月平均約241 kWh，収入は月約5,800円が目安です．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>ずっと同じ値段で売れるわけではないんだよね？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．5～10年目は1 kWhあたり8.3円です．このFITの価格と期間も，診断に含めています．11年目以降の価格は，売電先との契約で決まります．</p></div></div></details></div></div>
+        <div class="response-bubble"><a id="next" class="primary" href="/guides/home-battery/">わかった！ 次へ →</a><nav id="next-routes" class="next-routes" aria-label="次に読むページを選ぶ" hidden></nav><div id="page-questions"><details class="response-choice response-dialogue"><summary>昼は留守でも，付ける意味はある？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>留守でも，冷蔵庫などが使う電気に回し，余った分は売れます．ただし，昼にどのくらい使うかで節約と売電の割合が変わるので，費用も合わせて比べましょう．</p></div></div></details><details class="response-choice response-dialogue"><summary>電気代は，どのくらい減るの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>2026年10月時点の試算では，東京都・南向き4 kW・蓄電池なしの初年度は，月平均約4,700円の節約です．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>太陽光パネルの電気で，どのくらいまかなえるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>家で使う分は月平均約150 kWhです．単価は東京電力エリアの2023年度の平均料金をもとに，1 kWhあたり31.21円としています．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>家によって，節約できる金額は変わるんだね．</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．東京都の標準的な電気代で試算しています．実際の<a href="/guides/solar-electricity-savings/">節約額</a>は，地域や電気の使い方・契約で変わります．</p></div></div></details><details class="response-choice response-dialogue"><summary>余った電気は，いくらで売れるの？</summary><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>2026年度認定の住宅用太陽光（10 kW未満）は，<a href="/guides/solar-fit/">FITという買取制度</a>を使うと，売り始めてから最初の4年間は1 kWhあたり24円で売れます．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>それだと，いくらくらいの収入になるの？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>東京都の標準的な電気代で，南向き4 kW・蓄電池なしを試算すると，初年度に売る量は月平均約241 kWh，収入は月約5,800円が目安です．</p></div></div><div class="speech speech-navigator"><img src="/map/assets/navigator.png" alt=""><div><span class="speaker">ハレナ</span><p>ずっと同じ値段で売れるわけではないんだよね？</p></div></div><div class="speech speech-professor"><img src="/map/assets/professor-chibi.png" alt=""><div><span class="speaker">はれトク博士</span><p>はい．5～10年目は1 kWhあたり8.3円です．このFITの価格と期間も，診断に含めています．11年目以降の価格は，売電先との契約で決まります．</p></div></div></details></div></div>
       </section>
       <nav class="previous-page" aria-label="前のページ"><a id="previous" class="text-link" href="/simulator/">← 前のページへ</a></nav>
     </section>

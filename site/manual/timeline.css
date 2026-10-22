@@ -1,0 +1,29 @@
+.manual-timeline { --timeline-axis:130px; --timeline-dot-y:28px; list-style:none; margin:0; padding:0; }
+.manual-timeline > li { display:grid; grid-template-columns:112px 1fr; column-gap:37px; position:relative; padding-bottom:18px; }
+.manual-timeline > li:before { content:""; position:absolute; left:var(--timeline-axis); top:var(--timeline-dot-y); bottom:calc(-1 * var(--timeline-dot-y)); width:2px; transform:translateX(-50%); background:#b6ccb6; }
+.manual-timeline > li:last-child:before { bottom:18px; }
+.manual-timeline > li:after { content:""; position:absolute; box-sizing:border-box; left:var(--timeline-axis); top:var(--timeline-dot-y); width:20px; height:20px; transform:translate(-50%,-50%); border-radius:50%; background:#edf3ec; border:4px solid #71977a; }
+.manual-year { padding-top:11px; color:#54715b; text-align:right; font-size:17px; font-weight:700; }
+.manual-year small { display:block; font-size:11px; font-weight:400; margin-top:4px; }
+.manual-timeline-card { background:#fffefa; border:1px solid #dbe4d9; border-radius:14px; padding:21px 26px; }
+.manual-milestones { display:grid; gap:12px; }
+.manual-timeline-card h3 { margin:0 0 7px; font-size:20px; line-height:1.6; }
+.manual-timeline-card p { margin:0; font-size:14px; color:#586d5f; }
+.manual-timeline-card .manual-guide { margin-top:12px; }
+.manual-timeline-card--inspection { padding-block:16px; }
+.manual-timeline-card--inspection h3 { margin:0; }
+@media(max-width:760px) {
+ .manual-timeline { --timeline-axis:71px; --timeline-dot-y:27px; }
+ .manual-timeline > li { grid-template-columns:60px 1fr; column-gap:24px; }
+ .manual-timeline > li:after { width:18px; height:18px; border-width:3px; }
+ .manual-year { font-size:13px; padding-top:17px; }
+ .manual-year small { font-size:9px; }
+ .manual-timeline-card { padding:17px 15px; }
+ .manual-timeline-card h3 { font-size:16px; }
+ .manual-timeline-card p { font-size:12px; }
+}
+@media(max-width:370px) {
+ .manual-timeline > li { grid-template-columns:49px 1fr; column-gap:19px; }
+ .manual-timeline { --timeline-axis:57px; }
+ .manual-timeline-card { padding:15px 12px; }
+}

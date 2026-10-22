@@ -1,0 +1,156 @@
+{
+  "reviewer": "v060_renewal_review（各記事の今回実装とは別担当）",
+  "date": "2026-10-21",
+  "purpose": "トリセツへ再配置した既存2記事のv0.6.0差分に限定した独立内容レビュー．",
+  "baseline": {
+    "commit": "1dc7b3136bf656fc56e9c925b1cdc0408c486503",
+    "label": "HEAD（v0.5.1）．未変更の数値・図及びその先行検収は再利用．"
+  },
+  "decision": "PASS_CONTENT_SCOPE",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "articles": [
+    {
+      "article": "self-consumption",
+      "file": "site/guides/self-consumption/index.html",
+      "sha256": "ff6d3b927d6ad4634594bf207737153a3ed991fb48de1d4c0ec590bb95044ed0",
+      "baselineFileSha256": "c4ffc18d5013107964394cc8eb8f5c2568c8cdd7b6e02c2c1bd10249b8e283e2",
+      "figures": {
+        "count": 3,
+        "normalizedHtmlSameAsHead": true,
+        "sha256": [
+          "8fa6a54ad822481a5de0e62a00dbc4b7d5fef7a163665a8395fb87fb3d877167",
+          "ad0d2458c1698e569f023f4de2fe1dfd682b0623203d21ea6d4b763ee2e6d3f7",
+          "9e990c26e98e1fe1afb0329d76b4c3454a16a42d7b20beb6653fcf6ddcf87c7f"
+        ]
+      },
+      "chaptersTextSameAsHead": [
+        false,
+        false,
+        false
+      ],
+      "replies": 3,
+      "supplementaryQuestions": 2,
+      "decision": "PASS_CONTENT_SCOPE"
+    },
+    {
+      "article": "disaster",
+      "file": "site/guides/disaster/index.html",
+      "sha256": "5d77ef9aa2fa597255ed92086c869140164533dcdcbf71590b887caa3624cb67",
+      "baselineFileSha256": "ae57a3885a7e50cc876746adb6d4279d510f146518dac091e3bd1324235451d5",
+      "figures": {
+        "count": 2,
+        "normalizedHtmlSameAsHead": true,
+        "sha256": [
+          "63092a9d4cc236542c75ad0d70143ec0ad2d1c9a3f49b607f7f5d746b1dbd995",
+          "3e3abcd854a446627a420aba6a06fa8aff3068c74c2f4813b5f4c4edf0a7c19a"
+        ]
+      },
+      "chaptersTextSameAsHead": [
+        true,
+        true,
+        true
+      ],
+      "replies": 3,
+      "supplementaryQuestions": 2,
+      "decision": "PASS_CONTENT_SCOPE"
+    }
+  ],
+  "findings": [],
+  "checks": [
+    {
+      "article": "self-consumption",
+      "result": "PASS",
+      "detail": "収支改善の問いに，現状把握→自家消費の時間移動→契約見直しで回答．発電・買電・売電，量と単価を分け，請求総額の変化だけで原因を判断しない．"
+    },
+    {
+      "article": "self-consumption",
+      "result": "PASS",
+      "detail": "1kWhを減らす限界的買電額を基本料金込みの請求平均と区別．1章表1と3章表2及び補足回答の単価の意味が一致．基本料金は契約全体の比較へ分担している．"
+    },
+    {
+      "article": "self-consumption",
+      "result": "PASS",
+      "detail": "図3点はHEADと一致．既存の2026年10月・TEPCO関東料金例と計算31.28−8.50＝22.78，段階料金範囲・税・対象地域の条件は維持．先行検収を再利用し，今回の再編を理由とする全価格根拠の再調査はしない．"
+    },
+    {
+      "article": "self-consumption",
+      "result": "PASS",
+      "detail": "予定していた家事だけを時間移動し，不要な運転を増やさない．買電単価と失う売電収入，時間帯を比較する説明と，売電単価が高い場合の留保が整合．"
+    },
+    {
+      "article": "self-consumption",
+      "result": "PASS",
+      "detail": "新しい契約比較章は，単価だけでなく基本料金・変動条件・適用期間・解約・セット条件と総額比較へ接続し，設備追加の投資費用とは分ける．公式の契約説明・書面確認，自由契約売電の案内と整合．"
+    },
+    {
+      "article": "disaster",
+      "result": "PASS",
+      "detail": "全3章の本文テキストと図2点はHEADと一致し，容量・家電の時間目安・給電範囲・出力・医療機器や浸水破損の条件も維持．既存の正式検収を再利用．"
+    },
+    {
+      "article": "disaster",
+      "result": "PASS",
+      "detail": "追加質問は，使えるコンセントの場所・回路が製品と配線で異なること，自動設定と手動の復電時操作が異なることを短く説明．自宅機器の説明書に戻すため，メーカー1例を全機種へ一律適用していない．"
+    },
+    {
+      "article": "both",
+      "result": "PASS",
+      "detail": "3つの返事は読者の発話として自然で，困りごと・時期節目・トリセツTOPの3経路に分かれる．質問は下に置き，返事の選択を強制していない．"
+    },
+    {
+      "article": "both",
+      "result": "PASS",
+      "detail": "同じ正規アバターのentry.jsを読み出し，記事自体に追加のキャラクター選択又は診断条件書き込みを設けていない．"
+    }
+  ],
+  "sourceChecks": [
+    {
+      "url": "https://www.tepco.co.jp/ep/private/plan/chargelist01.html",
+      "status": "本文確認",
+      "claim": "基本料金と電力量料金，燃料費調整の区別．既存の歴史的料金例の全再調査は対象外．"
+    },
+    {
+      "url": "https://kurashi-idea.tepco.co.jp/entry/20250619/june-02",
+      "status": "本文確認",
+      "claim": "太陽光が余る昼の食洗機・洗濯乾燥機の使い方，モニターによる確認．予約運転は対応機器・説明書に従うとの限定を記事に残す．"
+    },
+    {
+      "url": "https://jp.sharp/sunvista/support/jiritsu/",
+      "status": "本文確認",
+      "claim": "自立運転コンセントの設置場所と不明時の販売工事店確認．復電時の手動連系運転復帰と，蓄電池自動設定時には操作不要という両方の説明を確認．"
+    },
+    {
+      "url": "https://www.enecho.meti.go.jp/category/electricity_and_gas/electric/electricity_liberalization/step/",
+      "status": "web openは403．同URLの公式検索結果で内容確認",
+      "claim": "料金・契約期間・契約解除などの説明と書面を確認する．"
+    },
+    {
+      "url": "https://www.emsc.meti.go.jp/info/faq/index.html",
+      "status": "web openはアクセス不可．同URLの公式検索結果と公式FAQ検索結果で内容確認",
+      "claim": "契約や料金プランにより解約金が発生する場合がある．ツールのアクセス不可をリンク切れとは断定しない．"
+    },
+    {
+      "url": "https://www.emsc.meti.go.jp/info/business/FCAS/index.html",
+      "status": "web openはアクセス不可．現行の別公式資料で主張確認",
+      "alternative": "https://www.enecho.meti.go.jp/category/electricity_and_gas/electric/summary/regulations/kouri20260409.pdf",
+      "claim": "燃料費調整等の料金変動の条件・算出方法・上限の説明に関する公式指針の検索結果を確認．"
+    },
+    {
+      "url": "https://www.enecho.meti.go.jp/about/special/johoteikyo/taiyoko_manryo.html",
+      "status": "web openは403．別の現行公式案内で主張確認",
+      "alternative": "https://www.enecho.meti.go.jp/category/saving_and_new/saiene/solar-2019after/selection.html",
+      "claim": "FIT終了後の自家消費・相対自由契約売電の選択肢．"
+    }
+  ],
+  "limits": [
+    "本担当はブラウザや共有タブを操作していない．親担当から360/412実viewportの本文・図表・質問開閉・戻り先確認済みとの連絡を受けたが，このJSONの独立確認範囲は内容と静的構造である．",
+    "元の料金例・停電時時間目安の新たな実計算検収や，全公式資料の再調査は行っていない．不変の図と数値・条件は先行の検収を再利用する．",
+    "政府公式ページの一部をweb toolで直接取得できなかったため，直接取得と公式検索結果又は代替公式資料による確認を分けて記録した．外部サイト全件のHTTP検収ではない．",
+    "人間レビュー・本番公開・共有情報の公開検収は未実施．"
+  ],
+  "processesStarted": []
+}

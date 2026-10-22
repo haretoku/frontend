@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-21",
+  "scope": "トリセツ導入3ページ目の本文・8分類図・補足3問・導線",
+  "sourceHash": "C93684E3F614A62C90C7BE83C34A7DDAA768A10ABDEBD2A6C90E75AB1D1C887E",
+  "result": "PASS：自己確認・独立レビューともにMUST・RECOMMENDの指摘なし．",
+  "independentReview": "manual_third_page_review：会話のつながり，TOPとの共通データ・部品による一致，相談先の一次資料，読者の発話としての2導線に整合．",
+  "change": "カードの準備中表示と重複する「個別の記事は準備中です．」を図キャプションから削除．",
+  "humanStatus": "本人が「あとはいいね」と内容を確認．3ページ目のレビューを依頼し，その範囲の自己確認・独立レビューはPASS．",
+  "screen": "PC開発版で注記削除・補足3問の展開と回答・参照リンクを確認．明らかな崩れなし．",
+  "sources": [
+    "https://www.jpea.gr.jp/house/setting/",
+    "https://jp.sharp/support/rp_4649.html"
+  ],
+  "build": "qa/artifacts/v060-third-page-review-build.log：124ファイル・39HTMLの確認用ビルドPASS．",
+  "screenshot": "qa/artifacts/v060-third-page-review.png",
+  "deployment": {
+    "commit": "795bf09d0e764c8110f676d0641e4a615deba2c5",
+    "id": "appgdep_6ad884cb86f08191862622be189d8c93",
+    "status": "succeeded"
+  },
+  "limits": "幅別・スマホ実機及び本番リリース前の全体検収は別途．不変のアバター保存処理は既存PASSを再利用．"
+}

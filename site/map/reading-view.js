@@ -4,7 +4,17 @@ import {renderConsultationProviders} from './consultation-view.js';
 import {journeyLinks} from './routes.js';
 const safe = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const contractorChecklistUrl = new URL('./assets/contractor-checksheet.pdf',import.meta.url).href;
-function speech(text,speaker='professor',reference=null){return `<div class="speech speech-${speaker}"><img src="${assets[speaker==='professor'?'professor-chibi':speaker]}" alt=""><div><span class="speaker">${speaker==='professor'?'はれトク博士':'ハレナ'}</span>${(Array.isArray(text)?text:[text]).map(paragraph=>`<p>${safe(paragraph)}</p>`).join('')}${reference?`<p class="question-reference"><a href="${safe(reference.href)}">${safe(reference.label)}</a></p>`:''}</div></div>`;}
+function answerText(text,links=[]){
+  const matches=links.filter(link=>/^\/guides\/[a-z-]+\/$/.test(link.href)&&link.text).map(link=>({...link,start:String(text).indexOf(link.text)})).filter(link=>link.start>=0).sort((a,b)=>a.start-b.start);
+  let html='',cursor=0;
+  for(const link of matches){
+    if(link.start<cursor)continue;
+    html+=safe(text.slice(cursor,link.start))+`<a href="${safe(link.href)}">${safe(link.text)}</a>`;
+    cursor=link.start+link.text.length;
+  }
+  return html+safe(text.slice(cursor));
+}
+function speech(text,speaker='professor',reference=null,links=[]){return `<div class="speech speech-${speaker}"><img src="${assets[speaker==='professor'?'professor-chibi':speaker]}" alt=""><div><span class="speaker">${speaker==='professor'?'はれトク博士':'ハレナ'}</span>${(Array.isArray(text)?text:[text]).map(paragraph=>`<p>${answerText(paragraph,links)}</p>`).join('')}${reference?`<p class="question-reference"><a href="${safe(reference.href)}">${safe(reference.label)}</a></p>`:''}</div></div>`;}
 function solarUseDiagram(){return `<figure class="solar-use-diagram" aria-label="屋根で作った電気の使い道">
   <div class="solar-use-source"><svg viewBox="0 0 120 120" aria-hidden="true"><use href="${assets.titleArt}#solar-house"/></svg><strong>屋根で電気を作る</strong></div>
   <div class="solar-use-branches">
@@ -87,6 +97,6 @@ export function renderReadingQuestions(page){
   let questions='';
   if(page.easy||page.easyDialogue)questions+=`<details class="response-choice${page.easyDialogue?' response-dialogue':''}"><summary>${safe(page.easyLabel||'もう少しわかりやすく説明して')}</summary>${page.easyDialogue?page.easyDialogue.map(([speaker,text])=>speech(text,speaker)).join(''):speech(page.easy,'navigator')}</details>`;
   if(page.question)questions+=`<details class="response-choice${page.answerDialogue?' response-dialogue':''}"><summary>${safe(page.question)}</summary>${page.answerDialogue?page.answerDialogue.map(([speaker,text])=>speech(text,speaker)).join(''):speech(page.answer)}</details>`;
-  for(const supplement of page.questions??[])questions+=`<details class="response-choice response-dialogue"><summary>${safe(supplement.question)}</summary>${supplement.answerDialogue.map(([speaker,text],index)=>speech(text,speaker,index===supplement.answerDialogue.length-1?supplement.reference:null)).join('')}</details>`;
+  for(const supplement of page.questions??[])questions+=`<details class="response-choice response-dialogue"><summary>${safe(supplement.question)}</summary>${supplement.answerDialogue.map(([speaker,text],index)=>speech(text,speaker,index===supplement.answerDialogue.length-1?supplement.reference:null,supplement.answerLinks)).join('')}</details>`;
   return journeyLinks(questions);
 }

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-21",
+  "scope": "トリセツ導入1ページ目のみ．2・3ページ目の本文は対象外．",
+  "deployedSourceCommit": "9f192a8ecc79cda9c5182bc78187191fa4440f40",
+  "files": {
+    "site/manual/getting-started/style.css": "A03E785DEF424874F587B7276E0EA6AC983B8B1C57347F5D5E13B61EB7F719E3",
+    "site/manual/getting-started/entry.js": "27B2C79DA8E9029CFEE5C11C2527862AE9CB12F67E35343AF25641BBD2E2D0D3",
+    "site/manual/getting-started/avatar-state.js": "E4F89661A6D89902F58DC6D18D3C972332FF2DF4210C2457C27D8CF39853EBBC",
+    "site/manual/getting-started/index.html": "151C5F6869BCB21A8821AA1C7AD9E46C7718AA9A6DD03F867FB6FEE319C9DB63"
+  },
+  "result": "PASS：MUST・RECOMMENDの修正指摘なし．",
+  "content": "本文6発言234字．お祝い→確認と点検→自分と専門家の役割につながる．補足3問は相談先・普段の確認・掃除を分担し，次ページの節目へ進む導線と整合する．",
+  "references": [
+    "https://www.jpea.gr.jp/house/longuser/",
+    "https://www.jpea.gr.jp/faq/593/"
+  ],
+  "independentReview": "manual_first_page_review：本文・関連コードを読取り．MUST・RECOMMEND・必須NITSなし．",
+  "screen": "開発版PC実画面で本文・保存済みアバターの初期選択・補足2問の開閉と回答・参考リンク・次ページリンクを確認．質問を開いた画面に明らかな崩れなし．",
+  "reused": "共通アバターの初期値・既存選択・診断条件と進捗の保持・保存禁止時のタブ内代替保存は，同じJSの直前PASSを再利用．ビルドは同じ入力の直前PASSを再利用．",
+  "limits": "スマホ実機の幅別検査と本番リリース前の全体検収は今回の対象外．追加質問に対する人間の完成稿確認は別途．",
+  "screenshot": "qa/artifacts/v060-first-page-review.png",
+  "postReviewAmendment": "本人から進行リンクの発話が案内役に寄っている指摘を受け，承認文言「この先，どんなことがあるの？ →」へ変更．上記レビュー結果は変更前の記録であり，本文・補足・アバターは不変．"
+}

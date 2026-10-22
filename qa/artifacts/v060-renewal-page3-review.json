@@ -1,0 +1,141 @@
+{
+  "date": "2026-10-22",
+  "reviewer": "v060_renewal_review（今回の実装とは別担当）",
+  "scope": "設備更新3ページ目の現内容だけを独立確認．本文・図3・補足2問・あなたの返事3件・手続き説明・参考資料・リンクラベルと遷移先の静的整合を対象とする．前2ページの承認は変更しない．",
+  "sourceDeploymentCommit": "a47407ec1fc29dae299d1a36677ff227ac291120",
+  "deployment": {
+    "id": "appgdep_6ad9fd9e72308191858e5b400df2756f",
+    "status": "succeeded（親から受領．本担当は配信実体を再検査していない）"
+  },
+  "targetFiles": [
+    {
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "sha256": "a4ff8853ca5328f143be7c41a4402cbce94443e4e71121617399a3a7c0f88ecd"
+    },
+    {
+      "file": "site/manual/equipment-renewal/style.css",
+      "sha256": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d"
+    }
+  ],
+  "decision": "PASS_CONTENT_SCOPE",
+  "currentDecision": "PASS_CONTENT_SCOPE",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "findings": [],
+  "checks": [
+    {
+      "id": "central-question",
+      "result": "PASS",
+      "detail": "方針決定前でも設置した販売店・施工会社に状態と修理・更新を相談できることを先に回答．設置年・型番・不具合・屋根工事予定を用意し，調査後に残す／替える設備，工事と保証・申請担当を比較する流れが中心の問いに答える．"
+    },
+    {
+      "id": "figure-dialogue",
+      "result": "PASS",
+      "detail": "図3は状況を伝える→現地で確かめる→見積もりを比べるの3段階．後の会話で修理継続と更新，屋根工事，機器・処分・保証まで具体化する．同じ条件の見積比較は各案の工事範囲を合わせる趣旨であり，異なる案を同じ総額にする指示ではない．"
+    },
+    {
+      "id": "referral-scope",
+      "result": "PASS_QUALIFIED_ENQUIRY",
+      "detail": "一括サイトは対応会社を紹介してもらえるか相談窓口で確認する方法と限定．修理だけ・撤去だけは最初に伝えると本文に明記し，参考条件でも事前の対応可否確認を再掲．SP一般紹介サービスと利用規約は単独修理・撤去の紹介保証を支えないが，現本文はそれを事実として主張していない．規約の提案不能の可能性とも矛盾しない．"
+    },
+    {
+      "id": "fallback-question",
+      "result": "PASS",
+      "detail": "紹介不能時の補足でメーカー窓口，JPEAの取外し・適正処理施工業者一覧，太陽光対応の屋根工事会社を用途別に案内．JPEA原文の設置店・屋根工事店・メーカー・一覧という相談先に対応する．一覧へ直接リンクし，JPEAによる紹介保証・個別施工適合の保証とは表現していない．"
+    },
+    {
+      "id": "procedures-question",
+      "result": "PASS_LIMITED_CONFIRMATION",
+      "detail": "設備変更・廃止時のFIT認定及び電力会社への手続き，補助設備の交換・処分条件を個別に確認する説明．すべての交換に同一手続きを課したり，補助金の必ず返還という断定をしていない．JPEAの廃止届・補助金交付元確認，一覧に記載された電力会社・経済産業省申請対応と整合し，工事前に担当を決める行動へ落とす．"
+    },
+    {
+      "id": "reader-replies",
+      "result": "PASS",
+      "detail": "3件とも読者発話として自然．一括サイト確認はTOPの3社カード所在/#map-consultation，ほかの困りごとは/manual/#troubles，ひとまず大丈夫は/manual/へ戻る．案内と移動先が一致し，直接外部申込みへ遷移するとの誤認は生じない．"
+    },
+    {
+      "id": "questions-and-links",
+      "result": "PASS_STATIC",
+      "detail": "補足2問，返事3件を確認．記事内のローカルhref7件は全ファイルが存在し，map-consultationとtroublesのアンカーも実在．前ページ及び各ページ索引のタイトル・現在地は対象ページと一致．"
+    },
+    {
+      "id": "references",
+      "result": "PASS",
+      "detail": "SP「サービス内容・利用規約」のリンク先はabout相当本文と同ページ内の利用規約を含む．「相談窓口」ページには一般相談番号・各サービス番号を含み，連絡方法を確認できる．JPEA撤去注意点の資料は質問の手続き説明を支える．"
+    },
+    {
+      "id": "redundancy",
+      "result": "PASS",
+      "detail": "図は相談の順序，会話は会社がなくなった場合と比較範囲，補足は紹介不能時と手続きに役割が分かれる．長い条件を本線に戻さず，必要な次の行動を確認できる．"
+    },
+    {
+      "id": "style",
+      "result": "PASS_REUSED_STATIC_ONLY",
+      "detail": "共通CSSのSHA256は2ページ目最終確認版と一致．図3で用いるrenewal-options／renewal-optionは既存先行レビューの3案カードと共通．実viewport・見た目・操作の確認は親担当．"
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.solar-partners.jp/manga-36530.html",
+      "type": "サービス提供者の一次情報",
+      "checked": "一般紹介サービス，無料相談から希望確認・紹介・見積比較・任意契約の流れ，同ページ利用規約第5条の導入検討目的，第7条の提案不能の可能性．単独修理・撤去の紹介が可能との明示は確認できない．",
+      "articleUse": "対応可否を先に問い合わせるという限定助言のみ．紹介保証の根拠にはしない．"
+    },
+    {
+      "url": "https://www.solar-partners.jp/contact_information",
+      "type": "サービス提供者の一次情報",
+      "checked": "相談番号を含む各サービス問い合わせ・確認連絡用公式電話番号一覧．",
+      "articleUse": "相談方法の確認先．このページ自体は修理・撤去の受託保証を示さない．"
+    },
+    {
+      "url": "https://www.solar-partners.jp/contents/81170.html",
+      "type": "サービス提供者が自社紹介範囲を説明する一次情報",
+      "checked": "パワコン交換時の他社見積比較の推奨及び新規太陽光・蓄電池検討者への業者紹介．",
+      "articleUse": "これだけでPCS単独交換・修理・撤去のみの紹介を保証することはできず，今回の限定表現が必要．記事未採用の数値や経済効果の断定は検収対象外．"
+    },
+    {
+      "url": "https://www.solar-partners.jp/contents/42356.html",
+      "type": "サービス提供者の公式解説．公的根拠はJPEAでも照合",
+      "checked": "撤去は設置店を優先，廃業時はメーカー・JPEA掲載業者，屋根工事では対応屋根工事店へ相談．現地調査と工事範囲を比べる説明．",
+      "articleUse": "相談内容・工事範囲の整理に対応．自社で撤去のみ紹介すると読み替えない．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/house/waste/",
+      "type": "協会の一次案内",
+      "checked": "設置店・屋根工事店・メーカー・一覧という相談先，撤去前の修理交換相談，FIT廃止届と補助金交付元確認，金具と防水，複数社見積．",
+      "articleUse": "相談先・補足2問・工事範囲の前回PASSを再利用し，今回表示位置と限定文を再照合．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/wp-content/uploads/20260513_allchart.pdf",
+      "type": "協会の一次一覧",
+      "checked": "最終更新2026年5月13日，取外し・適正処理可能な施工業者の一覧で地域別の連絡先を掲載．参考情報であり地域・条件が異なる．",
+      "articleUse": "下の補足質問から原本へ直接遷移．個別の対応や品質を保証する表現なし．"
+    }
+  ],
+  "reusedEvidence": [
+    {
+      "file": "qa/artifacts/v060-renewal-independent-review.json",
+      "scope": "JPEA相談先・認定／補助金確認と一覧の意味に関する先行PASS．今回も一次資料へ限定照合．前2ページの数値・判断は今回再評価しない．"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page2-review.json",
+      "scope": "同一ハッシュの共通CSSの静的確認のみ再利用．"
+    }
+  ],
+  "limits": [
+    "ブラウザ・共有タブを操作していない．PC／360px実表示，リンク操作，質問開閉，保存・フォーカスは親担当．",
+    "ソーラーパートナーズ及び他の一括サイトが特定地域・機種の修理のみ／撤去のみを現在紹介するかは未確認．公式記載から断定できず，記事も問い合わせるよう限定している．",
+    "実際の見積価格，既設機器の適合性，各施工業者の対応能力，個別の法令・電力会社・補助制度の手続き要否は対象外．本文は専門窓口へ個別確認する行動を示す．",
+    "公開配信のcommit/deploymentは親から受領．レビュー対象は記録SHA256のローカル内容．",
+    "人間レビュー完了・本番公開の判断は本担当では行わない．条件付き人間承認の台帳は親担当．"
+  ],
+  "processesStarted": []
+}

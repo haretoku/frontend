@@ -1,0 +1,227 @@
+{
+  "date": "2026-10-22",
+  "reviewer": "v060_renewal_review（追加実装とは別担当）",
+  "scope": "設備更新3ページ目に追加した共通3社カード・初期閉の比較表・TOPへ戻る返事の削除，関連CSS抽出・rendererのintro追加・静的同期差分のみを独立レビュー．本文・質問の内容は直前PASSを再利用．",
+  "sourceDeploymentCommit": "447dc1343542d77a7dbf477312002f7f080e287a",
+  "deployment": {
+    "id": "appgdep_6ada01618970819181caf4d9eb5e173e",
+    "status": "succeeded（親から受領）"
+  },
+  "targetFiles": [
+    {
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "sha256": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d"
+    },
+    {
+      "file": "site/manual/equipment-renewal/consultation/style.css",
+      "sha256": "9121e52dcc796345ddacb6421ff467d770fdece334730663eb15f45db832be1f"
+    },
+    {
+      "file": "site/shared/consultation-providers.css",
+      "sha256": "8cee043f540f3e8855f24fb34498bfe9ee71cf04bf99d0af3dfd3d4c74f7439b"
+    },
+    {
+      "file": "site/map/consultation-view.js",
+      "sha256": "e757849b80339cfc09399b351bc300d6865f31eb2c92e4a88e3184e17d0900f8"
+    },
+    {
+      "file": "site/map/map.css",
+      "sha256": "f904ac260458530f53b174ae948a8d036b507fedd8cc80a2b53268009c4146dc"
+    },
+    {
+      "file": "qa/sync-manual-components.mjs",
+      "sha256": "c229aa12ef76de39528802fb8e89510e3a41ba2a28995e268857c311d2d9844e"
+    }
+  ],
+  "decision": "PASS_CONTENT_SCOPE",
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "RECOMMEND",
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "line": 62,
+      "location": "開いた比較表の見出し直下",
+      "issue": "比較対象は太陽光＋蓄電池の新設だが，その条件は比較表内の閉じた参考資料欄にだけある．更新・修理・撤去の記事では，見積相談や工事未完時保証を既設工事にもそのまま適用できると読み違える余地がある．本文・カード直前に紹介可否の事前確認があるため，MUSTとはしない．",
+      "fix": "このページでは比較表を開いた直後に「比較表は新設時のサービス内容です．更新・修理・撤去の対応は各社に確認してください．」程度の短い注を表示する．TOPと比較表の値を変える必要はない．",
+      "status": "RESOLVED",
+      "resolution": "このページ専用に，比較表を開いた際に見出しと表の間へ新設の対象条件・既設工事への確認を表示した．"
+    }
+  ],
+  "checks": [
+    {
+      "id": "provider-content",
+      "result": "PASS_REUSED_CONTENT",
+      "detail": "会社名・ロゴ・説明・おすすめ・広告開示・ボタン・URL・比較表の9項目と記号はTOPと同じrenderer及びデータを使用．新しい会社評価や優劣・価格を追加していない．"
+    },
+    {
+      "id": "static-sync",
+      "result": "PASS_EXACT",
+      "detail": "consultation-providersマーカー内はrenderConsultationProvidersとrenderProviderComparisonの現出力に完全一致（ビルド時URLを静的/へ正規化）．静的同期スクリプトも同rendererを利用し，マーカーの一意性と順序を検査する． R1対応後はこのページ専用の対象注を挿入した同renderer出力との完全一致を限定再確認．"
+    },
+    {
+      "id": "intro-default",
+      "result": "PASS_DIFF",
+      "detail": "consultation-view.jsのHEAD比差分はintro引数の追加とsafe(intro)の出力のみ．既定文は従前と同じで，TOP・診断の呼出しを変更しない．今回ページは希望工事を紹介可能か窓口でまず確認する文へ上書きする．"
+    },
+    {
+      "id": "scope-and-referral",
+      "result": "PASS",
+      "detail": "本文の修理だけ・撤去だけは最初に伝える説明と，カード前の紹介可否確認を維持し，紹介保証をしていない．新設のサービス比較を既設へ使う際の対象表示だけR1を推奨． R1は対象注を表の直前に表示して解消．"
+    },
+    {
+      "id": "collapsed-comparison",
+      "result": "PASS",
+      "detail": "外側details.consult-provider-comparisonにopen属性はなく初期閉．参考資料の内側detailsも初期閉で，既存の段階的表示を保持．比較表の値はrendererに一致する．"
+    },
+    {
+      "id": "links-and-disclosure",
+      "result": "PASS",
+      "detail": "ソーラーパートナーズとタイナビは採用済み正式広告URLと計測画像を対で保持し，広告・アフィリエイトを明示．グリエネは通常公式リンクと表示．全ボタンは別タブ，noopener noreferrer，no-referrer．広告リンクにはsponsored nofollowを付ける．比較表はincludeImpressions:falseで画像を重複配置しない．"
+    },
+    {
+      "id": "review-tracking-disabled",
+      "result": "PASS_BUILD_OUTPUT",
+      "detail": "現dist-reviewの当該HTMLでA8 URL／a8mat／計測画像がないことを独立確認し，3社公式URLが存在．review configは静的HTMLを公式URLへ置換・A8画像削除し，JSはpreview quote／analyticsへalias．親のbuildログの全配信検証PASSを再利用し，配信全体を再走査しない．"
+    },
+    {
+      "id": "ids-and-references",
+      "result": "PASS",
+      "detail": "当該HTML全体の重複ID0件，headers／aria-labelledbyの参照先不足0件．renewal-接頭辞でTOPのmap-と分離し，表セルと各見出しの対応を保持．"
+    },
+    {
+      "id": "reader-response",
+      "result": "PASS",
+      "detail": "TOPへの「一括見積もりサイトを確認したい」は削除され，ほかの気になること(/manual/#troubles)・ひとまず大丈夫(/manual/)の2件を維持．既存補足2問も維持し，記事内カードとの重複導線を解消する．"
+    },
+    {
+      "id": "css-extraction",
+      "result": "PASS_STATIC",
+      "detail": "map.css差分から抽出した関連70行が全て共通CSSに存在し欠落0件．760pxのmedia条件と1列カード／表の規則を保持．map.css冒頭で共通CSSをimportし，記事は共通CSS→ページ固有CSSの順で読み込む．ページ固有CSSは既存記事表のnowrap等を上書きして通常折返しにする．"
+    },
+    {
+      "id": "existing-tests-and-build",
+      "result": "PASS_REUSED_LOGS",
+      "detail": "親のproviders-tests.logは既存9件pass・fail0，providers-build.logはVite build成功と確認用配信検証PASS．同じ対象の再実行はしていない．"
+    }
+  ],
+  "reusedEvidence": [
+    {
+      "file": "qa/artifacts/v060-renewal-page3-review.json",
+      "sha256": "055356fb15da28558ba453409cd0e8e3b44221efbc1983b14fb51e8683cd38bf",
+      "scope": "本文・図3・2質問の内容と一次根拠PASSを再利用．先行JSONは変更しない．"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page3-providers-tests.log",
+      "sha256": "ff4ccfb259227b44618de3e26050428dc548c040329b647a0a1057f3724504de",
+      "scope": "9既存テストのPASS記録．"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page3-providers-build.log",
+      "sha256": "a9a01cfbbdcb119512f3725c31eba46613ae74fe8e6cb0005e070b67e5eb1973",
+      "scope": "ビルド及び広告計測無効の配信検証PASS記録．"
+    }
+  ],
+  "limits": [
+    "PC／スマホ実表示と操作は未実施．親が担当し，本担当はコード・生成結果の静的確認だけを行う．",
+    "各社が特定設備の更新・修理のみ・撤去のみを紹介可能かは未確認．記事は事前照会としており，今回も紹介可能との事実認定はしない．",
+    "既存比較表の9項目の一次情報を今回全件再調査していない．内容不変の既存renderer・データと先行検収を再利用．",
+    "source commit／deploymentは親から受領．ローカルGitに配信commitはなく，commit内容を直接比較していない．記録した現ファイルのハッシュで対象を固定．",
+    "人間レビューOKの台帳記録・本番公開は本担当の対象外．"
+  ],
+  "processesStarted": [],
+  "initialDecision": "PASS_WITH_RECOMMENDATION",
+  "initialCounts": {
+    "MUST": 0,
+    "RECOMMEND": 1,
+    "NITS": 0
+  },
+  "currentDecision": "PASS_CONTENT_SCOPE",
+  "initialTargetFiles": [
+    {
+      "file": "site/manual/equipment-renewal/consultation/index.html",
+      "sha256": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d"
+    },
+    {
+      "file": "site/manual/equipment-renewal/consultation/style.css",
+      "sha256": "9121e52dcc796345ddacb6421ff467d770fdece334730663eb15f45db832be1f"
+    },
+    {
+      "file": "site/shared/consultation-providers.css",
+      "sha256": "8cee043f540f3e8855f24fb34498bfe9ee71cf04bf99d0af3dfd3d4c74f7439b"
+    },
+    {
+      "file": "site/map/consultation-view.js",
+      "sha256": "e757849b80339cfc09399b351bc300d6865f31eb2c92e4a88e3184e17d0900f8"
+    },
+    {
+      "file": "site/map/map.css",
+      "sha256": "f904ac260458530f53b174ae948a8d036b507fedd8cc80a2b53268009c4146dc"
+    },
+    {
+      "file": "qa/sync-manual-components.mjs",
+      "sha256": "c229aa12ef76de39528802fb8e89510e3a41ba2a28995e268857c311d2d9844e"
+    }
+  ],
+  "followupReviews": [
+    {
+      "date": "2026-10-22",
+      "scope": "R1の短い対象条件・ページCSS・静的同期だけ再確認．本文と比較表の値・カード・リンクのPASSは再利用．",
+      "decision": "PASS_CONTENT_SCOPE",
+      "targetFiles": [
+        {
+          "file": "site/manual/equipment-renewal/consultation/index.html",
+          "sha256": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d"
+        },
+        {
+          "file": "site/manual/equipment-renewal/consultation/style.css",
+          "sha256": "9121e52dcc796345ddacb6421ff467d770fdece334730663eb15f45db832be1f"
+        },
+        {
+          "file": "site/shared/consultation-providers.css",
+          "sha256": "8cee043f540f3e8855f24fb34498bfe9ee71cf04bf99d0af3dfd3d4c74f7439b"
+        },
+        {
+          "file": "site/map/consultation-view.js",
+          "sha256": "e757849b80339cfc09399b351bc300d6865f31eb2c92e4a88e3184e17d0900f8"
+        },
+        {
+          "file": "site/map/map.css",
+          "sha256": "f904ac260458530f53b174ae948a8d036b507fedd8cc80a2b53268009c4146dc"
+        },
+        {
+          "file": "qa/sync-manual-components.mjs",
+          "sha256": "c229aa12ef76de39528802fb8e89510e3a41ba2a28995e268857c311d2d9844e"
+        }
+      ],
+      "checks": [
+        {
+          "result": "PASS",
+          "detail": "追加段落は外側の比較表detailsを開いた直後，内側参考資料detailsの外・table直前に存在する．対象を太陽光＋蓄電池の新設に限定し，更新・修理・撤去の対応と支援条件は各社確認とする．"
+        },
+        {
+          "result": "PASS_EXACT_DIFF",
+          "detail": "HTMLから追加段落を除くと元SHA256 5e2e3cfb6aa3fd0e15bdbe4f6e7cff3ffc92c142181d765115f1d50664d600f2へ完全一致．ページCSSから追加1行を除くと元SHA256 e1e8d4321de94678da0d04e1e82a59ef0638d581a09add2b017739bd3d315ca3へ完全一致．他の内容のPASSを再利用．"
+        },
+        {
+          "result": "PASS",
+          "detail": "静的同期は既存共通比較renderer出力にこの段落を追加したページ専用renewalComparisonを利用し，現HTMLと完全一致．共通renderer・比較データ・共通CSSは不変．段落はfont-size13px・line-height1.9の通常表示．"
+        }
+      ],
+      "openCounts": {
+        "MUST": 0,
+        "RECOMMEND": 0,
+        "NITS": 0
+      }
+    }
+  ]
+}

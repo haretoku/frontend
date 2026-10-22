@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-21",
+  "status": "prototype; independent and human review pending",
+  "sources": [
+    {
+      "url": "https://www.jpea.gr.jp/faq/583/",
+      "claim": "パネルは年数で一律に突然使用不可とはならない．耐用年数と保証・故障時期を区別する．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/house/longuser/",
+      "claim": "状態に応じた点検・修理．"
+    },
+    {
+      "url": "https://www.jpea.gr.jp/house/waste/",
+      "claim": "修理交換の検討，撤去相談先，費用区分，防水，認定・補助金の確認．"
+    },
+    {
+      "url": "https://jp.sharp/sunvista/support/faqs/answer.html",
+      "claim": "既設システムの構成を確認したうえで提案する旨と，他社製パネルの接続に条件がある旨を確認．適合する組合せを施工会社・メーカーに確認する説明へ使用．"
+    },
+    {
+      "url": "https://solar-panel.jp/contents/solar-panel-replacement/",
+      "claim": "一社の掲載目安：4kW載せ替え75〜150万円．パワコン同時交換は別に約35万円．税区分・足場・撤去処分の範囲は未確認と明記．1枚交換の合計は内訳との整合が不明なため採用しない．"
+    },
+    {
+      "url": "https://solar-panel.jp/contents/solar-panel-dismantling-cost/",
+      "claim": "10枚撤去：9万円＋5万円＋15.1〜18.84万円＝29.1〜32.84万円．掲載丸め値29〜33万円を表示．同社足場施工が単価条件．金具等別途，税区分明記なし．"
+    },
+    {
+      "url": "/guides/solar-maintenance-cost/",
+      "claim": "既存診断は新設から30年．30年後の撤去再設置は次の設置費用扱いで次の30年は未計算．計算・パラメータは変更しない．"
+    }
+  ]
+}

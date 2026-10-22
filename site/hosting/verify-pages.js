@@ -1,3 +1,4 @@
+import {manualPages} from '../manual/routes.js';
 import {journeyRoutes} from '../map/routes.js';
 import { analyticsConfig } from "../shared/analytics-config.js";
 import { analyticsAllowed } from "../shared/analytics-core.js";
@@ -17,14 +18,15 @@ const relative = files.map(file => file.slice(output.length + 1).replaceAll("\\"
 // 記事別OGはcatalogで採用した固定URLだけを公開し，選外案を混ぜない．
 const selectedGuideShares=new Set(articles.filter(a=>a.shareImage).map(a=>a.shareImage.slice(1)));
 assert(relative.filter(p=>p.startsWith("assets/og-guide-")).every(p=>selectedGuideShares.has(p)), "未採用の記事共有画像が混入しています");
-assert(relative.every(path => /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|favicon\.png|og-home-photo-20260926\.jpg|og-step-map-20261017(?:-v034)?\.png|og-image\.png|og-support-shock-burden\.png|og-self-consumption-v040\.png)$/.test(path)), "未承認の配信ファイルがあります");
+const manualFiles=new Set(manualPages.map(page=>page.path.slice(1)+"index.html"));
+assert(relative.every(path => manualFiles.has(path) || /^(?:assets\/[^/]+|(?:pages|simulator)\/[^/]+\.html|(?:guides|data|press)\/(?:[^/]+\/)?index\.html|index\.html|404\.html|sitemap\.xml|robots\.txt|CNAME|\.nojekyll|favicon\.png|og-home-photo-20260926\.jpg|og-step-map-20261017(?:-v034)?\.png|og-image\.png|og-support-shock-burden\.png|og-self-consumption-v040\.png)$/.test(path)), "未承認の配信ファイルがあります");
 assert(!relative.some(path => /(?:\.map$|fixture|audit|__local|\.openai|worker|wrangler|hosting\.json)/i.test(path)), "開発用ファイルが混入しています");
 for (const retired of ['solar/index.html', 'guides/solar-profit-conditions/index.html', ...['electricity-sales','costs-maintenance','subsidies','disaster','quotes-contractors'].map(name => `pages/${name}.html`)]) {
   assert(!relative.includes(retired), `廃止URLが配信されています: ${retired}`);
 }
 const sitemap = await readFile(resolve(output, "sitemap.xml"), "utf8");
 const urls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map(m => m[1]);
-assert.equal(urls.length, 16+Object.keys(journeyRoutes).length-1);
+assert.equal(urls.length, 16+Object.keys(journeyRoutes).length-1+manualPages.length);
 for(const route of Object.values(journeyRoutes)){
   assert(urls.includes(`https://haretoku.jp${route}`));
   const html=await readFile(resolve(output,'.'+route,'index.html'),'utf8');
@@ -45,14 +47,15 @@ for (const url of urls) {
     assert(html.includes('<title>はれトク｜わが家の太陽光・蓄電池えらび</title>'));
     assert(html.includes('property="og:title" content="はれトク｜わが家の太陽光・蓄電池えらび"'));
   }
+  const manualPage=manualPages.find(page=>page.path===path);
   const news = path === '/guides/electricity-support-end/';
   const selfConsumption = path === '/guides/self-consumption/';
   const guideArticle=articles.some(article=>article.href===path);
   const journeyArticle=Object.entries(journeyRoutes).some(([id,route])=>!['map','estimate'].includes(id)&&route===path);
-  assert(html.includes('property="og:type" content="' + (news||journeyArticle||guideArticle ? 'article' : 'website') + '"'), `og:type: ${path}`);
+  assert(html.includes('property="og:type" content="' + (news||journeyArticle||guideArticle||manualPage?.article ? 'article' : 'website') + '"'), `og:type: ${path}`);
   assert(html.includes(`property="og:url" content="${url}"`), `og:url: ${path}`);
   const articleShare=articles.find(article=>article.href===path)?.shareImage;
-  const sharePath=articleShare || '/' + (news ? 'og-support-shock-burden.png' : selfConsumption ? 'og-self-consumption-v040.png' : 'og-step-map-20261017-v034.png');
+  const sharePath=manualPage?.shareImage || articleShare || '/' + (news ? 'og-support-shock-burden.png' : selfConsumption ? 'og-self-consumption-v040.png' : 'og-step-map-20261017-v034.png');
   assert(html.includes(`property="og:image" content="https://haretoku.jp${sharePath}"`),`共有画像：${path}`);
   if(articleShare)assert((await readFile(resolve(output,'.'+articleShare))).equals(await readFile(resolve(root,'site/shared/assets',articleShare.split('/').at(-1)))),`記事共有画像の一致：${path}`);
   assert(html.includes('property="og:image:type" content="image/png"'));

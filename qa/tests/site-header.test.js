@@ -40,7 +40,10 @@ test('MAP入口をメニューへまとめ，見直す入口を重複させな�
   const nav=header.match(/<nav aria-label="主要メニュー"[\s\S]*?<\/nav>/)[0];
   const [outsideMenu,insideMenu]=nav.split('<div id="menu"');
   assert(!outsideMenu.includes('class="map-link"'));
-  assert.match(insideMenu,/<a class="map-link" href="\/" aria-current="page">太陽光えらびマップ<\/a>/);
+  assert(insideMenu.includes('<p class="menu-audience">太陽光を考えている方へ</p>'));
+  assert(insideMenu.includes('<a class="map-link" href="/" aria-current="page"><span class="menu-primary-title">太陽光えらびマップ</span></a>'));
+  assert(insideMenu.includes('<a class="map-link" href="/guides/"><span class="menu-primary-title">太陽光えらびの詳しいガイド</span></a>'));
+  assert.equal((insideMenu.match(/href="\/guides\/"/g)??[]).length,1);
   assert(!nav.includes('わが家のプランを見直す'));
   assert.match(header,/aria-label="はれトクの太陽光えらびマップ"/);
 });
@@ -60,7 +63,8 @@ test('全表示ページが共通ヘッダーと確認画面を1個ずつ持ち�
     assert.equal((html.match(/src="\/shared\/site-header-entry.js"/g)??[]).length,html.includes('src="/map/journey.js"')?0:1,path);
     count++;
   }
-  assert.equal(count,34);
+  assert.equal(count,41);
+  for(const route of ['manual/index.html','manual/getting-started/index.html','manual/getting-started/milestones/index.html','manual/getting-started/troubles/index.html','manual/equipment-renewal/index.html','manual/equipment-renewal/costs/index.html','manual/equipment-renewal/consultation/index.html']) assert.equal(headerSection(route),'manual');
   assert.equal(headerSection('guides/electricity-support-end/index.html'),'press');
   const press=await readFile(new URL('press/index.html',root),'utf8');
   assert(press.includes('data-guide-groups="press"'));

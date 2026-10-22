@@ -1,3 +1,4 @@
+import {manualPages} from '../manual/routes.js';
 import {journeyRoutes,journeyPageId} from '../map/routes.js';
 import { quoteMaterial } from './quote-config.js';
 import {consultationProviderForUrl} from '../map/consultation-view.js';
@@ -5,9 +6,10 @@ const ORIGIN = "https://haretoku.jp";
 const QUOTE_PLACEMENTS = new Set(['fixed_bar', 'article_body', 'diagnosis_result', 'map_consultation', 'map_comparison', 'article_comparison']);
 const CONSULT_PLACEMENTS = new Set(['map', 'article', 'map_comparison', 'article_comparison']);
 const PAGES = Object.freeze({
+  ...Object.fromEntries(manualPages.map(page=>[page.path,{id:page.id,title:"太陽光トリセツ",article:page.article}])),
   ...Object.fromEntries(Object.entries(journeyRoutes).filter(([id])=>!['map','estimate'].includes(id)).map(([id,path])=>[path,{id:`guide_${id.replaceAll('-','_')}`,title:"太陽光と蓄電池のガイド",article:true}])),
   "/": { id: "home", title: "はれトク", article: false },
-  "/guides/": { id: "guides", title: "はれトクガイド", article: false },
+  "/guides/": { id: "guides", title: "太陽光えらびの詳しいガイド", article: false },
   "/press/": { id: "press", title: "プレスリリース", article: false },
   "/simulator/": { id: "diagnosis", title: "はれトク診断", article: false },
   "/data/": { id: "data", title: "はれトクデータ", article: false, data: true },
@@ -111,7 +113,7 @@ export function createAnalytics({ config, productionBuild, window: win, document
         const consultPlacement = link.getAttribute('data-consult-placement');
         const provider = consultationProviderForUrl(providerId,target.href);
         if (provider && CONSULT_PLACEMENTS.has(consultPlacement)
-          && (consultPlacement === 'map' || consultPlacement === 'map_comparison' ? path === '/' : page.article || path === '/simulator/')) {
+          && (consultPlacement === 'map' || consultPlacement === 'map_comparison' ? path === '/' : page.article || path === '/simulator/' || path === '/manual/')) {
           event('consultation_click', undefined, {provider_id:provider.id, consultation_placement:consultPlacement});
           // 広告成果の既存イベントも維持する．相談全社のイベントとは別指標．
           if (provider.id === 'solar-partners' && target.href === provider.url) event('quote_click', consultPlacement.endsWith('_comparison') ? consultPlacement : consultPlacement === 'map' ? 'map_consultation' : 'diagnosis_result');
