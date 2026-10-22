@@ -10,11 +10,6 @@
 .guide-article .renewal-tradeoffs dt { margin:0 0 3px; font-size:12px; font-weight:700; color:#476950; }
 .guide-article .renewal-tradeoffs dd { margin:0; }
 .guide-article .renewal-figure figcaption { margin-top:10px; font-size:12px; color:#647268; line-height:1.9; }
-.guide-article article .renewal-table { width:100%; max-width:100%; table-layout:fixed; }
-.guide-article article .renewal-table .renewal-label { width:26%; }
-.guide-article article .renewal-table .renewal-price-label { width:38%; }
-.guide-article article .renewal-table th,.guide-article article .renewal-table td { padding:14px 12px; white-space:normal; text-align:left; vertical-align:top; overflow-wrap:anywhere; font-size:14px; line-height:1.9; }
-.guide-article .renewal-table small { font-size:12px; }
 .guide-article .renewal-cost-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
 .guide-article .renewal-cost-card { min-width:0; padding:20px 16px; border:1px solid #d5dfd4; border-radius:16px; background:#fff; text-align:center; }
 .guide-article .renewal-cost-art { width:120px; height:96px; margin:0 auto 10px; }
@@ -34,7 +29,6 @@
 .guide-article .renewal-breakdown dt,.guide-article .renewal-breakdown dd { margin:0; }
 .guide-article .renewal-breakdown dd { font-weight:700; white-space:nowrap; }
 .guide-article .renewal-breakdown small { font-size:11px; font-weight:400; }
-.guide-article .renewal-cost-extra .renewal-cost-component { margin-top:8px; font-size:13px; }
 .guide-article .renewal-cost-extra .renewal-cost-condition { margin-top:8px; font-size:11px; color:#647268; }
 .guide-article .renewal-sources { margin-top:28px; font-size:12px; line-height:1.9; color:#647268; }
 .guide-article .renewal-sources summary { cursor:pointer; min-height:36px; padding:8px 0; }
@@ -53,5 +47,4 @@
  .guide-article .renewal-option h2 { font-size:16px; }
  .guide-article .renewal-option p { font-size:13px; }
  .guide-article .renewal-tradeoffs { grid-column:2; font-size:13px; margin-top:12px; padding-top:10px; }
- .guide-article article .renewal-table th,.guide-article article .renewal-table td { padding:11px 8px; font-size:12px; }
 }

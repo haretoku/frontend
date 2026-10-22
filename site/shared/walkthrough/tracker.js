@@ -16,10 +16,10 @@ if (reset) {
 // 既存MAPの保存・判定は読み書きしない．
 const pathname = location.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/');
 const complete = id => completeMission(id);
-function whenVisible(element, callback, threshold = 0.5, eligible = () => true) {
+function whenVisible(element, callback, threshold = 0.5) {
   if (!element) return;
   const observer = new IntersectionObserver(entries => {
-    if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= threshold) && eligible()) {
+    if (entries.some(entry => entry.isIntersecting && entry.intersectionRatio >= threshold)) {
       callback();
       observer.disconnect();
     }

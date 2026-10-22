@@ -311,6 +311,47 @@
         "実装・本文・リンク等の意味変更はないため，当初の全件検査・静的構造・計測モックPASSを再利用し再実行しない．"
       ],
       "candidateCommit": "5da8a5f5956e8f8763a050e4ed8204fcc6ba9905"
+    },
+    {
+      "date": "2026-10-22",
+      "scope": "公開前の未使用コード3ファイル整理だけを独立確認",
+      "result": "PASS_BEHAVIOR_UNCHANGED",
+      "baseCommit": "bc268512bdddf0d8127b794b52c281e67072f549",
+      "files": {
+        "site/shared/walkthrough/reading.js": "193835ae74c031d115dbbdd95aa855017b611b62f043ca6c5df36900f3fdb63b",
+        "site/shared/walkthrough/tracker.js": "bc82b694842e10068e180b620e5e6b8753a040186e7ffc022bf5826d81301e53",
+        "site/manual/equipment-renewal/style.css": "fe5cfc11991bde0e2dea4624299b1952cc33039d93c69a414e526b98b17ab808"
+      },
+      "counts": {
+        "MUST": 0,
+        "RECOMMEND": 0,
+        "NITS": 0
+      },
+      "checks": [
+        {
+          "file": "site/shared/walkthrough/reading.js",
+          "result": "PASS_EXACT_COMMENT_ONLY",
+          "detail": "行コメントを除くとHEAD版と完全一致．最新の更新3ページ読了＝節目読了という合意にコメントを修正しただけ．"
+        },
+        {
+          "file": "site/shared/walkthrough/tracker.js",
+          "result": "PASS_EXACT_UNUSED_PARAMETER_REMOVAL",
+          "detail": "HEAD版からeligible既定引数とeligible()呼出しの2文字列を除くと現ファイルに完全一致．whenVisibleは非exportのローカル関数で呼出しは2箇所とも2引数のみ．常にtrueを返す副作用なし既定関数の削除であり，閾値0.5・読了・observer解除の判定は不変．"
+        },
+        {
+          "file": "site/manual/equipment-renewal/style.css",
+          "result": "PASS_EXACT_7_UNUSED_RULES_ONLY",
+          "detail": "renewal-table系6規則とrenewal-cost-component1規則を除くとHEAD版と完全一致．site配下のHTML/JS/CSSへ旧4クラス名の参照が残らないことをrgで確認．使用中のcost-grid・cost-card・breakdown・モバイル規則は不変．"
+        }
+      ],
+      "reused": {
+        "tests": "実装担当の関連25検査PASSを再利用し，同一範囲のテストを繰り返さない．",
+        "content": "本文・図・数値・保存データ・使用中の見た目は不変のため，既存内容/配信/実画像のPASSを再利用．"
+      },
+      "limits": [
+        "今回の3ファイル以外の整理候補・削除ファイルの妥当性を再検収したものではない．",
+        "本番HTTP検査はまだ開始していない．公開成功通知と確定SHAを受領してからD02を実施する．"
+      ]
     }
   ]
 }

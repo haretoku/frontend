@@ -1,7 +1,7 @@
 {
   "date": "2026-10-22",
   "version": "0.6.0",
-  "status": "release candidate; not published",
+  "status": "publication authorized; cleanup checked; workflow pending",
   "previewSource": "926430ac5b865e54a4b392079a656b55c36538af",
   "rollbackCommit": "948f8d192f4cd20f1a92ccccc5eb93628a135598",
   "source": [
@@ -11,7 +11,7 @@
     },
     {
       "path": "CHANGELOG.md",
-      "sha256": "2207e703b3e85961ff39d9dcb3b7eae1fd96f80994ef293ba53ee663b35d88e7"
+      "sha256": "c5c36b0f559ea15fbadd28a8cba3afa2b674cff1b5e5c09c501d285e8c8b4329"
     },
     {
       "path": "package.json",
@@ -23,7 +23,7 @@
     },
     {
       "path": "qa/README.md",
-      "sha256": "5061a774bfb71f701f93baaea589f6d274b65c87ef036a4ac5ee42b6ece08a3f"
+      "sha256": "1cbdaf1c964ec8acfa91e220b118a205cbc5caaa1296685d8a59f12c6f1f6dea"
     },
     {
       "path": "qa/release-checklist.md",
@@ -235,7 +235,7 @@
     },
     {
       "path": "site/manual/equipment-renewal/style.css",
-      "sha256": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d"
+      "sha256": "fe5cfc11991bde0e2dea4624299b1952cc33039d93c69a414e526b98b17ab808"
     },
     {
       "path": "site/manual/getting-started-illustration.svg",
@@ -379,7 +379,7 @@
     },
     {
       "path": "site/shared/walkthrough/reading.js",
-      "sha256": "83e8d7435afa4870b1e7c58f321525fbdc4df7a6143c0562f8d8782103f8a95f"
+      "sha256": "193835ae74c031d115dbbdd95aa855017b611b62f043ca6c5df36900f3fdb63b"
     },
     {
       "path": "site/shared/walkthrough/state.js",
@@ -387,7 +387,7 @@
     },
     {
       "path": "site/shared/walkthrough/tracker.js",
-      "sha256": "786f76c0897602777aa0ffc0d438384df7371a1dae90e13751f307dc4108b9ac"
+      "sha256": "bc82b694842e10068e180b620e5e6b8753a040186e7ffc022bf5826d81301e53"
     },
     {
       "path": "site/simulator/index.html",
@@ -417,11 +417,7 @@
     },
     {
       "path": "404.html",
-      "sha256": "b4e75d64b9e5fb0ec2f7bfbfd274904d00d35ce9a1f1ae83d6662a3081f9ec0c"
-    },
-    {
-      "path": "CNAME",
-      "sha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e"
+      "sha256": "43eec46294493e2b89654b4b493b3df6895934a6f9984544778847afdb5efcf0"
     },
     {
       "path": "assets/analytics-BUBPSZHq.js",
@@ -432,12 +428,12 @@
       "sha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3"
     },
     {
-      "path": "assets/article-solar-economics-cumulative-DefzOuOL.svg",
-      "sha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6"
-    },
-    {
       "path": "assets/article-solar-economics-cumulative-compact-CIGTExUV.svg",
       "sha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7"
+    },
+    {
+      "path": "assets/article-solar-economics-cumulative-DefzOuOL.svg",
+      "sha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6"
     },
     {
       "path": "assets/assets-wVBih1br.js",
@@ -464,8 +460,8 @@
       "sha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117"
     },
     {
-      "path": "assets/data-subsidies-index-DNJ4caO2.js",
-      "sha256": "1091188839122555ede475200d46d58b4ec6f7aea831e7a03b807ac1884be907"
+      "path": "assets/data-subsidies-index-BL4xE5rd.js",
+      "sha256": "82ec0e7e7d78ab878662b669a4d925b094690f5f37cf70e73abb2bd105a4b69d"
     },
     {
       "path": "assets/detail-guide-CgQSBg9B.css",
@@ -488,36 +484,36 @@
       "sha256": "ed806f5bc0f17eb7c1ad7bac657dabcf747fff16fcdd43d6bc77837effb3f484"
     },
     {
+      "path": "assets/entry-BRpxFgIG.js",
+      "sha256": "388ef666ac76370eca731038410566c2a5bce12ad7822fd61e74a0d494879463"
+    },
+    {
       "path": "assets/entry-ChgWZR9D.css",
       "sha256": "72c5d22a234ff3dc72ebd8f355a31ca56ba324d2ca84401f109ab42cfdc5ffb9"
     },
     {
-      "path": "assets/entry-CsdLZixT.js",
-      "sha256": "830bbcd27cb1d935bdb1ed78f6536985bc929e49e163425cb8fd28824f765119"
-    },
-    {
-      "path": "assets/entry-DGq9XUYx.js",
-      "sha256": "feecbc61a72c254dd4233afbc9687e9947fcf56d479eb89110ad02d3de7b8ad5"
+      "path": "assets/entry-UobnqAeu.js",
+      "sha256": "959c38ee26e4a459725161b884e80cdd809ac4f1772d638b77c6d47365417a64"
     },
     {
       "path": "assets/favicon-BmMVSVLw.svg",
       "sha256": "558e837accce56ac69644f56c744790e4a342faa2f4de65bc7eb47ac71eb5e94"
     },
     {
-      "path": "assets/guides-C544OVPW.js",
-      "sha256": "c9d01fa07d7652dbefad7757974c99912bf7575aca3fc5d4adfaf48895ae090c"
-    },
-    {
-      "path": "assets/guides-Re8FBS7e.css",
-      "sha256": "2338593832b652ae3c2462a80177bca63f7462d1b8632cad3543104e96ebe057"
-    },
-    {
-      "path": "assets/guides-electricity-support-end-index-D4RkiFM8.js",
-      "sha256": "addc451e03d48c7d67f1a9640335f5f826dcd51dff3261834c89bbf413d6ff2a"
+      "path": "assets/guides-DwUJrXYW.js",
+      "sha256": "f2cf690e82757786ccab832f2d12ab109f6c63ff4faa08055afb00a5dbe60212"
     },
     {
       "path": "assets/guides-electricity-support-end-index-DK-szL2n.css",
       "sha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b"
+    },
+    {
+      "path": "assets/guides-electricity-support-end-index-DK74h4Q6.js",
+      "sha256": "6afb3f0f240649bf125edc7861c883bbef2ee0efad96823f728d56547adf8041"
+    },
+    {
+      "path": "assets/guides-Re8FBS7e.css",
+      "sha256": "2338593832b652ae3c2462a80177bca63f7462d1b8632cad3543104e96ebe057"
     },
     {
       "path": "assets/guides-self-consumption-index-Oslr8jQX.css",
@@ -552,8 +548,8 @@
       "sha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4"
     },
     {
-      "path": "assets/journey-C63KdCCz.js",
-      "sha256": "9d837b8aef691a32cf29bda10e8f863f8fb6e9bc30def19d3ffb98f9cf1e0657"
+      "path": "assets/journey-BWwQnKOu.js",
+      "sha256": "dad27bd9e5d186a58352f9f857e9668a98d45d9800aa759120ed73adefa6c52e"
     },
     {
       "path": "assets/journey-CAZk8pFz.css",
@@ -568,12 +564,12 @@
       "sha256": "8736d7431700def70635bd49cbbc81bfc0ea6b04ccc5e2664f295e605ee5690d"
     },
     {
-      "path": "assets/manual-index-CcPEb2ZA.js",
-      "sha256": "6da17d52a81f0e1a4a697e8139f5e2f7debe25436a2c511e562c5a83e1f389f0"
-    },
-    {
       "path": "assets/manual-index-Cw0FJBHy.css",
       "sha256": "9e7f0212b0184582f7d5f7090483ea0100fe96fbc1f2fedba6070c6cc8a494d4"
+    },
+    {
+      "path": "assets/manual-index-piVqDHiC.js",
+      "sha256": "f8e4ebe518ce2b6c0fa53d94039584350b572ada5f5c50623d0d6aba4f305c8b"
     },
     {
       "path": "assets/metadata-D8VIoK63.json",
@@ -636,12 +632,12 @@
       "sha256": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599"
     },
     {
-      "path": "assets/pages-calculation-method-BNRa9Hn-.js",
-      "sha256": "dbc654884a8d89519615b6e3df051adeef6f77d55ebd17b0d2800ad672d88d8b"
-    },
-    {
       "path": "assets/pages-calculation-method-FO3eh5vu.css",
       "sha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9"
+    },
+    {
+      "path": "assets/pages-calculation-method-wRtgT__m.js",
+      "sha256": "846add2e925021cc6092c9243c198b21c0b7f7edd952d8096ad8c011c62ce857"
     },
     {
       "path": "assets/pawn-female-DSZs4HJW.png",
@@ -664,8 +660,8 @@
       "sha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48"
     },
     {
-      "path": "assets/site-header-entry-BMepWNwA.js",
-      "sha256": "1166fa925a73ea45ff0d96bc7a6a4b095ef88edd920c908fa8ba5df1d2433382"
+      "path": "assets/site-header-entry-B7pGwjIz.js",
+      "sha256": "724dee22943cb213655de5f4525d722289a977c8fb68bc67427db222d03a3d40"
     },
     {
       "path": "assets/solar-partners-D00TnDtz.png",
@@ -676,8 +672,8 @@
       "sha256": "a7650527c195cf27da2f401422d8fce5ee3d51141cb3e48880e504fed9e3f19a"
     },
     {
-      "path": "assets/style-BLkeAMic.css",
-      "sha256": "fa6eb727614a77d30cade1522d41fe382377b49cbe3cf7cac4fba05befdfe9e6"
+      "path": "assets/style-BDpO0ne3.css",
+      "sha256": "bf7aaf644f37d543308536c66c040a1be7b76a5c2e77f640d8483f417a4c6815"
     },
     {
       "path": "assets/support-shock-burden-CfPq4i2Y.png",
@@ -692,12 +688,12 @@
       "sha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496"
     },
     {
-      "path": "assets/support-shock-daily-DdFQA0Ah.svg",
-      "sha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
-    },
-    {
       "path": "assets/support-shock-daily-compact-DPcvJas5.svg",
       "sha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4"
+    },
+    {
+      "path": "assets/support-shock-daily-DdFQA0Ah.svg",
+      "sha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
     },
     {
       "path": "assets/support-shock-daily.png",
@@ -756,12 +752,16 @@
       "sha256": "52c3887d06417cebde6c54c813a0c686f9e7a618b8e134eb51c7b5c9d00344dc"
     },
     {
+      "path": "CNAME",
+      "sha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e"
+    },
+    {
       "path": "data/index.html",
-      "sha256": "3c3eee140f8f3428a70c00276ef14415f2120a8e2c8c1995f813bb6e86e1e98f"
+      "sha256": "c20365512072ecc3d2daed2fcdd3f6c4f17b2facedb91928d501a633e8877fbc"
     },
     {
       "path": "data/subsidies/index.html",
-      "sha256": "1dccc862c0af2ffff0725f1af4127a6363e68792769e50c2cb0c9f8743941f34"
+      "sha256": "39681f10f244469969d2804a51fe074302af6efad2cad4c41f29f90481fbb44f"
     },
     {
       "path": "favicon.png",
@@ -769,139 +769,139 @@
     },
     {
       "path": "guides/choosing-installer/index.html",
-      "sha256": "3610deab5cb7e58fa0c51ddc7d441c4670ee8b94611b32ffd6dae38a94af4630"
+      "sha256": "b0a0d3266d860fa78c6ea177bcea0698703affc95bba0533448d5391f631796f"
     },
     {
       "path": "guides/consultation-preparation/index.html",
-      "sha256": "dec8e49b5a1300aa3ffa305b2f416afd597770200a79d26a3f867303e3c53c71"
+      "sha256": "b9b7e0a160e30c800be08e08f7b08f33a9022afd15ebbcd5f8df8b655022b448"
     },
     {
       "path": "guides/disaster-preparedness/index.html",
-      "sha256": "577a5c896e11e7ef0b91d135e6efafc29cb5200a96a426c5118a4f125f80bfc8"
+      "sha256": "370e5425a90cbad0bf129d37d29fee1e53c3f45c9d1bcac330028c27a973ca4e"
     },
     {
       "path": "guides/disaster/index.html",
-      "sha256": "d8ba451fde89ccdacf2f8c600bb3efaa6ac7f40a8eb1465e4288e36d19713fca"
+      "sha256": "48a0e5943be6be996c1c2ed170dfc9d4ab59b9c4625f3a743dfab16f7b1a0fe7"
     },
     {
       "path": "guides/electricity-support-end/index.html",
-      "sha256": "2f6c95dbbdbafecc9fd6be7de95eb43c7f1b3a7b2b5a8fe9d63ac031dbfb4034"
+      "sha256": "837325dd90e394ec1b0799e282f18bab6838ed307c8dd7e4b766860c6898de66"
     },
     {
       "path": "guides/equipment-maintenance/index.html",
-      "sha256": "ad8cc405fea467b9778750135fa4fb4ef78a090ce7c7659d64907181120e1ec3"
+      "sha256": "a79b2c7e2cd315dfd5fafb06744032c2e406a71a6db68193162ce725346b2052"
     },
     {
       "path": "guides/home-battery/index.html",
-      "sha256": "755d373b449c0f0459a3202effddc6fefa3ba3b7ba3038b123c6498197b27b02"
+      "sha256": "0f72c8cb4342743c7d11bc6145a83a6c3a5e0175d807593fb58235a33b01e7d3"
     },
     {
       "path": "guides/home-survey/index.html",
-      "sha256": "8fd4c827467c7cd2018bf466f667066a0c0ed577b4805f62361ac8780933995d"
+      "sha256": "0f282d9332a8ce505813966d35b9324c7abd2ea5595bf8da86a1e052127a0ef5"
     },
     {
       "path": "guides/index.html",
-      "sha256": "56dcbd76561292dc8bbe6bd157f8104e36530536d55de07991ccde30562aaa70"
+      "sha256": "cf2fbbf4ca3ad2f7dbe75dc5226736046f63c09fde1bb6548ad078c8fa05a59e"
     },
     {
       "path": "guides/installation-process/index.html",
-      "sha256": "2ba6afa6ec679fd9221d4c3ea8593d5ac8d0bf71affdf6bc6b0634d70ae9410f"
+      "sha256": "346f3ac18ce1321e1954285741b68e639856f956321ce0e6f4ee07d852138ea7"
     },
     {
       "path": "guides/power-outage/index.html",
-      "sha256": "032e185036069809ef04bb32be42cbc0e9ff824d014a4342d77e08cbe92912d6"
+      "sha256": "f15fc1d7aa44695b83647944961298c6984447fb0bde3ccbfee80aaa1bf4f897"
     },
     {
       "path": "guides/quote-services/index.html",
-      "sha256": "fb4fb6d913466884f4131331054a0b142cfc5b00677e4719b15b32b6832147e9"
+      "sha256": "733ca728edb5701a3be907e3da198cab454d8effb5f11bfd0ae1c56d3b72e0b2"
     },
     {
       "path": "guides/quotes-contractors/index.html",
-      "sha256": "b0bcb66c3c259e5b2cc68bec3b973f6059a31d0a1b1dded1fb54b34c894fa779"
+      "sha256": "94675a095d05eadc4fcf89ceaaf256e238c656fb42ad5375df5cb3bd3737f100"
     },
     {
       "path": "guides/self-consumption/index.html",
-      "sha256": "91aa0fd220847a5fbe0a2eee5529e411644f1f0ccd7cab9bff489207db2e9b24"
+      "sha256": "ebdd2b3765a3740cf46aecd0c5160922e1948af0b5ea1538a5abc666615d5f99"
     },
     {
       "path": "guides/solar-benefits/index.html",
-      "sha256": "8eba82bfcdb53583d1b5082cd1aee770a82829a60e88d8fe83079cc659c6881b"
+      "sha256": "19fadbf157fdfbeba86eabe8ac532dc4f5a98fe54267e4ac484810495b7dea5c"
     },
     {
       "path": "guides/solar-consultation/index.html",
-      "sha256": "6faabe0d12db6c0596511368b482f6ce871db301367435b24b9df86f2710d0af"
+      "sha256": "26b9ef56c16307e96a2680177678ca734fc4b1278c11e72dc65dedd30c707714"
     },
     {
       "path": "guides/solar-costs/index.html",
-      "sha256": "ea119fe8fc578ef011eb7966aef1cf48946b07d746261b8708cdcb048843a0ea"
+      "sha256": "9a4b616cac58159cf363990877aae31daa690c3f66055ef91fa11368a550514a"
     },
     {
       "path": "guides/solar-economics/index.html",
-      "sha256": "7533fc5898c6dd2578bf15eb81af8fabfde0fc5b91ad9e242a985a5ec633033e"
+      "sha256": "7be8136b20e7750af763dd624a9f6ceba93e24ed9f8b1123415372fcb44f3622"
     },
     {
       "path": "guides/solar-electricity-savings/index.html",
-      "sha256": "6edf27975078bb0251629e948524f0e7b314c82d1b08e6802f471717f0a0d3c8"
+      "sha256": "638e1ec40149dc3fb539a232a10fb7837284061d736f408b66926232776be259"
     },
     {
       "path": "guides/solar-fit/index.html",
-      "sha256": "32d56892e3e45f084c4fea0e0618bc0895e1770926131c79922638379984af17"
+      "sha256": "47834964c88e95e375fdfdda8900bb8429506f2137d3e0df3470662ab68e9c75"
     },
     {
       "path": "guides/solar-installation-cost/index.html",
-      "sha256": "5fcd8c713cdbdb3580f987783eb9fb1c2166a2d723aa5514f406d53ba0ba9411"
+      "sha256": "d5ab9dd147116c7f9bae146fc96d75b9c214d2a8a86c1362c642a2be794307ef"
     },
     {
       "path": "guides/solar-living/index.html",
-      "sha256": "9b8efb12077dcd395002d007a696d34b1df27c6fa4355b1420b2782a8950ddda"
+      "sha256": "2f866d28bda0f1dea6bfc3db9344aa01730a583584a7a3443332bf4b13fada0c"
     },
     {
       "path": "guides/solar-maintenance-cost/index.html",
-      "sha256": "d27e0452af9f54f37642c1f9602e330d0f7388fce7c784c7b88691dbbf7f285e"
+      "sha256": "48243994387998c045b8b64355510c2cff4cdfaefb91408e15c9f8982e5fe13b"
     },
     {
       "path": "guides/subsidies/index.html",
-      "sha256": "48f20c4c786a2e767a6c11432d8f657fe89a16814543f523dca05623663bdf77"
+      "sha256": "59ce56fc43f5adef1dbc5536bd952d98ffbf041a2cabc1b6af68dfcf1fab9fb4"
     },
     {
       "path": "guides/subsidy-amount/index.html",
-      "sha256": "a39355454bba81ebfb224cf69750a531c23d8299373ec64e03241ee458769394"
+      "sha256": "e406a76fe3e6b4c020a3e0b462bd3da4efcad3b1495b84438bd30b7163cc458e"
     },
     {
       "path": "guides/welcome/index.html",
-      "sha256": "9887e6095621eb26914f030efe09941fe0b96ac92f1b05b38a59b736ef21808b"
+      "sha256": "3c67db127a0d5802f76912f6d664f1de7d0acf5c0165c0c6df23d69aeb4948e7"
     },
     {
       "path": "index.html",
-      "sha256": "9aec69f19facf3998870bc096492e006b6ead12183cad543102f5eaf073b6867"
+      "sha256": "9e82b9ff49061adf5a5699dd464233e4abb84d95a993d8b646e834a2264e950b"
     },
     {
       "path": "manual/equipment-renewal/consultation/index.html",
-      "sha256": "ec63de3617b3ed9fb00735a494cfb33155151771a5009649c46cc3b057280472"
+      "sha256": "e8262fb20986cafb2d137116ad1dfb41c0c2a5740378246185def9effe1acc0c"
     },
     {
       "path": "manual/equipment-renewal/costs/index.html",
-      "sha256": "47e56743d968441eaf1b2f7f51483950447f2b06e3a32bd7a0a4f89a2e4aabe1"
+      "sha256": "55e2e3d3bc50bbb622bc30a43c8f2022e61eeda35deb45b5a794e43db750f114"
     },
     {
       "path": "manual/equipment-renewal/index.html",
-      "sha256": "b220108328c79c5fd8c465f5661a6756b890a308e0ec4e82fbc0ace434f81baf"
+      "sha256": "10944f27513b523ceedce53f0127f3c0dd7398b169ba523bb08f8014b82aebbf"
     },
     {
       "path": "manual/getting-started/index.html",
-      "sha256": "78ec4ed87367fc596bd3cc59be9560b35e94ea074b7001a61e97358a6a950f7a"
+      "sha256": "1e37c3bdf50b749cff4e869868c95676cac3aa79b90987e0036ee03fa18ee69f"
     },
     {
       "path": "manual/getting-started/milestones/index.html",
-      "sha256": "e0ce5838fa7574e784e1ab2bbe89ff4e54fe110ef192e42e47a820d264aafb33"
+      "sha256": "fa2088205e4911c3fd68b6c9a70c0bb3690fde7ba7dc8bca785f1914ecee5312"
     },
     {
       "path": "manual/getting-started/troubles/index.html",
-      "sha256": "5b82ac791b84b2a8e1e2bb885f8e8d27a10f25b8148c1fb2233df68c78f8f57a"
+      "sha256": "96c0e535cb92853e358e7f564583737e1c4f66c2e6132eba926022ac7e9cfc3d"
     },
     {
       "path": "manual/index.html",
-      "sha256": "de378eaea8583c0941cdff4e66a3a4fbe98e3453866f1bce80db168c4f88544f"
+      "sha256": "ee2799f2ce7a905eb14de22c3a1dfeba8e66a275be606d1097b8b7460b7cf0fc"
     },
     {
       "path": "og-home-photo-20260926.jpg",
@@ -929,15 +929,15 @@
     },
     {
       "path": "pages/calculation-method.html",
-      "sha256": "8103dcc0f0d10975d970e58e218928350b58ddae1fd20dd6c88e1d9032afa757"
+      "sha256": "f47549e34e7993ac1393300cf79fbc0581767975a82fa28615ea85958d76b1b6"
     },
     {
       "path": "pages/policy.html",
-      "sha256": "fdd6da4ec3dacab723164051af13de4bdf6d1d9690ec9ce68c504e3a48d205d2"
+      "sha256": "cb5ce5ca9c0fc0cb60884c22aad22f8ad078e6ddc39817cc75ca1d64e0464a62"
     },
     {
       "path": "press/index.html",
-      "sha256": "8c3a89ae61fb424078beeba4d1a0f5a2c5fd22acfb3113ab73146b289f0792a8"
+      "sha256": "165efb59a9a3a10db4cb2f9b5d570bc730e6a867145ae71181b9a2c6f3b89e6e"
     },
     {
       "path": "robots.txt",
@@ -945,7 +945,7 @@
     },
     {
       "path": "simulator/index.html",
-      "sha256": "fb6c58080a6ddf124553f895d29e959329dc4404ea23241e9755a719229343f0"
+      "sha256": "d13e06d2a7d66e7516d1d2dad5a35cba97fa58cc3c4d30c8de7e431e7c515279"
     },
     {
       "path": "sitemap.xml",
@@ -959,14 +959,14 @@
     "independentWalkthrough": "PASS",
     "independentIntegrity": "PASS",
     "humanReview": "approved",
-    "production": "not started",
+    "production": "authorized; workflow pending",
     "visualComparison": "PC1280x900 / mobile390x844; label wrap recheck360x812 PASS"
   },
   "processesStarted": [],
   "notes": [
     "ソースと配信物のSHAで対象範囲を識別する．候補commitは本記録を含むローカル保存コミットとして最終報告・開発計画へ記録．",
-    "P10本番公開指示待ち．D01-D04とE01-E04は公開時・公開後に実施．",
     "候補保存時の末尾空白検査に対応し，共通Manual生成結果と導入1ページの空行を正規化．内容不変，公開用buildとverifyを再実行しPASS．",
-    "公開版との統一感比較で検出した1件のラベル折返しを修正．独立限定確認とmanual-readiness3検査・pages/review buildを再実行しPASS．"
+    "公開版との統一感比較で検出した1件のラベル折返しを修正．独立限定確認とmanual-readiness3検査・pages/review buildを再実行しPASS．",
+    "本人が本番公開と整理を承認．未使用CSS・引数・古いコメントだけ整理し25関連検査と135配信物buildがPASS．"
   ]
 }

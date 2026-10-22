@@ -1,0 +1,1095 @@
+{
+  "date": "2026-10-22",
+  "auditor": "v060_renewal_review",
+  "scope": "frontendのファイル・旧出力案・完了経緯及び小さい未使用コードの整理監査．基準は公開候補4028525．当初は監査のみ，途中の親指示により3ファイルの最小整理だけ実施．本文・数値・使用中のCSS・表示仕様は変更しない．",
+  "sourceCandidateCommit": "402852510e7b9fb07c4c305dba3735a300a8830d",
+  "decision": "AUDIT_COMPLETE_SMALL_CLEANUP_TESTS_PASS",
+  "policies": [
+    {
+      "file": "README.md",
+      "sections": [
+        "文書・不要ファイルの整理方針",
+        "ファイルの保持方針",
+        "コミット・タグと公開の区別"
+      ],
+      "applied": "参照・動的一括読込・ビルド・テスト・旧公開互換を確認し，原本・現行QA・未完変更を保護する．未追跡はタグで復元できないため一覧とSHAで対象を固定する．"
+    },
+    {
+      "file": "../business-research/運営/運営方針.md",
+      "section": "ファイルの保持方針",
+      "applied": "現行の根拠・レビュー判定・基準データ・再生成入力を保持し，使用済みの旧案・重複画像・一時生成物は使用終了を確認して削除する．公開中・稼働中の処理は保護する．"
+    }
+  ],
+  "counts": {
+    "MUST": 0,
+    "RECOMMEND": 4,
+    "NITS": 1
+  },
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 2,
+    "NITS": 0
+  },
+  "findings": [
+    {
+      "id": "R1",
+      "priority": "RECOMMEND",
+      "status": "PROPOSED_PARENT_DELETE",
+      "file": "site/shared/assets/",
+      "issue": "未採用OG生成案28点が未追跡のまま残る．",
+      "action": "oldOgCandidatesの絶対パス・件数・SHAを親が直前確認して削除できる．QA READMEの過去版名等は経緯集約と合わせて整理する．採用原図・生成器・旧固定公開URLを削除しない．"
+    },
+    {
+      "id": "R2",
+      "priority": "RECOMMEND",
+      "status": "IMPLEMENTED_AND_TESTED",
+      "file": "site/manual/equipment-renewal/style.css",
+      "location": "旧renewal-table系列6規則とrenewal-cost-component1規則",
+      "issue": "費用表をカード図に再編した後の非使用CSSが7行残る．",
+      "action": "対象3ページを含むHTML／JS／generator／testに当該classの利用0件を確認し，その7行だけ除去．"
+    },
+    {
+      "id": "R3",
+      "priority": "RECOMMEND",
+      "status": "IMPLEMENTED_AND_TESTED",
+      "file": "site/shared/walkthrough/reading.js",
+      "line": 5,
+      "issue": "「一覧の分類と重複計上しない」というコメントが，設備更新全頁読了は節目記事読了も満たすという後続合意を説明しない．",
+      "action": "「導入・更新は全ページ読了を別に集計する．更新の全ページ読了は節目の記事読了も満たす．」へコメントのみ修正．"
+    },
+    {
+      "id": "R4",
+      "priority": "RECOMMEND",
+      "status": "DEFERRED_UNTIL_AFTER_RELEASE",
+      "file": "qa/artifacts/",
+      "issue": "v050試作・開発確認画像に，旧経緯以外の利用がないものが残る．",
+      "action": "legacyQaCandidatesへ具体的な44候補を記録．現在のv060独立目視が参照するv050-quote-cards-pc.pngは除外．旧QA経緯の参照を公開commit／Actions等へ集約し，v060公開作業終了後に削除する．現在は削除しない．"
+    },
+    {
+      "id": "N1",
+      "priority": "NITS",
+      "status": "IMPLEMENTED_AND_TESTED",
+      "file": "site/shared/walkthrough/tracker.js",
+      "line": 19,
+      "issue": "whenVisibleのeligible引数は全2呼出しで未指定であり，常に既定のtrueを返すだけ．",
+      "action": "eligible引数及び&& eligible()だけ除去．threshold・observer・達成呼出しは不変．"
+    }
+  ],
+  "oldOgCandidates": [
+    {
+      "file": "site/shared/assets/og-guide-disaster-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-disaster-20261018.png",
+      "bytes": 41368,
+      "sha256": "92010a4a14d4e32fed22d556ea7190d0f557864b8b55ba8dd194723a9259f965",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-disaster-20261019-v2.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-disaster-20261019-v2.png",
+      "bytes": 42320,
+      "sha256": "fb3c0bf95825717aabcbde301b2385805d68cf7c2997e07af89518c8ab907061",
+      "tracked": false,
+      "references": [
+        "qa/artifacts/three-guide-images-change-20261019.json"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-quotes-contractors-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-quotes-contractors-20261018.png",
+      "bytes": 36655,
+      "sha256": "9a147333dfe59797ed0202bcf96be2580839743b6a936721dbde9d4e78a91416",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-economics-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-economics-20261018.png",
+      "bytes": 46293,
+      "sha256": "aa626c6981ffbff1ae4acd412ce3791d9ca0ab71aaec61847ac8ddaa58987b42",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-economics-20261019-v2.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-economics-20261019-v2.png",
+      "bytes": 51082,
+      "sha256": "9cc5ef4c11424b7710fb1c1ca0758712e09e9c71b485b43f2fa86dbf18514db9",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261018-v2.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261018-v2.png",
+      "bytes": 40648,
+      "sha256": "4631d12403e8b67030d6d78b18bbaa2bf57a609903dd69ba70de2a5f93405938",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261018-v3.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261018-v3.png",
+      "bytes": 48047,
+      "sha256": "1348c62e8de015fedba0d3c37ab1a8d636f1517c8026326b76d27e845b651044",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261018-v4.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261018-v4.png",
+      "bytes": 51159,
+      "sha256": "e76186a2d2a03a8ab8213914acc6daa4bcf57eddb34135291d4a855407425f5c",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261018.png",
+      "bytes": 41969,
+      "sha256": "2c0c2a0137c86a1e56a2a2176d083fe0710d17aa92a9f0958057f85d10961e6d",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v10.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v10.png",
+      "bytes": 50999,
+      "sha256": "81f2c971d6e05482f6d7c58a5c8f372baee15292f911719bfcf03c213af2a6a3",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v11.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v11.png",
+      "bytes": 50075,
+      "sha256": "42164a46b6245d282d2d2221a1a4f501c0b0003241b16f6f54baf7d7e6f0e936",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v12.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v12.png",
+      "bytes": 49794,
+      "sha256": "499d42d956f236cbad1bcd2fe9b10184eeada64d69f8fd25740ba038af74d78f",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v13.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v13.png",
+      "bytes": 50310,
+      "sha256": "13dbf28b32b75926d4eebc8cb51af03ffa0091c9361d6176c73cfb06c38be036",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v5.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v5.png",
+      "bytes": 56385,
+      "sha256": "d4f1f0a849b410e512caac5ed98f488cd8a09666af6f1b7835211a6e8a4b6811",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v6.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v6.png",
+      "bytes": 46536,
+      "sha256": "184a4276b30f7566316045980997718ff455bceefce8baf9ccd9eeea4de68d70",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v7.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v7.png",
+      "bytes": 46651,
+      "sha256": "4a69ea18fbc119fd35a56631334cd450b2ccce3980240df5e8399d2fe9838457",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v8.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v8.png",
+      "bytes": 46931,
+      "sha256": "862b8f840976f5442c46ee58c1ce3eeef2d6b6d26a90eec71a904b8d907ba4b5",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-electricity-savings-20261019-v9.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-electricity-savings-20261019-v9.png",
+      "bytes": 48957,
+      "sha256": "1ed976f319ecdf3835200a845fa5467954fb765697064dfc20f806c4b52aa62d",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-fit-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-fit-20261018.png",
+      "bytes": 39002,
+      "sha256": "08d6a772f95dbd98481784a4bcdaef804d511a3b80ed23aaf966bf7587e4b4d2",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-fit-20261019-v2.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-fit-20261019-v2.png",
+      "bytes": 37215,
+      "sha256": "d2d30610c731c05b1059ed29ebe6f4b5afd27aec2a00d3d75f966225540a155d",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-fit-20261019-v3.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-fit-20261019-v3.png",
+      "bytes": 39030,
+      "sha256": "0cb11a7a4229ec389d918b520c1e40026f45a98abd34e0ab9162035e8c1b3d67",
+      "tracked": false,
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-installation-cost-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-installation-cost-20261018.png",
+      "bytes": 45532,
+      "sha256": "ddf1fc2839005125fd82d960c6102506e972595e487b0d5a3553940033889a1f",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-solar-maintenance-cost-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-solar-maintenance-cost-20261018.png",
+      "bytes": 39132,
+      "sha256": "f822dcdcb587164069c5e13e435e75a35ee8945d14684009fa700f1442aa8b5e",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-subsidies-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-subsidies-20261018.png",
+      "bytes": 42776,
+      "sha256": "4ef8835e315f7dc3c42c8dcb79bafddec5abb72d163be1b97975915b7eef9aee",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-subsidy-amount-20261018.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-subsidy-amount-20261018.png",
+      "bytes": 39863,
+      "sha256": "0384c3ce57593ea1553b0a8be7f0f1e8b6a0ad732789852b4ec1e1445bcdc260",
+      "tracked": false,
+      "references": [],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-subsidy-amount-20261019-v2.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-subsidy-amount-20261019-v2.png",
+      "bytes": 48814,
+      "sha256": "4fc01404c289303b1f507893d096d4d80ceb4b1c708dbb2f23ad8003dc959f86",
+      "tracked": false,
+      "references": [
+        "qa/README.md",
+        "qa/artifacts/subsidy-amount-image-change-20261019.json"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-subsidy-amount-20261019-v3.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-subsidy-amount-20261019-v3.png",
+      "bytes": 47269,
+      "sha256": "db678242cd9e975db1696bf4ac13e2763364973b3e11b9d3b23922189c23d4f5",
+      "tracked": false,
+      "references": [
+        "qa/README.md",
+        "qa/artifacts/subsidy-amount-arrow-change-20261019.json"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    },
+    {
+      "file": "site/shared/assets/og-guide-subsidy-amount-20261019-v4.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\site\\shared\\assets\\og-guide-subsidy-amount-20261019-v4.png",
+      "bytes": 49836,
+      "sha256": "a19405c49c620ae1a167de97d14e405f64d8d78706ec30a2a542d6bebbfbc410",
+      "tracked": false,
+      "references": [
+        "qa/README.md",
+        "qa/artifacts/subsidy-two-stacks-change-20261019.json"
+      ],
+      "action": "DELETED_BY_PARENT_AFTER_HASH_CHECK",
+      "reason": "採用済み原本ではなく生成器の旧出力案．現catalog／現generator／v041・v050・v051公開catalogに不在，現dist-pagesの画像と内容SHA一致0件．残る参照は過去QA経緯だけ．"
+    }
+  ],
+  "oldOgSummary": {
+    "count": 28,
+    "bytes": 1274648,
+    "sourceOrTestRefs": 0,
+    "currentCatalogMatches": 0,
+    "currentGeneratorMatches": 0,
+    "publicCatalogMatches": {
+      "v0.4.1": 0,
+      "v0.5.0": 0,
+      "v0.5.1": 0
+    },
+    "distImageHashesCompared": 34,
+    "distHashMatches": 0,
+    "neverTrackedInAvailableLocalHistory": true,
+    "deleted": false,
+    "disposalCaveat": "未追跡でローカルGit履歴にもない旧案のため，削除後のGit復元はできない．採用済み10点と生成入力を残す．旧v041ビルド指摘での「原図保持」は当時の過包含修正案であり，今回の使用済み旧生成案の整理とは区別する．"
+  },
+  "legacyQaCandidates": [
+    {
+      "file": "qa/artifacts/v050-article-comparison-open.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-article-comparison-open.png",
+      "bytes": 114842,
+      "sha256": "ecfd3e22408e319e564df1d2a7523d914d33698b83d8272891b2162b02bf2df2",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-first-visit-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-first-visit-deployed.png",
+      "bytes": 38168,
+      "sha256": "bc01c33ca043068945b16b5755387a5bd2e21b7f8691e78ce59ec4ee9b71f1d6",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-first-visit-localhost.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-first-visit-localhost.png",
+      "bytes": 63732,
+      "sha256": "98cf4bfc7d5bf6a04f58b3cd06ed95d8a15701eb09006d30e7668ccfec3f36fe",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-first-visit-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-first-visit-mobile.png",
+      "bytes": 63246,
+      "sha256": "0ec26a3fac6c3feb5ebb3572da96d7f2b9068e91d27f7827617cb896ad1033ae",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-harena-logo.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-harena-logo.png",
+      "bytes": 7524,
+      "sha256": "d66aafd0b1dd6786b929d49f8569386d50d2e6be88fc62cf5856e36079a84d5a",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-harena-medal.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-harena-medal.png",
+      "bytes": 8300,
+      "sha256": "2e32eeac96aca9ecefd37e9831a955ee36f9df58f70ab54b0d47a84e98115cca",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-descriptions-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-descriptions-mobile.png",
+      "bytes": 41204,
+      "sha256": "32dfe7445841672bf0f963c4d7e18a191ae2072a894c90ed2992b2728c327c83",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-descriptions-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-descriptions-pc.png",
+      "bytes": 42666,
+      "sha256": "d45fca196bae2e287bfb2e62e8caf036a3e2a5923c7ccba523a77b935cf68c85",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-mobile.png",
+      "bytes": 41772,
+      "sha256": "53dc52f23fb194ecf24448a6f8e91390a919daef60fd8be7b420090f739c7bea",
+      "references": [
+        "qa/artifacts/v050-notebook-preview.json",
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-palette-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-palette-mobile.png",
+      "bytes": 40085,
+      "sha256": "588d34ac880b2209ed271a1506e5c8b609215c79b461884deedb1943e2e9505e",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-palette-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-palette-pc.png",
+      "bytes": 41197,
+      "sha256": "7cfc7953ef9a86ab7011144c114c1584fc3fc5fb47c3e61a57d82a455a660b72",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-pc.png",
+      "bytes": 145407,
+      "sha256": "189b19bcfb3ad3730730e249b357c0249e67ef9ce86aeaeebcd47b072c284d39",
+      "references": [
+        "qa/artifacts/v050-notebook-preview.json",
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-notebook-reset.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-notebook-reset.png",
+      "bytes": 37076,
+      "sha256": "cacc800959a90fc092969b6928a0c34f79c0be677ceb516be00ed5c1c157d8d4",
+      "references": [
+        "qa/artifacts/v050-notebook-preview.json",
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-quote-cards-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-quote-cards-deployed.png",
+      "bytes": 118670,
+      "sha256": "f2708d04cc4d33b91600c43d12eb1939db8329dd0e92b0fa88bc46bdee07a4a8",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-quote-cards-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-quote-cards-mobile.png",
+      "bytes": 36016,
+      "sha256": "d20c97c55568c1032404c1dac92e3eaf72511e3af70926acba2b7e0de7d4ebb7",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-remove-consult-status.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-remove-consult-status.png",
+      "bytes": 9531,
+      "sha256": "be5b234d0d4872dc62da17584903dd9b02166742249d1e41810dd07cc6edd83d",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-color-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-color-deployed.png",
+      "bytes": 122957,
+      "sha256": "fdb7c16820055fd20deb7f28ecd18543d0b9fd44886a9f0f4dbb3626043db889",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-companies-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-companies-mobile.png",
+      "bytes": 29226,
+      "sha256": "e406182fcdcbf9c1b181a04206f866d4595843e994d1901411b8b0aa3ab604f1",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-companies.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-companies.png",
+      "bytes": 98732,
+      "sha256": "d056e01e4a0671bc0d6e8498328d6f1060f15f751674c7da83a2ee5c9bddd51a",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-deployed.png",
+      "bytes": 150214,
+      "sha256": "26ccac79e0b50a322c9378fcaf077bd619556b9685a8a1df54390ade80d230a6",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-intro.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-intro.png",
+      "bytes": 98502,
+      "sha256": "bb846409e266565c825d482d61ca87f06352fd06109d2992988d33d64dad0854",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-mobile.png",
+      "bytes": 41950,
+      "sha256": "c61ddf5b7c1589d17d47e85a2a27eaab9a7aa7d9a759bfa732e366352be53137",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-seven-missions-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-seven-missions-pc.png",
+      "bytes": 118394,
+      "sha256": "4c14637439d4e7766235677e1a40e202f47eaeb0ca434ed16900572e3aa4d047",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-soft-glow-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-soft-glow-deployed.png",
+      "bytes": 121589,
+      "sha256": "270e8dac447e70ba833b00dedcf551b374e45404e588c3f8b7237f0df9dd8065",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-soft-glow-quote.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-soft-glow-quote.png",
+      "bytes": 67808,
+      "sha256": "da8b3cceafdeff326d949255e956aa846c3fe451faaa05f1810c0662aaab5466",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-soft-glow-welcome-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-soft-glow-welcome-mobile.png",
+      "bytes": 33185,
+      "sha256": "35d06678e4c864734ebb3f62b25ed843dbd4b2cc4d04385cde9b540689bf86ef",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-soft-glow-welcome.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-soft-glow-welcome.png",
+      "bytes": 67450,
+      "sha256": "5ed41887da053fa866eec2bb129d6bbad1c62cc4ad8cc19d56d9a4030965ae04",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-diagnosis-return.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-diagnosis-return.png",
+      "bytes": 52317,
+      "sha256": "8cd9d175b6e1469e8c9852ed15be623e1a493a5d27020a99b45d3c799a3b3256",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-diagnosis.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-diagnosis.png",
+      "bytes": 45747,
+      "sha256": "972df794a7e25ae10d1fd5c386520d4a944db26a57e639a39044843ed2299d86",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-panel-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-panel-deployed.png",
+      "bytes": 145540,
+      "sha256": "66df77a9abeaae0bfcb78e28bf8560880972522652a1a77c406cf16e4b52caec",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-quote-deployed.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-quote-deployed.png",
+      "bytes": 121512,
+      "sha256": "60813e6f2ab36b60602e767018dacefc07d03832f3a6e5b798da6bc70daeb67d",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-quote-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-quote-mobile.png",
+      "bytes": 38791,
+      "sha256": "7ee69ba0cbcb34f6fe2fed1604f90a5a7b09946c437cb44e118f976eefdc579b",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-quote-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-quote-pc.png",
+      "bytes": 71374,
+      "sha256": "869930a2f37040b7181fbb720c714046ac9f867f0cf2c6a375157647bfcdd211",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-target-welcome.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-target-welcome.png",
+      "bytes": 67933,
+      "sha256": "a01c369dba791c7a1573e833915fa4d9f6b94b06c53470a3a5db8382f0e0ce31",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-auto-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-auto-mobile.png",
+      "bytes": 39503,
+      "sha256": "924cb62d87ab7179c49612e924a8cbb7edd94229ffbed612c93b0e42f3f30f4e",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-auto-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-auto-pc.png",
+      "bytes": 145657,
+      "sha256": "e91f2120c0c70234508d51e645f0e6b7eeb071496a01ff47dc2aac4e81f1ff6c",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-global-deployed-menu.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-global-deployed-menu.png",
+      "bytes": 43888,
+      "sha256": "26e4104d0e5abec009b2c959eb641bafedffd95b50e4465c133541a75336399a",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-global-deployed-panel.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-global-deployed-panel.png",
+      "bytes": 146027,
+      "sha256": "bf759de715353e8c9f63be3330a3710caa66e1f9aa9f4acb4e4d673de172ba25",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-global-map.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-global-map.png",
+      "bytes": 83053,
+      "sha256": "5f436f873191eff6a03255408877c18bfebeed481466c0348585163f74ca1015",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-global-menu-320.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-global-menu-320.png",
+      "bytes": 26878,
+      "sha256": "581c770d89e2e1c153298c1ab8599718b033c093e526ad5b39af8161a9467446",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-global-menu.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-global-menu.png",
+      "bytes": 73048,
+      "sha256": "a98700c198edf55fe762ac4c49513aeacc3842396ad3348c77332db285c499cf",
+      "references": [],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-global-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-global-mobile.png",
+      "bytes": 42511,
+      "sha256": "fc6a0cd84b2072fcd804c0dcb43f6965b12b6cae6f568f6e801019effc9792cc",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-mobile.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-mobile.png",
+      "bytes": 39235,
+      "sha256": "36a530afda290600355c1784d1f845d5860330d0831d225471f497a0bba08b1e",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    },
+    {
+      "file": "qa/artifacts/v050-walkthrough-pc.png",
+      "absolutePath": "C:\\Users\\wordm\\github_haretoku\\frontend\\qa\\artifacts\\v050-walkthrough-pc.png",
+      "bytes": 145943,
+      "sha256": "9f747937753100a764560629d92d1fd43d3de9f1f2b2b20bfd78f15186ceb878",
+      "references": [
+        "qa/README.md"
+      ],
+      "action": "AFTER_V060_RELEASE_AND_HISTORY_CONSOLIDATION",
+      "reason": "v050試作・開発確認の画像．製品コード・テスト入力・採用原本から参照されず，既存参照は旧経緯又は旧v050確認JSONのみ．v060の現在検収が完了し，経緯を公開commit／Actions等へ集約した後の削除候補．"
+    }
+  ],
+  "laterPrototypeCandidates": [
+    {
+      "file": "qa/artifacts/v060-equipment-renewal-prototype.png",
+      "bytes": 114326,
+      "sha256": "5ad46a820d0e5b0a6061f85a36b1ca25feeed64e476189079c4d8b413cc42bab",
+      "references": [],
+      "action": "HOLD_FOR_POST_RELEASE_RETENTION_REVIEW",
+      "reason": "現在の確定記事・新タイトル・新進捗の前段階の表示案．コード参照はないが，今回の監査だけで固有の人間確認根拠が不要と断定せず，公開後に最新表示証跡と置換済みかを親が確認する．"
+    },
+    {
+      "file": "qa/artifacts/v060-manual-audience-badge.png",
+      "bytes": 93226,
+      "sha256": "067646fcda57a438bcd6dd781d80fa5b74a8390545563bc8b6d9aeff3d602ae9",
+      "references": [],
+      "action": "HOLD_FOR_POST_RELEASE_RETENTION_REVIEW",
+      "reason": "現在の確定記事・新タイトル・新進捗の前段階の表示案．コード参照はないが，今回の監査だけで固有の人間確認根拠が不要と断定せず，公開後に最新表示証跡と置換済みかを親が確認する．"
+    },
+    {
+      "file": "qa/artifacts/v060-map-audience-badge.png",
+      "bytes": 122269,
+      "sha256": "bb04e2de9c7b09f5d71cfd93322236b5e5e1fc13d60002e5c7c6b06d5e5954b1",
+      "references": [],
+      "action": "HOLD_FOR_POST_RELEASE_RETENTION_REVIEW",
+      "reason": "現在の確定記事・新タイトル・新進捗の前段階の表示案．コード参照はないが，今回の監査だけで固有の人間確認根拠が不要と断定せず，公開後に最新表示証跡と置換済みかを親が確認する．"
+    },
+    {
+      "file": "qa/artifacts/v060-torisetsu-intro-draft.png",
+      "bytes": 107334,
+      "sha256": "c46364a3a33f36046595e9d4532d07b72b85a3342f4ae486f23fdff06b7b921c",
+      "references": [],
+      "action": "HOLD_FOR_POST_RELEASE_RETENTION_REVIEW",
+      "reason": "現在の確定記事・新タイトル・新進捗の前段階の表示案．コード参照はないが，今回の監査だけで固有の人間確認根拠が不要と断定せず，公開後に最新表示証跡と置換済みかを親が確認する．"
+    },
+    {
+      "file": "qa/artifacts/v060-torisetsu-pending.png",
+      "bytes": 94660,
+      "sha256": "824d7c249a63dac171da1593eccc917cf5e3201683325bc6e707c046ed5d99cc",
+      "references": [],
+      "action": "HOLD_FOR_POST_RELEASE_RETENTION_REVIEW",
+      "reason": "現在の確定記事・新タイトル・新進捗の前段階の表示案．コード参照はないが，今回の監査だけで固有の人間確認根拠が不要と断定せず，公開後に最新表示証跡と置換済みかを親が確認する．"
+    }
+  ],
+  "smallCleanup": {
+    "authorization": "親からreading.jsの古いコメント，tracker.jsの未使用eligible引数，renewal CSSの未使用規則のみ整理する指示を受領．",
+    "files": [
+      {
+        "file": "site/shared/walkthrough/reading.js",
+        "beforeSha256": "83e8d7435afa4870b1e7c58f321525fbdc4df7a6143c0562f8d8782103f8a95f",
+        "afterSha256": "193835ae74c031d115dbbdd95aa855017b611b62f043ca6c5df36900f3fdb63b"
+      },
+      {
+        "file": "site/shared/walkthrough/tracker.js",
+        "beforeSha256": "786f76c0897602777aa0ffc0d438384df7371a1dae90e13751f307dc4108b9ac",
+        "afterSha256": "bc82b694842e10068e180b620e5e6b8753a040186e7ffc022bf5826d81301e53"
+      },
+      {
+        "file": "site/manual/equipment-renewal/style.css",
+        "beforeSha256": "3151b183cb076e889b8bcd1d2584a888931ed87dd11331deaf9d29b4e30b395d",
+        "afterSha256": "fe5cfc11991bde0e2dea4624299b1952cc33039d93c69a414e526b98b17ab808"
+      }
+    ],
+    "diffStat": {
+      "files": 3,
+      "insertions": 3,
+      "deletions": 10
+    },
+    "removedCssRules": [
+      ".guide-article article .renewal-table { width:100%; max-width:100%; table-layout:fixed; }",
+      ".guide-article article .renewal-table .renewal-label { width:26%; }",
+      ".guide-article article .renewal-table .renewal-price-label { width:38%; }",
+      ".guide-article article .renewal-table th,.guide-article article .renewal-table td { padding:14px 12px; white-space:normal; text-align:left; vertical-align:top; overflow-wrap:anywhere; font-size:14px; line-height:1.9; }",
+      ".guide-article .renewal-table small { font-size:12px; }",
+      ".guide-article .renewal-cost-extra .renewal-cost-component { margin-top:8px; font-size:13px; }",
+      " .guide-article article .renewal-table th,.guide-article article .renewal-table td { padding:11px 8px; font-size:12px; }"
+    ],
+    "htmlJsGeneratorTestClassReferences": 0,
+    "behaviorPreservation": "reading.jsはコメント1行だけ，tracker.jsは全呼出しで省略される既定true関数だけ，CSSは利用0件のclass規則だけ．元候補の内容からこの置換だけで現内容に完全一致することをassertした．",
+    "tests": {
+      "command": "node --test qa/tests/walkthrough.test.js qa/tests/walkthrough-target.test.js qa/tests/manual-readiness.test.js",
+      "tests": 25,
+      "pass": 25,
+      "fail": 0,
+      "log": "qa/artifacts/v060-cleanup-tests.log",
+      "logSha256": "bd04627a516ca7c54b034ec5140256991ea51b8ad6a48d42360b26d8d0b3e141",
+      "diffCheck": "PASS"
+    },
+    "commit": false,
+    "productionPublishedByAuditor": false
+  },
+  "protected": [
+    {
+      "paths": [
+        "design/characters/harena.png",
+        "design/characters/professor.png",
+        "design/characters/README.md"
+      ],
+      "reason": "採用キャラクター原本及び派生手順．未参照でも明示的保持対象．"
+    },
+    {
+      "paths": [
+        "qa/generate-guide-illustrations.mjs",
+        "qa/generate-self-consumption-share.mjs",
+        "qa/generate-manual-shares.mjs",
+        "site/shared/assets/article-*.svg",
+        "site/solar/data/articles.json"
+      ],
+      "reason": "現採用素材と再生成入力．旧生成案とは別であり保持．"
+    },
+    {
+      "paths": [
+        "site/shared/assets/og-self-consumption-v040.png",
+        "site/shared/assets/og-step-map-20261017.png",
+        "site/shared/assets/og-step-map-20261017.jpg"
+      ],
+      "reason": "finalize-static-assets.jsが旧共有固定URLへコピーし，互換性と再配布に必要．未使用とは扱わない．"
+    },
+    {
+      "paths": [
+        "site/prototypes/guide-self-consumption/index.html",
+        "site/prototypes/step-map/index.html"
+      ],
+      "reason": "前者は開発ビルド・verify-review・self-consumption testが利用し，後者は旧マップ転送互換testが利用する．旧名だけで削除しない．"
+    },
+    {
+      "paths": [
+        "qa/artifacts/v060-*-review.json",
+        "qa/artifacts/v060-release-*.png",
+        "qa/artifacts/v060-visual-*.png",
+        "qa/artifacts/v050-quote-cards-pc.png"
+      ],
+      "reason": "今回の公開準備・独立判定・目視検収の現在根拠．v050の1画像も最新の独立目視JSONが参照しており保持．"
+    },
+    {
+      "paths": [
+        "qa/artifacts/*google*",
+        "qa/artifacts/*a8*",
+        "qa/a8-placement-current-20261017.csv"
+      ],
+      "reason": "外部依頼・未完又は経緯照合の証跡．今回未完事項の解消状況を全件確認していないため一括削除しない．"
+    },
+    {
+      "paths": [
+        "data/",
+        "qa/fixtures/",
+        "qa/tests/",
+        "node_modules/"
+      ],
+      "reason": "受領原本・現QA基準・回帰検査・開発依存を保持．"
+    },
+    {
+      "paths": [
+        ".preview-upload/.git/",
+        ".preview-upload/.openai/hosting.json"
+      ],
+      "reason": "公開開発版の識別・再開情報．全量コピーのdistと区別し，stage全体を削除しない．"
+    },
+    {
+      "paths": [
+        "dist-pages/",
+        "dist-review/",
+        ".preview-upload/dist/",
+        "review-site.tar.gz"
+      ],
+      "reason": "生成物だが親が現在公開処理を進めている．今回は保護し，公開・配布・ロールバック作業終了後に親が使用停止を確定したものだけ再生成可能な一時成果物として削除する．"
+    },
+    {
+      "paths": [
+        "site/shared/walkthrough/panel.js:previousAudience",
+        "site/shared/walkthrough/state.js:pending/旧保存キー",
+        "site/shared/walkthrough/tracker.js:threshold"
+      ],
+      "reason": "previousAudienceは重複する対象文の表示制御，pendingは公開リンク有無の判定，旧保存キーは移行とリセット，thresholdは可視比率に実利用がある．余計な変数とみなして削除しない．"
+    }
+  ],
+  "processAndTemporaryNotes": {
+    "processesStarted": [],
+    "processInventory": "Win32_ProcessのCIM参照は権限不足で取得できなかった．一時成果物がプロセス未使用との判定は行わず，親が現在使用している生成物を保護する．",
+    "tmpPdfsFiles": 0,
+    "ignoredQaLogCountAtAudit": 160,
+    "ignoredQaLogBytesAtAudit": 1547377,
+    "ignoredLogsAction": "現リリース・未完作業・根拠のログを先に選別する必要があるため，一括削除候補にしない．"
+  },
+  "verificationScope": [
+    "tracked＋untrackedの325テキスト（監査時）を対象にbasename参照を照合．旧OGの参照先は個別候補へ記録．",
+    "動的画像importはguideImagesの明示11画像だけであり，旧OG案は含まない．publicDir=falseで資産全体の暗黙コピーはない．",
+    "finalize-static-assetsはarticles.jsonの選択shareImageだけを固定コピーし，verify-pagesは選外の固定OG出力を禁止する．",
+    "旧OG案28点を公開タグv041/v050/v051のcatalog及び現dist-pagesの画像SHAへ照合し，利用0件．",
+    "製品コード・データ・fixture・generatorを不要という理由だけで削除しない．今回の製品変更は許可された3ファイルだけ．"
+  ],
+  "limits": [
+    "外部サービス・本番公開・ユーザーブラウザは操作していない．",
+    "旧OG28案以外の全ファイルを到達性解析した監査ではない．具体候補について静的参照・build/test・互換性を確認したもので，名前や更新日だけを削除根拠にしていない．",
+    "v050の旧スクリーンショットは未追跡のものが多く，Gitで復元できない．画像の最新検収上の役割を公開後に再確認してから削除する．",
+    "現在のUI・本文・数値は既存PASSを再利用し，小整理後のブラウザ再検査・全件buildは本担当では実施しない．親が公開処理・必要なビルドを担当する．",
+    "本記録は新しい常設保管台帳を目的とせず，今回の削除候補と保持根拠・小整理の検査記録として既存qa/artifactsへ保存する．"
+  ],
+  "parentDeletion": {
+    "count": 28,
+    "verifiedAbsoluteContainment": true,
+    "bytes": 1274648,
+    "verifiedSha256": true
+  }
+}
