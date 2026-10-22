@@ -2,7 +2,7 @@
   "date": "2026-10-22",
   "version": "0.6.0",
   "status": "release candidate; not published",
-  "previewSource": "64fca1f24835d45162d3155140bdc7fd546c4f36",
+  "previewSource": "926430ac5b865e54a4b392079a656b55c36538af",
   "rollbackCommit": "948f8d192f4cd20f1a92ccccc5eb93628a135598",
   "source": [
     {
@@ -18,12 +18,16 @@
       "sha256": "26794c41e8c08e7d96ab56c1acbd5014b4332caf9428f26e9ede7d6bb72e04aa"
     },
     {
-      "path": "qa/README.md",
-      "sha256": "693c8089ed3dcab090110acd45c7bcfa22cfcf5ae3122742efbf5992c7fda24b"
-    },
-    {
       "path": "qa/generate-manual-shares.mjs",
       "sha256": "94241cb90a45162d4c1bac80043f3fbb94781833f8f8fcf92f70fd07c815a7e4"
+    },
+    {
+      "path": "qa/README.md",
+      "sha256": "5061a774bfb71f701f93baaea589f6d274b65c87ef036a4ac5ee42b6ece08a3f"
+    },
+    {
+      "path": "qa/release-checklist.md",
+      "sha256": "2cca0e901941915c407c276785b982e166b238b7c7d2c98c6efe97a14e3c0d52"
     },
     {
       "path": "qa/sync-manual-components.mjs",
@@ -267,11 +271,11 @@
     },
     {
       "path": "site/manual/index.html",
-      "sha256": "f432bf6daea39de12cde950de61d15210da51ffa710dc2e9a53a366e993b23f5"
+      "sha256": "35189a3c5c46bcf08347a4473bc582e9dcfcc0b28d879648dc643915d04f36e2"
     },
     {
       "path": "site/manual/manual.css",
-      "sha256": "097ee0ba3500d2238542fedb288c5c006b9d1341291a70332924b70cce55b1f2"
+      "sha256": "5bbbb99edf49738b05f7596c65b69e8ed49f2c462e8cb86761d2001e250409a6"
     },
     {
       "path": "site/manual/manual.js",
@@ -564,12 +568,12 @@
       "sha256": "8736d7431700def70635bd49cbbc81bfc0ea6b04ccc5e2664f295e605ee5690d"
     },
     {
-      "path": "assets/manual-index-B9Efo6rE.css",
-      "sha256": "3a668f049234bd3a27cbf3b8e180aaa45fd2ed6eb02affa960c6d5595f7be967"
+      "path": "assets/manual-index-CcPEb2ZA.js",
+      "sha256": "6da17d52a81f0e1a4a697e8139f5e2f7debe25436a2c511e562c5a83e1f389f0"
     },
     {
-      "path": "assets/manual-index-v4v-BM6H.js",
-      "sha256": "6da17d52a81f0e1a4a697e8139f5e2f7debe25436a2c511e562c5a83e1f389f0"
+      "path": "assets/manual-index-Cw0FJBHy.css",
+      "sha256": "9e7f0212b0184582f7d5f7090483ea0100fe96fbc1f2fedba6070c6cc8a494d4"
     },
     {
       "path": "assets/metadata-D8VIoK63.json",
@@ -897,7 +901,7 @@
     },
     {
       "path": "manual/index.html",
-      "sha256": "7cfe67228cfa6b611e690a95ba49c3423b7b45435d51949ec9983132d82e8237"
+      "sha256": "de378eaea8583c0941cdff4e66a3a4fbe98e3453866f1bce80db168c4f88544f"
     },
     {
       "path": "og-home-photo-20260926.jpg",
@@ -955,12 +959,14 @@
     "independentWalkthrough": "PASS",
     "independentIntegrity": "PASS",
     "humanReview": "approved",
-    "production": "not started"
+    "production": "not started",
+    "visualComparison": "PC1280x900 / mobile390x844; label wrap recheck360x812 PASS"
   },
   "processesStarted": [],
   "notes": [
     "ソースと配信物のSHAで対象範囲を識別する．候補commitは本記録を含むローカル保存コミットとして最終報告・開発計画へ記録．",
     "P10本番公開指示待ち．D01-D04とE01-E04は公開時・公開後に実施．",
-    "候補保存時の末尾空白検査に対応し，共通Manual生成結果と導入1ページの空行を正規化．内容不変，公開用buildとverifyを再実行しPASS．"
+    "候補保存時の末尾空白検査に対応し，共通Manual生成結果と導入1ページの空行を正規化．内容不変，公開用buildとverifyを再実行しPASS．",
+    "公開版との統一感比較で検出した1件のラベル折返しを修正．独立限定確認とmanual-readiness3検査・pages/review buildを再実行しPASS．"
   ]
 }

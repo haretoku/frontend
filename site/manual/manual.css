@@ -59,3 +59,6 @@
 
 #manual-consultation { margin-top:40px; scroll-margin-top:90px; --map-green:#008653; }
 .manual-page .provider-comparison-scope { margin:0 0 16px; color:#515d56; font-size:13px; line-height:1.9; }
+
+.manual-tab-label { min-width:0; }
+.manual-tab-label > span { display:inline-block; }

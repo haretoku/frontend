@@ -1,0 +1,390 @@
+{
+  "reviewer": "/root/v060_release_integrity",
+  "date": "2026-10-22",
+  "type": "公開版v0.5.1とv0.6.0候補の実画像による独立統一感レビュー",
+  "scope": {
+    "published": {
+      "origin": "https://haretoku.jp",
+      "version": "v0.5.1",
+      "commit": "948f8d192f4cd20f1a92ccccc5eb93628a135598"
+    },
+    "candidate": {
+      "origin": "https://haretoku-preview.wordmindblack.chatgpt.site",
+      "initialLocalCandidate": "9a62bb5",
+      "priorProductCommit": "5da8a5f5956e8f8763a050e4ed8204fcc6ba9905",
+      "finalPreviewSource": "926430ac5b865e54a4b392079a656b55c36538af",
+      "deployment": "appgdep_6ada16190d088191a9fd35432f4ad7e7"
+    },
+    "viewports": [
+      {
+        "width": 1280,
+        "height": 900,
+        "actualImage": "1265×889，ブラウザーのスクロールバー等を除いた画像幅・高さ"
+      },
+      {
+        "width": 390,
+        "height": 844,
+        "actualImage": "375×812"
+      },
+      {
+        "width": 360,
+        "height": 844,
+        "purpose": "タブの折返し修正だけの限定再確認"
+      }
+    ],
+    "pages": [
+      "MAP TOP",
+      "MAPはじめに1ページ目",
+      "詳しいガイド一覧",
+      "収支改善記事の導入",
+      "トリセツTOP・困りごと入口",
+      "トリセツ導入1ページ目",
+      "歩き方",
+      "トリセツ相談比較表と既存共通3社カード"
+    ]
+  },
+  "status": "PASS_AFTER_NIT_FIX",
+  "openCounts": {
+    "MUST": 0,
+    "RECOMMEND": 0,
+    "NITS": 0
+  },
+  "findings": [
+    {
+      "id": "V01",
+      "priority": "NITS",
+      "status": "resolved",
+      "title": "390pxのManualTOP左タブで末尾の「す」が1字だけ折り返す",
+      "observed": "修正前のManualTOP/困りごと画像で「時期・節目から探／す」と分かれた．同じ高さは維持し操作を妨げないため非阻害のNITSとした．",
+      "fix": "両タブラベルを「時期・節目から」「探す」，「困りごとから」「探す」の各spanへ分割し，内側をdisplay:inline-blockにした．文字列・ボタンのrole/id/aria-controls/選択属性は前後完全一致．",
+      "verification": [
+        "v060-visual-candidate-troubles-mobile.pngを再目視し，390pxで「時期・節目から／探す」と自然に折り返すことを確認．",
+        "v060-visual-tab-wrap-360.pngを実際に目視し，360pxではタブ文言が両方1行に収まり，末尾1字の分離がないことを確認．",
+        "親のDOM計測は390pxでdoc375/375，360pxでdoc345/345．これは親の計測であり独立目視とは区別する．"
+      ],
+      "files": {
+        "site/manual/index.html": "35189a3c5c46bcf08347a4473bc582e9dcfcc0b28d879648dc643915d04f36e2",
+        "site/manual/manual.css": "5bbbb99edf49738b05f7596c65b69e8ed49f2c462e8cb86761d2001e250409a6"
+      }
+    }
+  ],
+  "visualChecks": [
+    {
+      "area": "色・背景・見出し",
+      "result": "PASS",
+      "detail": "濃緑の見出しと本文，白〜薄いクリームのカード，淡緑の背景，黄土色の縁・影とハレナの黄色は同じ系統．新Manualは既存MAPの図と見出しの組み方に沿い，記事一覧・記事本文との移動でも別サイトに見えるほどの不一致なし．"
+    },
+    {
+      "area": "ヘッダーと主要操作",
+      "result": "PASS",
+      "detail": "ロゴ，歩き方，メニューの位置・大きさ・丸み・コントラストは公開版と同系統．PC/mobileで重なりや文字切れは見当たらない．"
+    },
+    {
+      "area": "文字と余白・カード",
+      "result": "PASS",
+      "detail": "ガイド一覧は既存の横型記事カードを維持．新しい4入口は同じアイコン・緑・角丸を使い，スマホでも文字が読める大きさ．収支改善の本文は公開版と同じ左右の吹き出し・アバター・本文幅を保ち，タイトルや内容の改稿による高さの差を退行扱いしない．"
+    },
+    {
+      "area": "対話とアバター",
+      "result": "PASS",
+      "detail": "同じMAPはじめにを公開/候補のPC/mobileで比較し，図の読み込み後に色・アバター・本文の折返し・吹き出し配置が維持されることを目視．トリセツ導入は既存通常記事の灰色博士/橙色ハレナの体系に沿う．MAP対話の薄緑背景との差を新規記事形式の差として区別．"
+    },
+    {
+      "area": "Manualの入口と困りごとカード",
+      "result": "PASS_AFTER_NIT_FIX",
+      "detail": "タイトルと対象吹き出し，説明書＋モニターの横長導入カード，時期/困りごとタブ，8分類の線画アイコンは共通配色・細線・角丸で統一．PCの2列カードは行高と余白がそろい，mobileは1列になって文字・リンクが収まる．唯一の不自然な1字折返しはV01で解消．"
+    },
+    {
+      "area": "歩き方の手帳",
+      "result": "PASS",
+      "detail": "公開版の紙色・左の綴じ・薄緑の罫線・進捗バー・チェック印を継承．候補の2対象タブは手帳の色と整合し，スマホで「太陽光を」の後に2行でそろう．長い項目も枠内で折り返し，閉じるボタンと相談項目は読める．別originの達成数差は保存状態の差として除外．"
+    },
+    {
+      "area": "相談先と比較表",
+      "result": "PASS_REUSED_SAME_COMPONENT",
+      "detail": "Manual下部の相談見出し・比較表のPC/mobile実画像を確認．既存共通3社カードの過去実画像も目視し，クリーム色のカード，推薦枠，緑の主ボタン，枠線ボタン，ロゴ配置の系統が維持されることを確認．新設比較であることの注記は通常本文と同じトーンで表示されている．"
+    }
+  ],
+  "intentionalDifferencesExcluded": [
+    "開発用の黄色いバナーとそれに伴う縦位置のずれ．",
+    "初期の候補PC画像の高さ712pxはviewport設定が別タブへ適用されていなかった撮影状態．最終PCは1280×900で再撮影され，その画像を再目視した．",
+    "対象者を示すハレナ吹き出し・パネル位置の変更．",
+    "ガイドの4分類ナビ・番号・記事の並べ替えと，その追加分による一覧の縦位置変化．",
+    "2対象タブ・Manual時期/困りごとの入口・新規記事の見出しと内容．",
+    "選択したMAPのマス，保存済みの駒・読了/進捗の違い．",
+    "MAPはじめにの黒い見出し枠はprogrammatic focusによるUI状態であり，意図しない装飾や見出しの破損として扱わない．"
+  ],
+  "images": [
+    {
+      "file": "qa/artifacts/v060-visual-published-map-pc.png",
+      "sha256": "acc7147ff060eb7fb77f3edc3e7349d39de73bf6086aa645d29ea1298350913c",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-map-mobile.png",
+      "sha256": "850330a06f87b01aabf6cffa4a50a957202dd14dd9b1207b7aeedfa6a3fc0107",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-guides-pc.png",
+      "sha256": "19d2378e24a171fd3a348cce209849cd8e39fba3531ca4057a9408698a9d8369",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-guides-mobile.png",
+      "sha256": "c45319b891ef3743ad483312132641fd99444565cdc1ad292a5360494aa5b5c2",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-income-pc.png",
+      "sha256": "9c89e11f4eb1a982228928fa4ade972f4ab29464715dfd515a40861bd1c87d9c",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-income-mobile.png",
+      "sha256": "17aee7bec4868e5bb9257c72237ef8cfe86380795b8efc9f53c8ed6188bdf5a6",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-dialogue-pc.png",
+      "sha256": "943081638cb16c10a960bd67c791d0cbc49f526f7612ce2db7de35b1698fe3e8",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-dialogue-mobile.png",
+      "sha256": "36217b2ded3c569a402707a320851e75ba054d4508f073a65255f342aba8c57d",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-walkthrough-pc.png",
+      "sha256": "677acbec482b5e112d3fecd454fc4144e7f97f2d545b080744dbbb94f6becc28",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-published-walkthrough-mobile.png",
+      "sha256": "5fe04cffa1a92fe635cdde8302bbf299aa5f717efbae55b6a45a4435b1642c06",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-map-pc.png",
+      "sha256": "932f3ac19ebd369b4297b7cd50acc7588ae792318a1ee316c4808467a3da2b47",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-map-mobile.png",
+      "sha256": "5cc6c81261c13b4e0e61d73baa2ab3aa1d2e7aff1b3b06bbc904c56f5a437b23",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-guides-pc.png",
+      "sha256": "53d0c4b43067d1663c222fabb9455c8ca80ec0787c9307ba1ef9554e3744fadc",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-guides-mobile.png",
+      "sha256": "e751f234d11197db133d1744ed8307698aab4fe8649c98d631bcbff46fdd65fe",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-income-pc.png",
+      "sha256": "e442ef103e9199f30829ad1aa735103c0af048bf4d0e0fc76cfce29578ffcf7b",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-income-mobile.png",
+      "sha256": "4a6410c094980d50303e80119c4f6b9725124ea7098f8a7cc325904e13befd43",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-dialogue-pc.png",
+      "sha256": "558eb78ac8043a7b42293ba2bafaeb09794f9c67c38dc63c532c5d69cb31a4c0",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-dialogue-mobile.png",
+      "sha256": "bbf5b41af262b2c58aae5ef35ce8b09a7231076f09c7236805f223dda0f2b675",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-walkthrough-pc.png",
+      "sha256": "41b10b08a2173f3cf995b0ff6e754351901e94a770db1a93ba599cdafb72a9c7",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-walkthrough-mobile.png",
+      "sha256": "874953572d798aff92553d7eaaad9a91155c06546e1bfe08dfffcb6bc98fef3a",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-intro-pc.png",
+      "sha256": "a682c83b22a4d12ef043fff6aca19a8b6a6bd65bc44629e0b4778a424dd67859",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-intro-mobile.png",
+      "sha256": "bcb86dc14412fc28cfd819baedb5a67b90774fb331f5dd19fa36d7ecfa8f5fab",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-manual-pc.png",
+      "sha256": "8b97d8a6aeb565961b68e30d68f1801071125e45fd0466a800e9ec2ef87b9a85",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-manual-mobile.png",
+      "sha256": "b39cd25fb005c2678bc11e46216d70fc1b24f42e3e83b4014c1844458adcdbe6",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-troubles-pc.png",
+      "sha256": "97ddeafab6e4c462ee889ea5365e22a4a3ae9967e317df9c72ff00b7e88735a8",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 889,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-candidate-troubles-mobile.png",
+      "sha256": "52006ea788bbc61766ada2d6db6cc5e27f012ee8b9a88f7e65fdba5567506f74",
+      "format": "JPEG",
+      "width": 375,
+      "height": 812,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-visual-tab-wrap-360.png",
+      "sha256": "84fe8b13958f3ab5b6a81ce7d948b4e3daef09d46a23ac2ff689173d4df1cfda",
+      "format": "JPEG",
+      "width": 345,
+      "height": 778,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-release-manual-consultation-pc.png",
+      "sha256": "d83ad88a7110dac3043354e9aa254ba81908c4e85ea6ab8ca177910533229989",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 712,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-release-manual-consultation-mobile.png",
+      "sha256": "96f339240a5ec40d07d2604d3c4674abcdf1ea868506a9f63cfb48bbc0008fd1",
+      "format": "JPEG",
+      "width": 345,
+      "height": 778,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v050-quote-cards-pc.png",
+      "sha256": "25d4c9f43130c17bad7f3b761c7f3a2f9cde0ab3973dbe63c47074c87ce32276",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 988,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    },
+    {
+      "file": "qa/artifacts/v060-renewal-page3-providers-review-pc.png",
+      "sha256": "ac72938b9004c564c97e4ecaf46050beed0a0de56fff99af39537436f1b213b5",
+      "format": "JPEG",
+      "width": 1265,
+      "height": 988,
+      "reviewMethod": "view_imageで実画像を目視確認"
+    }
+  ],
+  "verificationReused": [
+    {
+      "artifact": "qa/artifacts/v060-visual-pages-build.log",
+      "detail": "親実施の修正後公開ビルド135ファイル・38正規URL PASSを再利用．"
+    },
+    {
+      "artifact": "qa/artifacts/v060-visual-preview-build.log",
+      "detail": "親実施の修正後開発ビルド134ファイル・42HTML PASSを再利用．"
+    },
+    {
+      "artifact": "qa/artifacts/v060-release-integrity-review.json",
+      "detail": "既存本文・数値・データ・配信構造の独立PASSは変更なし．本追加レビューを理由に全件テストを繰り返さない．"
+    }
+  ],
+  "limits": [
+    "親がCUAで操作・撮影した実画面を，別担当がview_imageで独立に目視したレビュー．本担当はブラウザーを操作していない．",
+    "クリック・タブ切替・戻る・保存などの実操作は親の確認範囲．本担当の独立検収は見た目と小CSS/HTML差分，アクセシブル名/属性の同一性に限定する．",
+    "幅変更は実端末の検査ではない．今回の代表画面・表示範囲を越えた全ページ/全ブラウザーのピクセル一致や，実機UXの完了を意味しない．",
+    "相談カードの全表示は既存共有コンポーネントの過去画像を併用し，現在Manualの比較表画像だけで全カードを新たに目視したとは扱わない．",
+    "スクリーンショットの拡張子はpngだがCUA返却の実体はJPEGのものを含む．個別format/実寸を画像記録へ明記．",
+    "本番公開・外部サービス送信の許可や実施を意味しない．"
+  ],
+  "processesStarted": []
+}
