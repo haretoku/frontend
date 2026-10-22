@@ -10,7 +10,7 @@
     "packageVersion": "0.6.0",
     "sourceFiles": {
       "package.json": "26794c41e8c08e7d96ab56c1acbd5014b4332caf9428f26e9ede7d6bb72e04aa",
-      "CHANGELOG.md": "d7a484170dd70e04cefc58d660ee8bec21e088971055c5ceb6e9a44d22041c2e",
+      "CHANGELOG.md": "2207e703b3e85961ff39d9dcb3b7eae1fd96f80994ef293ba53ee663b35d88e7",
       ".config/vite.pages.config.js": "dac420186e32300bee4ec2b19491daed8003eeb1a50af5c2156ae53727ad7b80",
       "site/hosting/finalize-pages.js": "fc1f8071a44c8cf1b94d71205b56d292bf96edbc2d71adaec88f51cd3ddb7e62",
       "site/hosting/finalize-static-assets.js": "8dcd3bbffd0c6e3a33b847461c9c263b822f68b7465af2080da0318fb0056b41",
@@ -21,17 +21,20 @@
       "site/shared/analytics-config.js": "710e0b03e43bedb066323607c5902d8a14d25fa7d86fa63b9cceb187299e0ef9",
       "site/solar/src/guide-groups.js": "0e8426d3e2b0e01d8cf35e0e94975afee98a8741c2db22a6015e2352eb9ce949",
       "site/shared/site-header-template.js": "67228cd13dfe3ecf1fa428588890919c7ad9c5e660d59b8585310b3227a7eb99",
-      "site/manual/index.html": "98a70d4f1d440ef889decfbcf9e1befcd8fe579964ba775d08aa7f0648a192d8",
-      "site/manual/getting-started/index.html": "52b1dc748d3b91ac80c2cf049b6251c0277f6c0445662834d96b0a706ec0265b",
-      "site/manual/getting-started/milestones/index.html": "35b7043915d49946a0570677917714c4f87e4e8b7d41309320a35352dd3fdc08",
+      "site/manual/index.html": "f432bf6daea39de12cde950de61d15210da51ffa710dc2e9a53a366e993b23f5",
+      "site/manual/getting-started/index.html": "7170ff30a5d99a88b0aaddee4bd6cb101ae5368fa257627b11714ddc8dc1b3fb",
+      "site/manual/getting-started/milestones/index.html": "a37bf578ca7a81d530fb7e04334f2ffdc38f8c73c305addcf0fe75c466fa11a8",
       "site/manual/getting-started/troubles/index.html": "6f37cbb3e51751703ae0188d14d2c9d206babe8636ebe3f38aa144a89ffc80c0",
       "site/manual/equipment-renewal/index.html": "20c0e51041bac8d7c878e059e18950214b702918e8cca758cd8814499551c2e6",
       "site/manual/equipment-renewal/costs/index.html": "2fbf8b78f34084f678704d59da766dbb49a6cb871e247d22ff2d2a60c4209fc3",
-      "site/manual/equipment-renewal/consultation/index.html": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d"
+      "site/manual/equipment-renewal/consultation/index.html": "b75bad210c96c39455805634a3a3773f075e9d5fd3cd15353f9d5de9924222f5",
+      "qa/sync-manual-components.mjs": "9e5713e6be676b5c3c9f8a63f57a668659848b09759221543001e759078c1b58"
     },
     "buildOutput": "dist-pages",
     "buildScan": "qa/artifacts/v060-release-integrity-scan.json",
-    "buildOutputDigest": "c529c6e42de9ad6cefca6ac582a843db3a0a2c93616be4d25c8df55b644cac75"
+    "buildOutputDigest": "c529c6e42de9ad6cefca6ac582a843db3a0a2c93616be4d25c8df55b644cac75",
+    "commit": "5da8a5f5956e8f8763a050e4ed8204fcc6ba9905",
+    "commitStatus": "local release candidate; not pushed or published"
   },
   "status": "PASS_IN_REVIEW_SCOPE",
   "counts": {
@@ -230,5 +233,84 @@
     "数値根拠の全再調査と外部全URLのHTTP再取得は不変範囲の既存PASSを再利用．以前記録済みの政府ページ取得制約を解消済みとはしない．",
     "このPASSは候補の保存/リリース準備に対するもので本番公開の承認ではない．"
   ],
-  "processesStarted": []
+  "processesStarted": [],
+  "amendments": [
+    {
+      "date": "2026-10-22",
+      "scope": "末尾空白正規化と検収結果文書追記の限定再確認",
+      "result": "PASS_WHITESPACE_AND_DOCUMENTATION_SCOPE",
+      "counts": {
+        "MUST": 0,
+        "RECOMMEND": 0,
+        "NITS": 0
+      },
+      "sourceChanged": [
+        {
+          "file": "CHANGELOG.md",
+          "oldSha256": "d7a484170dd70e04cefc58d660ee8bec21e088971055c5ceb6e9a44d22041c2e",
+          "newSha256": "2207e703b3e85961ff39d9dcb3b7eae1fd96f80994ef293ba53ee663b35d88e7"
+        },
+        {
+          "file": "site/manual/index.html",
+          "oldSha256": "98a70d4f1d440ef889decfbcf9e1befcd8fe579964ba775d08aa7f0648a192d8",
+          "newSha256": "f432bf6daea39de12cde950de61d15210da51ffa710dc2e9a53a366e993b23f5"
+        },
+        {
+          "file": "site/manual/getting-started/index.html",
+          "oldSha256": "52b1dc748d3b91ac80c2cf049b6251c0277f6c0445662834d96b0a706ec0265b",
+          "newSha256": "7170ff30a5d99a88b0aaddee4bd6cb101ae5368fa257627b11714ddc8dc1b3fb"
+        },
+        {
+          "file": "site/manual/getting-started/milestones/index.html",
+          "oldSha256": "35b7043915d49946a0570677917714c4f87e4e8b7d41309320a35352dd3fdc08",
+          "newSha256": "a37bf578ca7a81d530fb7e04334f2ffdc38f8c73c305addcf0fe75c466fa11a8"
+        },
+        {
+          "file": "site/manual/equipment-renewal/consultation/index.html",
+          "oldSha256": "35fed3068fffc55c7bf1457f076f059a472cf6fc3e4947b777d04c1ad32aac6d",
+          "newSha256": "b75bad210c96c39455805634a3a3773f075e9d5fd3cd15353f9d5de9924222f5"
+        }
+      ],
+      "sync": {
+        "file": "qa/sync-manual-components.mjs",
+        "sha256": "9e5713e6be676b5c3c9f8a63f57a668659848b09759221543001e759078c1b58",
+        "change": "result=result.replace(/[ \\t]+$/gm,''); の1行追加"
+      },
+      "outputChanged": [
+        {
+          "file": "manual/equipment-renewal/consultation/index.html",
+          "oldSha256": "f65ab985b9e6b94a997cb18906afb937e98eda23008bd1512c46966abade95f5",
+          "newSha256": "ec63de3617b3ed9fb00735a494cfb33155151771a5009649c46cc3b057280472"
+        },
+        {
+          "file": "manual/getting-started/index.html",
+          "oldSha256": "460d95a8738a3933acd3ed6e6e4f4668c2e3650cc28040315b1229a4b70b9daf",
+          "newSha256": "78ec4ed87367fc596bd3cc59be9560b35e94ea074b7001a61e97358a6a950f7a"
+        },
+        {
+          "file": "manual/getting-started/milestones/index.html",
+          "oldSha256": "fcd0d77f3769512b58a5c527dbf14951d9188355ec003aa19cf5354994f70742",
+          "newSha256": "e0ce5838fa7574e784e1ab2bbe89ff4e54fe110ef192e42e47a820d264aafb33"
+        },
+        {
+          "file": "manual/index.html",
+          "oldSha256": "23e70732c13d796e924b5dbab889c6f3b736914ad748f68f63235e8b312b0388",
+          "newSha256": "7cfe67228cfa6b611e690a95ba49c3423b7b45435d51949ec9983132d82e8237"
+        }
+      ],
+      "checks": [
+        "再stage前にgit diffを確認し，4HTMLの変更が末尾空白だけであることをgit diff --ignore-space-at-eol --numstatが空になることにより独立確認した．その後親が同じ差分をstageしたため，後続作業は現ハッシュへの更新に限定．",
+        "同期スクリプトの追加は既存5対象の生成後に末尾スペース・タブを除く1行のみ．node qa/sync-manual-components.mjs --checkはPASS．",
+        "再ビルド135配信物のSHA256を当初の独立走査一覧と照合し，4HTML以外131ファイルは完全一致．4HTMLは上記ソース空白正規化に対応する．",
+        "CHANGELOGの検収結果追記は公開準備中・本番未公開・公開指示待ちを維持し，公開成功とは記載していない．",
+        "qa/artifacts/v060-release-candidate-files.jsonのsourceハッシュを現ファイルと全件照合し一致．",
+        "確定候補5da8a5f5956e8f8763a050e4ed8204fcc6ba9905と現行.config・package・site・同期スクリプトのgit diffは0．検収記録の追記だけを候補後の監査文書差分として保持する．"
+      ],
+      "candidateManifestSha256": "2e60b29ab4879d30025e916c5d0062b31f4a6eb6e72b6d55df9f2b1d644db83a",
+      "limits": [
+        "実装・本文・リンク等の意味変更はないため，当初の全件検査・静的構造・計測モックPASSを再利用し再実行しない．"
+      ],
+      "candidateCommit": "5da8a5f5956e8f8763a050e4ed8204fcc6ba9905"
+    }
+  ]
 }
