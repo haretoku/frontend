@@ -1,8 +1,8 @@
+import {escapeHtml as safe} from '../shared/html.js';
 import {assets} from './assets.js';
 import {renderProviderComparison} from './provider-comparison-view.js';
 import {renderConsultationProviders} from './consultation-view.js';
 import {journeyLinks} from './routes.js';
-const safe = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const contractorChecklistUrl = new URL('./assets/contractor-checksheet.pdf',import.meta.url).href;
 function answerText(text,links=[]){
   const matches=links.filter(link=>/^\/guides\/[a-z-]+\/$/.test(link.href)&&link.text).map(link=>({...link,start:String(text).indexOf(link.text)})).filter(link=>link.start>=0).sort((a,b)=>a.start-b.start);

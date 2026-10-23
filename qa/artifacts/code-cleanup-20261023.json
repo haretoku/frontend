@@ -1,0 +1,3006 @@
+{
+  "date": "2026-10-23",
+  "status": "complete-preview-verified",
+  "baseCommits": {
+    "frontend": "eb40fa12961d74b02872817cde9205a12aff15a5",
+    "backend": "a6a2edafc8fd3d823a6b7f82a3b944cecc1da8a3"
+  },
+  "coverage": {
+    "frontend": {
+      "codeFiles": 163,
+      "jsModules": 128,
+      "jsFunctionsParsed": 1736,
+      "parseErrors": 0
+    },
+    "backend": {
+      "codeFiles": 17,
+      "pythonModules": 13,
+      "pythonFunctionsParsed": 203
+    },
+    "businessResearch": "no tracked executable code; ongoing documents and media protected"
+  },
+  "changes": [
+    {
+      "repo": "frontend",
+      "path": "site/map/consultation-view.js",
+      "beforeSha256": "74737c2cf53b7817a74f7e814cc38e66f35e6596067a18d091ba867941d1eb9c",
+      "kind": "replace identical HTML escaping with shared helper"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/journey.js",
+      "beforeSha256": "1bdddc9af4310ba191ca4099957a5487b0dd05b685ad179d67a6535c53e64a0c",
+      "kind": "replace identical HTML escaping with shared helper"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/provider-comparison-view.js",
+      "beforeSha256": "c4c204c916f9fe414dbe23a91ee4b2732a66a616ea6f6c0993c9c2725c65cb54",
+      "kind": "replace identical HTML escaping with shared helper"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/reading-view.js",
+      "beforeSha256": "56151d3cafb8b81704c38162a1563484b67138cab1947e0fb318bddf02032559",
+      "kind": "replace identical HTML escaping with shared helper"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/manual/components.js",
+      "beforeSha256": "95d20a9a84f18f90e798792a2a3d90cd36ac409f9070cbfd61dfbcc126a51c17",
+      "kind": "replace identical HTML escaping with shared helper"
+    },
+    {
+      "repo": "frontend",
+      "path": "qa/sync-journey-pages.mjs",
+      "beforeSha256": "e9ae763625e357526a65a6f7970983aacd317238af51c31de0303ea3807c18dc",
+      "kind": "replace identical HTML escaping with shared helper"
+    },
+    {
+      "repo": "frontend",
+      "path": "qa/generate-economics-chart.mjs",
+      "kind": "retain exact chart-only styles in qa/article-cashflow.css",
+      "rules": 29,
+      "cssSha256": "56a914c2de351f8fd4dec6cd4395355f7f907273a2cac9fc6fc07a0666678480"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/src/engine.py",
+      "kind": "remove obsolete isolated-trial CLI, HTML renderer and CLI-only I/O/imports",
+      "removedLines": 90,
+      "activeFunctionsUnchanged": true
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/src/common_generate.py",
+      "kind": "remove unused imports; preserve canonical reference test",
+      "removedNames": [
+        "confirmed_equipment_value",
+        "source_equipment_heading",
+        "canonical_transport_digest",
+        "source_housing_stage_controls",
+        "partition_source_display_bindings",
+        "resolve_original_path",
+        "aggregate_reception_states",
+        "source_reception_state",
+        "paragraph",
+        "listing",
+        "resolved_item_definition_reference",
+        "pointer",
+        "compile_official_expression",
+        "source_field_reference_syntax",
+        "compile_source_amount_tree",
+        "hashlib"
+      ]
+    },
+    {
+      "repo": "backend",
+      "path": "qa/tests/test_calculation_physics.py",
+      "kind": "remove unused imports; preserve canonical reference test",
+      "removedNames": [
+        "_preprocessed_capacity_kw",
+        "calculator_module",
+        "patch"
+      ]
+    },
+    {
+      "scope": "legacy display helpers",
+      "detail": "Removed unused exports and constant-null pilot branch; preserved source conditions, common display contracts and active rendering."
+    }
+  ],
+  "deleted": [
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 23755,
+      "repo": "frontend",
+      "sha256": "ade303e912279b6954a5d54f81bc3ef516be4c8270d9ae97eb6eb810f09dc651",
+      "path": "site/articles/styles/electricity-sales-hero.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 4288,
+      "repo": "frontend",
+      "sha256": "679043523db35c853a1579acde83b55017db4fd4fe0eafa8f0eeca9d252ef9e4",
+      "path": "site/articles/styles/electricity-savings.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 9724,
+      "repo": "frontend",
+      "sha256": "01252588726c0139501268dce75d4c8993dfc9618e8f5a7560122534edca5a53",
+      "path": "site/articles/styles/guide-chapters.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 3469,
+      "repo": "frontend",
+      "sha256": "56c48727d76439394fe204322860f66945effdc3e9ebca7b480eb66cf483ef48",
+      "path": "site/articles/styles/installation-cost.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 3441,
+      "repo": "frontend",
+      "sha256": "7caae43d682c0671241d3f62cc211b2af2fad968bd5655a2239ea90515f442f7",
+      "path": "site/articles/styles/maintenance-cost.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 4848,
+      "repo": "frontend",
+      "sha256": "d587c5f20f5605bc9d39079fb6b7005eae90a11a74ed6576a050d9bb8175e198",
+      "path": "site/articles/styles/subsidy-amount.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 62510,
+      "repo": "frontend",
+      "sha256": "eafe33031e7f285c4d6c79a5f6b8960ded2d3a5193e34053f067259a041d6068",
+      "path": "site/simulator/styles/analysis.css"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 1714,
+      "repo": "frontend",
+      "sha256": "aa88dc2271bb9a94ad1cd8b15451b47701c73437e3fd110f7f9fe08bf5a931f8",
+      "path": "site/simulator/src/subsidy-information.js"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 4254,
+      "repo": "frontend",
+      "sha256": "dd2462a6302d3daa8af53f866b6465313e9166f927d5f409b92978e7af43ccf8",
+      "path": "site/simulator/src/subsidy-amount-presentation.js"
+    },
+    {
+      "reason": "no runtime/build/QA references; selected chart styles moved unchanged; retired-only battery UI unit removed",
+      "bytes": 1914,
+      "repo": "frontend",
+      "sha256": "a1d3ad16bc4b16b7ed6bece7d025d359aed2417014ba8f3f5a778574ed10ff38",
+      "path": "site/simulator/src/battery-presentation.js"
+    },
+    {
+      "path": "site/simulator/src/diagnostic-amount-dom.js",
+      "sha256": "de3edec4078b8672606962d9a77adb0d6bcba587407abac0e0abe0019b0b81d3",
+      "bytes": 2622,
+      "reason": "Unused institutional renderer and ordering helper after constant-null pilot branch removed."
+    }
+  ],
+  "protectedData": [
+    {
+      "repo": "frontend",
+      "path": "data/input/diagnostic-display-binding.json",
+      "sha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919"
+    },
+    {
+      "repo": "frontend",
+      "path": "data/input/diagnostic-display-table.json",
+      "sha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7"
+    },
+    {
+      "repo": "frontend",
+      "path": "data/input/hare-display-binding.json",
+      "sha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a"
+    },
+    {
+      "repo": "frontend",
+      "path": "data/input/hare-display-table.json",
+      "sha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff"
+    },
+    {
+      "repo": "frontend",
+      "path": "data/input/metadata.json",
+      "sha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd"
+    },
+    {
+      "repo": "frontend",
+      "path": "data/input/public-data.json",
+      "sha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23"
+    },
+    {
+      "repo": "backend",
+      "path": "data/dataset-manifest.json",
+      "sha256": "89baaf10fee66bf2812e274f5e5a3103bcc039a8ae4e7caa35be3eb84212770f"
+    },
+    {
+      "repo": "backend",
+      "path": "data/demand/adopted/average-electricity-bills.json",
+      "sha256": "34e0abb01404801ed5d73a0ecaed76ecf2cd57864b644b8625c1c504e4ea4902"
+    },
+    {
+      "repo": "backend",
+      "path": "data/demand/adopted/self-consumption-adjustments.json",
+      "sha256": "9931dd6dbe22c0dd76b13856e6001d7a0ba69ba4d0c24d02898adec09bae5655"
+    },
+    {
+      "repo": "backend",
+      "path": "data/electricity/adopted/electricity-area-map.json",
+      "sha256": "95fefe957c2458c5e8f6eeb9756e3d7378ba8484bd1594fadeda9797a7e5930c"
+    },
+    {
+      "repo": "backend",
+      "path": "data/electricity/adopted/electricity-prices.json",
+      "sha256": "0150e26119c1c0fe6b3de87d0d5d60a00f0bc0d09b15af4b88d14990daa296d4"
+    },
+    {
+      "repo": "backend",
+      "path": "data/electricity/adopted/fit-prices.json",
+      "sha256": "948745cb9cd4e8aee3b29758e2c449fbbf2da89c038f7c2b5adba16162faf88e"
+    },
+    {
+      "repo": "backend",
+      "path": "data/electricity/adopted/post-fit-prices.json",
+      "sha256": "e6e7f4acf75d0d3e40a363804b48de50d51075915d5ac63c650f13dd3bde3649"
+    },
+    {
+      "repo": "backend",
+      "path": "data/equipment/adopted/battery-system.json",
+      "sha256": "6aee897edaebee317f03263a5e2e530d620b1684762af4f98aa15968624d8a34"
+    },
+    {
+      "repo": "backend",
+      "path": "data/equipment/adopted/installation-cost.json",
+      "sha256": "0eebf8afb611a5b0870b97385de6ec2bf923df1dbf2143facf1d656c44bdffd1"
+    },
+    {
+      "repo": "backend",
+      "path": "data/equipment/adopted/lifecycle-costs.json",
+      "sha256": "fd32c7e371dfa597b0934aa3644538333407a16049b34f342424f2c6997c1e66"
+    },
+    {
+      "repo": "backend",
+      "path": "data/generation/adopted/generation-adjustments.json",
+      "sha256": "0376fcf9d2b81ad2558e4552b757791177a2c9afe46b518dae25c7002ac101df"
+    },
+    {
+      "repo": "backend",
+      "path": "data/generation/adopted/generation-by-prefecture.json",
+      "sha256": "a976d55cac70d99caf4d311ac4ec4a8e0437b7e5e1fcf6d9f65e936cb080b58a"
+    },
+    {
+      "repo": "backend",
+      "path": "data/generation/adopted/pv-generation-degradation.json",
+      "sha256": "e323d90759563064028b9584d95f1d4bd240e793efc33ab9391ab37e0ee26b13"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/average-electricity-bills.schema.json",
+      "sha256": "d31d8b8804b108ba8c67cbba828bdc32b828493abc0a212313a616aa4c11f735"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/battery-system.schema.json",
+      "sha256": "31bcdc9d0629884432a3bb7d1937af3bbf388c9a512b789a5901a9ebdfe84cb6"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/common.schema.json",
+      "sha256": "8e8338ef20d159c1222e566928131112b7bd729054bfafc66cff69d5f81ddc3c"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/electricity-area-map.schema.json",
+      "sha256": "889ad4339aa7fa9657c4d39985a93e152f12e8f8e47b258f2f9cb1f66e547a2d"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/electricity-prices.schema.json",
+      "sha256": "283e5c8e38b01517ea5b7c7c53522901c69c6164fcd99cd652028e78926e9951"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/fit-prices.schema.json",
+      "sha256": "195eca32212232109acd27829df080ffa18d54f659dd57561c0c352f51a2f207"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/generation-adjustments.schema.json",
+      "sha256": "8c562354e15603855a0dd997339d1d644f129279e93b4442840327ac5a3b7ae9"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/generation-by-prefecture.schema.json",
+      "sha256": "18428ea8e3efd69fd2ccee9b03b2a5a14f7e9c58c5086e7ae8a0b64aa0969b71"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/installation-cost.schema.json",
+      "sha256": "dbf9acb04b1fb707fa0e8f78698816851e7d291a487f8361980579cae4b49add"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/lifecycle-costs.schema.json",
+      "sha256": "28e8a000a96ecc1cdbc05b95e7da339a908b86efa2a48e4832b7659fbd5c29d7"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/post-fit-prices.schema.json",
+      "sha256": "da6be33c05e4e1b1ded8204e9569ba8d697903a6baf6c85c7ad5834e982f12d6"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/pv-generation-degradation.schema.json",
+      "sha256": "cbbc2d7f11e26272743520f457e4321ee698f53f039ca988dbb65bf1ba0ba428"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/scenarios.schema.json",
+      "sha256": "3bbb4ddf2e13ff62a9ea75ff5218daf50f749ef69d775575fb41e51992c50c1e"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/self-consumption-adjustments.schema.json",
+      "sha256": "aed4d69a49b650bef1f108b23990c7f3f70776ace717fd3b3ab896e936017e89"
+    },
+    {
+      "repo": "backend",
+      "path": "data/schemas/source-catalog.schema.json",
+      "sha256": "de5111e4ad56748a72ec33749daf73f3d9e4e3b3b9a3e6c0a0126cabfffcc163"
+    },
+    {
+      "repo": "backend",
+      "path": "data/sources/catalog.json",
+      "sha256": "701bc2687254a60984e2f19a0327a048b1c3a14f64354498b9a58de8664930ad"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/adopted/diagnostic-display-binding.json",
+      "sha256": "8122bdb16c1d40e8200a4d3a72e728f3fba184c309282dfcd8321fe2f2715f53"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/adopted/diagnostic-display-table.json",
+      "sha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/adopted/hare-display-binding.json",
+      "sha256": "591d7a93eb5e7d95f13598603c52e34cc1944b9fbfa0b80034aeee6df3bc14cf"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/adopted/hare-display-table.json",
+      "sha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/01-hokkaido-2026-collection-audit.json",
+      "sha256": "f27dc57243a52d32121e9e5ac00c4657004c553bb316377da57e23eee8eab979"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/02-aomori-2026-collection-audit.json",
+      "sha256": "a120238a5a3b75071b523531b1452a7a29fb0d8c15683632dcd1de2342a39429"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/03-iwate-2026-collection-audit.json",
+      "sha256": "f1c9e181c1a51c1b0e8a846ea5cb7ad24e7e827f862e067ff91f78cc05809d07"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/04-miyagi-2026-collection-audit.json",
+      "sha256": "14fc654b3a0a29b79dec9c4086a46bb913967c2cb028403dbe619bf3073b8c81"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/05-akita-2026-collection-audit.json",
+      "sha256": "d98ef689fa88672a72b21b4302b845b4cd16d41d2b2dd76811a84dd3007d22d9"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/06-yamagata-2026-collection-audit.json",
+      "sha256": "5770a0471384034fbfc51a97f82d6b45df386c58a64b27e11de0515d4e8006bd"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/07-fukushima-2026-collection-audit.json",
+      "sha256": "845b421199c609d783c242e1bc8e0aa7919eb595651b4c0487302036afb3c115"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/08-ibaraki-2026-collection-audit.json",
+      "sha256": "0d1605b5b888066d9152343f205668f4f12a8eb2774648bd7804d29e42b22fab"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/09-tochigi-2026-collection-audit.json",
+      "sha256": "b2a527efcbe84d3cc448a829112828486173fbdfc9c6fc833ea2b365f2c18e94"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/10-gunma-2026-collection-audit.json",
+      "sha256": "7aaeabc0051313ad88c94002d176f1da6998d0680fdfee53920995ae7f9d425b"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/11-saitama-2026-collection-audit.json",
+      "sha256": "d7133e3f116a21e43f876c05d908d440d4f5623e88364113d7ea8820f8dc93fa"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/12-chiba-2026-collection-audit.json",
+      "sha256": "e554d8d7e2f75618d0100492c004099c1399c1d2fdee5e35b06861c2a81b62f3"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/13-tokyo-2026-collection-audit.json",
+      "sha256": "f27fbfccf909ad48d000f2bccb6789a7e5d716798db7bf59711da4c9600f7627"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/14-kanagawa-2026-collection-audit.json",
+      "sha256": "1552f99be6c9f93878e361d8465126b9c72ed2a48a9dec3c5935f32a60d036d5"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/15-niigata-2026-collection-audit.json",
+      "sha256": "34fe58ce61b95fc7ef6d832465700173911472bbc739d3e509ec384389f4b312"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/16-toyama-2026-collection-audit.json",
+      "sha256": "e6bbde2283c8305fb4325d10eb7266b37d56622d85f983930bc18a9f41d7fdad"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/17-ishikawa-2026-collection-audit.json",
+      "sha256": "be260e4b4f6c61de624f98cbee2cc4844c9c39ad216932a2093d0d08cc79e697"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/18-fukui-2026-collection-audit.json",
+      "sha256": "7347164497eeee65aadbe6f7cf48399276dd42c41ec910ebfb94c619977c1bfc"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/19-yamanashi-2026-collection-audit.json",
+      "sha256": "fef5eb303b1f9467ff16dbbdcb8a24b36ef341fb20ca79212b93ebb5ad3573ae"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/20-nagano-2026-collection-audit.json",
+      "sha256": "f4577ab90d215b3316f13805d897ed7f8107f98971bbfd762416b994f8002374"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/21-gifu-2026-collection-audit.json",
+      "sha256": "bcba596166ed04cdd4ec7bfe166ce938af1180a045f6ff0afe14eb23abe3d8b9"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/22-shizuoka-2026-collection-audit.json",
+      "sha256": "a810d016227e6deac4110dafed6f075e7320ebda998b44d161bced7e8581b99c"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/23-aichi-2026-collection-audit.json",
+      "sha256": "19f7374d1c1d9a5bea2a32026a73103f71bcd07a80d227c3e1a1367042f53c6d"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/24-mie-2026-collection-audit.json",
+      "sha256": "8142d1a705cdfc8bf294275726a640eec59ef26949ab261a982ea406258acc02"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/25-shiga-2026-collection-audit.json",
+      "sha256": "c045735edec79c38507d09163ec6933c3959aea2d5e377181abd8169b2c1eb83"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/26-kyoto-2026-collection-audit.json",
+      "sha256": "e2baf17f8a0171f971deb31e21889b436d74047d334afbb9b1adbd162af3a63e"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/27-osaka-2026-collection-audit.json",
+      "sha256": "6ce8b812db9c3a41dbfcc0f1aba365e8c14bce1a85fe5d2c4d1a0d364445fa0f"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/28-hyogo-2026-collection-audit.json",
+      "sha256": "a1f4a063e599d75fd1ad865a75aef2fabfdc81beac93f286512118bdf14e05a0"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/29-nara-2026-collection-audit.json",
+      "sha256": "b1c9ffad55a8bcaf53e208234165003182e6ed8d245603dd6f79707e1d65a8f5"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/30-wakayama-2026-collection-audit.json",
+      "sha256": "a358587c9a7a448761c8bd06469167d80232048046fe99ea048a18d8be9be9e8"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/31-tottori-2026-collection-audit.json",
+      "sha256": "f84394ac2f7996320a27604f59df1a13ecd57ea4b8425292fb4078bfe545cf28"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/32-shimane-2026-collection-audit.json",
+      "sha256": "0c5a3c7e33129b5db34dcd5bb40246d35c8e160003a7bf02be677b22f5020c15"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/33-okayama-2026-collection-audit.json",
+      "sha256": "aff496315b492b091da13b761852cb28c815eb915bedfc2fb5bdc2009f771fa6"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/34-hiroshima-2026-collection-audit.json",
+      "sha256": "66b25da0d79eb9d3398feec1c9d536207892205df7e1bb5c364d10a065f8bb5f"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/35-yamaguchi-2026-collection-audit.json",
+      "sha256": "fe58e457d71d68094cedb1bbb5aa1944b513b12af1986555a5787476219e4323"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/36-tokushima-2026-collection-audit.json",
+      "sha256": "bd2797f6073d83c6ef4527fe6aef56775e0b0aa648a9823526fe824a733ab07c"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/37-kagawa-2026-collection-audit.json",
+      "sha256": "473362d861c596245ca0ddb97294abe8c70211de865cb46bf5fb22d640255091"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/38-ehime-2026-collection-audit.json",
+      "sha256": "86384a3e23ecd7d6645543562aeb5b6ad63f36ae10e2bf6aa4d2344db2fee64f"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/39-kochi-2026-collection-audit.json",
+      "sha256": "2093032e70bd1fa7b3250cd6002521b267ffda3f239a57d9440b5bdd1cd7ce26"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/40-fukuoka-2026-collection-audit.json",
+      "sha256": "fa284be0cf38b89b52031de591d6f78f3d6fed546c35586946a18df68f3affa4"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/41-saga-2026-collection-audit.json",
+      "sha256": "24d1caffc72c8782d235294481d71a4218791f6df941119b8737f243468c83be"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/42-nagasaki-2026-collection-audit.json",
+      "sha256": "64131c9a67658e580cea8a6e61597dea28e77f2721cf2ad168bc137869e4c6e4"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/43-kumamoto-2026-collection-audit.json",
+      "sha256": "076e644eebc95f63066125fb58a9aa2807f79dfa2e3ef216d06365a089485d4b"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/44-oita-2026-collection-audit.json",
+      "sha256": "ad80802d64fe24de0f9b1db58624512d8067e6ebc6f4cdc31784fae103a46273"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/45-miyazaki-2026-collection-audit.json",
+      "sha256": "1dc273278869da93799d00f32871920ad50fb805b5caf328501979914aa5a605"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/46-kagoshima-2026-collection-audit.json",
+      "sha256": "03e31e84e1a1538341aa4244c9b6f7c89ee3298d57221518b2bdfed3be0b1783"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/prefecture-audits/47-okinawa-2026-collection-audit.json",
+      "sha256": "0977acbf9251df0698dfb4310b5487e6c66aa4fc2935086f770320cbff0a33b2"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/reference-map.json",
+      "sha256": "0460626a3aedda93a8323077557a04138e4da21b81036d0686fcc665a25980fc"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/references/55758eccaa189683-宮城住宅率包含採用・独立局所検収-v1.json",
+      "sha256": "55758eccaa1896832fce4f3724ac954c9f4bb68fa611245bda56039ab92db245"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/references/d8ae9d2051076e87-diagnostic-subsidy-rules-2026.json",
+      "sha256": "d8ae9d2051076e8760f714cf95c22defdefe456a8e1cc8558cd467cdde5664c6"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/source-package.json",
+      "sha256": "22cfd6497d3597efb6ae692d5b5d955d0cb66e94e75618146b50efc17d78b6cf"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/unresolved-source-records.json",
+      "sha256": "1fcdffdb173829225d6bc18ca64e08e687fbec1c3468b9bf61d4f4498a1845ba"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/共通処理定義.json",
+      "sha256": "b5ab4c745254af216f73bbd9d8e92199e8e1f08b8bc2a2216b97ac9cca484c5d"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/input/共通項目定義.json",
+      "sha256": "90624484e9b72c6e52af64e57a38b7302f77cbcdea487342d968288b848c78b3"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/input/metadata.json",
+      "sha256": "8d9735595588eb15531ffa8945d71bd85bb3b2877e5f3d6709c6df20272be15b"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/input/public-contract.json",
+      "sha256": "eb6490ef580a429240730bb45a6366a38ed0f6c986e2052436c399da35778886"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/output/diagnostic-display-binding.json",
+      "sha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/output/diagnostic-display-table.json",
+      "sha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/output/hare-display-binding.json",
+      "sha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/output/hare-display-table.json",
+      "sha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/output/metadata.json",
+      "sha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd"
+    },
+    {
+      "repo": "backend",
+      "path": "dist/output/public-data.json",
+      "sha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23"
+    }
+  ],
+  "baselineOutput": [
+    {
+      "path": ".nojekyll",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "404.html",
+      "sha256": "43eec46294493e2b89654b4b493b3df6895934a6f9984544778847afdb5efcf0"
+    },
+    {
+      "path": "assets/analytics-BUBPSZHq.js",
+      "sha256": "8a133afa139c465a033e8acf7741b5ee05af82d368e54e883e355ee30906c97f"
+    },
+    {
+      "path": "assets/article-Bj71asNy.css",
+      "sha256": "c9c1d4473c13bba787ddaeefb5551665b6e29960380216ecfe9478abde9c03d3"
+    },
+    {
+      "path": "assets/article-solar-economics-cumulative-compact-CIGTExUV.svg",
+      "sha256": "d76ec6539c1aaae1b109d467e81906283902104bd0c59b3cd0c280ca0cdd97b7"
+    },
+    {
+      "path": "assets/article-solar-economics-cumulative-DefzOuOL.svg",
+      "sha256": "c182a31303fdb9b33c74cf76411a378b9e81ce7eaa97d6a2ce7479d97154bfa6"
+    },
+    {
+      "path": "assets/assets-wVBih1br.js",
+      "sha256": "2c3569f23522fcd023782a96d35c2dd36a16d1855151e2f7b0c2e301f6362083"
+    },
+    {
+      "path": "assets/cards-kEJrbhPN.css",
+      "sha256": "798be81494277d218a03042d0b0271fa745b175f16d66faee8bb0699f9901889"
+    },
+    {
+      "path": "assets/consultation-providers-D-Yg8-MO.css",
+      "sha256": "7fb1db773f07053baa5acbc0df3e352f91306df5ac9b8b3571902f1c5ee33d09"
+    },
+    {
+      "path": "assets/contractor-checksheet-DmgL5J0n.pdf",
+      "sha256": "83816ce8cadaa141db74d06ea694987379eeabe4144d9a9e4ee7fe1b05177c70"
+    },
+    {
+      "path": "assets/data-CTlfnS1N.css",
+      "sha256": "dbd066ce8683ce1e6fa86e1232d85438b8f44281e068ec078464dd4a46419c7b"
+    },
+    {
+      "path": "assets/data-loader-_UALgZOL.js",
+      "sha256": "ecf0ed2aab9ca82cc008ee170507c06b3f3477d72789b9881eb04e0e713ec117"
+    },
+    {
+      "path": "assets/data-subsidies-index-BL4xE5rd.js",
+      "sha256": "82ec0e7e7d78ab878662b669a4d925b094690f5f37cf70e73abb2bd105a4b69d"
+    },
+    {
+      "path": "assets/detail-guide-CgQSBg9B.css",
+      "sha256": "2515d0917b7dee0d1946899a208d841e1f115fc14240ec3b222b494b4293543d"
+    },
+    {
+      "path": "assets/detail-guide-figures-B_s8fnqU.css",
+      "sha256": "0f79732c5fe7ba8b659d08a5cfda1790991db5184b7f63dbd0080afd0ce6fc03"
+    },
+    {
+      "path": "assets/diagnostic-display-binding-CKdfZiu5.json",
+      "sha256": "1ef2edc8541a368be7c9b4c5a41b5e4ac6577775bc300644bd3bb884d3d62919"
+    },
+    {
+      "path": "assets/diagnostic-display-table-E4yzT3FH.json",
+      "sha256": "6e024bc5abeba6cbdb9bb2630aaec78550296b9d0d3097ea5f57ea56ca64c0c7"
+    },
+    {
+      "path": "assets/entry-B5WcVJxE.css",
+      "sha256": "ed806f5bc0f17eb7c1ad7bac657dabcf747fff16fcdd43d6bc77837effb3f484"
+    },
+    {
+      "path": "assets/entry-BRpxFgIG.js",
+      "sha256": "388ef666ac76370eca731038410566c2a5bce12ad7822fd61e74a0d494879463"
+    },
+    {
+      "path": "assets/entry-ChgWZR9D.css",
+      "sha256": "72c5d22a234ff3dc72ebd8f355a31ca56ba324d2ca84401f109ab42cfdc5ffb9"
+    },
+    {
+      "path": "assets/entry-UobnqAeu.js",
+      "sha256": "959c38ee26e4a459725161b884e80cdd809ac4f1772d638b77c6d47365417a64"
+    },
+    {
+      "path": "assets/favicon-BmMVSVLw.svg",
+      "sha256": "558e837accce56ac69644f56c744790e4a342faa2f4de65bc7eb47ac71eb5e94"
+    },
+    {
+      "path": "assets/guides-DwUJrXYW.js",
+      "sha256": "f2cf690e82757786ccab832f2d12ab109f6c63ff4faa08055afb00a5dbe60212"
+    },
+    {
+      "path": "assets/guides-electricity-support-end-index-DK-szL2n.css",
+      "sha256": "9999a308639f9c637734a4691dd75982b0fe31f4ad2e337ecd11575a114afc0b"
+    },
+    {
+      "path": "assets/guides-electricity-support-end-index-DK74h4Q6.js",
+      "sha256": "6afb3f0f240649bf125edc7861c883bbef2ee0efad96823f728d56547adf8041"
+    },
+    {
+      "path": "assets/guides-Re8FBS7e.css",
+      "sha256": "2338593832b652ae3c2462a80177bca63f7462d1b8632cad3543104e96ebe057"
+    },
+    {
+      "path": "assets/guides-self-consumption-index-Oslr8jQX.css",
+      "sha256": "fa7bb4d8461fa35c36b3429bbb079e89cff5afd571b3149d238491252c253e70"
+    },
+    {
+      "path": "assets/guides-solar-economics-index-CMvQrjsJ.css",
+      "sha256": "29715262bf59b85406fe57a41ed96e49263b8392d569638105208ef2eab71203"
+    },
+    {
+      "path": "assets/guides-solar-electricity-savings-index-KaY4wo2D.css",
+      "sha256": "3e78e2beb4fe8cbb661bee9d8f363185f74cd8778f024a9196926d2305c80053"
+    },
+    {
+      "path": "assets/guides-solar-installation-cost-index-D_gosE4s.css",
+      "sha256": "42145e12bf5cf681791e88ea99e71c68e3a015030492efca18c6bf1360e60e83"
+    },
+    {
+      "path": "assets/guides-solar-maintenance-cost-index-BfX-UV_h.css",
+      "sha256": "715f9e1f08843c1f14b1a845327a8c1e573d29231103edafd7aa83c53ccb2dd9"
+    },
+    {
+      "path": "assets/hare-display-binding-ByES3t9O.json",
+      "sha256": "2b097e5e44f1fcff57ba89026ee314f990666193d83b54558ef7025183eb588a"
+    },
+    {
+      "path": "assets/hare-display-table-GvQlwHhJ.json",
+      "sha256": "4838c32ebd7742a09b702636110a76fa93a02ab55a8ef9fcd37c08ca53882bff"
+    },
+    {
+      "path": "assets/harena-rooftops-Cwq_PN9m.png",
+      "sha256": "6261941188c0d07bb9e8ae5c0e624a52d837f09b23d7ad701ec8e7719d7804b4"
+    },
+    {
+      "path": "assets/journey-BWwQnKOu.js",
+      "sha256": "dad27bd9e5d186a58352f9f857e9668a98d45d9800aa759120ed73adefa6c52e"
+    },
+    {
+      "path": "assets/journey-CAZk8pFz.css",
+      "sha256": "076d6e0081786a9a90eae8ea752f992ec3c3f86fb8340a010f77e479a377c1f8"
+    },
+    {
+      "path": "assets/journey-state-CCTPYMpn.js",
+      "sha256": "db7c1c26ef2d5fc9299a5a4ae9848fa2928daf5dfecbc1df8d343640f664d278"
+    },
+    {
+      "path": "assets/manual-equipment-renewal-consultation-index-D1nzFn4_.css",
+      "sha256": "8736d7431700def70635bd49cbbc81bfc0ea6b04ccc5e2664f295e605ee5690d"
+    },
+    {
+      "path": "assets/manual-index-Cw0FJBHy.css",
+      "sha256": "9e7f0212b0184582f7d5f7090483ea0100fe96fbc1f2fedba6070c6cc8a494d4"
+    },
+    {
+      "path": "assets/manual-index-piVqDHiC.js",
+      "sha256": "f8e4ebe518ce2b6c0fa53d94039584350b572ada5f5c50623d0d6aba4f305c8b"
+    },
+    {
+      "path": "assets/metadata-D8VIoK63.json",
+      "sha256": "de2a920972f98d6dbf33f946592db3a1b3f1468027e0cd5501e2ed88c26a5dfd"
+    },
+    {
+      "path": "assets/navigator-C6wSog06.png",
+      "sha256": "1cfc6cd08c52ee36e60d4f37261ce6b219112a9c731658c6de191118d5e544fb"
+    },
+    {
+      "path": "assets/og-guide-disaster-20261019-v3.png",
+      "sha256": "833fff14ac67df4b00381e372d2fc16460ad48fe3fef0ecac3cdc785966a9344"
+    },
+    {
+      "path": "assets/og-guide-quotes-contractors-20261019-v2.png",
+      "sha256": "3618f4d22810ebb79a825964486d98df27d7e0eab87d0d2377913f8394390206"
+    },
+    {
+      "path": "assets/og-guide-self-consumption-20261018.png",
+      "sha256": "858a298c0c7d58ca67867428a18db94905afeaa97f1dab5dbe6e3868bba54a48"
+    },
+    {
+      "path": "assets/og-guide-solar-economics-20261019-v3.png",
+      "sha256": "234a460269b3db01fd4eb4d09930ba3ac3b07d612d8cd21f0326a96dd61b3c9d"
+    },
+    {
+      "path": "assets/og-guide-solar-electricity-savings-20261019-v14.png",
+      "sha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639"
+    },
+    {
+      "path": "assets/og-guide-solar-fit-20261019-v4.png",
+      "sha256": "2e1510ecd5c57b61afe2acd8e86995cc5f0128accc6ac15459bdef57db84ea11"
+    },
+    {
+      "path": "assets/og-guide-solar-installation-cost-20261019-v2.png",
+      "sha256": "7be00cdf9a2d221593d15eca2aaddf425cd80dde3cd2bf93520e852bd664f2d1"
+    },
+    {
+      "path": "assets/og-guide-solar-maintenance-cost-20261019-v2.png",
+      "sha256": "f564eafeeeb2b3597c1179f39070a51985000c429016266256779fd590ec4fa6"
+    },
+    {
+      "path": "assets/og-guide-subsidies-20261019-v2.png",
+      "sha256": "9320cdfe1cdc4811420d57dfd993f029ceb7e2eade272c1d9878282a5b3f7174"
+    },
+    {
+      "path": "assets/og-guide-subsidy-amount-20261019-v5.png",
+      "sha256": "084ff8629b378447682aa110b5d0683580c29f3e3138a83e64431cd8e77b1639"
+    },
+    {
+      "path": "assets/og-manual-20261021.png",
+      "sha256": "a5d4ee79d8637de26b3d33f2571debfacf1d49177349bf6b3433d1ec8a6e08c5"
+    },
+    {
+      "path": "assets/og-manual-intro-20261021.png",
+      "sha256": "1c21b765c1f1f37b3e129216f104d62052a96fef4d9df57f7f2657775e61cbd2"
+    },
+    {
+      "path": "assets/og-manual-renewal-20261021.png",
+      "sha256": "5e6e714c0a9b3c727b9d1bebbe35b431d0ef7229c70ac831f6316eefd452a599"
+    },
+    {
+      "path": "assets/pages-calculation-method-FO3eh5vu.css",
+      "sha256": "281f5c5006f6265137ae9b7fefc44792d4e21b861fbccb98391de50f80a788b9"
+    },
+    {
+      "path": "assets/pages-calculation-method-wRtgT__m.js",
+      "sha256": "846add2e925021cc6092c9243c198b21c0b7f7edd952d8096ad8c011c62ce857"
+    },
+    {
+      "path": "assets/pawn-female-DSZs4HJW.png",
+      "sha256": "31ce7412569c8f367062b5ee47c4ca9900a5f05db9be54465e9d928525b00c6b"
+    },
+    {
+      "path": "assets/pawn-male-DkOsVmn1.png",
+      "sha256": "0917d1153746e74958ff6d355c8620d5cfb1be813e9d345220613243b92e8de2"
+    },
+    {
+      "path": "assets/professor-chibi-BwE1xmLE.png",
+      "sha256": "cd752bd66b6710e403c69cd9756c6cbf00ac5a1c459ae3d39052fbc14e01f069"
+    },
+    {
+      "path": "assets/public-data-CZscpcC-.json",
+      "sha256": "c0d96cb84425d17ca648f185144d0f2338b8608f3e8928c129243b74ba1d1e23"
+    },
+    {
+      "path": "assets/retained-diagnostic-display-DOTGF6p4.js",
+      "sha256": "db588c293d54dc46b2f5c3ddd5777afab930164c0b51b0ea21c56ec80a105e48"
+    },
+    {
+      "path": "assets/site-header-entry-B7pGwjIz.js",
+      "sha256": "724dee22943cb213655de5f4525d722289a977c8fb68bc67427db222d03a3d40"
+    },
+    {
+      "path": "assets/solar-partners-D00TnDtz.png",
+      "sha256": "0942ba7e61287c5dc4e9dfe28a75f78e780926b80e0b9d21d3ad77ec87c12f39"
+    },
+    {
+      "path": "assets/step-icons-WybuhB-8.svg",
+      "sha256": "a7650527c195cf27da2f401422d8fce5ee3d51141cb3e48880e504fed9e3f19a"
+    },
+    {
+      "path": "assets/style-BDpO0ne3.css",
+      "sha256": "bf7aaf644f37d543308536c66c040a1be7b76a5c2e77f640d8483f417a4c6815"
+    },
+    {
+      "path": "assets/support-shock-burden-CfPq4i2Y.png",
+      "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+    },
+    {
+      "path": "assets/support-shock-burden.png",
+      "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+    },
+    {
+      "path": "assets/support-shock-burden.svg",
+      "sha256": "fc711e23c23d2fed9a2556efee9f98a5df67dfbd75d78796dcc31ea7098d0496"
+    },
+    {
+      "path": "assets/support-shock-daily-compact-DPcvJas5.svg",
+      "sha256": "554c9f97c9142e57a6b9fb26611c54087c069feb615a2cc9b5018012973285f4"
+    },
+    {
+      "path": "assets/support-shock-daily-DdFQA0Ah.svg",
+      "sha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
+    },
+    {
+      "path": "assets/support-shock-daily.png",
+      "sha256": "b5e3df2c4f073963c430db5f609d331569709dd1aa9efdb8c699741a0047139c"
+    },
+    {
+      "path": "assets/support-shock-daily.svg",
+      "sha256": "676346fe7f504d543cb70eae547424148d3c631adfec2ca217df4fba0cf424a9"
+    },
+    {
+      "path": "assets/support-shock-table-1.csv",
+      "sha256": "300fd83c3c70e352c5a23ecaa4cad85801030b74ee044820e8393c69d3295354"
+    },
+    {
+      "path": "assets/support-shock-table-1.png",
+      "sha256": "7e4735fac5903543cad047a2fc3026872cd7ac1b5e77442d2fe1e30fe9008547"
+    },
+    {
+      "path": "assets/support-shock-table-2.csv",
+      "sha256": "c1f06657b4aea2f304b89df32b8be575354672429c782bc712d1f9169ca0b789"
+    },
+    {
+      "path": "assets/support-shock-table-2.png",
+      "sha256": "fbaea5728a686155181a30b18df8b6d353a7c857827ed86f3fab7d22e2200b2e"
+    },
+    {
+      "path": "assets/support-shock-table-3.csv",
+      "sha256": "9b9e694b55e45162b74f1d46f5d46fd2fb6be16163b0a8b10f4d607ee41f1863"
+    },
+    {
+      "path": "assets/support-shock-table-3.png",
+      "sha256": "01247c2f6d2b1e617288497d3a7a196e2a5b3a37c69b1ee657ecc5f6017f09ff"
+    },
+    {
+      "path": "assets/support-shock-table-4.csv",
+      "sha256": "88dbbe45fd3feac5756d2c09fb4b2429c5c55c3c12e62f93e312c277bffc9d93"
+    },
+    {
+      "path": "assets/support-shock-table-4.png",
+      "sha256": "e9d5101331c383b444cb63f7a4d92e514717d3647376a17ae0b8bdd038dcaadf"
+    },
+    {
+      "path": "assets/table-scroll-hint-BMcEuJb1.js",
+      "sha256": "882f10fd344a6f62c7e4598ea9510426986e7ce092d8b95adacba06cd74af71a"
+    },
+    {
+      "path": "assets/tainavi-BIkDNw0f.webp",
+      "sha256": "2f4184a9f5bb491974d4f7351d45d9038721330411968318a255df85ef9bca83"
+    },
+    {
+      "path": "assets/timeline-B-2dL9ie.css",
+      "sha256": "c7c1b8bd8d47eebdaec724444517e2a3925d01f8a815e2bca535b63314743979"
+    },
+    {
+      "path": "assets/title-art-CxXD5rU-.svg",
+      "sha256": "52c3887d06417cebde6c54c813a0c686f9e7a618b8e134eb51c7b5c9d00344dc"
+    },
+    {
+      "path": "CNAME",
+      "sha256": "fe44c3f0e42ad3a87b2161d6a49bae12edbb11942d68f915ec274d6907a8944e"
+    },
+    {
+      "path": "data/index.html",
+      "sha256": "c20365512072ecc3d2daed2fcdd3f6c4f17b2facedb91928d501a633e8877fbc"
+    },
+    {
+      "path": "data/subsidies/index.html",
+      "sha256": "39681f10f244469969d2804a51fe074302af6efad2cad4c41f29f90481fbb44f"
+    },
+    {
+      "path": "favicon.png",
+      "sha256": "b97e71632febfa997e483b4fb070f4d3d9d1d3862d8ba8b88f6251e0bb3853a5"
+    },
+    {
+      "path": "guides/choosing-installer/index.html",
+      "sha256": "b0a0d3266d860fa78c6ea177bcea0698703affc95bba0533448d5391f631796f"
+    },
+    {
+      "path": "guides/consultation-preparation/index.html",
+      "sha256": "b9b7e0a160e30c800be08e08f7b08f33a9022afd15ebbcd5f8df8b655022b448"
+    },
+    {
+      "path": "guides/disaster/index.html",
+      "sha256": "48a0e5943be6be996c1c2ed170dfc9d4ab59b9c4625f3a743dfab16f7b1a0fe7"
+    },
+    {
+      "path": "guides/disaster-preparedness/index.html",
+      "sha256": "370e5425a90cbad0bf129d37d29fee1e53c3f45c9d1bcac330028c27a973ca4e"
+    },
+    {
+      "path": "guides/electricity-support-end/index.html",
+      "sha256": "837325dd90e394ec1b0799e282f18bab6838ed307c8dd7e4b766860c6898de66"
+    },
+    {
+      "path": "guides/equipment-maintenance/index.html",
+      "sha256": "a79b2c7e2cd315dfd5fafb06744032c2e406a71a6db68193162ce725346b2052"
+    },
+    {
+      "path": "guides/home-battery/index.html",
+      "sha256": "0f72c8cb4342743c7d11bc6145a83a6c3a5e0175d807593fb58235a33b01e7d3"
+    },
+    {
+      "path": "guides/home-survey/index.html",
+      "sha256": "0f282d9332a8ce505813966d35b9324c7abd2ea5595bf8da86a1e052127a0ef5"
+    },
+    {
+      "path": "guides/index.html",
+      "sha256": "cf2fbbf4ca3ad2f7dbe75dc5226736046f63c09fde1bb6548ad078c8fa05a59e"
+    },
+    {
+      "path": "guides/installation-process/index.html",
+      "sha256": "346f3ac18ce1321e1954285741b68e639856f956321ce0e6f4ee07d852138ea7"
+    },
+    {
+      "path": "guides/power-outage/index.html",
+      "sha256": "f15fc1d7aa44695b83647944961298c6984447fb0bde3ccbfee80aaa1bf4f897"
+    },
+    {
+      "path": "guides/quote-services/index.html",
+      "sha256": "733ca728edb5701a3be907e3da198cab454d8effb5f11bfd0ae1c56d3b72e0b2"
+    },
+    {
+      "path": "guides/quotes-contractors/index.html",
+      "sha256": "94675a095d05eadc4fcf89ceaaf256e238c656fb42ad5375df5cb3bd3737f100"
+    },
+    {
+      "path": "guides/self-consumption/index.html",
+      "sha256": "ebdd2b3765a3740cf46aecd0c5160922e1948af0b5ea1538a5abc666615d5f99"
+    },
+    {
+      "path": "guides/solar-benefits/index.html",
+      "sha256": "19fadbf157fdfbeba86eabe8ac532dc4f5a98fe54267e4ac484810495b7dea5c"
+    },
+    {
+      "path": "guides/solar-consultation/index.html",
+      "sha256": "26b9ef56c16307e96a2680177678ca734fc4b1278c11e72dc65dedd30c707714"
+    },
+    {
+      "path": "guides/solar-costs/index.html",
+      "sha256": "9a4b616cac58159cf363990877aae31daa690c3f66055ef91fa11368a550514a"
+    },
+    {
+      "path": "guides/solar-economics/index.html",
+      "sha256": "7be8136b20e7750af763dd624a9f6ceba93e24ed9f8b1123415372fcb44f3622"
+    },
+    {
+      "path": "guides/solar-electricity-savings/index.html",
+      "sha256": "638e1ec40149dc3fb539a232a10fb7837284061d736f408b66926232776be259"
+    },
+    {
+      "path": "guides/solar-fit/index.html",
+      "sha256": "47834964c88e95e375fdfdda8900bb8429506f2137d3e0df3470662ab68e9c75"
+    },
+    {
+      "path": "guides/solar-installation-cost/index.html",
+      "sha256": "d5ab9dd147116c7f9bae146fc96d75b9c214d2a8a86c1362c642a2be794307ef"
+    },
+    {
+      "path": "guides/solar-living/index.html",
+      "sha256": "2f866d28bda0f1dea6bfc3db9344aa01730a583584a7a3443332bf4b13fada0c"
+    },
+    {
+      "path": "guides/solar-maintenance-cost/index.html",
+      "sha256": "48243994387998c045b8b64355510c2cff4cdfaefb91408e15c9f8982e5fe13b"
+    },
+    {
+      "path": "guides/subsidies/index.html",
+      "sha256": "59ce56fc43f5adef1dbc5536bd952d98ffbf041a2cabc1b6af68dfcf1fab9fb4"
+    },
+    {
+      "path": "guides/subsidy-amount/index.html",
+      "sha256": "e406a76fe3e6b4c020a3e0b462bd3da4efcad3b1495b84438bd30b7163cc458e"
+    },
+    {
+      "path": "guides/welcome/index.html",
+      "sha256": "3c67db127a0d5802f76912f6d664f1de7d0acf5c0165c0c6df23d69aeb4948e7"
+    },
+    {
+      "path": "index.html",
+      "sha256": "9e82b9ff49061adf5a5699dd464233e4abb84d95a993d8b646e834a2264e950b"
+    },
+    {
+      "path": "manual/equipment-renewal/consultation/index.html",
+      "sha256": "e8262fb20986cafb2d137116ad1dfb41c0c2a5740378246185def9effe1acc0c"
+    },
+    {
+      "path": "manual/equipment-renewal/costs/index.html",
+      "sha256": "55e2e3d3bc50bbb622bc30a43c8f2022e61eeda35deb45b5a794e43db750f114"
+    },
+    {
+      "path": "manual/equipment-renewal/index.html",
+      "sha256": "10944f27513b523ceedce53f0127f3c0dd7398b169ba523bb08f8014b82aebbf"
+    },
+    {
+      "path": "manual/getting-started/index.html",
+      "sha256": "1e37c3bdf50b749cff4e869868c95676cac3aa79b90987e0036ee03fa18ee69f"
+    },
+    {
+      "path": "manual/getting-started/milestones/index.html",
+      "sha256": "fa2088205e4911c3fd68b6c9a70c0bb3690fde7ba7dc8bca785f1914ecee5312"
+    },
+    {
+      "path": "manual/getting-started/troubles/index.html",
+      "sha256": "96c0e535cb92853e358e7f564583737e1c4f66c2e6132eba926022ac7e9cfc3d"
+    },
+    {
+      "path": "manual/index.html",
+      "sha256": "ee2799f2ce7a905eb14de22c3a1dfeba8e66a275be606d1097b8b7460b7cf0fc"
+    },
+    {
+      "path": "og-home-photo-20260926.jpg",
+      "sha256": "bcbda55c0c9fa8bd840891ab9ee21f57383736376c3936f83029a64d3a035e62"
+    },
+    {
+      "path": "og-image.png",
+      "sha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04"
+    },
+    {
+      "path": "og-self-consumption-v040.png",
+      "sha256": "0666ec57097ddccb30ae6902c2f5300033eeb388f96eb80df870efc2b3d0480c"
+    },
+    {
+      "path": "og-step-map-20261017-v034.png",
+      "sha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04"
+    },
+    {
+      "path": "og-step-map-20261017.png",
+      "sha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04"
+    },
+    {
+      "path": "og-support-shock-burden.png",
+      "sha256": "a56f551abaf9d343af9c7d9640ac8fffeb21a8f1bc666ad04cb5ab23f34c8e8b"
+    },
+    {
+      "path": "pages/calculation-method.html",
+      "sha256": "f47549e34e7993ac1393300cf79fbc0581767975a82fa28615ea85958d76b1b6"
+    },
+    {
+      "path": "pages/policy.html",
+      "sha256": "cb5ce5ca9c0fc0cb60884c22aad22f8ad078e6ddc39817cc75ca1d64e0464a62"
+    },
+    {
+      "path": "press/index.html",
+      "sha256": "165efb59a9a3a10db4cb2f9b5d570bc730e6a867145ae71181b9a2c6f3b89e6e"
+    },
+    {
+      "path": "robots.txt",
+      "sha256": "5eb08d7202a7815316a495e465625a5b27d854def0a3c65fd2b297643bc62de6"
+    },
+    {
+      "path": "simulator/index.html",
+      "sha256": "d13e06d2a7d66e7516d1d2dad5a35cba97fa58cc3c4d30c8de7e431e7c515279"
+    },
+    {
+      "path": "sitemap.xml",
+      "sha256": "5786845fbde129bd25e2cb700a3a7db065a676a94f3ada85617065e3a0a02b17"
+    }
+  ],
+  "retiredTest": {
+    "file": "qa/tests/public-integrity.test.js",
+    "name": "劣化比較の説明は選択した仮定を使い，停電線はDC容量の精度を保つ",
+    "reason": "only imports the retired, unreachable battery-presentation module; current calculation/physics tests retained",
+    "count": 1
+  },
+  "unusedExports": [
+    {
+      "file": "site/simulator/src/diagnostic-display-record.js",
+      "exports": [
+        "appendDiagnosticReceptionNote",
+        "appendDiagnosticDisplay"
+      ]
+    },
+    {
+      "file": "site/simulator/src/housing-input.js",
+      "exports": [
+        "configureHousingInput",
+        "housingLabel"
+      ]
+    },
+    {
+      "file": "site/simulator/src/result-presentation.js",
+      "exports": [
+        "scenarioSubsidyCondition",
+        "subsidyBreakdownReason",
+        "conclusionBreakdown",
+        "compactYen",
+        "financialTotals",
+        "energyRoutes",
+        "subsidyReasonPresentation",
+        "formatEnergyRate"
+      ]
+    },
+    {
+      "file": "site/simulator/src/retained-diagnostic-display.js",
+      "exports": [
+        "diagnosticPilotTerms",
+        "diagnosticAmountPolicy",
+        "diagnosticPilotNotice",
+        "diagnosticPilotSupplement",
+        "diagnosticPilotSections",
+        "diagnosticPilotCommonSupplement",
+        "diagnosticDetailNotes"
+      ]
+    }
+  ],
+  "historyConsolidation": {
+    "file": "qa/README.md",
+    "baseline": "eb40fa12961d74b02872817cde9205a12aff15a5",
+    "description": "Older completed trials and releases point to fixed Git history; current v060 acceptance, limitations, pending external work and QA standards retained.",
+    "currentLines": 179,
+    "originalLines": 1178
+  },
+  "fileCleanupPlan": {
+    "base": "eb40fa12961d74b02872817cde9205a12aff15a5",
+    "criteria": "Tracked completed QA reports/images unreachable from current code/docs, v060 evidence, ASP/Google/LINE work, and untracked work references. Fixed Git history retains originals.",
+    "count": 218,
+    "bytes": 18220729,
+    "extensions": {
+      ".png": 140,
+      ".md": 14,
+      ".json": 26,
+      ".log": 3,
+      ".jpg": 35
+    },
+    "candidates": [
+      "qa/artifacts/disaster-consultation-action-live.png",
+      "qa/artifacts/disaster-final-independent-review.md",
+      "qa/artifacts/disaster-final-review-checks.json",
+      "qa/artifacts/disaster-layout-change-20261019.json",
+      "qa/artifacts/disaster-layout-large-20261019.png",
+      "qa/artifacts/disaster-layout-list-live-20261019.png",
+      "qa/artifacts/disaster-layout-share-square-20261019.png",
+      "qa/artifacts/disaster-layout-small-20261019.png",
+      "qa/artifacts/disaster-whole-home-actions-change.json",
+      "qa/artifacts/disaster-whole-home-body-live.png",
+      "qa/artifacts/disaster-whole-home-detail.png",
+      "qa/artifacts/disaster-whole-home-figure-live.png",
+      "qa/artifacts/economics-cumulative-compact-20261019.png",
+      "qa/artifacts/economics-cumulative-desktop-20261019.png",
+      "qa/artifacts/economics-cumulative-live-20261019.png",
+      "qa/artifacts/economics-formula-live-20261019.png",
+      "qa/artifacts/economics-image-20261019-v2.png",
+      "qa/artifacts/economics-image-list-20261019-v2.png",
+      "qa/artifacts/economics-image-proof-20261019-v2.png",
+      "qa/artifacts/economics-table-live-20261019.png",
+      "qa/artifacts/fit-review-price-20261019.png",
+      "qa/artifacts/fit-review-procedure-20261019.png",
+      "qa/artifacts/fit-review-summary-20261019.png",
+      "qa/artifacts/fit-used-house-short-20261019.png",
+      "qa/artifacts/guide-illustrations-contact.png",
+      "qa/artifacts/house-images-list-20261019.png",
+      "qa/artifacts/house-images-proof-20261019.png",
+      "qa/artifacts/installation-cost-amounts-live-20261019.png",
+      "qa/artifacts/installation-cost-conditions-live-20261019.png",
+      "qa/artifacts/installation-cost-explanation-live-20261019.png",
+      "qa/artifacts/installation-cost-share-live-20261019.png",
+      "qa/artifacts/installation-lead-toc-20261019.png",
+      "qa/artifacts/installation-review-caption-20261019.png",
+      "qa/artifacts/installation-review-chapter3-20261019.png",
+      "qa/artifacts/installation-review-solar-only-20261019.png",
+      "qa/artifacts/maintenance-actions-detail.png",
+      "qa/artifacts/maintenance-actions-live.png",
+      "qa/artifacts/maintenance-common-diagnosis-detail.png",
+      "qa/artifacts/maintenance-common-diagnosis-live.png",
+      "qa/artifacts/maintenance-content-actions-change.json",
+      "qa/artifacts/maintenance-diagnosis-consistency.json",
+      "qa/artifacts/maintenance-final-independent-review.md",
+      "qa/artifacts/maintenance-final-mobile-actions.png",
+      "qa/artifacts/maintenance-final-mobile-inspection-start.png",
+      "qa/artifacts/maintenance-final-mobile-inspection.png",
+      "qa/artifacts/maintenance-final-mobile-lead.png",
+      "qa/artifacts/maintenance-final-mobile-left.png",
+      "qa/artifacts/maintenance-final-mobile-lifecycle-total.png",
+      "qa/artifacts/maintenance-final-mobile-lifecycle.png",
+      "qa/artifacts/maintenance-final-mobile-note.png",
+      "qa/artifacts/maintenance-final-mobile-right.png",
+      "qa/artifacts/maintenance-final-note-detail.png",
+      "qa/artifacts/maintenance-final-pc-inspection.png",
+      "qa/artifacts/maintenance-final-pc-lifecycle.png",
+      "qa/artifacts/maintenance-final-pc-table.png",
+      "qa/artifacts/maintenance-final-verification.json",
+      "qa/artifacts/maintenance-lead-live.png",
+      "qa/artifacts/maintenance-renewal-note-detail.png",
+      "qa/artifacts/maintenance-renewal-note-live.png",
+      "qa/artifacts/maintenance-roof-repair-live.png",
+      "qa/artifacts/maintenance-three-scenario-body-live.png",
+      "qa/artifacts/maintenance-three-scenario-costs.json",
+      "qa/artifacts/maintenance-three-scenario-table-detail.png",
+      "qa/artifacts/maintenance-three-scenario-table-live.png",
+      "qa/artifacts/payment-wallet-cards-live-20261019.png",
+      "qa/artifacts/payment-wallet-change-20261019.json",
+      "qa/artifacts/payment-wallet-large-20261019.png",
+      "qa/artifacts/payment-wallet-list-live-20261019.png",
+      "qa/artifacts/payment-wallet-share-square-20261019.png",
+      "qa/artifacts/payment-wallet-small-20261019.png",
+      "qa/artifacts/quotes-final-independent-review.md",
+      "qa/artifacts/quotes-final-mobile-actions.png",
+      "qa/artifacts/quotes-final-mobile-contract.png",
+      "qa/artifacts/quotes-final-mobile-flow-start.png",
+      "qa/artifacts/quotes-final-mobile-flow.png",
+      "qa/artifacts/quotes-final-mobile-lead.png",
+      "qa/artifacts/quotes-final-mobile-table.png",
+      "qa/artifacts/quotes-final-other-articles-before.json",
+      "qa/artifacts/quotes-final-pc-actions.png",
+      "qa/artifacts/quotes-final-pc-contract.png",
+      "qa/artifacts/quotes-final-pc-flow.png",
+      "qa/artifacts/quotes-final-pc-lead.png",
+      "qa/artifacts/quotes-final-pc-table.png",
+      "qa/artifacts/quotes-final-table-detail.png",
+      "qa/artifacts/quotes-final-verification.json",
+      "qa/artifacts/subsidies-consultation-story.json",
+      "qa/artifacts/subsidies-data-quotes-routes.json",
+      "qa/artifacts/subsidies-data-route-live.png",
+      "qa/artifacts/subsidies-document-coin-20261019.png",
+      "qa/artifacts/subsidies-document-coin-list-live-20261019.png",
+      "qa/artifacts/subsidies-document-coin-share-square-20261019.png",
+      "qa/artifacts/subsidies-document-coin-small-20261019.png",
+      "qa/artifacts/subsidies-final-independent-review.md",
+      "qa/artifacts/subsidies-final-review-detail.png",
+      "qa/artifacts/subsidies-final-review-live.png",
+      "qa/artifacts/subsidies-image-change-20261019.json",
+      "qa/artifacts/subsidies-navi-link-change.json",
+      "qa/artifacts/subsidies-navi-link-live.png",
+      "qa/artifacts/subsidies-quotes-route-detail.png",
+      "qa/artifacts/subsidies-quotes-route-live.png",
+      "qa/artifacts/subsidy-amount-arrow-large-20261019.png",
+      "qa/artifacts/subsidy-amount-arrow-list-live-20261019.png",
+      "qa/artifacts/subsidy-amount-arrow-share-square-20261019.png",
+      "qa/artifacts/subsidy-amount-arrow-small-20261019.png",
+      "qa/artifacts/subsidy-amount-capacity-live.png",
+      "qa/artifacts/subsidy-amount-capacity-routes.json",
+      "qa/artifacts/subsidy-amount-capacity-simple-live.png",
+      "qa/artifacts/subsidy-amount-coins-large-20261019.png",
+      "qa/artifacts/subsidy-amount-coins-list-live-20261019.png",
+      "qa/artifacts/subsidy-amount-coins-share-square-20261019.png",
+      "qa/artifacts/subsidy-amount-coins-small-20261019.png",
+      "qa/artifacts/subsidy-amount-equal-actions-detail.png",
+      "qa/artifacts/subsidy-amount-equal-actions-live.png",
+      "qa/artifacts/subsidy-amount-equal-actions.json",
+      "qa/artifacts/subsidy-amount-final-independent-review.md",
+      "qa/artifacts/subsidy-amount-final-review-live.png",
+      "qa/artifacts/subsidy-amount-routes-detail.png",
+      "qa/artifacts/subsidy-amount-routes-live.png",
+      "qa/artifacts/subsidy-two-article-link-fix.json",
+      "qa/artifacts/subsidy-two-stacks-card-live-20261019.png",
+      "qa/artifacts/subsidy-two-stacks-large-20261019.png",
+      "qa/artifacts/subsidy-two-stacks-list-live-20261019.png",
+      "qa/artifacts/subsidy-two-stacks-share-square-20261019.png",
+      "qa/artifacts/subsidy-two-stacks-small-20261019.png",
+      "qa/artifacts/three-guide-images-list-live-20261019.png",
+      "qa/artifacts/three-guide-images-proof-20261019.png",
+      "qa/artifacts/v040-public-build.log",
+      "qa/artifacts/v040-public-tests.log",
+      "qa/artifacts/v040-review-build.log",
+      "qa/artifacts/v041-mobile-checks.json",
+      "qa/artifacts/v041-mobile-disaster-full.png",
+      "qa/artifacts/v041-mobile-guide-list-full.png",
+      "qa/artifacts/v041-mobile-self-consumption-full.png",
+      "qa/artifacts/v041-mobile-solar-economics-full.png",
+      "qa/artifacts/v041-mobile-solar-electricity-savings-full.png",
+      "qa/artifacts/v041-mobile-solar-fit-full.png",
+      "qa/artifacts/v041-mobile-solar-installation-cost-full.png",
+      "qa/artifacts/v041-mobile-subsidies-full.png",
+      "qa/artifacts/v041-mobile-subsidy-amount-full.png",
+      "qa/artifacts/v041-pc-guide-list.png",
+      "qa/artifacts/v041-production-checks.json",
+      "qa/artifacts/v041-production-independent-review.md",
+      "qa/artifacts/v041-production-quotes-detail.png",
+      "qa/artifacts/v041-production-quotes.png",
+      "qa/artifacts/v041-publication.json",
+      "qa/artifacts/v041-readiness-independent-review.md",
+      "qa/artifacts/v041-readiness-verification.json",
+      "qa/artifacts/v041-release-body.md",
+      "qa/artifacts/v041-release-public.png",
+      "qa/artifacts/v050-actions-success.png",
+      "qa/artifacts/v050-github-release.png",
+      "qa/artifacts/v050-production-checks.json",
+      "qa/artifacts/v050-production-first-visit.png",
+      "qa/artifacts/v050-production-independent-review.md",
+      "qa/artifacts/v050-production-panel-mobile.png",
+      "qa/artifacts/v050-production-panel-pc.png",
+      "qa/artifacts/v050-publication.json",
+      "qa/artifacts/v050-release-body.md",
+      "qa/artifacts/v050-release-candidate-files.json",
+      "qa/artifacts/v050-release-candidate-preview.png",
+      "qa/artifacts/v050-release-first-visit-pc.png",
+      "qa/artifacts/v050-release-independent-review.md",
+      "qa/artifacts/v050-release-mobile-panel.png",
+      "qa/artifacts/v050-release-quote-highlight.png",
+      "qa/artifacts/v051-favicon-deployed.png",
+      "qa/artifacts/v051-favicon-sizes.png",
+      "qa/artifacts/v051-github-release.png",
+      "qa/artifacts/v051-harena-master-deployed.png",
+      "qa/artifacts/v051-harena-master-sizes.png",
+      "qa/artifacts/v051-production-checks.json",
+      "qa/artifacts/v051-production-icon.png",
+      "qa/artifacts/v051-production-independent-review.md",
+      "qa/artifacts/v051-production-mobile.png",
+      "qa/artifacts/v051-production-pc.png",
+      "qa/artifacts/v051-release-body.md",
+      "qa/artifacts/v051-release-candidate-files.json",
+      "qa/artifacts/v051-release-independent-review.md",
+      "qa/artifacts/v051-release-preview-mobile.png",
+      "qa/artifacts/v051-release-preview-pc.png",
+      "qa/guide-directory-mobile-compact-20261018.jpg",
+      "qa/guide-directory-mobile-square-20261018.jpg",
+      "qa/guide-directory-pc-horizontal-square-20261018.jpg",
+      "qa/guide-directory-pc-vertical-square-20261018.jpg",
+      "qa/guide-directory-topics-pc-20261018.jpg",
+      "qa/guide-self-use-comparison-pc-20261018.jpg",
+      "qa/guide-self-use-figure3-icons-20261018.jpg",
+      "qa/guide-self-use-figure3-mobile-20261018.jpg",
+      "qa/guide-self-use-figure3-pc-20261018.jpg",
+      "qa/guide-self-use-revised-mobile-full-20261018.jpg",
+      "qa/guide-self-use-revised-pc-20261018.jpg",
+      "qa/press-about-mobile-20261018.jpg",
+      "qa/press-about-pc-20261018.jpg",
+      "qa/press-about-production-v036.jpg",
+      "qa/review-breadcrumb-mobile-20261018.jpg",
+      "qa/review-breadcrumb-pc-20261018.jpg",
+      "qa/review-hosting-mobile-20261018.jpg",
+      "qa/review-hosting-pc-20261018.jpg",
+      "qa/share-card-crop-safe.png",
+      "qa/share-card-square-preview.png",
+      "qa/v040-article-mobile.jpg",
+      "qa/v040-article-pc.jpg",
+      "qa/v040-article-rates-pc.jpg",
+      "qa/v040-directory-mobile-bottom.jpg",
+      "qa/v040-directory-mobile.jpg",
+      "qa/v040-directory-pc.jpg",
+      "qa/v040-flow-fixed-mobile.jpg",
+      "qa/v040-flow-fixed-pc.jpg",
+      "qa/v040-flow-production.jpg",
+      "qa/v040-github-release.jpg",
+      "qa/v040-hosted-authenticated.jpg",
+      "qa/v040-og-square.png",
+      "qa/v040-og-wide.png",
+      "qa/v040-search-console-request.jpg",
+      "qa/v040-search-console-sitemap-read.jpg",
+      "qa/v040-search-console-sitemap.jpg",
+      "qa/welcome-rental-local-v035.jpg",
+      "qa/welcome-rental-mobile-v035.jpg",
+      "qa/welcome-rental-production-v035.jpg"
+    ],
+    "verified": [
+      {
+        "path": "qa/artifacts/disaster-consultation-action-live.png",
+        "sha256": "43749bb3c967e1a7d0311ae91cfb4359cdfbdc8997df50922802845748bc97c4",
+        "bytes": 128541
+      },
+      {
+        "path": "qa/artifacts/disaster-final-independent-review.md",
+        "sha256": "a3e9740aad713abff8a2cd3b7dc9e4db934b61434bb53439dc219e68c38cd03f",
+        "bytes": 8410
+      },
+      {
+        "path": "qa/artifacts/disaster-final-review-checks.json",
+        "sha256": "27d4e5adb7489b3e2808161fd0742c9994ebd86a16df8253d7c9070fbda4ed8d",
+        "bytes": 789
+      },
+      {
+        "path": "qa/artifacts/disaster-layout-change-20261019.json",
+        "sha256": "1c6eecccdf2cfbf09b94d5bc86248b3ac1222d18b5659cbdf748d60a31f3131f",
+        "bytes": 211
+      },
+      {
+        "path": "qa/artifacts/disaster-layout-large-20261019.png",
+        "sha256": "432e9d9225828734c3ebb8aadc3e19ae2486ceec313b6db5a2c1a3f5f0a93122",
+        "bytes": 17013
+      },
+      {
+        "path": "qa/artifacts/disaster-layout-list-live-20261019.png",
+        "sha256": "b71db046afda723bc82a515fbb00af853217f7cc4947fcc026a3c36f86153d79",
+        "bytes": 99108
+      },
+      {
+        "path": "qa/artifacts/disaster-layout-share-square-20261019.png",
+        "sha256": "31b42107f2ea81b89eb77782b24749b4af717619d56e7d21c68b43523afe201a",
+        "bytes": 30989
+      },
+      {
+        "path": "qa/artifacts/disaster-layout-small-20261019.png",
+        "sha256": "91c8be77c812965d6ad0956cc9f7b347ac2324f1c008433b6afb455a522ed433",
+        "bytes": 4915
+      },
+      {
+        "path": "qa/artifacts/disaster-whole-home-actions-change.json",
+        "sha256": "174845b8528c3c59d6b3c40ae7f023e184190d4cf99bc65f8ca59987744cbe9b",
+        "bytes": 2827
+      },
+      {
+        "path": "qa/artifacts/disaster-whole-home-body-live.png",
+        "sha256": "631605cf40346bec7493764dbb1b7c48154ce6a2946a24da8369517084fb10a0",
+        "bytes": 152575
+      },
+      {
+        "path": "qa/artifacts/disaster-whole-home-detail.png",
+        "sha256": "16ce8b149fc3f0cc236f0518c6e69bd3364c0254ff2fe77b99e77172b32676a6",
+        "bytes": 191919
+      },
+      {
+        "path": "qa/artifacts/disaster-whole-home-figure-live.png",
+        "sha256": "30e739507e821f7fed36e3610ee2af7e0b0f2cc391a6856e5b1518945b683ca3",
+        "bytes": 112319
+      },
+      {
+        "path": "qa/artifacts/economics-cumulative-compact-20261019.png",
+        "sha256": "5666f67dbab2cd8e203c850ffe6b8db74fea5f156651b1d6e255c5b5fcde3753",
+        "bytes": 23417
+      },
+      {
+        "path": "qa/artifacts/economics-cumulative-desktop-20261019.png",
+        "sha256": "f85fcdf28f4ce22fd3d650799fca4d199c0e300cf32531e4150bcb72615488cd",
+        "bytes": 28140
+      },
+      {
+        "path": "qa/artifacts/economics-cumulative-live-20261019.png",
+        "sha256": "15c39042e8e3f4a047bce9f0da61f96e5395a0adc43f31eb5d61d8234b32c91e",
+        "bytes": 132919
+      },
+      {
+        "path": "qa/artifacts/economics-formula-live-20261019.png",
+        "sha256": "4cbac38c98fefe9e42269e3b708585c2368c373bb21942b351914a720e100bd5",
+        "bytes": 118723
+      },
+      {
+        "path": "qa/artifacts/economics-image-20261019-v2.png",
+        "sha256": "663e44461f1ea7a92bac69d01cbc0a2e452ce933c831a47fe84ba10c9099f5f7",
+        "bytes": 24858
+      },
+      {
+        "path": "qa/artifacts/economics-image-list-20261019-v2.png",
+        "sha256": "a4a4905be94696d10c47b6f30ec27d9164575e9d6f64f843853de2a830c9a074",
+        "bytes": 109579
+      },
+      {
+        "path": "qa/artifacts/economics-image-proof-20261019-v2.png",
+        "sha256": "b81c9ecf3e4c03b3181b1cc0611c893dfb293acc64f5870186eff245b242fbd8",
+        "bytes": 98478
+      },
+      {
+        "path": "qa/artifacts/economics-table-live-20261019.png",
+        "sha256": "b7d59faf6aca9b00e9500929f3f3fb2e9e5a6a25d46f2db9be2ec76eec3838cc",
+        "bytes": 119113
+      },
+      {
+        "path": "qa/artifacts/fit-review-price-20261019.png",
+        "sha256": "a191e5fef15ed015ca2ee7d2211e4fabed2ad734425cb0716e4c9e99c69d9fa4",
+        "bytes": 132893
+      },
+      {
+        "path": "qa/artifacts/fit-review-procedure-20261019.png",
+        "sha256": "0acde97eed1d91f7ba756ae62f411cbf0ba2e8b73a23b805e15391ae3fa5aef4",
+        "bytes": 141206
+      },
+      {
+        "path": "qa/artifacts/fit-review-summary-20261019.png",
+        "sha256": "198d032fd15060fce84790386fbb02a80ac1e00aed41684895c3c2fc4d562c42",
+        "bytes": 133881
+      },
+      {
+        "path": "qa/artifacts/fit-used-house-short-20261019.png",
+        "sha256": "847e20ce2c13dfe55b4bec9341a6d80afc272bfdf1993d648aa17c50d4d69ff7",
+        "bytes": 121273
+      },
+      {
+        "path": "qa/artifacts/guide-illustrations-contact.png",
+        "sha256": "117829ed2d5644884033a0f1aada0498ee6cce51be010a585dec09fe943e445f",
+        "bytes": 63541
+      },
+      {
+        "path": "qa/artifacts/house-images-list-20261019.png",
+        "sha256": "50306e70cffe16dcc25e825252cf0911fab1961c454c863d6c0c94e1777c922f",
+        "bytes": 108564
+      },
+      {
+        "path": "qa/artifacts/house-images-proof-20261019.png",
+        "sha256": "6eaacddbfeefd25829429da681781d082fa3f10ea7adce722a12042c086ef795",
+        "bytes": 113057
+      },
+      {
+        "path": "qa/artifacts/installation-cost-amounts-live-20261019.png",
+        "sha256": "b5c29dd9821e4eba94bacfe86425edad9ffc86a67e46c08b4df0a6e1f255a270",
+        "bytes": 111414
+      },
+      {
+        "path": "qa/artifacts/installation-cost-conditions-live-20261019.png",
+        "sha256": "6792c2fae50321c32c9ec1550f567188804e3f79d31fd066a2c1d7d8a56cb2d3",
+        "bytes": 125762
+      },
+      {
+        "path": "qa/artifacts/installation-cost-explanation-live-20261019.png",
+        "sha256": "de84f4ec4672943b2dba66ca411bcaab0cdf1d2e676c58dc490b8dcadf2b979b",
+        "bytes": 119448
+      },
+      {
+        "path": "qa/artifacts/installation-cost-share-live-20261019.png",
+        "sha256": "d5449f77fac768f2d1656bfe3076fce7b587b05de7f3854fc535b1799136cf89",
+        "bytes": 110445
+      },
+      {
+        "path": "qa/artifacts/installation-lead-toc-20261019.png",
+        "sha256": "70b81c66fc0c71c8dbddd36b014fa4058bb545213275f681039a648722bb4e4a",
+        "bytes": 109559
+      },
+      {
+        "path": "qa/artifacts/installation-review-caption-20261019.png",
+        "sha256": "8fba2097efc2486aea7acc0d1f741b1ddda2b7ba6cbe5db921d544be771aeb69",
+        "bytes": 114034
+      },
+      {
+        "path": "qa/artifacts/installation-review-chapter3-20261019.png",
+        "sha256": "e75db3f97c5dfc1e90277d74769d17e8cae452f1ba6b052dee350d07b5e7b55e",
+        "bytes": 121227
+      },
+      {
+        "path": "qa/artifacts/installation-review-solar-only-20261019.png",
+        "sha256": "a66bde9eb8d83b33cb074d28a5159997ad2b6b19424991b0e3ae413647c51168",
+        "bytes": 115014
+      },
+      {
+        "path": "qa/artifacts/maintenance-actions-detail.png",
+        "sha256": "0d53b320f47109ec8ebc2583612d43cc791e2fcf9abfc9564881049a3128c86f",
+        "bytes": 126078
+      },
+      {
+        "path": "qa/artifacts/maintenance-actions-live.png",
+        "sha256": "1d4e9cc282b3a708467bcff1c66312bde9043f1eeaac526611eee822fe2807ec",
+        "bytes": 113064
+      },
+      {
+        "path": "qa/artifacts/maintenance-common-diagnosis-detail.png",
+        "sha256": "6ad83d7324c221b0d74a210255c68113b807072d8cd4d00755a26f07866b0cd8",
+        "bytes": 293728
+      },
+      {
+        "path": "qa/artifacts/maintenance-common-diagnosis-live.png",
+        "sha256": "6b2aeac36a66c5434d658269038c5219132bfd6acef862cc2362aae29b278465",
+        "bytes": 130653
+      },
+      {
+        "path": "qa/artifacts/maintenance-content-actions-change.json",
+        "sha256": "083d5c7ba002f0e3c209a36e22b2e76191bda148854eaca2777aeccefbd5ede2",
+        "bytes": 5657
+      },
+      {
+        "path": "qa/artifacts/maintenance-diagnosis-consistency.json",
+        "sha256": "35424299efa608a15ed58848df908e9b28785909caa411b2afdf37e4f42a9521",
+        "bytes": 1311
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-independent-review.md",
+        "sha256": "e943bb0f2e930d0f609025a55166492b812a55ec8133ee5cba880e705b49e43f",
+        "bytes": 9117
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-actions.png",
+        "sha256": "fc0ac6019c06b211e1b3f10c3417a5001f8f64f56dca17217e83e275ea58ef9e",
+        "bytes": 38778
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-inspection-start.png",
+        "sha256": "74fb7e4a3d4d5b56dbd1fa05d1aefd2f0e1fee865614a1442b3598b6bd7f787d",
+        "bytes": 34586
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-inspection.png",
+        "sha256": "e43a2b2d0ad32b872de1704c47b39ed5b2a0243742b562146e8ecf9a14e952ea",
+        "bytes": 38563
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-lead.png",
+        "sha256": "3e24e418541673ad48b1b537d2dc939630df71a164183f215953d2ddc92094fe",
+        "bytes": 35859
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-left.png",
+        "sha256": "725de4e187714a54abb250a52b57c848aec1cccd471afc105c5cb9191be33823",
+        "bytes": 36349
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-lifecycle-total.png",
+        "sha256": "e33282c802c2018a8bf72965ea352d9ef400645bdda9fd24033ea51cb5d7c975",
+        "bytes": 40654
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-lifecycle.png",
+        "sha256": "d8581820d9c18fb2f5a68456aef3caaaec3be009c5bb93106ec5f845a83efebe",
+        "bytes": 37583
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-note.png",
+        "sha256": "4fbc434d3dc7b6d846d825a33a689365a3b5f2be87dcd2417d1d83a3efdefe89",
+        "bytes": 48011
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-mobile-right.png",
+        "sha256": "516d25d24bd277184aabd337935f9489415be7487a08029ea14d554f1cfa48b6",
+        "bytes": 37611
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-note-detail.png",
+        "sha256": "f1e29b7dd40e87b9a99e04596ead252f1b33693d106f18f9218775dd9f5d38ab",
+        "bytes": 184937
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-pc-inspection.png",
+        "sha256": "568ea93476216cbbbaa72e2e914b7c06fd58b6048084b65d87d8dd3d71dc47f0",
+        "bytes": 106377
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-pc-lifecycle.png",
+        "sha256": "19a8275153b0b635ac1d34faad5cfcd28fa6929188f80657fe56bdcda250e6d1",
+        "bytes": 113067
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-pc-table.png",
+        "sha256": "33e7b73bd003faf479eea5253b919c6450dd34da674b0c92a648552730eb715d",
+        "bytes": 130153
+      },
+      {
+        "path": "qa/artifacts/maintenance-final-verification.json",
+        "sha256": "b58e8415295e3863a657c9eb394bb9544f49c6da00970bca857ae96c98571470",
+        "bytes": 2150
+      },
+      {
+        "path": "qa/artifacts/maintenance-lead-live.png",
+        "sha256": "7c4ef7ab35ed88a761fc6c6395dfa72fb5d2cbf8cf019a735c14692bb6eaa3e2",
+        "bytes": 109433
+      },
+      {
+        "path": "qa/artifacts/maintenance-renewal-note-detail.png",
+        "sha256": "349189b723b8062e4360f3d997deade3bc08ae46c96bbab6b10371447c91488d",
+        "bytes": 193495
+      },
+      {
+        "path": "qa/artifacts/maintenance-renewal-note-live.png",
+        "sha256": "d411c78b66a0d124c422e95a9f84851b2f98b8c609e161142ea525be15f7cb59",
+        "bytes": 130806
+      },
+      {
+        "path": "qa/artifacts/maintenance-roof-repair-live.png",
+        "sha256": "bf3ceacadfc6070e6526150afff7464552626bb3427a6dac57c01c4d19b5f4f0",
+        "bytes": 120974
+      },
+      {
+        "path": "qa/artifacts/maintenance-three-scenario-body-live.png",
+        "sha256": "70d4d98a3a2c01e0cb7c445bb282ec9053a5da5ab0ae2405ebae0dd42bb8083a",
+        "bytes": 133507
+      },
+      {
+        "path": "qa/artifacts/maintenance-three-scenario-costs.json",
+        "sha256": "ce8fff8d2d6ff80098486b74a97d9279ba2da08e1250016f62b0a0bd51b0334f",
+        "bytes": 10970
+      },
+      {
+        "path": "qa/artifacts/maintenance-three-scenario-table-detail.png",
+        "sha256": "2c30c54060ca6b16ac10b992fce3d03e02670b3fef5d95268dcfacd32ef5d718",
+        "bytes": 157424
+      },
+      {
+        "path": "qa/artifacts/maintenance-three-scenario-table-live.png",
+        "sha256": "406eb6d6318d5798caf1485ef5b64b0bc25c6689a8a6a77508a40fd8413233c9",
+        "bytes": 129813
+      },
+      {
+        "path": "qa/artifacts/payment-wallet-cards-live-20261019.png",
+        "sha256": "48d460aea55a820defc97696bd0fc16cdbdb3569cf9033b9e2361285b796de11",
+        "bytes": 111444
+      },
+      {
+        "path": "qa/artifacts/payment-wallet-change-20261019.json",
+        "sha256": "048a2180d34c175e4a58c8f86b6022ac5a547b84f62a4551598fe4670450eab6",
+        "bytes": 648
+      },
+      {
+        "path": "qa/artifacts/payment-wallet-large-20261019.png",
+        "sha256": "8baddfe6ecd19e07d4865cf0e75e44062619b859ab9f6db5d24eb1b82c9b3592",
+        "bytes": 16733
+      },
+      {
+        "path": "qa/artifacts/payment-wallet-list-live-20261019.png",
+        "sha256": "3c302e3fd8c2eef7669bfd4ea61c8ec89d203ffb487bd910ca20d72869ab8029",
+        "bytes": 118586
+      },
+      {
+        "path": "qa/artifacts/payment-wallet-share-square-20261019.png",
+        "sha256": "e1172897ec5827213def6f8c4e9309834b0389bb75b1a015522900303700b328",
+        "bytes": 28594
+      },
+      {
+        "path": "qa/artifacts/payment-wallet-small-20261019.png",
+        "sha256": "1493a531393fdd6db7359e46c9b15a939e2d3607f2a774c90f88346b9475ecd7",
+        "bytes": 4343
+      },
+      {
+        "path": "qa/artifacts/quotes-final-independent-review.md",
+        "sha256": "0e2757626c98600bd7cbc3f82209d6e4ffe5ac28254b465f9f7fe3cfefc6c741",
+        "bytes": 7217
+      },
+      {
+        "path": "qa/artifacts/quotes-final-mobile-actions.png",
+        "sha256": "c22c33f47d3d6f61c61a7a1375b0564e44091986a1a0f29070520e38e3423f94",
+        "bytes": 32257
+      },
+      {
+        "path": "qa/artifacts/quotes-final-mobile-contract.png",
+        "sha256": "70a72e892c12478778b572b8099936ad92730cc66b09f211c8bd9d724f7af251",
+        "bytes": 54484
+      },
+      {
+        "path": "qa/artifacts/quotes-final-mobile-flow-start.png",
+        "sha256": "86266d8de2a90a21ef181bdd0fd9f128e48b1f6d3256a04b0e3fb4ee3290aba6",
+        "bytes": 30515
+      },
+      {
+        "path": "qa/artifacts/quotes-final-mobile-flow.png",
+        "sha256": "18375cd17c19bace0032f32ba91e7e862a07c876e8ae4177175c9dd638e7891f",
+        "bytes": 41858
+      },
+      {
+        "path": "qa/artifacts/quotes-final-mobile-lead.png",
+        "sha256": "f4d5d915fac642ec299f932132ca4d007154b34c6b94cc932347f4bc544165a7",
+        "bytes": 35406
+      },
+      {
+        "path": "qa/artifacts/quotes-final-mobile-table.png",
+        "sha256": "4bdfdb4bc4914e55ea2227b90df4092357adfa664e46db326451983fb3cd9c4c",
+        "bytes": 35237
+      },
+      {
+        "path": "qa/artifacts/quotes-final-other-articles-before.json",
+        "sha256": "6878beb614ca5c5f98cafa60e9b0c95ef7eb552028fe26c766a08d4383098c2f",
+        "bytes": 2710
+      },
+      {
+        "path": "qa/artifacts/quotes-final-pc-actions.png",
+        "sha256": "91863674b59252af01319568e951c01a65a61f27400f029d92c74a210e5875e7",
+        "bytes": 133390
+      },
+      {
+        "path": "qa/artifacts/quotes-final-pc-contract.png",
+        "sha256": "91863674b59252af01319568e951c01a65a61f27400f029d92c74a210e5875e7",
+        "bytes": 133390
+      },
+      {
+        "path": "qa/artifacts/quotes-final-pc-flow.png",
+        "sha256": "a73d617c933dfde755ec4308fb3808cc8c883b82041b103fd42dcfdf52ffefc9",
+        "bytes": 102798
+      },
+      {
+        "path": "qa/artifacts/quotes-final-pc-lead.png",
+        "sha256": "a73d617c933dfde755ec4308fb3808cc8c883b82041b103fd42dcfdf52ffefc9",
+        "bytes": 102798
+      },
+      {
+        "path": "qa/artifacts/quotes-final-pc-table.png",
+        "sha256": "9185c33b8189c7dd8a4ea2a595ec43dfb7a9d693079d834598f2074c56667335",
+        "bytes": 117638
+      },
+      {
+        "path": "qa/artifacts/quotes-final-table-detail.png",
+        "sha256": "77dc238321ed3a4862e17d9b1da5245b454b3944b29d6ab45f2a4f4d2dd3743b",
+        "bytes": 167033
+      },
+      {
+        "path": "qa/artifacts/quotes-final-verification.json",
+        "sha256": "600c66affb1dce84f5c97f2412af19a01f4f16118a6c163861c7d62e08c9cec8",
+        "bytes": 1479
+      },
+      {
+        "path": "qa/artifacts/subsidies-consultation-story.json",
+        "sha256": "7700b9af770ad97dfcc2f4b4f9ff9b2764f31081ba72118d4d6f13cdfb1497b3",
+        "bytes": 604
+      },
+      {
+        "path": "qa/artifacts/subsidies-data-quotes-routes.json",
+        "sha256": "d7339e777ea4bd280e15a6ae278bf57a89d67098b36c10f71211e4b780a06595",
+        "bytes": 2556
+      },
+      {
+        "path": "qa/artifacts/subsidies-data-route-live.png",
+        "sha256": "998160461d5670d7edea1e5a394d05af6a101b53384b033bb0b6468f264f9d49",
+        "bytes": 123319
+      },
+      {
+        "path": "qa/artifacts/subsidies-document-coin-20261019.png",
+        "sha256": "730b53ea2bfc1ded35eb4129d47011ec4a2c759c886672843607d1697a859ec3",
+        "bytes": 11293
+      },
+      {
+        "path": "qa/artifacts/subsidies-document-coin-list-live-20261019.png",
+        "sha256": "cf274379413210cdd4021a78d2f25fa61f2e3899b1743cfd76e6096548c22cab",
+        "bytes": 98599
+      },
+      {
+        "path": "qa/artifacts/subsidies-document-coin-share-square-20261019.png",
+        "sha256": "f4c756bcb5f050c77e19d807947cf4e27610ff7b0413d8d7681690f137dc9709",
+        "bytes": 20019
+      },
+      {
+        "path": "qa/artifacts/subsidies-document-coin-small-20261019.png",
+        "sha256": "4d06bf9dc079648b89461aca3fa48b3110a9c921ccf4f651709cd64dc24dcf6b",
+        "bytes": 2899
+      },
+      {
+        "path": "qa/artifacts/subsidies-final-independent-review.md",
+        "sha256": "2d1624e52cc467da645a96dc90304a6df974bee4c456ddbeaa156142e8dfd5fd",
+        "bytes": 6020
+      },
+      {
+        "path": "qa/artifacts/subsidies-final-review-detail.png",
+        "sha256": "5bf63dff10776884ccd3b93bf9f391b605c83cdda600aeeeec38fe00eb8076df",
+        "bytes": 77083
+      },
+      {
+        "path": "qa/artifacts/subsidies-final-review-live.png",
+        "sha256": "4c5760c8f398ad11bfe5d955d5da3b7b7d67876c4e71f8d7b39a34e19a35724a",
+        "bytes": 97515
+      },
+      {
+        "path": "qa/artifacts/subsidies-image-change-20261019.json",
+        "sha256": "eed34a1cdcda38acb46a5582fc5b5acc052c86e3b80fd6fc5b567f5a75e25261",
+        "bytes": 212
+      },
+      {
+        "path": "qa/artifacts/subsidies-navi-link-change.json",
+        "sha256": "5d252c5f041282dbf50ffa0d2294f3ff4ad7bb08925ea8c7529827fae3a560f2",
+        "bytes": 211
+      },
+      {
+        "path": "qa/artifacts/subsidies-navi-link-live.png",
+        "sha256": "b07ed05175e3f8b27d295aa1f8114678bf6f9bf901b8577ca54fd0c498674368",
+        "bytes": 126735
+      },
+      {
+        "path": "qa/artifacts/subsidies-quotes-route-detail.png",
+        "sha256": "9ffc22d03bffa5dae22582637ca3ea36ac6cbbe3ae06c8aae9c254b08182b8e7",
+        "bytes": 79314
+      },
+      {
+        "path": "qa/artifacts/subsidies-quotes-route-live.png",
+        "sha256": "cf6a1a2283fd2b063cbc250372f3d4f5a7317ded6c6096f1c88d4c59d1f32166",
+        "bytes": 98023
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-arrow-large-20261019.png",
+        "sha256": "814afb4d0e44f644b0c5cb082df745778ef9c6ccd952f0df5050b30fdaa0e553",
+        "bytes": 16601
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-arrow-list-live-20261019.png",
+        "sha256": "7a4b424725b7c8c573bac83aa51fb74fce1b12807aa8edab0e07104ae1163c5c",
+        "bytes": 98203
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-arrow-share-square-20261019.png",
+        "sha256": "0312c407fe7237dac2d1f8e9b17a626a14d931181b20dc726d2ba6416c315bce",
+        "bytes": 27950
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-arrow-small-20261019.png",
+        "sha256": "e301e324e26e989944f88c2e0bf40037b85769f511237882084a8ff91dda0967",
+        "bytes": 4533
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-capacity-live.png",
+        "sha256": "bba44b4a04e678bce59e0f675a323a602064b98facb2886046466b587f03576a",
+        "bytes": 131093
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-capacity-routes.json",
+        "sha256": "4fa88c0d9c61227a3f1942b4b56fae43baf69cfaf9142265436955a0284e36e3",
+        "bytes": 1299
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-capacity-simple-live.png",
+        "sha256": "217275035fcb3e62d91de5bfe858ed541f4c8806f0c2f850094d2e634ba19a2c",
+        "bytes": 130057
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-coins-large-20261019.png",
+        "sha256": "ac55cc84705e289daea377302354e07fdbd95044c9a3dcea7846ccaa10908ec5",
+        "bytes": 16823
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-coins-list-live-20261019.png",
+        "sha256": "d8a74e39535b44937df4a684cb347f4d7314516ef9a34cddb276bd466058858a",
+        "bytes": 102853
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-coins-share-square-20261019.png",
+        "sha256": "741d145f5f2974948481b74fcd93355fcb463e9c140f2696414ccd58b8867b7b",
+        "bytes": 30939
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-coins-small-20261019.png",
+        "sha256": "241df10d0825cdf702a596597dcf0176072c9f2c6c46863f212953b15221c949",
+        "bytes": 4628
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-equal-actions-detail.png",
+        "sha256": "c6b4acb8c1dc36ee3a58cc4aec1d5ef7d4a3e89d3cb3e17772c8a67bae1eba11",
+        "bytes": 136732
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-equal-actions-live.png",
+        "sha256": "cef6661bb83806039f9c46464f612b2cd15f0bf2fb55d04bd2f9615f31ca1adb",
+        "bytes": 110684
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-equal-actions.json",
+        "sha256": "65dd682bc422549f942c866d0dd7e0db90e7af32662df218448e141103c7ab87",
+        "bytes": 2623
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-final-independent-review.md",
+        "sha256": "a1740261f59fd6594b22d418c451d201b0dacc721b6b89831c751fd86c052ee8",
+        "bytes": 7371
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-final-review-live.png",
+        "sha256": "4d8d0e01edf9db5c3df4eab4ca0000038eec83fc197351ecc7f3251770ef95ca",
+        "bytes": 110796
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-routes-detail.png",
+        "sha256": "622b2a0280cb85f2285aa2f580d0a70c8acdf95ad93c7029b1d80051ad0f762f",
+        "bytes": 101005
+      },
+      {
+        "path": "qa/artifacts/subsidy-amount-routes-live.png",
+        "sha256": "7145b4dd1cd911662defbca9598e2c1b5953f30adcb158ecda93e9cf740af1e4",
+        "bytes": 121158
+      },
+      {
+        "path": "qa/artifacts/subsidy-two-article-link-fix.json",
+        "sha256": "fb5d8e4d55f853944792fc133216843794f301a341ea09f865281b0f96e9c2be",
+        "bytes": 362
+      },
+      {
+        "path": "qa/artifacts/subsidy-two-stacks-card-live-20261019.png",
+        "sha256": "9eb16adc2b7ab1907ed7db03f8ab79683540ba503206c5ca7f824c422d239be6",
+        "bytes": 53350
+      },
+      {
+        "path": "qa/artifacts/subsidy-two-stacks-large-20261019.png",
+        "sha256": "fcbe6b4696f939373e07d6c97326e6c0c64968a561ac94f481ce1dd17d7856c3",
+        "bytes": 18183
+      },
+      {
+        "path": "qa/artifacts/subsidy-two-stacks-list-live-20261019.png",
+        "sha256": "6703ce277ff2ef114c65c67f2476fa55a1fa054415cf0443517e663e65f64a98",
+        "bytes": 99237
+      },
+      {
+        "path": "qa/artifacts/subsidy-two-stacks-share-square-20261019.png",
+        "sha256": "8bce47200f6a3131bcfa4b47af638dd6ea8573583979ffb19ba6b7e32e6da5c8",
+        "bytes": 30331
+      },
+      {
+        "path": "qa/artifacts/subsidy-two-stacks-small-20261019.png",
+        "sha256": "77c97b8ab0fad65ee9259cab54e30faad732826554237855cfebc0acbbd26b2f",
+        "bytes": 5112
+      },
+      {
+        "path": "qa/artifacts/three-guide-images-list-live-20261019.png",
+        "sha256": "4c1de789f2e48620edf1ebee6506fc8ce2947354267e17060d1861d4a2419834",
+        "bytes": 105852
+      },
+      {
+        "path": "qa/artifacts/three-guide-images-proof-20261019.png",
+        "sha256": "8aab5e2a9665265bb930bad817a7460ba7dea1791b09e4e1016326545263aa79",
+        "bytes": 61563
+      },
+      {
+        "path": "qa/artifacts/v040-public-build.log",
+        "sha256": "9680cbe95b6a0b3946039b913321d0083341956ac982a8acc9a0ef22fc34d97c",
+        "bytes": 11600
+      },
+      {
+        "path": "qa/artifacts/v040-public-tests.log",
+        "sha256": "fc8c2a166fa8dd5dd435cc87311042d70567e154fc810a735367ed7e76c908aa",
+        "bytes": 14037
+      },
+      {
+        "path": "qa/artifacts/v040-review-build.log",
+        "sha256": "aceedd850c35ce8fb04c8dab555b4ab3e697de00a4ca8e0df2c636b7ebe2287e",
+        "bytes": 11627
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-checks.json",
+        "sha256": "385992a82a40030425d2ec5bf9da3244c1aa54718734d20bf6c1157fa0a06576",
+        "bytes": 19065
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-disaster-full.png",
+        "sha256": "9ce2f0758ed03ecace9393f53f8bdc19b4855ef2a2506c7ca044c2ce47a87b0a",
+        "bytes": 366926
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-guide-list-full.png",
+        "sha256": "427fe4ed25053a05fc9aeafcdbc647d211c1b105297df237f6579e6b37a24090",
+        "bytes": 120125
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-self-consumption-full.png",
+        "sha256": "3f6bde5db87db0c38583b90f8558e45898c09fcba81325c9effd2a598489df24",
+        "bytes": 354289
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-solar-economics-full.png",
+        "sha256": "05cdc467b35c6f5270ed71ec47975b10b573fa5a4b9942bb00e0980e79b15a0a",
+        "bytes": 355866
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-solar-electricity-savings-full.png",
+        "sha256": "7e9a7cabe8f8b8352d2f533116b5ffacb0fb5b61744ee3d496c9b5825aac833b",
+        "bytes": 292691
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-solar-fit-full.png",
+        "sha256": "49cf8d1b7c3c979e33274c1eb30551701d5d5799c6e7ae3ec589981034fcf863",
+        "bytes": 376176
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-solar-installation-cost-full.png",
+        "sha256": "9e078e852862e598cb4c5ccfb1e85671410d4489b890cc349977fae6cc726991",
+        "bytes": 337516
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-subsidies-full.png",
+        "sha256": "9f49971884819df7d6656f05c7fc71868935f4d6876247b7296d3b925991e53b",
+        "bytes": 297129
+      },
+      {
+        "path": "qa/artifacts/v041-mobile-subsidy-amount-full.png",
+        "sha256": "c5de1381b27406e169065fdd125af5b4800f59c14ea67e568c6735f7ca7e840f",
+        "bytes": 349437
+      },
+      {
+        "path": "qa/artifacts/v041-pc-guide-list.png",
+        "sha256": "d4fa422f3abe5eeea93cf0b0914942d7fa5dfa88a7e3a377bb6dee9df03d0c95",
+        "bytes": 63415
+      },
+      {
+        "path": "qa/artifacts/v041-production-checks.json",
+        "sha256": "365ae28ea41226e7de699bdb5b556dd5b858e46b00296947a8c5d65ea81f68fd",
+        "bytes": 97049
+      },
+      {
+        "path": "qa/artifacts/v041-production-independent-review.md",
+        "sha256": "ee0b1f6c2e12e8b0150373f7b199a3357bbe7f659d83033849fe6e73a79e119e",
+        "bytes": 8500
+      },
+      {
+        "path": "qa/artifacts/v041-production-quotes-detail.png",
+        "sha256": "ea0cee452d77dc305d941822951cf4d4d2c9b09571ab2810a6fa2fa44ea1b6d3",
+        "bytes": 167866
+      },
+      {
+        "path": "qa/artifacts/v041-production-quotes.png",
+        "sha256": "53eb68605fb5a820be8637f257fcf19a0126f3b27f70a5620d11f37b2af82d20",
+        "bytes": 117869
+      },
+      {
+        "path": "qa/artifacts/v041-publication.json",
+        "sha256": "8d94cc37613f753217a1a403080b54f8d5db53dbf1ac2cab1511b82cbbb70d48",
+        "bytes": 1446
+      },
+      {
+        "path": "qa/artifacts/v041-readiness-independent-review.md",
+        "sha256": "295f8100c7f146b27df1ed3aef71065712d68dfcd6501c3fbaf73f13fa9b1cea",
+        "bytes": 19385
+      },
+      {
+        "path": "qa/artifacts/v041-readiness-verification.json",
+        "sha256": "2e67f7984e47c372a309b98aeeaa14ca157231ec8da1f4a5ece34e8c793ee2de",
+        "bytes": 17922
+      },
+      {
+        "path": "qa/artifacts/v041-release-body.md",
+        "sha256": "9cb00cbdfc3edc7785bb4f06d5f7f547946c4b2c32c55f23a353e156488319ce",
+        "bytes": 1070
+      },
+      {
+        "path": "qa/artifacts/v041-release-public.png",
+        "sha256": "570dfe56b6c101b36023c8aee9014613fa89c93beeb52a193a157c61cbd5b0e2",
+        "bytes": 110539
+      },
+      {
+        "path": "qa/artifacts/v050-actions-success.png",
+        "sha256": "1c7d8239aaef26627dc81b9dd2b04bb69409840c7f862a83cb5019f6307b6631",
+        "bytes": 68072
+      },
+      {
+        "path": "qa/artifacts/v050-github-release.png",
+        "sha256": "d5334df0b5543f8dfa8ecd8bc8f957011c56bda00a0b5f7185c0b66be1f2b141",
+        "bytes": 120881
+      },
+      {
+        "path": "qa/artifacts/v050-production-checks.json",
+        "sha256": "64be26ad5f72029b434f673364079e7e85a0faee25757d89c047ced0781bcbcf",
+        "bytes": 65408
+      },
+      {
+        "path": "qa/artifacts/v050-production-first-visit.png",
+        "sha256": "c8c7b0ab1a77aac15e9a527b47a274c20f5fb7aa64386d81aba4d381f9905306",
+        "bytes": 117181
+      },
+      {
+        "path": "qa/artifacts/v050-production-independent-review.md",
+        "sha256": "853a38a973d09c0697f2e3ef2c2fa29143acc42d91ee670376ecdee1fa8413f2",
+        "bytes": 6784
+      },
+      {
+        "path": "qa/artifacts/v050-production-panel-mobile.png",
+        "sha256": "afd4ee4b1917273c5a450285c90d3c599a1c5afba2c11ea1d9abee4e1e4ad8aa",
+        "bytes": 6625
+      },
+      {
+        "path": "qa/artifacts/v050-production-panel-pc.png",
+        "sha256": "572ac6aa753096ccd5a6ddd48363b9a18ba8176ddde26a713eb4dae5c3c41580",
+        "bytes": 136057
+      },
+      {
+        "path": "qa/artifacts/v050-publication.json",
+        "sha256": "4903614139f304af0c42ea49bb9b294980ed266d6d3af57efe9f8a2aedd8370d",
+        "bytes": 2000
+      },
+      {
+        "path": "qa/artifacts/v050-release-body.md",
+        "sha256": "d756b84d5977ef5a906c156b384742e892b01c7ca1b90c57a72900322f2bc8ab",
+        "bytes": 1520
+      },
+      {
+        "path": "qa/artifacts/v050-release-candidate-files.json",
+        "sha256": "a05b656c0a039d5bcc167137978b605d43742a039c256e7a6cf98436bf1e1219",
+        "bytes": 9319
+      },
+      {
+        "path": "qa/artifacts/v050-release-candidate-preview.png",
+        "sha256": "d35c2f9cbc6cc51c9042152e7450ad8a69fca1ec1990407a74243b0b79cb8c05",
+        "bytes": 145397
+      },
+      {
+        "path": "qa/artifacts/v050-release-first-visit-pc.png",
+        "sha256": "062e50642f92bf1a3d361a880cb1f5c677f81a35a76c76a08528cee76446b48b",
+        "bytes": 65147
+      },
+      {
+        "path": "qa/artifacts/v050-release-independent-review.md",
+        "sha256": "e5e9f0de241b1641af69060dcc26e690e5a5ad03c66b7099646c9ae7069fc13c",
+        "bytes": 8157
+      },
+      {
+        "path": "qa/artifacts/v050-release-mobile-panel.png",
+        "sha256": "bf36b0a065f9b99e8854f225f49d63dce60350a865605b288be7d2d0e4492522",
+        "bytes": 40276
+      },
+      {
+        "path": "qa/artifacts/v050-release-quote-highlight.png",
+        "sha256": "02358423106b3471966dfd094f177a62d3152beb1b365789b79290c5a4763c78",
+        "bytes": 68933
+      },
+      {
+        "path": "qa/artifacts/v051-favicon-deployed.png",
+        "sha256": "0b4157b67882869d77fa295d284eaeb3b381577ce9eb6e4b9ac86e4ebfeeec4e",
+        "bytes": 2622
+      },
+      {
+        "path": "qa/artifacts/v051-favicon-sizes.png",
+        "sha256": "8201fa0940bcba4ef136ce24877fe5ffe5e3d5a24d77d7bc290dfbab9a6fe6db",
+        "bytes": 6832
+      },
+      {
+        "path": "qa/artifacts/v051-github-release.png",
+        "sha256": "cc2c1e2c00646be03f241ed3febf94d119409e01847198efd645aeecb38b99ac",
+        "bytes": 105194
+      },
+      {
+        "path": "qa/artifacts/v051-harena-master-deployed.png",
+        "sha256": "2fc79bd0a9c009bfdb8f2aa9e39393637f463f75f11cc0c816602e7d8b849657",
+        "bytes": 3148
+      },
+      {
+        "path": "qa/artifacts/v051-harena-master-sizes.png",
+        "sha256": "825f951f02705a0384574b2c437de9213495cd8497a50ead7e8a695b05a5b671",
+        "bytes": 11664
+      },
+      {
+        "path": "qa/artifacts/v051-production-checks.json",
+        "sha256": "232e4a002ac9b42aab9448875debaca97a23723ac04879dcabd5fd7471eb3e87",
+        "bytes": 18535
+      },
+      {
+        "path": "qa/artifacts/v051-production-icon.png",
+        "sha256": "de449b6c48ad44f665be41fcf650aaa7f348e34d654b2ce8add4cf51e0100024",
+        "bytes": 2841
+      },
+      {
+        "path": "qa/artifacts/v051-production-independent-review.md",
+        "sha256": "57370dc603611388c2f04c9c72d3407de7fa063061246f077ba14f3d24e24a59",
+        "bytes": 4823
+      },
+      {
+        "path": "qa/artifacts/v051-production-mobile.png",
+        "sha256": "961e0b4355cae2c14587edc382b88733a7770f92728dbc2d7c82bf418b469b1c",
+        "bytes": 32505
+      },
+      {
+        "path": "qa/artifacts/v051-production-pc.png",
+        "sha256": "d777a2d57bd5c079dbc82542ff9fd27887b6b73f4f836c1772d333fe7d64ba9b",
+        "bytes": 123893
+      },
+      {
+        "path": "qa/artifacts/v051-release-body.md",
+        "sha256": "0bc7afd3ec9c6c83475cf99099adfbe6a3a3cc21a45f51af614f042fa3a47425",
+        "bytes": 841
+      },
+      {
+        "path": "qa/artifacts/v051-release-candidate-files.json",
+        "sha256": "f97ac77f41dd9ec07c955f107e66c9e10530e0982cddde2d413b613065296dad",
+        "bytes": 1798
+      },
+      {
+        "path": "qa/artifacts/v051-release-independent-review.md",
+        "sha256": "3136cbaaf24f34efb814ba6d48d26e09aae9813bac8426ecd7dd397edcc4d263",
+        "bytes": 6944
+      },
+      {
+        "path": "qa/artifacts/v051-release-preview-mobile.png",
+        "sha256": "e63b6f4c0253b7e0396d560069cc51384b6d52ffe50671ede6380ad1d9c84df7",
+        "bytes": 36262
+      },
+      {
+        "path": "qa/artifacts/v051-release-preview-pc.png",
+        "sha256": "f77a1554f73cf03eda653af87efd7506caf5182d0b8e79fc2e58def6f871406f",
+        "bytes": 127201
+      },
+      {
+        "path": "qa/guide-directory-mobile-compact-20261018.jpg",
+        "sha256": "d96680d42f03d12bd7f69d74c1151b3b23f3c9a02d41d297f3b5cf2dc785ef7a",
+        "bytes": 37701
+      },
+      {
+        "path": "qa/guide-directory-mobile-square-20261018.jpg",
+        "sha256": "133c286a7323b2bd4ffa314c96f43913986369fc4c9c401ef0a6949ec43c0188",
+        "bytes": 41432
+      },
+      {
+        "path": "qa/guide-directory-pc-horizontal-square-20261018.jpg",
+        "sha256": "59d3784304ec8996016ea82ac676ae79ec67f2e9981d42f3e052b16ba4fce124",
+        "bytes": 122831
+      },
+      {
+        "path": "qa/guide-directory-pc-vertical-square-20261018.jpg",
+        "sha256": "97d7f2745324d14557df2a7eba94d29573987767da9e52b7022919bb4562807c",
+        "bytes": 87020
+      },
+      {
+        "path": "qa/guide-directory-topics-pc-20261018.jpg",
+        "sha256": "95c1693e85ff0248e12a55df82b39583c8001210996364cd8b909988476ae283",
+        "bytes": 119790
+      },
+      {
+        "path": "qa/guide-self-use-comparison-pc-20261018.jpg",
+        "sha256": "372a4e1103a342cb821eb8b5667d8cb7ce06b8bc4867bbdbc9a9609cfc7d352e",
+        "bytes": 93410
+      },
+      {
+        "path": "qa/guide-self-use-figure3-icons-20261018.jpg",
+        "sha256": "3f2c838bc1980eb7f84bfedd0bde0bfa646ffecdd998eb1b87314822697c289e",
+        "bytes": 127206
+      },
+      {
+        "path": "qa/guide-self-use-figure3-mobile-20261018.jpg",
+        "sha256": "933f2d816aece5deb2b673f573f30f05e28ff0d992ecf867b61bd94551f48ed4",
+        "bytes": 31795
+      },
+      {
+        "path": "qa/guide-self-use-figure3-pc-20261018.jpg",
+        "sha256": "d1b561146761a4fc5757b55bcc0ab43bef167857c61bae63d785fdffb6b6337d",
+        "bytes": 82115
+      },
+      {
+        "path": "qa/guide-self-use-revised-mobile-full-20261018.jpg",
+        "sha256": "1e82b965cafc0f17f0ebcee77684109703d5580c690b8beaf195ccc8adc48d85",
+        "bytes": 366797
+      },
+      {
+        "path": "qa/guide-self-use-revised-pc-20261018.jpg",
+        "sha256": "e65ea325369aef7ff55d67bacb2b12de2f5d32b1fd765c1e153d5aaed91faf50",
+        "bytes": 70882
+      },
+      {
+        "path": "qa/press-about-mobile-20261018.jpg",
+        "sha256": "a682b4d5b814f2bb98b87c31d3c8cc53627cb51882983c9b2c79c720eb27104a",
+        "bytes": 53141
+      },
+      {
+        "path": "qa/press-about-pc-20261018.jpg",
+        "sha256": "09d66088797c97516e412372a73b88762714559ec3c97e8ec0fb268d29c4f109",
+        "bytes": 106370
+      },
+      {
+        "path": "qa/press-about-production-v036.jpg",
+        "sha256": "a32680d6ec1843f2b2f5d2b2fec96ca3a2bb9f5eb5dd15048fd7c65fb8add0bc",
+        "bytes": 58504
+      },
+      {
+        "path": "qa/review-breadcrumb-mobile-20261018.jpg",
+        "sha256": "606d4cdb02e2c7b6dc47f4dd7ba954fa236eafb30fe1500996d6619e5baa2cf5",
+        "bytes": 42325
+      },
+      {
+        "path": "qa/review-breadcrumb-pc-20261018.jpg",
+        "sha256": "6a14b904f05b8068788ff1be49b26cccb146eebf1364d9e44ad4cf361bbc5758",
+        "bytes": 91209
+      },
+      {
+        "path": "qa/review-hosting-mobile-20261018.jpg",
+        "sha256": "e54792fa655095f2438dc4af3e9913b4db1620affc247f0800196ecd3392bcff",
+        "bytes": 38329
+      },
+      {
+        "path": "qa/review-hosting-pc-20261018.jpg",
+        "sha256": "452c9f4d2e9f768ce32607ea7c5aed79ead0d14022a6467d83565849c5210060",
+        "bytes": 58790
+      },
+      {
+        "path": "qa/share-card-crop-safe.png",
+        "sha256": "75651f06c3fc3c54ff39e947f651cb973f2fe53279dbcf91ee25f3b2475aba04",
+        "bytes": 415229
+      },
+      {
+        "path": "qa/share-card-square-preview.png",
+        "sha256": "4c095750d74862a8825957d6b92d1a871074fbacece76e60c7553058c2fbd753",
+        "bytes": 97377
+      },
+      {
+        "path": "qa/v040-article-mobile.jpg",
+        "sha256": "c5fbfab1566798e35886ab96a16eed3e6011df1b601e2d7618ce04a637f5707a",
+        "bytes": 354353
+      },
+      {
+        "path": "qa/v040-article-pc.jpg",
+        "sha256": "47cc3ea827c0c102e5928d6ece9e0e533d09a836603c426c5f4398379b99d57f",
+        "bytes": 453176
+      },
+      {
+        "path": "qa/v040-article-rates-pc.jpg",
+        "sha256": "402953d37fea13654249d8c6b97e532e22050133f8a8ff523b4dfa1469fe054e",
+        "bytes": 79071
+      },
+      {
+        "path": "qa/v040-directory-mobile-bottom.jpg",
+        "sha256": "93bae23f3a7241ae63249cdb93547b08fe386d7c309b1c3cde66ace9af7ba729",
+        "bytes": 9471
+      },
+      {
+        "path": "qa/v040-directory-mobile.jpg",
+        "sha256": "cc02697be56b03eee0a58a63a133f1b54a7bc51cfbb9511fe49294aeb2a1b0b1",
+        "bytes": 130997
+      },
+      {
+        "path": "qa/v040-directory-pc.jpg",
+        "sha256": "acf8d697ae852753ecc69dbd57d69dc14d4630ac1fc0ad7940a08e923795fe19",
+        "bytes": 181476
+      },
+      {
+        "path": "qa/v040-flow-fixed-mobile.jpg",
+        "sha256": "9cf42382f930bdf16f22361f9d3bbea8525ee739471d84327c529a7f3d4742e7",
+        "bytes": 40069
+      },
+      {
+        "path": "qa/v040-flow-fixed-pc.jpg",
+        "sha256": "a2ea26a07a11b952505487759272bcb72b5727ba30a6605bdf950055b8585668",
+        "bytes": 72843
+      },
+      {
+        "path": "qa/v040-flow-production.jpg",
+        "sha256": "877bb53d632bc90670ac5da6307c30a39aad67fee1a01e80fceee5ca9c2dc4df",
+        "bytes": 59021
+      },
+      {
+        "path": "qa/v040-github-release.jpg",
+        "sha256": "a27d912b73aceed60b67c9fe1fe068a6b1b71dca21a138607ad396fed7f0377a",
+        "bytes": 102775
+      },
+      {
+        "path": "qa/v040-hosted-authenticated.jpg",
+        "sha256": "5caac7953317b424d8806e4f33c33d802db0cc48f255e898f8ba35aba9d549ac",
+        "bytes": 94294
+      },
+      {
+        "path": "qa/v040-og-square.png",
+        "sha256": "d33e4a52cd5c209f2cc6d5b0a0e1c7a5d9787ebf5470335b3ede2b9efeae5914",
+        "bytes": 20601
+      },
+      {
+        "path": "qa/v040-og-wide.png",
+        "sha256": "106910c34b6dc9478e52cd796caf5ff3725ff7561d868173c5674ffef2eba118",
+        "bytes": 14122
+      },
+      {
+        "path": "qa/v040-search-console-request.jpg",
+        "sha256": "89139ad823a6928417a9824bb8e7f704604d4e8c43e59cf5758126dcf836e355",
+        "bytes": 83184
+      },
+      {
+        "path": "qa/v040-search-console-sitemap-read.jpg",
+        "sha256": "31141b8fa604e43dfb018a5aafde06e2c0f671139f6536374b3cfb391f846500",
+        "bytes": 56265
+      },
+      {
+        "path": "qa/v040-search-console-sitemap.jpg",
+        "sha256": "287245cf84e09167c171fa20d30b0003cd0c5ec5c39faef5e9b606405e91fb7f",
+        "bytes": 53263
+      },
+      {
+        "path": "qa/welcome-rental-local-v035.jpg",
+        "sha256": "5f99c0f6e2ead8edcc69584f63c93c56b7d8e6708bdb24f72f4a8d306a7fce66",
+        "bytes": 85008
+      },
+      {
+        "path": "qa/welcome-rental-mobile-v035.jpg",
+        "sha256": "b3dd6e4bc3db625e8a2f0bdfd008f372992a74fb7f705da95325f176a9d4fa20",
+        "bytes": 31872
+      },
+      {
+        "path": "qa/welcome-rental-production-v035.jpg",
+        "sha256": "55756eb7fd80987b2a57972bb105b35b6b1076a63d7a9bc9c8b85b3b09090de8",
+        "bytes": 49043
+      }
+    ],
+    "restoredPrimarySources": [
+      "qa/artifacts/installation-cost-composition-source.json",
+      "qa/artifacts/installation-meti-source-cost-chart.png"
+    ]
+  },
+  "verification": {
+    "frontendTests": {
+      "pass": 250,
+      "fail": 0,
+      "log": "qa/artifacts/code-cleanup-tests.log"
+    },
+    "backendTests": {
+      "pass": 28,
+      "fail": 0,
+      "log": "qa/artifacts/code-cleanup-backend-tests.log"
+    },
+    "dataHashes": {
+      "checked": 101,
+      "changed": 0
+    },
+    "outputComparison": {
+      "baselineCount": 135,
+      "currentCount": 135,
+      "changedExisting": [
+        "data/index.html",
+        "data/subsidies/index.html",
+        "guides/choosing-installer/index.html",
+        "guides/consultation-preparation/index.html",
+        "guides/disaster/index.html",
+        "guides/disaster-preparedness/index.html",
+        "guides/electricity-support-end/index.html",
+        "guides/equipment-maintenance/index.html",
+        "guides/home-battery/index.html",
+        "guides/home-survey/index.html",
+        "guides/index.html",
+        "guides/installation-process/index.html",
+        "guides/power-outage/index.html",
+        "guides/quote-services/index.html",
+        "guides/quotes-contractors/index.html",
+        "guides/self-consumption/index.html",
+        "guides/solar-benefits/index.html",
+        "guides/solar-consultation/index.html",
+        "guides/solar-costs/index.html",
+        "guides/solar-economics/index.html",
+        "guides/solar-electricity-savings/index.html",
+        "guides/solar-fit/index.html",
+        "guides/solar-installation-cost/index.html",
+        "guides/solar-living/index.html",
+        "guides/solar-maintenance-cost/index.html",
+        "guides/subsidies/index.html",
+        "guides/subsidy-amount/index.html",
+        "guides/welcome/index.html",
+        "index.html",
+        "manual/equipment-renewal/consultation/index.html",
+        "manual/equipment-renewal/costs/index.html",
+        "manual/equipment-renewal/index.html",
+        "manual/getting-started/index.html",
+        "manual/getting-started/milestones/index.html",
+        "manual/getting-started/troubles/index.html",
+        "manual/index.html",
+        "pages/calculation-method.html",
+        "pages/policy.html",
+        "press/index.html",
+        "simulator/index.html"
+      ],
+      "removed": [
+        "assets/analytics-BUBPSZHq.js",
+        "assets/data-subsidies-index-BL4xE5rd.js",
+        "assets/guides-electricity-support-end-index-DK74h4Q6.js",
+        "assets/journey-BWwQnKOu.js",
+        "assets/manual-index-piVqDHiC.js",
+        "assets/pages-calculation-method-wRtgT__m.js",
+        "assets/retained-diagnostic-display-DOTGF6p4.js"
+      ],
+      "added": [
+        "assets/analytics-C9o8GTwn.js",
+        "assets/data-subsidies-index-CcTbFUoe.js",
+        "assets/guides-electricity-support-end-index-C0v12n0M.js",
+        "assets/hare-display-record-xfF87kiH.js",
+        "assets/journey-Dk9zLDM_.js",
+        "assets/manual-index-BYPCa0wS.js",
+        "assets/pages-calculation-method-DdsEHD6p.js"
+      ],
+      "svgChanged": [],
+      "chartStylesEqualIgnoringCheckoutEOL": true,
+      "htmlAssetSubstitution": {
+        "map": [
+          [
+            "assets/analytics-C9o8GTwn.js",
+            "assets/analytics-BUBPSZHq.js"
+          ],
+          [
+            "assets/data-subsidies-index-CcTbFUoe.js",
+            "assets/data-subsidies-index-BL4xE5rd.js"
+          ],
+          [
+            "assets/guides-electricity-support-end-index-C0v12n0M.js",
+            "assets/guides-electricity-support-end-index-DK74h4Q6.js"
+          ],
+          [
+            "assets/journey-Dk9zLDM_.js",
+            "assets/journey-BWwQnKOu.js"
+          ],
+          [
+            "assets/manual-index-BYPCa0wS.js",
+            "assets/manual-index-piVqDHiC.js"
+          ],
+          [
+            "assets/pages-calculation-method-DdsEHD6p.js",
+            "assets/pages-calculation-method-wRtgT__m.js"
+          ],
+          [
+            "assets/hare-display-record-xfF87kiH.js",
+            "assets/retained-diagnostic-display-DOTGF6p4.js"
+          ]
+        ],
+        "matched": 41,
+        "unmatched": []
+      }
+    },
+    "buildPages": {
+      "pass": true,
+      "files": 135,
+      "canonicalUrls": 38
+    },
+    "buildReview": {
+      "pass": true,
+      "files": 134,
+      "html": 42
+    },
+    "backendReview": {
+      "pass": true,
+      "reviewer": "/root/cleanup_backend_review",
+      "activeFunctionsASTUnchanged": 17,
+      "must": 0,
+      "recommend": 0,
+      "nits": 0
+    },
+    "frontendReview": {
+      "pass": true,
+      "reviewer": "/root/cleanup_frontend_review",
+      "initialMust": 1,
+      "resolved": "Restored two adopted figure-source files with byte identity; linked from current QA.",
+      "remaining": {
+        "must": 0,
+        "recommend": 0,
+        "nits": 0
+      }
+    },
+    "diffCheck": {
+      "frontend": true,
+      "backend": true
+    },
+    "duplicateCssRules": 0,
+    "processes": "No persistent helper server/watcher was started; build/test commands have exited."
+  },
+  "protectedPrimarySources": [
+    {
+      "path": "qa/artifacts/installation-cost-composition-source.json",
+      "sha256": "db127853dd17ffb58944142f9b8813cdbf73405d127f3b444154002225cc02b5"
+    },
+    {
+      "path": "qa/artifacts/installation-meti-source-cost-chart.png",
+      "sha256": "24002b1489d6ae2777456a9fd70fdbb3055381f99e5e9072e6d9b33c17d71f90"
+    }
+  ],
+  "scopeLimits": [
+    "No data, calculation formulas, adopted article prose, public URLs, original character files, active fixtures or generators changed.",
+    "Cross-language calculation/runtime mirrors, original/public derived images and semantic public asset aliases are deliberate and retained.",
+    "This is a repository-wide static redundancy/reference audit and conservative cleanup; it does not establish that every semantically similar function can be merged.",
+    "Pre-existing business-research edits and untracked user/design material retained.",
+    "Only the existing owner-private public preview was deployed. No production deployment, version bump or public release tag."
+  ],
+  "cleanupTotals": {
+    "unusedSourceFiles": 11,
+    "unusedSourceBytes": 122539,
+    "historicalQaFiles": 218,
+    "historicalQaBytes": 18220729,
+    "unusedExportsRemoved": 19,
+    "htmlEscapeConsumers": 6
+  },
+  "finalSourceHashes": [
+    {
+      "repo": "frontend",
+      "path": "qa/generate-economics-chart.mjs",
+      "sha256": "b02df3e8138d5ae438ea4c8c8411cb754d6e182dcc69a994457134fe9df692c4"
+    },
+    {
+      "repo": "frontend",
+      "path": "qa/sync-journey-pages.mjs",
+      "sha256": "650909d4c8e38079de8de4e58b1e8824ddaea060f7c271d9bb30715815c3c2c6"
+    },
+    {
+      "repo": "frontend",
+      "path": "qa/tests/public-integrity.test.js",
+      "sha256": "feeede75d6886496c07d54f2d83bb084932abeeecaf0ab60737c0f34cd4e33c6"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/articles/src/article-data.js",
+      "sha256": "8a62f652e0e966731233a0d57c1d82264929aa35006d661ecf1d76ea305bae75"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/data/src/subsidies.js",
+      "sha256": "99451bea68981d069e72d7338a9adbbcabe9953c5b68f3ff46731e7fcac2c659"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/manual/components.js",
+      "sha256": "8c17ab6f1c8a8fa871a38955afff2600bd81c7a8532aa331fb16ca5b54c2c9d3"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/consultation-view.js",
+      "sha256": "754065c2f145aa644fc6829a80af1f5f8441ce53375dc83600e05d237df72ce9"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/journey.js",
+      "sha256": "b39481a1ea9f585748f213967287311ef35d0900d5566976db6e8ae84c6fc3cc"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/provider-comparison-view.js",
+      "sha256": "e866ee01c100c941c92018b8876f5cb822bffca4a3fe282443cfc6c310c50b85"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/map/reading-view.js",
+      "sha256": "69cd54c5012ead039cda0a7e48b30e14cf9e2a639d49d6d86e11036a91d0a06f"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/simulator/src/calculator.js",
+      "sha256": "38e3dcd3828955734db92a974184bf4f3c99b154f16f4580541732851edf9b5e"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/simulator/src/diagnostic-display-record.js",
+      "sha256": "1c3a67532799678288f50b106f04d3eb6985cef078e1d87202c6864ba7d4a0cf"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/simulator/src/housing-input.js",
+      "sha256": "503c60dd973742939c98c77c1474a0d31a4d363e67a64fbdb7d8631e3c27206a"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/simulator/src/result-presentation.js",
+      "sha256": "c3106539b63b767945fa0b48e20e74a30e4fad557de880a338f9a74781593ecd"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/simulator/src/retained-diagnostic-display.js",
+      "sha256": "f00b392f6c1a033c5123abd6122fde42d6b9182dafaaca4230a56d33b4ce85e7"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/src/common_generate.py",
+      "sha256": "fd249b02f23c602182b9dc6e75066450b70c880f5da44e142d96ef5daaf2b5ed"
+    },
+    {
+      "repo": "backend",
+      "path": "data/subsidies/src/engine.py",
+      "sha256": "bc0ac4b94385d051671ded79ad44cf6ece6301644a3e180d2011cb914a9b1cd0"
+    },
+    {
+      "repo": "backend",
+      "path": "qa/tests/test_calculation_physics.py",
+      "sha256": "ba28135dd1921b9fd6bd488c5878078f763222f4372eec4d1796deaff6a4746c"
+    },
+    {
+      "repo": "backend",
+      "path": "qa/tests/test_prefecture_scope.py",
+      "sha256": "82c126c14f2683c940c7694eb79450c02b54c9b9b99f619544704ec0ffdce6c3"
+    },
+    {
+      "repo": "frontend",
+      "path": "site/shared/html.js",
+      "sha256": "aaefcf7013629eda4709c50f2a106caa67b57712b4f8c79f0329c65ae3bedb5a"
+    },
+    {
+      "repo": "frontend",
+      "path": "qa/article-cashflow.css",
+      "sha256": "a7686a585bad31cdf6d57a8ec750efea9bb0a37e650cd0dad96c0582403001ab"
+    }
+  ],
+  "retainedIntentionalDuplicates": [
+    "Character originals and derived public images",
+    "Calculation contracts mirrored in JavaScript/Python",
+    "Published semantic aliases for the same illustration",
+    "Generated HTML sharing header/component markup"
+  ],
+  "delivery": {
+    "sourceRepositoryCommitted": false,
+    "sourceRepositoryPushed": false,
+    "productionDeployed": false,
+    "publicPreviewDeployed": true
+  },
+  "preview": {
+    "origin": "https://haretoku-preview.wordmindblack.chatgpt.site",
+    "audience": "owner-private",
+    "sourceCommit": "e023b0f5208b8c168500e281b556bb5869799f8f",
+    "versionId": "appgprj_6ad443af93d0819196462588cef5c7e1~appgver_0a3bd001aaac81918d6dcc040145382f",
+    "deploymentId": "appgdep_6adaf1f743608191916bb6536012d431",
+    "status": "succeeded",
+    "deployedAt": "2026-10-23T05:35:01.115935+00:00",
+    "archiveSha256": "271f6e7a3c8745bee446d341467e46d8eea8e56f712d45643a4825e4de14633a",
+    "verification": {
+      "http": "PASS: anonymous gate, matching article/build and all linked assets, robots, preview metadata, expected 404.",
+      "pcViewport": {
+        "width": 1366,
+        "height": 900
+      },
+      "mobileViewport": {
+        "width": 360,
+        "height": 812,
+        "physicalDevice": false
+      },
+      "cases": [
+        {
+          "name": "consultation before/after DOM snapshot",
+          "result": "identical"
+        },
+        {
+          "name": "comparison table and supplemental questions",
+          "result": "PASS open/close and content"
+        },
+        {
+          "name": "walkthrough audience selection, reload persistence, progress retention",
+          "result": "PASS"
+        },
+        {
+          "name": "walkthrough to corresponding map square and article",
+          "result": "PASS; observed navigation and existing warm-colored border treatment"
+        },
+        {
+          "name": "avatar selection and persistence, dialogue next-page",
+          "result": "PASS; original character 1 restored"
+        },
+        {
+          "name": "shared navigation and data directory",
+          "result": "PASS"
+        },
+        {
+          "name": "Tokyo subsidy listing and accepting-only filter",
+          "result": "PASS; 3 accepting prefecture records shown"
+        },
+        {
+          "name": "data region to diagnosis, blank/default and 15000yen input",
+          "result": "PASS; results recomputed; blank restored"
+        },
+        {
+          "name": "diagnosis equipment selection",
+          "result": "PASS; original solar-only plan restored"
+        },
+        {
+          "name": "manual timeline/troubles tabs, article navigation and return",
+          "result": "PASS"
+        },
+        {
+          "name": "renewal pages 1 to 2 to 3, price figure and cards",
+          "result": "PASS"
+        },
+        {
+          "name": "mobile page horizontal overflow",
+          "result": "none in diagnosis, self-consumption, manual comparison and renewal costs; root content width=client width=345 inside 360 viewport"
+        },
+        {
+          "name": "reset confirmation and cancel",
+          "result": "PASS; cancelled without reset; manual progress retained 3/5"
+        },
+        {
+          "name": "runtime console warnings/errors",
+          "result": "none observed in inspected tab logs"
+        }
+      ],
+      "screenshots": [
+        "code-cleanup-preview-before-pc.png",
+        "code-cleanup-preview-after-pc.png",
+        "code-cleanup-preview-diagnosis-mobile.png",
+        "code-cleanup-preview-troubles-mobile.png",
+        "code-cleanup-preview-walkthrough-mobile.png",
+        "code-cleanup-preview-comparison-mobile.png",
+        "code-cleanup-preview-costs-mobile.png"
+      ],
+      "cleanup": "Temporary QA tab closed, viewport reset, original user tab refreshed; helper and HTTP-check processes exited."
+    }
+  }
+}

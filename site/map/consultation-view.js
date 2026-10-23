@@ -1,6 +1,6 @@
+import {escapeHtml as safe} from '../shared/html.js';
 import {quoteMaterial,tainaviMaterial} from '../shared/quote-config.js';
 
-const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const providerLogos={
   'solar-partners':new URL('../shared/assets/solar-partners.png',import.meta.url).href,
   tainavi:new URL('../shared/assets/tainavi.webp',import.meta.url).href

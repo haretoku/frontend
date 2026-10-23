@@ -28,4 +28,11 @@
     <path d="M23 33h58l16 50H9Z" fill="#b0cecc" stroke="#638b72" stroke-width="3" stroke-linejoin="round"/>
     <path d="M19 48h66M14 65h77M42 33l-3 50m23-50 6 50M43 85v20m21-20v20M29 106h48" fill="none" stroke="#638b72" stroke-width="2"/>
   </symbol>
+  <symbol id="solar-panel-maintenance" viewBox="0 0 120 120">
+    <use href="#solar-panel"/>
+    <g transform="translate(6 20) scale(.48)" stroke="#648a75" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M162 91q-12-27 11-43l14-2-13 22 16 15 21-14q3 27-23 34l-57 70q-9 11-19 2t-1-19z" fill="#f7d47b"/>
+      <circle cx="121" cy="166" r="3" fill="#fff"/>
+    </g>
+  </symbol>
 </svg>

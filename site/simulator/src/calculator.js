@@ -1,7 +1,7 @@
 import { connectDiagnosticSubsidy } from './diagnostic-subsidy.js';
 import { prepareSubsidyData } from '../../../data/src/scheme-adapter.js';
 import { housingInput } from "./housing-input.js";
-import { preprocessCapacity } from "./capacity-preprocessing.js";
+
 
 export const CALCULATION_IMPLEMENTED = true;
 

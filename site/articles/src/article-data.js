@@ -2,7 +2,7 @@ import '../../simulator/styles/diagnostic-display-record.css';
 import '../../shared/table-scroll-hint.js';
 import {loadDiagnosticDisplayRecords} from '../../simulator/src/diagnostic-display-record.js';
 import {appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
-import {diagnosticTrialSourceTexts, diagnosticDetailNotes} from '../../simulator/src/retained-diagnostic-display.js';
+import {diagnosticTrialSourceTexts} from '../../simulator/src/retained-diagnostic-display.js';
 import { bindArticleBibliography } from "./article-bibliography.js";
 import { loadFrontendData } from "../../../data/src/data-loader.js";
 
@@ -124,7 +124,7 @@ async function initialize() {
           ? '非FITの条件は，今回の新設太陽光を含む申請経路についてのものです．既設太陽光への蓄電池追加は別の申請枠であり，今回の新設診断では評価していません．'
           : null;
         const sourceNotes = diagnosticTrialSourceTexts(publicData, program.id).map(text => '制度額の詳細：' + text);
-        const notes = diagnosticDetailNotes(publicData, program, [...sourceNotes,formula,scopeClarification,program.diagnostic_scope?.basis, program.note, ...(program.calculation_assumptions ?? []), ...(program.required_confirmations ?? [])].filter(Boolean));
+        const notes = [...sourceNotes,formula,scopeClarification,program.diagnostic_scope?.basis, program.note, ...(program.calculation_assumptions ?? []), ...(program.required_confirmations ?? [])].filter(Boolean);
         for (const text of [...new Set(notes)]) {
           const paragraph = document.createElement('p');
           paragraph.style.whiteSpace = 'pre-line';

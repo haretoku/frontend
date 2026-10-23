@@ -1,7 +1,7 @@
+import {escapeHtml as escape} from '../shared/html.js';
 import {timelineEvents, troubleCategories} from './content.js';
 import {renderManualIcon} from './icons.js';
 
-const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const status = item => item.pending && !item.links?.length ? ' <span class="manual-status">準備中</span>' : '';
 const links = item => item.links?.length ? '<div class="manual-links">' + item.links.map(link => `<a class="manual-guide" href="${escape(link.href)}">${escape(link.label)}<span aria-hidden="true">→</span></a>`).join('') + '</div>' : '';
 

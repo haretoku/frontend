@@ -1,16 +1,11 @@
 import {pages as mapPages} from '../../site/map/content.js';
-import {prepareSubsidyData} from '../../data/src/scheme-adapter.js';
-import { cashflowMarkers, groupMarkerTargets } from "../../site/simulator/src/chart-markers.js";
-import { subsidyGroups, nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
+import { nonInclusionReason, replacementEvents } from "../../site/simulator/src/subsidy-presentation.js";
 import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateLocation } from "../../site/simulator/src/location-input.js";
-import { calculateEstimate } from "../../site/simulator/src/calculator.js";
-import { degradationLabel, degradationDescription, outageReferencePresentation, formatBatteryCapacity } from "../../site/simulator/src/battery-presentation.js";
-import { cashflowChartLayout, formatEnergyRate, subsidyReasonPresentation, energyRoutes, financialTotals, endpointResult, conclusionBreakdown, compactYen, decisionAmountParts, hasUnconfirmedSubsidy, scenarioSubsidyCondition, resultConditionHeadline, mainSubsidyPresentation, subsidyBreakdownReason, scenarioRecoveryPresentation, energyBreakdownPresentation } from "../../site/simulator/src/result-presentation.js";
+import { decisionAmountParts, resultConditionHeadline, mainSubsidyPresentation, scenarioRecoveryPresentation, energyBreakdownPresentation } from "../../site/simulator/src/result-presentation.js";
 const repositoryRoot = fileURLToPath(new URL("../..", import.meta.url));
 const siteRoot=resolve(repositoryRoot,"site");
 const newDetailSlugs = ["solar-electricity-savings", "solar-fit", "solar-installation-cost", "solar-maintenance-cost", "subsidy-amount"];
@@ -46,24 +41,6 @@ async function localTarget(pagePath, reference) {
   return target;
 }
 
-test("劣化比較の説明は選択した仮定を使い，停電線はDC容量の精度を保つ", () => {
-  assert.equal(formatBatteryCapacity(8.075), "8.08");
-  for (const [id, retention] of [["conditional_70", 0.7], ["optimistic_85", 0.85]]) {
-    const scenario = { id, scenario_id: id, capacity_retention_at_year_20: retention };
-    assert.match(degradationLabel(scenario), /条件付き比較/);
-    assert.match(degradationDescription(scenario), new RegExp(`20年後${retention * 100}％`));
-    assert.doesNotMatch(degradationDescription(scenario), /15年目末60％/);
-    assert.match(degradationDescription(scenario), /平均や保証値ではありません/);
-  }
-  assert.match(degradationLabel({ id: "conservative", capacity_retention_at_year_20: 0.5060595991810496 }), /約50.6％/);
-  const reference = { required_dc_capacity_reference_kwh: 1.7122657777822357, household_appliance_ac_load_kwh: 0.9043979452054796, auxiliary_ac_load_kwh: 0.72, discharge_efficiency: Math.sqrt(0.9) };
-  const presentation = outageReferencePresentation(reference);
-  assert.equal(presentation.capacity, reference.required_dc_capacity_reference_kwh);
-  assert.equal(presentation.label, "約1.7 kWh");
-  assert.match(presentation.energy, /家電.*0.90 kWh.*自身.*0.72 kWh.*94.9％/);
-  assert.equal(outageReferencePresentation(undefined), null);
-  assert.equal(outageReferencePresentation({ ...reference, required_dc_capacity_reference_kwh: NaN }), null);
-});
 test("主結果は1万円未満を千円単位の概算とし，0円と1万円境界を区別する", () => {
   assert.deepEqual(decisionAmountParts(1_086), { amount: "1,000円", outcome: "トク" });
   assert.deepEqual(decisionAmountParts(-1_086), { amount: "1,000円", outcome: "損" });

@@ -1,0 +1,142 @@
+
+
+.cashflow-chart__grid {
+  stroke: #dce3df;
+  stroke-width: 1;
+}
+
+
+.cashflow-chart__zero {
+  stroke: #aeb9b3;
+  stroke-dasharray: 7 6;
+  stroke-width: 2;
+}
+
+
+.cashflow-chart__line {
+  fill: none;
+  stroke: var(--color-primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: opacity 160ms ease, stroke-width 160ms ease;
+}
+
+
+.cashflow-chart__line--downside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__line--standard {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__line--upside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__line.is-muted {
+  opacity: 0.18;
+  stroke-width: 2;
+}
+
+
+.cashflow-chart__line.is-selected {
+  opacity: 1;
+  stroke-width: 5;
+}
+
+
+.cashflow-chart__area {
+  fill: rgb(31 104 77 / 10%);
+}
+
+
+.cashflow-chart__area--downside {
+  fill: rgb(31 104 77 / 8%);
+}
+
+
+.cashflow-chart__area--upside {
+  fill: rgb(31 104 77 / 8%);
+}
+
+
+.cashflow-chart__dot {
+  fill: var(--color-surface);
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+
+.cashflow-chart__lifecycle-cost {
+  fill: var(--color-accent);
+  stroke: var(--color-surface);
+  stroke-width: 2;
+}
+
+
+.cashflow-chart__label {
+  fill: var(--color-muted);
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+
+.cashflow-chart__payback {
+  fill: var(--color-surface);
+  opacity: 0.2;
+  stroke: var(--color-primary);
+  stroke-width: 3;
+}
+
+
+.cashflow-chart__payback--downside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__payback--standard {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__payback--upside {
+  stroke: var(--color-primary);
+}
+
+
+.cashflow-chart__payback.is-selected {
+  opacity: 1;
+  fill: var(--color-primary-pale);
+  stroke-width: 4;
+  filter: drop-shadow(0 0 5px rgb(31 104 77 / 42%));
+}
+
+
+.cashflow-chart__payback.is-secondary {
+  opacity: 0.32;
+  fill: var(--color-surface);
+  stroke-width: 2;
+}
+
+.cashflow-chart__line.is-muted { opacity: 0.48; stroke-width: 2.5; }
+
+.cashflow-chart__line--downside { stroke-dasharray: 8 5; }
+
+.cashflow-chart__line--upside { stroke-dasharray: 2 5; }
+
+.cashflow-chart__replacement-label { fill: var(--color-ink-soft); font-size: 13px; font-weight: 700; }
+
+.cashflow-chart__replacement-leader { stroke: var(--color-muted); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.65; }
+
+
+.cashflow-endpoint-label { font-size: 14px; font-weight: 700; fill: var(--color-primary-dark); pointer-events: none; }
+
+.cashflow-endpoint-label.is-negative { fill: #9c2929; }
+
+.cashflow-endpoint-label.is-neutral { fill: var(--color-ink); }
+
+.cashflow-endpoint-caption { font-size: 11px; fill: var(--color-primary-dark); }

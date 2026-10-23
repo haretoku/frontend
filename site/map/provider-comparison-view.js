@@ -1,7 +1,7 @@
+import {escapeHtml as safe} from '../shared/html.js';
 import {comparisonDate,providers,statusLegend,comparisonRows,comparisonSources,comparisonScope} from './provider-comparison.js';
 import {consultationProviders,providerLogo,providerImpression} from './consultation-view.js';
 
-const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 // 一つの表を画面幅に応じて組み替え，項目・会社とセルの対応を保つ．
 export function renderProviderComparison({idPrefix='',placement='article_comparison',includeImpressions=true}={}){

@@ -1,3 +1,4 @@
+import {escapeHtml as safe} from '../site/shared/html.js';
 import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -9,7 +10,6 @@ import {renderSiteHeader,headerSection} from '../site/shared/site-header-templat
 
 const root=resolve(import.meta.dirname,'../site'),check=process.argv.includes('--check');
 const template=journeyLinks(await readFile(resolve(root,'index.html'),'utf8'));
-const safe=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function publicAssets(html){
   return html.replace(/file:\/\/\/[^"<>\s]+/g,url=>{
     const asset=new URL(url),path=fileURLToPath(asset).replaceAll('\\','/'),base=root.replaceAll('\\','/');

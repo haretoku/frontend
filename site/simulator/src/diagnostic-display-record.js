@@ -1,5 +1,5 @@
-import {calculationContext, calculationContexts, extractDiagnosticDisplay} from './common-diagnostic-extract.js';
-import {receiveHareDisplayRecords, appendHareDisplayCommon, appendHareDisplayBranch} from '../../shared/hare-display-record.js';
+import {calculationContexts, extractDiagnosticDisplay} from './common-diagnostic-extract.js';
+import {receiveHareDisplayRecords} from '../../shared/hare-display-record.js';
 import {loadJson} from '../../../data/src/data-loader.js';
 
 function canonical(value) {
@@ -36,55 +36,4 @@ export async function loadDiagnosticDisplayRecords(data) {
   ];
   const [table, binding, hare] = await Promise.all(urls.map(loadJson));
   return receiveDiagnosticDisplayRecords(data, table, binding, hare);
-}
-
-export function appendDiagnosticReceptionNote(document, parent, row, records) {
-  if (row.included || !['accepting', 'scheduled', 'unknown', 'unconfirmed'].includes(row.application_status)) return false;
-  const entry = records.get(row.id);
-  if (!entry) return false;
-  if (row.common_branch_source_sha256 && row.common_branch_source_sha256 !== entry.source_sha256)
-    throw Error('受付注記と受取済み診断表示表が一致しません．');
-  const items = (entry.record.common?.items ?? []).filter(item => item.source_item_ids?.includes('reception.state'));
-  if (items.length > 1) throw Error('同制度の受付項目が一意ではありません．');
-  const lines = items[0]?.content.slice(1) ?? [];
-  if (!lines.length) return false;
-  for (const text of lines) {
-    const note = document.createElement('p');
-    note.className = 'diagnostic-reception-note';
-    note.textContent = text;
-    parent.append(note);
-  }
-  return true;
-}
-
-export function appendDiagnosticDisplay(document, parent, row, records, calculation) {
-  const entry = records.get(row.id);
-  if (!entry || !row.included) return false;
-  if (row.common_branch_source_sha256 !== entry.source_sha256)
-    throw Error('今回の算定成分と診断表示表が一致しません．');
-  const currentContexts = entry.contract.version === 'common-equipment-branches-calculation/3' ? calculationContexts(entry.contract, row.used_common_branches) : [calculationContext(entry.contract, row.selected_common_components, row.used_common_refs ?? null)];
-  const extracted = extractDiagnosticDisplay(entry.hare, currentContexts);
-  if (extracted.records.length !== 1) throw Error('今回の診断表示対象が一意ではありません．');
-  const record = extracted.records[0];
-  const wrapper = document.createElement('div');
-  wrapper.className = 'hare-display-scheme diagnostic-display-record';
-  wrapper.dataset.diagnosticDisplayRecord = record.record_id;
-  const common = document.createElement('div');
-  common.className = 'hare-display-scheme-common';
-  if (record.common?.items.length) {
-    appendHareDisplayCommon(document, common, record.common, `${record.common.heading}の条件`);
-    wrapper.append(common);
-  }
-  const equipment = document.createElement('div');
-  equipment.className = 'hare-display-scheme-equipment';
-  for (const branch of record.branches) appendHareDisplayBranch(document, equipment, branch);
-  wrapper.append(equipment);
-  const notice = document.createElement('p');
-  notice.className = 'diagnostic-display-notice';
-  notice.textContent = '※適用条件を満たすと仮定した概算です．申請前に，公式窓口または施工業者を通じて適用可否をご確認ください．';
-  const detail = document.createElement('a');
-  detail.href = '../../data/subsidies/?prefecture=' + encodeURIComponent(entry.prefecture_code);
-  detail.textContent = 'この制度の詳しい条件・手続をハレトクデータで見る';
-  parent.append(calculation, wrapper, notice, detail);
-  return true;
 }

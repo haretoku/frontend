@@ -7,8 +7,6 @@ import metadataUrl from '../../../data/input/metadata.json?url';
 import {loadFrontendData, loadJson} from '../../../data/src/data-loader.js';
 import {usesSchemeContract} from '../../../data/src/scheme-adapter.js';
 import {selectSchemeGroups} from './scheme-model.js';
-import {diagnosticPilotTerms} from '../../simulator/src/retained-diagnostic-display.js';
-import {orderedSupplementRows} from '../../simulator/src/diagnostic-amount-dom.js';
 import {listingNotes,diagnosisUrl,selectPrograms,groupPrograms,amountSummary,equipmentLabel,statusLabel,conditionSections,groupedEquipmentSummary,applicationPeriod,receptionFilters,matchesReception} from './model.js';
 // The import path is relative to site/data/src; only the received public dataset is used.
 const pref = document.querySelector('#prefecture');
@@ -84,12 +82,8 @@ function render(updateUrl=true) {
       if(!hareRecord){
       const official=group.map(p=>p._catalog?.conditions?.official||[]);
       const common=group.length>1&&group.every(p=>p._catalog)?[...new Set(official[0].filter(text=>official.every(parts=>parts.includes(text))))]:[];
-      const termsByBranch=group.map(p=>diagnosticPilotTerms(data,p));
-      const complete=termsByBranch.every(terms=>terms?.conditionDisplayComplete);
-      const commonDisplay=complete&&group.length>1?[...new Set(termsByBranch[0].commonSupplement.filter(text=>termsByBranch.every(terms=>terms.commonSupplement.includes(text))))]:[];
       for(const p of group){
         const block=node('section',null,'data-amount-summary');block.append(node('h5',equipmentLabel(p)));
-        const terms=termsByBranch[group.indexOf(p)];
         const commonGroups=p._catalog?.common_item_groups;
         if(commonGroups?.length && p._catalog.common_source_sha256===data.common_branch_trial?.source_sha256){
           appendLines(block,['制度の基本額：'+amountSummary(p)]);
@@ -98,25 +92,15 @@ function render(updateUrl=true) {
         }
 
         const detail=disclosure('補足・適用条件');
-        if(terms?.sections?.length){
-          const shared=(terms.commonSupplement||[]).filter(text=>!commonDisplay.includes(text));
-          for(const section of terms.sections){
-            if(terms.sections.length>1)block.append(node('strong',section.label));
-            appendLines(block,['制度の補助額：'+section.text]);
-            const rows=terms.sections.length===1?orderedSupplementRows([...section.supplement,...shared]):section.supplement;
-            if(rows.length){if(terms.sections.length>1)detail.append(node('h5',section.label));appendLines(detail,rows);}
-          }
-          if(terms.sections.length>1)appendLines(detail,shared);
-        }else appendLines(block,['制度の補助額：'+amountSummary(p)]);
-        if(!terms?.conditionDisplayComplete){
+        appendLines(block,['制度の補助額：'+amountSummary(p)]);
+        {
           const sections=conditionSections([p]);
           if(official[group.indexOf(p)].length){const section=sections.find(s=>s.label==='補助条件');if(section)section.lines=official[group.indexOf(p)].filter(text=>!common.includes(text));}
           appendConditions(detail,sections.filter(section=>section.lines.length));
         }
         if(detail.children.length>1)block.append(detail);amount.append(block);
       }
-      if(commonDisplay.length){const detail=disclosure('共通の適用条件');appendLines(detail,commonDisplay);amount.append(detail);}
-      else if(!complete&&common.length){const detail=disclosure('共通の補助条件');appendConditions(detail,[{label:'共通の補助条件',lines:common}]);amount.append(detail);}
+      if(common.length){const detail=disclosure('共通の補助条件');appendConditions(detail,[{label:'共通の補助条件',lines:common}]);amount.append(detail);}
       }
       const state=node('td');state.dataset.label='受付状況';for(const text of groupedEquipmentSummary(group,statusLabel))state.append(node('p',text,'data-badge'+(text.endsWith('受付中')||text.endsWith('キャンセル待ち')?' data-badge--open':'')));
       appendLines(state,groupedEquipmentSummary(group,applicationPeriod));

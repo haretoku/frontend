@@ -1,3 +1,4 @@
+import {escapeHtml as safe} from '../shared/html.js';
 import {journeyRoutes,journeyPageId,journeyHref} from './routes.js';
 import {renderReadingBody,renderReadingEnding,renderReadingQuestions} from './reading-view.js';
 import {loadFrontendData} from '../../data/src/data-loader.js';
@@ -22,7 +23,6 @@ let diagnosisTimer;
 let state=initialJourneyState();
 let diagnosisDraft={prefecture:false,bill:false};
 let unsavedSource=null;
-const safe = value => String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const money=value=>`約${(Math.abs(value)/10000).toLocaleString('ja-JP',{maximumFractionDigits:0})}万円`;
 const signed=value=>`${value<0?'−':'＋'}${money(value)}`;
 function financeAmount(value,direction){
